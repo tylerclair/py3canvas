@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
-from base import BaseModel
+from .base import BaseCanvasAPI
+from .base import BaseModel
 
 
 class FavoritesAPI(BaseCanvasAPI):
@@ -150,7 +150,7 @@ class FavoritesAPI(BaseCanvasAPI):
 class Favorite(BaseModel):
     """Favorite Model."""
 
-    def __init__(self, , context_type=None, context_id=None):
+    def __init__(self, context_type=None, context_id=None):
         """Init method for Favorite class."""
         self._context_type = context_type
         self._context_id = context_id

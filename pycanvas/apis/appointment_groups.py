@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
-from base import BaseModel
+from .base import BaseCanvasAPI
+from .base import BaseModel
 
 
 class AppointmentGroupsAPI(BaseCanvasAPI):
@@ -28,7 +28,7 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         params = {}
 
         # OPTIONAL - scope
-        """Defaults to "reservable""""
+        """Defaults to 'reservable'"""
         if scope is not None:
             self._validate_enum(scope, ["reservable", "manageable"])
             params["scope"] = scope
@@ -305,7 +305,7 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         path["id"] = id
 
         # OPTIONAL - registration_status
-        """Limits results to the a given participation status, defaults to "all""""
+        """Limits results to the a given participation status, defaults to 'all'"""
         if registration_status is not None:
             self._validate_enum(registration_status, ["all", "registered", "registered"])
             params["registration_status"] = registration_status
@@ -330,7 +330,7 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         path["id"] = id
 
         # OPTIONAL - registration_status
-        """Limits results to the a given participation status, defaults to "all""""
+        """Limits results to the a given participation status, defaults to 'all'"""
         if registration_status is not None:
             self._validate_enum(registration_status, ["all", "registered", "registered"])
             params["registration_status"] = registration_status

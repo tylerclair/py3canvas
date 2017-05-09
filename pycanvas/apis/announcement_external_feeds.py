@@ -4,8 +4,9 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
-from base import BaseModel
+
+from .base import BaseCanvasAPI
+from .base import BaseModel
 
 
 class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
@@ -74,7 +75,7 @@ class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
             data["header_match"] = header_match
 
         # OPTIONAL - verbosity
-        """Defaults to "full""""
+        """Defaults to 'full'"""
         if verbosity is not None:
             self._validate_enum(verbosity, ["full", "truncate", "link_only"])
             data["verbosity"] = verbosity
@@ -106,7 +107,7 @@ class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
             data["header_match"] = header_match
 
         # OPTIONAL - verbosity
-        """Defaults to "full""""
+        """Defaults to 'full'"""
         if verbosity is not None:
             self._validate_enum(verbosity, ["full", "truncate", "link_only"])
             data["verbosity"] = verbosity

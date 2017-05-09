@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
-from base import BaseModel
+from .base import BaseCanvasAPI
+from .base import BaseModel
 
 
 class EnrollmentsAPI(BaseCanvasAPI):
@@ -58,7 +58,7 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """Filter by enrollment state. If omitted, 'active' and 'invited' enrollments
         are returned. When querying a user's enrollments (either via user_id
         argument or via user enrollments endpoint), the following additional
-        synthetic states are supported: "current_and_invited"|"current_and_future"|"current_and_concluded""""
+        synthetic states are supported: "current_and_invited"|"current_and_future"|'current_and_concluded'"""
         if state is not None:
             self._validate_enum(state, ["active", "invited", "creation_pending", "deleted", "rejected", "completed", "inactive"])
             params["state"] = state
@@ -154,7 +154,7 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """Filter by enrollment state. If omitted, 'active' and 'invited' enrollments
         are returned. When querying a user's enrollments (either via user_id
         argument or via user enrollments endpoint), the following additional
-        synthetic states are supported: "current_and_invited"|"current_and_future"|"current_and_concluded""""
+        synthetic states are supported: "current_and_invited"|"current_and_future"|'current_and_concluded'"""
         if state is not None:
             self._validate_enum(state, ["active", "invited", "creation_pending", "deleted", "rejected", "completed", "inactive"])
             params["state"] = state
@@ -246,7 +246,7 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """Filter by enrollment state. If omitted, 'active' and 'invited' enrollments
         are returned. When querying a user's enrollments (either via user_id
         argument or via user enrollments endpoint), the following additional
-        synthetic states are supported: "current_and_invited"|"current_and_future"|"current_and_concluded""""
+        synthetic states are supported: "current_and_invited"|"current_and_future"|'current_and_concluded'"""
         if state is not None:
             self._validate_enum(state, ["active", "invited", "creation_pending", "deleted", "rejected", "completed", "inactive"])
             params["state"] = state

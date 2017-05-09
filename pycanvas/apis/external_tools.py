@@ -4,7 +4,7 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
+from .base import BaseCanvasAPI
 
 
 
@@ -548,14 +548,14 @@ class ExternalToolsAPI(BaseCanvasAPI):
 
         # OPTIONAL - config_xml
         """XML tool configuration, as specified in the CC xml specification. This is
-        required if "config_type" is set to "by_xml""""
+        required if "config_type" is set to 'by_xml'"""
         if config_xml is not None:
             data["config_xml"] = config_xml
 
         # OPTIONAL - config_url
         """URL where the server can retrieve an XML tool configuration, as specified
         in the CC xml specification. This is required if "config_type" is set to
-        "by_url""""
+        'by_url'"""
         if config_url is not None:
             data["config_url"] = config_url
 
@@ -871,14 +871,14 @@ class ExternalToolsAPI(BaseCanvasAPI):
 
         # OPTIONAL - config_xml
         """XML tool configuration, as specified in the CC xml specification. This is
-        required if "config_type" is set to "by_xml""""
+        required if "config_type" is set to 'by_xml'"""
         if config_xml is not None:
             data["config_xml"] = config_xml
 
         # OPTIONAL - config_url
         """URL where the server can retrieve an XML tool configuration, as specified
         in the CC xml specification. This is required if "config_type" is set to
-        "by_url""""
+        'by_url'"""
         if config_url is not None:
             data["config_url"] = config_url
 

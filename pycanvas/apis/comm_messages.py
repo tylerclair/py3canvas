@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
-from base import BaseModel
+from .base import BaseCanvasAPI
+from .base import BaseModel
 
 
 class CommMessagesAPI(BaseCanvasAPI):
@@ -47,10 +47,10 @@ class CommMessagesAPI(BaseCanvasAPI):
 class Commmessage(BaseModel):
     """Commmessage Model."""
 
-    def __init__(self, body=None, from=None, sent_at=None, workflow_state=None, created_at=None, to=None, reply_to=None, html_body=None, id=None, subject=None):
+    def __init__(self, body=None, sender=None, sent_at=None, workflow_state=None, created_at=None, to=None, reply_to=None, html_body=None, id=None, subject=None):
         """Init method for Commmessage class."""
         self._body = body
-        self._from = from
+        self._sender = sender
         self._sent_at = sent_at
         self._workflow_state = workflow_state
         self._created_at = created_at
@@ -74,12 +74,12 @@ class Commmessage(BaseModel):
         self._body = value
 
     @property
-    def from(self):
+    def sender(self):
         """The address that was put in the 'from' field of the message."""
         return self._from
 
-    @from.setter
-    def from(self, value):
+    @sender.setter
+    def sender(self, value):
         """Setter for from property."""
         self.logger.warn("Setting values on from will NOT update the remote Canvas instance.")
         self._from = value

@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
-from base import BaseModel
+from .base import BaseCanvasAPI
+from .base import BaseModel
 
 
 class GroupsAPI(BaseCanvasAPI):
@@ -539,7 +539,7 @@ class GroupsAPI(BaseCanvasAPI):
         path["membership_id"] = membership_id
 
         # OPTIONAL - workflow_state
-        """Currently, the only allowed value is "accepted""""
+        """Currently, the only allowed value is 'accepted'"""
         if workflow_state is not None:
             self._validate_enum(workflow_state, ["accepted"])
             data["workflow_state"] = workflow_state
@@ -571,7 +571,7 @@ class GroupsAPI(BaseCanvasAPI):
         path["user_id"] = user_id
 
         # OPTIONAL - workflow_state
-        """Currently, the only allowed value is "accepted""""
+        """Currently, the only allowed value is 'accepted'"""
         if workflow_state is not None:
             self._validate_enum(workflow_state, ["accepted"])
             data["workflow_state"] = workflow_state

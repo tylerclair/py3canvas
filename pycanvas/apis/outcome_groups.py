@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
-from base import BaseModel
+from .base import BaseCanvasAPI
+from .base import BaseModel
 
 
 class OutcomeGroupsAPI(BaseCanvasAPI):
@@ -582,13 +582,13 @@ class OutcomeGroupsAPI(BaseCanvasAPI):
             data["ratings[points]"] = ratings_points
 
         # OPTIONAL - calculation_method
-        """The new calculation method.  Defaults to "highest""""
+        """The new calculation method.  Defaults to 'highest'"""
         if calculation_method is not None:
             self._validate_enum(calculation_method, ["decaying_average", "n_mastery", "latest", "highest"])
             data["calculation_method"] = calculation_method
 
         # OPTIONAL - calculation_int
-        """The new calculation int.  Only applies if the calculation_method is "decaying_average" or "n_mastery""""
+        """The new calculation int.  Only applies if the calculation_method is "decaying_average" or 'n_mastery'"""
         if calculation_int is not None:
             data["calculation_int"] = calculation_int
 
@@ -677,7 +677,7 @@ class OutcomeGroupsAPI(BaseCanvasAPI):
             data["calculation_method"] = calculation_method
 
         # OPTIONAL - calculation_int
-        """The new calculation int.  Only applies if the calculation_method is "decaying_average" or "n_mastery""""
+        """The new calculation int.  Only applies if the calculation_method is "decaying_average" or 'n_mastery'"""
         if calculation_int is not None:
             data["calculation_int"] = calculation_int
 
@@ -864,7 +864,9 @@ class OutcomeGroupsAPI(BaseCanvasAPI):
             data["calculation_method"] = calculation_method
 
         # OPTIONAL - calculation_int
-        """The new calculation int.  Only applies if the calculation_method is "decaying_average" or "n_mastery""""
+        """The new calculation int.  Only applies if the 
+        
+        calculation_method is "decaying_average" or "n_mastery""""
         if calculation_int is not None:
             data["calculation_int"] = calculation_int
 

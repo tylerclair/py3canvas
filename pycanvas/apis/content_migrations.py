@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
-from base import BaseModel
+from .base import BaseCanvasAPI
+from .base import BaseModel
 
 
 class ContentMigrationsAPI(BaseCanvasAPI):
@@ -472,7 +472,7 @@ class ContentMigrationsAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/users/{user_id}/content_migrations/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/{user_id}/content_migrations/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def create_content_migration_accounts(self, account_id, migration_type, date_shift_options_day_substitutions_X=None, date_shift_options_new_end_date=None, date_shift_options_new_start_date=None, date_shift_options_old_end_date=None, date_shift_options_old_start_date=None, date_shift_options_remove_dates=None, date_shift_options_shift_dates=None, pre_attachment_*=None, pre_attachment_name=None, settings_file_url=None, settings_folder_id=None, settings_overwrite_quizzes=None, settings_question_bank_id=None, settings_question_bank_name=None, settings_source_course_id=None):
+    def create_content_migration_accounts(self, account_id, migration_type, date_shift_options_day_substitutions_X=None, date_shift_options_new_end_date=None, date_shift_options_new_start_date=None, date_shift_options_old_end_date=None, date_shift_options_old_start_date=None, date_shift_options_remove_dates=None, date_shift_options_shift_dates=None, pre_attachment=None, pre_attachment_name=None, settings_file_url=None, settings_folder_id=None, settings_overwrite_quizzes=None, settings_question_bank_id=None, settings_question_bank_name=None, settings_source_course_id=None):
         """
         Create a content migration.
 
@@ -530,8 +530,8 @@ class ContentMigrationsAPI(BaseCanvasAPI):
         # OPTIONAL - pre_attachment[*]
         """Other file upload properties, See {file:file_uploads.html File Upload
         Documentation}"""
-        if pre_attachment_* is not None:
-            data["pre_attachment[*]"] = pre_attachment_*
+        if pre_attachment is not None:
+            data["pre_attachment[*]"] = pre_attachment
 
         # OPTIONAL - settings[file_url]
         """A URL to download the file from. Must not require authentication."""
@@ -607,7 +607,7 @@ class ContentMigrationsAPI(BaseCanvasAPI):
         self.logger.debug("POST /api/v1/accounts/{account_id}/content_migrations with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/accounts/{account_id}/content_migrations".format(**path), data=data, params=params, single_item=True)
 
-    def create_content_migration_courses(self, course_id, migration_type, date_shift_options_day_substitutions_X=None, date_shift_options_new_end_date=None, date_shift_options_new_start_date=None, date_shift_options_old_end_date=None, date_shift_options_old_start_date=None, date_shift_options_remove_dates=None, date_shift_options_shift_dates=None, pre_attachment_*=None, pre_attachment_name=None, settings_file_url=None, settings_folder_id=None, settings_overwrite_quizzes=None, settings_question_bank_id=None, settings_question_bank_name=None, settings_source_course_id=None):
+    def create_content_migration_courses(self, course_id, migration_type, date_shift_options_day_substitutions_X=None, date_shift_options_new_end_date=None, date_shift_options_new_start_date=None, date_shift_options_old_end_date=None, date_shift_options_old_start_date=None, date_shift_options_remove_dates=None, date_shift_options_shift_dates=None, pre_attachment=None, pre_attachment_name=None, settings_file_url=None, settings_folder_id=None, settings_overwrite_quizzes=None, settings_question_bank_id=None, settings_question_bank_name=None, settings_source_course_id=None):
         """
         Create a content migration.
 
@@ -665,8 +665,8 @@ class ContentMigrationsAPI(BaseCanvasAPI):
         # OPTIONAL - pre_attachment[*]
         """Other file upload properties, See {file:file_uploads.html File Upload
         Documentation}"""
-        if pre_attachment_* is not None:
-            data["pre_attachment[*]"] = pre_attachment_*
+        if pre_attachment is not None:
+            data["pre_attachment[*]"] = pre_attachment
 
         # OPTIONAL - settings[file_url]
         """A URL to download the file from. Must not require authentication."""
@@ -742,7 +742,7 @@ class ContentMigrationsAPI(BaseCanvasAPI):
         self.logger.debug("POST /api/v1/courses/{course_id}/content_migrations with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/courses/{course_id}/content_migrations".format(**path), data=data, params=params, single_item=True)
 
-    def create_content_migration_groups(self, group_id, migration_type, date_shift_options_day_substitutions_X=None, date_shift_options_new_end_date=None, date_shift_options_new_start_date=None, date_shift_options_old_end_date=None, date_shift_options_old_start_date=None, date_shift_options_remove_dates=None, date_shift_options_shift_dates=None, pre_attachment_*=None, pre_attachment_name=None, settings_file_url=None, settings_folder_id=None, settings_overwrite_quizzes=None, settings_question_bank_id=None, settings_question_bank_name=None, settings_source_course_id=None):
+    def create_content_migration_groups(self, group_id, migration_type, date_shift_options_day_substitutions_X=None, date_shift_options_new_end_date=None, date_shift_options_new_start_date=None, date_shift_options_old_end_date=None, date_shift_options_old_start_date=None, date_shift_options_remove_dates=None, date_shift_options_shift_dates=None, pre_attachment=None, pre_attachment_name=None, settings_file_url=None, settings_folder_id=None, settings_overwrite_quizzes=None, settings_question_bank_id=None, settings_question_bank_name=None, settings_source_course_id=None):
         """
         Create a content migration.
 
@@ -800,8 +800,8 @@ class ContentMigrationsAPI(BaseCanvasAPI):
         # OPTIONAL - pre_attachment[*]
         """Other file upload properties, See {file:file_uploads.html File Upload
         Documentation}"""
-        if pre_attachment_* is not None:
-            data["pre_attachment[*]"] = pre_attachment_*
+        if pre_attachment is not None:
+            data["pre_attachment[*]"] = pre_attachment
 
         # OPTIONAL - settings[file_url]
         """A URL to download the file from. Must not require authentication."""
@@ -877,7 +877,7 @@ class ContentMigrationsAPI(BaseCanvasAPI):
         self.logger.debug("POST /api/v1/groups/{group_id}/content_migrations with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/groups/{group_id}/content_migrations".format(**path), data=data, params=params, single_item=True)
 
-    def create_content_migration_users(self, user_id, migration_type, date_shift_options_day_substitutions_X=None, date_shift_options_new_end_date=None, date_shift_options_new_start_date=None, date_shift_options_old_end_date=None, date_shift_options_old_start_date=None, date_shift_options_remove_dates=None, date_shift_options_shift_dates=None, pre_attachment_*=None, pre_attachment_name=None, settings_file_url=None, settings_folder_id=None, settings_overwrite_quizzes=None, settings_question_bank_id=None, settings_question_bank_name=None, settings_source_course_id=None):
+    def create_content_migration_users(self, user_id, migration_type, date_shift_options_day_substitutions_X=None, date_shift_options_new_end_date=None, date_shift_options_new_start_date=None, date_shift_options_old_end_date=None, date_shift_options_old_start_date=None, date_shift_options_remove_dates=None, date_shift_options_shift_dates=None, pre_attachment=None, pre_attachment_name=None, settings_file_url=None, settings_folder_id=None, settings_overwrite_quizzes=None, settings_question_bank_id=None, settings_question_bank_name=None, settings_source_course_id=None):
         """
         Create a content migration.
 
@@ -935,8 +935,8 @@ class ContentMigrationsAPI(BaseCanvasAPI):
         # OPTIONAL - pre_attachment[*]
         """Other file upload properties, See {file:file_uploads.html File Upload
         Documentation}"""
-        if pre_attachment_* is not None:
-            data["pre_attachment[*]"] = pre_attachment_*
+        if pre_attachment is not None:
+            data["pre_attachment[*]"] = pre_attachment
 
         # OPTIONAL - settings[file_url]
         """A URL to download the file from. Must not require authentication."""
