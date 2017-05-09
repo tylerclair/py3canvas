@@ -1,6 +1,6 @@
 import requests
 import re
-import urllib
+import urllib.parse
 import logging
 
 logger = logging.getLogger('pycanvas.BaseCanvasAPI')
@@ -15,8 +15,6 @@ class BaseCanvasAPI(object):
         self.session = requests.Session()
         self.session.headers.update({'Authorization': 'Bearer {}'.format(self.access_token)})
         logger.debug('Using Authorization Token authentication method. Added token to headers: {}'.format('Authorization: Bearer {}'.format(self.access_token)))
-
-        self.rel_matcher = re.compile(r' ?rel="([a-z]+)"')
 
     def uri_for(self, a):
         return self.instance_address + a
@@ -40,37 +38,11 @@ class BaseCanvasAPI(object):
         '''Given a wrapped_response from a Canvas API endpoint,
         extract the pagination links from the response headers'''
         try:
-            link_header = response.headers['Link']
+            link_header = response.links
         except KeyError:
-            logger.warn('Unable to find the Link header. Unable to continue with pagination.')
+            logger.warning('Unable to find the Link header. Unable to continue with pagination.')
             return None
-
-        split_header = link_header.split(',')
-        exploded_split_header = [i.split(';') for i in split_header]
-
-        pagination_links = {}
-        for h in exploded_split_header:
-            link = h[0]
-            rel = h[1]
-            # Check that the link format is what we expect
-            if link.startswith('<') and link.endswith('>'):
-                link = link[1:-1]
-            else:
-                continue
-            # Extract the rel argument
-            m = self.rel_matcher.match(rel)
-            try:
-                rel = m.groups()[0]
-            except AttributeError:
-                # Match returned None, just skip.
-                continue
-            except IndexError:
-                # Matched but no groups returned
-                continue
-
-            pagination_links[rel] = link
-        return pagination_links
-
+        return link_header
     def has_pagination_links(self, response):
         return 'Link' in response.headers
 
@@ -86,15 +58,18 @@ class BaseCanvasAPI(object):
 
         if self.has_pagination_links(response):
             pagination_links = self.extract_pagination_links(response)
-            while 'next' in pagination_links:
-                response = self.session.get(pagination_links['next'])
-                pagination_links = self.extract_pagination_links(response)
-                this_data = self.extract_data_from_response(response, data_key=data_key)
-                if this_data is not None:
-                    if type(this_data) == list:
-                        all_data += this_data
-                    else:
-                        all_data.append(this_data)
+            try:
+                while pagination_links['next']:
+                    response = self.session.get(pagination_links['next']['url'])
+                    pagination_links = self.extract_pagination_links(response)
+                    this_data = self.extract_data_from_response(response, data_key=data_key)
+                    if this_data is not None:
+                        if type(this_data) == list:
+                            all_data += this_data
+                        else:
+                            all_data.append(this_data)
+            except KeyError:
+                pass
         else:
             logging.warn('Response from {} has no pagination links.'.format(response.url))
         return all_data
@@ -114,7 +89,7 @@ class BaseCanvasAPI(object):
             uri = self.uri_for(uri)
 
         if force_urlencode_data is True:
-            uri += '?' + urllib.urlencode(data)
+            uri += '?' + urllib.parse.urlencode(data)
 
         assert method in ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS']
 
