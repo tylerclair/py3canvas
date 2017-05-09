@@ -150,7 +150,7 @@ class CanvasAPIError(Exception):
         self.response = response
 
     def __unicode__(self):
-        return u'API Request Failed. Status: {} Content: {}'.format(self.response.status_code, self.response.content)
+        return 'API Request Failed. Status: {} Content: {}'.format(self.response.status_code, self.response.content)
 
     def __str__(self):
         return 'API Request Failed. Status: {} Content: {}'.format(self.response.status_code, self.response.content)

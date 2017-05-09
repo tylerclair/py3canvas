@@ -4,7 +4,7 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
+from .base import BaseCanvasAPI
 
 
 class LoginsAPI(BaseCanvasAPI):

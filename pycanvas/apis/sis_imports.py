@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
-from base import BaseModel
+from .base import BaseCanvasAPI
+from .base import BaseModel
 import os
 
 
@@ -38,7 +38,7 @@ class SisImportsAPI(BaseCanvasAPI):
         # OPTIONAL - created_since
         """If set, only shows imports created after the specified date (use ISO8601 format)"""
         if created_since is not None:
-            if issubclass(created_since.__class__, basestring):
+            if issubclass(created_since.__class__, str):
                 created_since = self._validate_iso8601_string(created_since)
             elif issubclass(created_since.__class__, date) or issubclass(created_since.__class__, datetime):
                 created_since = created_since.strftime('%Y-%m-%dT%H:%M:%S+00:00')

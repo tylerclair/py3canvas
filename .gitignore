@@ -69,3 +69,6 @@ pip.ini
 
 #Pycharm
 .idea/
+
+#2to3 conversion
+*.bak
