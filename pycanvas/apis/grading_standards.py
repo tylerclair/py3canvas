@@ -129,7 +129,7 @@ class GradingStandardsAPI(BaseCanvasAPI):
         path["course_id"] = course_id
 
         self.logger.debug("GET /api/v1/courses/{course_id}/grading_standards with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_standards".format(**path), data=data, params=params, all_pages=True)
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_standards".format(**path), data=data, params=params)
 
     def list_grading_standards_available_in_context_accounts(self, account_id):
         """
@@ -146,7 +146,7 @@ class GradingStandardsAPI(BaseCanvasAPI):
         path["account_id"] = account_id
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/grading_standards with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/grading_standards".format(**path), data=data, params=params, all_pages=True)
+        return self.generic_request("GET", "/api/v1/accounts/{account_id}/grading_standards".format(**path), data=data, params=params)
 
 
 class Gradingstandard(BaseModel):
