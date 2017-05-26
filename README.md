@@ -6,8 +6,8 @@ Not all of the API's have been checked, if you fix an issue in one of the genera
 
 
 Quickstart:
-
-from pycanvas.apis import AccountsAPI
-
-`client = AccountsAPI(instance_address="https://mycanvas.instance.com", access_token="my access token")
-`client.list_accounts()
+```python
+from pycanvas.apis import accounts
+client = accounts.AccountsAPI(instance_address="https://mycanvas.instance.com", access_token="my access token")
+client.list_accounts()
+```
