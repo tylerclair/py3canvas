@@ -2,9 +2,10 @@ import requests
 import re
 import urllib.parse
 import logging
-
+logging.basicConfig(filename='testing.log',
+                    level=logging.DEBUG,
+                   format='%(asctime)s:%(levelname)s:%(lineno)d:%(message)s')
 logger = logging.getLogger('pycanvas.BaseCanvasAPI')
-
 
 class BaseCanvasAPI(object):
     def __init__(self, instance_address, access_token, **kwargs):
