@@ -88,15 +88,15 @@ def service_param_string(params):
 
 
 def metadata_path(name):
-    return 'pycanvas/meta/{}.py'.format(name)
+    return 'py3canvas/meta/{}.py'.format(name)
 
 
 def model_path(name):
-    return 'pycanvas/models/{}.py'.format(name)
+    return 'py3canvas/models/{}.py'.format(name)
 
 
 def api_path(name):
-    return 'pycanvas/{}.py'.format(name)
+    return 'py3canvas/{}.py'.format(name)
 
 
 def get_jinja_env():
@@ -124,7 +124,7 @@ def build_metadata_class(specfile):
         env = get_jinja_env()
 
         metadata_template = env.get_template('metadata.py.jinja2')
-        with open('pycanvas/meta/{}.py'.format(name), 'w') as t:
+        with open('py3canvas/meta/{}.py'.format(name), 'w') as t:
             t.write(metadata_template.render(spec=spec))
 
 
@@ -163,7 +163,7 @@ def build_api_from_specfile(specfile, api_name, output_folder):
 
     output_file_name = base_name.replace('.json', '.py')
 
-    module_path = 'pycanvas.apis.{}'.format(base_name[:base_name.find('.')])
+    module_path = 'py3canvas.apis.{}'.format(base_name[:base_name.find('.')])
 
     if api_name is None:
         raw_api_name = list(base_name[:base_name.find('.')])
