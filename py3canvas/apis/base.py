@@ -5,22 +5,22 @@ import logging
 logging.basicConfig(filename='testing.log',
                     level=logging.DEBUG,
                    format='%(asctime)s:%(levelname)s:%(lineno)d:%(message)s')
-logger = logging.getLogger('pycanvas.BaseCanvasAPI')
+logger = logging.getLogger('py3canvas.BaseCanvasAPI')
+from . import ACCESS_TOKEN
+from . import URL_INSTANCE
+from . import session
 
 class BaseCanvasAPI(object):
-    def __init__(self, instance_address, access_token, **kwargs):
-        self.instance_address = instance_address
-        self.access_token = access_token
-        logger.debug('Created new CanvasAPI client for instance: {}.'.format('self.instance_address'))
+    def __init__(self, **kwargs):
+        logger.debug('Created new CanvasAPI client for instance: {}.'.format(URL_INSTANCE))
+        logger.debug('Using Authorization Token authentication method. Added token to headers: {}'.format('Authorization: Bearer {}'.format(ACCESS_TOKEN)))
 
-        self.session = requests.Session()
-        self.session.headers.update({'Authorization': 'Bearer {}'.format(self.access_token)})
-        logger.debug('Using Authorization Token authentication method. Added token to headers: {}'.format('Authorization: Bearer {}'.format(self.access_token)))
+    @staticmethod
+    def uri_for(a):
+        return URL_INSTANCE + a
 
-    def uri_for(self, a):
-        return self.instance_address + a
-
-    def extract_data_from_response(self, response, data_key=None):
+    @staticmethod
+    def extract_data_from_response(response, data_key=None):
         """Given a response and an optional data_key should return a dictionary of data returned as part of the response."""
         response_json_data = response.json()
         # Seems to be two types of response, a dict with keys and then lists of data or a flat list data with no key.
@@ -35,7 +35,8 @@ class BaseCanvasAPI(object):
         else:
             raise CanvasAPIError(response)
 
-    def extract_pagination_links(self, response):
+    @staticmethod
+    def extract_pagination_links(response):
         '''Given a wrapped_response from a Canvas API endpoint,
         extract the pagination links from the response headers'''
         try:
@@ -44,7 +45,9 @@ class BaseCanvasAPI(object):
             logger.warning('Unable to find the Link header. Unable to continue with pagination.')
             return None
         return link_header
-    def has_pagination_links(self, response):
+
+    @staticmethod
+    def has_pagination_links(response):
         return 'Link' in response.headers
 
     def depaginate(self, response, data_key=None):
@@ -95,17 +98,17 @@ class BaseCanvasAPI(object):
         assert method in ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS']
 
         if method == 'GET':
-            response = self.session.get(uri, params=params)
+            response = session.get(uri, params=params)
         elif method == 'POST':
-            response = self.session.post(uri, data=data, files=files)
+            response = session.post(uri, data=data, files=files)
         elif method == 'PUT':
-            response = self.session.put(uri, data=data)
+            response = session.put(uri, data=data)
         elif method == 'DELETE':
-            response = self.session.delete(uri, params=params)
+            response = session.delete(uri, params=params)
         elif method == 'HEAD':
-            response = self.session.head(uri, params=params)
+            response = session.head(uri, params=params)
         elif method == 'OPTIONS':
-            response = self.session.options(uri, params=params)
+            response = session.options(uri, params=params)
 
         response.raise_for_status()
 
@@ -127,7 +130,8 @@ class BaseCanvasAPI(object):
 
         return response.json()
 
-    def _validate_enum(self, value, acceptable_values):
+    @staticmethod
+    def _validate_enum(value, acceptable_values):
         if not hasattr(value, '__iter__'):
             if value not in acceptable_values:
                 raise ValueError('{} not in {}'.format(value, str(acceptable_values)))
@@ -137,7 +141,8 @@ class BaseCanvasAPI(object):
                     raise ValueError('{} not in {}'.format(value, str(acceptable_values)))
         return value
 
-    def _validate_iso8601_string(self, value):
+    @staticmethod
+    def _validate_iso8601_string(value):
         """Return the value or raise a ValueError if it is not a string in ISO8601 format."""
         ISO8601_REGEX = r'(\d{4})-(\d{2})-(\d{2})T(\d{2})\:(\d{2})\:(\d{2})([+-](\d{2})\:(\d{2})|Z)'
         if re.match(ISO8601_REGEX, value):
