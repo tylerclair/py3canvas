@@ -5,9 +5,9 @@ This is a testing template for the generated RolesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.roles import RolesAPI
-from pycanvas.apis.roles import Rolepermissions
-from pycanvas.apis.roles import Role
+from py3canvas.apis.roles import RolesAPI
+from py3canvas.apis.roles import Rolepermissions
+from py3canvas.apis.roles import Role
 
 
 class TestRolesAPI(unittest.TestCase):

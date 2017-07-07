@@ -14,7 +14,7 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for DiscussionTopicsAPI."""
         super(DiscussionTopicsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.DiscussionTopicsAPI")
+        self.logger = logging.getLogger("py3canvas.DiscussionTopicsAPI")
 
     def list_discussion_topics_courses(self, course_id, exclude_context_module_locked_topics=None, include=None, only_announcements=None, order_by=None, scope=None, search_term=None):
         """
@@ -1887,7 +1887,7 @@ class Discussiontopic(BaseModel):
         self._published = published
         self._lock_explanation = lock_explanation
 
-        self.logger = logging.getLogger('pycanvas.Discussiontopic')
+        self.logger = logging.getLogger('py3canvas.Discussiontopic')
 
     @property
     def lock_info(self):
@@ -2264,7 +2264,7 @@ class Fileattachment(BaseModel):
         self._content_type = content_type
         self._filename = filename
 
-        self.logger = logging.getLogger('pycanvas.Fileattachment')
+        self.logger = logging.getLogger('py3canvas.Fileattachment')
 
     @property
     def url(self):

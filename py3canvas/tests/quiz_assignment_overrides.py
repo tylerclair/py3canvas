@@ -5,10 +5,10 @@ This is a testing template for the generated QuizAssignmentOverridesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.quiz_assignment_overrides import QuizAssignmentOverridesAPI
-from pycanvas.apis.quiz_assignment_overrides import Quizassignmentoverride
-from pycanvas.apis.quiz_assignment_overrides import Quizassignmentoverridesetcontainer
-from pycanvas.apis.quiz_assignment_overrides import Quizassignmentoverrideset
+from py3canvas.apis.quiz_assignment_overrides import QuizAssignmentOverridesAPI
+from py3canvas.apis.quiz_assignment_overrides import Quizassignmentoverride
+from py3canvas.apis.quiz_assignment_overrides import Quizassignmentoverridesetcontainer
+from py3canvas.apis.quiz_assignment_overrides import Quizassignmentoverrideset
 
 
 class TestQuizAssignmentOverridesAPI(unittest.TestCase):

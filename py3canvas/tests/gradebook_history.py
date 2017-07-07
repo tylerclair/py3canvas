@@ -5,11 +5,11 @@ This is a testing template for the generated GradebookHistoryAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.gradebook_history import GradebookHistoryAPI
-from pycanvas.apis.gradebook_history import Submissionversion
-from pycanvas.apis.gradebook_history import Grader
-from pycanvas.apis.gradebook_history import Day
-from pycanvas.apis.gradebook_history import Submissionhistory
+from py3canvas.apis.gradebook_history import GradebookHistoryAPI
+from py3canvas.apis.gradebook_history import Submissionversion
+from py3canvas.apis.gradebook_history import Grader
+from py3canvas.apis.gradebook_history import Day
+from py3canvas.apis.gradebook_history import Submissionhistory
 
 
 class TestGradebookHistoryAPI(unittest.TestCase):

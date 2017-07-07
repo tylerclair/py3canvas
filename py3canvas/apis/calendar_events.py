@@ -14,7 +14,7 @@ class CalendarEventsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for CalendarEventsAPI."""
         super(CalendarEventsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.CalendarEventsAPI")
+        self.logger = logging.getLogger("py3canvas.CalendarEventsAPI")
 
     def list_calendar_events(self, all_events=None, context_codes=None, end_date=None, excludes=None, start_date=None, type=None, undated=None):
         """
@@ -574,7 +574,7 @@ class Calendarevent(BaseModel):
         self._appointment_group_url = appointment_group_url
         self._all_context_codes = all_context_codes
 
-        self.logger = logging.getLogger('pycanvas.Calendarevent')
+        self.logger = logging.getLogger('py3canvas.Calendarevent')
 
     @property
     def reserved(self):
@@ -928,7 +928,7 @@ class Assignmentevent(BaseModel):
         self._id = id
         self._all_day = all_day
 
-        self.logger = logging.getLogger('pycanvas.Assignmentevent')
+        self.logger = logging.getLogger('py3canvas.Assignmentevent')
 
     @property
     def start_at(self):

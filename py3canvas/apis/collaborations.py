@@ -14,7 +14,7 @@ class CollaborationsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for CollaborationsAPI."""
         super(CollaborationsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.CollaborationsAPI")
+        self.logger = logging.getLogger("py3canvas.CollaborationsAPI")
 
     def list_collaborations_courses(self, course_id):
         """
@@ -94,7 +94,7 @@ class Collaborator(BaseModel):
         self._id = id
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.Collaborator')
+        self.logger = logging.getLogger('py3canvas.Collaborator')
 
     @property
     def type(self):
@@ -150,7 +150,7 @@ class Collaboration(BaseModel):
         self._id = id
         self._document_id = document_id
 
-        self.logger = logging.getLogger('pycanvas.Collaboration')
+        self.logger = logging.getLogger('py3canvas.Collaboration')
 
     @property
     def user_id(self):

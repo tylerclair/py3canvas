@@ -14,7 +14,7 @@ class PagesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for PagesAPI."""
         super(PagesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.PagesAPI")
+        self.logger = logging.getLogger("py3canvas.PagesAPI")
 
     def show_front_page_courses(self, course_id):
         """
@@ -764,7 +764,7 @@ class Pagerevision(BaseModel):
         self._revision_id = revision_id
         self._latest = latest
 
-        self.logger = logging.getLogger('pycanvas.Pagerevision')
+        self.logger = logging.getLogger('py3canvas.Pagerevision')
 
     @property
     def body(self):
@@ -863,7 +863,7 @@ class Page(BaseModel):
         self._last_edited_by = last_edited_by
         self._locked_for_user = locked_for_user
 
-        self.logger = logging.getLogger('pycanvas.Page')
+        self.logger = logging.getLogger('py3canvas.Page')
 
     @property
     def body(self):

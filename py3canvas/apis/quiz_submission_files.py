@@ -14,7 +14,7 @@ class QuizSubmissionFilesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizSubmissionFilesAPI."""
         super(QuizSubmissionFilesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizSubmissionFilesAPI")
+        self.logger = logging.getLogger("py3canvas.QuizSubmissionFilesAPI")
 
     def upload_file(self, quiz_id, course_id, name=None, on_duplicate=None):
         """

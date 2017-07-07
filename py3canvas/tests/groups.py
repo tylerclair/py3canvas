@@ -5,9 +5,9 @@ This is a testing template for the generated GroupsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.groups import GroupsAPI
-from pycanvas.apis.groups import Group
-from pycanvas.apis.groups import Groupmembership
+from py3canvas.apis.groups import GroupsAPI
+from py3canvas.apis.groups import Group
+from py3canvas.apis.groups import Groupmembership
 
 
 class TestGroupsAPI(unittest.TestCase):

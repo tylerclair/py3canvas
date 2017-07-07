@@ -14,7 +14,7 @@ class CommMessagesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for CommMessagesAPI."""
         super(CommMessagesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.CommMessagesAPI")
+        self.logger = logging.getLogger("py3canvas.CommMessagesAPI")
 
     def list_of_commmessages_for_user(self, user_id, end_time=None, start_time=None):
         """
@@ -60,7 +60,7 @@ class Commmessage(BaseModel):
         self._id = id
         self._subject = subject
 
-        self.logger = logging.getLogger('pycanvas.Commmessage')
+        self.logger = logging.getLogger('py3canvas.Commmessage')
 
     @property
     def body(self):

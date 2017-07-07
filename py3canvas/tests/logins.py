@@ -5,7 +5,7 @@ This is a testing template for the generated LoginsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.logins import LoginsAPI
+from py3canvas.apis.logins import LoginsAPI
 
 
 class TestLoginsAPI(unittest.TestCase):

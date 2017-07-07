@@ -14,7 +14,7 @@ class AuthenticationsLogAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for AuthenticationsLogAPI."""
         super(AuthenticationsLogAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.AuthenticationsLogAPI")
+        self.logger = logging.getLogger("py3canvas.AuthenticationsLogAPI")
 
     def query_by_login(self, login_id, end_time=None, start_time=None):
         """
@@ -109,7 +109,7 @@ class Authenticationevent(BaseModel):
         self._event_type = event_type
         self._account_id = account_id
 
-        self.logger = logging.getLogger('pycanvas.Authenticationevent')
+        self.logger = logging.getLogger('py3canvas.Authenticationevent')
 
     @property
     def pseudonym_id(self):

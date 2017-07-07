@@ -14,7 +14,7 @@ class QuizQuestionsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizQuestionsAPI."""
         super(QuizQuestionsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizQuestionsAPI")
+        self.logger = logging.getLogger("py3canvas.QuizQuestionsAPI")
 
     def list_questions_in_quiz_or_submission(self, quiz_id, course_id, quiz_submission_attempt=None, quiz_submission_id=None):
         """
@@ -283,7 +283,7 @@ class Answer(BaseModel):
         self._exact = exact
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Answer')
+        self.logger = logging.getLogger('py3canvas.Answer')
 
     @property
     def text_after_answers(self):
@@ -480,7 +480,7 @@ class Quizquestion(BaseModel):
         self._quiz_id = quiz_id
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Quizquestion')
+        self.logger = logging.getLogger('py3canvas.Quizquestion')
 
     @property
     def question_text(self):

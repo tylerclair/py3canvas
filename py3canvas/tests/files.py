@@ -5,11 +5,11 @@ This is a testing template for the generated FilesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.files import FilesAPI
-from pycanvas.apis.files import Folder
-from pycanvas.apis.files import Usagerights
-from pycanvas.apis.files import License
-from pycanvas.apis.files import File
+from py3canvas.apis.files import FilesAPI
+from py3canvas.apis.files import Folder
+from py3canvas.apis.files import Usagerights
+from py3canvas.apis.files import License
+from py3canvas.apis.files import File
 
 
 class TestFilesAPI(unittest.TestCase):

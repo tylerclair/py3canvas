@@ -14,7 +14,7 @@ class QuizReportsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizReportsAPI."""
         super(QuizReportsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizReportsAPI")
+        self.logger = logging.getLogger("py3canvas.QuizReportsAPI")
 
     def retrieve_all_quiz_reports(self, quiz_id, course_id, includes_all_versions=None):
         """
@@ -181,7 +181,7 @@ class Quizreport(BaseModel):
         self._includes_all_versions = includes_all_versions
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Quizreport')
+        self.logger = logging.getLogger('py3canvas.Quizreport')
 
     @property
     def file(self):

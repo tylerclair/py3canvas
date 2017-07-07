@@ -14,7 +14,7 @@ class AccountNotificationsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for AccountNotificationsAPI."""
         super(AccountNotificationsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.AccountNotificationsAPI")
+        self.logger = logging.getLogger("py3canvas.AccountNotificationsAPI")
 
     def index_of_active_global_notification_for_user(self, user_id, account_id):
         """
@@ -208,7 +208,7 @@ class Accountnotification(BaseModel):
         self._subject = subject
         self._icon = icon
 
-        self.logger = logging.getLogger('pycanvas.Accountnotification')
+        self.logger = logging.getLogger('py3canvas.Accountnotification')
 
     @property
     def role_ids(self):

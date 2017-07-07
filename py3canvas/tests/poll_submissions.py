@@ -5,8 +5,8 @@ This is a testing template for the generated PollSubmissionsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.poll_submissions import PollSubmissionsAPI
-from pycanvas.apis.poll_submissions import Pollsubmission
+from py3canvas.apis.poll_submissions import PollSubmissionsAPI
+from py3canvas.apis.poll_submissions import Pollsubmission
 
 
 class TestPollSubmissionsAPI(unittest.TestCase):

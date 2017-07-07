@@ -14,7 +14,7 @@ class QuizAssignmentOverridesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizAssignmentOverridesAPI."""
         super(QuizAssignmentOverridesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizAssignmentOverridesAPI")
+        self.logger = logging.getLogger("py3canvas.QuizAssignmentOverridesAPI")
 
     def retrieve_assignment_overridden_dates_for_quizzes(self, course_id, quiz_assignment_overrides_0_quiz_ids=None):
         """
@@ -54,7 +54,7 @@ class Quizassignmentoverride(BaseModel):
         self._base = base
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Quizassignmentoverride')
+        self.logger = logging.getLogger('py3canvas.Quizassignmentoverride')
 
     @property
     def unlock_at(self):
@@ -131,7 +131,7 @@ class Quizassignmentoverridesetcontainer(BaseModel):
         """Init method for Quizassignmentoverridesetcontainer class."""
         self._quiz_assignment_overrides = quiz_assignment_overrides
 
-        self.logger = logging.getLogger('pycanvas.Quizassignmentoverridesetcontainer')
+        self.logger = logging.getLogger('py3canvas.Quizassignmentoverridesetcontainer')
 
     @property
     def quiz_assignment_overrides(self):
@@ -155,7 +155,7 @@ class Quizassignmentoverrideset(BaseModel):
         self._quiz_id = quiz_id
         self._all_dates = all_dates
 
-        self.logger = logging.getLogger('pycanvas.Quizassignmentoverrideset')
+        self.logger = logging.getLogger('py3canvas.Quizassignmentoverrideset')
 
     @property
     def due_dates(self):

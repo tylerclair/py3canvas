@@ -5,8 +5,8 @@ This is a testing template for the generated FavoritesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.favorites import FavoritesAPI
-from pycanvas.apis.favorites import Favorite
+from py3canvas.apis.favorites import FavoritesAPI
+from py3canvas.apis.favorites import Favorite
 
 
 class TestFavoritesAPI(unittest.TestCase):

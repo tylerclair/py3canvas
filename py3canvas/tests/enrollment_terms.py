@@ -5,8 +5,8 @@ This is a testing template for the generated EnrollmentTermsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.enrollment_terms import EnrollmentTermsAPI
-from pycanvas.apis.enrollment_terms import Enrollmentterm
+from py3canvas.apis.enrollment_terms import EnrollmentTermsAPI
+from py3canvas.apis.enrollment_terms import Enrollmentterm
 
 
 class TestEnrollmentTermsAPI(unittest.TestCase):

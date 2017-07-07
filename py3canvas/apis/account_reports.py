@@ -14,7 +14,7 @@ class AccountReportsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for AccountReportsAPI."""
         super(AccountReportsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.AccountReportsAPI")
+        self.logger = logging.getLogger("py3canvas.AccountReportsAPI")
 
     def list_available_reports(self, account_id):
         """
@@ -143,7 +143,7 @@ class Report(BaseModel):
         self._progress = progress
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Report')
+        self.logger = logging.getLogger('py3canvas.Report')
 
     @property
     def status(self):
@@ -237,7 +237,7 @@ class Reportparameters(BaseModel):
         self._order = order
         self._xlist = xlist
 
-        self.logger = logging.getLogger('pycanvas.Reportparameters')
+        self.logger = logging.getLogger('py3canvas.Reportparameters')
 
     @property
     def include_enrollment_state(self):

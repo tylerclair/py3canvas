@@ -14,7 +14,7 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for AppointmentGroupsAPI."""
         super(AppointmentGroupsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.AppointmentGroupsAPI")
+        self.logger = logging.getLogger("py3canvas.AppointmentGroupsAPI")
 
     def list_appointment_groups(self, context_codes=None, include=None, include_past_appointments=None, scope=None):
         """
@@ -390,7 +390,7 @@ class Appointmentgroup(BaseModel):
         self._sub_context_codes = sub_context_codes
         self._requiring_action = requiring_action
 
-        self.logger = logging.getLogger('pycanvas.Appointmentgroup')
+        self.logger = logging.getLogger('py3canvas.Appointmentgroup')
 
     @property
     def participant_visibility(self):
@@ -678,7 +678,7 @@ class Appointment(BaseModel):
         self._id = id
         self._end_at = end_at
 
-        self.logger = logging.getLogger('pycanvas.Appointment')
+        self.logger = logging.getLogger('py3canvas.Appointment')
 
     @property
     def start_at(self):

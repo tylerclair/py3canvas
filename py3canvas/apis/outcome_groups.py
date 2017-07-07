@@ -14,7 +14,7 @@ class OutcomeGroupsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for OutcomeGroupsAPI."""
         super(OutcomeGroupsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.OutcomeGroupsAPI")
+        self.logger = logging.getLogger("py3canvas.OutcomeGroupsAPI")
 
     def redirect_to_root_outcome_group_for_context_global(self):
         """
@@ -1426,7 +1426,7 @@ class Outcomegroup(BaseModel):
         self._subgroups_url = subgroups_url
         self._context_type = context_type
 
-        self.logger = logging.getLogger('pycanvas.Outcomegroup')
+        self.logger = logging.getLogger('py3canvas.Outcomegroup')
 
     @property
     def vendor_guid(self):
@@ -1574,7 +1574,7 @@ class Outcomelink(BaseModel):
         self._assessed = assessed
         self._outcome = outcome
 
-        self.logger = logging.getLogger('pycanvas.Outcomelink')
+        self.logger = logging.getLogger('py3canvas.Outcomelink')
 
     @property
     def url(self):

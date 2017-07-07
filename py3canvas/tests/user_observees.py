@@ -5,7 +5,7 @@ This is a testing template for the generated UserObserveesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.user_observees import UserObserveesAPI
+from py3canvas.apis.user_observees import UserObserveesAPI
 
 
 class TestUserObserveesAPI(unittest.TestCase):

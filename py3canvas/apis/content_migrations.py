@@ -14,7 +14,7 @@ class ContentMigrationsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for ContentMigrationsAPI."""
         super(ContentMigrationsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.ContentMigrationsAPI")
+        self.logger = logging.getLogger("py3canvas.ContentMigrationsAPI")
 
     def list_migration_issues_accounts(self, account_id, content_migration_id):
         """
@@ -1202,7 +1202,7 @@ class Contentmigration(BaseModel):
         self._started_at = started_at
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Contentmigration')
+        self.logger = logging.getLogger('py3canvas.Contentmigration')
 
     @property
     def progress_url(self):
@@ -1342,7 +1342,7 @@ class Migrationissue(BaseModel):
         self._error_report_html_url = error_report_html_url
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Migrationissue')
+        self.logger = logging.getLogger('py3canvas.Migrationissue')
 
     @property
     def error_message(self):
@@ -1465,7 +1465,7 @@ class Migrator(BaseModel):
         self._name = name
         self._requires_file_upload = requires_file_upload
 
-        self.logger = logging.getLogger('pycanvas.Migrator')
+        self.logger = logging.getLogger('py3canvas.Migrator')
 
     @property
     def required_settings(self):

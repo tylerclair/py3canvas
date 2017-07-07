@@ -5,8 +5,8 @@ This is a testing template for the generated OutcomesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.outcomes import OutcomesAPI
-from pycanvas.apis.outcomes import Outcome
+from py3canvas.apis.outcomes import OutcomesAPI
+from py3canvas.apis.outcomes import Outcome
 
 
 class TestOutcomesAPI(unittest.TestCase):

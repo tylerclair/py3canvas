@@ -5,8 +5,8 @@ This is a testing template for the generated TabsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.tabs import TabsAPI
-from pycanvas.apis.tabs import Tab
+from py3canvas.apis.tabs import TabsAPI
+from py3canvas.apis.tabs import Tab
 
 
 class TestTabsAPI(unittest.TestCase):

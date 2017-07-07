@@ -14,7 +14,7 @@ class GradeChangeLogAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for GradeChangeLogAPI."""
         super(GradeChangeLogAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.GradeChangeLogAPI")
+        self.logger = logging.getLogger("py3canvas.GradeChangeLogAPI")
 
     def query_by_assignment(self, assignment_id, end_time=None, start_time=None):
         """
@@ -142,7 +142,7 @@ class Gradechangeevent(BaseModel):
         self._excused_before = excused_before
         self._grade_after = grade_after
 
-        self.logger = logging.getLogger('pycanvas.Gradechangeevent')
+        self.logger = logging.getLogger('py3canvas.Gradechangeevent')
 
     @property
     def version_number(self):
@@ -277,7 +277,7 @@ class Gradechangeeventlinks(BaseModel):
         self._student = student
         self._course = course
 
-        self.logger = logging.getLogger('pycanvas.Gradechangeeventlinks')
+        self.logger = logging.getLogger('py3canvas.Gradechangeeventlinks')
 
     @property
     def assignment(self):

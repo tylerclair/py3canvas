@@ -5,9 +5,9 @@ This is a testing template for the generated GradeChangeLogAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.grade_change_log import GradeChangeLogAPI
-from pycanvas.apis.grade_change_log import Gradechangeevent
-from pycanvas.apis.grade_change_log import Gradechangeeventlinks
+from py3canvas.apis.grade_change_log import GradeChangeLogAPI
+from py3canvas.apis.grade_change_log import Gradechangeevent
+from py3canvas.apis.grade_change_log import Gradechangeeventlinks
 
 
 class TestGradeChangeLogAPI(unittest.TestCase):

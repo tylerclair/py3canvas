@@ -14,7 +14,7 @@ class SearchAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for SearchAPI."""
         super(SearchAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.SearchAPI")
+        self.logger = logging.getLogger("py3canvas.SearchAPI")
 
     def find_recipients_conversations(self, context=None, exclude=None, from_conversation_id=None, permissions=None, search=None, type=None, user_id=None):
         """

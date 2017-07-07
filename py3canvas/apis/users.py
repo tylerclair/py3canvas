@@ -14,7 +14,7 @@ class UsersAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for UsersAPI."""
         super(UsersAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.UsersAPI")
+        self.logger = logging.getLogger("py3canvas.UsersAPI")
 
     def list_users_in_account(self, account_id, search_term=None):
         """
@@ -1471,7 +1471,7 @@ class Profile(BaseModel):
         self._sis_login_id = sis_login_id
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Profile')
+        self.logger = logging.getLogger('py3canvas.Profile')
 
     @property
     def bio(self):
@@ -1637,7 +1637,7 @@ class Coursenickname(BaseModel):
         self._nickname = nickname
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.Coursenickname')
+        self.logger = logging.getLogger('py3canvas.Coursenickname')
 
     @property
     def course_id(self):
@@ -1697,7 +1697,7 @@ class Pageview(BaseModel):
         self._asset_type = asset_type
         self._render_time = render_time
 
-        self.logger = logging.getLogger('pycanvas.Pageview')
+        self.logger = logging.getLogger('py3canvas.Pageview')
 
     @property
     def app_name(self):
@@ -1899,7 +1899,7 @@ class Pageviewlinks(BaseModel):
         self._context = context
         self._asset = asset
 
-        self.logger = logging.getLogger('pycanvas.Pageviewlinks')
+        self.logger = logging.getLogger('py3canvas.Pageviewlinks')
 
     @property
     def account(self):
@@ -1980,7 +1980,7 @@ class User(BaseModel):
         self._sis_login_id = sis_login_id
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.User')
+        self.logger = logging.getLogger('py3canvas.User')
 
     @property
     def integration_id(self):
@@ -2170,7 +2170,7 @@ class Userdisplay(BaseModel):
         self._short_name = short_name
         self._html_url = html_url
 
-        self.logger = logging.getLogger('pycanvas.Userdisplay')
+        self.logger = logging.getLogger('py3canvas.Userdisplay')
 
     @property
     def avatar_image_url(self):
@@ -2232,7 +2232,7 @@ class Avatar(BaseModel):
         self._id = id
         self._size = size
 
-        self.logger = logging.getLogger('pycanvas.Avatar')
+        self.logger = logging.getLogger('py3canvas.Avatar')
 
     @property
     def display_name(self):

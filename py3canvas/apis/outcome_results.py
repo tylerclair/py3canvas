@@ -14,7 +14,7 @@ class OutcomeResultsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for OutcomeResultsAPI."""
         super(OutcomeResultsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.OutcomeResultsAPI")
+        self.logger = logging.getLogger("py3canvas.OutcomeResultsAPI")
 
     def get_outcome_results(self, course_id, include=None, outcome_ids=None, user_ids=None):
         """
@@ -117,7 +117,7 @@ class Outcomeresult(BaseModel):
         self._links = links
         self._submitted_or_assessed_at = submitted_or_assessed_at
 
-        self.logger = logging.getLogger('pycanvas.Outcomeresult')
+        self.logger = logging.getLogger('py3canvas.Outcomeresult')
 
     @property
     def score(self):
@@ -184,7 +184,7 @@ class Outcomerolluplinks(BaseModel):
         self._section = section
         self._user = user
 
-        self.logger = logging.getLogger('pycanvas.Outcomerolluplinks')
+        self.logger = logging.getLogger('py3canvas.Outcomerolluplinks')
 
     @property
     def course(self):
@@ -228,7 +228,7 @@ class Outcomepathpart(BaseModel):
         """Init method for Outcomepathpart class."""
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.Outcomepathpart')
+        self.logger = logging.getLogger('py3canvas.Outcomepathpart')
 
     @property
     def name(self):
@@ -249,7 +249,7 @@ class Outcomerollupscorelinks(BaseModel):
         """Init method for Outcomerollupscorelinks class."""
         self._outcome = outcome
 
-        self.logger = logging.getLogger('pycanvas.Outcomerollupscorelinks')
+        self.logger = logging.getLogger('py3canvas.Outcomerollupscorelinks')
 
     @property
     def outcome(self):
@@ -273,7 +273,7 @@ class Outcomealignment(BaseModel):
         self._html_url = html_url
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.Outcomealignment')
+        self.logger = logging.getLogger('py3canvas.Outcomealignment')
 
     @property
     def id(self):
@@ -318,7 +318,7 @@ class Outcomerollupscore(BaseModel):
         self._score = score
         self._links = links
 
-        self.logger = logging.getLogger('pycanvas.Outcomerollupscore')
+        self.logger = logging.getLogger('py3canvas.Outcomerollupscore')
 
     @property
     def count(self):
@@ -363,7 +363,7 @@ class Outcomerollup(BaseModel):
         self._links = links
         self._scores = scores
 
-        self.logger = logging.getLogger('pycanvas.Outcomerollup')
+        self.logger = logging.getLogger('py3canvas.Outcomerollup')
 
     @property
     def name(self):
@@ -408,7 +408,7 @@ class Outcomepath(BaseModel):
         self._parts = parts
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Outcomepath')
+        self.logger = logging.getLogger('py3canvas.Outcomepath')
 
     @property
     def parts(self):

@@ -14,7 +14,7 @@ class NotificationPreferencesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for NotificationPreferencesAPI."""
         super(NotificationPreferencesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.NotificationPreferencesAPI")
+        self.logger = logging.getLogger("py3canvas.NotificationPreferencesAPI")
 
     def list_preferences_communication_channel_id(self, user_id, communication_channel_id):
         """
@@ -273,7 +273,7 @@ class Notificationpreference(BaseModel):
         self._href = href
         self._frequency = frequency
 
-        self.logger = logging.getLogger('pycanvas.Notificationpreference')
+        self.logger = logging.getLogger('py3canvas.Notificationpreference')
 
     @property
     def category(self):

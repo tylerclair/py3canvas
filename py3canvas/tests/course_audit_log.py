@@ -5,11 +5,11 @@ This is a testing template for the generated CourseAuditLogAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.course_audit_log import CourseAuditLogAPI
-from pycanvas.apis.course_audit_log import Createdeventdata
-from pycanvas.apis.course_audit_log import Courseevent
-from pycanvas.apis.course_audit_log import Courseeventlink
-from pycanvas.apis.course_audit_log import Updatedeventdata
+from py3canvas.apis.course_audit_log import CourseAuditLogAPI
+from py3canvas.apis.course_audit_log import Createdeventdata
+from py3canvas.apis.course_audit_log import Courseevent
+from py3canvas.apis.course_audit_log import Courseeventlink
+from py3canvas.apis.course_audit_log import Updatedeventdata
 
 
 class TestCourseAuditLogAPI(unittest.TestCase):

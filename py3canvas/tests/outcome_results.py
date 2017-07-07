@@ -5,15 +5,15 @@ This is a testing template for the generated OutcomeResultsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.outcome_results import OutcomeResultsAPI
-from pycanvas.apis.outcome_results import Outcomeresult
-from pycanvas.apis.outcome_results import Outcomerolluplinks
-from pycanvas.apis.outcome_results import Outcomepathpart
-from pycanvas.apis.outcome_results import Outcomerollupscorelinks
-from pycanvas.apis.outcome_results import Outcomealignment
-from pycanvas.apis.outcome_results import Outcomerollupscore
-from pycanvas.apis.outcome_results import Outcomerollup
-from pycanvas.apis.outcome_results import Outcomepath
+from py3canvas.apis.outcome_results import OutcomeResultsAPI
+from py3canvas.apis.outcome_results import Outcomeresult
+from py3canvas.apis.outcome_results import Outcomerolluplinks
+from py3canvas.apis.outcome_results import Outcomepathpart
+from py3canvas.apis.outcome_results import Outcomerollupscorelinks
+from py3canvas.apis.outcome_results import Outcomealignment
+from py3canvas.apis.outcome_results import Outcomerollupscore
+from py3canvas.apis.outcome_results import Outcomerollup
+from py3canvas.apis.outcome_results import Outcomepath
 
 
 class TestOutcomeResultsAPI(unittest.TestCase):

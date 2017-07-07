@@ -5,10 +5,10 @@ This is a testing template for the generated LiveAssessmentsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.live_assessments import LiveAssessmentsAPI
-from pycanvas.apis.live_assessments import Assessment
-from pycanvas.apis.live_assessments import Result
-from pycanvas.apis.live_assessments import Resultlinks
+from py3canvas.apis.live_assessments import LiveAssessmentsAPI
+from py3canvas.apis.live_assessments import Assessment
+from py3canvas.apis.live_assessments import Result
+from py3canvas.apis.live_assessments import Resultlinks
 
 
 class TestLiveAssessmentsAPI(unittest.TestCase):

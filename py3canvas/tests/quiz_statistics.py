@@ -5,13 +5,13 @@ This is a testing template for the generated QuizStatisticsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.quiz_statistics import QuizStatisticsAPI
-from pycanvas.apis.quiz_statistics import Quizstatisticsquestionstatistics
-from pycanvas.apis.quiz_statistics import Quizstatistics
-from pycanvas.apis.quiz_statistics import Quizstatisticsanswerpointbiserial
-from pycanvas.apis.quiz_statistics import Quizstatisticsanswerstatistics
-from pycanvas.apis.quiz_statistics import Quizstatisticslinks
-from pycanvas.apis.quiz_statistics import Quizstatisticssubmissionstatistics
+from py3canvas.apis.quiz_statistics import QuizStatisticsAPI
+from py3canvas.apis.quiz_statistics import Quizstatisticsquestionstatistics
+from py3canvas.apis.quiz_statistics import Quizstatistics
+from py3canvas.apis.quiz_statistics import Quizstatisticsanswerpointbiserial
+from py3canvas.apis.quiz_statistics import Quizstatisticsanswerstatistics
+from py3canvas.apis.quiz_statistics import Quizstatisticslinks
+from py3canvas.apis.quiz_statistics import Quizstatisticssubmissionstatistics
 
 
 class TestQuizStatisticsAPI(unittest.TestCase):

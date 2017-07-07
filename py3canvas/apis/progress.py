@@ -14,7 +14,7 @@ class ProgressAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for ProgressAPI."""
         super(ProgressAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.ProgressAPI")
+        self.logger = logging.getLogger("py3canvas.ProgressAPI")
 
     def query_progress(self, id):
         """
@@ -51,7 +51,7 @@ class Progress(BaseModel):
         self._message = message
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Progress')
+        self.logger = logging.getLogger('py3canvas.Progress')
 
     @property
     def completion(self):

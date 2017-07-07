@@ -5,7 +5,7 @@ This is a testing template for the generated AccountDomainLookupsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.account_domain_lookups import AccountDomainLookupsAPI
+from py3canvas.apis.account_domain_lookups import AccountDomainLookupsAPI
 
 
 class TestAccountDomainLookupsAPI(unittest.TestCase):

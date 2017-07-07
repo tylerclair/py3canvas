@@ -5,8 +5,8 @@ This is a testing template for the generated AccountsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.accounts import AccountsAPI
-from pycanvas.apis.accounts import Account
+from py3canvas.apis.accounts import AccountsAPI
+from py3canvas.apis.accounts import Account
 
 
 class TestAccountsAPI(unittest.TestCase):

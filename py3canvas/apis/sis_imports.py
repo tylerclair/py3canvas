@@ -15,7 +15,7 @@ class SisImportsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for SisImportsAPI."""
         super(SisImportsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.SisImportsAPI")
+        self.logger = logging.getLogger("py3canvas.SisImportsAPI")
 
     def get_sis_import_list(self, account_id, created_since=None):
         """
@@ -262,7 +262,7 @@ class Sisimport(BaseModel):
         self._data = data
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Sisimport')
+        self.logger = logging.getLogger('py3canvas.Sisimport')
 
     @property
     def ended_at(self):
@@ -467,7 +467,7 @@ class Sisimportcounts(BaseModel):
         self._batch_courses_deleted = batch_courses_deleted
         self._sections = sections
 
-        self.logger = logging.getLogger('pycanvas.Sisimportcounts')
+        self.logger = logging.getLogger('py3canvas.Sisimportcounts')
 
     @property
     def terms(self):
@@ -633,7 +633,7 @@ class Sisimportdata(BaseModel):
         self._counts = counts
         self._supplied_batches = supplied_batches
 
-        self.logger = logging.getLogger('pycanvas.Sisimportdata')
+        self.logger = logging.getLogger('py3canvas.Sisimportdata')
 
     @property
     def import_type(self):

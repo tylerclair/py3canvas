@@ -5,8 +5,8 @@ This is a testing template for the generated SectionsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.sections import SectionsAPI
-from pycanvas.apis.sections import Section
+from py3canvas.apis.sections import SectionsAPI
+from py3canvas.apis.sections import Section
 
 
 class TestSectionsAPI(unittest.TestCase):

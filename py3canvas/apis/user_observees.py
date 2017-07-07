@@ -14,7 +14,7 @@ class UserObserveesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for UserObserveesAPI."""
         super(UserObserveesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.UserObserveesAPI")
+        self.logger = logging.getLogger("py3canvas.UserObserveesAPI")
 
     def list_observees(self, user_id, include=None):
         """

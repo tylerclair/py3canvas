@@ -14,7 +14,7 @@ class FilesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for FilesAPI."""
         super(FilesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.FilesAPI")
+        self.logger = logging.getLogger("py3canvas.FilesAPI")
 
     def get_quota_information_courses(self, course_id):
         """
@@ -1492,7 +1492,7 @@ class Folder(BaseModel):
         self._folders_url = folders_url
         self._unlock_at = unlock_at
 
-        self.logger = logging.getLogger('pycanvas.Folder')
+        self.logger = logging.getLogger('py3canvas.Folder')
 
     @property
     def folders_count(self):
@@ -1728,7 +1728,7 @@ class Usagerights(BaseModel):
         self._use_justification = use_justification
         self._message = message
 
-        self.logger = logging.getLogger('pycanvas.Usagerights')
+        self.logger = logging.getLogger('py3canvas.Usagerights')
 
     @property
     def license(self):
@@ -1806,7 +1806,7 @@ class License(BaseModel):
         self._id = id
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.License')
+        self.logger = logging.getLogger('py3canvas.License')
 
     @property
     def url(self):
@@ -1868,7 +1868,7 @@ class File(BaseModel):
         self._id = id
         self._size = size
 
-        self.logger = logging.getLogger('pycanvas.File')
+        self.logger = logging.getLogger('py3canvas.File')
 
     @property
     def media_entry_id(self):

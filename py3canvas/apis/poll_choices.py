@@ -14,7 +14,7 @@ class PollChoicesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for PollChoicesAPI."""
         super(PollChoicesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.PollChoicesAPI")
+        self.logger = logging.getLogger("py3canvas.PollChoicesAPI")
 
     def list_poll_choices_in_poll(self, poll_id):
         """
@@ -153,7 +153,7 @@ class Pollchoice(BaseModel):
         self._poll_id = poll_id
         self._text = text
 
-        self.logger = logging.getLogger('pycanvas.Pollchoice')
+        self.logger = logging.getLogger('py3canvas.Pollchoice')
 
     @property
     def is_correct(self):

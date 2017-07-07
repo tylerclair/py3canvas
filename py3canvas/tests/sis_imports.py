@@ -5,10 +5,10 @@ This is a testing template for the generated SisImportsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.sis_imports import SisImportsAPI
-from pycanvas.apis.sis_imports import Sisimport
-from pycanvas.apis.sis_imports import Sisimportcounts
-from pycanvas.apis.sis_imports import Sisimportdata
+from py3canvas.apis.sis_imports import SisImportsAPI
+from py3canvas.apis.sis_imports import Sisimport
+from py3canvas.apis.sis_imports import Sisimportcounts
+from py3canvas.apis.sis_imports import Sisimportdata
 
 
 class TestSisImportsAPI(unittest.TestCase):

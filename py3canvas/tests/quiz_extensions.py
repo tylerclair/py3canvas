@@ -5,8 +5,8 @@ This is a testing template for the generated QuizExtensionsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.quiz_extensions import QuizExtensionsAPI
-from pycanvas.apis.quiz_extensions import Quizextension
+from py3canvas.apis.quiz_extensions import QuizExtensionsAPI
+from py3canvas.apis.quiz_extensions import Quizextension
 
 
 class TestQuizExtensionsAPI(unittest.TestCase):

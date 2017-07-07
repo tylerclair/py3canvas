@@ -14,7 +14,7 @@ class AssignmentsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for AssignmentsAPI."""
         super(AssignmentsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.AssignmentsAPI")
+        self.logger = logging.getLogger("py3canvas.AssignmentsAPI")
 
     def delete_assignment(self, id, course_id):
         """
@@ -969,7 +969,7 @@ class Turnitinsettings(BaseModel):
         self._exclude_small_matches_value = exclude_small_matches_value
         self._exclude_biblio = exclude_biblio
 
-        self.logger = logging.getLogger('pycanvas.Turnitinsettings')
+        self.logger = logging.getLogger('py3canvas.Turnitinsettings')
 
     @property
     def originality_report_visibility(self):
@@ -1078,7 +1078,7 @@ class Assignmentoverride(BaseModel):
         self._group_id = group_id
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Assignmentoverride')
+        self.logger = logging.getLogger('py3canvas.Assignmentoverride')
 
     @property
     def unlock_at(self):
@@ -1211,7 +1211,7 @@ class Externaltooltagattributes(BaseModel):
         self._new_tab = new_tab
         self._resource_link_id = resource_link_id
 
-        self.logger = logging.getLogger('pycanvas.Externaltooltagattributes')
+        self.logger = logging.getLogger('py3canvas.Externaltooltagattributes')
 
     @property
     def url(self):
@@ -1309,7 +1309,7 @@ class Assignment(BaseModel):
         self._overrides = overrides
         self._unpublishable = unpublishable
 
-        self.logger = logging.getLogger('pycanvas.Assignment')
+        self.logger = logging.getLogger('py3canvas.Assignment')
 
     @property
     def use_rubric_for_grading(self):
@@ -1937,7 +1937,7 @@ class Needsgradingcount(BaseModel):
         self._needs_grading_count = needs_grading_count
         self._section_id = section_id
 
-        self.logger = logging.getLogger('pycanvas.Needsgradingcount')
+        self.logger = logging.getLogger('py3canvas.Needsgradingcount')
 
     @property
     def needs_grading_count(self):
@@ -1975,7 +1975,7 @@ class Rubriccriteria(BaseModel):
         self._outcome_id = outcome_id
         self._long_description = long_description
 
-        self.logger = logging.getLogger('pycanvas.Rubriccriteria')
+        self.logger = logging.getLogger('py3canvas.Rubriccriteria')
 
     @property
     def vendor_guid(self):
@@ -2068,7 +2068,7 @@ class Assignmentdate(BaseModel):
         self._base = base
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Assignmentdate')
+        self.logger = logging.getLogger('py3canvas.Assignmentdate')
 
     @property
     def unlock_at(self):
@@ -2146,7 +2146,7 @@ class Rubricrating(BaseModel):
         self._id = id
         self._description = description
 
-        self.logger = logging.getLogger('pycanvas.Rubricrating')
+        self.logger = logging.getLogger('py3canvas.Rubricrating')
 
     @property
     def points(self):
@@ -2193,7 +2193,7 @@ class Lockinfo(BaseModel):
         self._unlock_at = unlock_at
         self._manually_locked = manually_locked
 
-        self.logger = logging.getLogger('pycanvas.Lockinfo')
+        self.logger = logging.getLogger('py3canvas.Lockinfo')
 
     @property
     def lock_at(self):

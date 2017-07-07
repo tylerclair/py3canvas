@@ -14,7 +14,7 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizSubmissionQuestionsAPI."""
         super(QuizSubmissionQuestionsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizSubmissionQuestionsAPI")
+        self.logger = logging.getLogger("py3canvas.QuizSubmissionQuestionsAPI")
 
     def get_all_quiz_submission_questions(self, quiz_submission_id, include=None):
         """
@@ -169,7 +169,7 @@ class Quizsubmissionquestion(BaseModel):
         self._answers = answers
         self._flagged = flagged
 
-        self.logger = logging.getLogger('pycanvas.Quizsubmissionquestion')
+        self.logger = logging.getLogger('py3canvas.Quizsubmissionquestion')
 
     @property
     def answer(self):

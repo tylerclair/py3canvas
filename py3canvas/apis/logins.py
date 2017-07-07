@@ -13,7 +13,7 @@ class LoginsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for LoginsAPI."""
         super(LoginsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.LoginsAPI")
+        self.logger = logging.getLogger("py3canvas.LoginsAPI")
 
     def list_user_logins_accounts(self, account_id):
         """

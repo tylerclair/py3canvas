@@ -5,8 +5,8 @@ This is a testing template for the generated CommunicationChannelsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.communication_channels import CommunicationChannelsAPI
-from pycanvas.apis.communication_channels import Communicationchannel
+from py3canvas.apis.communication_channels import CommunicationChannelsAPI
+from py3canvas.apis.communication_channels import Communicationchannel
 
 
 class TestCommunicationChannelsAPI(unittest.TestCase):

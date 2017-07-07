@@ -5,14 +5,14 @@ This is a testing template for the generated UsersAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.users import UsersAPI
-from pycanvas.apis.users import Profile
-from pycanvas.apis.users import Coursenickname
-from pycanvas.apis.users import Pageview
-from pycanvas.apis.users import Pageviewlinks
-from pycanvas.apis.users import User
-from pycanvas.apis.users import Userdisplay
-from pycanvas.apis.users import Avatar
+from py3canvas.apis.users import UsersAPI
+from py3canvas.apis.users import Profile
+from py3canvas.apis.users import Coursenickname
+from py3canvas.apis.users import Pageview
+from py3canvas.apis.users import Pageviewlinks
+from py3canvas.apis.users import User
+from py3canvas.apis.users import Userdisplay
+from py3canvas.apis.users import Avatar
 
 
 class TestUsersAPI(unittest.TestCase):

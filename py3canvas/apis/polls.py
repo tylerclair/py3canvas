@@ -14,7 +14,7 @@ class PollsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for PollsAPI."""
         super(PollsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.PollsAPI")
+        self.logger = logging.getLogger("py3canvas.PollsAPI")
 
     def list_polls(self):
         """
@@ -124,7 +124,7 @@ class Poll(BaseModel):
         self._question = question
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Poll')
+        self.logger = logging.getLogger('py3canvas.Poll')
 
     @property
     def user_id(self):

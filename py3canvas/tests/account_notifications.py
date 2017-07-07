@@ -5,8 +5,8 @@ This is a testing template for the generated AccountNotificationsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.account_notifications import AccountNotificationsAPI
-from pycanvas.apis.account_notifications import Accountnotification
+from py3canvas.apis.account_notifications import AccountNotificationsAPI
+from py3canvas.apis.account_notifications import Accountnotification
 
 
 class TestAccountNotificationsAPI(unittest.TestCase):

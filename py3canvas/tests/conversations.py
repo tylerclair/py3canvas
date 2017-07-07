@@ -5,8 +5,8 @@ This is a testing template for the generated ConversationsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.conversations import ConversationsAPI
-from pycanvas.apis.conversations import Conversation
+from py3canvas.apis.conversations import ConversationsAPI
+from py3canvas.apis.conversations import Conversation
 
 
 class TestConversationsAPI(unittest.TestCase):

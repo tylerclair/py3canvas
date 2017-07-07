@@ -14,7 +14,7 @@ class ConversationsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for ConversationsAPI."""
         super(ConversationsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.ConversationsAPI")
+        self.logger = logging.getLogger("py3canvas.ConversationsAPI")
 
     def list_conversations(self, filter=None, filter_mode=None, include=None, include_all_conversation_ids=None, interleave_submissions=None, scope=None):
         """
@@ -518,7 +518,7 @@ class Conversation(BaseModel):
         self._id = id
         self._subject = subject
 
-        self.logger = logging.getLogger('pycanvas.Conversation')
+        self.logger = logging.getLogger('py3canvas.Conversation')
 
     @property
     def start_at(self):

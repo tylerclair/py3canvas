@@ -14,7 +14,7 @@ class EnrollmentTermsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for EnrollmentTermsAPI."""
         super(EnrollmentTermsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.EnrollmentTermsAPI")
+        self.logger = logging.getLogger("py3canvas.EnrollmentTermsAPI")
 
     def create_enrollment_term(self, account_id, enrollment_term_end_at=None, enrollment_term_name=None, enrollment_term_sis_term_id=None, enrollment_term_start_at=None):
         """
@@ -156,7 +156,7 @@ class Enrollmentterm(BaseModel):
         self._end_at = end_at
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Enrollmentterm')
+        self.logger = logging.getLogger('py3canvas.Enrollmentterm')
 
     @property
     def start_at(self):

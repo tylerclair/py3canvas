@@ -5,16 +5,16 @@ This is a testing template for the generated AssignmentsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.assignments import AssignmentsAPI
-from pycanvas.apis.assignments import Turnitinsettings
-from pycanvas.apis.assignments import Assignmentoverride
-from pycanvas.apis.assignments import Externaltooltagattributes
-from pycanvas.apis.assignments import Assignment
-from pycanvas.apis.assignments import Needsgradingcount
-from pycanvas.apis.assignments import Rubriccriteria
-from pycanvas.apis.assignments import Assignmentdate
-from pycanvas.apis.assignments import Rubricrating
-from pycanvas.apis.assignments import Lockinfo
+from py3canvas.apis.assignments import AssignmentsAPI
+from py3canvas.apis.assignments import Turnitinsettings
+from py3canvas.apis.assignments import Assignmentoverride
+from py3canvas.apis.assignments import Externaltooltagattributes
+from py3canvas.apis.assignments import Assignment
+from py3canvas.apis.assignments import Needsgradingcount
+from py3canvas.apis.assignments import Rubriccriteria
+from py3canvas.apis.assignments import Assignmentdate
+from py3canvas.apis.assignments import Rubricrating
+from py3canvas.apis.assignments import Lockinfo
 
 
 class TestAssignmentsAPI(unittest.TestCase):

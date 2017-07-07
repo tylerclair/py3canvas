@@ -5,8 +5,8 @@ This is a testing template for the generated QuizQuestionGroupsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.quiz_question_groups import QuizQuestionGroupsAPI
-from pycanvas.apis.quiz_question_groups import Quizgroup
+from py3canvas.apis.quiz_question_groups import QuizQuestionGroupsAPI
+from py3canvas.apis.quiz_question_groups import Quizgroup
 
 
 class TestQuizQuestionGroupsAPI(unittest.TestCase):

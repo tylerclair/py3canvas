@@ -14,7 +14,7 @@ class EnrollmentsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for EnrollmentsAPI."""
         super(EnrollmentsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.EnrollmentsAPI")
+        self.logger = logging.getLogger("py3canvas.EnrollmentsAPI")
 
     def list_enrollments_courses(self, course_id, grading_period_id=None, include=None, role=None, sis_account_id=None, sis_course_id=None, sis_section_id=None, sis_user_id=None, state=None, type=None, user_id=None):
         """
@@ -581,7 +581,7 @@ class Grade(BaseModel):
         self._current_grade = current_grade
         self._final_grade = final_grade
 
-        self.logger = logging.getLogger('pycanvas.Grade')
+        self.logger = logging.getLogger('py3canvas.Grade')
 
     @property
     def current_score(self):
@@ -681,7 +681,7 @@ class Enrollment(BaseModel):
         self._sis_section_id = sis_section_id
         self._total_activity_time = total_activity_time
 
-        self.logger = logging.getLogger('pycanvas.Enrollment')
+        self.logger = logging.getLogger('py3canvas.Enrollment')
 
     @property
     def limit_privileges_to_course_section(self):

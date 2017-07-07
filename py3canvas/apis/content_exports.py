@@ -14,7 +14,7 @@ class ContentExportsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for ContentExportsAPI."""
         super(ContentExportsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.ContentExportsAPI")
+        self.logger = logging.getLogger("py3canvas.ContentExportsAPI")
 
     def list_content_exports_courses(self, course_id):
         """
@@ -255,7 +255,7 @@ class Contentexport(BaseModel):
         self._attachment = attachment
         self._export_type = export_type
 
-        self.logger = logging.getLogger('pycanvas.Contentexport')
+        self.logger = logging.getLogger('py3canvas.Contentexport')
 
     @property
     def progress_url(self):

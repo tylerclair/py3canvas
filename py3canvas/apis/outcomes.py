@@ -14,7 +14,7 @@ class OutcomesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for OutcomesAPI."""
         super(OutcomesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.OutcomesAPI")
+        self.logger = logging.getLogger("py3canvas.OutcomesAPI")
 
     def show_outcome(self, id):
         """
@@ -132,7 +132,7 @@ class Outcome(BaseModel):
         self._id = id
         self._mastery_points = mastery_points
 
-        self.logger = logging.getLogger('pycanvas.Outcome')
+        self.logger = logging.getLogger('py3canvas.Outcome')
 
     @property
     def vendor_guid(self):

@@ -5,8 +5,8 @@ This is a testing template for the generated QuizSubmissionsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.quiz_submissions import QuizSubmissionsAPI
-from pycanvas.apis.quiz_submissions import Quizsubmission
+from py3canvas.apis.quiz_submissions import QuizSubmissionsAPI
+from py3canvas.apis.quiz_submissions import Quizsubmission
 
 
 class TestQuizSubmissionsAPI(unittest.TestCase):

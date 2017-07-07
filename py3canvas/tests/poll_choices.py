@@ -5,8 +5,8 @@ This is a testing template for the generated PollChoicesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.poll_choices import PollChoicesAPI
-from pycanvas.apis.poll_choices import Pollchoice
+from py3canvas.apis.poll_choices import PollChoicesAPI
+from py3canvas.apis.poll_choices import Pollchoice
 
 
 class TestPollChoicesAPI(unittest.TestCase):

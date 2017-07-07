@@ -14,7 +14,7 @@ class ServicesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for ServicesAPI."""
         super(ServicesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.ServicesAPI")
+        self.logger = logging.getLogger("py3canvas.ServicesAPI")
 
     def get_kaltura_config(self):
         """

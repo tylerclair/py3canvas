@@ -14,7 +14,7 @@ class QuizzesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizzesAPI."""
         super(QuizzesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizzesAPI")
+        self.logger = logging.getLogger("py3canvas.QuizzesAPI")
 
     def list_quizzes_in_course(self, course_id, search_term=None):
         """
@@ -363,7 +363,7 @@ class Quizpermissions(BaseModel):
         self._read_statistics = read_statistics
         self._review_grades = review_grades
 
-        self.logger = logging.getLogger('pycanvas.Quizpermissions')
+        self.logger = logging.getLogger('py3canvas.Quizpermissions')
 
     @property
     def read(self):
@@ -487,7 +487,7 @@ class Quiz(BaseModel):
         self._access_code = access_code
         self._unpublishable = unpublishable
 
-        self.logger = logging.getLogger('pycanvas.Quiz')
+        self.logger = logging.getLogger('py3canvas.Quiz')
 
     @property
     def time_limit(self):

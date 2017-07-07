@@ -14,7 +14,7 @@ class CourseQuizExtensionsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for CourseQuizExtensionsAPI."""
         super(CourseQuizExtensionsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.CourseQuizExtensionsAPI")
+        self.logger = logging.getLogger("py3canvas.CourseQuizExtensionsAPI")
 
     def set_extensions_for_student_quiz_submissions(self, user_id, course_id, extend_from_end_at=None, extend_from_now=None, extra_attempts=None, extra_time=None, manually_unlocked=None):
         """
@@ -85,7 +85,7 @@ class Coursequizextension(BaseModel):
         self._extra_attempts = extra_attempts
         self._end_at = end_at
 
-        self.logger = logging.getLogger('pycanvas.Coursequizextension')
+        self.logger = logging.getLogger('py3canvas.Coursequizextension')
 
     @property
     def manually_unlocked(self):

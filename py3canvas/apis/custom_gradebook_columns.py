@@ -14,7 +14,7 @@ class CustomGradebookColumnsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for CustomGradebookColumnsAPI."""
         super(CustomGradebookColumnsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.CustomGradebookColumnsAPI")
+        self.logger = logging.getLogger("py3canvas.CustomGradebookColumnsAPI")
 
     def list_custom_gradebook_columns(self, course_id, include_hidden=None):
         """
@@ -207,7 +207,7 @@ class Columndatum(BaseModel):
         self._content = content
         self._user_id = user_id
 
-        self.logger = logging.getLogger('pycanvas.Columndatum')
+        self.logger = logging.getLogger('py3canvas.Columndatum')
 
     @property
     def content(self):
@@ -241,7 +241,7 @@ class Customcolumn(BaseModel):
         self._hidden = hidden
         self._title = title
 
-        self.logger = logging.getLogger('pycanvas.Customcolumn')
+        self.logger = logging.getLogger('py3canvas.Customcolumn')
 
     @property
     def position(self):

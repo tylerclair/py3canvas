@@ -5,8 +5,8 @@ This is a testing template for the generated AdminsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.admins import AdminsAPI
-from pycanvas.apis.admins import Admin
+from py3canvas.apis.admins import AdminsAPI
+from py3canvas.apis.admins import Admin
 
 
 class TestAdminsAPI(unittest.TestCase):

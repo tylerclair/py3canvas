@@ -14,7 +14,7 @@ class SectionsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for SectionsAPI."""
         super(SectionsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.SectionsAPI")
+        self.logger = logging.getLogger("py3canvas.SectionsAPI")
 
     def list_course_sections(self, course_id, include=None):
         """
@@ -41,7 +41,7 @@ class SectionsAPI(BaseCanvasAPI):
         - "passback_status": Include the grade passback status."""
         if include is not None:
             self._validate_enum(include, ["students", "avatar_url", "enrollments", "total_students", "passback_status"])
-            params["include"] = include
+            params["include[]"] = include
 
         self.logger.debug("GET /api/v1/courses/{course_id}/sections with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/sections".format(**path), data=data, params=params, all_pages=True)
@@ -273,7 +273,7 @@ class Section(BaseModel):
         self._total_students = total_students
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Section')
+        self.logger = logging.getLogger('py3canvas.Section')
 
     @property
     def integration_id(self):

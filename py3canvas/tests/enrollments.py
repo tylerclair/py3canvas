@@ -61,4 +61,5 @@ class TestEnrollmentsAPI(unittest.TestCase):
     def test_re_activate_enrollment(self):
         """Integration test for the EnrollmentsAPI.re_activate_enrollment method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
-        pass
+        pass
+

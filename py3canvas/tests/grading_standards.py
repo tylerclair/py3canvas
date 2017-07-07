@@ -5,9 +5,9 @@ This is a testing template for the generated GradingStandardsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.grading_standards import GradingStandardsAPI
-from pycanvas.apis.grading_standards import Gradingstandard
-from pycanvas.apis.grading_standards import Gradingschemeentry
+from py3canvas.apis.grading_standards import GradingStandardsAPI
+from py3canvas.apis.grading_standards import Gradingstandard
+from py3canvas.apis.grading_standards import Gradingschemeentry
 
 
 class TestGradingStandardsAPI(unittest.TestCase):

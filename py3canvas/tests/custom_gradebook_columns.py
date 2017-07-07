@@ -5,9 +5,9 @@ This is a testing template for the generated CustomGradebookColumnsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.custom_gradebook_columns import CustomGradebookColumnsAPI
-from pycanvas.apis.custom_gradebook_columns import Columndatum
-from pycanvas.apis.custom_gradebook_columns import Customcolumn
+from py3canvas.apis.custom_gradebook_columns import CustomGradebookColumnsAPI
+from py3canvas.apis.custom_gradebook_columns import Columndatum
+from py3canvas.apis.custom_gradebook_columns import Customcolumn
 
 
 class TestCustomGradebookColumnsAPI(unittest.TestCase):

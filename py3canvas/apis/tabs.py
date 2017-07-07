@@ -14,7 +14,7 @@ class TabsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for TabsAPI."""
         super(TabsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.TabsAPI")
+        self.logger = logging.getLogger("py3canvas.TabsAPI")
 
     def list_available_tabs_for_course_or_group_courses(self, course_id, include=None):
         """
@@ -109,7 +109,7 @@ class Tab(BaseModel):
         self._type = type
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Tab')
+        self.logger = logging.getLogger('py3canvas.Tab')
 
     @property
     def html_url(self):

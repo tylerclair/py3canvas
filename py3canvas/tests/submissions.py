@@ -141,3 +141,4 @@ class TestSubmissionsAPI(unittest.TestCase):
         user_id = None  # Change me!!
 
         r = self.client.mark_submission_as_unread_sections(user_id, section_id, assignment_id)
+

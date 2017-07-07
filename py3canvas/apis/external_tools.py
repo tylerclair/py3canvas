@@ -14,7 +14,7 @@ class ExternalToolsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for ExternalToolsAPI."""
         super(ExternalToolsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.ExternalToolsAPI")
+        self.logger = logging.getLogger("py3canvas.ExternalToolsAPI")
 
     def list_external_tools_courses(self, course_id, include_parents=None, search_term=None, selectable=None):
         """

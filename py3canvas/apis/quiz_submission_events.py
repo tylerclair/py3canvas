@@ -14,7 +14,7 @@ class QuizSubmissionEventsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizSubmissionEventsAPI."""
         super(QuizSubmissionEventsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizSubmissionEventsAPI")
+        self.logger = logging.getLogger("py3canvas.QuizSubmissionEventsAPI")
 
     def submit_captured_events(self, id, quiz_id, course_id, quiz_submission_events):
         """
@@ -89,7 +89,7 @@ class Quizsubmissionevent(BaseModel):
         self._event_type = event_type
         self._event_data = event_data
 
-        self.logger = logging.getLogger('pycanvas.Quizsubmissionevent')
+        self.logger = logging.getLogger('py3canvas.Quizsubmissionevent')
 
     @property
     def created_at(self):

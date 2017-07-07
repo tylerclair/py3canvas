@@ -14,7 +14,7 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizSubmissionsAPI."""
         super(QuizSubmissionsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizSubmissionsAPI")
+        self.logger = logging.getLogger("py3canvas.QuizSubmissionsAPI")
 
     def get_all_quiz_submissions(self, quiz_id, course_id, include=None):
         """
@@ -314,7 +314,7 @@ class Quizsubmission(BaseModel):
         self._id = id
         self._has_seen_results = has_seen_results
 
-        self.logger = logging.getLogger('pycanvas.Quizsubmission')
+        self.logger = logging.getLogger('py3canvas.Quizsubmission')
 
     @property
     def submission_id(self):

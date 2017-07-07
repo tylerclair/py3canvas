@@ -14,7 +14,7 @@ class LiveAssessmentsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for LiveAssessmentsAPI."""
         super(LiveAssessmentsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.LiveAssessmentsAPI")
+        self.logger = logging.getLogger("py3canvas.LiveAssessmentsAPI")
 
     def create_live_assessment_results(self, course_id, assessment_id):
         """
@@ -109,7 +109,7 @@ class Assessment(BaseModel):
         self._key = key
         self._title = title
 
-        self.logger = logging.getLogger('pycanvas.Assessment')
+        self.logger = logging.getLogger('py3canvas.Assessment')
 
     @property
     def id(self):
@@ -156,7 +156,7 @@ class Result(BaseModel):
         self._id = id
         self._passed = passed
 
-        self.logger = logging.getLogger('pycanvas.Result')
+        self.logger = logging.getLogger('py3canvas.Result')
 
     @property
     def assessed_at(self):
@@ -213,7 +213,7 @@ class Resultlinks(BaseModel):
         self._user = user
         self._assessor = assessor
 
-        self.logger = logging.getLogger('pycanvas.Resultlinks')
+        self.logger = logging.getLogger('py3canvas.Resultlinks')
 
     @property
     def assessment(self):

@@ -42,3 +42,4 @@ class TestQuizReportsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.abort_generation_of_report_or_remove_previously_generated_one(id, quiz_id, course_id)
+

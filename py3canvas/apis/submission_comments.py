@@ -14,7 +14,7 @@ class SubmissionCommentsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for SubmissionCommentsAPI."""
         super(SubmissionCommentsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.SubmissionCommentsAPI")
+        self.logger = logging.getLogger("py3canvas.SubmissionCommentsAPI")
 
     def upload_file(self, user_id, course_id, assignment_id):
         """

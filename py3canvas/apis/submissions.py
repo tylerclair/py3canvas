@@ -14,7 +14,7 @@ class SubmissionsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for SubmissionsAPI."""
         super(SubmissionsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.SubmissionsAPI")
+        self.logger = logging.getLogger("py3canvas.SubmissionsAPI")
 
     def submit_assignment_courses(self, course_id, assignment_id, submission_submission_type, comment_text_comment=None, submission_body=None, submission_file_ids=None, submission_media_comment_id=None, submission_media_comment_type=None, submission_url=None):
         """
@@ -1213,7 +1213,7 @@ class Submissioncomment(BaseModel):
         self._author_id = author_id
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Submissioncomment')
+        self.logger = logging.getLogger('py3canvas.Submissioncomment')
 
     @property
     def comment(self):
@@ -1320,7 +1320,7 @@ class Submission(BaseModel):
         self._assignment_visible = assignment_visible
         self._user = user
 
-        self.logger = logging.getLogger('pycanvas.Submission')
+        self.logger = logging.getLogger('py3canvas.Submission')
 
     @property
     def body(self):
@@ -1565,7 +1565,7 @@ class Mediacomment(BaseModel):
         self._url = url
         self._media_type = media_type
 
-        self.logger = logging.getLogger('pycanvas.Mediacomment')
+        self.logger = logging.getLogger('py3canvas.Mediacomment')
 
     @property
     def media_id(self):

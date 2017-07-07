@@ -14,7 +14,7 @@ class QuizStatisticsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizStatisticsAPI."""
         super(QuizStatisticsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizStatisticsAPI")
+        self.logger = logging.getLogger("py3canvas.QuizStatisticsAPI")
 
     def fetching_latest_quiz_statistics(self, quiz_id, course_id, all_versions=None):
         """
@@ -56,7 +56,7 @@ class Quizstatisticsquestionstatistics(BaseModel):
         self._responses = responses
         self._answers = answers
 
-        self.logger = logging.getLogger('pycanvas.Quizstatisticsquestionstatistics')
+        self.logger = logging.getLogger('py3canvas.Quizstatisticsquestionstatistics')
 
     @property
     def responses(self):
@@ -97,7 +97,7 @@ class Quizstatistics(BaseModel):
         self._includes_all_versions = includes_all_versions
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Quizstatistics')
+        self.logger = logging.getLogger('py3canvas.Quizstatistics')
 
     @property
     def question_statistics(self):
@@ -223,7 +223,7 @@ class Quizstatisticsanswerpointbiserial(BaseModel):
         self._correct = correct
         self._answer_id = answer_id
 
-        self.logger = logging.getLogger('pycanvas.Quizstatisticsanswerpointbiserial')
+        self.logger = logging.getLogger('py3canvas.Quizstatisticsanswerpointbiserial')
 
     @property
     def point_biserial(self):
@@ -281,7 +281,7 @@ class Quizstatisticsanswerstatistics(BaseModel):
         self._weight = weight
         self._responses = responses
 
-        self.logger = logging.getLogger('pycanvas.Quizstatisticsanswerstatistics')
+        self.logger = logging.getLogger('py3canvas.Quizstatisticsanswerstatistics')
 
     @property
     def text(self):
@@ -336,7 +336,7 @@ class Quizstatisticslinks(BaseModel):
         """Init method for Quizstatisticslinks class."""
         self._quiz = quiz
 
-        self.logger = logging.getLogger('pycanvas.Quizstatisticslinks')
+        self.logger = logging.getLogger('py3canvas.Quizstatisticslinks')
 
     @property
     def quiz(self):
@@ -366,7 +366,7 @@ class Quizstatisticssubmissionstatistics(BaseModel):
         self._correct_count_average = correct_count_average
         self._score_stdev = score_stdev
 
-        self.logger = logging.getLogger('pycanvas.Quizstatisticssubmissionstatistics')
+        self.logger = logging.getLogger('py3canvas.Quizstatisticssubmissionstatistics')
 
     @property
     def duration_average(self):

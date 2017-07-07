@@ -14,5 +14,5 @@ class DocumentPreviewsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for DocumentPreviewsAPI."""
         super(DocumentPreviewsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.DocumentPreviewsAPI")
+        self.logger = logging.getLogger("py3canvas.DocumentPreviewsAPI")
 

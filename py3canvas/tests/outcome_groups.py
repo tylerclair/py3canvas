@@ -233,4 +233,5 @@ class TestOutcomeGroupsAPI(unittest.TestCase):
     def test_import_outcome_group_courses(self):
         """Integration test for the OutcomeGroupsAPI.import_outcome_group_courses method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
-        pass
+        pass
+

@@ -14,7 +14,7 @@ class FeatureFlagsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for FeatureFlagsAPI."""
         super(FeatureFlagsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.FeatureFlagsAPI")
+        self.logger = logging.getLogger("py3canvas.FeatureFlagsAPI")
 
     def list_features_courses(self, course_id):
         """
@@ -373,7 +373,7 @@ class Featureflag(BaseModel):
         self._locked = locked
         self._feature = feature
 
-        self.logger = logging.getLogger('pycanvas.Featureflag')
+        self.logger = logging.getLogger('py3canvas.Featureflag')
 
     @property
     def context_type(self):
@@ -447,7 +447,7 @@ class Feature(BaseModel):
         self._root_opt_in = root_opt_in
         self._release_notes_url = release_notes_url
 
-        self.logger = logging.getLogger('pycanvas.Feature')
+        self.logger = logging.getLogger('py3canvas.Feature')
 
     @property
     def development(self):

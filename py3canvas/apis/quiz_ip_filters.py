@@ -14,7 +14,7 @@ class QuizIpFiltersAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizIpFiltersAPI."""
         super(QuizIpFiltersAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizIpFiltersAPI")
+        self.logger = logging.getLogger("py3canvas.QuizIpFiltersAPI")
 
     def get_available_quiz_ip_filters(self, quiz_id, course_id):
         """
@@ -49,7 +49,7 @@ class Quizipfilter(BaseModel):
         self._account = account
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.Quizipfilter')
+        self.logger = logging.getLogger('py3canvas.Quizipfilter')
 
     @property
     def filter(self):

@@ -32,4 +32,5 @@ class TestCollaborationsAPI(unittest.TestCase):
         """Integration test for the CollaborationsAPI.list_members_of_collaboration method."""
         id = None  # Change me!!
 
-        r = self.client.list_members_of_collaboration(id, include=None)
+        r = self.client.list_members_of_collaboration(id, include=None)
+

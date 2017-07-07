@@ -5,9 +5,9 @@ This is a testing template for the generated AccountReportsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.account_reports import AccountReportsAPI
-from pycanvas.apis.account_reports import Report
-from pycanvas.apis.account_reports import Reportparameters
+from py3canvas.apis.account_reports import AccountReportsAPI
+from py3canvas.apis.account_reports import Report
+from py3canvas.apis.account_reports import Reportparameters
 
 
 class TestAccountReportsAPI(unittest.TestCase):

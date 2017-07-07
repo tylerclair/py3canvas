@@ -14,7 +14,7 @@ class GradebookHistoryAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for GradebookHistoryAPI."""
         super(GradebookHistoryAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.GradebookHistoryAPI")
+        self.logger = logging.getLogger("py3canvas.GradebookHistoryAPI")
 
     def days_in_gradebook_history_for_this_course(self, course_id):
         """
@@ -156,7 +156,7 @@ class Submissionversion(BaseModel):
         self._url = url
         self._submission_type = submission_type
 
-        self.logger = logging.getLogger('pycanvas.Submissionversion')
+        self.logger = logging.getLogger('py3canvas.Submissionversion')
 
     @property
     def new_grade(self):
@@ -421,7 +421,7 @@ class Grader(BaseModel):
         self._id = id
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.Grader')
+        self.logger = logging.getLogger('py3canvas.Grader')
 
     @property
     def assignments(self):
@@ -465,7 +465,7 @@ class Day(BaseModel):
         self._date = date
         self._graders = graders
 
-        self.logger = logging.getLogger('pycanvas.Day')
+        self.logger = logging.getLogger('py3canvas.Day')
 
     @property
     def date(self):
@@ -498,7 +498,7 @@ class Submissionhistory(BaseModel):
         self._submission_id = submission_id
         self._versions = versions
 
-        self.logger = logging.getLogger('pycanvas.Submissionhistory')
+        self.logger = logging.getLogger('py3canvas.Submissionhistory')
 
     @property
     def submission_id(self):

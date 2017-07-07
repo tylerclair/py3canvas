@@ -14,7 +14,7 @@ class ModulesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for ModulesAPI."""
         super(ModulesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.ModulesAPI")
+        self.logger = logging.getLogger("py3canvas.ModulesAPI")
 
     def list_modules(self, course_id, include=None, search_term=None, student_id=None):
         """
@@ -658,7 +658,7 @@ class Contentdetails(BaseModel):
         self._lock_explanation = lock_explanation
         self._locked_for_user = locked_for_user
 
-        self.logger = logging.getLogger('pycanvas.Contentdetails')
+        self.logger = logging.getLogger('py3canvas.Contentdetails')
 
     @property
     def unlock_at(self):
@@ -748,7 +748,7 @@ class Moduleitemsequenceasset(BaseModel):
         self._id = id
         self._title = title
 
-        self.logger = logging.getLogger('pycanvas.Moduleitemsequenceasset')
+        self.logger = logging.getLogger('py3canvas.Moduleitemsequenceasset')
 
     @property
     def module_id(self):
@@ -804,7 +804,7 @@ class Moduleitemcompletionrequirement(BaseModel):
         self._type = type
         self._completed = completed
 
-        self.logger = logging.getLogger('pycanvas.Moduleitemcompletionrequirement')
+        self.logger = logging.getLogger('py3canvas.Moduleitemcompletionrequirement')
 
     @property
     def min_score(self):
@@ -859,7 +859,7 @@ class Module(BaseModel):
         self._require_sequential_progress = require_sequential_progress
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.Module')
+        self.logger = logging.getLogger('py3canvas.Module')
 
     @property
     def completed_at(self):
@@ -1013,7 +1013,7 @@ class Moduleitemsequence(BaseModel):
         self._items = items
         self._modules = modules
 
-        self.logger = logging.getLogger('pycanvas.Moduleitemsequence')
+        self.logger = logging.getLogger('py3canvas.Moduleitemsequence')
 
     @property
     def items(self):
@@ -1047,7 +1047,7 @@ class Completionrequirement(BaseModel):
         self._type = type
         self._completed = completed
 
-        self.logger = logging.getLogger('pycanvas.Completionrequirement')
+        self.logger = logging.getLogger('py3canvas.Completionrequirement')
 
     @property
     def min_score(self):
@@ -1103,7 +1103,7 @@ class Moduleitem(BaseModel):
         self._id = id
         self._page_url = page_url
 
-        self.logger = logging.getLogger('pycanvas.Moduleitem')
+        self.logger = logging.getLogger('py3canvas.Moduleitem')
 
     @property
     def indent(self):
@@ -1269,7 +1269,7 @@ class Moduleitemsequencenode(BaseModel):
         self._prev = prev
         self._next = next
 
-        self.logger = logging.getLogger('pycanvas.Moduleitemsequencenode')
+        self.logger = logging.getLogger('py3canvas.Moduleitemsequencenode')
 
     @property
     def current(self):
@@ -1318,7 +1318,7 @@ class Moduleitemcontentdetails(BaseModel):
         self._lock_explanation = lock_explanation
         self._locked_for_user = locked_for_user
 
-        self.logger = logging.getLogger('pycanvas.Moduleitemcontentdetails')
+        self.logger = logging.getLogger('py3canvas.Moduleitemcontentdetails')
 
     @property
     def unlock_at(self):

@@ -5,7 +5,7 @@ This is a testing template for the generated DocumentPreviewsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.document_previews import DocumentPreviewsAPI
+from py3canvas.apis.document_previews import DocumentPreviewsAPI
 
 
 class TestDocumentPreviewsAPI(unittest.TestCase):

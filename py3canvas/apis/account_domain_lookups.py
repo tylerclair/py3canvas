@@ -14,7 +14,7 @@ class AccountDomainLookupsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for AccountDomainLookupsAPI."""
         super(AccountDomainLookupsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.AccountDomainLookupsAPI")
+        self.logger = logging.getLogger("py3canvas.AccountDomainLookupsAPI")
 
     def search_account_domains(self, domain=None, latitude=None, longitude=None, name=None):
         """

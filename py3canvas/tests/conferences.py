@@ -5,9 +5,9 @@ This is a testing template for the generated ConferencesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.conferences import ConferencesAPI
-from pycanvas.apis.conferences import Conference
-from pycanvas.apis.conferences import Conferencerecording
+from py3canvas.apis.conferences import ConferencesAPI
+from py3canvas.apis.conferences import Conference
+from py3canvas.apis.conferences import Conferencerecording
 
 
 class TestConferencesAPI(unittest.TestCase):

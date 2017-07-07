@@ -14,7 +14,7 @@ class GradingStandardsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for GradingStandardsAPI."""
         super(GradingStandardsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.GradingStandardsAPI")
+        self.logger = logging.getLogger("py3canvas.GradingStandardsAPI")
 
     def create_new_grading_standard_accounts(self, title, account_id, grading_scheme_entry_name, grading_scheme_entry_value):
         """
@@ -160,7 +160,7 @@ class Gradingstandard(BaseModel):
         self._id = id
         self._title = title
 
-        self.logger = logging.getLogger('pycanvas.Gradingstandard')
+        self.logger = logging.getLogger('py3canvas.Gradingstandard')
 
     @property
     def context_type(self):
@@ -226,7 +226,7 @@ class Gradingschemeentry(BaseModel):
         self._name = name
         self._value = value
 
-        self.logger = logging.getLogger('pycanvas.Gradingschemeentry')
+        self.logger = logging.getLogger('py3canvas.Gradingschemeentry')
 
     @property
     def name(self):

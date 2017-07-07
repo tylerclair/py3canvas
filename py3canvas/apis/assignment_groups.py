@@ -14,7 +14,7 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for AssignmentGroupsAPI."""
         super(AssignmentGroupsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.AssignmentGroupsAPI")
+        self.logger = logging.getLogger("py3canvas.AssignmentGroupsAPI")
 
     def list_assignment_groups(self, course_id, exclude_assignment_submission_types=None, grading_period_id=None, include=None, override_assignment_dates=None, scope_assignments_to_student=None):
         """
@@ -218,7 +218,7 @@ class Gradingrules(BaseModel):
         self._drop_highest = drop_highest
         self._drop_lowest = drop_lowest
 
-        self.logger = logging.getLogger('pycanvas.Gradingrules')
+        self.logger = logging.getLogger('py3canvas.Gradingrules')
 
     @property
     def never_drop(self):
@@ -268,7 +268,7 @@ class Assignmentgroup(BaseModel):
         self._position = position
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Assignmentgroup')
+        self.logger = logging.getLogger('py3canvas.Assignmentgroup')
 
     @property
     def group_weight(self):

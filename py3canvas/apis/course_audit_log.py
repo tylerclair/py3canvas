@@ -14,7 +14,7 @@ class CourseAuditLogAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for CourseAuditLogAPI."""
         super(CourseAuditLogAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.CourseAuditLogAPI")
+        self.logger = logging.getLogger("py3canvas.CourseAuditLogAPI")
 
     def query_by_course(self, course_id, end_time=None, start_time=None):
         """
@@ -56,7 +56,7 @@ class Createdeventdata(BaseModel):
         self._name = name
         self._created_source = created_source
 
-        self.logger = logging.getLogger('pycanvas.Createdeventdata')
+        self.logger = logging.getLogger('py3canvas.Createdeventdata')
 
     @property
     def is_public(self):
@@ -126,7 +126,7 @@ class Courseevent(BaseModel):
         self._id = id
         self._event_data = event_data
 
-        self.logger = logging.getLogger('pycanvas.Courseevent')
+        self.logger = logging.getLogger('py3canvas.Courseevent')
 
     @property
     def event_source(self):
@@ -207,7 +207,7 @@ class Courseeventlink(BaseModel):
         self._copied_to = copied_to
         self._page_view = page_view
 
-        self.logger = logging.getLogger('pycanvas.Courseeventlink')
+        self.logger = logging.getLogger('py3canvas.Courseeventlink')
 
     @property
     def copied_from(self):
@@ -287,7 +287,7 @@ class Updatedeventdata(BaseModel):
         self._start_at = start_at
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.Updatedeventdata')
+        self.logger = logging.getLogger('py3canvas.Updatedeventdata')
 
     @property
     def is_public(self):

@@ -14,7 +14,7 @@ class AdminsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for AdminsAPI."""
         super(AdminsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.AdminsAPI")
+        self.logger = logging.getLogger("py3canvas.AdminsAPI")
 
     def make_account_admin(self, user_id, account_id, role=None, role_id=None, send_confirmation=None):
         """
@@ -123,7 +123,7 @@ class Admin(BaseModel):
         self._id = id
         self._user = user
 
-        self.logger = logging.getLogger('pycanvas.Admin')
+        self.logger = logging.getLogger('py3canvas.Admin')
 
     @property
     def status(self):

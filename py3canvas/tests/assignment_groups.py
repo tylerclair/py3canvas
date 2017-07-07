@@ -5,9 +5,9 @@ This is a testing template for the generated AssignmentGroupsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.assignment_groups import AssignmentGroupsAPI
-from pycanvas.apis.assignment_groups import Gradingrules
-from pycanvas.apis.assignment_groups import Assignmentgroup
+from py3canvas.apis.assignment_groups import AssignmentGroupsAPI
+from py3canvas.apis.assignment_groups import Gradingrules
+from py3canvas.apis.assignment_groups import Assignmentgroup
 
 
 class TestAssignmentGroupsAPI(unittest.TestCase):

@@ -5,8 +5,8 @@ This is a testing template for the generated ContentExportsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.content_exports import ContentExportsAPI
-from pycanvas.apis.content_exports import Contentexport
+from py3canvas.apis.content_exports import ContentExportsAPI
+from py3canvas.apis.content_exports import Contentexport
 
 
 class TestContentExportsAPI(unittest.TestCase):

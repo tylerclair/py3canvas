@@ -18,4 +18,4 @@ class TestQuizSubmissionFilesAPI(unittest.TestCase):
         """Integration test for the QuizSubmissionFilesAPI.upload_file method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-
+

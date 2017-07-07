@@ -5,8 +5,8 @@ This is a testing template for the generated ProgressAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.progress import ProgressAPI
-from pycanvas.apis.progress import Progress
+from py3canvas.apis.progress import ProgressAPI
+from py3canvas.apis.progress import Progress
 
 
 class TestProgressAPI(unittest.TestCase):

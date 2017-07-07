@@ -14,7 +14,7 @@ class AccountsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for AccountsAPI."""
         super(AccountsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.AccountsAPI")
+        self.logger = logging.getLogger("py3canvas.AccountsAPI")
 
     def list_accounts(self, include=None):
         """
@@ -361,7 +361,7 @@ class Account(BaseModel):
         self._parent_account_id = parent_account_id
         self._default_user_storage_quota_mb = default_user_storage_quota_mb
 
-        self.logger = logging.getLogger('pycanvas.Account')
+        self.logger = logging.getLogger('py3canvas.Account')
 
     @property
     def integration_id(self):

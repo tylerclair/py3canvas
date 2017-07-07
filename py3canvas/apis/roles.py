@@ -14,7 +14,7 @@ class RolesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for RolesAPI."""
         super(RolesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.RolesAPI")
+        self.logger = logging.getLogger("py3canvas.RolesAPI")
 
     def list_roles(self, account_id, show_inherited=None, state=None):
         """
@@ -355,7 +355,7 @@ class Rolepermissions(BaseModel):
         self._prior_default = prior_default
         self._applies_to_self = applies_to_self
 
-        self.logger = logging.getLogger('pycanvas.Rolepermissions')
+        self.logger = logging.getLogger('py3canvas.Rolepermissions')
 
     @property
     def locked(self):
@@ -447,7 +447,7 @@ class Role(BaseModel):
         self._label = label
         self._permissions = permissions
 
-        self.logger = logging.getLogger('pycanvas.Role')
+        self.logger = logging.getLogger('py3canvas.Role')
 
     @property
     def account(self):

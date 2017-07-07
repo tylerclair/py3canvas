@@ -5,10 +5,10 @@ This is a testing template for the generated QuizSubmissionUserListAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.quiz_submission_user_list import QuizSubmissionUserListAPI
-from pycanvas.apis.quiz_submission_user_list import Jsonapipagination
-from pycanvas.apis.quiz_submission_user_list import Quizsubmissionuserlistmeta
-from pycanvas.apis.quiz_submission_user_list import Quizsubmissionuserlist
+from py3canvas.apis.quiz_submission_user_list import QuizSubmissionUserListAPI
+from py3canvas.apis.quiz_submission_user_list import Jsonapipagination
+from py3canvas.apis.quiz_submission_user_list import Quizsubmissionuserlistmeta
+from py3canvas.apis.quiz_submission_user_list import Quizsubmissionuserlist
 
 
 class TestQuizSubmissionUserListAPI(unittest.TestCase):

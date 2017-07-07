@@ -14,7 +14,7 @@ class GroupsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for GroupsAPI."""
         super(GroupsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.GroupsAPI")
+        self.logger = logging.getLogger("py3canvas.GroupsAPI")
 
     def list_your_groups(self, context_type=None, include=None):
         """
@@ -653,7 +653,7 @@ class Group(BaseModel):
         self._id = id
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.Group')
+        self.logger = logging.getLogger('py3canvas.Group')
 
     @property
     def members_count(self):
@@ -845,7 +845,7 @@ class Groupmembership(BaseModel):
         self._group_id = group_id
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Groupmembership')
+        self.logger = logging.getLogger('py3canvas.Groupmembership')
 
     @property
     def user_id(self):

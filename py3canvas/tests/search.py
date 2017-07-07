@@ -5,7 +5,7 @@ This is a testing template for the generated SearchAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.search import SearchAPI
+from py3canvas.apis.search import SearchAPI
 
 
 class TestSearchAPI(unittest.TestCase):

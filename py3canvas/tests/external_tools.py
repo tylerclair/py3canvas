@@ -5,7 +5,7 @@ This is a testing template for the generated ExternalToolsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.external_tools import ExternalToolsAPI
+from py3canvas.apis.external_tools import ExternalToolsAPI
 
 
 class TestExternalToolsAPI(unittest.TestCase):

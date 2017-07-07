@@ -5,11 +5,11 @@ This is a testing template for the generated CoursesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.courses import CoursesAPI
-from pycanvas.apis.courses import Course
-from pycanvas.apis.courses import Term
-from pycanvas.apis.courses import Courseprogress
-from pycanvas.apis.courses import Calendarlink
+from py3canvas.apis.courses import CoursesAPI
+from py3canvas.apis.courses import Course
+from py3canvas.apis.courses import Term
+from py3canvas.apis.courses import Courseprogress
+from py3canvas.apis.courses import Calendarlink
 
 
 class TestCoursesAPI(unittest.TestCase):

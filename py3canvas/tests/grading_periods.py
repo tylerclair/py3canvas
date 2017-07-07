@@ -5,8 +5,8 @@ This is a testing template for the generated GradingPeriodsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.grading_periods import GradingPeriodsAPI
-from pycanvas.apis.grading_periods import Gradingperiod
+from py3canvas.apis.grading_periods import GradingPeriodsAPI
+from py3canvas.apis.grading_periods import Gradingperiod
 
 
 class TestGradingPeriodsAPI(unittest.TestCase):

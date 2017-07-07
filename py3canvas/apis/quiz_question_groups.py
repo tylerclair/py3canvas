@@ -14,7 +14,7 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for QuizQuestionGroupsAPI."""
         super(QuizQuestionGroupsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.QuizQuestionGroupsAPI")
+        self.logger = logging.getLogger("py3canvas.QuizQuestionGroupsAPI")
 
     def get_single_quiz_group(self, id, quiz_id, course_id):
         """
@@ -202,7 +202,7 @@ class Quizgroup(BaseModel):
         self._quiz_id = quiz_id
         self._assessment_question_bank_id = assessment_question_bank_id
 
-        self.logger = logging.getLogger('pycanvas.Quizgroup')
+        self.logger = logging.getLogger('py3canvas.Quizgroup')
 
     @property
     def name(self):

@@ -5,7 +5,7 @@ This is a testing template for the generated ServicesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.services import ServicesAPI
+from py3canvas.apis.services import ServicesAPI
 
 
 class TestServicesAPI(unittest.TestCase):

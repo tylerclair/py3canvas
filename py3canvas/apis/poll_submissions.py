@@ -14,7 +14,7 @@ class PollSubmissionsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for PollSubmissionsAPI."""
         super(PollSubmissionsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.PollSubmissionsAPI")
+        self.logger = logging.getLogger("py3canvas.PollSubmissionsAPI")
 
     def get_single_poll_submission(self, id, poll_id, poll_session_id):
         """
@@ -77,7 +77,7 @@ class Pollsubmission(BaseModel):
         self._id = id
         self._poll_choice_id = poll_choice_id
 
-        self.logger = logging.getLogger('pycanvas.Pollsubmission')
+        self.logger = logging.getLogger('py3canvas.Pollsubmission')
 
     @property
     def created_at(self):

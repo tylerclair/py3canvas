@@ -5,8 +5,8 @@ This is a testing template for the generated AuthenticationsLogAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.authentications_log import AuthenticationsLogAPI
-from pycanvas.apis.authentications_log import Authenticationevent
+from py3canvas.apis.authentications_log import AuthenticationsLogAPI
+from py3canvas.apis.authentications_log import Authenticationevent
 
 
 class TestAuthenticationsLogAPI(unittest.TestCase):

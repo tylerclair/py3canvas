@@ -14,7 +14,7 @@ class CoursesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for CoursesAPI."""
         super(CoursesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.CoursesAPI")
+        self.logger = logging.getLogger("py3canvas.CoursesAPI")
 
     def list_your_courses(self, enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, include=None, state=None):
         """
@@ -890,7 +890,7 @@ class CoursesAPI(BaseCanvasAPI):
         - "observed_users": include observed users in the enrollments"""
         if include is not None:
             self._validate_enum(include, ["needs_grading_count", "syllabus_body", "public_description", "total_scores", "current_grading_period_scores", "term", "course_progress", "sections", "storage_quota_used_mb", "total_students", "passback_status", "favorites", "teachers", "observed_users", "all_courses", "permissions", "observed_users"])
-            params["include[]"] = include
+            params["include"] = include
 
         self.logger.debug("GET /api/v1/courses/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{id}".format(**path), data=data, params=params, single_item=True)
@@ -1361,7 +1361,7 @@ class Course(BaseModel):
         self._course_code = course_code
         self._total_students = total_students
 
-        self.logger = logging.getLogger('pycanvas.Course')
+        self.logger = logging.getLogger('py3canvas.Course')
 
     @property
     def open_enrollment(self):
@@ -1814,7 +1814,7 @@ class Term(BaseModel):
         self._id = id
         self._name = name
 
-        self.logger = logging.getLogger('pycanvas.Term')
+        self.logger = logging.getLogger('py3canvas.Term')
 
     @property
     def end_at(self):
@@ -1871,7 +1871,7 @@ class Courseprogress(BaseModel):
         self._requirement_completed_count = requirement_completed_count
         self._completed_at = completed_at
 
-        self.logger = logging.getLogger('pycanvas.Courseprogress')
+        self.logger = logging.getLogger('py3canvas.Courseprogress')
 
     @property
     def requirement_count(self):
@@ -1925,7 +1925,7 @@ class Calendarlink(BaseModel):
         """Init method for Calendarlink class."""
         self._ics = ics
 
-        self.logger = logging.getLogger('pycanvas.Calendarlink')
+        self.logger = logging.getLogger('py3canvas.Calendarlink')
 
     @property
     def ics(self):

@@ -15,7 +15,7 @@ class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for AnnouncementExternalFeedsAPI."""
         super(AnnouncementExternalFeedsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.AnnouncementExternalFeedsAPI")
+        self.logger = logging.getLogger("py3canvas.AnnouncementExternalFeedsAPI")
 
     def list_external_feeds_courses(self, course_id):
         """
@@ -170,7 +170,7 @@ class Externalfeed(BaseModel):
         self._header_match = header_match
         self._verbosity = verbosity
 
-        self.logger = logging.getLogger('pycanvas.Externalfeed')
+        self.logger = logging.getLogger('py3canvas.Externalfeed')
 
     @property
     def display_name(self):

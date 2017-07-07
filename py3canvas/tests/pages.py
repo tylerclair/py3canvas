@@ -5,9 +5,9 @@ This is a testing template for the generated PagesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.pages import PagesAPI
-from pycanvas.apis.pages import Pagerevision
-from pycanvas.apis.pages import Page
+from py3canvas.apis.pages import PagesAPI
+from py3canvas.apis.pages import Pagerevision
+from py3canvas.apis.pages import Page
 
 
 class TestPagesAPI(unittest.TestCase):

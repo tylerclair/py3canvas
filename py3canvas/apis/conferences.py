@@ -14,7 +14,7 @@ class ConferencesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for ConferencesAPI."""
         super(ConferencesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.ConferencesAPI")
+        self.logger = logging.getLogger("py3canvas.ConferencesAPI")
 
     def list_conferences_courses(self, course_id):
         """
@@ -78,7 +78,7 @@ class Conference(BaseModel):
         self._id = id
         self._users = users
 
-        self.logger = logging.getLogger('pycanvas.Conference')
+        self.logger = logging.getLogger('py3canvas.Conference')
 
     @property
     def conference_key(self):
@@ -257,7 +257,7 @@ class Conferencerecording(BaseModel):
         self._playback_url = playback_url
         self._title = title
 
-        self.logger = logging.getLogger('pycanvas.Conferencerecording')
+        self.logger = logging.getLogger('py3canvas.Conferencerecording')
 
     @property
     def created_at(self):

@@ -14,7 +14,7 @@ class FavoritesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for FavoritesAPI."""
         super(FavoritesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.FavoritesAPI")
+        self.logger = logging.getLogger("py3canvas.FavoritesAPI")
 
     def list_favorite_courses(self):
         """
@@ -155,7 +155,7 @@ class Favorite(BaseModel):
         self._context_type = context_type
         self._context_id = context_id
 
-        self.logger = logging.getLogger('pycanvas.Favorite')
+        self.logger = logging.getLogger('py3canvas.Favorite')
 
     @property
     def context_type(self):

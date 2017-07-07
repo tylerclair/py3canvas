@@ -70,3 +70,4 @@ class TestGroupCategoriesAPI(unittest.TestCase):
         """Integration test for the GroupCategoriesAPI.assign_unassigned_members method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
+

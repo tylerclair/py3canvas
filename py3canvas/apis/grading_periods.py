@@ -14,7 +14,7 @@ class GradingPeriodsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for GradingPeriodsAPI."""
         super(GradingPeriodsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.GradingPeriodsAPI")
+        self.logger = logging.getLogger("py3canvas.GradingPeriodsAPI")
 
     def list_grading_periods_accounts(self, account_id):
         """
@@ -162,7 +162,7 @@ class Gradingperiod(BaseModel):
         self._close_date = close_date
         self._start_date = start_date
 
-        self.logger = logging.getLogger('pycanvas.Gradingperiod')
+        self.logger = logging.getLogger('py3canvas.Gradingperiod')
 
     @property
     def end_date(self):

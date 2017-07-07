@@ -5,9 +5,9 @@ This is a testing template for the generated FeatureFlagsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.feature_flags import FeatureFlagsAPI
-from pycanvas.apis.feature_flags import Featureflag
-from pycanvas.apis.feature_flags import Feature
+from py3canvas.apis.feature_flags import FeatureFlagsAPI
+from py3canvas.apis.feature_flags import Featureflag
+from py3canvas.apis.feature_flags import Feature
 
 
 class TestFeatureFlagsAPI(unittest.TestCase):

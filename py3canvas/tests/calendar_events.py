@@ -5,9 +5,9 @@ This is a testing template for the generated CalendarEventsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.calendar_events import CalendarEventsAPI
-from pycanvas.apis.calendar_events import Calendarevent
-from pycanvas.apis.calendar_events import Assignmentevent
+from py3canvas.apis.calendar_events import CalendarEventsAPI
+from py3canvas.apis.calendar_events import Calendarevent
+from py3canvas.apis.calendar_events import Assignmentevent
 
 
 class TestCalendarEventsAPI(unittest.TestCase):

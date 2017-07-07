@@ -5,16 +5,16 @@ This is a testing template for the generated ModulesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.modules import ModulesAPI
-from pycanvas.apis.modules import Contentdetails
-from pycanvas.apis.modules import Moduleitemsequenceasset
-from pycanvas.apis.modules import Moduleitemcompletionrequirement
-from pycanvas.apis.modules import Module
-from pycanvas.apis.modules import Moduleitemsequence
-from pycanvas.apis.modules import Completionrequirement
-from pycanvas.apis.modules import Moduleitem
-from pycanvas.apis.modules import Moduleitemsequencenode
-from pycanvas.apis.modules import Moduleitemcontentdetails
+from py3canvas.apis.modules import ModulesAPI
+from py3canvas.apis.modules import Contentdetails
+from py3canvas.apis.modules import Moduleitemsequenceasset
+from py3canvas.apis.modules import Moduleitemcompletionrequirement
+from py3canvas.apis.modules import Module
+from py3canvas.apis.modules import Moduleitemsequence
+from py3canvas.apis.modules import Completionrequirement
+from py3canvas.apis.modules import Moduleitem
+from py3canvas.apis.modules import Moduleitemsequencenode
+from py3canvas.apis.modules import Moduleitemcontentdetails
 
 
 class TestModulesAPI(unittest.TestCase):

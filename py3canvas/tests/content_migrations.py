@@ -5,10 +5,10 @@ This is a testing template for the generated ContentMigrationsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.content_migrations import ContentMigrationsAPI
-from pycanvas.apis.content_migrations import Contentmigration
-from pycanvas.apis.content_migrations import Migrationissue
-from pycanvas.apis.content_migrations import Migrator
+from py3canvas.apis.content_migrations import ContentMigrationsAPI
+from py3canvas.apis.content_migrations import Contentmigration
+from py3canvas.apis.content_migrations import Migrationissue
+from py3canvas.apis.content_migrations import Migrator
 
 
 class TestContentMigrationsAPI(unittest.TestCase):

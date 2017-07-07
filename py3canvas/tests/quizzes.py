@@ -54,4 +54,5 @@ class TestQuizzesAPI(unittest.TestCase):
     def test_validate_quiz_access_code(self):
         """Integration test for the QuizzesAPI.validate_quiz_access_code method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
-        pass
+        pass
+

@@ -5,8 +5,8 @@ This is a testing template for the generated AnnouncementExternalFeedsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.announcement_external_feeds import AnnouncementExternalFeedsAPI
-from pycanvas.apis.announcement_external_feeds import Externalfeed
+from py3canvas.apis.announcement_external_feeds import AnnouncementExternalFeedsAPI
+from py3canvas.apis.announcement_external_feeds import Externalfeed
 
 
 class TestAnnouncementExternalFeedsAPI(unittest.TestCase):

@@ -5,9 +5,9 @@ This is a testing template for the generated DiscussionTopicsAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.discussion_topics import DiscussionTopicsAPI
-from pycanvas.apis.discussion_topics import Discussiontopic
-from pycanvas.apis.discussion_topics import Fileattachment
+from py3canvas.apis.discussion_topics import DiscussionTopicsAPI
+from py3canvas.apis.discussion_topics import Discussiontopic
+from py3canvas.apis.discussion_topics import Fileattachment
 
 
 class TestDiscussionTopicsAPI(unittest.TestCase):

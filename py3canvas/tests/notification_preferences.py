@@ -5,8 +5,8 @@ This is a testing template for the generated NotificationPreferencesAPI Class.
 import unittest
 import requests
 import secrets
-from pycanvas.apis.notification_preferences import NotificationPreferencesAPI
-from pycanvas.apis.notification_preferences import Notificationpreference
+from py3canvas.apis.notification_preferences import NotificationPreferencesAPI
+from py3canvas.apis.notification_preferences import Notificationpreference
 
 
 class TestNotificationPreferencesAPI(unittest.TestCase):

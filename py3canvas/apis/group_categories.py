@@ -14,7 +14,7 @@ class GroupCategoriesAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for GroupCategoriesAPI."""
         super(GroupCategoriesAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.GroupCategoriesAPI")
+        self.logger = logging.getLogger("py3canvas.GroupCategoriesAPI")
 
     def list_group_categories_for_context_accounts(self, account_id):
         """
@@ -357,7 +357,7 @@ class Groupcategory(BaseModel):
         self._id = id
         self._account_id = account_id
 
-        self.logger = logging.getLogger('pycanvas.Groupcategory')
+        self.logger = logging.getLogger('py3canvas.Groupcategory')
 
     @property
     def name(self):

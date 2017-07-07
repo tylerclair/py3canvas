@@ -14,7 +14,7 @@ class CommunicationChannelsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for CommunicationChannelsAPI."""
         super(CommunicationChannelsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.CommunicationChannelsAPI")
+        self.logger = logging.getLogger("py3canvas.CommunicationChannelsAPI")
 
     def list_user_communication_channels(self, user_id):
         """
@@ -139,7 +139,7 @@ class Communicationchannel(BaseModel):
         self._type = type
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Communicationchannel')
+        self.logger = logging.getLogger('py3canvas.Communicationchannel')
 
     @property
     def user_id(self):
