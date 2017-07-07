@@ -1,18 +1,23 @@
 import requests
 import re
 import urllib.parse
+from . import ACCESS_TOKEN
+from . import URL_INSTANCE
 import logging
 logging.basicConfig(filename='testing.log',
                     level=logging.DEBUG,
                    format='%(asctime)s:%(levelname)s:%(lineno)d:%(message)s')
 logger = logging.getLogger('py3canvas.BaseCanvasAPI')
-from . import ACCESS_TOKEN
-from . import URL_INSTANCE
-from . import session
 
 class BaseCanvasAPI(object):
-    def __init__(self, **kwargs):
-        logger.debug('Created new CanvasAPI client for instance: {}.'.format(URL_INSTANCE))
+    def __init__(self, initsession=True, **kwargs):
+        # self.instance_address = instance_address
+        # self.access_token = access_token
+        logger.debug('Created new CanvasAPI client for instance: {}.'.format('self.instance_address'))
+        if initsession:
+            from . import session
+            self.session = session
+        # self.session.headers.update({'Authorization': 'Bearer {}'.format(self.access_token)})
         logger.debug('Using Authorization Token authentication method. Added token to headers: {}'.format('Authorization: Bearer {}'.format(ACCESS_TOKEN)))
 
     @staticmethod
@@ -98,17 +103,17 @@ class BaseCanvasAPI(object):
         assert method in ['GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS']
 
         if method == 'GET':
-            response = session.get(uri, params=params)
+            response = self.session.get(uri, params=params)
         elif method == 'POST':
-            response = session.post(uri, data=data, files=files)
+            response = self.session.post(uri, data=data, files=files)
         elif method == 'PUT':
-            response = session.put(uri, data=data)
+            response = self.session.put(uri, data=data)
         elif method == 'DELETE':
-            response = session.delete(uri, params=params)
+            response = self.session.delete(uri, params=params)
         elif method == 'HEAD':
-            response = session.head(uri, params=params)
+            response = self.session.head(uri, params=params)
         elif method == 'OPTIONS':
-            response = session.options(uri, params=params)
+            response = self.session.options(uri, params=params)
 
         response.raise_for_status()
 
