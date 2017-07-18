@@ -4,9 +4,9 @@ import urllib.parse
 from . import ACCESS_TOKEN
 from . import URL_INSTANCE
 import logging
-logging.basicConfig(filename='testing.log',
-                    level=logging.DEBUG,
-                   format='%(asctime)s:%(levelname)s:%(lineno)d:%(message)s')
+# logging.basicConfig(filename='testing.log',
+#                     level=logging.DEBUG,
+#                    format='%(asctime)s:%(levelname)s:%(lineno)d:%(message)s')
 logger = logging.getLogger('py3canvas.BaseCanvasAPI')
 
 class BaseCanvasAPI(object):
