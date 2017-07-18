@@ -37,7 +37,7 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         The "assignment_visibility" option additionally requires that the Differentiated Assignments course feature be turned on."""
         if include is not None:
             self._validate_enum(include, ["assignments", "discussion_topic", "all_dates", "assignment_visibility", "overrides", "submission"])
-            params["include"] = include
+            params["include[]"] = include
 
         # OPTIONAL - exclude_assignment_submission_types
         """If "assignments" are included, those with the specified submission types
