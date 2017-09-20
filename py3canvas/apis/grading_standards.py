@@ -118,7 +118,7 @@ class GradingStandardsAPI(BaseCanvasAPI):
         """
         List the grading standards available in a context.
 
-        Returns the list of grading standards in the given context that are visible to user.
+        Returns the list of grading standards for the given context that are visible to the user.
         """
         path = {}
         data = {}
@@ -129,13 +129,13 @@ class GradingStandardsAPI(BaseCanvasAPI):
         path["course_id"] = course_id
 
         self.logger.debug("GET /api/v1/courses/{course_id}/grading_standards with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_standards".format(**path), data=data, params=params)
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_standards".format(**path), data=data, params=params, all_pages=True)
 
     def list_grading_standards_available_in_context_accounts(self, account_id):
         """
         List the grading standards available in a context.
 
-        Returns the list of grading standards in the given context that are visible to user.
+        Returns the list of grading standards for the given context that are visible to the user.
         """
         path = {}
         data = {}
@@ -146,7 +146,49 @@ class GradingStandardsAPI(BaseCanvasAPI):
         path["account_id"] = account_id
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/grading_standards with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/grading_standards".format(**path), data=data, params=params)
+        return self.generic_request("GET", "/api/v1/accounts/{account_id}/grading_standards".format(**path), data=data, params=params, all_pages=True)
+
+    def get_single_grading_standard_in_context_courses(self, course_id, grading_standard_id):
+        """
+        Get a single grading standard in a context.
+
+        Returns a grading standard for the given context that is visible to the user.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - course_id
+        """ID"""
+        path["course_id"] = course_id
+
+        # REQUIRED - PATH - grading_standard_id
+        """ID"""
+        path["grading_standard_id"] = grading_standard_id
+
+        self.logger.debug("GET /api/v1/courses/{course_id}/grading_standards/{grading_standard_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_standards/{grading_standard_id}".format(**path), data=data, params=params, single_item=True)
+
+    def get_single_grading_standard_in_context_accounts(self, account_id, grading_standard_id):
+        """
+        Get a single grading standard in a context.
+
+        Returns a grading standard for the given context that is visible to the user.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - account_id
+        """ID"""
+        path["account_id"] = account_id
+
+        # REQUIRED - PATH - grading_standard_id
+        """ID"""
+        path["grading_standard_id"] = grading_standard_id
+
+        self.logger.debug("GET /api/v1/accounts/{account_id}/grading_standards/{grading_standard_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/accounts/{account_id}/grading_standards/{grading_standard_id}".format(**path), data=data, params=params, single_item=True)
 
 
 class Gradingstandard(BaseModel):

@@ -98,7 +98,7 @@ class AccountsAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/accounts/{account_id}/sub_accounts with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/sub_accounts".format(**path), data=data, params=params, all_pages=True)
 
-    def list_active_courses_in_account(self, account_id, by_subaccounts=None, by_teachers=None, completed=None, enrollment_term_id=None, enrollment_type=None, hide_enrollmentless_courses=None, include=None, published=None, search_term=None, state=None, with_enrollments=None):
+    def list_active_courses_in_account(self, account_id, blueprint=None, blueprint_associated=None, by_subaccounts=None, by_teachers=None, completed=None, enrollment_term_id=None, enrollment_type=None, hide_enrollmentless_courses=None, include=None, order=None, published=None, search_by=None, search_term=None, sort=None, state=None, with_enrollments=None):
         """
         List active courses in an account.
 
@@ -138,6 +138,18 @@ class AccountsAPI(BaseCanvasAPI):
         completed courses.  If not present, do not filter on completed status."""
         if completed is not None:
             params["completed"] = completed
+
+        # OPTIONAL - blueprint
+        """If true, include only blueprint courses. If false, exclude them.
+        If not present, do not filter on this basis."""
+        if blueprint is not None:
+            params["blueprint"] = blueprint
+
+        # OPTIONAL - blueprint_associated
+        """If true, include only courses that inherit content from a blueprint course.
+        If false, exclude them. If not present, do not filter on this basis."""
+        if blueprint_associated is not None:
+            params["blueprint_associated"] = blueprint_associated
 
         # OPTIONAL - by_teachers
         """List of User IDs of teachers; if supplied, include only courses taught by
@@ -181,10 +193,29 @@ class AccountsAPI(BaseCanvasAPI):
             self._validate_enum(include, ["syllabus_body", "term", "course_progress", "storage_quota_used_mb", "total_students", "teachers"])
             params["include"] = include
 
+        # OPTIONAL - sort
+        """The column to sort results by."""
+        if sort is not None:
+            self._validate_enum(sort, ["course_name", "sis_course_id", "teacher", "subaccount", "enrollments"])
+            params["sort"] = sort
+
+        # OPTIONAL - order
+        """The order to sort the given column by."""
+        if order is not None:
+            self._validate_enum(order, ["asc", "desc"])
+            params["order"] = order
+
+        # OPTIONAL - search_by
+        """The filter to search by. "course" searches for course names, course codes,
+        and SIS IDs. "teacher" searches for teacher names"""
+        if search_by is not None:
+            self._validate_enum(search_by, ["course", "teacher"])
+            params["search_by"] = search_by
+
         self.logger.debug("GET /api/v1/accounts/{account_id}/courses with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/courses".format(**path), data=data, params=params, all_pages=True)
 
-    def update_account(self, id, account_default_group_storage_quota_mb=None, account_default_storage_quota_mb=None, account_default_time_zone=None, account_default_user_storage_quota_mb=None, account_name=None, account_services=None, account_settings_lock_all_announcements_locked=None, account_settings_lock_all_announcements_value=None, account_settings_restrict_student_future_listing_locked=None, account_settings_restrict_student_future_listing_value=None, account_settings_restrict_student_future_view_locked=None, account_settings_restrict_student_future_view_value=None, account_settings_restrict_student_past_view_locked=None, account_settings_restrict_student_past_view_value=None):
+    def update_account(self, id, account_default_group_storage_quota_mb=None, account_default_storage_quota_mb=None, account_default_time_zone=None, account_default_user_storage_quota_mb=None, account_name=None, account_services=None, account_settings_lock_all_announcements_locked=None, account_settings_lock_all_announcements_value=None, account_settings_restrict_student_future_listing_locked=None, account_settings_restrict_student_future_listing_value=None, account_settings_restrict_student_future_view_locked=None, account_settings_restrict_student_future_view_value=None, account_settings_restrict_student_past_view_locked=None, account_settings_restrict_student_past_view_value=None, account_sis_account_id=None):
         """
         Update an account.
 
@@ -202,6 +233,12 @@ class AccountsAPI(BaseCanvasAPI):
         """Updates the account name"""
         if account_name is not None:
             data["account[name]"] = account_name
+
+        # OPTIONAL - account[sis_account_id]
+        """Updates the account sis_account_id
+        Must have manage_sis permission and must not be a root_account."""
+        if account_sis_account_id is not None:
+            data["account[sis_account_id]"] = account_sis_account_id
 
         # OPTIONAL - account[default_time_zone]
         """The default time zone of the account. Allowed time zones are
@@ -345,11 +382,11 @@ class AccountsAPI(BaseCanvasAPI):
 class Account(BaseModel):
     """Account Model."""
 
-    def __init__(self, integration_id=None, default_time_zone=None, name=None, default_storage_quota_mb=None, sis_account_id=None, root_account_id=None, default_group_storage_quota_mb=None, id=None, sis_import_id=None, lti_guid=None, workflow_state=None, parent_account_id=None, default_user_storage_quota_mb=None):
+    def __init__(self, integration_id=None, default_time_zone=None, uuid=None, default_storage_quota_mb=None, sis_account_id=None, root_account_id=None, default_group_storage_quota_mb=None, id=None, sis_import_id=None, lti_guid=None, workflow_state=None, default_user_storage_quota_mb=None, parent_account_id=None, name=None):
         """Init method for Account class."""
         self._integration_id = integration_id
         self._default_time_zone = default_time_zone
-        self._name = name
+        self._uuid = uuid
         self._default_storage_quota_mb = default_storage_quota_mb
         self._sis_account_id = sis_account_id
         self._root_account_id = root_account_id
@@ -358,8 +395,9 @@ class Account(BaseModel):
         self._sis_import_id = sis_import_id
         self._lti_guid = lti_guid
         self._workflow_state = workflow_state
-        self._parent_account_id = parent_account_id
         self._default_user_storage_quota_mb = default_user_storage_quota_mb
+        self._parent_account_id = parent_account_id
+        self._name = name
 
         self.logger = logging.getLogger('py3canvas.Account')
 
@@ -386,15 +424,15 @@ class Account(BaseModel):
         self._default_time_zone = value
 
     @property
-    def name(self):
-        """The display name of the account."""
-        return self._name
+    def uuid(self):
+        """The UUID of the account."""
+        return self._uuid
 
-    @name.setter
-    def name(self, value):
-        """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
-        self._name = value
+    @uuid.setter
+    def uuid(self, value):
+        """Setter for uuid property."""
+        self.logger.warn("Setting values on uuid will NOT update the remote Canvas instance.")
+        self._uuid = value
 
     @property
     def default_storage_quota_mb(self):
@@ -485,6 +523,17 @@ class Account(BaseModel):
         self._workflow_state = value
 
     @property
+    def default_user_storage_quota_mb(self):
+        """The storage quota for a user in the account in megabytes, if not otherwise specified."""
+        return self._default_user_storage_quota_mb
+
+    @default_user_storage_quota_mb.setter
+    def default_user_storage_quota_mb(self, value):
+        """Setter for default_user_storage_quota_mb property."""
+        self.logger.warn("Setting values on default_user_storage_quota_mb will NOT update the remote Canvas instance.")
+        self._default_user_storage_quota_mb = value
+
+    @property
     def parent_account_id(self):
         """The account's parent ID, or null if this is the root account."""
         return self._parent_account_id
@@ -496,13 +545,13 @@ class Account(BaseModel):
         self._parent_account_id = value
 
     @property
-    def default_user_storage_quota_mb(self):
-        """The storage quota for a user in the account in megabytes, if not otherwise specified."""
-        return self._default_user_storage_quota_mb
+    def name(self):
+        """The display name of the account."""
+        return self._name
 
-    @default_user_storage_quota_mb.setter
-    def default_user_storage_quota_mb(self, value):
-        """Setter for default_user_storage_quota_mb property."""
-        self.logger.warn("Setting values on default_user_storage_quota_mb will NOT update the remote Canvas instance.")
-        self._default_user_storage_quota_mb = value
+    @name.setter
+    def name(self, value):
+        """Setter for name property."""
+        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self._name = value
 

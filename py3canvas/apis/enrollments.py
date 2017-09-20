@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from .base import BaseCanvasAPI
-from .base import BaseModel
+from base import BaseCanvasAPI
+from base import BaseModel
 
 
 class EnrollmentsAPI(BaseCanvasAPI):
@@ -58,7 +58,7 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """Filter by enrollment state. If omitted, 'active' and 'invited' enrollments
         are returned. When querying a user's enrollments (either via user_id
         argument or via user enrollments endpoint), the following additional
-        synthetic states are supported: "current_and_invited"|"current_and_future"|'current_and_concluded'"""
+        synthetic states are supported: "current_and_invited"|"current_and_future"|"current_and_concluded""""
         if state is not None:
             self._validate_enum(state, ["active", "invited", "creation_pending", "deleted", "rejected", "completed", "inactive"])
             params["state"] = state
@@ -154,7 +154,7 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """Filter by enrollment state. If omitted, 'active' and 'invited' enrollments
         are returned. When querying a user's enrollments (either via user_id
         argument or via user enrollments endpoint), the following additional
-        synthetic states are supported: "current_and_invited"|"current_and_future"|'current_and_concluded'"""
+        synthetic states are supported: "current_and_invited"|"current_and_future"|"current_and_concluded""""
         if state is not None:
             self._validate_enum(state, ["active", "invited", "creation_pending", "deleted", "rejected", "completed", "inactive"])
             params["state"] = state
@@ -246,7 +246,7 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """Filter by enrollment state. If omitted, 'active' and 'invited' enrollments
         are returned. When querying a user's enrollments (either via user_id
         argument or via user enrollments endpoint), the following additional
-        synthetic states are supported: "current_and_invited"|"current_and_future"|'current_and_concluded'"""
+        synthetic states are supported: "current_and_invited"|"current_and_future"|"current_and_concluded""""
         if state is not None:
             self._validate_enum(state, ["active", "invited", "creation_pending", "deleted", "rejected", "completed", "inactive"])
             params["state"] = state
@@ -642,7 +642,7 @@ class Grade(BaseModel):
 class Enrollment(BaseModel):
     """Enrollment Model."""
 
-    def __init__(self, limit_privileges_to_course_section=None, course_section_id=None, updated_at=None, current_period_computed_current_score=None, grades=None, course_id=None, multiple_grading_periods_enabled=None, id=None, user_id=None, sis_user_id=None, root_account_id=None, current_period_computed_current_grade=None, end_at=None, computed_final_grade=None, sis_import_id=None, role=None, enrollment_state=None, type=None, course_integration_id=None, section_integration_id=None, start_at=None, computed_current_score=None, current_grading_period_id=None, html_url=None, current_period_computed_final_score=None, computed_current_grade=None, associated_user_id=None, last_activity_at=None, sis_account_id=None, totals_for_all_grading_periods_option=None, computed_final_score=None, current_period_computed_final_grade=None, sis_course_id=None, current_grading_period_title=None, sis_section_id=None, total_activity_time=None):
+    def __init__(self, limit_privileges_to_course_section=None, course_section_id=None, updated_at=None, current_period_computed_current_score=None, grades=None, course_id=None, role_id=None, id=None, user_id=None, sis_user_id=None, root_account_id=None, current_period_computed_current_grade=None, end_at=None, computed_final_grade=None, sis_import_id=None, role=None, has_grading_periods=None, enrollment_state=None, type=None, course_integration_id=None, section_integration_id=None, start_at=None, computed_current_score=None, current_grading_period_id=None, html_url=None, current_period_computed_final_score=None, computed_current_grade=None, associated_user_id=None, last_activity_at=None, sis_account_id=None, totals_for_all_grading_periods_option=None, created_at=None, computed_final_score=None, current_period_computed_final_grade=None, sis_course_id=None, current_grading_period_title=None, sis_section_id=None, total_activity_time=None):
         """Init method for Enrollment class."""
         self._limit_privileges_to_course_section = limit_privileges_to_course_section
         self._course_section_id = course_section_id
@@ -650,7 +650,7 @@ class Enrollment(BaseModel):
         self._current_period_computed_current_score = current_period_computed_current_score
         self._grades = grades
         self._course_id = course_id
-        self._multiple_grading_periods_enabled = multiple_grading_periods_enabled
+        self._role_id = role_id
         self._id = id
         self._user_id = user_id
         self._sis_user_id = sis_user_id
@@ -660,6 +660,7 @@ class Enrollment(BaseModel):
         self._computed_final_grade = computed_final_grade
         self._sis_import_id = sis_import_id
         self._role = role
+        self._has_grading_periods = has_grading_periods
         self._enrollment_state = enrollment_state
         self._type = type
         self._course_integration_id = course_integration_id
@@ -674,6 +675,7 @@ class Enrollment(BaseModel):
         self._last_activity_at = last_activity_at
         self._sis_account_id = sis_account_id
         self._totals_for_all_grading_periods_option = totals_for_all_grading_periods_option
+        self._created_at = created_at
         self._computed_final_score = computed_final_score
         self._current_period_computed_final_grade = current_period_computed_final_grade
         self._sis_course_id = sis_course_id
@@ -685,7 +687,7 @@ class Enrollment(BaseModel):
 
     @property
     def limit_privileges_to_course_section(self):
-        """User can only access his or her own course section. Applies to Teacher and TA enrollments."""
+        """User can only access his or her own course section."""
         return self._limit_privileges_to_course_section
 
     @limit_privileges_to_course_section.setter
@@ -718,7 +720,7 @@ class Enrollment(BaseModel):
 
     @property
     def current_period_computed_current_score(self):
-        """optional: The student's score in the course for the current grading period, ignoring ungraded assignments. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
+        """optional: The student's score in the course for the current grading period, ignoring ungraded assignments. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
         return self._current_period_computed_current_score
 
     @current_period_computed_current_score.setter
@@ -750,15 +752,15 @@ class Enrollment(BaseModel):
         self._course_id = value
 
     @property
-    def multiple_grading_periods_enabled(self):
-        """optional: Indicates whether the course the enrollment belongs to has the Multiple Grading Periods feature enabled. (applies only to student enrollments, and only available in course endpoints)."""
-        return self._multiple_grading_periods_enabled
+    def role_id(self):
+        """The id of the enrollment role."""
+        return self._role_id
 
-    @multiple_grading_periods_enabled.setter
-    def multiple_grading_periods_enabled(self, value):
-        """Setter for multiple_grading_periods_enabled property."""
-        self.logger.warn("Setting values on multiple_grading_periods_enabled will NOT update the remote Canvas instance.")
-        self._multiple_grading_periods_enabled = value
+    @role_id.setter
+    def role_id(self, value):
+        """Setter for role_id property."""
+        self.logger.warn("Setting values on role_id will NOT update the remote Canvas instance.")
+        self._role_id = value
 
     @property
     def id(self):
@@ -806,7 +808,7 @@ class Enrollment(BaseModel):
 
     @property
     def current_period_computed_current_grade(self):
-        """optional: The letter grade equivalent of current_period_computed_current_score, if available. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
+        """optional: The letter grade equivalent of current_period_computed_current_score, if available. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
         return self._current_period_computed_current_grade
 
     @current_period_computed_current_grade.setter
@@ -858,6 +860,17 @@ class Enrollment(BaseModel):
         """Setter for role property."""
         self.logger.warn("Setting values on role will NOT update the remote Canvas instance.")
         self._role = value
+
+    @property
+    def has_grading_periods(self):
+        """optional: Indicates whether the course the enrollment belongs to has grading periods set up. (applies only to student enrollments, and only available in course endpoints)."""
+        return self._has_grading_periods
+
+    @has_grading_periods.setter
+    def has_grading_periods(self, value):
+        """Setter for has_grading_periods property."""
+        self.logger.warn("Setting values on has_grading_periods will NOT update the remote Canvas instance.")
+        self._has_grading_periods = value
 
     @property
     def enrollment_state(self):
@@ -927,7 +940,7 @@ class Enrollment(BaseModel):
 
     @property
     def current_grading_period_id(self):
-        """optional: The id of the currently active grading period, if one exists. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
+        """optional: The id of the currently active grading period, if one exists. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
         return self._current_grading_period_id
 
     @current_grading_period_id.setter
@@ -949,7 +962,7 @@ class Enrollment(BaseModel):
 
     @property
     def current_period_computed_final_score(self):
-        """optional: The student's score in the course for the current grading period, including ungraded assignments with a score of 0. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
+        """optional: The student's score in the course for the current grading period, including ungraded assignments with a score of 0. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
         return self._current_period_computed_final_score
 
     @current_period_computed_final_score.setter
@@ -1014,6 +1027,17 @@ class Enrollment(BaseModel):
         self._totals_for_all_grading_periods_option = value
 
     @property
+    def created_at(self):
+        """The created time of the enrollment, in ISO8601 format."""
+        return self._created_at
+
+    @created_at.setter
+    def created_at(self, value):
+        """Setter for created_at property."""
+        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self._created_at = value
+
+    @property
     def computed_final_score(self):
         """optional: The student's score in the course including ungraded assignments with a score of 0. (applies only to student enrollments, and only available in course endpoints)."""
         return self._computed_final_score
@@ -1026,7 +1050,7 @@ class Enrollment(BaseModel):
 
     @property
     def current_period_computed_final_grade(self):
-        """optional: The letter grade equivalent of current_period_computed_final_score, if available. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
+        """optional: The letter grade equivalent of current_period_computed_final_score, if available. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
         return self._current_period_computed_final_grade
 
     @current_period_computed_final_grade.setter
@@ -1048,7 +1072,7 @@ class Enrollment(BaseModel):
 
     @property
     def current_grading_period_title(self):
-        """optional: The name of the currently active grading period, if one exists. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
+        """optional: The name of the currently active grading period, if one exists. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)."""
         return self._current_grading_period_title
 
     @current_grading_period_title.setter

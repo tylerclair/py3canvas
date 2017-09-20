@@ -475,11 +475,19 @@ class FilesAPI(BaseCanvasAPI):
         # OPTIONAL - lock_at
         """The datetime to lock the file at"""
         if lock_at is not None:
+            if issubclass(lock_at.__class__, str):
+                lock_at = self._validate_iso8601_string(lock_at)
+            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
+                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
         # OPTIONAL - unlock_at
         """The datetime to unlock the file at"""
         if unlock_at is not None:
+            if issubclass(unlock_at.__class__, str):
+                unlock_at = self._validate_iso8601_string(unlock_at)
+            elif issubclass(unlock_at.__class__, date) or issubclass(unlock_at.__class__, datetime):
+                unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
         # OPTIONAL - locked
@@ -495,14 +503,11 @@ class FilesAPI(BaseCanvasAPI):
         self.logger.debug("PUT /api/v1/files/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/files/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def delete_file(self, id):
+    def delete_file(self, id, replace=None):
         """
         Delete file.
 
         Remove the specified file
-        
-          curl -XDELETE 'https://<canvas>/api/v1/files/<file_id>' \
-               -H 'Authorization: Bearer <token>'
         """
         path = {}
         data = {}
@@ -512,8 +517,17 @@ class FilesAPI(BaseCanvasAPI):
         """ID"""
         path["id"] = id
 
+        # OPTIONAL - replace
+        """This action is irreversible.
+        If replace is set to true the file contents will be replaced with a
+        generic "file has been removed" file. This also destroys any previews
+        that have been generated for the file.
+        Must have manage files and become other users permissions"""
+        if replace is not None:
+            params["replace"] = replace
+
         self.logger.debug("DELETE /api/v1/files/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/files/{id}".format(**path), data=data, params=params, no_data=True)
+        return self.generic_request("DELETE", "/api/v1/files/{id}".format(**path), data=data, params=params, single_item=True)
 
     def list_folders(self, id):
         """
@@ -837,11 +851,19 @@ class FilesAPI(BaseCanvasAPI):
         # OPTIONAL - lock_at
         """The datetime to lock the folder at"""
         if lock_at is not None:
+            if issubclass(lock_at.__class__, str):
+                lock_at = self._validate_iso8601_string(lock_at)
+            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
+                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
         # OPTIONAL - unlock_at
         """The datetime to unlock the folder at"""
         if unlock_at is not None:
+            if issubclass(unlock_at.__class__, str):
+                unlock_at = self._validate_iso8601_string(unlock_at)
+            elif issubclass(unlock_at.__class__, date) or issubclass(unlock_at.__class__, datetime):
+                unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
         # OPTIONAL - locked
@@ -893,11 +915,19 @@ class FilesAPI(BaseCanvasAPI):
         # OPTIONAL - lock_at
         """The datetime to lock the folder at"""
         if lock_at is not None:
+            if issubclass(lock_at.__class__, str):
+                lock_at = self._validate_iso8601_string(lock_at)
+            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
+                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
         # OPTIONAL - unlock_at
         """The datetime to unlock the folder at"""
         if unlock_at is not None:
+            if issubclass(unlock_at.__class__, str):
+                unlock_at = self._validate_iso8601_string(unlock_at)
+            elif issubclass(unlock_at.__class__, date) or issubclass(unlock_at.__class__, datetime):
+                unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
         # OPTIONAL - locked
@@ -949,11 +979,19 @@ class FilesAPI(BaseCanvasAPI):
         # OPTIONAL - lock_at
         """The datetime to lock the folder at"""
         if lock_at is not None:
+            if issubclass(lock_at.__class__, str):
+                lock_at = self._validate_iso8601_string(lock_at)
+            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
+                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
         # OPTIONAL - unlock_at
         """The datetime to unlock the folder at"""
         if unlock_at is not None:
+            if issubclass(unlock_at.__class__, str):
+                unlock_at = self._validate_iso8601_string(unlock_at)
+            elif issubclass(unlock_at.__class__, date) or issubclass(unlock_at.__class__, datetime):
+                unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
         # OPTIONAL - locked
@@ -1005,11 +1043,19 @@ class FilesAPI(BaseCanvasAPI):
         # OPTIONAL - lock_at
         """The datetime to lock the folder at"""
         if lock_at is not None:
+            if issubclass(lock_at.__class__, str):
+                lock_at = self._validate_iso8601_string(lock_at)
+            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
+                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
         # OPTIONAL - unlock_at
         """The datetime to unlock the folder at"""
         if unlock_at is not None:
+            if issubclass(unlock_at.__class__, str):
+                unlock_at = self._validate_iso8601_string(unlock_at)
+            elif issubclass(unlock_at.__class__, date) or issubclass(unlock_at.__class__, datetime):
+                unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
         # OPTIONAL - locked
@@ -1061,11 +1107,19 @@ class FilesAPI(BaseCanvasAPI):
         # OPTIONAL - lock_at
         """The datetime to lock the folder at"""
         if lock_at is not None:
+            if issubclass(lock_at.__class__, str):
+                lock_at = self._validate_iso8601_string(lock_at)
+            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
+                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
         # OPTIONAL - unlock_at
         """The datetime to unlock the folder at"""
         if unlock_at is not None:
+            if issubclass(unlock_at.__class__, str):
+                unlock_at = self._validate_iso8601_string(unlock_at)
+            elif issubclass(unlock_at.__class__, date) or issubclass(unlock_at.__class__, datetime):
+                unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
         # OPTIONAL - locked
@@ -1960,7 +2014,7 @@ class File(BaseModel):
 
     @property
     def preview_url(self):
-        """optional: url to the document preview (only included in submission endpoints)."""
+        """optional: url to the document preview. This url is specific to the user making the api call. Only included in submission endpoints."""
         return self._preview_url
 
     @preview_url.setter

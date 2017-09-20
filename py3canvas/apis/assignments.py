@@ -154,7 +154,7 @@ class AssignmentsAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def create_assignment(self, course_id, assignment_name, assignment_allowed_extensions=None, assignment_assignment_group_id=None, assignment_assignment_overrides=None, assignment_automatic_peer_reviews=None, assignment_description=None, assignment_due_at=None, assignment_external_tool_tag_attributes=None, assignment_grade_group_students_individually=None, assignment_grading_standard_id=None, assignment_grading_type=None, assignment_group_category_id=None, assignment_integration_data=None, assignment_integration_id=None, assignment_lock_at=None, assignment_muted=None, assignment_notify_of_update=None, assignment_omit_from_final_grade=None, assignment_only_visible_to_overrides=None, assignment_peer_reviews=None, assignment_points_possible=None, assignment_position=None, assignment_published=None, assignment_submission_types=None, assignment_turnitin_enabled=None, assignment_turnitin_settings=None, assignment_unlock_at=None, assignment_vericite_enabled=None):
+    def create_assignment(self, course_id, assignment_name, assignment_allowed_extensions=None, assignment_assignment_group_id=None, assignment_assignment_overrides=None, assignment_automatic_peer_reviews=None, assignment_description=None, assignment_due_at=None, assignment_external_tool_tag_attributes=None, assignment_grade_group_students_individually=None, assignment_grading_standard_id=None, assignment_grading_type=None, assignment_group_category_id=None, assignment_integration_data=None, assignment_integration_id=None, assignment_lock_at=None, assignment_muted=None, assignment_notify_of_update=None, assignment_omit_from_final_grade=None, assignment_only_visible_to_overrides=None, assignment_peer_reviews=None, assignment_points_possible=None, assignment_position=None, assignment_published=None, assignment_quiz_lti=None, assignment_submission_types=None, assignment_turnitin_enabled=None, assignment_turnitin_settings=None, assignment_unlock_at=None, assignment_vericite_enabled=None):
         """
         Create an assignment.
 
@@ -299,18 +299,30 @@ class AssignmentsAPI(BaseCanvasAPI):
         """The day/time the assignment is due.
         Accepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z."""
         if assignment_due_at is not None:
+            if issubclass(assignment_due_at.__class__, str):
+                assignment_due_at = self._validate_iso8601_string(assignment_due_at)
+            elif issubclass(assignment_due_at.__class__, date) or issubclass(assignment_due_at.__class__, datetime):
+                assignment_due_at = assignment_due_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment[due_at]"] = assignment_due_at
 
         # OPTIONAL - assignment[lock_at]
         """The day/time the assignment is locked after.
         Accepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z."""
         if assignment_lock_at is not None:
+            if issubclass(assignment_lock_at.__class__, str):
+                assignment_lock_at = self._validate_iso8601_string(assignment_lock_at)
+            elif issubclass(assignment_lock_at.__class__, date) or issubclass(assignment_lock_at.__class__, datetime):
+                assignment_lock_at = assignment_lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment[lock_at]"] = assignment_lock_at
 
         # OPTIONAL - assignment[unlock_at]
         """The day/time the assignment is unlocked.
         Accepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z."""
         if assignment_unlock_at is not None:
+            if issubclass(assignment_unlock_at.__class__, str):
+                assignment_unlock_at = self._validate_iso8601_string(assignment_unlock_at)
+            elif issubclass(assignment_unlock_at.__class__, date) or issubclass(assignment_unlock_at.__class__, datetime):
+                assignment_unlock_at = assignment_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment[unlock_at]"] = assignment_unlock_at
 
         # OPTIONAL - assignment[description]
@@ -361,6 +373,14 @@ class AssignmentsAPI(BaseCanvasAPI):
         """Whether this assignment is counted towards a student's final grade."""
         if assignment_omit_from_final_grade is not None:
             data["assignment[omit_from_final_grade]"] = assignment_omit_from_final_grade
+
+        # OPTIONAL - assignment[quiz_lti]
+        """Whether this assignment should use the Quizzes 2 LTI tool. Sets the
+        submission type to 'external_tool' and configures the external tool
+        attributes to use the Quizzes 2 LTI tool configured for this course.
+        Has no effect if no Quizzes 2 LTI tool is configured."""
+        if assignment_quiz_lti is not None:
+            data["assignment[quiz_lti]"] = assignment_quiz_lti
 
         self.logger.debug("POST /api/v1/courses/{course_id}/assignments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments".format(**path), data=data, params=params, single_item=True)
@@ -521,18 +541,30 @@ class AssignmentsAPI(BaseCanvasAPI):
         """The day/time the assignment is due.
         Accepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z."""
         if assignment_due_at is not None:
+            if issubclass(assignment_due_at.__class__, str):
+                assignment_due_at = self._validate_iso8601_string(assignment_due_at)
+            elif issubclass(assignment_due_at.__class__, date) or issubclass(assignment_due_at.__class__, datetime):
+                assignment_due_at = assignment_due_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment[due_at]"] = assignment_due_at
 
         # OPTIONAL - assignment[lock_at]
         """The day/time the assignment is locked after.
         Accepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z."""
         if assignment_lock_at is not None:
+            if issubclass(assignment_lock_at.__class__, str):
+                assignment_lock_at = self._validate_iso8601_string(assignment_lock_at)
+            elif issubclass(assignment_lock_at.__class__, date) or issubclass(assignment_lock_at.__class__, datetime):
+                assignment_lock_at = assignment_lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment[lock_at]"] = assignment_lock_at
 
         # OPTIONAL - assignment[unlock_at]
         """The day/time the assignment is unlocked.
         Accepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z."""
         if assignment_unlock_at is not None:
+            if issubclass(assignment_unlock_at.__class__, str):
+                assignment_unlock_at = self._validate_iso8601_string(assignment_unlock_at)
+            elif issubclass(assignment_unlock_at.__class__, date) or issubclass(assignment_unlock_at.__class__, datetime):
+                assignment_unlock_at = assignment_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment[unlock_at]"] = assignment_unlock_at
 
         # OPTIONAL - assignment[description]
@@ -743,6 +775,10 @@ class AssignmentsAPI(BaseCanvasAPI):
         May be present but null to indicate the override removes any previous due
         date."""
         if assignment_override_due_at is not None:
+            if issubclass(assignment_override_due_at.__class__, str):
+                assignment_override_due_at = self._validate_iso8601_string(assignment_override_due_at)
+            elif issubclass(assignment_override_due_at.__class__, date) or issubclass(assignment_override_due_at.__class__, datetime):
+                assignment_override_due_at = assignment_override_due_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment_override[due_at]"] = assignment_override_due_at
 
         # OPTIONAL - assignment_override[unlock_at]
@@ -752,6 +788,10 @@ class AssignmentsAPI(BaseCanvasAPI):
         affect the unlock date. May be present but null to indicate the override
         removes any previous unlock date."""
         if assignment_override_unlock_at is not None:
+            if issubclass(assignment_override_unlock_at.__class__, str):
+                assignment_override_unlock_at = self._validate_iso8601_string(assignment_override_unlock_at)
+            elif issubclass(assignment_override_unlock_at.__class__, date) or issubclass(assignment_override_unlock_at.__class__, datetime):
+                assignment_override_unlock_at = assignment_override_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment_override[unlock_at]"] = assignment_override_unlock_at
 
         # OPTIONAL - assignment_override[lock_at]
@@ -761,6 +801,10 @@ class AssignmentsAPI(BaseCanvasAPI):
         affect the lock date. May be present but null to indicate the override
         removes any previous lock date."""
         if assignment_override_lock_at is not None:
+            if issubclass(assignment_override_lock_at.__class__, str):
+                assignment_override_lock_at = self._validate_iso8601_string(assignment_override_lock_at)
+            elif issubclass(assignment_override_lock_at.__class__, date) or issubclass(assignment_override_lock_at.__class__, datetime):
+                assignment_override_lock_at = assignment_override_lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment_override[lock_at]"] = assignment_override_lock_at
 
         self.logger.debug("POST /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides with query params: {params} and form data: {data}".format(params=params, data=data, **path))
@@ -814,6 +858,10 @@ class AssignmentsAPI(BaseCanvasAPI):
         May be present but null to indicate the override removes any previous due
         date."""
         if assignment_override_due_at is not None:
+            if issubclass(assignment_override_due_at.__class__, str):
+                assignment_override_due_at = self._validate_iso8601_string(assignment_override_due_at)
+            elif issubclass(assignment_override_due_at.__class__, date) or issubclass(assignment_override_due_at.__class__, datetime):
+                assignment_override_due_at = assignment_override_due_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment_override[due_at]"] = assignment_override_due_at
 
         # OPTIONAL - assignment_override[unlock_at]
@@ -823,6 +871,10 @@ class AssignmentsAPI(BaseCanvasAPI):
         affect the unlock date. May be present but null to indicate the override
         removes any previous unlock date."""
         if assignment_override_unlock_at is not None:
+            if issubclass(assignment_override_unlock_at.__class__, str):
+                assignment_override_unlock_at = self._validate_iso8601_string(assignment_override_unlock_at)
+            elif issubclass(assignment_override_unlock_at.__class__, date) or issubclass(assignment_override_unlock_at.__class__, datetime):
+                assignment_override_unlock_at = assignment_override_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment_override[unlock_at]"] = assignment_override_unlock_at
 
         # OPTIONAL - assignment_override[lock_at]
@@ -832,6 +884,10 @@ class AssignmentsAPI(BaseCanvasAPI):
         affect the lock date. May be present but null to indicate the override
         removes any previous lock date."""
         if assignment_override_lock_at is not None:
+            if issubclass(assignment_override_lock_at.__class__, str):
+                assignment_override_lock_at = self._validate_iso8601_string(assignment_override_lock_at)
+            elif issubclass(assignment_override_lock_at.__class__, date) or issubclass(assignment_override_lock_at.__class__, datetime):
+                assignment_override_lock_at = assignment_override_lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["assignment_override[lock_at]"] = assignment_override_lock_at
 
         self.logger.debug("PUT /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
@@ -1250,12 +1306,13 @@ class Externaltooltagattributes(BaseModel):
 class Assignment(BaseModel):
     """Assignment Model."""
 
-    def __init__(self, use_rubric_for_grading=None, has_overrides=None, lock_info=None, frozen_attributes=None, points_possible=None, assignment_visibility=None, updated_at=None, turnitin_enabled=None, rubric=None, omit_from_final_grade=None, course_id=None, needs_grading_count_by_section=None, id=None, locked_for_user=None, muted=None, grading_type=None, rubric_settings=None, anonymous_submissions=None, peer_reviews=None, discussion_topic=None, intra_group_peer_reviews=None, quiz_id=None, freeze_on_copy=None, all_dates=None, integration_data=None, description=None, peer_review_count=None, grade_group_students_individually=None, grading_standard_id=None, external_tool_tag_attributes=None, html_url=None, turnitin_settings=None, group_category_id=None, lock_explanation=None, needs_grading_count=None, vericite_enabled=None, peer_reviews_assign_at=None, name=None, integration_id=None, frozen=None, only_visible_to_overrides=None, unlock_at=None, submission=None, due_at=None, created_at=None, post_to_sis=None, lock_at=None, assignment_group_id=None, allowed_extensions=None, automatic_peer_reviews=None, published=None, position=None, submission_types=None, submissions_download_url=None, overrides=None, unpublishable=None):
+    def __init__(self, use_rubric_for_grading=None, has_overrides=None, lock_info=None, frozen_attributes=None, max_name_length=None, points_possible=None, assignment_visibility=None, updated_at=None, turnitin_enabled=None, rubric=None, omit_from_final_grade=None, course_id=None, needs_grading_count_by_section=None, id=None, locked_for_user=None, due_date_required=None, muted=None, grading_type=None, rubric_settings=None, anonymous_submissions=None, peer_reviews=None, discussion_topic=None, intra_group_peer_reviews=None, quiz_id=None, freeze_on_copy=None, all_dates=None, integration_data=None, description=None, peer_review_count=None, grade_group_students_individually=None, grading_standard_id=None, external_tool_tag_attributes=None, html_url=None, turnitin_settings=None, group_category_id=None, lock_explanation=None, needs_grading_count=None, vericite_enabled=None, peer_reviews_assign_at=None, name=None, integration_id=None, frozen=None, only_visible_to_overrides=None, unlock_at=None, submission=None, due_at=None, created_at=None, post_to_sis=None, lock_at=None, assignment_group_id=None, allowed_extensions=None, automatic_peer_reviews=None, published=None, position=None, submission_types=None, submissions_download_url=None, overrides=None, unpublishable=None):
         """Init method for Assignment class."""
         self._use_rubric_for_grading = use_rubric_for_grading
         self._has_overrides = has_overrides
         self._lock_info = lock_info
         self._frozen_attributes = frozen_attributes
+        self._max_name_length = max_name_length
         self._points_possible = points_possible
         self._assignment_visibility = assignment_visibility
         self._updated_at = updated_at
@@ -1266,6 +1323,7 @@ class Assignment(BaseModel):
         self._needs_grading_count_by_section = needs_grading_count_by_section
         self._id = id
         self._locked_for_user = locked_for_user
+        self._due_date_required = due_date_required
         self._muted = muted
         self._grading_type = grading_type
         self._rubric_settings = rubric_settings
@@ -1354,6 +1412,17 @@ class Assignment(BaseModel):
         """Setter for frozen_attributes property."""
         self.logger.warn("Setting values on frozen_attributes will NOT update the remote Canvas instance.")
         self._frozen_attributes = value
+
+    @property
+    def max_name_length(self):
+        """An integer indicating the maximum length an assignment's name may be."""
+        return self._max_name_length
+
+    @max_name_length.setter
+    def max_name_length(self, value):
+        """Setter for max_name_length property."""
+        self.logger.warn("Setting values on max_name_length will NOT update the remote Canvas instance.")
+        self._max_name_length = value
 
     @property
     def points_possible(self):
@@ -1464,6 +1533,17 @@ class Assignment(BaseModel):
         """Setter for locked_for_user property."""
         self.logger.warn("Setting values on locked_for_user will NOT update the remote Canvas instance.")
         self._locked_for_user = value
+
+    @property
+    def due_date_required(self):
+        """Boolean flag indicating whether the assignment requires a due date based on the account level setting."""
+        return self._due_date_required
+
+    @due_date_required.setter
+    def due_date_required(self, value):
+        """Setter for due_date_required property."""
+        self.logger.warn("Setting values on due_date_required will NOT update the remote Canvas instance.")
+        self._due_date_required = value
 
     @property
     def muted(self):
@@ -1808,7 +1888,7 @@ class Assignment(BaseModel):
 
     @property
     def post_to_sis(self):
-        """(optional, present if Post Grades to SIS feature is enabled)."""
+        """(optional, present if Sync Grades to SIS feature is enabled)."""
         return self._post_to_sis
 
     @post_to_sis.setter
@@ -1965,14 +2045,14 @@ class Needsgradingcount(BaseModel):
 class Rubriccriteria(BaseModel):
     """Rubriccriteria Model."""
 
-    def __init__(self, vendor_guid=None, description=None, ratings=None, id=None, points=None, outcome_id=None, long_description=None):
+    def __init__(self, vendor_guid=None, description=None, ratings=None, id=None, learning_outcome_id=None, points=None, long_description=None):
         """Init method for Rubriccriteria class."""
         self._vendor_guid = vendor_guid
         self._description = description
         self._ratings = ratings
         self._id = id
+        self._learning_outcome_id = learning_outcome_id
         self._points = points
-        self._outcome_id = outcome_id
         self._long_description = long_description
 
         self.logger = logging.getLogger('py3canvas.Rubriccriteria')
@@ -2022,6 +2102,17 @@ class Rubriccriteria(BaseModel):
         self._id = value
 
     @property
+    def learning_outcome_id(self):
+        """(Optional) The id of the learning outcome this criteria uses, if any."""
+        return self._learning_outcome_id
+
+    @learning_outcome_id.setter
+    def learning_outcome_id(self, value):
+        """Setter for learning_outcome_id property."""
+        self.logger.warn("Setting values on learning_outcome_id will NOT update the remote Canvas instance.")
+        self._learning_outcome_id = value
+
+    @property
     def points(self):
         """points."""
         return self._points
@@ -2031,17 +2122,6 @@ class Rubriccriteria(BaseModel):
         """Setter for points property."""
         self.logger.warn("Setting values on points will NOT update the remote Canvas instance.")
         self._points = value
-
-    @property
-    def outcome_id(self):
-        """(Optional) The id of the learning outcome this criteria uses, if any."""
-        return self._outcome_id
-
-    @outcome_id.setter
-    def outcome_id(self, value):
-        """Setter for outcome_id property."""
-        self.logger.warn("Setting values on outcome_id will NOT update the remote Canvas instance.")
-        self._outcome_id = value
 
     @property
     def long_description(self):

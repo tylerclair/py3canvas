@@ -84,6 +84,46 @@ class CollaborationsAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/collaborations/{id}/members with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/collaborations/{id}/members".format(**path), data=data, params=params, all_pages=True)
 
+    def list_potential_members_courses(self, course_id):
+        """
+        List potential members.
+
+        List the users who can potentially be added to a collaboration in the given context.
+        
+        For courses, this consists of all enrolled users.  For groups, it is comprised of the
+        group members plus the admins of the course containing the group.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - course_id
+        """ID"""
+        path["course_id"] = course_id
+
+        self.logger.debug("GET /api/v1/courses/{course_id}/potential_collaborators with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/potential_collaborators".format(**path), data=data, params=params, all_pages=True)
+
+    def list_potential_members_groups(self, group_id):
+        """
+        List potential members.
+
+        List the users who can potentially be added to a collaboration in the given context.
+        
+        For courses, this consists of all enrolled users.  For groups, it is comprised of the
+        group members plus the admins of the course containing the group.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - group_id
+        """ID"""
+        path["group_id"] = group_id
+
+        self.logger.debug("GET /api/v1/groups/{group_id}/potential_collaborators with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/groups/{group_id}/potential_collaborators".format(**path), data=data, params=params, all_pages=True)
+
 
 class Collaborator(BaseModel):
     """Collaborator Model."""

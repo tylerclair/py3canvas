@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from .base import BaseCanvasAPI
-from .base import BaseModel
+from base import BaseCanvasAPI
+from base import BaseModel
 
 
 class CommMessagesAPI(BaseCanvasAPI):
@@ -33,11 +33,19 @@ class CommMessagesAPI(BaseCanvasAPI):
         # OPTIONAL - start_time
         """The beginning of the time range you want to retrieve message from."""
         if start_time is not None:
+            if issubclass(start_time.__class__, basestring):
+                start_time = self._validate_iso8601_string(start_time)
+            elif issubclass(start_time.__class__, date) or issubclass(start_time.__class__, datetime):
+                start_time = start_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             params["start_time"] = start_time
 
         # OPTIONAL - end_time
         """The end of the time range you want to retrieve messages for."""
         if end_time is not None:
+            if issubclass(end_time.__class__, basestring):
+                end_time = self._validate_iso8601_string(end_time)
+            elif issubclass(end_time.__class__, date) or issubclass(end_time.__class__, datetime):
+                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             params["end_time"] = end_time
 
         self.logger.debug("GET /api/v1/comm_messages with query params: {params} and form data: {data}".format(params=params, data=data, **path))
@@ -47,10 +55,11 @@ class CommMessagesAPI(BaseCanvasAPI):
 class Commmessage(BaseModel):
     """Commmessage Model."""
 
-    def __init__(self, body=None, sender=None, sent_at=None, workflow_state=None, created_at=None, to=None, reply_to=None, html_body=None, id=None, subject=None):
+    def __init__(self, body=None, from_name=None, from=None, sent_at=None, workflow_state=None, created_at=None, to=None, reply_to=None, html_body=None, id=None, subject=None):
         """Init method for Commmessage class."""
         self._body = body
-        self._sender = sender
+        self._from_name = from_name
+        self._from = from
         self._sent_at = sent_at
         self._workflow_state = workflow_state
         self._created_at = created_at
@@ -74,12 +83,23 @@ class Commmessage(BaseModel):
         self._body = value
 
     @property
-    def sender(self):
+    def from_name(self):
+        """The display name for the from address."""
+        return self._from_name
+
+    @from_name.setter
+    def from_name(self, value):
+        """Setter for from_name property."""
+        self.logger.warn("Setting values on from_name will NOT update the remote Canvas instance.")
+        self._from_name = value
+
+    @property
+    def from(self):
         """The address that was put in the 'from' field of the message."""
         return self._from
 
-    @sender.setter
-    def sender(self, value):
+    @from.setter
+    def from(self, value):
         """Setter for from property."""
         self.logger.warn("Setting values on from will NOT update the remote Canvas instance.")
         self._from = value

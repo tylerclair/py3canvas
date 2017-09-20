@@ -254,7 +254,7 @@ class SubmissionsAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions".format(**path), data=data, params=params, all_pages=True)
 
-    def list_submissions_for_multiple_assignments_courses(self, course_id, assignment_ids=None, grading_period_id=None, grouped=None, include=None, order=None, order_direction=None, student_ids=None):
+    def list_submissions_for_multiple_assignments_courses(self, course_id, assignment_ids=None, enrollment_state=None, grading_period_id=None, grouped=None, include=None, order=None, order_direction=None, post_to_sis=None, student_ids=None, workflow_state=None):
         """
         List submissions for multiple assignments.
 
@@ -289,11 +289,30 @@ class SubmissionsAPI(BaseCanvasAPI):
         if grouped is not None:
             params["grouped"] = grouped
 
+        # OPTIONAL - post_to_sis
+        """If this argument is set to true, the response will only include
+        assignments that have the post_to_sis flag set to true."""
+        if post_to_sis is not None:
+            params["post_to_sis"] = post_to_sis
+
         # OPTIONAL - grading_period_id
         """The id of the grading period in which submissions are being requested
-        (Requires the Multiple Grading Periods account feature turned on)"""
+        (Requires grading periods to exist on the account)"""
         if grading_period_id is not None:
             params["grading_period_id"] = grading_period_id
+
+        # OPTIONAL - workflow_state
+        """The current status of the submission"""
+        if workflow_state is not None:
+            self._validate_enum(workflow_state, ["submitted", "unsubmitted", "graded", "pending_review"])
+            params["workflow_state"] = workflow_state
+
+        # OPTIONAL - enrollment_state
+        """The current state of the enrollments. If omitted will include all
+        enrollments that are not deleted."""
+        if enrollment_state is not None:
+            self._validate_enum(enrollment_state, ["active", "concluded"])
+            params["enrollment_state"] = enrollment_state
 
         # OPTIONAL - order
         """The order submissions will be returned in.  Defaults to "id".  Doesn't
@@ -319,7 +338,7 @@ class SubmissionsAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/courses/{course_id}/students/submissions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/students/submissions".format(**path), data=data, params=params, no_data=True)
 
-    def list_submissions_for_multiple_assignments_sections(self, section_id, assignment_ids=None, grading_period_id=None, grouped=None, include=None, order=None, order_direction=None, student_ids=None):
+    def list_submissions_for_multiple_assignments_sections(self, section_id, assignment_ids=None, enrollment_state=None, grading_period_id=None, grouped=None, include=None, order=None, order_direction=None, post_to_sis=None, student_ids=None, workflow_state=None):
         """
         List submissions for multiple assignments.
 
@@ -354,11 +373,30 @@ class SubmissionsAPI(BaseCanvasAPI):
         if grouped is not None:
             params["grouped"] = grouped
 
+        # OPTIONAL - post_to_sis
+        """If this argument is set to true, the response will only include
+        assignments that have the post_to_sis flag set to true."""
+        if post_to_sis is not None:
+            params["post_to_sis"] = post_to_sis
+
         # OPTIONAL - grading_period_id
         """The id of the grading period in which submissions are being requested
-        (Requires the Multiple Grading Periods account feature turned on)"""
+        (Requires grading periods to exist on the account)"""
         if grading_period_id is not None:
             params["grading_period_id"] = grading_period_id
+
+        # OPTIONAL - workflow_state
+        """The current status of the submission"""
+        if workflow_state is not None:
+            self._validate_enum(workflow_state, ["submitted", "unsubmitted", "graded", "pending_review"])
+            params["workflow_state"] = workflow_state
+
+        # OPTIONAL - enrollment_state
+        """The current state of the enrollments. If omitted will include all
+        enrollments that are not deleted."""
+        if enrollment_state is not None:
+            self._validate_enum(enrollment_state, ["active", "concluded"])
+            params["enrollment_state"] = enrollment_state
 
         # OPTIONAL - order
         """The order submissions will be returned in.  Defaults to "id".  Doesn't
@@ -510,7 +548,7 @@ class SubmissionsAPI(BaseCanvasAPI):
         self.logger.debug("POST /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{user_id}/files with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{user_id}/files".format(**path), data=data, params=params, no_data=True)
 
-    def grade_or_comment_on_submission_courses(self, user_id, course_id, assignment_id, comment_file_ids=None, comment_group_comment=None, comment_media_comment_id=None, comment_media_comment_type=None, comment_text_comment=None, include_visibility=None, rubric_assessment=None, submission_excuse=None, submission_posted_grade=None):
+    def grade_or_comment_on_submission_courses(self, user_id, course_id, assignment_id, comment_file_ids=None, comment_group_comment=None, comment_media_comment_id=None, comment_media_comment_type=None, comment_text_comment=None, include_visibility=None, rubric_assessment=None, submission_excuse=None, submission_late_policy_status=None, submission_posted_grade=None, submission_seconds_late_override=None):
         """
         Grade or comment on a submission.
 
@@ -608,6 +646,16 @@ class SubmissionsAPI(BaseCanvasAPI):
         if submission_excuse is not None:
             data["submission[excuse]"] = submission_excuse
 
+        # OPTIONAL - submission[late_policy_status]
+        """Sets the late policy status to either "late", "missing", "none", or null."""
+        if submission_late_policy_status is not None:
+            data["submission[late_policy_status]"] = submission_late_policy_status
+
+        # OPTIONAL - submission[seconds_late_override]
+        """Sets the seconds late if late policy status is 'late'"""
+        if submission_seconds_late_override is not None:
+            data["submission[seconds_late_override]"] = submission_seconds_late_override
+
         # OPTIONAL - rubric_assessment
         """Assign a rubric assessment to this assignment submission. The
         sub-parameters here depend on the rubric for the assignment. The general
@@ -652,7 +700,7 @@ class SubmissionsAPI(BaseCanvasAPI):
         self.logger.debug("PUT /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{user_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{user_id}".format(**path), data=data, params=params, no_data=True)
 
-    def grade_or_comment_on_submission_sections(self, user_id, section_id, assignment_id, comment_file_ids=None, comment_group_comment=None, comment_media_comment_id=None, comment_media_comment_type=None, comment_text_comment=None, include_visibility=None, rubric_assessment=None, submission_excuse=None, submission_posted_grade=None):
+    def grade_or_comment_on_submission_sections(self, user_id, section_id, assignment_id, comment_file_ids=None, comment_group_comment=None, comment_media_comment_id=None, comment_media_comment_type=None, comment_text_comment=None, include_visibility=None, rubric_assessment=None, submission_excuse=None, submission_late_policy_status=None, submission_posted_grade=None, submission_seconds_late_override=None):
         """
         Grade or comment on a submission.
 
@@ -749,6 +797,16 @@ class SubmissionsAPI(BaseCanvasAPI):
         """Sets the "excused" status of an assignment."""
         if submission_excuse is not None:
             data["submission[excuse]"] = submission_excuse
+
+        # OPTIONAL - submission[late_policy_status]
+        """Sets the late policy status to either "late", "missing", "none", or null."""
+        if submission_late_policy_status is not None:
+            data["submission[late_policy_status]"] = submission_late_policy_status
+
+        # OPTIONAL - submission[seconds_late_override]
+        """Sets the seconds late if late policy status is 'late'"""
+        if submission_seconds_late_override is not None:
+            data["submission[seconds_late_override]"] = submission_seconds_late_override
 
         # OPTIONAL - rubric_assessment
         """Assign a rubric assessment to this assignment submission. The
@@ -819,7 +877,32 @@ class SubmissionsAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{assignment_id}/gradeable_students with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/gradeable_students".format(**path), data=data, params=params, no_data=True)
 
-    def grade_or_comment_on_multiple_submissions_courses_submissions(self, course_id, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
+    def list_multiple_assignments_gradeable_students(self, course_id, assignment_ids=None):
+        """
+        List multiple assignments gradeable students.
+
+        List students eligible to submit a list of assignments. The caller must have
+        permission to view grades for the requested course.
+        
+        Section-limited instructors will only see students in their own sections.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - course_id
+        """ID"""
+        path["course_id"] = course_id
+
+        # OPTIONAL - assignment_ids
+        """Assignments being requested"""
+        if assignment_ids is not None:
+            params["assignment_ids"] = assignment_ids
+
+        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/gradeable_students with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/gradeable_students".format(**path), data=data, params=params, no_data=True)
+
+    def grade_or_comment_on_multiple_submissions_courses_submissions(self, course_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
         """
         Grade or comment on multiple submissions.
 
@@ -881,11 +964,17 @@ class SubmissionsAPI(BaseCanvasAPI):
         {api:SubmissionsApiController#update Submissions Update} documentation"""
         if grade_data_<student_id>_file_ids is not None:
             data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
+
+        # OPTIONAL - grade_data[<student_id>][assignment_id]
+        """Specifies which assignment to grade.  This argument is not necessary when
+        using the assignment-specific endpoints."""
+        if grade_data_<student_id>_assignment_id is not None:
+            data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
 
         self.logger.debug("POST /api/v1/courses/{course_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/courses/{course_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
 
-    def grade_or_comment_on_multiple_submissions_courses_assignments(self, course_id, assignment_id, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
+    def grade_or_comment_on_multiple_submissions_courses_assignments(self, course_id, assignment_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
         """
         Grade or comment on multiple submissions.
 
@@ -952,10 +1041,16 @@ class SubmissionsAPI(BaseCanvasAPI):
         if grade_data_<student_id>_file_ids is not None:
             data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
 
+        # OPTIONAL - grade_data[<student_id>][assignment_id]
+        """Specifies which assignment to grade.  This argument is not necessary when
+        using the assignment-specific endpoints."""
+        if grade_data_<student_id>_assignment_id is not None:
+            data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
+
         self.logger.debug("POST /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
 
-    def grade_or_comment_on_multiple_submissions_sections_submissions(self, section_id, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
+    def grade_or_comment_on_multiple_submissions_sections_submissions(self, section_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
         """
         Grade or comment on multiple submissions.
 
@@ -1018,10 +1113,16 @@ class SubmissionsAPI(BaseCanvasAPI):
         if grade_data_<student_id>_file_ids is not None:
             data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
 
+        # OPTIONAL - grade_data[<student_id>][assignment_id]
+        """Specifies which assignment to grade.  This argument is not necessary when
+        using the assignment-specific endpoints."""
+        if grade_data_<student_id>_assignment_id is not None:
+            data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
+
         self.logger.debug("POST /api/v1/sections/{section_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/sections/{section_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
 
-    def grade_or_comment_on_multiple_submissions_sections_assignments(self, section_id, assignment_id, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
+    def grade_or_comment_on_multiple_submissions_sections_assignments(self, section_id, assignment_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
         """
         Grade or comment on multiple submissions.
 
@@ -1087,6 +1188,12 @@ class SubmissionsAPI(BaseCanvasAPI):
         {api:SubmissionsApiController#update Submissions Update} documentation"""
         if grade_data_<student_id>_file_ids is not None:
             data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
+
+        # OPTIONAL - grade_data[<student_id>][assignment_id]
+        """Specifies which assignment to grade.  This argument is not necessary when
+        using the assignment-specific endpoints."""
+        if grade_data_<student_id>_assignment_id is not None:
+            data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
 
         self.logger.debug("POST /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
@@ -1199,6 +1306,50 @@ class SubmissionsAPI(BaseCanvasAPI):
         self.logger.debug("DELETE /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{user_id}/read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{user_id}/read".format(**path), data=data, params=params, no_data=True)
 
+    def submission_summary_courses(self, course_id, assignment_id):
+        """
+        Submission Summary.
+
+        Returns the number of submissions for the given assignment based on gradeable students
+        that fall into three categories: graded, ungraded, not submitted.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - course_id
+        """ID"""
+        path["course_id"] = course_id
+
+        # REQUIRED - PATH - assignment_id
+        """ID"""
+        path["assignment_id"] = assignment_id
+
+        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{assignment_id}/submission_summary with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/submission_summary".format(**path), data=data, params=params, no_data=True)
+
+    def submission_summary_sections(self, section_id, assignment_id):
+        """
+        Submission Summary.
+
+        Returns the number of submissions for the given assignment based on gradeable students
+        that fall into three categories: graded, ungraded, not submitted.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - section_id
+        """ID"""
+        path["section_id"] = section_id
+
+        # REQUIRED - PATH - assignment_id
+        """ID"""
+        path["assignment_id"] = assignment_id
+
+        self.logger.debug("GET /api/v1/sections/{section_id}/assignments/{assignment_id}/submission_summary with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/sections/{section_id}/assignments/{assignment_id}/submission_summary".format(**path), data=data, params=params, no_data=True)
+
 
 class Submissioncomment(BaseModel):
     """Submissioncomment Model."""
@@ -1296,75 +1447,46 @@ class Submissioncomment(BaseModel):
 class Submission(BaseModel):
     """Submission Model."""
 
-    def __init__(self, body=None, attempt=None, submitted_at=None, excused=None, course=None, assignment_id=None, assignment=None, workflow_state=None, html_url=None, preview_url=None, late=None, grade=None, submission_comments=None, score=None, grade_matches_current_submission=None, url=None, grader_id=None, user_id=None, submission_type=None, assignment_visible=None, user=None):
+    def __init__(self, grade=None, course=None, seconds_late=None, user_id=None, excused=None, workflow_state=None, late=None, submission_comments=None, score=None, grade_matches_current_submission=None, grader_id=None, late_policy_status=None, assignment_visible=None, body=None, missing=None, assignment=None, html_url=None, user=None, attempt=None, submitted_at=None, assignment_id=None, preview_url=None, url=None, submission_type=None, points_deducted=None):
         """Init method for Submission class."""
-        self._body = body
-        self._attempt = attempt
-        self._submitted_at = submitted_at
-        self._excused = excused
-        self._course = course
-        self._assignment_id = assignment_id
-        self._assignment = assignment
-        self._workflow_state = workflow_state
-        self._html_url = html_url
-        self._preview_url = preview_url
-        self._late = late
         self._grade = grade
+        self._course = course
+        self._seconds_late = seconds_late
+        self._user_id = user_id
+        self._excused = excused
+        self._workflow_state = workflow_state
+        self._late = late
         self._submission_comments = submission_comments
         self._score = score
         self._grade_matches_current_submission = grade_matches_current_submission
-        self._url = url
         self._grader_id = grader_id
-        self._user_id = user_id
-        self._submission_type = submission_type
+        self._late_policy_status = late_policy_status
         self._assignment_visible = assignment_visible
+        self._body = body
+        self._missing = missing
+        self._assignment = assignment
+        self._html_url = html_url
         self._user = user
+        self._attempt = attempt
+        self._submitted_at = submitted_at
+        self._assignment_id = assignment_id
+        self._preview_url = preview_url
+        self._url = url
+        self._submission_type = submission_type
+        self._points_deducted = points_deducted
 
         self.logger = logging.getLogger('py3canvas.Submission')
 
     @property
-    def body(self):
-        """The content of the submission, if it was submitted directly in a text field."""
-        return self._body
+    def grade(self):
+        """The grade for the submission, translated into the assignment grading scheme (so a letter grade, for example)."""
+        return self._grade
 
-    @body.setter
-    def body(self, value):
-        """Setter for body property."""
-        self.logger.warn("Setting values on body will NOT update the remote Canvas instance.")
-        self._body = value
-
-    @property
-    def attempt(self):
-        """This is the submission attempt number."""
-        return self._attempt
-
-    @attempt.setter
-    def attempt(self, value):
-        """Setter for attempt property."""
-        self.logger.warn("Setting values on attempt will NOT update the remote Canvas instance.")
-        self._attempt = value
-
-    @property
-    def submitted_at(self):
-        """The timestamp when the assignment was submitted."""
-        return self._submitted_at
-
-    @submitted_at.setter
-    def submitted_at(self, value):
-        """Setter for submitted_at property."""
-        self.logger.warn("Setting values on submitted_at will NOT update the remote Canvas instance.")
-        self._submitted_at = value
-
-    @property
-    def excused(self):
-        """Whether the assignment is excused.  Excused assignments have no impact on a user's grade."""
-        return self._excused
-
-    @excused.setter
-    def excused(self, value):
-        """Setter for excused property."""
-        self.logger.warn("Setting values on excused will NOT update the remote Canvas instance.")
-        self._excused = value
+    @grade.setter
+    def grade(self, value):
+        """Setter for grade property."""
+        self.logger.warn("Setting values on grade will NOT update the remote Canvas instance.")
+        self._grade = value
 
     @property
     def course(self):
@@ -1378,26 +1500,37 @@ class Submission(BaseModel):
         self._course = value
 
     @property
-    def assignment_id(self):
-        """The submission's assignment id."""
-        return self._assignment_id
+    def seconds_late(self):
+        """The amount of time, in seconds, that an submission is late by."""
+        return self._seconds_late
 
-    @assignment_id.setter
-    def assignment_id(self, value):
-        """Setter for assignment_id property."""
-        self.logger.warn("Setting values on assignment_id will NOT update the remote Canvas instance.")
-        self._assignment_id = value
+    @seconds_late.setter
+    def seconds_late(self, value):
+        """Setter for seconds_late property."""
+        self.logger.warn("Setting values on seconds_late will NOT update the remote Canvas instance.")
+        self._seconds_late = value
 
     @property
-    def assignment(self):
-        """The submission's assignment (see the assignments API) (optional)."""
-        return self._assignment
+    def user_id(self):
+        """The id of the user who created the submission."""
+        return self._user_id
 
-    @assignment.setter
-    def assignment(self, value):
-        """Setter for assignment property."""
-        self.logger.warn("Setting values on assignment will NOT update the remote Canvas instance.")
-        self._assignment = value
+    @user_id.setter
+    def user_id(self, value):
+        """Setter for user_id property."""
+        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self._user_id = value
+
+    @property
+    def excused(self):
+        """Whether the assignment is excused.  Excused assignments have no impact on a user's grade."""
+        return self._excused
+
+    @excused.setter
+    def excused(self, value):
+        """Setter for excused property."""
+        self.logger.warn("Setting values on excused will NOT update the remote Canvas instance.")
+        self._excused = value
 
     @property
     def workflow_state(self):
@@ -1411,28 +1544,6 @@ class Submission(BaseModel):
         self._workflow_state = value
 
     @property
-    def html_url(self):
-        """URL to the submission. This will require the user to log in."""
-        return self._html_url
-
-    @html_url.setter
-    def html_url(self, value):
-        """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
-        self._html_url = value
-
-    @property
-    def preview_url(self):
-        """URL to the submission preview. This will require the user to log in."""
-        return self._preview_url
-
-    @preview_url.setter
-    def preview_url(self, value):
-        """Setter for preview_url property."""
-        self.logger.warn("Setting values on preview_url will NOT update the remote Canvas instance.")
-        self._preview_url = value
-
-    @property
     def late(self):
         """Whether the submission was made after the applicable due date."""
         return self._late
@@ -1442,17 +1553,6 @@ class Submission(BaseModel):
         """Setter for late property."""
         self.logger.warn("Setting values on late will NOT update the remote Canvas instance.")
         self._late = value
-
-    @property
-    def grade(self):
-        """The grade for the submission, translated into the assignment grading scheme (so a letter grade, for example)."""
-        return self._grade
-
-    @grade.setter
-    def grade(self, value):
-        """Setter for grade property."""
-        self.logger.warn("Setting values on grade will NOT update the remote Canvas instance.")
-        self._grade = value
 
     @property
     def submission_comments(self):
@@ -1488,19 +1588,8 @@ class Submission(BaseModel):
         self._grade_matches_current_submission = value
 
     @property
-    def url(self):
-        """The URL of the submission (for 'online_url' submissions)."""
-        return self._url
-
-    @url.setter
-    def url(self, value):
-        """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
-        self._url = value
-
-    @property
     def grader_id(self):
-        """The id of the user who graded the submission."""
+        """The id of the user who graded the submission. This will be null for submissions that haven't been graded yet. It will be a positive number if a real user has graded the submission and a negative number if the submission was graded by a process (e.g. Quiz autograder and autograding LTI tools).  Specifically autograded quizzes set grader_id to the negative of the quiz id.  Submissions autograded by LTI tools set grader_id to the negative of the tool id."""
         return self._grader_id
 
     @grader_id.setter
@@ -1510,26 +1599,15 @@ class Submission(BaseModel):
         self._grader_id = value
 
     @property
-    def user_id(self):
-        """The id of the user who created the submission."""
-        return self._user_id
+    def late_policy_status(self):
+        """The status of the submission in relation to the late policy. Can be late, missing, none, or null."""
+        return self._late_policy_status
 
-    @user_id.setter
-    def user_id(self, value):
-        """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
-        self._user_id = value
-
-    @property
-    def submission_type(self):
-        """The types of submission ex: ('online_text_entry'|'online_url'|'online_upload'|'media_recording')."""
-        return self._submission_type
-
-    @submission_type.setter
-    def submission_type(self, value):
-        """Setter for submission_type property."""
-        self.logger.warn("Setting values on submission_type will NOT update the remote Canvas instance.")
-        self._submission_type = value
+    @late_policy_status.setter
+    def late_policy_status(self, value):
+        """Setter for late_policy_status property."""
+        self.logger.warn("Setting values on late_policy_status will NOT update the remote Canvas instance.")
+        self._late_policy_status = value
 
     @property
     def assignment_visible(self):
@@ -1543,6 +1621,50 @@ class Submission(BaseModel):
         self._assignment_visible = value
 
     @property
+    def body(self):
+        """The content of the submission, if it was submitted directly in a text field."""
+        return self._body
+
+    @body.setter
+    def body(self, value):
+        """Setter for body property."""
+        self.logger.warn("Setting values on body will NOT update the remote Canvas instance.")
+        self._body = value
+
+    @property
+    def missing(self):
+        """Whether the assignment is missing."""
+        return self._missing
+
+    @missing.setter
+    def missing(self, value):
+        """Setter for missing property."""
+        self.logger.warn("Setting values on missing will NOT update the remote Canvas instance.")
+        self._missing = value
+
+    @property
+    def assignment(self):
+        """The submission's assignment (see the assignments API) (optional)."""
+        return self._assignment
+
+    @assignment.setter
+    def assignment(self, value):
+        """Setter for assignment property."""
+        self.logger.warn("Setting values on assignment will NOT update the remote Canvas instance.")
+        self._assignment = value
+
+    @property
+    def html_url(self):
+        """URL to the submission. This will require the user to log in."""
+        return self._html_url
+
+    @html_url.setter
+    def html_url(self, value):
+        """Setter for html_url property."""
+        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self._html_url = value
+
+    @property
     def user(self):
         """The submissions user (see user API) (optional)."""
         return self._user
@@ -1552,6 +1674,83 @@ class Submission(BaseModel):
         """Setter for user property."""
         self.logger.warn("Setting values on user will NOT update the remote Canvas instance.")
         self._user = value
+
+    @property
+    def attempt(self):
+        """This is the submission attempt number."""
+        return self._attempt
+
+    @attempt.setter
+    def attempt(self, value):
+        """Setter for attempt property."""
+        self.logger.warn("Setting values on attempt will NOT update the remote Canvas instance.")
+        self._attempt = value
+
+    @property
+    def submitted_at(self):
+        """The timestamp when the assignment was submitted."""
+        return self._submitted_at
+
+    @submitted_at.setter
+    def submitted_at(self, value):
+        """Setter for submitted_at property."""
+        self.logger.warn("Setting values on submitted_at will NOT update the remote Canvas instance.")
+        self._submitted_at = value
+
+    @property
+    def assignment_id(self):
+        """The submission's assignment id."""
+        return self._assignment_id
+
+    @assignment_id.setter
+    def assignment_id(self, value):
+        """Setter for assignment_id property."""
+        self.logger.warn("Setting values on assignment_id will NOT update the remote Canvas instance.")
+        self._assignment_id = value
+
+    @property
+    def preview_url(self):
+        """URL to the submission preview. This will require the user to log in."""
+        return self._preview_url
+
+    @preview_url.setter
+    def preview_url(self, value):
+        """Setter for preview_url property."""
+        self.logger.warn("Setting values on preview_url will NOT update the remote Canvas instance.")
+        self._preview_url = value
+
+    @property
+    def url(self):
+        """The URL of the submission (for 'online_url' submissions)."""
+        return self._url
+
+    @url.setter
+    def url(self, value):
+        """Setter for url property."""
+        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self._url = value
+
+    @property
+    def submission_type(self):
+        """The types of submission ex: ('online_text_entry'|'online_url'|'online_upload'|'media_recording')."""
+        return self._submission_type
+
+    @submission_type.setter
+    def submission_type(self, value):
+        """Setter for submission_type property."""
+        self.logger.warn("Setting values on submission_type will NOT update the remote Canvas instance.")
+        self._submission_type = value
+
+    @property
+    def points_deducted(self):
+        """The amount of points automatically deducted from the score by the missing/late policy for a late or missing assignment."""
+        return self._points_deducted
+
+    @points_deducted.setter
+    def points_deducted(self, value):
+        """Setter for points_deducted property."""
+        self.logger.warn("Setting values on points_deducted will NOT update the remote Canvas instance.")
+        self._points_deducted = value
 
 
 class Mediacomment(BaseModel):

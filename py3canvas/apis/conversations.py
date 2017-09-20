@@ -577,7 +577,7 @@ class Conversation(BaseModel):
 
     @property
     def participants(self):
-        """Array of users (id, name) participating in the conversation. Includes current user."""
+        """Array of users participating in the conversation. Includes current user."""
         return self._participants
 
     @participants.setter
@@ -695,4 +695,61 @@ class Conversation(BaseModel):
         """Setter for subject property."""
         self.logger.warn("Setting values on subject will NOT update the remote Canvas instance.")
         self._subject = value
+
+
+class Conversationparticipant(BaseModel):
+    """Conversationparticipant Model."""
+
+    def __init__(self, avatar_url=None, id=None, full_name=None, name=None):
+        """Init method for Conversationparticipant class."""
+        self._avatar_url = avatar_url
+        self._id = id
+        self._full_name = full_name
+        self._name = name
+
+        self.logger = logging.getLogger('py3canvas.Conversationparticipant')
+
+    @property
+    def avatar_url(self):
+        """If requested, this field will be included and contain a url to retrieve the user's avatar."""
+        return self._avatar_url
+
+    @avatar_url.setter
+    def avatar_url(self, value):
+        """Setter for avatar_url property."""
+        self.logger.warn("Setting values on avatar_url will NOT update the remote Canvas instance.")
+        self._avatar_url = value
+
+    @property
+    def id(self):
+        """The user ID for the participant."""
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        """Setter for id property."""
+        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self._id = value
+
+    @property
+    def full_name(self):
+        """The full name of the user."""
+        return self._full_name
+
+    @full_name.setter
+    def full_name(self, value):
+        """Setter for full_name property."""
+        self.logger.warn("Setting values on full_name will NOT update the remote Canvas instance.")
+        self._full_name = value
+
+    @property
+    def name(self):
+        """A short name the user has selected, for use in conversations or other less formal places through the site."""
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        """Setter for name property."""
+        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self._name = value
 

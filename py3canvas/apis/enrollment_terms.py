@@ -16,7 +16,7 @@ class EnrollmentTermsAPI(BaseCanvasAPI):
         super(EnrollmentTermsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.EnrollmentTermsAPI")
 
-    def create_enrollment_term(self, account_id, enrollment_term_end_at=None, enrollment_term_name=None, enrollment_term_sis_term_id=None, enrollment_term_start_at=None):
+    def create_enrollment_term(self, account_id, enrollment_term_end_at=None, enrollment_term_name=None, enrollment_term_overrides_enrollment_type_end_at=None, enrollment_term_overrides_enrollment_type_start_at=None, enrollment_term_sis_term_id=None, enrollment_term_start_at=None):
         """
         Create enrollment term.
 
@@ -39,12 +39,20 @@ class EnrollmentTermsAPI(BaseCanvasAPI):
         """The day/time the term starts.
         Accepts times in ISO 8601 format, e.g. 2015-01-10T18:48:00Z."""
         if enrollment_term_start_at is not None:
+            if issubclass(enrollment_term_start_at.__class__, str):
+                enrollment_term_start_at = self._validate_iso8601_string(enrollment_term_start_at)
+            elif issubclass(enrollment_term_start_at.__class__, date) or issubclass(enrollment_term_start_at.__class__, datetime):
+                enrollment_term_start_at = enrollment_term_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["enrollment_term[start_at]"] = enrollment_term_start_at
 
         # OPTIONAL - enrollment_term[end_at]
         """The day/time the term ends.
         Accepts times in ISO 8601 format, e.g. 2015-01-10T18:48:00Z."""
         if enrollment_term_end_at is not None:
+            if issubclass(enrollment_term_end_at.__class__, str):
+                enrollment_term_end_at = self._validate_iso8601_string(enrollment_term_end_at)
+            elif issubclass(enrollment_term_end_at.__class__, date) or issubclass(enrollment_term_end_at.__class__, datetime):
+                enrollment_term_end_at = enrollment_term_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["enrollment_term[end_at]"] = enrollment_term_end_at
 
         # OPTIONAL - enrollment_term[sis_term_id]
@@ -52,10 +60,30 @@ class EnrollmentTermsAPI(BaseCanvasAPI):
         if enrollment_term_sis_term_id is not None:
             data["enrollment_term[sis_term_id]"] = enrollment_term_sis_term_id
 
+        # OPTIONAL - enrollment_term[overrides][enrollment_type][start_at]
+        """The day/time the term starts, overridden for the given enrollment type.
+        *enrollment_type* can be one of StudentEnrollment, TeacherEnrollment, TaEnrollment, or DesignerEnrollment"""
+        if enrollment_term_overrides_enrollment_type_start_at is not None:
+            if issubclass(enrollment_term_overrides_enrollment_type_start_at.__class__, str):
+                enrollment_term_overrides_enrollment_type_start_at = self._validate_iso8601_string(enrollment_term_overrides_enrollment_type_start_at)
+            elif issubclass(enrollment_term_overrides_enrollment_type_start_at.__class__, date) or issubclass(enrollment_term_overrides_enrollment_type_start_at.__class__, datetime):
+                enrollment_term_overrides_enrollment_type_start_at = enrollment_term_overrides_enrollment_type_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            data["enrollment_term[overrides][enrollment_type][start_at]"] = enrollment_term_overrides_enrollment_type_start_at
+
+        # OPTIONAL - enrollment_term[overrides][enrollment_type][end_at]
+        """The day/time the term ends, overridden for the given enrollment type.
+        *enrollment_type* can be one of StudentEnrollment, TeacherEnrollment, TaEnrollment, or DesignerEnrollment"""
+        if enrollment_term_overrides_enrollment_type_end_at is not None:
+            if issubclass(enrollment_term_overrides_enrollment_type_end_at.__class__, str):
+                enrollment_term_overrides_enrollment_type_end_at = self._validate_iso8601_string(enrollment_term_overrides_enrollment_type_end_at)
+            elif issubclass(enrollment_term_overrides_enrollment_type_end_at.__class__, date) or issubclass(enrollment_term_overrides_enrollment_type_end_at.__class__, datetime):
+                enrollment_term_overrides_enrollment_type_end_at = enrollment_term_overrides_enrollment_type_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            data["enrollment_term[overrides][enrollment_type][end_at]"] = enrollment_term_overrides_enrollment_type_end_at
+
         self.logger.debug("POST /api/v1/accounts/{account_id}/terms with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/accounts/{account_id}/terms".format(**path), data=data, params=params, single_item=True)
 
-    def update_enrollment_term(self, id, account_id, enrollment_term_end_at=None, enrollment_term_name=None, enrollment_term_sis_term_id=None, enrollment_term_start_at=None):
+    def update_enrollment_term(self, id, account_id, enrollment_term_end_at=None, enrollment_term_name=None, enrollment_term_overrides_enrollment_type_end_at=None, enrollment_term_overrides_enrollment_type_start_at=None, enrollment_term_sis_term_id=None, enrollment_term_start_at=None):
         """
         Update enrollment term.
 
@@ -82,18 +110,46 @@ class EnrollmentTermsAPI(BaseCanvasAPI):
         """The day/time the term starts.
         Accepts times in ISO 8601 format, e.g. 2015-01-10T18:48:00Z."""
         if enrollment_term_start_at is not None:
+            if issubclass(enrollment_term_start_at.__class__, str):
+                enrollment_term_start_at = self._validate_iso8601_string(enrollment_term_start_at)
+            elif issubclass(enrollment_term_start_at.__class__, date) or issubclass(enrollment_term_start_at.__class__, datetime):
+                enrollment_term_start_at = enrollment_term_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["enrollment_term[start_at]"] = enrollment_term_start_at
 
         # OPTIONAL - enrollment_term[end_at]
         """The day/time the term ends.
         Accepts times in ISO 8601 format, e.g. 2015-01-10T18:48:00Z."""
         if enrollment_term_end_at is not None:
+            if issubclass(enrollment_term_end_at.__class__, str):
+                enrollment_term_end_at = self._validate_iso8601_string(enrollment_term_end_at)
+            elif issubclass(enrollment_term_end_at.__class__, date) or issubclass(enrollment_term_end_at.__class__, datetime):
+                enrollment_term_end_at = enrollment_term_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["enrollment_term[end_at]"] = enrollment_term_end_at
 
         # OPTIONAL - enrollment_term[sis_term_id]
         """The unique SIS identifier for the term."""
         if enrollment_term_sis_term_id is not None:
             data["enrollment_term[sis_term_id]"] = enrollment_term_sis_term_id
+
+        # OPTIONAL - enrollment_term[overrides][enrollment_type][start_at]
+        """The day/time the term starts, overridden for the given enrollment type.
+        *enrollment_type* can be one of StudentEnrollment, TeacherEnrollment, TaEnrollment, or DesignerEnrollment"""
+        if enrollment_term_overrides_enrollment_type_start_at is not None:
+            if issubclass(enrollment_term_overrides_enrollment_type_start_at.__class__, str):
+                enrollment_term_overrides_enrollment_type_start_at = self._validate_iso8601_string(enrollment_term_overrides_enrollment_type_start_at)
+            elif issubclass(enrollment_term_overrides_enrollment_type_start_at.__class__, date) or issubclass(enrollment_term_overrides_enrollment_type_start_at.__class__, datetime):
+                enrollment_term_overrides_enrollment_type_start_at = enrollment_term_overrides_enrollment_type_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            data["enrollment_term[overrides][enrollment_type][start_at]"] = enrollment_term_overrides_enrollment_type_start_at
+
+        # OPTIONAL - enrollment_term[overrides][enrollment_type][end_at]
+        """The day/time the term ends, overridden for the given enrollment type.
+        *enrollment_type* can be one of StudentEnrollment, TeacherEnrollment, TaEnrollment, or DesignerEnrollment"""
+        if enrollment_term_overrides_enrollment_type_end_at is not None:
+            if issubclass(enrollment_term_overrides_enrollment_type_end_at.__class__, str):
+                enrollment_term_overrides_enrollment_type_end_at = self._validate_iso8601_string(enrollment_term_overrides_enrollment_type_end_at)
+            elif issubclass(enrollment_term_overrides_enrollment_type_end_at.__class__, date) or issubclass(enrollment_term_overrides_enrollment_type_end_at.__class__, datetime):
+                enrollment_term_overrides_enrollment_type_end_at = enrollment_term_overrides_enrollment_type_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            data["enrollment_term[overrides][enrollment_type][end_at]"] = enrollment_term_overrides_enrollment_type_end_at
 
         self.logger.debug("PUT /api/v1/accounts/{account_id}/terms/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/accounts/{account_id}/terms/{id}".format(**path), data=data, params=params, single_item=True)
@@ -119,7 +175,7 @@ class EnrollmentTermsAPI(BaseCanvasAPI):
         self.logger.debug("DELETE /api/v1/accounts/{account_id}/terms/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/terms/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def list_enrollment_terms(self, account_id, workflow_state=None):
+    def list_enrollment_terms(self, account_id, include=None, workflow_state=None):
         """
         List enrollment terms.
 
@@ -140,18 +196,27 @@ class EnrollmentTermsAPI(BaseCanvasAPI):
             self._validate_enum(workflow_state, ["active", "deleted", "all"])
             params["workflow_state"] = workflow_state
 
+        # OPTIONAL - include
+        """Array of additional information to include.
+        
+        "overrides":: term start/end dates overridden for different enrollment types"""
+        if include is not None:
+            self._validate_enum(include, ["overrides"])
+            params["include"] = include
+
         self.logger.debug("GET /api/v1/accounts/{account_id}/terms with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/terms".format(**path), data=data, params=params, data_key='enrollment_terms', all_pages=True)
+        return self.generic_request("GET", "/api/v1/accounts/{account_id}/terms".format(**path), data=data, params=params, all_pages=True)
 
 
 class Enrollmentterm(BaseModel):
     """Enrollmentterm Model."""
 
-    def __init__(self, start_at=None, name=None, workflow_state=None, sis_term_id=None, end_at=None, id=None):
+    def __init__(self, start_at=None, name=None, workflow_state=None, overrides=None, sis_term_id=None, end_at=None, id=None):
         """Init method for Enrollmentterm class."""
         self._start_at = start_at
         self._name = name
         self._workflow_state = workflow_state
+        self._overrides = overrides
         self._sis_term_id = sis_term_id
         self._end_at = end_at
         self._id = id
@@ -190,6 +255,17 @@ class Enrollmentterm(BaseModel):
         """Setter for workflow_state property."""
         self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
         self._workflow_state = value
+
+    @property
+    def overrides(self):
+        """Term date overrides for specific enrollment types."""
+        return self._overrides
+
+    @overrides.setter
+    def overrides(self, value):
+        """Setter for overrides property."""
+        self.logger.warn("Setting values on overrides will NOT update the remote Canvas instance.")
+        self._overrides = value
 
     @property
     def sis_term_id(self):

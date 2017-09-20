@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from .base import BaseCanvasAPI
-from .base import BaseModel
+from base import BaseCanvasAPI
+from base import BaseModel
 
 
 class FavoritesAPI(BaseCanvasAPI):
@@ -16,7 +16,7 @@ class FavoritesAPI(BaseCanvasAPI):
         super(FavoritesAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.FavoritesAPI")
 
-    def list_favorite_courses(self):
+    def list_favorite_courses(self, exclude_blueprint_courses=None):
         """
         List favorite courses.
 
@@ -28,6 +28,11 @@ class FavoritesAPI(BaseCanvasAPI):
         path = {}
         data = {}
         params = {}
+
+        # OPTIONAL - exclude_blueprint_courses
+        """When set, only return courses that are not configured as blueprint courses."""
+        if exclude_blueprint_courses is not None:
+            params["exclude_blueprint_courses"] = exclude_blueprint_courses
 
         self.logger.debug("GET /api/v1/users/self/favorites/courses with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/self/favorites/courses".format(**path), data=data, params=params, all_pages=True)
@@ -150,7 +155,7 @@ class FavoritesAPI(BaseCanvasAPI):
 class Favorite(BaseModel):
     """Favorite Model."""
 
-    def __init__(self, context_type=None, context_id=None):
+    def __init__(self, , context_type=None, context_id=None):
         """Init method for Favorite class."""
         self._context_type = context_type
         self._context_id = context_id

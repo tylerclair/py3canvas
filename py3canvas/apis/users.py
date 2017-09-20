@@ -16,7 +16,7 @@ class UsersAPI(BaseCanvasAPI):
         super(UsersAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.UsersAPI")
 
-    def list_users_in_account(self, account_id, search_term=None):
+    def list_users_in_account(self, account_id, order=None, search_term=None, sort=None):
         """
         List users in account.
 
@@ -42,10 +42,22 @@ class UsersAPI(BaseCanvasAPI):
         Note that the API will prefer matching on canonical user ID if the ID has
         a numeric form. It will only search against other fields if non-numeric
         in form, or if the numeric value doesn't yield any matches. Queries by
-        administrative users will search on SIS ID, name, or email address; non-
-        administrative queries will only be compared against name."""
+        administrative users will search on SIS ID, login ID, name, or email
+        address; non-administrative queries will only be compared against name."""
         if search_term is not None:
             params["search_term"] = search_term
+
+        # OPTIONAL - sort
+        """The column to sort results by."""
+        if sort is not None:
+            self._validate_enum(sort, ["username", "email", "sis_id", "last_login"])
+            params["sort"] = sort
+
+        # OPTIONAL - order
+        """The order to sort the given column by."""
+        if order is not None:
+            self._validate_enum(order, ["asc", "desc"])
+            params["order"] = order
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/users with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/users".format(**path), data=data, params=params, all_pages=True)
@@ -328,7 +340,7 @@ class UsersAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/users/self/upcoming_events with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/self/upcoming_events".format(**path), data=data, params=params, no_data=True)
 
-    def list_missing_submissions(self, user_id):
+    def list_missing_submissions(self, user_id, include=None):
         """
         List Missing Submissions.
 
@@ -342,6 +354,14 @@ class UsersAPI(BaseCanvasAPI):
         # REQUIRED - PATH - user_id
         """the student's ID"""
         path["user_id"] = user_id
+
+        # OPTIONAL - include
+        """"planner_overrides":: Optionally include the assignment's associated planner override, if it exists, for the current user.
+                              These will be returned under a +planner_override+ key
+        "course":: Optionally include the assignments' courses"""
+        if include is not None:
+            self._validate_enum(include, ["planner_overrides", "course"])
+            params["include"] = include
 
         self.logger.debug("GET /api/v1/users/{user_id}/missing_submissions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/{user_id}/missing_submissions".format(**path), data=data, params=params, all_pages=True)
@@ -944,7 +964,7 @@ class UsersAPI(BaseCanvasAPI):
         To split a merged user, the caller must have permissions to manage all of
         the users logins. If there are multiple users that have been merged into one
         user it will split each merge into a separate user.
-        A split can only happen within 90 days of a user merge. A user merge deletes
+        A split can only happen within 180 days of a user merge. A user merge deletes
         the previous user and may be permanently deleted. In this scenario we create
         a new user object and proceed to move as much as possible to the new user.
         The user object will not have preserved the name or settings from the
@@ -970,7 +990,7 @@ class UsersAPI(BaseCanvasAPI):
         Returns user profile data, including user id, name, and profile pic.
         
         When requesting the profile for the user accessing the API, the user's
-        calendar feed URL will be returned as well.
+        calendar feed URL and LTI user id will be returned as well.
         """
         path = {}
         data = {}
@@ -1027,11 +1047,19 @@ class UsersAPI(BaseCanvasAPI):
         # OPTIONAL - start_time
         """The beginning of the time range from which you want page views."""
         if start_time is not None:
+            if issubclass(start_time.__class__, str):
+                start_time = self._validate_iso8601_string(start_time)
+            elif issubclass(start_time.__class__, date) or issubclass(start_time.__class__, datetime):
+                start_time = start_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             params["start_time"] = start_time
 
         # OPTIONAL - end_time
         """The end of the time range from which you want page views."""
         if end_time is not None:
+            if issubclass(end_time.__class__, str):
+                end_time = self._validate_iso8601_string(end_time)
+            elif issubclass(end_time.__class__, date) or issubclass(end_time.__class__, datetime):
+                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             params["end_time"] = end_time
 
         self.logger.debug("GET /api/v1/users/{user_id}/page_views with query params: {params} and form data: {data}".format(params=params, data=data, **path))
@@ -1454,11 +1482,12 @@ class Profile(BaseModel):
     """Profile Model.
     Profile details for a Canvas user."""
 
-    def __init__(self, bio=None, login_id=None, sortable_name=None, name=None, short_name=None, title=None, locale=None, sis_user_id=None, time_zone=None, avatar_url=None, primary_email=None, calendar=None, sis_login_id=None, id=None):
+    def __init__(self, bio=None, login_id=None, sortable_name=None, lti_user_id=None, name=None, short_name=None, title=None, locale=None, sis_user_id=None, time_zone=None, avatar_url=None, primary_email=None, calendar=None, sis_login_id=None, id=None):
         """Init method for Profile class."""
         self._bio = bio
         self._login_id = login_id
         self._sortable_name = sortable_name
+        self._lti_user_id = lti_user_id
         self._name = name
         self._short_name = short_name
         self._title = title
@@ -1505,6 +1534,17 @@ class Profile(BaseModel):
         """Setter for sortable_name property."""
         self.logger.warn("Setting values on sortable_name will NOT update the remote Canvas instance.")
         self._sortable_name = value
+
+    @property
+    def lti_user_id(self):
+        """lti_user_id."""
+        return self._lti_user_id
+
+    @lti_user_id.setter
+    def lti_user_id(self, value):
+        """Setter for lti_user_id property."""
+        self.logger.warn("Setting values on lti_user_id will NOT update the remote Canvas instance.")
+        self._lti_user_id = value
 
     @property
     def name(self):

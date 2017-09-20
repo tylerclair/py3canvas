@@ -168,11 +168,19 @@ class CalendarEventsAPI(BaseCanvasAPI):
         # OPTIONAL - calendar_event[start_at]
         """Start date/time of the event."""
         if calendar_event_start_at is not None:
+            if issubclass(calendar_event_start_at.__class__, basestring):
+                calendar_event_start_at = self._validate_iso8601_string(calendar_event_start_at)
+            elif issubclass(calendar_event_start_at.__class__, date) or issubclass(calendar_event_start_at.__class__, datetime):
+                calendar_event_start_at = calendar_event_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["calendar_event[start_at]"] = calendar_event_start_at
 
         # OPTIONAL - calendar_event[end_at]
         """End date/time of the event."""
         if calendar_event_end_at is not None:
+            if issubclass(calendar_event_end_at.__class__, basestring):
+                calendar_event_end_at = self._validate_iso8601_string(calendar_event_end_at)
+            elif issubclass(calendar_event_end_at.__class__, date) or issubclass(calendar_event_end_at.__class__, datetime):
+                calendar_event_end_at = calendar_event_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["calendar_event[end_at]"] = calendar_event_end_at
 
         # OPTIONAL - calendar_event[location_name]
@@ -197,11 +205,19 @@ class CalendarEventsAPI(BaseCanvasAPI):
         identifier, provided that it is consistent across the start_at, end_at
         and context_code"""
         if calendar_event_child_event_data_X_start_at is not None:
+            if issubclass(calendar_event_child_event_data_X_start_at.__class__, basestring):
+                calendar_event_child_event_data_X_start_at = self._validate_iso8601_string(calendar_event_child_event_data_X_start_at)
+            elif issubclass(calendar_event_child_event_data_X_start_at.__class__, date) or issubclass(calendar_event_child_event_data_X_start_at.__class__, datetime):
+                calendar_event_child_event_data_X_start_at = calendar_event_child_event_data_X_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["calendar_event[child_event_data][X][start_at]"] = calendar_event_child_event_data_X_start_at
 
         # OPTIONAL - calendar_event[child_event_data][X][end_at]
         """Section-level end time(s) if this is a course event."""
         if calendar_event_child_event_data_X_end_at is not None:
+            if issubclass(calendar_event_child_event_data_X_end_at.__class__, basestring):
+                calendar_event_child_event_data_X_end_at = self._validate_iso8601_string(calendar_event_child_event_data_X_end_at)
+            elif issubclass(calendar_event_child_event_data_X_end_at.__class__, date) or issubclass(calendar_event_child_event_data_X_end_at.__class__, datetime):
+                calendar_event_child_event_data_X_end_at = calendar_event_child_event_data_X_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["calendar_event[child_event_data][X][end_at]"] = calendar_event_child_event_data_X_end_at
 
         # OPTIONAL - calendar_event[child_event_data][X][context_code]
@@ -351,11 +367,19 @@ class CalendarEventsAPI(BaseCanvasAPI):
         # OPTIONAL - calendar_event[start_at]
         """Start date/time of the event."""
         if calendar_event_start_at is not None:
+            if issubclass(calendar_event_start_at.__class__, basestring):
+                calendar_event_start_at = self._validate_iso8601_string(calendar_event_start_at)
+            elif issubclass(calendar_event_start_at.__class__, date) or issubclass(calendar_event_start_at.__class__, datetime):
+                calendar_event_start_at = calendar_event_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["calendar_event[start_at]"] = calendar_event_start_at
 
         # OPTIONAL - calendar_event[end_at]
         """End date/time of the event."""
         if calendar_event_end_at is not None:
+            if issubclass(calendar_event_end_at.__class__, basestring):
+                calendar_event_end_at = self._validate_iso8601_string(calendar_event_end_at)
+            elif issubclass(calendar_event_end_at.__class__, date) or issubclass(calendar_event_end_at.__class__, datetime):
+                calendar_event_end_at = calendar_event_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["calendar_event[end_at]"] = calendar_event_end_at
 
         # OPTIONAL - calendar_event[location_name]
@@ -380,11 +404,19 @@ class CalendarEventsAPI(BaseCanvasAPI):
         identifier, provided that it is consistent across the start_at, end_at
         and context_code"""
         if calendar_event_child_event_data_X_start_at is not None:
+            if issubclass(calendar_event_child_event_data_X_start_at.__class__, basestring):
+                calendar_event_child_event_data_X_start_at = self._validate_iso8601_string(calendar_event_child_event_data_X_start_at)
+            elif issubclass(calendar_event_child_event_data_X_start_at.__class__, date) or issubclass(calendar_event_child_event_data_X_start_at.__class__, datetime):
+                calendar_event_child_event_data_X_start_at = calendar_event_child_event_data_X_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["calendar_event[child_event_data][X][start_at]"] = calendar_event_child_event_data_X_start_at
 
         # OPTIONAL - calendar_event[child_event_data][X][end_at]
         """Section-level end time(s) if this is a course event."""
         if calendar_event_child_event_data_X_end_at is not None:
+            if issubclass(calendar_event_child_event_data_X_end_at.__class__, basestring):
+                calendar_event_child_event_data_X_end_at = self._validate_iso8601_string(calendar_event_child_event_data_X_end_at)
+            elif issubclass(calendar_event_child_event_data_X_end_at.__class__, date) or issubclass(calendar_event_child_event_data_X_end_at.__class__, datetime):
+                calendar_event_child_event_data_X_end_at = calendar_event_child_event_data_X_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["calendar_event[child_event_data][X][end_at]"] = calendar_event_child_event_data_X_end_at
 
         # OPTIONAL - calendar_event[child_event_data][X][context_code]
@@ -541,11 +573,12 @@ class CalendarEventsAPI(BaseCanvasAPI):
 class Calendarevent(BaseModel):
     """Calendarevent Model."""
 
-    def __init__(self, reserved=None, updated_at=None, group=None, child_events_count=None, available_slots=None, id=None, reserve_url=None, location_name=None, title=None, end_at=None, appointment_group_id=None, context_code=None, hidden=None, start_at=None, description=None, child_events=None, workflow_state=None, effective_context_code=None, html_url=None, all_day_date=None, user=None, participants_per_appointment=None, parent_event_id=None, created_at=None, all_day=None, url=None, location_address=None, own_reservation=None, appointment_group_url=None, all_context_codes=None):
+    def __init__(self, reserved=None, updated_at=None, group=None, participant_type=None, child_events_count=None, available_slots=None, id=None, reserve_url=None, location_name=None, title=None, end_at=None, appointment_group_id=None, context_code=None, hidden=None, start_at=None, description=None, child_events=None, workflow_state=None, effective_context_code=None, html_url=None, all_day_date=None, user=None, participants_per_appointment=None, parent_event_id=None, created_at=None, all_day=None, url=None, location_address=None, own_reservation=None, appointment_group_url=None, all_context_codes=None):
         """Init method for Calendarevent class."""
         self._reserved = reserved
         self._updated_at = updated_at
         self._group = group
+        self._participant_type = participant_type
         self._child_events_count = child_events_count
         self._available_slots = available_slots
         self._id = id
@@ -608,6 +641,17 @@ class Calendarevent(BaseModel):
         """Setter for group property."""
         self.logger.warn("Setting values on group will NOT update the remote Canvas instance.")
         self._group = value
+
+    @property
+    def participant_type(self):
+        """The type of participant to sign up for a slot: 'User' or 'Group'."""
+        return self._participant_type
+
+    @participant_type.setter
+    def participant_type(self, value):
+        """Setter for participant_type property."""
+        self.logger.warn("Setting values on participant_type will NOT update the remote Canvas instance.")
+        self._participant_type = value
 
     @property
     def child_events_count(self):

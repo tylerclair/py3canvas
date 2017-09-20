@@ -116,9 +116,9 @@ class AdminsAPI(BaseCanvasAPI):
 class Admin(BaseModel):
     """Admin Model."""
 
-    def __init__(self, id, status=None, role=None, user=None):
+    def __init__(self, id, workflow_state=None, role=None, user=None):
         """Init method for Admin class."""
-        self._status = status
+        self._workflow_state = workflow_state
         self._role = role
         self._id = id
         self._user = user
@@ -126,15 +126,15 @@ class Admin(BaseModel):
         self.logger = logging.getLogger('py3canvas.Admin')
 
     @property
-    def status(self):
+    def workflow_state(self):
         """The status of the account role/user assignment."""
-        return self._status
+        return self._workflow_state
 
-    @status.setter
-    def status(self, value):
-        """Setter for status property."""
-        self.logger.warn("Setting values on status will NOT update the remote Canvas instance.")
-        self._status = value
+    @workflow_state.setter
+    def workflow_state(self, value):
+        """Setter for workflow_state property."""
+        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self._workflow_state = value
 
     @property
     def role(self):

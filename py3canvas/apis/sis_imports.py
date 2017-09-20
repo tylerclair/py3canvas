@@ -6,7 +6,6 @@ import logging
 from datetime import date, datetime
 from .base import BaseCanvasAPI
 from .base import BaseModel
-import os
 
 
 class SisImportsAPI(BaseCanvasAPI):
@@ -22,7 +21,7 @@ class SisImportsAPI(BaseCanvasAPI):
         Get SIS import list.
 
         Returns the list of SIS imports for an account
-
+        
         Example:
           curl 'https://<canvas>/api/v1/accounts/<account_id>/sis_imports' \
             -H "Authorization: Bearer <token>"
@@ -45,22 +44,21 @@ class SisImportsAPI(BaseCanvasAPI):
             params["created_since"] = created_since
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/sis_imports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/sis_imports".format(**path), data=data, params=params, data_key='sis_imports', all_pages=True)
+        return self.generic_request("GET", "/api/v1/accounts/{account_id}/sis_imports".format(**path), data=data, params=params, all_pages=True)
 
-    def import_sis_data(self, account_id, add_sis_stickiness=None, attachment=None, batch_mode=None, batch_mode_term_id=None, clear_sis_stickiness=None, diffing_data_set_identifier=None, diffing_remaster_data_set=None, extension=None, import_type=None, override_sis_stickiness=None):
+    def import_sis_data(self, account_id, add_sis_stickiness=None, attachment=None, batch_mode=None, batch_mode_term_id=None, change_threshold=None, clear_sis_stickiness=None, diffing_data_set_identifier=None, diffing_remaster_data_set=None, extension=None, import_type=None, override_sis_stickiness=None):
         """
         Import SIS data.
 
         Import SIS data into Canvas. Must be on a root account with SIS imports
         enabled.
-
+        
         For more information on the format that's expected here, please see the
         "SIS CSV" section in the API docs.
         """
         path = {}
         data = {}
         params = {}
-        files = {}
 
         # REQUIRED - PATH - account_id
         """ID"""
@@ -77,41 +75,36 @@ class SisImportsAPI(BaseCanvasAPI):
         """There are two ways to post SIS import data - either via a
         multipart/form-data form-field-style attachment, or via a non-multipart
         raw post request.
-
+        
         'attachment' is required for multipart/form-data style posts. Assumed to
         be SIS data from a file upload form field named 'attachment'.
-
+        
         Examples:
           curl -F attachment=@<filename> -H "Authorization: Bearer <token>" \
               'https://<canvas>/api/v1/accounts/<account_id>/sis_imports.json?import_type=instructure_csv'
-
+        
         If you decide to do a raw post, you can skip the 'attachment' argument,
         but you will then be required to provide a suitable Content-Type header.
         You are encouraged to also provide the 'extension' argument.
-
+        
         Examples:
           curl -H 'Content-Type: application/octet-stream' --data-binary @<filename>.zip \
               -H "Authorization: Bearer <token>" \
               'https://<canvas>/api/v1/accounts/<account_id>/sis_imports.json?import_type=instructure_csv&extension=zip'
-
+        
           curl -H 'Content-Type: application/zip' --data-binary @<filename>.zip \
               -H "Authorization: Bearer <token>" \
               'https://<canvas>/api/v1/accounts/<account_id>/sis_imports.json?import_type=instructure_csv'
-
+        
           curl -H 'Content-Type: text/csv' --data-binary @<filename>.csv \
               -H "Authorization: Bearer <token>" \
               'https://<canvas>/api/v1/accounts/<account_id>/sis_imports.json?import_type=instructure_csv'
-
+        
           curl -H 'Content-Type: text/csv' --data-binary @<filename>.csv \
               -H "Authorization: Bearer <token>" \
               'https://<canvas>/api/v1/accounts/<account_id>/sis_imports.json?import_type=instructure_csv&batch_mode=1&batch_mode_term_id=15'"""
         if attachment is not None:
-            if type(attachment) is file:
-                files['attachment'] = (os.path.basename(attachment.name), attachment)
-            elif os.path.exists(attachment):
-                files['attachment'] = (os.path.basename(attachment), open(attachment, 'rb'))
-            else:
-                raise ValueError('The attachment must be an open file or a path to a readable file.')
+            data["attachment"] = attachment
 
         # OPTIONAL - extension
         """Recommended for raw post request style imports. This field will be used to
@@ -161,7 +154,7 @@ class SisImportsAPI(BaseCanvasAPI):
         # OPTIONAL - diffing_data_set_identifier
         """If set on a CSV import, Canvas will attempt to optimize the SIS import by
         comparing this set of CSVs to the previous set that has the same data set
-        identifier, and only appliying the difference between the two. See the
+        identifier, and only applying the difference between the two. See the
         SIS CSV Format documentation for more details."""
         if diffing_data_set_identifier is not None:
             data["diffing_data_set_identifier"] = diffing_data_set_identifier
@@ -173,8 +166,24 @@ class SisImportsAPI(BaseCanvasAPI):
         if diffing_remaster_data_set is not None:
             data["diffing_remaster_data_set"] = diffing_remaster_data_set
 
+        # OPTIONAL - change_threshold
+        """If set with batch_mode, the batch cleanup process will not run if the
+        number of items deleted is higher than the percentage set. If set to 10
+        and a term has 200 enrollments, and batch would delete more than 20 of
+        the enrollments the batch will abort before the enrollments are deleted.
+        If set with diffing, diffing  will not be performed if the files are
+        greater than the threshold as a percent. If set to 5 and the file is more
+        than 5% smaller or more than 5% larger than the file that is being
+        compared to, diffing will not be performed. If the files are less than 5%,
+        diffing will be performed. See the SIS CSV Format documentation for more
+        details.
+        If set with batch_mode and diffing, the same threshold is used for both
+        steps of the import."""
+        if change_threshold is not None:
+            data["change_threshold"] = change_threshold
+
         self.logger.debug("POST /api/v1/accounts/{account_id}/sis_imports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/sis_imports".format(**path), data=data, params=params, files=files, single_item=True)
+        return self.generic_request("POST", "/api/v1/accounts/{account_id}/sis_imports".format(**path), data=data, params=params, single_item=True)
 
     def get_sis_import_status(self, id, account_id):
         """
@@ -205,7 +214,7 @@ class SisImportsAPI(BaseCanvasAPI):
         """
         Abort SIS import.
 
-        Abort an already created but not processed or processing SIS import.
+        Abort a SIS import that has not completed.
         """
         path = {}
         data = {}
@@ -243,7 +252,7 @@ class SisImportsAPI(BaseCanvasAPI):
 class Sisimport(BaseModel):
     """Sisimport Model."""
 
-    def __init__(self, ended_at=None, diffed_against_import_id=None, workflow_state=None, batch_mode=None, created_at=None, batch_mode_term_id=None, clear_sis_stickiness=None, updated_at=None, override_sis_stickiness=None, processing_errors=None, add_sis_stickiness=None, diffing_data_set_identifier=None, processing_warnings=None, progress=None, data=None, id=None):
+    def __init__(self, ended_at=None, diffed_against_import_id=None, workflow_state=None, batch_mode=None, created_at=None, batch_mode_term_id=None, clear_sis_stickiness=None, updated_at=None, override_sis_stickiness=None, processing_errors=None, add_sis_stickiness=None, diffing_data_set_identifier=None, processing_warnings=None, progress=None, data=None, id=None, errors_attachment=None):
         """Init method for Sisimport class."""
         self._ended_at = ended_at
         self._diffed_against_import_id = diffed_against_import_id
@@ -261,6 +270,7 @@ class Sisimport(BaseModel):
         self._progress = progress
         self._data = data
         self._id = id
+        self._errors_attachment = errors_attachment
 
         self.logger = logging.getLogger('py3canvas.Sisimport')
 
@@ -445,6 +455,17 @@ class Sisimport(BaseModel):
         """Setter for id property."""
         self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
         self._id = value
+
+    @property
+    def errors_attachment(self):
+        """errors_attachment."""
+        return self._errors_attachment
+
+    @errors_attachment.setter
+    def errors_attachment(self, value):
+        """Setter for errors_attachment property."""
+        self.logger.warn("Setting values on errors_attachment will NOT update the remote Canvas instance.")
+        self._errors_attachment = value
 
 
 class Sisimportcounts(BaseModel):

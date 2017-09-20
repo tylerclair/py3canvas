@@ -4,7 +4,7 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from .base import BaseCanvasAPI
+from base import BaseCanvasAPI
 
 
 
@@ -251,7 +251,7 @@ class ExternalToolsAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/accounts/{account_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
 
-    def create_external_tool_courses(self, name, course_id, consumer_key, privacy_level, shared_secret, account_navigation_enabled=None, account_navigation_selection_height=None, account_navigation_selection_width=None, account_navigation_text=None, account_navigation_url=None, config_type=None, config_url=None, config_xml=None, course_home_sub_navigation_enabled=None, course_home_sub_navigation_icon_url=None, course_home_sub_navigation_text=None, course_home_sub_navigation_url=None, course_navigation_default=None, course_navigation_enabled=None, course_navigation_text=None, course_navigation_visibility=None, course_navigation_windowTarget=None, custom_fields_field_name=None, description=None, domain=None, editor_button_enabled=None, editor_button_icon_url=None, editor_button_message_type=None, editor_button_selection_height=None, editor_button_selection_width=None, editor_button_url=None, homework_submission_enabled=None, homework_submission_message_type=None, homework_submission_text=None, homework_submission_url=None, icon_url=None, link_selection_enabled=None, link_selection_message_type=None, link_selection_text=None, link_selection_url=None, migration_selection_enabled=None, migration_selection_message_type=None, migration_selection_url=None, not_selectable=None, oauth_compliant=None, resource_selection_enabled=None, resource_selection_icon_url=None, resource_selection_selection_height=None, resource_selection_selection_width=None, resource_selection_url=None, text=None, tool_configuration_enabled=None, tool_configuration_message_type=None, tool_configuration_url=None, url=None, user_navigation_enabled=None, user_navigation_text=None, user_navigation_url=None):
+    def create_external_tool_courses(self, name, course_id, consumer_key, privacy_level, shared_secret, account_navigation_enabled=None, account_navigation_selection_height=None, account_navigation_selection_width=None, account_navigation_text=None, account_navigation_url=None, config_type=None, config_url=None, config_xml=None, course_home_sub_navigation_enabled=None, course_home_sub_navigation_icon_url=None, course_home_sub_navigation_text=None, course_home_sub_navigation_url=None, course_navigation_default=None, course_navigation_enabled=None, course_navigation_text=None, course_navigation_visibility=None, course_navigation_windowTarget=None, custom_fields_field_name=None, description=None, domain=None, editor_button_enabled=None, editor_button_icon_url=None, editor_button_message_type=None, editor_button_selection_height=None, editor_button_selection_width=None, editor_button_url=None, homework_submission_enabled=None, homework_submission_message_type=None, homework_submission_text=None, homework_submission_url=None, icon_url=None, link_selection_enabled=None, link_selection_message_type=None, link_selection_text=None, link_selection_url=None, migration_selection_enabled=None, migration_selection_message_type=None, migration_selection_url=None, not_selectable=None, oauth_compliant=None, resource_selection_enabled=None, resource_selection_icon_url=None, resource_selection_selection_height=None, resource_selection_selection_width=None, resource_selection_url=None, text=None, tool_configuration_enabled=None, tool_configuration_message_type=None, tool_configuration_prefer_sis_email=None, tool_configuration_url=None, url=None, user_navigation_enabled=None, user_navigation_text=None, user_navigation_url=None):
         """
         Create an external tool.
 
@@ -512,6 +512,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if tool_configuration_message_type is not None:
             data["tool_configuration[message_type]"] = tool_configuration_message_type
 
+        # OPTIONAL - tool_configuration[prefer_sis_email]
+        """Set this to default the lis_person_contact_email_primary to prefer
+        provisioned sis_email; otherwise, omit"""
+        if tool_configuration_prefer_sis_email is not None:
+            data["tool_configuration[prefer_sis_email]"] = tool_configuration_prefer_sis_email
+
         # OPTIONAL - resource_selection[url]
         """The url of the external tool"""
         if resource_selection_url is not None:
@@ -548,14 +554,14 @@ class ExternalToolsAPI(BaseCanvasAPI):
 
         # OPTIONAL - config_xml
         """XML tool configuration, as specified in the CC xml specification. This is
-        required if "config_type" is set to 'by_xml'"""
+        required if "config_type" is set to "by_xml""""
         if config_xml is not None:
             data["config_xml"] = config_xml
 
         # OPTIONAL - config_url
         """URL where the server can retrieve an XML tool configuration, as specified
         in the CC xml specification. This is required if "config_type" is set to
-        'by_url'"""
+        "by_url""""
         if config_url is not None:
             data["config_url"] = config_url
 
@@ -574,7 +580,7 @@ class ExternalToolsAPI(BaseCanvasAPI):
         self.logger.debug("POST /api/v1/courses/{course_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/courses/{course_id}/external_tools".format(**path), data=data, params=params, no_data=True)
 
-    def create_external_tool_accounts(self, name, account_id, consumer_key, privacy_level, shared_secret, account_navigation_enabled=None, account_navigation_selection_height=None, account_navigation_selection_width=None, account_navigation_text=None, account_navigation_url=None, config_type=None, config_url=None, config_xml=None, course_home_sub_navigation_enabled=None, course_home_sub_navigation_icon_url=None, course_home_sub_navigation_text=None, course_home_sub_navigation_url=None, course_navigation_default=None, course_navigation_enabled=None, course_navigation_text=None, course_navigation_visibility=None, course_navigation_windowTarget=None, custom_fields_field_name=None, description=None, domain=None, editor_button_enabled=None, editor_button_icon_url=None, editor_button_message_type=None, editor_button_selection_height=None, editor_button_selection_width=None, editor_button_url=None, homework_submission_enabled=None, homework_submission_message_type=None, homework_submission_text=None, homework_submission_url=None, icon_url=None, link_selection_enabled=None, link_selection_message_type=None, link_selection_text=None, link_selection_url=None, migration_selection_enabled=None, migration_selection_message_type=None, migration_selection_url=None, not_selectable=None, oauth_compliant=None, resource_selection_enabled=None, resource_selection_icon_url=None, resource_selection_selection_height=None, resource_selection_selection_width=None, resource_selection_url=None, text=None, tool_configuration_enabled=None, tool_configuration_message_type=None, tool_configuration_url=None, url=None, user_navigation_enabled=None, user_navigation_text=None, user_navigation_url=None):
+    def create_external_tool_accounts(self, name, account_id, consumer_key, privacy_level, shared_secret, account_navigation_enabled=None, account_navigation_selection_height=None, account_navigation_selection_width=None, account_navigation_text=None, account_navigation_url=None, config_type=None, config_url=None, config_xml=None, course_home_sub_navigation_enabled=None, course_home_sub_navigation_icon_url=None, course_home_sub_navigation_text=None, course_home_sub_navigation_url=None, course_navigation_default=None, course_navigation_enabled=None, course_navigation_text=None, course_navigation_visibility=None, course_navigation_windowTarget=None, custom_fields_field_name=None, description=None, domain=None, editor_button_enabled=None, editor_button_icon_url=None, editor_button_message_type=None, editor_button_selection_height=None, editor_button_selection_width=None, editor_button_url=None, homework_submission_enabled=None, homework_submission_message_type=None, homework_submission_text=None, homework_submission_url=None, icon_url=None, link_selection_enabled=None, link_selection_message_type=None, link_selection_text=None, link_selection_url=None, migration_selection_enabled=None, migration_selection_message_type=None, migration_selection_url=None, not_selectable=None, oauth_compliant=None, resource_selection_enabled=None, resource_selection_icon_url=None, resource_selection_selection_height=None, resource_selection_selection_width=None, resource_selection_url=None, text=None, tool_configuration_enabled=None, tool_configuration_message_type=None, tool_configuration_prefer_sis_email=None, tool_configuration_url=None, url=None, user_navigation_enabled=None, user_navigation_text=None, user_navigation_url=None):
         """
         Create an external tool.
 
@@ -835,6 +841,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if tool_configuration_message_type is not None:
             data["tool_configuration[message_type]"] = tool_configuration_message_type
 
+        # OPTIONAL - tool_configuration[prefer_sis_email]
+        """Set this to default the lis_person_contact_email_primary to prefer
+        provisioned sis_email; otherwise, omit"""
+        if tool_configuration_prefer_sis_email is not None:
+            data["tool_configuration[prefer_sis_email]"] = tool_configuration_prefer_sis_email
+
         # OPTIONAL - resource_selection[url]
         """The url of the external tool"""
         if resource_selection_url is not None:
@@ -871,14 +883,14 @@ class ExternalToolsAPI(BaseCanvasAPI):
 
         # OPTIONAL - config_xml
         """XML tool configuration, as specified in the CC xml specification. This is
-        required if "config_type" is set to 'by_xml'"""
+        required if "config_type" is set to "by_xml""""
         if config_xml is not None:
             data["config_xml"] = config_xml
 
         # OPTIONAL - config_url
         """URL where the server can retrieve an XML tool configuration, as specified
         in the CC xml specification. This is required if "config_type" is set to
-        'by_url'"""
+        "by_url""""
         if config_url is not None:
             data["config_url"] = config_url
 

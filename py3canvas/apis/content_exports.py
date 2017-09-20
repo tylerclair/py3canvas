@@ -314,7 +314,7 @@ class Contentexport(BaseModel):
 
     @property
     def attachment(self):
-        """attachment api object for the export package (not present until the export completes)."""
+        """attachment api object for the export package (not present before the export completes or after it becomes unavailable for download.)."""
         return self._attachment
 
     @attachment.setter

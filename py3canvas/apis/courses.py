@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from .base import BaseCanvasAPI
-from .base import BaseModel
+from base import BaseCanvasAPI
+from base import BaseModel
 
 
 class CoursesAPI(BaseCanvasAPI):
@@ -16,7 +16,7 @@ class CoursesAPI(BaseCanvasAPI):
         super(CoursesAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.CoursesAPI")
 
-    def list_your_courses(self, enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, include=None, state=None):
+    def list_your_courses(self, enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, exclude_blueprint_courses=None, include=None, state=None):
         """
         List your courses.
 
@@ -60,6 +60,11 @@ class CoursesAPI(BaseCanvasAPI):
             self._validate_enum(enrollment_state, ["active", "invited_or_pending", "completed"])
             params["enrollment_state"] = enrollment_state
 
+        # OPTIONAL - exclude_blueprint_courses
+        """When set, only return courses that are not configured as blueprint courses."""
+        if exclude_blueprint_courses is not None:
+            params["exclude_blueprint_courses"] = exclude_blueprint_courses
+
         # OPTIONAL - include
         """- "needs_grading_count": Optional information to include with each Course.
           When needs_grading_count is given, and the current user has grading
@@ -80,14 +85,14 @@ class CoursesAPI(BaseCanvasAPI):
         - "current_grading_period_scores": Optional information to include with
           each Course. When current_grading_period_scores is given and total_scores
           is given, any student enrollments will also include the fields
-          'multiple_grading_periods_enabled',
+          'has_grading_periods',
           'totals_for_all_grading_periods_option', 'current_grading_period_title',
           'current_grading_period_id', current_period_computed_current_score',
           'current_period_computed_final_score',
           'current_period_computed_current_grade', and
           'current_period_computed_final_grade' (see Enrollment documentation for
           more information on these fields). In addition, when this argument is
-          passed, the course will have a 'multiple_grading_periods_enabled' attribute
+          passed, the course will have a 'has_grading_periods' attribute
           on it. This argument is ignored if the course is configured to hide final
           grades or if the total_scores argument is not included.
         - "term": Optional information to include with each Course. When
@@ -123,10 +128,12 @@ class CoursesAPI(BaseCanvasAPI):
           observer enrollment.
         - "tabs": Optional information to include with each Course.
           Will include the list of tabs configured for each course.  See the
-          {api:TabsController#index List available tabs API} for more information."""
+          {api:TabsController#index List available tabs API} for more information.
+        - "course_image": Optional course image data for when there is a course image
+          and the course image feature flag has been enabled"""
         if include is not None:
-            self._validate_enum(include, ["needs_grading_count", "syllabus_body", "public_description", "total_scores", "current_grading_period_scores", "term", "course_progress", "sections", "storage_quota_used_mb", "total_students", "passback_status", "favorites", "teachers", "observed_users"])
-            params["include[]"] = include
+            self._validate_enum(include, ["needs_grading_count", "syllabus_body", "public_description", "total_scores", "current_grading_period_scores", "term", "course_progress", "sections", "storage_quota_used_mb", "total_students", "passback_status", "favorites", "teachers", "observed_users", "course_image"])
+            params["include"] = include
 
         # OPTIONAL - state
         """If set, only return courses that are in the given state(s).
@@ -173,14 +180,14 @@ class CoursesAPI(BaseCanvasAPI):
         - "current_grading_period_scores": Optional information to include with
           each Course. When current_grading_period_scores is given and total_scores
           is given, any student enrollments will also include the fields
-          'multiple_grading_periods_enabled',
+          'has_grading_periods',
           'totals_for_all_grading_periods_option', 'current_grading_period_title',
           'current_grading_period_id', current_period_computed_current_score',
           'current_period_computed_final_score',
           'current_period_computed_current_grade', and
           'current_period_computed_final_grade' (see Enrollment documentation for
           more information on these fields). In addition, when this argument is
-          passed, the course will have a 'multiple_grading_periods_enabled' attribute
+          passed, the course will have a 'has_grading_periods' attribute
           on it. This argument is ignored if the course is configured to hide final
           grades or if the total_scores argument is not included.
         - "term": Optional information to include with each Course. When
@@ -216,10 +223,12 @@ class CoursesAPI(BaseCanvasAPI):
           observer enrollment.
         - "tabs": Optional information to include with each Course.
           Will include the list of tabs configured for each course.  See the
-          {api:TabsController#index List available tabs API} for more information."""
+          {api:TabsController#index List available tabs API} for more information.
+        - "course_image": Optional course image data for when there is a course image
+          and the course image feature flag has been enabled"""
         if include is not None:
-            self._validate_enum(include, ["needs_grading_count", "syllabus_body", "public_description", "total_scores", "current_grading_period_scores", "term", "course_progress", "sections", "storage_quota_used_mb", "total_students", "passback_status", "favorites", "teachers", "observed_users"])
-            params["include[]"] = include
+            self._validate_enum(include, ["needs_grading_count", "syllabus_body", "public_description", "total_scores", "current_grading_period_scores", "term", "course_progress", "sections", "storage_quota_used_mb", "total_students", "passback_status", "favorites", "teachers", "observed_users", "course_image"])
+            params["include"] = include
 
         # OPTIONAL - state
         """If set, only return courses that are in the given state(s).
@@ -255,7 +264,7 @@ class CoursesAPI(BaseCanvasAPI):
 
         # OPTIONAL - course[name]
         """The name of the course. If omitted, the course will be named "Unnamed
-        Course." """
+        Course.""""
         if course_name is not None:
             data["course[name]"] = course_name
 
@@ -267,11 +276,19 @@ class CoursesAPI(BaseCanvasAPI):
         # OPTIONAL - course[start_at]
         """Course start date in ISO8601 format, e.g. 2011-01-01T01:00Z"""
         if course_start_at is not None:
+            if issubclass(course_start_at.__class__, basestring):
+                course_start_at = self._validate_iso8601_string(course_start_at)
+            elif issubclass(course_start_at.__class__, date) or issubclass(course_start_at.__class__, datetime):
+                course_start_at = course_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["course[start_at]"] = course_start_at
 
         # OPTIONAL - course[end_at]
         """Course end date in ISO8601 format. e.g. 2011-01-01T01:00Z"""
         if course_end_at is not None:
+            if issubclass(course_end_at.__class__, basestring):
+                course_end_at = self._validate_iso8601_string(course_end_at)
+            elif issubclass(course_end_at.__class__, date) or issubclass(course_end_at.__class__, datetime):
+                course_end_at = course_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["course[end_at]"] = course_end_at
 
         # OPTIONAL - course[license]
@@ -514,10 +531,16 @@ class CoursesAPI(BaseCanvasAPI):
         - "test_student": Optionally include the course's Test Student,
         if present. Default is to not include Test Student.
         - "custom_links": Optionally include plugin-supplied custom links for each student,
-        such as analytics information"""
+        such as analytics information
+        - "current_grading_period_scores": if enrollments is included as
+        well as this directive, the scores returned in the enrollment
+        will be for the current grading period if there is one. A
+        'grading_period_id' value will also be included with the
+        scores. if grading_period_id is nil there is no current grading
+        period and the score is a total score."""
         if include is not None:
-            self._validate_enum(include, ["email", "enrollments", "locked", "avatar_url", "test_student", "bio", "custom_links"])
-            params["include[]"] = include
+            self._validate_enum(include, ["email", "enrollments", "locked", "avatar_url", "test_student", "bio", "custom_links", "current_grading_period_scores"])
+            params["include"] = include
 
         # OPTIONAL - user_id
         """If this parameter is given and it corresponds to a user in the course,
@@ -602,10 +625,16 @@ class CoursesAPI(BaseCanvasAPI):
         - "test_student": Optionally include the course's Test Student,
         if present. Default is to not include Test Student.
         - "custom_links": Optionally include plugin-supplied custom links for each student,
-        such as analytics information"""
+        such as analytics information
+        - "current_grading_period_scores": if enrollments is included as
+        well as this directive, the scores returned in the enrollment
+        will be for the current grading period if there is one. A
+        'grading_period_id' value will also be included with the
+        scores. if grading_period_id is nil there is no current grading
+        period and the score is a total score."""
         if include is not None:
-            self._validate_enum(include, ["email", "enrollments", "locked", "avatar_url", "test_student", "bio", "custom_links"])
-            params["include[]"] = include
+            self._validate_enum(include, ["email", "enrollments", "locked", "avatar_url", "test_student", "bio", "custom_links", "current_grading_period_scores"])
+            params["include"] = include
 
         # OPTIONAL - user_id
         """If this parameter is given and it corresponds to a user in the course,
@@ -887,9 +916,11 @@ class CoursesAPI(BaseCanvasAPI):
         """- "all_courses": Also search recently deleted courses.
         - "permissions": Include permissions the current user has
           for the course.
-        - "observed_users": include observed users in the enrollments"""
+        - "observed_users": include observed users in the enrollments
+        - "course_image": Optional course image data for when there is a course image
+          and the course image feature flag has been enabled"""
         if include is not None:
-            self._validate_enum(include, ["needs_grading_count", "syllabus_body", "public_description", "total_scores", "current_grading_period_scores", "term", "course_progress", "sections", "storage_quota_used_mb", "total_students", "passback_status", "favorites", "teachers", "observed_users", "all_courses", "permissions", "observed_users"])
+            self._validate_enum(include, ["needs_grading_count", "syllabus_body", "public_description", "total_scores", "current_grading_period_scores", "term", "course_progress", "sections", "storage_quota_used_mb", "total_students", "passback_status", "favorites", "teachers", "observed_users", "all_courses", "permissions", "observed_users", "course_image"])
             params["include"] = include
 
         self.logger.debug("GET /api/v1/courses/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
@@ -919,15 +950,17 @@ class CoursesAPI(BaseCanvasAPI):
         """- "all_courses": Also search recently deleted courses.
         - "permissions": Include permissions the current user has
           for the course.
-        - "observed_users": include observed users in the enrollments"""
+        - "observed_users": include observed users in the enrollments
+        - "course_image": Optional course image data for when there is a course image
+          and the course image feature flag has been enabled"""
         if include is not None:
-            self._validate_enum(include, ["needs_grading_count", "syllabus_body", "public_description", "total_scores", "current_grading_period_scores", "term", "course_progress", "sections", "storage_quota_used_mb", "total_students", "passback_status", "favorites", "teachers", "observed_users", "all_courses", "permissions", "observed_users"])
-            params["include[]"] = include
+            self._validate_enum(include, ["needs_grading_count", "syllabus_body", "public_description", "total_scores", "current_grading_period_scores", "term", "course_progress", "sections", "storage_quota_used_mb", "total_students", "passback_status", "favorites", "teachers", "observed_users", "all_courses", "permissions", "observed_users", "course_image"])
+            params["include"] = include
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/courses/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/courses/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def update_course(self, id, course_account_id=None, course_allow_student_forum_attachments=None, course_allow_student_wiki_edits=None, course_allow_wiki_comments=None, course_apply_assignment_group_weights=None, course_course_code=None, course_course_format=None, course_end_at=None, course_event=None, course_grading_standard_id=None, course_hide_final_grades=None, course_image_id=None, course_image_url=None, course_integration_id=None, course_is_public=None, course_is_public_to_auth_users=None, course_license=None, course_name=None, course_open_enrollment=None, course_public_description=None, course_public_syllabus=None, course_public_syllabus_to_auth=None, course_remove_image=None, course_restrict_enrollments_to_course_dates=None, course_self_enrollment=None, course_sis_course_id=None, course_start_at=None, course_storage_quota_mb=None, course_syllabus_body=None, course_term_id=None, course_time_zone=None, offer=None):
+    def update_course(self, id, course_account_id=None, course_allow_student_forum_attachments=None, course_allow_student_wiki_edits=None, course_allow_wiki_comments=None, course_apply_assignment_group_weights=None, course_blueprint=None, course_blueprint_restrictions=None, course_blueprint_restrictions_by_object_type=None, course_course_code=None, course_course_format=None, course_end_at=None, course_event=None, course_grading_standard_id=None, course_hide_final_grades=None, course_image_id=None, course_image_url=None, course_integration_id=None, course_is_public=None, course_is_public_to_auth_users=None, course_license=None, course_name=None, course_open_enrollment=None, course_public_description=None, course_public_syllabus=None, course_public_syllabus_to_auth=None, course_remove_image=None, course_restrict_enrollments_to_course_dates=None, course_self_enrollment=None, course_sis_course_id=None, course_start_at=None, course_storage_quota_mb=None, course_syllabus_body=None, course_term_id=None, course_time_zone=None, course_use_blueprint_restrictions_by_object_type=None, offer=None):
         """
         Update a course.
 
@@ -953,7 +986,7 @@ class CoursesAPI(BaseCanvasAPI):
 
         # OPTIONAL - course[name]
         """The name of the course. If omitted, the course will be named "Unnamed
-        Course." """
+        Course.""""
         if course_name is not None:
             data["course[name]"] = course_name
 
@@ -965,11 +998,19 @@ class CoursesAPI(BaseCanvasAPI):
         # OPTIONAL - course[start_at]
         """Course start date in ISO8601 format, e.g. 2011-01-01T01:00Z"""
         if course_start_at is not None:
+            if issubclass(course_start_at.__class__, basestring):
+                course_start_at = self._validate_iso8601_string(course_start_at)
+            elif issubclass(course_start_at.__class__, date) or issubclass(course_start_at.__class__, datetime):
+                course_start_at = course_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["course[start_at]"] = course_start_at
 
         # OPTIONAL - course[end_at]
         """Course end date in ISO8601 format. e.g. 2011-01-01T01:00Z"""
         if course_end_at is not None:
+            if issubclass(course_end_at.__class__, basestring):
+                course_end_at = self._validate_iso8601_string(course_end_at)
+            elif issubclass(course_end_at.__class__, date) or issubclass(course_end_at.__class__, datetime):
+                course_end_at = course_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["course[end_at]"] = course_end_at
 
         # OPTIONAL - course[license]
@@ -1139,6 +1180,33 @@ class CoursesAPI(BaseCanvasAPI):
         if course_remove_image is not None:
             data["course[remove_image]"] = course_remove_image
 
+        # OPTIONAL - course[blueprint]
+        """Sets the course as a blueprint course. NOTE: The Blueprint Courses feature is in beta"""
+        if course_blueprint is not None:
+            data["course[blueprint]"] = course_blueprint
+
+        # OPTIONAL - course[blueprint_restrictions]
+        """Sets a default set to apply to blueprint course objects when restricted,
+        unless _use_blueprint_restrictions_by_object_type_ is enabled.
+        See the {api:Blueprint_Courses:BlueprintRestriction Blueprint Restriction} documentation"""
+        if course_blueprint_restrictions is not None:
+            data["course[blueprint_restrictions]"] = course_blueprint_restrictions
+
+        # OPTIONAL - course[use_blueprint_restrictions_by_object_type]
+        """When enabled, the _blueprint_restrictions_ parameter will be ignored in favor of
+        the _blueprint_restrictions_by_object_type_ parameter"""
+        if course_use_blueprint_restrictions_by_object_type is not None:
+            data["course[use_blueprint_restrictions_by_object_type]"] = course_use_blueprint_restrictions_by_object_type
+
+        # OPTIONAL - course[blueprint_restrictions_by_object_type]
+        """Allows setting multiple {api:Blueprint_Courses:BlueprintRestriction Blueprint Restriction}
+        to apply to blueprint course objects of the matching type when restricted.
+        The possible object types are "assignment", "attachment", "discussion_topic", "quiz" and "wiki_page".
+        Example usage:
+          course[blueprint_restrictions_by_object_type][assignment][content]=1"""
+        if course_blueprint_restrictions_by_object_type is not None:
+            data["course[blueprint_restrictions_by_object_type]"] = course_blueprint_restrictions_by_object_type
+
         self.logger.debug("PUT /api/v1/courses/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/courses/{id}".format(**path), data=data, params=params, no_data=True)
 
@@ -1202,9 +1270,9 @@ class CoursesAPI(BaseCanvasAPI):
         Get effective due dates.
 
         For each assignment in the course, returns each assigned student's ID
-        and their corresponding due date along with some Multiple Grading Periods
-        data. Returns a collection with keys representing assignment IDs and values
-        as a collection containing keys representing student IDs and values representing
+        and their corresponding due date along with some grading period data.
+        Returns a collection with keys representing assignment IDs and values as a
+        collection containing keys representing student IDs and values representing
         the student's effective due_at, the grading_period_id of which the due_at falls
         in, and whether or not the grading period is closed (in_closed_grading_period)
         
@@ -1272,7 +1340,7 @@ class CoursesAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/courses/{course_id}/course_copy/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/course_copy/{id}".format(**path), data=data, params=params, no_data=True)
 
-    def copy_course_content(self, course_id, exclude=None, only=None, source_course=None):
+    def copy_course_content(self, course_id, except=None, only=None, source_course=None):
         """
         Copy course content.
 
@@ -1300,9 +1368,9 @@ class CoursesAPI(BaseCanvasAPI):
         # OPTIONAL - except
         """A list of the course content types to exclude, all areas not listed will
         be copied."""
-        if exclude is not None:
-            self._validate_enum(exclude, ["course_settings", "assignments", "external_tools", "files", "topics", "calendar_events", "quizzes", "wiki_pages", "modules", "outcomes"])
-            data["except"] = exclude
+        if except is not None:
+            self._validate_enum(except, ["course_settings", "assignments", "external_tools", "files", "topics", "calendar_events", "quizzes", "wiki_pages", "modules", "outcomes"])
+            data["except"] = except
 
         # OPTIONAL - only
         """A list of the course content types to copy, all areas not listed will not
@@ -1318,9 +1386,10 @@ class CoursesAPI(BaseCanvasAPI):
 class Course(BaseModel):
     """Course Model."""
 
-    def __init__(self, open_enrollment=None, storage_quota_used_mb=None, is_public=None, calendar=None, allow_wiki_comments=None, id=None, public_syllabus_to_auth=None, default_view=None, is_public_to_auth_users=None, access_restricted_by_date=None, root_account_id=None, end_at=None, storage_quota_mb=None, self_enrollment=None, syllabus_body=None, start_at=None, account_id=None, workflow_state=None, public_syllabus=None, grading_standard_id=None, apply_assignment_group_weights=None, enrollment_term_id=None, course_format=None, enrollments=None, needs_grading_count=None, permissions=None, integration_id=None, term=None, name=None, license=None, allow_student_forum_attachments=None, restrict_enrollments_to_course_dates=None, time_zone=None, hide_final_grades=None, allow_student_assignment_edits=None, sis_course_id=None, course_progress=None, public_description=None, course_code=None, total_students=None):
+    def __init__(self, open_enrollment=None, locale=None, storage_quota_used_mb=None, is_public=None, calendar=None, allow_wiki_comments=None, id=None, public_syllabus_to_auth=None, default_view=None, is_public_to_auth_users=None, access_restricted_by_date=None, uuid=None, root_account_id=None, end_at=None, storage_quota_mb=None, self_enrollment=None, permissions=None, start_at=None, account_id=None, workflow_state=None, public_syllabus=None, grading_standard_id=None, apply_assignment_group_weights=None, enrollment_term_id=None, course_format=None, enrollments=None, needs_grading_count=None, syllabus_body=None, integration_id=None, term=None, name=None, license=None, allow_student_forum_attachments=None, restrict_enrollments_to_course_dates=None, time_zone=None, hide_final_grades=None, allow_student_assignment_edits=None, sis_course_id=None, course_progress=None, public_description=None, course_code=None, total_students=None):
         """Init method for Course class."""
         self._open_enrollment = open_enrollment
+        self._locale = locale
         self._storage_quota_used_mb = storage_quota_used_mb
         self._is_public = is_public
         self._calendar = calendar
@@ -1330,11 +1399,12 @@ class Course(BaseModel):
         self._default_view = default_view
         self._is_public_to_auth_users = is_public_to_auth_users
         self._access_restricted_by_date = access_restricted_by_date
+        self._uuid = uuid
         self._root_account_id = root_account_id
         self._end_at = end_at
         self._storage_quota_mb = storage_quota_mb
         self._self_enrollment = self_enrollment
-        self._syllabus_body = syllabus_body
+        self._permissions = permissions
         self._start_at = start_at
         self._account_id = account_id
         self._workflow_state = workflow_state
@@ -1345,7 +1415,7 @@ class Course(BaseModel):
         self._course_format = course_format
         self._enrollments = enrollments
         self._needs_grading_count = needs_grading_count
-        self._permissions = permissions
+        self._syllabus_body = syllabus_body
         self._integration_id = integration_id
         self._term = term
         self._name = name
@@ -1373,6 +1443,17 @@ class Course(BaseModel):
         """Setter for open_enrollment property."""
         self.logger.warn("Setting values on open_enrollment will NOT update the remote Canvas instance.")
         self._open_enrollment = value
+
+    @property
+    def locale(self):
+        """the course-set locale, if applicable."""
+        return self._locale
+
+    @locale.setter
+    def locale(self, value):
+        """Setter for locale property."""
+        self.logger.warn("Setting values on locale will NOT update the remote Canvas instance.")
+        self._locale = value
 
     @property
     def storage_quota_used_mb(self):
@@ -1474,6 +1555,17 @@ class Course(BaseModel):
         self._access_restricted_by_date = value
 
     @property
+    def uuid(self):
+        """the UUID of the course."""
+        return self._uuid
+
+    @uuid.setter
+    def uuid(self, value):
+        """Setter for uuid property."""
+        self.logger.warn("Setting values on uuid will NOT update the remote Canvas instance.")
+        self._uuid = value
+
+    @property
     def root_account_id(self):
         """the root account associated with the course."""
         return self._root_account_id
@@ -1518,15 +1610,15 @@ class Course(BaseModel):
         self._self_enrollment = value
 
     @property
-    def syllabus_body(self):
-        """optional: user-generated HTML for the course syllabus."""
-        return self._syllabus_body
+    def permissions(self):
+        """optional: the permissions the user has for the course. returned only for a single course and include[]=permissions."""
+        return self._permissions
 
-    @syllabus_body.setter
-    def syllabus_body(self, value):
-        """Setter for syllabus_body property."""
-        self.logger.warn("Setting values on syllabus_body will NOT update the remote Canvas instance.")
-        self._syllabus_body = value
+    @permissions.setter
+    def permissions(self, value):
+        """Setter for permissions property."""
+        self.logger.warn("Setting values on permissions will NOT update the remote Canvas instance.")
+        self._permissions = value
 
     @property
     def start_at(self):
@@ -1639,15 +1731,15 @@ class Course(BaseModel):
         self._needs_grading_count = value
 
     @property
-    def permissions(self):
-        """optional: the permissions the user has for the course. returned only for a single course and include[]=permissions."""
-        return self._permissions
+    def syllabus_body(self):
+        """optional: user-generated HTML for the course syllabus."""
+        return self._syllabus_body
 
-    @permissions.setter
-    def permissions(self, value):
-        """Setter for permissions property."""
-        self.logger.warn("Setting values on permissions will NOT update the remote Canvas instance.")
-        self._permissions = value
+    @syllabus_body.setter
+    def syllabus_body(self, value):
+        """Setter for syllabus_body property."""
+        self.logger.warn("Setting values on syllabus_body will NOT update the remote Canvas instance.")
+        self._syllabus_body = value
 
     @property
     def integration_id(self):

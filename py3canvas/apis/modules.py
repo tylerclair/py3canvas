@@ -123,6 +123,10 @@ class ModulesAPI(BaseCanvasAPI):
         # OPTIONAL - module[unlock_at]
         """The date the module will unlock"""
         if module_unlock_at is not None:
+            if issubclass(module_unlock_at.__class__, str):
+                module_unlock_at = self._validate_iso8601_string(module_unlock_at)
+            elif issubclass(module_unlock_at.__class__, date) or issubclass(module_unlock_at.__class__, datetime):
+                module_unlock_at = module_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["module[unlock_at]"] = module_unlock_at
 
         # OPTIONAL - module[position]
@@ -177,6 +181,10 @@ class ModulesAPI(BaseCanvasAPI):
         # OPTIONAL - module[unlock_at]
         """The date the module will unlock"""
         if module_unlock_at is not None:
+            if issubclass(module_unlock_at.__class__, str):
+                module_unlock_at = self._validate_iso8601_string(module_unlock_at)
+            elif issubclass(module_unlock_at.__class__, date) or issubclass(module_unlock_at.__class__, datetime):
+                module_unlock_at = module_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["module[unlock_at]"] = module_unlock_at
 
         # OPTIONAL - module[position]

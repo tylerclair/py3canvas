@@ -114,11 +114,19 @@ class AccountNotificationsAPI(BaseCanvasAPI):
         # REQUIRED - account_notification[start_at]
         """The start date and time of the notification in ISO8601 format.
         e.g. 2014-01-01T01:00Z"""
+        if issubclass(account_notification_start_at.__class__, str):
+            account_notification_start_at = self._validate_iso8601_string(account_notification_start_at)
+        elif issubclass(account_notification_start_at.__class__, date) or issubclass(account_notification_start_at.__class__, datetime):
+            account_notification_start_at = account_notification_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
         data["account_notification[start_at]"] = account_notification_start_at
 
         # REQUIRED - account_notification[end_at]
         """The end date and time of the notification in ISO8601 format.
         e.g. 2014-01-01T01:00Z"""
+        if issubclass(account_notification_end_at.__class__, str):
+            account_notification_end_at = self._validate_iso8601_string(account_notification_end_at)
+        elif issubclass(account_notification_end_at.__class__, date) or issubclass(account_notification_end_at.__class__, datetime):
+            account_notification_end_at = account_notification_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
         data["account_notification[end_at]"] = account_notification_end_at
 
         # OPTIONAL - account_notification[icon]
@@ -170,12 +178,20 @@ class AccountNotificationsAPI(BaseCanvasAPI):
         """The start date and time of the notification in ISO8601 format.
         e.g. 2014-01-01T01:00Z"""
         if account_notification_start_at is not None:
+            if issubclass(account_notification_start_at.__class__, str):
+                account_notification_start_at = self._validate_iso8601_string(account_notification_start_at)
+            elif issubclass(account_notification_start_at.__class__, date) or issubclass(account_notification_start_at.__class__, datetime):
+                account_notification_start_at = account_notification_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["account_notification[start_at]"] = account_notification_start_at
 
         # OPTIONAL - account_notification[end_at]
         """The end date and time of the notification in ISO8601 format.
         e.g. 2014-01-01T01:00Z"""
         if account_notification_end_at is not None:
+            if issubclass(account_notification_end_at.__class__, str):
+                account_notification_end_at = self._validate_iso8601_string(account_notification_end_at)
+            elif issubclass(account_notification_end_at.__class__, date) or issubclass(account_notification_end_at.__class__, datetime):
+                account_notification_end_at = account_notification_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["account_notification[end_at]"] = account_notification_end_at
 
         # OPTIONAL - account_notification[icon]

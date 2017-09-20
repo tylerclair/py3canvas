@@ -134,11 +134,13 @@ class AccountReportsAPI(BaseCanvasAPI):
 class Report(BaseModel):
     """Report Model."""
 
-    def __init__(self, status=None, parameters=None, file_url=None, report=None, progress=None, id=None):
+    def __init__(self, status=None, current_line=None, parameters=None, file_url=None, attachment=None, report=None, progress=None, id=None):
         """Init method for Report class."""
         self._status = status
+        self._current_line = current_line
         self._parameters = parameters
         self._file_url = file_url
+        self._attachment = attachment
         self._report = report
         self._progress = progress
         self._id = id
@@ -155,6 +157,17 @@ class Report(BaseModel):
         """Setter for status property."""
         self.logger.warn("Setting values on status will NOT update the remote Canvas instance.")
         self._status = value
+
+    @property
+    def current_line(self):
+        """This is the current line count being written to the report. It updates every 1000 records."""
+        return self._current_line
+
+    @current_line.setter
+    def current_line(self, value):
+        """Setter for current_line property."""
+        self.logger.warn("Setting values on current_line will NOT update the remote Canvas instance.")
+        self._current_line = value
 
     @property
     def parameters(self):
@@ -177,6 +190,17 @@ class Report(BaseModel):
         """Setter for file_url property."""
         self.logger.warn("Setting values on file_url will NOT update the remote Canvas instance.")
         self._file_url = value
+
+    @property
+    def attachment(self):
+        """attachment."""
+        return self._attachment
+
+    @attachment.setter
+    def attachment(self, value):
+        """Setter for attachment property."""
+        self.logger.warn("Setting values on attachment will NOT update the remote Canvas instance.")
+        self._attachment = value
 
     @property
     def report(self):

@@ -41,7 +41,7 @@ class SectionsAPI(BaseCanvasAPI):
         - "passback_status": Include the grade passback status."""
         if include is not None:
             self._validate_enum(include, ["students", "avatar_url", "enrollments", "total_students", "passback_status"])
-            params["include[]"] = include
+            params["include"] = include
 
         self.logger.debug("GET /api/v1/courses/{course_id}/sections with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/sections".format(**path), data=data, params=params, all_pages=True)
@@ -73,11 +73,19 @@ class SectionsAPI(BaseCanvasAPI):
         # OPTIONAL - course_section[start_at]
         """Section start date in ISO8601 format, e.g. 2011-01-01T01:00Z"""
         if course_section_start_at is not None:
+            if issubclass(course_section_start_at.__class__, str):
+                course_section_start_at = self._validate_iso8601_string(course_section_start_at)
+            elif issubclass(course_section_start_at.__class__, date) or issubclass(course_section_start_at.__class__, datetime):
+                course_section_start_at = course_section_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["course_section[start_at]"] = course_section_start_at
 
         # OPTIONAL - course_section[end_at]
         """Section end date in ISO8601 format. e.g. 2011-01-01T01:00Z"""
         if course_section_end_at is not None:
+            if issubclass(course_section_end_at.__class__, str):
+                course_section_end_at = self._validate_iso8601_string(course_section_end_at)
+            elif issubclass(course_section_end_at.__class__, date) or issubclass(course_section_end_at.__class__, datetime):
+                course_section_end_at = course_section_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["course_section[end_at]"] = course_section_end_at
 
         # OPTIONAL - course_section[restrict_enrollments_to_section_dates]
@@ -159,11 +167,19 @@ class SectionsAPI(BaseCanvasAPI):
         # OPTIONAL - course_section[start_at]
         """Section start date in ISO8601 format, e.g. 2011-01-01T01:00Z"""
         if course_section_start_at is not None:
+            if issubclass(course_section_start_at.__class__, str):
+                course_section_start_at = self._validate_iso8601_string(course_section_start_at)
+            elif issubclass(course_section_start_at.__class__, date) or issubclass(course_section_start_at.__class__, datetime):
+                course_section_start_at = course_section_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["course_section[start_at]"] = course_section_start_at
 
         # OPTIONAL - course_section[end_at]
         """Section end date in ISO8601 format. e.g. 2011-01-01T01:00Z"""
         if course_section_end_at is not None:
+            if issubclass(course_section_end_at.__class__, str):
+                course_section_end_at = self._validate_iso8601_string(course_section_end_at)
+            elif issubclass(course_section_end_at.__class__, date) or issubclass(course_section_end_at.__class__, datetime):
+                course_section_end_at = course_section_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["course_section[end_at]"] = course_section_end_at
 
         # OPTIONAL - course_section[restrict_enrollments_to_section_dates]
@@ -259,7 +275,7 @@ class SectionsAPI(BaseCanvasAPI):
 class Section(BaseModel):
     """Section Model."""
 
-    def __init__(self, integration_id=None, start_at=None, name=None, sis_course_id=None, end_at=None, sis_import_id=None, sis_section_id=None, course_id=None, nonxlist_course_id=None, total_students=None, id=None):
+    def __init__(self, integration_id=None, start_at=None, name=None, sis_course_id=None, end_at=None, sis_import_id=None, restrict_enrollments_to_section_dates=None, sis_section_id=None, course_id=None, nonxlist_course_id=None, total_students=None, id=None):
         """Init method for Section class."""
         self._integration_id = integration_id
         self._start_at = start_at
@@ -267,6 +283,7 @@ class Section(BaseModel):
         self._sis_course_id = sis_course_id
         self._end_at = end_at
         self._sis_import_id = sis_import_id
+        self._restrict_enrollments_to_section_dates = restrict_enrollments_to_section_dates
         self._sis_section_id = sis_section_id
         self._course_id = course_id
         self._nonxlist_course_id = nonxlist_course_id
@@ -340,6 +357,17 @@ class Section(BaseModel):
         """Setter for sis_import_id property."""
         self.logger.warn("Setting values on sis_import_id will NOT update the remote Canvas instance.")
         self._sis_import_id = value
+
+    @property
+    def restrict_enrollments_to_section_dates(self):
+        """Restrict user enrollments to the start and end dates of the section."""
+        return self._restrict_enrollments_to_section_dates
+
+    @restrict_enrollments_to_section_dates.setter
+    def restrict_enrollments_to_section_dates(self, value):
+        """Setter for restrict_enrollments_to_section_dates property."""
+        self.logger.warn("Setting values on restrict_enrollments_to_section_dates will NOT update the remote Canvas instance.")
+        self._restrict_enrollments_to_section_dates = value
 
     @property
     def sis_section_id(self):

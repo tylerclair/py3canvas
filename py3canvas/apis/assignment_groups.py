@@ -37,7 +37,7 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         The "assignment_visibility" option additionally requires that the Differentiated Assignments course feature be turned on."""
         if include is not None:
             self._validate_enum(include, ["assignments", "discussion_topic", "all_dates", "assignment_visibility", "overrides", "submission"])
-            params["include[]"] = include
+            params["include"] = include
 
         # OPTIONAL - exclude_assignment_submission_types
         """If "assignments" are included, those with the specified submission types
@@ -53,7 +53,7 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
 
         # OPTIONAL - grading_period_id
         """The id of the grading period in which assignment groups are being requested
-        (Requires the Multiple Grading Periods feature turned on.)"""
+        (Requires grading periods to exist.)"""
         if grading_period_id is not None:
             params["grading_period_id"] = grading_period_id
 
@@ -61,8 +61,8 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         """If true, all assignments returned will apply to the current user in the
         specified grading period. If assignments apply to other students in the
         specified grading period, but not the current user, they will not be
-        returned. (Requires the grading_period_id argument and the Multiple Grading
-        Periods feature turned on. In addition, the current user must be a student.)"""
+        returned. (Requires the grading_period_id argument and grading periods to
+        exist. In addition, the current user must be a student.)"""
         if scope_assignments_to_student is not None:
             params["scope_assignments_to_student"] = scope_assignments_to_student
 
@@ -102,7 +102,7 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
 
         # OPTIONAL - grading_period_id
         """The id of the grading period in which assignment groups are being requested
-        (Requires the Multiple Grading Periods account feature turned on)"""
+        (Requires grading periods to exist on the account)"""
         if grading_period_id is not None:
             params["grading_period_id"] = grading_period_id
 

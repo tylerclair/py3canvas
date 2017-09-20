@@ -165,6 +165,10 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         # OPTIONAL - delayed_post_at
         """If a timestamp is given, the topic will not be published until that time."""
         if delayed_post_at is not None:
+            if issubclass(delayed_post_at.__class__, str):
+                delayed_post_at = self._validate_iso8601_string(delayed_post_at)
+            elif issubclass(delayed_post_at.__class__, date) or issubclass(delayed_post_at.__class__, datetime):
+                delayed_post_at = delayed_post_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["delayed_post_at"] = delayed_post_at
 
         # OPTIONAL - lock_at
@@ -172,6 +176,10 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         provided timestamp. If the timestamp is in the past, the topic will be
         locked."""
         if lock_at is not None:
+            if issubclass(lock_at.__class__, str):
+                lock_at = self._validate_iso8601_string(lock_at)
+            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
+                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
         # OPTIONAL - podcast_enabled
@@ -289,6 +297,10 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         # OPTIONAL - delayed_post_at
         """If a timestamp is given, the topic will not be published until that time."""
         if delayed_post_at is not None:
+            if issubclass(delayed_post_at.__class__, str):
+                delayed_post_at = self._validate_iso8601_string(delayed_post_at)
+            elif issubclass(delayed_post_at.__class__, date) or issubclass(delayed_post_at.__class__, datetime):
+                delayed_post_at = delayed_post_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["delayed_post_at"] = delayed_post_at
 
         # OPTIONAL - lock_at
@@ -296,6 +308,10 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         provided timestamp. If the timestamp is in the past, the topic will be
         locked."""
         if lock_at is not None:
+            if issubclass(lock_at.__class__, str):
+                lock_at = self._validate_iso8601_string(lock_at)
+            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
+                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
         # OPTIONAL - podcast_enabled
@@ -417,6 +433,10 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         # OPTIONAL - delayed_post_at
         """If a timestamp is given, the topic will not be published until that time."""
         if delayed_post_at is not None:
+            if issubclass(delayed_post_at.__class__, str):
+                delayed_post_at = self._validate_iso8601_string(delayed_post_at)
+            elif issubclass(delayed_post_at.__class__, date) or issubclass(delayed_post_at.__class__, datetime):
+                delayed_post_at = delayed_post_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["delayed_post_at"] = delayed_post_at
 
         # OPTIONAL - lock_at
@@ -424,6 +444,10 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         provided timestamp. If the timestamp is in the past, the topic will be
         locked."""
         if lock_at is not None:
+            if issubclass(lock_at.__class__, str):
+                lock_at = self._validate_iso8601_string(lock_at)
+            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
+                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
         # OPTIONAL - podcast_enabled
@@ -539,6 +563,10 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         # OPTIONAL - delayed_post_at
         """If a timestamp is given, the topic will not be published until that time."""
         if delayed_post_at is not None:
+            if issubclass(delayed_post_at.__class__, str):
+                delayed_post_at = self._validate_iso8601_string(delayed_post_at)
+            elif issubclass(delayed_post_at.__class__, date) or issubclass(delayed_post_at.__class__, datetime):
+                delayed_post_at = delayed_post_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["delayed_post_at"] = delayed_post_at
 
         # OPTIONAL - lock_at
@@ -546,6 +574,10 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         provided timestamp. If the timestamp is in the past, the topic will be
         locked."""
         if lock_at is not None:
+            if issubclass(lock_at.__class__, str):
+                lock_at = self._validate_iso8601_string(lock_at)
+            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
+                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
         # OPTIONAL - podcast_enabled

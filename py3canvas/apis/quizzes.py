@@ -138,6 +138,10 @@ class QuizzesAPI(BaseCanvasAPI):
         date, otherwise the correct answers are visible once the student hands in
         their quiz submission."""
         if quiz_show_correct_answers_at is not None:
+            if issubclass(quiz_show_correct_answers_at.__class__, str):
+                quiz_show_correct_answers_at = self._validate_iso8601_string(quiz_show_correct_answers_at)
+            elif issubclass(quiz_show_correct_answers_at.__class__, date) or issubclass(quiz_show_correct_answers_at.__class__, datetime):
+                quiz_show_correct_answers_at = quiz_show_correct_answers_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["quiz[show_correct_answers_at]"] = quiz_show_correct_answers_at
 
         # OPTIONAL - quiz[hide_correct_answers_at]
@@ -145,6 +149,10 @@ class QuizzesAPI(BaseCanvasAPI):
         If set, the correct answers will stop being visible once this date has
         passed. Otherwise, the correct answers will be visible indefinitely."""
         if quiz_hide_correct_answers_at is not None:
+            if issubclass(quiz_hide_correct_answers_at.__class__, str):
+                quiz_hide_correct_answers_at = self._validate_iso8601_string(quiz_hide_correct_answers_at)
+            elif issubclass(quiz_hide_correct_answers_at.__class__, date) or issubclass(quiz_hide_correct_answers_at.__class__, datetime):
+                quiz_hide_correct_answers_at = quiz_hide_correct_answers_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["quiz[hide_correct_answers_at]"] = quiz_hide_correct_answers_at
 
         # OPTIONAL - quiz[allowed_attempts]
@@ -200,18 +208,30 @@ class QuizzesAPI(BaseCanvasAPI):
         """The day/time the quiz is due.
         Accepts times in ISO 8601 format, e.g. 2011-10-21T18:48Z."""
         if quiz_due_at is not None:
+            if issubclass(quiz_due_at.__class__, str):
+                quiz_due_at = self._validate_iso8601_string(quiz_due_at)
+            elif issubclass(quiz_due_at.__class__, date) or issubclass(quiz_due_at.__class__, datetime):
+                quiz_due_at = quiz_due_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["quiz[due_at]"] = quiz_due_at
 
         # OPTIONAL - quiz[lock_at]
         """The day/time the quiz is locked for students.
         Accepts times in ISO 8601 format, e.g. 2011-10-21T18:48Z."""
         if quiz_lock_at is not None:
+            if issubclass(quiz_lock_at.__class__, str):
+                quiz_lock_at = self._validate_iso8601_string(quiz_lock_at)
+            elif issubclass(quiz_lock_at.__class__, date) or issubclass(quiz_lock_at.__class__, datetime):
+                quiz_lock_at = quiz_lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["quiz[lock_at]"] = quiz_lock_at
 
         # OPTIONAL - quiz[unlock_at]
         """The day/time the quiz is unlocked for students.
         Accepts times in ISO 8601 format, e.g. 2011-10-21T18:48Z."""
         if quiz_unlock_at is not None:
+            if issubclass(quiz_unlock_at.__class__, str):
+                quiz_unlock_at = self._validate_iso8601_string(quiz_unlock_at)
+            elif issubclass(quiz_unlock_at.__class__, date) or issubclass(quiz_unlock_at.__class__, datetime):
+                quiz_unlock_at = quiz_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["quiz[unlock_at]"] = quiz_unlock_at
 
         # OPTIONAL - quiz[published]

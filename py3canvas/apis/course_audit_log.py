@@ -33,11 +33,19 @@ class CourseAuditLogAPI(BaseCanvasAPI):
         # OPTIONAL - start_time
         """The beginning of the time range from which you want events."""
         if start_time is not None:
+            if issubclass(start_time.__class__, str):
+                start_time = self._validate_iso8601_string(start_time)
+            elif issubclass(start_time.__class__, date) or issubclass(start_time.__class__, datetime):
+                start_time = start_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             params["start_time"] = start_time
 
         # OPTIONAL - end_time
         """The end of the time range from which you want events."""
         if end_time is not None:
+            if issubclass(end_time.__class__, str):
+                end_time = self._validate_iso8601_string(end_time)
+            elif issubclass(end_time.__class__, date) or issubclass(end_time.__class__, datetime):
+                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             params["end_time"] = end_time
 
         self.logger.debug("GET /api/v1/audit/course/courses/{course_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
