@@ -36,7 +36,7 @@ class {{api_name}}API(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for {{api_name}}API."""
         super({{api_name}}API, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.{{api_name}}API")
+        self.logger = logging.getLogger("py3canvas.{{api_name}}API")
 
     {% for api in spec.apis %}
     {% for op in api.operations %}
@@ -88,7 +88,7 @@ class {{model_name|capitalize}}(BaseModel):
         {% endfor %}
         {% endif %}
 
-        self.logger = logging.getLogger('pycanvas.{{model_name|capitalize}}')
+        self.logger = logging.getLogger('py3canvas.{{model_name|capitalize}}')
 
     {% if model_data.properties %}
     {% for property_name, property_data in model_data.properties.items() %}

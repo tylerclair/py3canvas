@@ -58,7 +58,7 @@ def required_attributes(m):
 
 
 def optional_attributes(m):
-    return [r for r in (y for y in m['properties'].keys() if y not in m['required'])]
+    return [r for r in (y for y in list(m['properties'].keys()) if y not in m['required'])]
 
 
 def fix_param_name(name):
