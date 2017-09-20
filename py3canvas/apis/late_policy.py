@@ -14,7 +14,7 @@ class LatePolicyAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for LatePolicyAPI."""
         super(LatePolicyAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("pycanvas.LatePolicyAPI")
+        self.logger = logging.getLogger("py3canvas.LatePolicyAPI")
 
     def get_late_policy(self, id):
         """
@@ -157,7 +157,7 @@ class Latepolicy(BaseModel):
         self._missing_submission_deduction = missing_submission_deduction
         self._id = id
 
-        self.logger = logging.getLogger('pycanvas.Latepolicy')
+        self.logger = logging.getLogger('py3canvas.Latepolicy')
 
     @property
     def late_submission_deduction(self):
