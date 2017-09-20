@@ -115,12 +115,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/grading_standards",
-      "description": "Returns the list of grading standards in the given context that are visible to user.",
+      "description": "Returns the list of grading standards for the given context that are visible to the user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List the grading standards available in a context.",
-          "notes": "Returns the list of grading standards in the given context that are visible to user.",
+          "notes": "Returns the list of grading standards for the given context that are visible to the user.",
           "nickname": "list_grading_standards_available_in_context_courses",
           "parameters": [
             {
@@ -141,12 +141,12 @@
     },
     {
       "path": "/v1/accounts/{account_id}/grading_standards",
-      "description": "Returns the list of grading standards in the given context that are visible to user.",
+      "description": "Returns the list of grading standards for the given context that are visible to the user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List the grading standards available in a context.",
-          "notes": "Returns the list of grading standards in the given context that are visible to user.",
+          "notes": "Returns the list of grading standards for the given context that are visible to the user.",
           "nickname": "list_grading_standards_available_in_context_accounts",
           "parameters": [
             {
@@ -162,6 +162,68 @@
           "items": {
             "$ref": "GradingStandard"
           }
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/grading_standards/{grading_standard_id}",
+      "description": "Returns a grading standard for the given context that is visible to the user.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get a single grading standard in a context.",
+          "notes": "Returns a grading standard for the given context that is visible to the user.",
+          "nickname": "get_single_grading_standard_in_context_courses",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "grading_standard_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            }
+          ],
+          "type": "GradingStandard"
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/grading_standards/{grading_standard_id}",
+      "description": "Returns a grading standard for the given context that is visible to the user.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get a single grading standard in a context.",
+          "notes": "Returns a grading standard for the given context that is visible to the user.",
+          "nickname": "get_single_grading_standard_in_context_accounts",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "grading_standard_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            }
+          ],
+          "type": "GradingStandard"
         }
       ]
     }

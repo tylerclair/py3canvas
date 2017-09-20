@@ -54,6 +54,37 @@
       ]
     },
     {
+      "path": "/v1/courses/{course_id}/pages/{url}/duplicate",
+      "description": "Duplicate a wiki page",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Duplicate page",
+          "notes": "Duplicate a wiki page",
+          "nickname": "duplicate_page",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            },
+            {
+              "paramType": "path",
+              "name": "url",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            }
+          ],
+          "type": "the page that was created"
+        }
+      ]
+    },
+    {
       "path": "/v1/courses/{course_id}/front_page",
       "description": "Update the title or contents of the front page",
       "operations": [

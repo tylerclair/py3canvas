@@ -56,6 +56,22 @@
               "type": "string",
               "format": null,
               "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "enrollment_term[overrides][enrollment_type][start_at]",
+              "description": "The day/time the term starts, overridden for the given enrollment type.\n*enrollment_type* can be one of StudentEnrollment, TeacherEnrollment, TaEnrollment, or DesignerEnrollment",
+              "type": "DateTime",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "enrollment_term[overrides][enrollment_type][end_at]",
+              "description": "The day/time the term ends, overridden for the given enrollment type.\n*enrollment_type* can be one of StudentEnrollment, TeacherEnrollment, TaEnrollment, or DesignerEnrollment",
+              "type": "DateTime",
+              "format": null,
+              "required": false
             }
           ],
           "type": "EnrollmentTerm"
@@ -117,6 +133,22 @@
               "name": "enrollment_term[sis_term_id]",
               "description": "The unique SIS identifier for the term.",
               "type": "string",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "enrollment_term[overrides][enrollment_type][start_at]",
+              "description": "The day/time the term starts, overridden for the given enrollment type.\n*enrollment_type* can be one of StudentEnrollment, TeacherEnrollment, TaEnrollment, or DesignerEnrollment",
+              "type": "DateTime",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "enrollment_term[overrides][enrollment_type][end_at]",
+              "description": "The day/time the term ends, overridden for the given enrollment type.\n*enrollment_type* can be one of StudentEnrollment, TeacherEnrollment, TaEnrollment, or DesignerEnrollment",
+              "type": "DateTime",
               "format": null,
               "required": false
             }
@@ -189,6 +221,20 @@
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "include",
+              "description": "Array of additional information to include.\n\n\"overrides\":: term start/end dates overridden for different enrollment types",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "enum": [
+                "overrides"
+              ],
+              "items": {
+                "type": "string"
+              }
             }
           ],
           "type": "array",
@@ -236,6 +282,16 @@
           "description": "The state of the term. Can be 'active' or 'deleted'.",
           "example": "active",
           "type": "string"
+        },
+        "overrides": {
+          "description": "Term date overrides for specific enrollment types",
+          "example": {
+            "StudentEnrollment": {
+              "start_at": "2014-01-07T08:00:00-05:00",
+              "end_at": "2014-05-14T05:00:00-04:0"
+            }
+          },
+          "type": "object"
         }
       }
     }

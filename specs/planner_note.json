@@ -1,0 +1,161 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://canvas.instructure.com/api",
+  "resourcePath": "/planner_note",
+  "produces": [
+    "application/json"
+  ],
+  "apis": [
+    {
+      "path": "/v1/planner_notes",
+      "description": "Retrieve the list of planner notes\n\nRetrieve planner note for a user",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List planner notes",
+          "notes": "Retrieve the list of planner notes\n\nRetrieve planner note for a user",
+          "nickname": "list_planner_notes",
+          "parameters": [
+
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "PlannerNote"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/v1/planner_notes/{id}",
+      "description": "Retrieve a planner note for the current user",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Show a PlannerNote",
+          "notes": "Retrieve a planner note for the current user",
+          "nickname": "show_plannernote",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            }
+          ],
+          "type": "PlannerNote"
+        }
+      ]
+    },
+    {
+      "path": "/v1/planner_notes/{id}",
+      "description": "Update a planner note for the current user",
+      "operations": [
+        {
+          "method": "PUT",
+          "summary": "Update a PlannerNote",
+          "notes": "Update a planner note for the current user",
+          "nickname": "update_plannernote",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            }
+          ],
+          "type": "PlannerNote"
+        }
+      ]
+    },
+    {
+      "path": "/v1/planner_notes",
+      "description": "Create a planner note for the current user",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Create a planner note",
+          "notes": "Create a planner note for the current user",
+          "nickname": "create_planner_note",
+          "parameters": [
+
+          ],
+          "type": "PlannerNote"
+        }
+      ]
+    },
+    {
+      "path": "/v1/planner_notes/{id}",
+      "description": "Delete a planner note for the current user",
+      "operations": [
+        {
+          "method": "DELETE",
+          "summary": "Delete a planner note",
+          "notes": "Delete a planner note for the current user",
+          "nickname": "delete_planner_note",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            }
+          ],
+          "type": "PlannerNote"
+        }
+      ]
+    }
+  ],
+  "models": {
+    "PlannerNote": {
+      "id": "PlannerNote",
+      "description": "A planner note",
+      "required": [
+
+      ],
+      "properties": {
+        "id": {
+          "description": "The ID of the planner note",
+          "example": 234,
+          "type": "integer"
+        },
+        "title": {
+          "description": "The title for a planner note",
+          "example": "Bring books tomorrow",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the planner note",
+          "example": "I need to bring books tomorrow for my course on biology",
+          "type": "string"
+        },
+        "user_id": {
+          "description": "The id of the associated user creating the planner note",
+          "example": 1578941,
+          "type": "integer"
+        },
+        "workflow_state": {
+          "description": "The current published state of the planner note",
+          "example": "active",
+          "type": "string"
+        },
+        "course_id": {
+          "description": "The course that the note is in relation too, if applicable",
+          "example": 1578941,
+          "type": "integer"
+        },
+        "todo_date": {
+          "description": "The datetime of when the planner note should show up on their planner",
+          "example": "2017-05-09T10:12:00Z",
+          "type": "datetime"
+        }
+      }
+    }
+  }
+}

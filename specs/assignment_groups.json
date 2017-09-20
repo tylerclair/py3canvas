@@ -72,7 +72,7 @@
             {
               "paramType": "query",
               "name": "grading_period_id",
-              "description": "The id of the grading period in which assignment groups are being requested\n(Requires the Multiple Grading Periods feature turned on.)",
+              "description": "The id of the grading period in which assignment groups are being requested\n(Requires grading periods to exist.)",
               "type": "integer",
               "format": "int64",
               "required": false
@@ -80,7 +80,7 @@
             {
               "paramType": "query",
               "name": "scope_assignments_to_student",
-              "description": "If true, all assignments returned will apply to the current user in the\nspecified grading period. If assignments apply to other students in the\nspecified grading period, but not the current user, they will not be\nreturned. (Requires the grading_period_id argument and the Multiple Grading\nPeriods feature turned on. In addition, the current user must be a student.)",
+              "description": "If true, all assignments returned will apply to the current user in the\nspecified grading period. If assignments apply to other students in the\nspecified grading period, but not the current user, they will not be\nreturned. (Requires the grading_period_id argument and grading periods to\nexist. In addition, the current user must be a student.)",
               "type": "boolean",
               "format": null,
               "required": false
@@ -147,7 +147,7 @@
             {
               "paramType": "query",
               "name": "grading_period_id",
-              "description": "The id of the grading period in which assignment groups are being requested\n(Requires the Multiple Grading Periods account feature turned on)",
+              "description": "The id of the grading period in which assignment groups are being requested\n(Requires grading periods to exist on the account)",
               "type": "integer",
               "format": "int64",
               "required": false

@@ -756,12 +756,12 @@
     },
     {
       "path": "/v1/files/{id}",
-      "description": "Remove the specified file\n\n  curl -XDELETE 'https://<canvas>/api/v1/files/<file_id>' \\\n       -H 'Authorization: Bearer <token>'",
+      "description": "Remove the specified file",
       "operations": [
         {
           "method": "DELETE",
           "summary": "Delete file",
-          "notes": "Remove the specified file\n\n  curl -XDELETE 'https://<canvas>/api/v1/files/<file_id>' \\\n       -H 'Authorization: Bearer <token>'",
+          "notes": "Remove the specified file",
           "nickname": "delete_file",
           "parameters": [
             {
@@ -771,9 +771,17 @@
               "type": "string",
               "format": null,
               "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "replace",
+              "description": "This action is irreversible.\nIf replace is set to true the file contents will be replaced with a\ngeneric \"file has been removed\" file. This also destroys any previews\nthat have been generated for the file.\nMust have manage files and become other users permissions",
+              "type": "boolean",
+              "format": null,
+              "required": false
             }
           ],
-          "type": "void"
+          "type": "File"
         }
       ]
     },
@@ -2256,7 +2264,7 @@
         },
         "preview_url": {
           "type": "string",
-          "description": "optional: url to the document preview (only included in submission endpoints)"
+          "description": "optional: url to the document preview. This url is specific to the user making the api call. Only included in submission endpoints."
         }
       }
     },

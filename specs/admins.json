@@ -169,7 +169,7 @@
           "description": "The user the role is assigned to. See the Users API for details.",
           "$ref": "User"
         },
-        "status": {
+        "workflow_state": {
           "description": "The status of the account role/user assignment.",
           "type": "string",
           "example": "deleted"

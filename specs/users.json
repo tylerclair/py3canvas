@@ -28,10 +28,36 @@
             {
               "paramType": "query",
               "name": "search_term",
-              "description": "The partial name or full ID of the users to match and return in the\nresults list. Must be at least 3 characters.\n\nNote that the API will prefer matching on canonical user ID if the ID has\na numeric form. It will only search against other fields if non-numeric\nin form, or if the numeric value doesn't yield any matches. Queries by\nadministrative users will search on SIS ID, name, or email address; non-\nadministrative queries will only be compared against name.",
+              "description": "The partial name or full ID of the users to match and return in the\nresults list. Must be at least 3 characters.\n\nNote that the API will prefer matching on canonical user ID if the ID has\na numeric form. It will only search against other fields if non-numeric\nin form, or if the numeric value doesn't yield any matches. Queries by\nadministrative users will search on SIS ID, login ID, name, or email\naddress; non-administrative queries will only be compared against name.",
               "type": "string",
               "format": null,
               "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "sort",
+              "description": "The column to sort results by.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "enum": [
+                "username",
+                "email",
+                "sis_id",
+                "last_login"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "order",
+              "description": "The order to sort the given column by.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           ],
           "type": "array",
@@ -151,6 +177,21 @@
               "type": "string",
               "format": null,
               "required": true
+            },
+            {
+              "paramType": "query",
+              "name": "include",
+              "description": "\"planner_overrides\":: Optionally include the assignment's associated planner override, if it exists, for the current user.\n                      These will be returned under a +planner_override+ key\n\"course\":: Optionally include the assignments' courses",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "enum": [
+                "planner_overrides",
+                "course"
+              ],
+              "items": {
+                "type": "string"
+              }
             }
           ],
           "type": "array",
@@ -876,12 +917,12 @@
     },
     {
       "path": "/v1/users/{id}/split",
-      "description": "Merged users cannot be fully restored to their previous state, but this will\nattempt to split as much as possible to the previous state.\nTo split a merged user, the caller must have permissions to manage all of\nthe users logins. If there are multiple users that have been merged into one\nuser it will split each merge into a separate user.\nA split can only happen within 90 days of a user merge. A user merge deletes\nthe previous user and may be permanently deleted. In this scenario we create\na new user object and proceed to move as much as possible to the new user.\nThe user object will not have preserved the name or settings from the\nprevious user. Some items may have been deleted during a user_merge that\ncannot be restored, and/or the data has become stale because of other\nchanges to the objects since the time of the user_merge.",
+      "description": "Merged users cannot be fully restored to their previous state, but this will\nattempt to split as much as possible to the previous state.\nTo split a merged user, the caller must have permissions to manage all of\nthe users logins. If there are multiple users that have been merged into one\nuser it will split each merge into a separate user.\nA split can only happen within 180 days of a user merge. A user merge deletes\nthe previous user and may be permanently deleted. In this scenario we create\na new user object and proceed to move as much as possible to the new user.\nThe user object will not have preserved the name or settings from the\nprevious user. Some items may have been deleted during a user_merge that\ncannot be restored, and/or the data has become stale because of other\nchanges to the objects since the time of the user_merge.",
       "operations": [
         {
           "method": "POST",
           "summary": "Split merged users into separate users",
-          "notes": "Merged users cannot be fully restored to their previous state, but this will\nattempt to split as much as possible to the previous state.\nTo split a merged user, the caller must have permissions to manage all of\nthe users logins. If there are multiple users that have been merged into one\nuser it will split each merge into a separate user.\nA split can only happen within 90 days of a user merge. A user merge deletes\nthe previous user and may be permanently deleted. In this scenario we create\na new user object and proceed to move as much as possible to the new user.\nThe user object will not have preserved the name or settings from the\nprevious user. Some items may have been deleted during a user_merge that\ncannot be restored, and/or the data has become stale because of other\nchanges to the objects since the time of the user_merge.",
+          "notes": "Merged users cannot be fully restored to their previous state, but this will\nattempt to split as much as possible to the previous state.\nTo split a merged user, the caller must have permissions to manage all of\nthe users logins. If there are multiple users that have been merged into one\nuser it will split each merge into a separate user.\nA split can only happen within 180 days of a user merge. A user merge deletes\nthe previous user and may be permanently deleted. In this scenario we create\na new user object and proceed to move as much as possible to the new user.\nThe user object will not have preserved the name or settings from the\nprevious user. Some items may have been deleted during a user_merge that\ncannot be restored, and/or the data has become stale because of other\nchanges to the objects since the time of the user_merge.",
           "nickname": "split_merged_users_into_separate_users",
           "parameters": [
             {
@@ -902,12 +943,12 @@
     },
     {
       "path": "/v1/users/{user_id}/profile",
-      "description": "Returns user profile data, including user id, name, and profile pic.\n\nWhen requesting the profile for the user accessing the API, the user's\ncalendar feed URL will be returned as well.",
+      "description": "Returns user profile data, including user id, name, and profile pic.\n\nWhen requesting the profile for the user accessing the API, the user's\ncalendar feed URL and LTI user id will be returned as well.",
       "operations": [
         {
           "method": "GET",
           "summary": "Get user profile",
-          "notes": "Returns user profile data, including user id, name, and profile pic.\n\nWhen requesting the profile for the user accessing the API, the user's\ncalendar feed URL will be returned as well.",
+          "notes": "Returns user profile data, including user id, name, and profile pic.\n\nWhen requesting the profile for the user accessing the API, the user's\ncalendar feed URL and LTI user id will be returned as well.",
           "nickname": "get_user_profile",
           "parameters": [
             {
@@ -1380,6 +1421,9 @@
         "sis_login_id": {
           "description": "sis1-login",
           "example": "sis1-login",
+          "type": "string"
+        },
+        "lti_user_id": {
           "type": "string"
         },
         "avatar_url": {

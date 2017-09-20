@@ -17,7 +17,14 @@
           "notes": "Retrieve the list of favorite courses for the current user. If the user has not chosen\nany favorites, then a selection of currently enrolled courses will be returned.\n\nSee the {api:CoursesController#index List courses API} for details on accepted include[] parameters.",
           "nickname": "list_favorite_courses",
           "parameters": [
-
+            {
+              "paramType": "query",
+              "name": "exclude_blueprint_courses",
+              "description": "When set, only return courses that are not configured as blueprint courses.",
+              "type": "boolean",
+              "format": null,
+              "required": false
+            }
           ],
           "type": "array",
           "items": {

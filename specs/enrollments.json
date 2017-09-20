@@ -884,7 +884,7 @@
           "type": "string"
         },
         "limit_privileges_to_course_section": {
-          "description": "User can only access his or her own course section. Applies to Teacher and TA enrollments.",
+          "description": "User can only access his or her own course section.",
           "example": true,
           "type": "boolean"
         },
@@ -917,6 +917,16 @@
           "description": "The enrollment role, for course-level permissions. This field will match `type` if the enrollment role has not been customized.",
           "example": "StudentEnrollment",
           "type": "string"
+        },
+        "role_id": {
+          "description": "The id of the enrollment role.",
+          "example": 1,
+          "type": "integer"
+        },
+        "created_at": {
+          "description": "The created time of the enrollment, in ISO8601 format.",
+          "example": "2012-04-18T23:08:51Z",
+          "type": "datetime"
         },
         "updated_at": {
           "description": "The updated time of the enrollment, in ISO8601 format.",
@@ -972,8 +982,8 @@
           "example": "B-",
           "type": "string"
         },
-        "multiple_grading_periods_enabled": {
-          "description": "optional: Indicates whether the course the enrollment belongs to has the Multiple Grading Periods feature enabled. (applies only to student enrollments, and only available in course endpoints)",
+        "has_grading_periods": {
+          "description": "optional: Indicates whether the course the enrollment belongs to has grading periods set up. (applies only to student enrollments, and only available in course endpoints)",
           "example": true,
           "type": "boolean"
         },
@@ -983,32 +993,32 @@
           "type": "boolean"
         },
         "current_grading_period_title": {
-          "description": "optional: The name of the currently active grading period, if one exists. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+          "description": "optional: The name of the currently active grading period, if one exists. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
           "example": "Fall Grading Period",
           "type": "string"
         },
         "current_grading_period_id": {
-          "description": "optional: The id of the currently active grading period, if one exists. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+          "description": "optional: The id of the currently active grading period, if one exists. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
           "example": 5,
           "type": "integer"
         },
         "current_period_computed_current_score": {
-          "description": "optional: The student's score in the course for the current grading period, ignoring ungraded assignments. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+          "description": "optional: The student's score in the course for the current grading period, ignoring ungraded assignments. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
           "example": 95.8,
           "type": "number"
         },
         "current_period_computed_final_score": {
-          "description": "optional: The student's score in the course for the current grading period, including ungraded assignments with a score of 0. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+          "description": "optional: The student's score in the course for the current grading period, including ungraded assignments with a score of 0. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
           "example": 85.25,
           "type": "number"
         },
         "current_period_computed_current_grade": {
-          "description": "optional: The letter grade equivalent of current_period_computed_current_score, if available. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+          "description": "optional: The letter grade equivalent of current_period_computed_current_score, if available. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
           "example": "A",
           "type": "string"
         },
         "current_period_computed_final_grade": {
-          "description": "optional: The letter grade equivalent of current_period_computed_final_score, if available. If the course the enrollment belongs to does not have Multiple Grading Periods enabled, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+          "description": "optional: The letter grade equivalent of current_period_computed_final_score, if available. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
           "example": "B",
           "type": "string"
         }

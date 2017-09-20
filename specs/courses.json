@@ -63,8 +63,16 @@
             },
             {
               "paramType": "query",
+              "name": "exclude_blueprint_courses",
+              "description": "When set, only return courses that are not configured as blueprint courses.",
+              "type": "boolean",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "query",
               "name": "include",
-              "description": "- \"needs_grading_count\": Optional information to include with each Course.\n  When needs_grading_count is given, and the current user has grading\n  rights, the total number of submissions needing grading for all\n  assignments is returned.\n- \"syllabus_body\": Optional information to include with each Course.\n  When syllabus_body is given the user-generated html for the course\n  syllabus is returned.\n- \"public_description\": Optional information to include with each Course.\n  When public_description is given the user-generated text for the course\n  public description is returned.\n- \"total_scores\": Optional information to include with each Course.\n  When total_scores is given, any student enrollments will also\n  include the fields 'computed_current_score', 'computed_final_score',\n  'computed_current_grade', and 'computed_final_grade' (see Enrollment\n  documentation for more information on these fields). This argument\n  is ignored if the course is configured to hide final grades.\n- \"current_grading_period_scores\": Optional information to include with\n  each Course. When current_grading_period_scores is given and total_scores\n  is given, any student enrollments will also include the fields\n  'multiple_grading_periods_enabled',\n  'totals_for_all_grading_periods_option', 'current_grading_period_title',\n  'current_grading_period_id', current_period_computed_current_score',\n  'current_period_computed_final_score',\n  'current_period_computed_current_grade', and\n  'current_period_computed_final_grade' (see Enrollment documentation for\n  more information on these fields). In addition, when this argument is\n  passed, the course will have a 'multiple_grading_periods_enabled' attribute\n  on it. This argument is ignored if the course is configured to hide final\n  grades or if the total_scores argument is not included.\n- \"term\": Optional information to include with each Course. When\n  term is given, the information for the enrollment term for each course\n  is returned.\n- \"course_progress\": Optional information to include with each Course.\n  When course_progress is given, each course will include a\n  'course_progress' object with the fields: 'requirement_count', an integer\n  specifying the total number of requirements in the course,\n  'requirement_completed_count', an integer specifying the total number of\n  requirements in this course that have been completed, and\n  'next_requirement_url', a string url to the next requirement item, and\n  'completed_at', the date the course was completed (null if incomplete).\n  'next_requirement_url' will be null if all requirements have been\n  completed or the current module does not require sequential progress.\n  \"course_progress\" will return an error message if the course is not\n  module based or the user is not enrolled as a student in the course.\n- \"sections\": Section enrollment information to include with each Course.\n  Returns an array of hashes containing the section ID (id), section name\n  (name), start and end dates (start_at, end_at), as well as the enrollment\n  type (enrollment_role, e.g. 'StudentEnrollment').\n- \"storage_quota_used_mb\": The amount of storage space used by the files in this course\n- \"total_students\": Optional information to include with each Course.\n  Returns an integer for the total amount of active and invited students.\n- \"passback_status\": Include the grade passback_status\n- \"favorites\": Optional information to include with each Course.\n  Indicates if the user has marked the course as a favorite course.\n- \"teachers\": Teacher information to include with each Course.\n  Returns an array of hashes containing the {api:Users:UserDisplay UserDisplay} information\n  for each teacher in the course.\n- \"observed_users\": Optional information to include with each Course.\n  Will include data for observed users if the current user has an\n  observer enrollment.\n- \"tabs\": Optional information to include with each Course.\n  Will include the list of tabs configured for each course.  See the\n  {api:TabsController#index List available tabs API} for more information.",
+              "description": "- \"needs_grading_count\": Optional information to include with each Course.\n  When needs_grading_count is given, and the current user has grading\n  rights, the total number of submissions needing grading for all\n  assignments is returned.\n- \"syllabus_body\": Optional information to include with each Course.\n  When syllabus_body is given the user-generated html for the course\n  syllabus is returned.\n- \"public_description\": Optional information to include with each Course.\n  When public_description is given the user-generated text for the course\n  public description is returned.\n- \"total_scores\": Optional information to include with each Course.\n  When total_scores is given, any student enrollments will also\n  include the fields 'computed_current_score', 'computed_final_score',\n  'computed_current_grade', and 'computed_final_grade' (see Enrollment\n  documentation for more information on these fields). This argument\n  is ignored if the course is configured to hide final grades.\n- \"current_grading_period_scores\": Optional information to include with\n  each Course. When current_grading_period_scores is given and total_scores\n  is given, any student enrollments will also include the fields\n  'has_grading_periods',\n  'totals_for_all_grading_periods_option', 'current_grading_period_title',\n  'current_grading_period_id', current_period_computed_current_score',\n  'current_period_computed_final_score',\n  'current_period_computed_current_grade', and\n  'current_period_computed_final_grade' (see Enrollment documentation for\n  more information on these fields). In addition, when this argument is\n  passed, the course will have a 'has_grading_periods' attribute\n  on it. This argument is ignored if the course is configured to hide final\n  grades or if the total_scores argument is not included.\n- \"term\": Optional information to include with each Course. When\n  term is given, the information for the enrollment term for each course\n  is returned.\n- \"course_progress\": Optional information to include with each Course.\n  When course_progress is given, each course will include a\n  'course_progress' object with the fields: 'requirement_count', an integer\n  specifying the total number of requirements in the course,\n  'requirement_completed_count', an integer specifying the total number of\n  requirements in this course that have been completed, and\n  'next_requirement_url', a string url to the next requirement item, and\n  'completed_at', the date the course was completed (null if incomplete).\n  'next_requirement_url' will be null if all requirements have been\n  completed or the current module does not require sequential progress.\n  \"course_progress\" will return an error message if the course is not\n  module based or the user is not enrolled as a student in the course.\n- \"sections\": Section enrollment information to include with each Course.\n  Returns an array of hashes containing the section ID (id), section name\n  (name), start and end dates (start_at, end_at), as well as the enrollment\n  type (enrollment_role, e.g. 'StudentEnrollment').\n- \"storage_quota_used_mb\": The amount of storage space used by the files in this course\n- \"total_students\": Optional information to include with each Course.\n  Returns an integer for the total amount of active and invited students.\n- \"passback_status\": Include the grade passback_status\n- \"favorites\": Optional information to include with each Course.\n  Indicates if the user has marked the course as a favorite course.\n- \"teachers\": Teacher information to include with each Course.\n  Returns an array of hashes containing the {api:Users:UserDisplay UserDisplay} information\n  for each teacher in the course.\n- \"observed_users\": Optional information to include with each Course.\n  Will include data for observed users if the current user has an\n  observer enrollment.\n- \"tabs\": Optional information to include with each Course.\n  Will include the list of tabs configured for each course.  See the\n  {api:TabsController#index List available tabs API} for more information.\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled",
               "type": "array",
               "format": null,
               "required": false,
@@ -82,7 +90,8 @@
                 "passback_status",
                 "favorites",
                 "teachers",
-                "observed_users"
+                "observed_users",
+                "course_image"
               ],
               "items": {
                 "type": "string"
@@ -134,7 +143,7 @@
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"needs_grading_count\": Optional information to include with each Course.\n  When needs_grading_count is given, and the current user has grading\n  rights, the total number of submissions needing grading for all\n  assignments is returned.\n- \"syllabus_body\": Optional information to include with each Course.\n  When syllabus_body is given the user-generated html for the course\n  syllabus is returned.\n- \"public_description\": Optional information to include with each Course.\n  When public_description is given the user-generated text for the course\n  public description is returned.\n- \"total_scores\": Optional information to include with each Course.\n  When total_scores is given, any student enrollments will also\n  include the fields 'computed_current_score', 'computed_final_score',\n  'computed_current_grade', and 'computed_final_grade' (see Enrollment\n  documentation for more information on these fields). This argument\n  is ignored if the course is configured to hide final grades.\n- \"current_grading_period_scores\": Optional information to include with\n  each Course. When current_grading_period_scores is given and total_scores\n  is given, any student enrollments will also include the fields\n  'multiple_grading_periods_enabled',\n  'totals_for_all_grading_periods_option', 'current_grading_period_title',\n  'current_grading_period_id', current_period_computed_current_score',\n  'current_period_computed_final_score',\n  'current_period_computed_current_grade', and\n  'current_period_computed_final_grade' (see Enrollment documentation for\n  more information on these fields). In addition, when this argument is\n  passed, the course will have a 'multiple_grading_periods_enabled' attribute\n  on it. This argument is ignored if the course is configured to hide final\n  grades or if the total_scores argument is not included.\n- \"term\": Optional information to include with each Course. When\n  term is given, the information for the enrollment term for each course\n  is returned.\n- \"course_progress\": Optional information to include with each Course.\n  When course_progress is given, each course will include a\n  'course_progress' object with the fields: 'requirement_count', an integer\n  specifying the total number of requirements in the course,\n  'requirement_completed_count', an integer specifying the total number of\n  requirements in this course that have been completed, and\n  'next_requirement_url', a string url to the next requirement item, and\n  'completed_at', the date the course was completed (null if incomplete).\n  'next_requirement_url' will be null if all requirements have been\n  completed or the current module does not require sequential progress.\n  \"course_progress\" will return an error message if the course is not\n  module based or the user is not enrolled as a student in the course.\n- \"sections\": Section enrollment information to include with each Course.\n  Returns an array of hashes containing the section ID (id), section name\n  (name), start and end dates (start_at, end_at), as well as the enrollment\n  type (enrollment_role, e.g. 'StudentEnrollment').\n- \"storage_quota_used_mb\": The amount of storage space used by the files in this course\n- \"total_students\": Optional information to include with each Course.\n  Returns an integer for the total amount of active and invited students.\n- \"passback_status\": Include the grade passback_status\n- \"favorites\": Optional information to include with each Course.\n  Indicates if the user has marked the course as a favorite course.\n- \"teachers\": Teacher information to include with each Course.\n  Returns an array of hashes containing the {api:Users:UserDisplay UserDisplay} information\n  for each teacher in the course.\n- \"observed_users\": Optional information to include with each Course.\n  Will include data for observed users if the current user has an\n  observer enrollment.\n- \"tabs\": Optional information to include with each Course.\n  Will include the list of tabs configured for each course.  See the\n  {api:TabsController#index List available tabs API} for more information.",
+              "description": "- \"needs_grading_count\": Optional information to include with each Course.\n  When needs_grading_count is given, and the current user has grading\n  rights, the total number of submissions needing grading for all\n  assignments is returned.\n- \"syllabus_body\": Optional information to include with each Course.\n  When syllabus_body is given the user-generated html for the course\n  syllabus is returned.\n- \"public_description\": Optional information to include with each Course.\n  When public_description is given the user-generated text for the course\n  public description is returned.\n- \"total_scores\": Optional information to include with each Course.\n  When total_scores is given, any student enrollments will also\n  include the fields 'computed_current_score', 'computed_final_score',\n  'computed_current_grade', and 'computed_final_grade' (see Enrollment\n  documentation for more information on these fields). This argument\n  is ignored if the course is configured to hide final grades.\n- \"current_grading_period_scores\": Optional information to include with\n  each Course. When current_grading_period_scores is given and total_scores\n  is given, any student enrollments will also include the fields\n  'has_grading_periods',\n  'totals_for_all_grading_periods_option', 'current_grading_period_title',\n  'current_grading_period_id', current_period_computed_current_score',\n  'current_period_computed_final_score',\n  'current_period_computed_current_grade', and\n  'current_period_computed_final_grade' (see Enrollment documentation for\n  more information on these fields). In addition, when this argument is\n  passed, the course will have a 'has_grading_periods' attribute\n  on it. This argument is ignored if the course is configured to hide final\n  grades or if the total_scores argument is not included.\n- \"term\": Optional information to include with each Course. When\n  term is given, the information for the enrollment term for each course\n  is returned.\n- \"course_progress\": Optional information to include with each Course.\n  When course_progress is given, each course will include a\n  'course_progress' object with the fields: 'requirement_count', an integer\n  specifying the total number of requirements in the course,\n  'requirement_completed_count', an integer specifying the total number of\n  requirements in this course that have been completed, and\n  'next_requirement_url', a string url to the next requirement item, and\n  'completed_at', the date the course was completed (null if incomplete).\n  'next_requirement_url' will be null if all requirements have been\n  completed or the current module does not require sequential progress.\n  \"course_progress\" will return an error message if the course is not\n  module based or the user is not enrolled as a student in the course.\n- \"sections\": Section enrollment information to include with each Course.\n  Returns an array of hashes containing the section ID (id), section name\n  (name), start and end dates (start_at, end_at), as well as the enrollment\n  type (enrollment_role, e.g. 'StudentEnrollment').\n- \"storage_quota_used_mb\": The amount of storage space used by the files in this course\n- \"total_students\": Optional information to include with each Course.\n  Returns an integer for the total amount of active and invited students.\n- \"passback_status\": Include the grade passback_status\n- \"favorites\": Optional information to include with each Course.\n  Indicates if the user has marked the course as a favorite course.\n- \"teachers\": Teacher information to include with each Course.\n  Returns an array of hashes containing the {api:Users:UserDisplay UserDisplay} information\n  for each teacher in the course.\n- \"observed_users\": Optional information to include with each Course.\n  Will include data for observed users if the current user has an\n  observer enrollment.\n- \"tabs\": Optional information to include with each Course.\n  Will include the list of tabs configured for each course.  See the\n  {api:TabsController#index List available tabs API} for more information.\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled",
               "type": "array",
               "format": null,
               "required": false,
@@ -152,7 +161,8 @@
                 "passback_status",
                 "favorites",
                 "teachers",
-                "observed_users"
+                "observed_users",
+                "course_image"
               ],
               "items": {
                 "type": "string"
@@ -556,7 +566,7 @@
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"email\": Optional user email.\n- \"enrollments\":\nOptionally include with each Course the user's current and invited\nenrollments. If the user is enrolled as a student, and the account has\npermission to manage or view all grades, each enrollment will include a\n'grades' key with 'current_score', 'final_score', 'current_grade' and\n'final_grade' values.\n- \"locked\": Optionally include whether an enrollment is locked.\n- \"avatar_url\": Optionally include avatar_url.\n- \"bio\": Optionally include each user's bio.\n- \"test_student\": Optionally include the course's Test Student,\nif present. Default is to not include Test Student.\n- \"custom_links\": Optionally include plugin-supplied custom links for each student,\nsuch as analytics information",
+              "description": "- \"email\": Optional user email.\n- \"enrollments\":\nOptionally include with each Course the user's current and invited\nenrollments. If the user is enrolled as a student, and the account has\npermission to manage or view all grades, each enrollment will include a\n'grades' key with 'current_score', 'final_score', 'current_grade' and\n'final_grade' values.\n- \"locked\": Optionally include whether an enrollment is locked.\n- \"avatar_url\": Optionally include avatar_url.\n- \"bio\": Optionally include each user's bio.\n- \"test_student\": Optionally include the course's Test Student,\nif present. Default is to not include Test Student.\n- \"custom_links\": Optionally include plugin-supplied custom links for each student,\nsuch as analytics information\n- \"current_grading_period_scores\": if enrollments is included as\nwell as this directive, the scores returned in the enrollment\nwill be for the current grading period if there is one. A\n'grading_period_id' value will also be included with the\nscores. if grading_period_id is nil there is no current grading\nperiod and the score is a total score.",
               "type": "array",
               "format": null,
               "required": false,
@@ -567,7 +577,8 @@
                 "avatar_url",
                 "test_student",
                 "bio",
-                "custom_links"
+                "custom_links",
+                "current_grading_period_scores"
               ],
               "items": {
                 "type": "string"
@@ -682,7 +693,7 @@
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"email\": Optional user email.\n- \"enrollments\":\nOptionally include with each Course the user's current and invited\nenrollments. If the user is enrolled as a student, and the account has\npermission to manage or view all grades, each enrollment will include a\n'grades' key with 'current_score', 'final_score', 'current_grade' and\n'final_grade' values.\n- \"locked\": Optionally include whether an enrollment is locked.\n- \"avatar_url\": Optionally include avatar_url.\n- \"bio\": Optionally include each user's bio.\n- \"test_student\": Optionally include the course's Test Student,\nif present. Default is to not include Test Student.\n- \"custom_links\": Optionally include plugin-supplied custom links for each student,\nsuch as analytics information",
+              "description": "- \"email\": Optional user email.\n- \"enrollments\":\nOptionally include with each Course the user's current and invited\nenrollments. If the user is enrolled as a student, and the account has\npermission to manage or view all grades, each enrollment will include a\n'grades' key with 'current_score', 'final_score', 'current_grade' and\n'final_grade' values.\n- \"locked\": Optionally include whether an enrollment is locked.\n- \"avatar_url\": Optionally include avatar_url.\n- \"bio\": Optionally include each user's bio.\n- \"test_student\": Optionally include the course's Test Student,\nif present. Default is to not include Test Student.\n- \"custom_links\": Optionally include plugin-supplied custom links for each student,\nsuch as analytics information\n- \"current_grading_period_scores\": if enrollments is included as\nwell as this directive, the scores returned in the enrollment\nwill be for the current grading period if there is one. A\n'grading_period_id' value will also be included with the\nscores. if grading_period_id is nil there is no current grading\nperiod and the score is a total score.",
               "type": "array",
               "format": null,
               "required": false,
@@ -693,7 +704,8 @@
                 "avatar_url",
                 "test_student",
                 "bio",
-                "custom_links"
+                "custom_links",
+                "current_grading_period_scores"
               ],
               "items": {
                 "type": "string"
@@ -1091,7 +1103,7 @@
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"all_courses\": Also search recently deleted courses.\n- \"permissions\": Include permissions the current user has\n  for the course.\n- \"observed_users\": include observed users in the enrollments",
+              "description": "- \"all_courses\": Also search recently deleted courses.\n- \"permissions\": Include permissions the current user has\n  for the course.\n- \"observed_users\": include observed users in the enrollments\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled",
               "type": "array",
               "format": null,
               "required": false,
@@ -1112,7 +1124,8 @@
                 "observed_users",
                 "all_courses",
                 "permissions",
-                "observed_users"
+                "observed_users",
+                "course_image"
               ],
               "items": {
                 "type": "string"
@@ -1152,7 +1165,7 @@
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"all_courses\": Also search recently deleted courses.\n- \"permissions\": Include permissions the current user has\n  for the course.\n- \"observed_users\": include observed users in the enrollments",
+              "description": "- \"all_courses\": Also search recently deleted courses.\n- \"permissions\": Include permissions the current user has\n  for the course.\n- \"observed_users\": include observed users in the enrollments\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled",
               "type": "array",
               "format": null,
               "required": false,
@@ -1173,7 +1186,8 @@
                 "observed_users",
                 "all_courses",
                 "permissions",
-                "observed_users"
+                "observed_users",
+                "course_image"
               ],
               "items": {
                 "type": "string"
@@ -1464,6 +1478,38 @@
               "type": "boolean",
               "format": null,
               "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[blueprint]",
+              "description": "Sets the course as a blueprint course. NOTE: The Blueprint Courses feature is in beta",
+              "type": "boolean",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[blueprint_restrictions]",
+              "description": "Sets a default set to apply to blueprint course objects when restricted,\nunless _use_blueprint_restrictions_by_object_type_ is enabled.\nSee the {api:Blueprint_Courses:BlueprintRestriction Blueprint Restriction} documentation",
+              "type": "BlueprintRestriction",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[use_blueprint_restrictions_by_object_type]",
+              "description": "When enabled, the _blueprint_restrictions_ parameter will be ignored in favor of\nthe _blueprint_restrictions_by_object_type_ parameter",
+              "type": "boolean",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[blueprint_restrictions_by_object_type]",
+              "description": "Allows setting multiple {api:Blueprint_Courses:BlueprintRestriction Blueprint Restriction}\nto apply to blueprint course objects of the matching type when restricted.\nThe possible object types are \"assignment\", \"attachment\", \"discussion_topic\", \"quiz\" and \"wiki_page\".\nExample usage:\n  course[blueprint_restrictions_by_object_type][assignment][content]=1",
+              "type": "multiple BlueprintRestrictions",
+              "format": null,
+              "required": false
             }
           ],
           "type": "void"
@@ -1543,12 +1589,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/effective_due_dates",
-      "description": "For each assignment in the course, returns each assigned student's ID\nand their corresponding due date along with some Multiple Grading Periods\ndata. Returns a collection with keys representing assignment IDs and values\nas a collection containing keys representing student IDs and values representing\nthe student's effective due_at, the grading_period_id of which the due_at falls\nin, and whether or not the grading period is closed (in_closed_grading_period)\n\nThe list of assignment IDs for which effective student due dates are\nrequested. If not provided, all assignments in the course will be used.",
+      "description": "For each assignment in the course, returns each assigned student's ID\nand their corresponding due date along with some grading period data.\nReturns a collection with keys representing assignment IDs and values as a\ncollection containing keys representing student IDs and values representing\nthe student's effective due_at, the grading_period_id of which the due_at falls\nin, and whether or not the grading period is closed (in_closed_grading_period)\n\nThe list of assignment IDs for which effective student due dates are\nrequested. If not provided, all assignments in the course will be used.",
       "operations": [
         {
           "method": "GET",
           "summary": "Get effective due dates",
-          "notes": "For each assignment in the course, returns each assigned student's ID\nand their corresponding due date along with some Multiple Grading Periods\ndata. Returns a collection with keys representing assignment IDs and values\nas a collection containing keys representing student IDs and values representing\nthe student's effective due_at, the grading_period_id of which the due_at falls\nin, and whether or not the grading period is closed (in_closed_grading_period)\n\nThe list of assignment IDs for which effective student due dates are\nrequested. If not provided, all assignments in the course will be used.",
+          "notes": "For each assignment in the course, returns each assigned student's ID\nand their corresponding due date along with some grading period data.\nReturns a collection with keys representing assignment IDs and values as a\ncollection containing keys representing student IDs and values representing\nthe student's effective due_at, the grading_period_id of which the due_at falls\nin, and whether or not the grading period is closed (in_closed_grading_period)\n\nThe list of assignment IDs for which effective student due dates are\nrequested. If not provided, all assignments in the course will be used.",
           "nickname": "get_effective_due_dates",
           "parameters": [
             {
@@ -1788,6 +1834,11 @@
           "description": "the SIS identifier for the course, if defined. This field is only included if the user has permission to view SIS information.",
           "type": "string"
         },
+        "uuid": {
+          "description": "the UUID of the course",
+          "example": "WvAHhY5FINzq5IyRIJybGeiXyFkG3SqHUPb7jZY5",
+          "type": "string"
+        },
         "integration_id": {
           "description": "the integration identifier for the course, if defined. This field is only included if the user has permission to view SIS information.",
           "type": "string"
@@ -1844,6 +1895,11 @@
           "description": "the end date for the course, if applicable",
           "example": "2012-09-01T00:00:00-06:00",
           "type": "datetime"
+        },
+        "locale": {
+          "description": "the course-set locale, if applicable",
+          "example": "en",
+          "type": "string"
         },
         "enrollments": {
           "description": "A list of enrollments linking the current user to the course. for student enrollments, grading information may be included if include[]=total_scores",

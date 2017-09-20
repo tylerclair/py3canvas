@@ -753,6 +753,14 @@
             },
             {
               "paramType": "form",
+              "name": "tool_configuration[prefer_sis_email]",
+              "description": "Set this to default the lis_person_contact_email_primary to prefer\nprovisioned sis_email; otherwise, omit",
+              "type": "boolean",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
               "name": "resource_selection[url]",
               "description": "The url of the external tool",
               "type": "string",
@@ -1240,6 +1248,14 @@
               "name": "tool_configuration[message_type]",
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "tool_configuration[prefer_sis_email]",
+              "description": "Set this to default the lis_person_contact_email_primary to prefer\nprovisioned sis_email; otherwise, omit",
+              "type": "boolean",
               "format": null,
               "required": false
             },

@@ -99,6 +99,58 @@
           }
         }
       ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/potential_collaborators",
+      "description": "List the users who can potentially be added to a collaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List potential members",
+          "notes": "List the users who can potentially be added to a collaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
+          "nickname": "list_potential_members_courses",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            }
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "User"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/v1/groups/{group_id}/potential_collaborators",
+      "description": "List the users who can potentially be added to a collaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List potential members",
+          "notes": "List the users who can potentially be added to a collaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
+          "nickname": "list_potential_members_groups",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "group_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true
+            }
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "User"
+          }
+        }
+      ]
     }
   ],
   "models": {

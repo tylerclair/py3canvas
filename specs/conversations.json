@@ -774,10 +774,10 @@
           "type": "string"
         },
         "participants": {
-          "description": "Array of users (id, name) participating in the conversation. Includes current user.",
+          "description": "Array of users participating in the conversation. Includes current user.",
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "ConversationParticipant"
           }
         },
         "visible": {
@@ -788,6 +788,36 @@
         "context_name": {
           "description": "Name of the course or group in which the conversation is occurring.",
           "example": "Canvas 101",
+          "type": "string"
+        }
+      }
+    },
+    "ConversationParticipant": {
+      "id": "ConversationParticipant",
+      "description": "",
+      "required": [
+
+      ],
+      "properties": {
+        "id": {
+          "description": "The user ID for the participant.",
+          "example": 2,
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "description": "A short name the user has selected, for use in conversations or other less formal places through the site.",
+          "example": "Shelly",
+          "type": "string"
+        },
+        "full_name": {
+          "description": "The full name of the user.",
+          "example": "Sheldon Cooper",
+          "type": "string"
+        },
+        "avatar_url": {
+          "description": "If requested, this field will be included and contain a url to retrieve the user's avatar.",
+          "example": "https://canvas.instructure.com/images/messages/avatar-50.png",
           "type": "string"
         }
       }

@@ -179,6 +179,22 @@
             },
             {
               "paramType": "query",
+              "name": "blueprint",
+              "description": "If true, include only blueprint courses. If false, exclude them.\nIf not present, do not filter on this basis.",
+              "type": "boolean",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "blueprint_associated",
+              "description": "If true, include only courses that inherit content from a blueprint course.\nIf false, exclude them. If not present, do not filter on this basis.",
+              "type": "boolean",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "query",
               "name": "by_teachers",
               "description": "List of User IDs of teachers; if supplied, include only courses taught by\none of the referenced users.",
               "type": "array",
@@ -260,6 +276,45 @@
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "sort",
+              "description": "The column to sort results by.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "enum": [
+                "course_name",
+                "sis_course_id",
+                "teacher",
+                "subaccount",
+                "enrollments"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "order",
+              "description": "The order to sort the given column by.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "search_by",
+              "description": "The filter to search by. \"course\" searches for course names, course codes,\nand SIS IDs. \"teacher\" searches for teacher names",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "enum": [
+                "course",
+                "teacher"
+              ]
             }
           ],
           "type": "array",
@@ -291,6 +346,14 @@
               "paramType": "form",
               "name": "account[name]",
               "description": "Updates the account name",
+              "type": "string",
+              "format": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[sis_account_id]",
+              "description": "Updates the account sis_account_id\nMust have manage_sis permission and must not be a root_account.",
               "type": "string",
               "format": null,
               "required": false
@@ -515,6 +578,11 @@
         "name": {
           "description": "The display name of the account",
           "example": "Canvas Account",
+          "type": "string"
+        },
+        "uuid": {
+          "description": "The UUID of the account",
+          "example": "WvAHhY5FINzq5IyRIJybGeiXyFkG3SqHUPb7jZY5",
           "type": "string"
         },
         "parent_account_id": {

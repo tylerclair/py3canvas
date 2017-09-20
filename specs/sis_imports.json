@@ -126,7 +126,7 @@
             {
               "paramType": "form",
               "name": "diffing_data_set_identifier",
-              "description": "If set on a CSV import, Canvas will attempt to optimize the SIS import by\ncomparing this set of CSVs to the previous set that has the same data set\nidentifier, and only appliying the difference between the two. See the\nSIS CSV Format documentation for more details.",
+              "description": "If set on a CSV import, Canvas will attempt to optimize the SIS import by\ncomparing this set of CSVs to the previous set that has the same data set\nidentifier, and only applying the difference between the two. See the\nSIS CSV Format documentation for more details.",
               "type": "string",
               "format": null,
               "required": false
@@ -137,6 +137,14 @@
               "description": "If true, and diffing_data_set_identifier is sent, this SIS import will be\npart of the data set, but diffing will not be performed. See the SIS CSV\nFormat documentation for details.",
               "type": "boolean",
               "format": null,
+              "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "change_threshold",
+              "description": "If set with batch_mode, the batch cleanup process will not run if the\nnumber of items deleted is higher than the percentage set. If set to 10\nand a term has 200 enrollments, and batch would delete more than 20 of\nthe enrollments the batch will abort before the enrollments are deleted.\nIf set with diffing, diffing  will not be performed if the files are\ngreater than the threshold as a percent. If set to 5 and the file is more\nthan 5% smaller or more than 5% larger than the file that is being\ncompared to, diffing will not be performed. If the files are less than 5%,\ndiffing will be performed. See the SIS CSV Format documentation for more\ndetails.\nIf set with batch_mode and diffing, the same threshold is used for both\nsteps of the import.",
+              "type": "integer",
+              "format": "int64",
               "required": false
             }
           ],
@@ -177,12 +185,12 @@
     },
     {
       "path": "/v1/accounts/{account_id}/sis_imports/{id}/abort",
-      "description": "Abort an already created but not processed or processing SIS import.",
+      "description": "Abort a SIS import that has not completed.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Abort SIS import",
-          "notes": "Abort an already created but not processed or processing SIS import.",
+          "notes": "Abort a SIS import that has not completed.",
           "nickname": "abort_sis_import",
           "parameters": [
             {
@@ -383,6 +391,8 @@
           "description": "The progress of the SIS import. The progress will reset when using batch_mode and have a different progress for the cleanup stage",
           "example": "100",
           "type": "string"
+        },
+        "errors_attachment": {
         },
         "processing_warnings": {
           "description": "Only imports that are complete will get this data. An array of CSV_file/warning_message pairs.",

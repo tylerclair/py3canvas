@@ -506,6 +506,14 @@
               "type": "boolean",
               "format": null,
               "required": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[quiz_lti]",
+              "description": "Whether this assignment should use the Quizzes 2 LTI tool. Sets the\nsubmission type to 'external_tool' and configures the external tool\nattributes to use the Quizzes 2 LTI tool configured for this course.\nHas no effect if no Quizzes 2 LTI tool is configured.",
+              "type": "boolean",
+              "format": null,
+              "required": false
             }
           ],
           "type": "Assignment"
@@ -1359,7 +1367,7 @@
           "example": "crit1",
           "type": "string"
         },
-        "outcome_id": {
+        "learning_outcome_id": {
           "description": "(Optional) The id of the learning outcome this criteria uses, if any.",
           "example": "1234",
           "type": "string"
@@ -1559,6 +1567,11 @@
           "example": 2,
           "type": "integer"
         },
+        "due_date_required": {
+          "description": "Boolean flag indicating whether the assignment requires a due date based on the account level setting",
+          "example": true,
+          "type": "boolean"
+        },
         "allowed_extensions": {
           "description": "Allowed file extensions, which take effect if submission_types includes 'online_upload'.",
           "example": [
@@ -1569,6 +1582,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "max_name_length": {
+          "description": "An integer indicating the maximum length an assignment's name may be",
+          "example": 15,
+          "type": "integer"
         },
         "turnitin_enabled": {
           "description": "Boolean flag indicating whether or not Turnitin has been enabled for the assignment. NOTE: This flag will not appear unless your account has the Turnitin plugin available",
@@ -1653,7 +1671,7 @@
         "post_to_sis": {
           "example": true,
           "type": "boolean",
-          "description": "(optional, present if Post Grades to SIS feature is enabled)"
+          "description": "(optional, present if Sync Grades to SIS feature is enabled)"
         },
         "integration_id": {
           "example": "12341234",
