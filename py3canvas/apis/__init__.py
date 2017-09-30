@@ -1,7 +1,7 @@
 import os
 import requests
 ACCESS_TOKEN = os.environ.get('CANVAS_TOKEN', None)
-URL_INSTANCE = 'https://usu.instructure.com'
+URL_INSTANCE = os.environ.get('PY3CANVAS_URL', None)
 
 
 class AccessTokenMissingError(Exception):
