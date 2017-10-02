@@ -41,7 +41,11 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     keywords=['canvas', 'instructure'],
-    install_requires=['requests'],
+    install_requires=[
+        'requests',
+        'jinja2',
+        'click'
+    ],
 )
 
 # Original developer and project
