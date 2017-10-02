@@ -81,7 +81,7 @@ def service_param_string(params):
                 k.append('{name}={default}'.format(name=name, default=param['default']))
             else:
                 k.append('{name}=None'.format(name=name))
-    p.sort(lambda a, b: len(a) - len(b))
+    p.sort()
     k.sort()
     a = p + k
     return ', '.join(a)
@@ -210,7 +210,7 @@ def update_spec_files(specfile_path):
         r = requests.get('https://canvas.instructure.com/doc/api/{}'.format(spec))
         if r.status_code == 200:
             specfile = os.path.join(specfile_path, spec)
-            with open(specfile, 'w+') as f:
+            with open(specfile, 'wb') as f:
                 f.write(r.content)
                 click.echo('Updated {}'.format(specfile))
         else:
