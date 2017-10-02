@@ -168,7 +168,7 @@ class CalendarEventsAPI(BaseCanvasAPI):
         # OPTIONAL - calendar_event[start_at]
         """Start date/time of the event."""
         if calendar_event_start_at is not None:
-            if issubclass(calendar_event_start_at.__class__, basestring):
+            if issubclass(calendar_event_start_at.__class__, str):
                 calendar_event_start_at = self._validate_iso8601_string(calendar_event_start_at)
             elif issubclass(calendar_event_start_at.__class__, date) or issubclass(calendar_event_start_at.__class__, datetime):
                 calendar_event_start_at = calendar_event_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -177,7 +177,7 @@ class CalendarEventsAPI(BaseCanvasAPI):
         # OPTIONAL - calendar_event[end_at]
         """End date/time of the event."""
         if calendar_event_end_at is not None:
-            if issubclass(calendar_event_end_at.__class__, basestring):
+            if issubclass(calendar_event_end_at.__class__, str):
                 calendar_event_end_at = self._validate_iso8601_string(calendar_event_end_at)
             elif issubclass(calendar_event_end_at.__class__, date) or issubclass(calendar_event_end_at.__class__, datetime):
                 calendar_event_end_at = calendar_event_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -205,7 +205,7 @@ class CalendarEventsAPI(BaseCanvasAPI):
         identifier, provided that it is consistent across the start_at, end_at
         and context_code"""
         if calendar_event_child_event_data_X_start_at is not None:
-            if issubclass(calendar_event_child_event_data_X_start_at.__class__, basestring):
+            if issubclass(calendar_event_child_event_data_X_start_at.__class__, str):
                 calendar_event_child_event_data_X_start_at = self._validate_iso8601_string(calendar_event_child_event_data_X_start_at)
             elif issubclass(calendar_event_child_event_data_X_start_at.__class__, date) or issubclass(calendar_event_child_event_data_X_start_at.__class__, datetime):
                 calendar_event_child_event_data_X_start_at = calendar_event_child_event_data_X_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -214,7 +214,7 @@ class CalendarEventsAPI(BaseCanvasAPI):
         # OPTIONAL - calendar_event[child_event_data][X][end_at]
         """Section-level end time(s) if this is a course event."""
         if calendar_event_child_event_data_X_end_at is not None:
-            if issubclass(calendar_event_child_event_data_X_end_at.__class__, basestring):
+            if issubclass(calendar_event_child_event_data_X_end_at.__class__, str):
                 calendar_event_child_event_data_X_end_at = self._validate_iso8601_string(calendar_event_child_event_data_X_end_at)
             elif issubclass(calendar_event_child_event_data_X_end_at.__class__, date) or issubclass(calendar_event_child_event_data_X_end_at.__class__, datetime):
                 calendar_event_child_event_data_X_end_at = calendar_event_child_event_data_X_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -367,7 +367,7 @@ class CalendarEventsAPI(BaseCanvasAPI):
         # OPTIONAL - calendar_event[start_at]
         """Start date/time of the event."""
         if calendar_event_start_at is not None:
-            if issubclass(calendar_event_start_at.__class__, basestring):
+            if issubclass(calendar_event_start_at.__class__, str):
                 calendar_event_start_at = self._validate_iso8601_string(calendar_event_start_at)
             elif issubclass(calendar_event_start_at.__class__, date) or issubclass(calendar_event_start_at.__class__, datetime):
                 calendar_event_start_at = calendar_event_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -376,7 +376,7 @@ class CalendarEventsAPI(BaseCanvasAPI):
         # OPTIONAL - calendar_event[end_at]
         """End date/time of the event."""
         if calendar_event_end_at is not None:
-            if issubclass(calendar_event_end_at.__class__, basestring):
+            if issubclass(calendar_event_end_at.__class__, str):
                 calendar_event_end_at = self._validate_iso8601_string(calendar_event_end_at)
             elif issubclass(calendar_event_end_at.__class__, date) or issubclass(calendar_event_end_at.__class__, datetime):
                 calendar_event_end_at = calendar_event_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -404,7 +404,7 @@ class CalendarEventsAPI(BaseCanvasAPI):
         identifier, provided that it is consistent across the start_at, end_at
         and context_code"""
         if calendar_event_child_event_data_X_start_at is not None:
-            if issubclass(calendar_event_child_event_data_X_start_at.__class__, basestring):
+            if issubclass(calendar_event_child_event_data_X_start_at.__class__, str):
                 calendar_event_child_event_data_X_start_at = self._validate_iso8601_string(calendar_event_child_event_data_X_start_at)
             elif issubclass(calendar_event_child_event_data_X_start_at.__class__, date) or issubclass(calendar_event_child_event_data_X_start_at.__class__, datetime):
                 calendar_event_child_event_data_X_start_at = calendar_event_child_event_data_X_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -413,7 +413,7 @@ class CalendarEventsAPI(BaseCanvasAPI):
         # OPTIONAL - calendar_event[child_event_data][X][end_at]
         """Section-level end time(s) if this is a course event."""
         if calendar_event_child_event_data_X_end_at is not None:
-            if issubclass(calendar_event_child_event_data_X_end_at.__class__, basestring):
+            if issubclass(calendar_event_child_event_data_X_end_at.__class__, str):
                 calendar_event_child_event_data_X_end_at = self._validate_iso8601_string(calendar_event_child_event_data_X_end_at)
             elif issubclass(calendar_event_child_event_data_X_end_at.__class__, date) or issubclass(calendar_event_child_event_data_X_end_at.__class__, datetime):
                 calendar_event_child_event_data_X_end_at = calendar_event_child_event_data_X_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')

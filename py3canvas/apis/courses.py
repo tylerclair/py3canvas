@@ -4,8 +4,8 @@ This API client was generated using a template. Make sure this code is valid bef
 """
 import logging
 from datetime import date, datetime
-from base import BaseCanvasAPI
-from base import BaseModel
+from .base import BaseCanvasAPI
+from .base import BaseModel
 
 
 class CoursesAPI(BaseCanvasAPI):
@@ -263,8 +263,7 @@ class CoursesAPI(BaseCanvasAPI):
         path["account_id"] = account_id
 
         # OPTIONAL - course[name]
-        """The name of the course. If omitted, the course will be named "Unnamed
-        Course.""""
+        """The name of the course. If omitted, the course will be named 'Unnamed Course.'"""
         if course_name is not None:
             data["course[name]"] = course_name
 
@@ -276,7 +275,7 @@ class CoursesAPI(BaseCanvasAPI):
         # OPTIONAL - course[start_at]
         """Course start date in ISO8601 format, e.g. 2011-01-01T01:00Z"""
         if course_start_at is not None:
-            if issubclass(course_start_at.__class__, basestring):
+            if issubclass(course_start_at.__class__, str):
                 course_start_at = self._validate_iso8601_string(course_start_at)
             elif issubclass(course_start_at.__class__, date) or issubclass(course_start_at.__class__, datetime):
                 course_start_at = course_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -285,7 +284,7 @@ class CoursesAPI(BaseCanvasAPI):
         # OPTIONAL - course[end_at]
         """Course end date in ISO8601 format. e.g. 2011-01-01T01:00Z"""
         if course_end_at is not None:
-            if issubclass(course_end_at.__class__, basestring):
+            if issubclass(course_end_at.__class__, str):
                 course_end_at = self._validate_iso8601_string(course_end_at)
             elif issubclass(course_end_at.__class__, date) or issubclass(course_end_at.__class__, datetime):
                 course_end_at = course_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -985,8 +984,7 @@ class CoursesAPI(BaseCanvasAPI):
             data["course[account_id]"] = course_account_id
 
         # OPTIONAL - course[name]
-        """The name of the course. If omitted, the course will be named "Unnamed
-        Course.""""
+        """The name of the course. If omitted, the course will be named 'Unnamed Course.'"""
         if course_name is not None:
             data["course[name]"] = course_name
 
@@ -998,7 +996,7 @@ class CoursesAPI(BaseCanvasAPI):
         # OPTIONAL - course[start_at]
         """Course start date in ISO8601 format, e.g. 2011-01-01T01:00Z"""
         if course_start_at is not None:
-            if issubclass(course_start_at.__class__, basestring):
+            if issubclass(course_start_at.__class__, str):
                 course_start_at = self._validate_iso8601_string(course_start_at)
             elif issubclass(course_start_at.__class__, date) or issubclass(course_start_at.__class__, datetime):
                 course_start_at = course_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -1007,7 +1005,7 @@ class CoursesAPI(BaseCanvasAPI):
         # OPTIONAL - course[end_at]
         """Course end date in ISO8601 format. e.g. 2011-01-01T01:00Z"""
         if course_end_at is not None:
-            if issubclass(course_end_at.__class__, basestring):
+            if issubclass(course_end_at.__class__, str):
                 course_end_at = self._validate_iso8601_string(course_end_at)
             elif issubclass(course_end_at.__class__, date) or issubclass(course_end_at.__class__, datetime):
                 course_end_at = course_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
@@ -1340,7 +1338,7 @@ class CoursesAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/courses/{course_id}/course_copy/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/course_copy/{id}".format(**path), data=data, params=params, no_data=True)
 
-    def copy_course_content(self, course_id, except=None, only=None, source_course=None):
+    def copy_course_content(self, course_id, exclude=None, only=None, source_course=None):
         """
         Copy course content.
 
@@ -1368,9 +1366,9 @@ class CoursesAPI(BaseCanvasAPI):
         # OPTIONAL - except
         """A list of the course content types to exclude, all areas not listed will
         be copied."""
-        if except is not None:
-            self._validate_enum(except, ["course_settings", "assignments", "external_tools", "files", "topics", "calendar_events", "quizzes", "wiki_pages", "modules", "outcomes"])
-            data["except"] = except
+        if exclude is not None:
+            self._validate_enum(exclude, ["course_settings", "assignments", "external_tools", "files", "topics", "calendar_events", "quizzes", "wiki_pages", "modules", "outcomes"])
+            data["except"] = exclude
 
         # OPTIONAL - only
         """A list of the course content types to copy, all areas not listed will not
