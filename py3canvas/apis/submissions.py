@@ -275,7 +275,7 @@ class SubmissionsAPI(BaseCanvasAPI):
         students. The special id "all" will return submissions for all students
         in the course/section as appropriate."""
         if student_ids is not None:
-            params["student_ids"] = student_ids
+            params["student_ids[]"] = student_ids
 
         # OPTIONAL - assignment_ids
         """List of assignments to return submissions for. If none are given,
