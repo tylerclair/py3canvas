@@ -108,7 +108,7 @@ class AssignmentsAPI(BaseCanvasAPI):
         path["course_id"] = course_id
 
         self.logger.debug("GET /api/v1/users/{user_id}/courses/{course_id}/assignments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/courses/{course_id}/assignments".format(**path), data=data, params=params, no_data=True)
+        return self.generic_request("GET", "/api/v1/users/{user_id}/courses/{course_id}/assignments".format(**path), data=data, params=params, all_pages=True)
 
     def get_single_assignment(self, id, course_id, all_dates=None, include=None, needs_grading_count_by_section=None, override_assignment_dates=None):
         """
