@@ -281,7 +281,7 @@ class SubmissionsAPI(BaseCanvasAPI):
         """List of assignments to return submissions for. If none are given,
         submissions for all assignments are returned."""
         if assignment_ids is not None:
-            params["assignment_ids"] = assignment_ids
+            params["assignment_ids[]"] = assignment_ids
 
         # OPTIONAL - grouped
         """If this argument is present, the response will be grouped by student,
@@ -333,7 +333,7 @@ class SubmissionsAPI(BaseCanvasAPI):
         `grouped` argument."""
         if include is not None:
             self._validate_enum(include, ["submission_history", "submission_comments", "rubric_assessment", "assignment", "total_scores", "visibility", "course", "user"])
-            params["include"] = include
+            params["include[]"] = include
 
         self.logger.debug("GET /api/v1/courses/{course_id}/students/submissions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/students/submissions".format(**path), data=data, params=params, all_pages=True)
