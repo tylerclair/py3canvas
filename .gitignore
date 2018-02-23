@@ -72,3 +72,6 @@ pip.ini
 
 #2to3 conversion
 *.bak
+
+#Visual Studio code
+.vscode/
