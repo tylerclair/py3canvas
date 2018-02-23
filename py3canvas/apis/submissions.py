@@ -336,7 +336,7 @@ class SubmissionsAPI(BaseCanvasAPI):
             params["include"] = include
 
         self.logger.debug("GET /api/v1/courses/{course_id}/students/submissions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/students/submissions".format(**path), data=data, params=params, no_data=True)
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/students/submissions".format(**path), data=data, params=params, all_pages=True)
 
     def list_submissions_for_multiple_assignments_sections(self, section_id, assignment_ids=None, enrollment_state=None, grading_period_id=None, grouped=None, include=None, order=None, order_direction=None, post_to_sis=None, student_ids=None, workflow_state=None):
         """
