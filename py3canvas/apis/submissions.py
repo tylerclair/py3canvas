@@ -902,301 +902,301 @@ class SubmissionsAPI(BaseCanvasAPI):
         self.logger.debug("GET /api/v1/courses/{course_id}/assignments/gradeable_students with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/gradeable_students".format(**path), data=data, params=params, no_data=True)
 
-    def grade_or_comment_on_multiple_submissions_courses_submissions(self, course_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
-        """
-        Grade or comment on multiple submissions.
+    # def grade_or_comment_on_multiple_submissions_courses_submissions(self, course_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
+    #     """
+    #     Grade or comment on multiple submissions.
+    #
+    #     Update the grading and comments on multiple student's assignment
+    #     submissions in an asynchronous job.
+    #
+    #     The user must have permission to manage grades in the appropriate context
+    #     (course or section).
+    #     """
+    #     path = {}
+    #     data = {}
+    #     params = {}
+    #
+    #     # REQUIRED - PATH - course_id
+    #     """ID"""
+    #     path["course_id"] = course_id
+    #
+    #     # OPTIONAL - grade_data[<student_id>][posted_grade]
+    #     """See documentation for the posted_grade argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_posted_grade is not None:
+    #         data["grade_data[<student_id>][posted_grade]"] = grade_data_<student_id>_posted_grade
+    #
+    #     # OPTIONAL - grade_data[<student_id>][excuse]
+    #     """See documentation for the excuse argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_excuse is not None:
+    #         data["grade_data[<student_id>][excuse]"] = grade_data_<student_id>_excuse
+    #
+    #     # OPTIONAL - grade_data[<student_id>][rubric_assessment]
+    #     """See documentation for the rubric_assessment argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_rubric_assessment is not None:
+    #         data["grade_data[<student_id>][rubric_assessment]"] = grade_data_<student_id>_rubric_assessment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][text_comment]
+    #     """no description"""
+    #     if grade_data_<student_id>_text_comment is not None:
+    #         data["grade_data[<student_id>][text_comment]"] = grade_data_<student_id>_text_comment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][group_comment]
+    #     """no description"""
+    #     if grade_data_<student_id>_group_comment is not None:
+    #         data["grade_data[<student_id>][group_comment]"] = grade_data_<student_id>_group_comment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][media_comment_id]
+    #     """no description"""
+    #     if grade_data_<student_id>_media_comment_id is not None:
+    #         data["grade_data[<student_id>][media_comment_id]"] = grade_data_<student_id>_media_comment_id
+    #
+    #     # OPTIONAL - grade_data[<student_id>][media_comment_type]
+    #     """no description"""
+    #     if grade_data_<student_id>_media_comment_type is not None:
+    #         self._validate_enum(grade_data_<student_id>_media_comment_type, ["audio", "video"])
+    #         data["grade_data[<student_id>][media_comment_type]"] = grade_data_<student_id>_media_comment_type
+    #
+    #     # OPTIONAL - grade_data[<student_id>][file_ids]
+    #     """See documentation for the comment[] arguments in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_file_ids is not None:
+    #         data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
+    #
+    #     # OPTIONAL - grade_data[<student_id>][assignment_id]
+    #     """Specifies which assignment to grade.  This argument is not necessary when
+    #     using the assignment-specific endpoints."""
+    #     if grade_data_<student_id>_assignment_id is not None:
+    #         data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
+    #
+    #     self.logger.debug("POST /api/v1/courses/{course_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+    #     return self.generic_request("POST", "/api/v1/courses/{course_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
 
-        Update the grading and comments on multiple student's assignment
-        submissions in an asynchronous job.
-        
-        The user must have permission to manage grades in the appropriate context
-        (course or section).
-        """
-        path = {}
-        data = {}
-        params = {}
-
-        # REQUIRED - PATH - course_id
-        """ID"""
-        path["course_id"] = course_id
-
-        # OPTIONAL - grade_data[<student_id>][posted_grade]
-        """See documentation for the posted_grade argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_posted_grade is not None:
-            data["grade_data[<student_id>][posted_grade]"] = grade_data_<student_id>_posted_grade
-
-        # OPTIONAL - grade_data[<student_id>][excuse]
-        """See documentation for the excuse argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_excuse is not None:
-            data["grade_data[<student_id>][excuse]"] = grade_data_<student_id>_excuse
-
-        # OPTIONAL - grade_data[<student_id>][rubric_assessment]
-        """See documentation for the rubric_assessment argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_rubric_assessment is not None:
-            data["grade_data[<student_id>][rubric_assessment]"] = grade_data_<student_id>_rubric_assessment
-
-        # OPTIONAL - grade_data[<student_id>][text_comment]
-        """no description"""
-        if grade_data_<student_id>_text_comment is not None:
-            data["grade_data[<student_id>][text_comment]"] = grade_data_<student_id>_text_comment
-
-        # OPTIONAL - grade_data[<student_id>][group_comment]
-        """no description"""
-        if grade_data_<student_id>_group_comment is not None:
-            data["grade_data[<student_id>][group_comment]"] = grade_data_<student_id>_group_comment
-
-        # OPTIONAL - grade_data[<student_id>][media_comment_id]
-        """no description"""
-        if grade_data_<student_id>_media_comment_id is not None:
-            data["grade_data[<student_id>][media_comment_id]"] = grade_data_<student_id>_media_comment_id
-
-        # OPTIONAL - grade_data[<student_id>][media_comment_type]
-        """no description"""
-        if grade_data_<student_id>_media_comment_type is not None:
-            self._validate_enum(grade_data_<student_id>_media_comment_type, ["audio", "video"])
-            data["grade_data[<student_id>][media_comment_type]"] = grade_data_<student_id>_media_comment_type
-
-        # OPTIONAL - grade_data[<student_id>][file_ids]
-        """See documentation for the comment[] arguments in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_file_ids is not None:
-            data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
-
-        # OPTIONAL - grade_data[<student_id>][assignment_id]
-        """Specifies which assignment to grade.  This argument is not necessary when
-        using the assignment-specific endpoints."""
-        if grade_data_<student_id>_assignment_id is not None:
-            data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
-
-    def grade_or_comment_on_multiple_submissions_courses_assignments(self, course_id, assignment_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
-        """
-        Grade or comment on multiple submissions.
-
-        Update the grading and comments on multiple student's assignment
-        submissions in an asynchronous job.
-        
-        The user must have permission to manage grades in the appropriate context
-        (course or section).
-        """
-        path = {}
-        data = {}
-        params = {}
-
-        # REQUIRED - PATH - course_id
-        """ID"""
-        path["course_id"] = course_id
-
-        # REQUIRED - PATH - assignment_id
-        """ID"""
-        path["assignment_id"] = assignment_id
-
-        # OPTIONAL - grade_data[<student_id>][posted_grade]
-        """See documentation for the posted_grade argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_posted_grade is not None:
-            data["grade_data[<student_id>][posted_grade]"] = grade_data_<student_id>_posted_grade
-
-        # OPTIONAL - grade_data[<student_id>][excuse]
-        """See documentation for the excuse argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_excuse is not None:
-            data["grade_data[<student_id>][excuse]"] = grade_data_<student_id>_excuse
-
-        # OPTIONAL - grade_data[<student_id>][rubric_assessment]
-        """See documentation for the rubric_assessment argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_rubric_assessment is not None:
-            data["grade_data[<student_id>][rubric_assessment]"] = grade_data_<student_id>_rubric_assessment
-
-        # OPTIONAL - grade_data[<student_id>][text_comment]
-        """no description"""
-        if grade_data_<student_id>_text_comment is not None:
-            data["grade_data[<student_id>][text_comment]"] = grade_data_<student_id>_text_comment
-
-        # OPTIONAL - grade_data[<student_id>][group_comment]
-        """no description"""
-        if grade_data_<student_id>_group_comment is not None:
-            data["grade_data[<student_id>][group_comment]"] = grade_data_<student_id>_group_comment
-
-        # OPTIONAL - grade_data[<student_id>][media_comment_id]
-        """no description"""
-        if grade_data_<student_id>_media_comment_id is not None:
-            data["grade_data[<student_id>][media_comment_id]"] = grade_data_<student_id>_media_comment_id
-
-        # OPTIONAL - grade_data[<student_id>][media_comment_type]
-        """no description"""
-        if grade_data_<student_id>_media_comment_type is not None:
-            self._validate_enum(grade_data_<student_id>_media_comment_type, ["audio", "video"])
-            data["grade_data[<student_id>][media_comment_type]"] = grade_data_<student_id>_media_comment_type
-
-        # OPTIONAL - grade_data[<student_id>][file_ids]
-        """See documentation for the comment[] arguments in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_file_ids is not None:
-            data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
-
-        # OPTIONAL - grade_data[<student_id>][assignment_id]
-        """Specifies which assignment to grade.  This argument is not necessary when
-        using the assignment-specific endpoints."""
-        if grade_data_<student_id>_assignment_id is not None:
-            data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
-
-    def grade_or_comment_on_multiple_submissions_sections_submissions(self, section_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
-        """
-        Grade or comment on multiple submissions.
-
-        Update the grading and comments on multiple student's assignment
-        submissions in an asynchronous job.
-        
-        The user must have permission to manage grades in the appropriate context
-        (course or section).
-        """
-        path = {}
-        data = {}
-        params = {}
-
-        # REQUIRED - PATH - section_id
-        """ID"""
-        path["section_id"] = section_id
-
-        # OPTIONAL - grade_data[<student_id>][posted_grade]
-        """See documentation for the posted_grade argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_posted_grade is not None:
-            data["grade_data[<student_id>][posted_grade]"] = grade_data_<student_id>_posted_grade
-
-        # OPTIONAL - grade_data[<student_id>][excuse]
-        """See documentation for the excuse argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_excuse is not None:
-            data["grade_data[<student_id>][excuse]"] = grade_data_<student_id>_excuse
-
-        # OPTIONAL - grade_data[<student_id>][rubric_assessment]
-        """See documentation for the rubric_assessment argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_rubric_assessment is not None:
-            data["grade_data[<student_id>][rubric_assessment]"] = grade_data_<student_id>_rubric_assessment
-
-        # OPTIONAL - grade_data[<student_id>][text_comment]
-        """no description"""
-        if grade_data_<student_id>_text_comment is not None:
-            data["grade_data[<student_id>][text_comment]"] = grade_data_<student_id>_text_comment
-
-        # OPTIONAL - grade_data[<student_id>][group_comment]
-        """no description"""
-        if grade_data_<student_id>_group_comment is not None:
-            data["grade_data[<student_id>][group_comment]"] = grade_data_<student_id>_group_comment
-
-        # OPTIONAL - grade_data[<student_id>][media_comment_id]
-        """no description"""
-        if grade_data_<student_id>_media_comment_id is not None:
-            data["grade_data[<student_id>][media_comment_id]"] = grade_data_<student_id>_media_comment_id
-
-        # OPTIONAL - grade_data[<student_id>][media_comment_type]
-        """no description"""
-        if grade_data_<student_id>_media_comment_type is not None:
-            self._validate_enum(grade_data_<student_id>_media_comment_type, ["audio", "video"])
-            data["grade_data[<student_id>][media_comment_type]"] = grade_data_<student_id>_media_comment_type
-
-        # OPTIONAL - grade_data[<student_id>][file_ids]
-        """See documentation for the comment[] arguments in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_file_ids is not None:
-            data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
-
-        # OPTIONAL - grade_data[<student_id>][assignment_id]
-        """Specifies which assignment to grade.  This argument is not necessary when
-        using the assignment-specific endpoints."""
-        if grade_data_<student_id>_assignment_id is not None:
-            data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
-
-        self.logger.debug("POST /api/v1/sections/{section_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/sections/{section_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
-
-    def grade_or_comment_on_multiple_submissions_sections_assignments(self, section_id, assignment_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
-        """
-        Grade or comment on multiple submissions.
-
-        Update the grading and comments on multiple student's assignment
-        submissions in an asynchronous job.
-        
-        The user must have permission to manage grades in the appropriate context
-        (course or section).
-        """
-        path = {}
-        data = {}
-        params = {}
-
-        # REQUIRED - PATH - section_id
-        """ID"""
-        path["section_id"] = section_id
-
-        # REQUIRED - PATH - assignment_id
-        """ID"""
-        path["assignment_id"] = assignment_id
-
-        # OPTIONAL - grade_data[<student_id>][posted_grade]
-        """See documentation for the posted_grade argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_posted_grade is not None:
-            data["grade_data[<student_id>][posted_grade]"] = grade_data_<student_id>_posted_grade
-
-        # OPTIONAL - grade_data[<student_id>][excuse]
-        """See documentation for the excuse argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_excuse is not None:
-            data["grade_data[<student_id>][excuse]"] = grade_data_<student_id>_excuse
-
-        # OPTIONAL - grade_data[<student_id>][rubric_assessment]
-        """See documentation for the rubric_assessment argument in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_rubric_assessment is not None:
-            data["grade_data[<student_id>][rubric_assessment]"] = grade_data_<student_id>_rubric_assessment
-
-        # OPTIONAL - grade_data[<student_id>][text_comment]
-        """no description"""
-        if grade_data_<student_id>_text_comment is not None:
-            data["grade_data[<student_id>][text_comment]"] = grade_data_<student_id>_text_comment
-
-        # OPTIONAL - grade_data[<student_id>][group_comment]
-        """no description"""
-        if grade_data_<student_id>_group_comment is not None:
-            data["grade_data[<student_id>][group_comment]"] = grade_data_<student_id>_group_comment
-
-        # OPTIONAL - grade_data[<student_id>][media_comment_id]
-        """no description"""
-        if grade_data_<student_id>_media_comment_id is not None:
-            data["grade_data[<student_id>][media_comment_id]"] = grade_data_<student_id>_media_comment_id
-
-        # OPTIONAL - grade_data[<student_id>][media_comment_type]
-        """no description"""
-        if grade_data_<student_id>_media_comment_type is not None:
-            self._validate_enum(grade_data_<student_id>_media_comment_type, ["audio", "video"])
-            data["grade_data[<student_id>][media_comment_type]"] = grade_data_<student_id>_media_comment_type
-
-        # OPTIONAL - grade_data[<student_id>][file_ids]
-        """See documentation for the comment[] arguments in the
-        {api:SubmissionsApiController#update Submissions Update} documentation"""
-        if grade_data_<student_id>_file_ids is not None:
-            data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
-
-        # OPTIONAL - grade_data[<student_id>][assignment_id]
-        """Specifies which assignment to grade.  This argument is not necessary when
-        using the assignment-specific endpoints."""
-        if grade_data_<student_id>_assignment_id is not None:
-            data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
-
-        self.logger.debug("POST /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
+    # def grade_or_comment_on_multiple_submissions_courses_assignments(self, course_id, assignment_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
+    #     """
+    #     Grade or comment on multiple submissions.
+    #
+    #     Update the grading and comments on multiple student's assignment
+    #     submissions in an asynchronous job.
+    #
+    #     The user must have permission to manage grades in the appropriate context
+    #     (course or section).
+    #     """
+    #     path = {}
+    #     data = {}
+    #     params = {}
+    #
+    #     # REQUIRED - PATH - course_id
+    #     """ID"""
+    #     path["course_id"] = course_id
+    #
+    #     # REQUIRED - PATH - assignment_id
+    #     """ID"""
+    #     path["assignment_id"] = assignment_id
+    #
+    #     # OPTIONAL - grade_data[<student_id>][posted_grade]
+    #     """See documentation for the posted_grade argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_posted_grade is not None:
+    #         data["grade_data[<student_id>][posted_grade]"] = grade_data_<student_id>_posted_grade
+    #
+    #     # OPTIONAL - grade_data[<student_id>][excuse]
+    #     """See documentation for the excuse argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_excuse is not None:
+    #         data["grade_data[<student_id>][excuse]"] = grade_data_<student_id>_excuse
+    #
+    #     # OPTIONAL - grade_data[<student_id>][rubric_assessment]
+    #     """See documentation for the rubric_assessment argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_rubric_assessment is not None:
+    #         data["grade_data[<student_id>][rubric_assessment]"] = grade_data_<student_id>_rubric_assessment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][text_comment]
+    #     """no description"""
+    #     if grade_data_<student_id>_text_comment is not None:
+    #         data["grade_data[<student_id>][text_comment]"] = grade_data_<student_id>_text_comment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][group_comment]
+    #     """no description"""
+    #     if grade_data_<student_id>_group_comment is not None:
+    #         data["grade_data[<student_id>][group_comment]"] = grade_data_<student_id>_group_comment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][media_comment_id]
+    #     """no description"""
+    #     if grade_data_<student_id>_media_comment_id is not None:
+    #         data["grade_data[<student_id>][media_comment_id]"] = grade_data_<student_id>_media_comment_id
+    #
+    #     # OPTIONAL - grade_data[<student_id>][media_comment_type]
+    #     """no description"""
+    #     if grade_data_<student_id>_media_comment_type is not None:
+    #         self._validate_enum(grade_data_<student_id>_media_comment_type, ["audio", "video"])
+    #         data["grade_data[<student_id>][media_comment_type]"] = grade_data_<student_id>_media_comment_type
+    #
+    #     # OPTIONAL - grade_data[<student_id>][file_ids]
+    #     """See documentation for the comment[] arguments in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_file_ids is not None:
+    #         data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
+    #
+    #     # OPTIONAL - grade_data[<student_id>][assignment_id]
+    #     """Specifies which assignment to grade.  This argument is not necessary when
+    #     using the assignment-specific endpoints."""
+    #     if grade_data_<student_id>_assignment_id is not None:
+    #         data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
+    #
+    #     self.logger.debug("POST /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+    #     return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
+    #
+    # def grade_or_comment_on_multiple_submissions_sections_submissions(self, section_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
+    #     """
+    #     Grade or comment on multiple submissions.
+    #
+    #     Update the grading and comments on multiple student's assignment
+    #     submissions in an asynchronous job.
+    #
+    #     The user must have permission to manage grades in the appropriate context
+    #     (course or section).
+    #     """
+    #     path = {}
+    #     data = {}
+    #     params = {}
+    #
+    #     # REQUIRED - PATH - section_id
+    #     """ID"""
+    #     path["section_id"] = section_id
+    #
+    #     # OPTIONAL - grade_data[<student_id>][posted_grade]
+    #     """See documentation for the posted_grade argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_posted_grade is not None:
+    #         data["grade_data[<student_id>][posted_grade]"] = grade_data_<student_id>_posted_grade
+    #
+    #     # OPTIONAL - grade_data[<student_id>][excuse]
+    #     """See documentation for the excuse argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_excuse is not None:
+    #         data["grade_data[<student_id>][excuse]"] = grade_data_<student_id>_excuse
+    #
+    #     # OPTIONAL - grade_data[<student_id>][rubric_assessment]
+    #     """See documentation for the rubric_assessment argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_rubric_assessment is not None:
+    #         data["grade_data[<student_id>][rubric_assessment]"] = grade_data_<student_id>_rubric_assessment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][text_comment]
+    #     """no description"""
+    #     if grade_data_<student_id>_text_comment is not None:
+    #         data["grade_data[<student_id>][text_comment]"] = grade_data_<student_id>_text_comment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][group_comment]
+    #     """no description"""
+    #     if grade_data_<student_id>_group_comment is not None:
+    #         data["grade_data[<student_id>][group_comment]"] = grade_data_<student_id>_group_comment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][media_comment_id]
+    #     """no description"""
+    #     if grade_data_<student_id>_media_comment_id is not None:
+    #         data["grade_data[<student_id>][media_comment_id]"] = grade_data_<student_id>_media_comment_id
+    #
+    #     # OPTIONAL - grade_data[<student_id>][media_comment_type]
+    #     """no description"""
+    #     if grade_data_<student_id>_media_comment_type is not None:
+    #         self._validate_enum(grade_data_<student_id>_media_comment_type, ["audio", "video"])
+    #         data["grade_data[<student_id>][media_comment_type]"] = grade_data_<student_id>_media_comment_type
+    #
+    #     # OPTIONAL - grade_data[<student_id>][file_ids]
+    #     """See documentation for the comment[] arguments in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_file_ids is not None:
+    #         data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
+    #
+    #     # OPTIONAL - grade_data[<student_id>][assignment_id]
+    #     """Specifies which assignment to grade.  This argument is not necessary when
+    #     using the assignment-specific endpoints."""
+    #     if grade_data_<student_id>_assignment_id is not None:
+    #         data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
+    #
+    #     self.logger.debug("POST /api/v1/sections/{section_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+    #     return self.generic_request("POST", "/api/v1/sections/{section_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
+    #
+    # def grade_or_comment_on_multiple_submissions_sections_assignments(self, section_id, assignment_id, grade_data_<student_id>_assignment_id=None, grade_data_<student_id>_excuse=None, grade_data_<student_id>_file_ids=None, grade_data_<student_id>_group_comment=None, grade_data_<student_id>_media_comment_id=None, grade_data_<student_id>_media_comment_type=None, grade_data_<student_id>_posted_grade=None, grade_data_<student_id>_rubric_assessment=None, grade_data_<student_id>_text_comment=None):
+    #     """
+    #     Grade or comment on multiple submissions.
+    #
+    #     Update the grading and comments on multiple student's assignment
+    #     submissions in an asynchronous job.
+    #
+    #     The user must have permission to manage grades in the appropriate context
+    #     (course or section).
+    #     """
+    #     path = {}
+    #     data = {}
+    #     params = {}
+    #
+    #     # REQUIRED - PATH - section_id
+    #     """ID"""
+    #     path["section_id"] = section_id
+    #
+    #     # REQUIRED - PATH - assignment_id
+    #     """ID"""
+    #     path["assignment_id"] = assignment_id
+    #
+    #     # OPTIONAL - grade_data[<student_id>][posted_grade]
+    #     """See documentation for the posted_grade argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_posted_grade is not None:
+    #         data["grade_data[<student_id>][posted_grade]"] = grade_data_<student_id>_posted_grade
+    #
+    #     # OPTIONAL - grade_data[<student_id>][excuse]
+    #     """See documentation for the excuse argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_excuse is not None:
+    #         data["grade_data[<student_id>][excuse]"] = grade_data_<student_id>_excuse
+    #
+    #     # OPTIONAL - grade_data[<student_id>][rubric_assessment]
+    #     """See documentation for the rubric_assessment argument in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_rubric_assessment is not None:
+    #         data["grade_data[<student_id>][rubric_assessment]"] = grade_data_<student_id>_rubric_assessment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][text_comment]
+    #     """no description"""
+    #     if grade_data_<student_id>_text_comment is not None:
+    #         data["grade_data[<student_id>][text_comment]"] = grade_data_<student_id>_text_comment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][group_comment]
+    #     """no description"""
+    #     if grade_data_<student_id>_group_comment is not None:
+    #         data["grade_data[<student_id>][group_comment]"] = grade_data_<student_id>_group_comment
+    #
+    #     # OPTIONAL - grade_data[<student_id>][media_comment_id]
+    #     """no description"""
+    #     if grade_data_<student_id>_media_comment_id is not None:
+    #         data["grade_data[<student_id>][media_comment_id]"] = grade_data_<student_id>_media_comment_id
+    #
+    #     # OPTIONAL - grade_data[<student_id>][media_comment_type]
+    #     """no description"""
+    #     if grade_data_<student_id>_media_comment_type is not None:
+    #         self._validate_enum(grade_data_<student_id>_media_comment_type, ["audio", "video"])
+    #         data["grade_data[<student_id>][media_comment_type]"] = grade_data_<student_id>_media_comment_type
+    #
+    #     # OPTIONAL - grade_data[<student_id>][file_ids]
+    #     """See documentation for the comment[] arguments in the
+    #     {api:SubmissionsApiController#update Submissions Update} documentation"""
+    #     if grade_data_<student_id>_file_ids is not None:
+    #         data["grade_data[<student_id>][file_ids]"] = grade_data_<student_id>_file_ids
+    #
+    #     # OPTIONAL - grade_data[<student_id>][assignment_id]
+    #     """Specifies which assignment to grade.  This argument is not necessary when
+    #     using the assignment-specific endpoints."""
+    #     if grade_data_<student_id>_assignment_id is not None:
+    #         data["grade_data[<student_id>][assignment_id]"] = grade_data_<student_id>_assignment_id
+    #
+    #     self.logger.debug("POST /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/update_grades with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+    #     return self.generic_request("POST", "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/update_grades".format(**path), data=data, params=params, single_item=True)
 
     def mark_submission_as_read_courses(self, user_id, course_id, assignment_id):
         """
