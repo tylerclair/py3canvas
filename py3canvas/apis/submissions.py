@@ -420,7 +420,7 @@ class SubmissionsAPI(BaseCanvasAPI):
             params["include"] = include
 
         self.logger.debug("GET /api/v1/sections/{section_id}/students/submissions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/sections/{section_id}/students/submissions".format(**path), data=data, params=params, no_data=True)
+        return self.generic_request("GET", "/api/v1/sections/{section_id}/students/submissions".format(**path), data=data, params=params, all_pages=True)
 
     def get_single_submission_courses(self, user_id, course_id, assignment_id, include=None):
         """
@@ -451,7 +451,7 @@ class SubmissionsAPI(BaseCanvasAPI):
             params["include"] = include
 
         self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{user_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{user_id}".format(**path), data=data, params=params, no_data=True)
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{user_id}".format(**path), data=data, params=params, all_pages=True)
 
     def get_single_submission_sections(self, user_id, section_id, assignment_id, include=None):
         """
