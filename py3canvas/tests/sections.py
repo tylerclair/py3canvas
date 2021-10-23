@@ -47,7 +47,7 @@ class TestSectionsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_section_information_courses(id, course_id, include=None)
+        r = self.client.get_section_information_courses(course_id, id, include=None)
 
     def test_get_section_information_sections(self):
         """Integration test for the SectionsAPI.get_section_information_sections method."""

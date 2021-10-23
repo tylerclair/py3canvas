@@ -39,5 +39,10 @@ class TestCommunicationChannelsAPI(unittest.TestCase):
         type = None  # Change me!!
         address = None  # Change me!!
 
-        r = self.client.delete_communication_channel_type(type, user_id, address)
+        r = self.client.delete_communication_channel_type(address, type, user_id)
+
+    def test_delete_push_notification_endpoint(self):
+        """Integration test for the CommunicationChannelsAPI.delete_push_notification_endpoint method."""
+
+        r = self.client.delete_push_notification_endpoint()
 

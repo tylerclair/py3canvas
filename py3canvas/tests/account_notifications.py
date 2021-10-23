@@ -18,25 +18,22 @@ class TestAccountNotificationsAPI(unittest.TestCase):
     def test_index_of_active_global_notification_for_user(self):
         """Integration test for the AccountNotificationsAPI.index_of_active_global_notification_for_user method."""
         account_id = None  # Change me!!
-        user_id = None  # Change me!!
 
-        r = self.client.index_of_active_global_notification_for_user(user_id, account_id)
+        r = self.client.index_of_active_global_notification_for_user(account_id, include_past=None)
 
     def test_show_global_notification(self):
         """Integration test for the AccountNotificationsAPI.show_global_notification method."""
         account_id = None  # Change me!!
-        user_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.show_global_notification(id, user_id, account_id)
+        r = self.client.show_global_notification(account_id, id)
 
     def test_close_notification_for_user(self):
         """Integration test for the AccountNotificationsAPI.close_notification_for_user method."""
         account_id = None  # Change me!!
-        user_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.close_notification_for_user(id, user_id, account_id)
+        r = self.client.close_notification_for_user(account_id, id)
 
     def test_create_global_notification(self):
         """Integration test for the AccountNotificationsAPI.create_global_notification method."""

@@ -16,33 +16,41 @@ class AccountNotificationsAPI(BaseCanvasAPI):
         super(AccountNotificationsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.AccountNotificationsAPI")
 
-    def index_of_active_global_notification_for_user(self, user_id, account_id):
+    def index_of_active_global_notification_for_user(self, account_id, include_past=None):
         """
         Index of active global notification for the user.
 
-        Returns a list of all global notifications in the account for this user
-        Any notifications that have been closed by the user will not be returned
+        Returns a list of all global notifications in the account for the current user
+        Any notifications that have been closed by the user will not be returned, unless
+        a include_past parameter is passed in as true.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
-        # REQUIRED - PATH - user_id
-        """ID"""
-        path["user_id"] = user_id
 
-        self.logger.debug("GET /api/v1/accounts/{account_id}/users/{user_id}/account_notifications with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/users/{user_id}/account_notifications".format(**path), data=data, params=params, all_pages=True)
+        # OPTIONAL - include_past
+        """
+            Include past and dismissed global announcements.
+        """
+        if include_past is not None:
+            params["include_past"] = include_past
 
-    def show_global_notification(self, id, user_id, account_id):
+
+        self.logger.debug("GET /api/v1/accounts/{account_id}/account_notifications with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/accounts/{account_id}/account_notifications".format(**path), data=data, params=params, all_pages=True)
+
+    def show_global_notification(self, account_id, id):
         """
         Show a global notification.
 
-        Returns a global notification
+        Returns a global notification for the current user
         A notification that has been closed by the user will not be returned
         """
         path = {}
@@ -50,46 +58,50 @@ class AccountNotificationsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
-        # REQUIRED - PATH - user_id
-        """ID"""
-        path["user_id"] = user_id
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
-        self.logger.debug("GET /api/v1/accounts/{account_id}/users/{user_id}/account_notifications/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/users/{user_id}/account_notifications/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def close_notification_for_user(self, id, user_id, account_id):
+        self.logger.debug("GET /api/v1/accounts/{account_id}/account_notifications/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/accounts/{account_id}/account_notifications/{id}".format(**path), data=data, params=params, single_item=True)
+
+    def close_notification_for_user(self, account_id, id):
         """
         Close notification for user.
 
-        If the user no long wants to see this notification it can be excused with this call
+        If the current user no long wants to see this notification it can be excused with this call
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
-        # REQUIRED - PATH - user_id
-        """ID"""
-        path["user_id"] = user_id
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
-        self.logger.debug("DELETE /api/v1/accounts/{account_id}/users/{user_id}/account_notifications/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/users/{user_id}/account_notifications/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def create_global_notification(self, account_id, account_notification_end_at, account_notification_subject, account_notification_message, account_notification_start_at, account_notification_icon=None, account_notification_roles=None):
+        self.logger.debug("DELETE /api/v1/accounts/{account_id}/account_notifications/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/account_notifications/{id}".format(**path), data=data, params=params, single_item=True)
+
+    def create_global_notification(self, account_id, account_notification_end_at, account_notification_message, account_notification_start_at, account_notification_subject, account_notification_icon=None, account_notification_roles=None):
         """
         Create a global notification.
 
@@ -100,53 +112,74 @@ class AccountNotificationsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # REQUIRED - account_notification[subject]
-        """The subject of the notification."""
+        """
+            The subject of the notification.
+        """
         data["account_notification[subject]"] = account_notification_subject
 
+
         # REQUIRED - account_notification[message]
-        """The message body of the notification."""
+        """
+            The message body of the notification.
+        """
         data["account_notification[message]"] = account_notification_message
 
+
         # REQUIRED - account_notification[start_at]
-        """The start date and time of the notification in ISO8601 format.
-        e.g. 2014-01-01T01:00Z"""
+        """
+            The start date and time of the notification in ISO8601 format.
+        e.g. 2014-01-01T01:00Z
+        """
         if issubclass(account_notification_start_at.__class__, str):
             account_notification_start_at = self._validate_iso8601_string(account_notification_start_at)
         elif issubclass(account_notification_start_at.__class__, date) or issubclass(account_notification_start_at.__class__, datetime):
             account_notification_start_at = account_notification_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
         data["account_notification[start_at]"] = account_notification_start_at
 
+
         # REQUIRED - account_notification[end_at]
-        """The end date and time of the notification in ISO8601 format.
-        e.g. 2014-01-01T01:00Z"""
+        """
+            The end date and time of the notification in ISO8601 format.
+        e.g. 2014-01-01T01:00Z
+        """
         if issubclass(account_notification_end_at.__class__, str):
             account_notification_end_at = self._validate_iso8601_string(account_notification_end_at)
         elif issubclass(account_notification_end_at.__class__, date) or issubclass(account_notification_end_at.__class__, datetime):
             account_notification_end_at = account_notification_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
         data["account_notification[end_at]"] = account_notification_end_at
 
+
         # OPTIONAL - account_notification[icon]
-        """The icon to display with the notification.
-        Note: Defaults to warning."""
+        """
+            The icon to display with the notification.
+        Note: Defaults to warning.
+        """
         if account_notification_icon is not None:
             self._validate_enum(account_notification_icon, ["warning", "information", "question", "error", "calendar"])
             data["account_notification[icon]"] = account_notification_icon
 
+
         # OPTIONAL - account_notification_roles
-        """The role(s) to send global notification to.  Note:  ommitting this field will send to everyone
+        """
+            The role(s) to send global notification to.  Note:  ommitting this field will send to everyone
         Example:
-          account_notification_roles: ["StudentEnrollment", "TeacherEnrollment"]"""
+          account_notification_roles: ["StudentEnrollment", "TeacherEnrollment"]
+        """
         if account_notification_roles is not None:
             data["account_notification_roles"] = account_notification_roles
+
 
         self.logger.debug("POST /api/v1/accounts/{account_id}/account_notifications with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/accounts/{account_id}/account_notifications".format(**path), data=data, params=params, no_data=True)
 
-    def update_global_notification(self, id, account_id, account_notification_end_at=None, account_notification_icon=None, account_notification_message=None, account_notification_roles=None, account_notification_start_at=None, account_notification_subject=None):
+    def update_global_notification(self, account_id, id, account_notification_end_at=None, account_notification_icon=None, account_notification_message=None, account_notification_roles=None, account_notification_start_at=None, account_notification_subject=None):
         """
         Update a global notification.
 
@@ -157,26 +190,40 @@ class AccountNotificationsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - account_notification[subject]
-        """The subject of the notification."""
+        """
+            The subject of the notification.
+        """
         if account_notification_subject is not None:
             data["account_notification[subject]"] = account_notification_subject
 
+
         # OPTIONAL - account_notification[message]
-        """The message body of the notification."""
+        """
+            The message body of the notification.
+        """
         if account_notification_message is not None:
             data["account_notification[message]"] = account_notification_message
 
+
         # OPTIONAL - account_notification[start_at]
-        """The start date and time of the notification in ISO8601 format.
-        e.g. 2014-01-01T01:00Z"""
+        """
+            The start date and time of the notification in ISO8601 format.
+        e.g. 2014-01-01T01:00Z
+        """
         if account_notification_start_at is not None:
             if issubclass(account_notification_start_at.__class__, str):
                 account_notification_start_at = self._validate_iso8601_string(account_notification_start_at)
@@ -184,9 +231,12 @@ class AccountNotificationsAPI(BaseCanvasAPI):
                 account_notification_start_at = account_notification_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["account_notification[start_at]"] = account_notification_start_at
 
+
         # OPTIONAL - account_notification[end_at]
-        """The end date and time of the notification in ISO8601 format.
-        e.g. 2014-01-01T01:00Z"""
+        """
+            The end date and time of the notification in ISO8601 format.
+        e.g. 2014-01-01T01:00Z
+        """
         if account_notification_end_at is not None:
             if issubclass(account_notification_end_at.__class__, str):
                 account_notification_end_at = self._validate_iso8601_string(account_notification_end_at)
@@ -194,18 +244,25 @@ class AccountNotificationsAPI(BaseCanvasAPI):
                 account_notification_end_at = account_notification_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["account_notification[end_at]"] = account_notification_end_at
 
+
         # OPTIONAL - account_notification[icon]
-        """The icon to display with the notification."""
+        """
+            The icon to display with the notification.
+        """
         if account_notification_icon is not None:
             self._validate_enum(account_notification_icon, ["warning", "information", "question", "error", "calendar"])
             data["account_notification[icon]"] = account_notification_icon
 
+
         # OPTIONAL - account_notification_roles
-        """The role(s) to send global notification to.  Note:  ommitting this field will send to everyone
+        """
+            The role(s) to send global notification to.  Note:  ommitting this field will send to everyone
         Example:
-          account_notification_roles: ["StudentEnrollment", "TeacherEnrollment"]"""
+          account_notification_roles: ["StudentEnrollment", "TeacherEnrollment"]
+        """
         if account_notification_roles is not None:
             data["account_notification_roles"] = account_notification_roles
+
 
         self.logger.debug("PUT /api/v1/accounts/{account_id}/account_notifications/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/accounts/{account_id}/account_notifications/{id}".format(**path), data=data, params=params, no_data=True)
@@ -214,72 +271,17 @@ class AccountNotificationsAPI(BaseCanvasAPI):
 class Accountnotification(BaseModel):
     """Accountnotification Model."""
 
-    def __init__(self, role_ids=None, start_at=None, roles=None, end_at=None, message=None, subject=None, icon=None):
+    def __init__(self, subject=None, message=None, start_at=None, end_at=None, icon=None, roles=None, role_ids=None):
         """Init method for Accountnotification class."""
-        self._role_ids = role_ids
-        self._start_at = start_at
-        self._roles = roles
-        self._end_at = end_at
-        self._message = message
         self._subject = subject
+        self._message = message
+        self._start_at = start_at
+        self._end_at = end_at
         self._icon = icon
+        self._roles = roles
+        self._role_ids = role_ids
 
         self.logger = logging.getLogger('py3canvas.Accountnotification')
-
-    @property
-    def role_ids(self):
-        """The roles to send the notification to.  If roles is not passed it defaults to all roles."""
-        return self._role_ids
-
-    @role_ids.setter
-    def role_ids(self, value):
-        """Setter for role_ids property."""
-        self.logger.warn("Setting values on role_ids will NOT update the remote Canvas instance.")
-        self._role_ids = value
-
-    @property
-    def start_at(self):
-        """When to send out the notification."""
-        return self._start_at
-
-    @start_at.setter
-    def start_at(self, value):
-        """Setter for start_at property."""
-        self.logger.warn("Setting values on start_at will NOT update the remote Canvas instance.")
-        self._start_at = value
-
-    @property
-    def roles(self):
-        """(Deprecated) The roles to send the notification to.  If roles is not passed it defaults to all roles."""
-        return self._roles
-
-    @roles.setter
-    def roles(self, value):
-        """Setter for roles property."""
-        self.logger.warn("Setting values on roles will NOT update the remote Canvas instance.")
-        self._roles = value
-
-    @property
-    def end_at(self):
-        """When to expire the notification."""
-        return self._end_at
-
-    @end_at.setter
-    def end_at(self, value):
-        """Setter for end_at property."""
-        self.logger.warn("Setting values on end_at will NOT update the remote Canvas instance.")
-        self._end_at = value
-
-    @property
-    def message(self):
-        """The message to be sent in the notification."""
-        return self._message
-
-    @message.setter
-    def message(self, value):
-        """Setter for message property."""
-        self.logger.warn("Setting values on message will NOT update the remote Canvas instance.")
-        self._message = value
 
     @property
     def subject(self):
@@ -293,6 +295,39 @@ class Accountnotification(BaseModel):
         self._subject = value
 
     @property
+    def message(self):
+        """The message to be sent in the notification."""
+        return self._message
+
+    @message.setter
+    def message(self, value):
+        """Setter for message property."""
+        self.logger.warn("Setting values on message will NOT update the remote Canvas instance.")
+        self._message = value
+
+    @property
+    def start_at(self):
+        """When to send out the notification."""
+        return self._start_at
+
+    @start_at.setter
+    def start_at(self, value):
+        """Setter for start_at property."""
+        self.logger.warn("Setting values on start_at will NOT update the remote Canvas instance.")
+        self._start_at = value
+
+    @property
+    def end_at(self):
+        """When to expire the notification."""
+        return self._end_at
+
+    @end_at.setter
+    def end_at(self, value):
+        """Setter for end_at property."""
+        self.logger.warn("Setting values on end_at will NOT update the remote Canvas instance.")
+        self._end_at = value
+
+    @property
     def icon(self):
         """The icon to display with the message.  Defaults to warning."""
         return self._icon
@@ -302,4 +337,26 @@ class Accountnotification(BaseModel):
         """Setter for icon property."""
         self.logger.warn("Setting values on icon will NOT update the remote Canvas instance.")
         self._icon = value
+
+    @property
+    def roles(self):
+        """(Deprecated) The roles to send the notification to.  If roles is not passed it defaults to all roles."""
+        return self._roles
+
+    @roles.setter
+    def roles(self, value):
+        """Setter for roles property."""
+        self.logger.warn("Setting values on roles will NOT update the remote Canvas instance.")
+        self._roles = value
+
+    @property
+    def role_ids(self):
+        """The roles to send the notification to.  If roles is not passed it defaults to all roles."""
+        return self._role_ids
+
+    @role_ids.setter
+    def role_ids(self, value):
+        """Setter for role_ids property."""
+        self.logger.warn("Setting values on role_ids will NOT update the remote Canvas instance.")
+        self._role_ids = value
 

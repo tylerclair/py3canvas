@@ -21,3 +21,10 @@ class TestProgressAPI(unittest.TestCase):
 
         r = self.client.query_progress(id)
 
+    def test_query_progress(self):
+        """Integration test for the ProgressAPI.query_progress method."""
+        course_id = None  # Change me!!
+        id = None  # Change me!!
+
+        r = self.client.query_progress(course_id, id)
+

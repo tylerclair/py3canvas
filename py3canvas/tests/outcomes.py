@@ -7,6 +7,7 @@ import requests
 import secrets
 from py3canvas.apis.outcomes import OutcomesAPI
 from py3canvas.apis.outcomes import Outcome
+from py3canvas.apis.outcomes import Outcomealignment
 
 
 class TestOutcomesAPI(unittest.TestCase):
@@ -25,4 +26,10 @@ class TestOutcomesAPI(unittest.TestCase):
         """Integration test for the OutcomesAPI.update_outcome method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
+
+    def test_get_aligned_assignments_for_outcome_in_course_for_particular_student(self):
+        """Integration test for the OutcomesAPI.get_aligned_assignments_for_outcome_in_course_for_particular_student method."""
+        course_id = None  # Change me!!
+
+        r = self.client.get_aligned_assignments_for_outcome_in_course_for_particular_student(course_id, student_id=None)
 

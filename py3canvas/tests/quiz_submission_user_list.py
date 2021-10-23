@@ -6,9 +6,9 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.quiz_submission_user_list import QuizSubmissionUserListAPI
-from py3canvas.apis.quiz_submission_user_list import Jsonapipagination
-from py3canvas.apis.quiz_submission_user_list import Quizsubmissionuserlistmeta
 from py3canvas.apis.quiz_submission_user_list import Quizsubmissionuserlist
+from py3canvas.apis.quiz_submission_user_list import Quizsubmissionuserlistmeta
+from py3canvas.apis.quiz_submission_user_list import Jsonapipagination
 
 
 class TestQuizSubmissionUserListAPI(unittest.TestCase):

@@ -26,5 +26,5 @@ class TestQuizSubmissionEventsAPI(unittest.TestCase):
         quiz_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.retrieve_captured_events(id, quiz_id, course_id, attempt=None)
+        r = self.client.retrieve_captured_events(course_id, id, quiz_id, attempt=None)
 

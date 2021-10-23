@@ -20,24 +20,30 @@ class GroupsAPI(BaseCanvasAPI):
         """
         List your groups.
 
-        Returns a list of active groups for the current user.
+        Returns a paginated list of active groups for the current user.
         """
         path = {}
         data = {}
         params = {}
 
         # OPTIONAL - context_type
-        """Only include groups that are in this type of context."""
+        """
+            Only include groups that are in this type of context.
+        """
         if context_type is not None:
             self._validate_enum(context_type, ["Account", "Course"])
             params["context_type"] = context_type
 
+
         # OPTIONAL - include
-        """- "tabs": Include the list of tabs configured for each group.  See the
-          {api:TabsController#index List available tabs API} for more information."""
+        """
+            - "tabs": Include the list of tabs configured for each group.  See the
+          {api:TabsController#index List available tabs API} for more information.
+        """
         if include is not None:
             self._validate_enum(include, ["tabs"])
             params["include"] = include
+
 
         self.logger.debug("GET /api/v1/users/self/groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/self/groups".format(**path), data=data, params=params, all_pages=True)
@@ -46,27 +52,36 @@ class GroupsAPI(BaseCanvasAPI):
         """
         List the groups available in a context.
 
-        Returns the list of active groups in the given context that are visible to user.
+        Returns the paginated list of active groups in the given context that are visible to user.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # OPTIONAL - only_own_groups
-        """Will only include groups that the user belongs to if this is set"""
+        """
+            Will only include groups that the user belongs to if this is set
+        """
         if only_own_groups is not None:
             params["only_own_groups"] = only_own_groups
 
+
         # OPTIONAL - include
-        """- "tabs": Include the list of tabs configured for each group.  See the
-          {api:TabsController#index List available tabs API} for more information."""
+        """
+            - "tabs": Include the list of tabs configured for each group.  See the
+          {api:TabsController#index List available tabs API} for more information.
+        """
         if include is not None:
             self._validate_enum(include, ["tabs"])
             params["include"] = include
+
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/groups".format(**path), data=data, params=params, all_pages=True)
@@ -75,27 +90,36 @@ class GroupsAPI(BaseCanvasAPI):
         """
         List the groups available in a context.
 
-        Returns the list of active groups in the given context that are visible to user.
+        Returns the paginated list of active groups in the given context that are visible to user.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # OPTIONAL - only_own_groups
-        """Will only include groups that the user belongs to if this is set"""
+        """
+            Will only include groups that the user belongs to if this is set
+        """
         if only_own_groups is not None:
             params["only_own_groups"] = only_own_groups
 
+
         # OPTIONAL - include
-        """- "tabs": Include the list of tabs configured for each group.  See the
-          {api:TabsController#index List available tabs API} for more information."""
+        """
+            - "tabs": Include the list of tabs configured for each group.  See the
+          {api:TabsController#index List available tabs API} for more information.
+        """
         if include is not None:
             self._validate_enum(include, ["tabs"])
             params["include"] = include
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/groups".format(**path), data=data, params=params, all_pages=True)
@@ -112,22 +136,28 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # OPTIONAL - include
-        """- "permissions": Include permissions the current user has
+        """
+            - "permissions": Include permissions the current user has
           for the group.
         - "tabs": Include the list of tabs configured for each group.  See the
-          {api:TabsController#index List available tabs API} for more information."""
+          {api:TabsController#index List available tabs API} for more information.
+        """
         if include is not None:
             self._validate_enum(include, ["permissions", "tabs"])
             params["include"] = include
 
+
         self.logger.debug("GET /api/v1/groups/{group_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}".format(**path), data=data, params=params, single_item=True)
 
-    def create_group_groups(self, description=None, is_public=None, join_level=None, name=None, storage_quota_mb=None):
+    def create_group_groups(self, description=None, is_public=None, join_level=None, name=None, sis_group_id=None, storage_quota_mb=None):
         """
         Create a group.
 
@@ -139,36 +169,59 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # OPTIONAL - name
-        """The name of the group"""
+        """
+            The name of the group
+        """
         if name is not None:
             data["name"] = name
 
+
         # OPTIONAL - description
-        """A description of the group"""
+        """
+            A description of the group
+        """
         if description is not None:
             data["description"] = description
 
+
         # OPTIONAL - is_public
-        """whether the group is public (applies only to community groups)"""
+        """
+            whether the group is public (applies only to community groups)
+        """
         if is_public is not None:
             data["is_public"] = is_public
 
+
         # OPTIONAL - join_level
-        """no description"""
+        """
+            no description
+        """
         if join_level is not None:
             self._validate_enum(join_level, ["parent_context_auto_join", "parent_context_request", "invitation_only"])
             data["join_level"] = join_level
 
+
         # OPTIONAL - storage_quota_mb
-        """The allowed file storage for the group, in megabytes. This parameter is
-        ignored if the caller does not have the manage_storage_quotas permission."""
+        """
+            The allowed file storage for the group, in megabytes. This parameter is
+        ignored if the caller does not have the manage_storage_quotas permission.
+        """
         if storage_quota_mb is not None:
             data["storage_quota_mb"] = storage_quota_mb
+
+
+        # OPTIONAL - sis_group_id
+        """
+            The sis ID of the group. Must have manage_sis permission to set.
+        """
+        if sis_group_id is not None:
+            data["sis_group_id"] = sis_group_id
+
 
         self.logger.debug("POST /api/v1/groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/groups".format(**path), data=data, params=params, single_item=True)
 
-    def create_group_group_categories(self, group_category_id, description=None, is_public=None, join_level=None, name=None, storage_quota_mb=None):
+    def create_group_group_categories(self, group_category_id, description=None, is_public=None, join_level=None, name=None, sis_group_id=None, storage_quota_mb=None):
         """
         Create a group.
 
@@ -180,40 +233,66 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_category_id
-        """ID"""
+        """
+            ID
+        """
         path["group_category_id"] = group_category_id
 
+
         # OPTIONAL - name
-        """The name of the group"""
+        """
+            The name of the group
+        """
         if name is not None:
             data["name"] = name
 
+
         # OPTIONAL - description
-        """A description of the group"""
+        """
+            A description of the group
+        """
         if description is not None:
             data["description"] = description
 
+
         # OPTIONAL - is_public
-        """whether the group is public (applies only to community groups)"""
+        """
+            whether the group is public (applies only to community groups)
+        """
         if is_public is not None:
             data["is_public"] = is_public
 
+
         # OPTIONAL - join_level
-        """no description"""
+        """
+            no description
+        """
         if join_level is not None:
             self._validate_enum(join_level, ["parent_context_auto_join", "parent_context_request", "invitation_only"])
             data["join_level"] = join_level
 
+
         # OPTIONAL - storage_quota_mb
-        """The allowed file storage for the group, in megabytes. This parameter is
-        ignored if the caller does not have the manage_storage_quotas permission."""
+        """
+            The allowed file storage for the group, in megabytes. This parameter is
+        ignored if the caller does not have the manage_storage_quotas permission.
+        """
         if storage_quota_mb is not None:
             data["storage_quota_mb"] = storage_quota_mb
+
+
+        # OPTIONAL - sis_group_id
+        """
+            The sis ID of the group. Must have manage_sis permission to set.
+        """
+        if sis_group_id is not None:
+            data["sis_group_id"] = sis_group_id
+
 
         self.logger.debug("POST /api/v1/group_categories/{group_category_id}/groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/group_categories/{group_category_id}/groups".format(**path), data=data, params=params, single_item=True)
 
-    def edit_group(self, group_id, avatar_id=None, description=None, is_public=None, join_level=None, members=None, name=None, storage_quota_mb=None):
+    def edit_group(self, group_id, avatar_id=None, description=None, is_public=None, join_level=None, members=None, name=None, sis_group_id=None, storage_quota_mb=None):
         """
         Edit a group.
 
@@ -228,49 +307,81 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # OPTIONAL - name
-        """The name of the group"""
+        """
+            The name of the group
+        """
         if name is not None:
             data["name"] = name
 
+
         # OPTIONAL - description
-        """A description of the group"""
+        """
+            A description of the group
+        """
         if description is not None:
             data["description"] = description
 
+
         # OPTIONAL - is_public
-        """Whether the group is public (applies only to community groups). Currently
-        you cannot set a group back to private once it has been made public."""
+        """
+            Whether the group is public (applies only to community groups). Currently
+        you cannot set a group back to private once it has been made public.
+        """
         if is_public is not None:
             data["is_public"] = is_public
 
+
         # OPTIONAL - join_level
-        """no description"""
+        """
+            no description
+        """
         if join_level is not None:
             self._validate_enum(join_level, ["parent_context_auto_join", "parent_context_request", "invitation_only"])
             data["join_level"] = join_level
 
+
         # OPTIONAL - avatar_id
-        """The id of the attachment previously uploaded to the group that you would
-        like to use as the avatar image for this group."""
+        """
+            The id of the attachment previously uploaded to the group that you would
+        like to use as the avatar image for this group.
+        """
         if avatar_id is not None:
             data["avatar_id"] = avatar_id
 
+
         # OPTIONAL - storage_quota_mb
-        """The allowed file storage for the group, in megabytes. This parameter is
-        ignored if the caller does not have the manage_storage_quotas permission."""
+        """
+            The allowed file storage for the group, in megabytes. This parameter is
+        ignored if the caller does not have the manage_storage_quotas permission.
+        """
         if storage_quota_mb is not None:
             data["storage_quota_mb"] = storage_quota_mb
 
+
         # OPTIONAL - members
-        """An array of user ids for users you would like in the group.
+        """
+            An array of user ids for users you would like in the group.
         Users not in the group will be sent invitations. Existing group
-        members who aren't in the list will be removed from the group."""
+        members who aren't in the list will be removed from the group.
+        """
         if members is not None:
             data["members"] = members
+
+
+        # OPTIONAL - sis_group_id
+        """
+            The sis ID of the group. Must have manage_sis permission to set.
+        """
+        if sis_group_id is not None:
+            data["sis_group_id"] = sis_group_id
+
 
         self.logger.debug("PUT /api/v1/groups/{group_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/groups/{group_id}".format(**path), data=data, params=params, single_item=True)
@@ -286,8 +397,11 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
+
 
         self.logger.debug("DELETE /api/v1/groups/{group_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/groups/{group_id}".format(**path), data=data, params=params, single_item=True)
@@ -304,41 +418,65 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - invitees
-        """An array of email addresses to be sent invitations."""
+        """
+            An array of email addresses to be sent invitations.
+        """
         data["invitees"] = invitees
+
 
         self.logger.debug("POST /api/v1/groups/{group_id}/invite with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/groups/{group_id}/invite".format(**path), data=data, params=params, no_data=True)
 
-    def list_group_s_users(self, group_id, include=None, search_term=None):
+    def list_group_s_users(self, group_id, exclude_inactive=None, include=None, search_term=None):
         """
         List group's users.
 
-        Returns a list of users in the group.
+        Returns a paginated list of users in the group.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # OPTIONAL - search_term
-        """The partial name or full ID of the users to match and return in the
-        results list. Must be at least 3 characters."""
+        """
+            The partial name or full ID of the users to match and return in the
+        results list. Must be at least 3 characters.
+        """
         if search_term is not None:
             params["search_term"] = search_term
 
+
         # OPTIONAL - include
-        """- "avatar_url": Include users' avatar_urls."""
+        """
+            "avatar_url": Include users' avatar_urls.
+        """
         if include is not None:
             self._validate_enum(include, ["avatar_url"])
             params["include"] = include
+
+
+        # OPTIONAL - exclude_inactive
+        """
+            Whether to filter out inactive users from the results. Defaults to
+        false unless explicitly provided.
+        """
+        if exclude_inactive is not None:
+            params["exclude_inactive"] = exclude_inactive
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/users with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/users".format(**path), data=data, params=params, all_pages=True)
@@ -362,8 +500,11 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
+
 
         self.logger.debug("POST /api/v1/groups/{group_id}/files with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/groups/{group_id}/files".format(**path), data=data, params=params, no_data=True)
@@ -379,13 +520,19 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # OPTIONAL - html
-        """The html content to process"""
+        """
+            The html content to process
+        """
         if html is not None:
             data["html"] = html
+
 
         self.logger.debug("POST /api/v1/groups/{group_id}/preview_html with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/groups/{group_id}/preview_html".format(**path), data=data, params=params, no_data=True)
@@ -404,8 +551,11 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/activity_stream with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/activity_stream".format(**path), data=data, params=params, no_data=True)
@@ -424,32 +574,72 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/activity_stream/summary with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/activity_stream/summary".format(**path), data=data, params=params, no_data=True)
 
-    def list_group_memberships(self, group_id, filter_states=None):
+    def permissions(self, group_id, permissions=None):
         """
-        List group memberships.
+        Permissions.
 
-        List the members of a group.
+        Returns permission information for the calling user in the given group.
+        See also the {api:AccountsController#permissions Account} and
+        {api:CoursesController#permissions Course} counterparts.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
+        # OPTIONAL - permissions
+        """
+            List of permissions to check against the authenticated user.
+        Permission names are documented in the {api:RoleOverridesController#add_role Create a role} endpoint.
+        """
+        if permissions is not None:
+            params["permissions"] = permissions
+
+
+        self.logger.debug("GET /api/v1/groups/{group_id}/permissions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/groups/{group_id}/permissions".format(**path), data=data, params=params, no_data=True)
+
+    def list_group_memberships(self, group_id, filter_states=None):
+        """
+        List group memberships.
+
+        A paginated list of the members of a group.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - group_id
+        """
+            ID
+        """
+        path["group_id"] = group_id
+
+
         # OPTIONAL - filter_states
-        """Only list memberships with the given workflow_states. By default it will
-        return all memberships."""
+        """
+            Only list memberships with the given workflow_states. By default it will
+        return all memberships.
+        """
         if filter_states is not None:
             self._validate_enum(filter_states, ["accepted", "invited", "requested"])
             params["filter_states"] = filter_states
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/memberships with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/memberships".format(**path), data=data, params=params, all_pages=True)
@@ -465,17 +655,23 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - PATH - membership_id
-        """ID"""
+        """
+            ID
+        """
         path["membership_id"] = membership_id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/memberships/{membership_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/memberships/{membership_id}".format(**path), data=data, params=params, single_item=True)
 
-    def get_single_group_membership_users(self, user_id, group_id):
+    def get_single_group_membership_users(self, group_id, user_id):
         """
         Get a single group membership.
 
@@ -486,12 +682,18 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/users/{user_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/users/{user_id}".format(**path), data=data, params=params, single_item=True)
@@ -509,13 +711,19 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # OPTIONAL - user_id
-        """no description"""
+        """
+            no description
+        """
         if user_id is not None:
             data["user_id"] = user_id
+
 
         self.logger.debug("POST /api/v1/groups/{group_id}/memberships with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/groups/{group_id}/memberships".format(**path), data=data, params=params, single_item=True)
@@ -531,28 +739,40 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - PATH - membership_id
-        """ID"""
+        """
+            ID
+        """
         path["membership_id"] = membership_id
 
+
         # OPTIONAL - workflow_state
-        """Currently, the only allowed value is 'accepted'"""
+        """
+            Currently, the only allowed value is "accepted"
+        """
         if workflow_state is not None:
             self._validate_enum(workflow_state, ["accepted"])
             data["workflow_state"] = workflow_state
 
+
         # OPTIONAL - moderator
-        """no description"""
+        """
+            no description
+        """
         if moderator is not None:
             data["moderator"] = moderator
+
 
         self.logger.debug("PUT /api/v1/groups/{group_id}/memberships/{membership_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/groups/{group_id}/memberships/{membership_id}".format(**path), data=data, params=params, single_item=True)
 
-    def update_membership_users(self, user_id, group_id, moderator=None, workflow_state=None):
+    def update_membership_users(self, group_id, user_id, moderator=None, workflow_state=None):
         """
         Update a membership.
 
@@ -563,23 +783,35 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
 
+
         # OPTIONAL - workflow_state
-        """Currently, the only allowed value is 'accepted'"""
+        """
+            Currently, the only allowed value is "accepted"
+        """
         if workflow_state is not None:
             self._validate_enum(workflow_state, ["accepted"])
             data["workflow_state"] = workflow_state
 
+
         # OPTIONAL - moderator
-        """no description"""
+        """
+            no description
+        """
         if moderator is not None:
             data["moderator"] = moderator
+
 
         self.logger.debug("PUT /api/v1/groups/{group_id}/users/{user_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/groups/{group_id}/users/{user_id}".format(**path), data=data, params=params, single_item=True)
@@ -597,17 +829,23 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - PATH - membership_id
-        """ID"""
+        """
+            ID
+        """
         path["membership_id"] = membership_id
+
 
         self.logger.debug("DELETE /api/v1/groups/{group_id}/memberships/{membership_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/groups/{group_id}/memberships/{membership_id}".format(**path), data=data, params=params, no_data=True)
 
-    def leave_group_users(self, user_id, group_id):
+    def leave_group_users(self, group_id, user_id):
         """
         Leave a group.
 
@@ -620,12 +858,18 @@ class GroupsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
+
 
         self.logger.debug("DELETE /api/v1/groups/{group_id}/users/{user_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/groups/{group_id}/users/{user_id}".format(**path), data=data, params=params, no_data=True)
@@ -634,180 +878,27 @@ class GroupsAPI(BaseCanvasAPI):
 class Group(BaseModel):
     """Group Model."""
 
-    def __init__(self, members_count=None, description=None, context_type=None, storage_quota_mb=None, join_level=None, followed_by_user=None, group_category_id=None, sis_import_id=None, avatar_url=None, role=None, sis_group_id=None, course_id=None, is_public=None, permissions=None, id=None, name=None):
+    def __init__(self, id=None, name=None, description=None, is_public=None, followed_by_user=None, join_level=None, members_count=None, avatar_url=None, context_type=None, course_id=None, role=None, group_category_id=None, sis_group_id=None, sis_import_id=None, storage_quota_mb=None, permissions=None, users=None):
         """Init method for Group class."""
-        self._members_count = members_count
-        self._description = description
-        self._context_type = context_type
-        self._storage_quota_mb = storage_quota_mb
-        self._join_level = join_level
-        self._followed_by_user = followed_by_user
-        self._group_category_id = group_category_id
-        self._sis_import_id = sis_import_id
-        self._avatar_url = avatar_url
-        self._role = role
-        self._sis_group_id = sis_group_id
-        self._course_id = course_id
-        self._is_public = is_public
-        self._permissions = permissions
         self._id = id
         self._name = name
+        self._description = description
+        self._is_public = is_public
+        self._followed_by_user = followed_by_user
+        self._join_level = join_level
+        self._members_count = members_count
+        self._avatar_url = avatar_url
+        self._context_type = context_type
+        self._course_id = course_id
+        self._role = role
+        self._group_category_id = group_category_id
+        self._sis_group_id = sis_group_id
+        self._sis_import_id = sis_import_id
+        self._storage_quota_mb = storage_quota_mb
+        self._permissions = permissions
+        self._users = users
 
         self.logger = logging.getLogger('py3canvas.Group')
-
-    @property
-    def members_count(self):
-        """The number of members currently in the group."""
-        return self._members_count
-
-    @members_count.setter
-    def members_count(self, value):
-        """Setter for members_count property."""
-        self.logger.warn("Setting values on members_count will NOT update the remote Canvas instance.")
-        self._members_count = value
-
-    @property
-    def description(self):
-        """A description of the group. This is plain text."""
-        return self._description
-
-    @description.setter
-    def description(self, value):
-        """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
-        self._description = value
-
-    @property
-    def context_type(self):
-        """The course or account that the group belongs to. The pattern here is that whatever the context_type is, there will be an _id field named after that type. So if instead context_type was 'account', the course_id field would be replaced by an account_id field."""
-        return self._context_type
-
-    @context_type.setter
-    def context_type(self, value):
-        """Setter for context_type property."""
-        self.logger.warn("Setting values on context_type will NOT update the remote Canvas instance.")
-        self._context_type = value
-
-    @property
-    def storage_quota_mb(self):
-        """the storage quota for the group, in megabytes."""
-        return self._storage_quota_mb
-
-    @storage_quota_mb.setter
-    def storage_quota_mb(self, value):
-        """Setter for storage_quota_mb property."""
-        self.logger.warn("Setting values on storage_quota_mb will NOT update the remote Canvas instance.")
-        self._storage_quota_mb = value
-
-    @property
-    def join_level(self):
-        """How people are allowed to join the group.  For all groups except for community groups, the user must share the group's parent course or account.  For student organized or community groups, where a user can be a member of as many or few as they want, the applicable levels are 'parent_context_auto_join', 'parent_context_request', and 'invitation_only'.  For class groups, where students are divided up and should only be part of one group of the category, this value will always be 'invitation_only', and is not relevant. * If 'parent_context_auto_join', anyone can join and will be automatically accepted. * If 'parent_context_request', anyone  can request to join, which must be approved by a group moderator. * If 'invitation_only', only those how have received an invitation my join the group, by accepting that invitation."""
-        return self._join_level
-
-    @join_level.setter
-    def join_level(self, value):
-        """Setter for join_level property."""
-        self.logger.warn("Setting values on join_level will NOT update the remote Canvas instance.")
-        self._join_level = value
-
-    @property
-    def followed_by_user(self):
-        """Whether or not the current user is following this group."""
-        return self._followed_by_user
-
-    @followed_by_user.setter
-    def followed_by_user(self, value):
-        """Setter for followed_by_user property."""
-        self.logger.warn("Setting values on followed_by_user will NOT update the remote Canvas instance.")
-        self._followed_by_user = value
-
-    @property
-    def group_category_id(self):
-        """The ID of the group's category."""
-        return self._group_category_id
-
-    @group_category_id.setter
-    def group_category_id(self, value):
-        """Setter for group_category_id property."""
-        self.logger.warn("Setting values on group_category_id will NOT update the remote Canvas instance.")
-        self._group_category_id = value
-
-    @property
-    def sis_import_id(self):
-        """The id of the SIS import if created through SIS. Only included if the user has permission to manage SIS information."""
-        return self._sis_import_id
-
-    @sis_import_id.setter
-    def sis_import_id(self, value):
-        """Setter for sis_import_id property."""
-        self.logger.warn("Setting values on sis_import_id will NOT update the remote Canvas instance.")
-        self._sis_import_id = value
-
-    @property
-    def avatar_url(self):
-        """The url of the group's avatar."""
-        return self._avatar_url
-
-    @avatar_url.setter
-    def avatar_url(self, value):
-        """Setter for avatar_url property."""
-        self.logger.warn("Setting values on avatar_url will NOT update the remote Canvas instance.")
-        self._avatar_url = value
-
-    @property
-    def role(self):
-        """Certain types of groups have special role designations. Currently, these include: 'communities', 'student_organized', and 'imported'. Regular course/account groups have a role of null."""
-        return self._role
-
-    @role.setter
-    def role(self, value):
-        """Setter for role property."""
-        self.logger.warn("Setting values on role will NOT update the remote Canvas instance.")
-        self._role = value
-
-    @property
-    def sis_group_id(self):
-        """The SIS ID of the group. Only included if the user has permission to view SIS information."""
-        return self._sis_group_id
-
-    @sis_group_id.setter
-    def sis_group_id(self, value):
-        """Setter for sis_group_id property."""
-        self.logger.warn("Setting values on sis_group_id will NOT update the remote Canvas instance.")
-        self._sis_group_id = value
-
-    @property
-    def course_id(self):
-        """course_id."""
-        return self._course_id
-
-    @course_id.setter
-    def course_id(self, value):
-        """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
-        self._course_id = value
-
-    @property
-    def is_public(self):
-        """Whether or not the group is public.  Currently only community groups can be made public.  Also, once a group has been set to public, it cannot be changed back to private."""
-        return self._is_public
-
-    @is_public.setter
-    def is_public(self, value):
-        """Setter for is_public property."""
-        self.logger.warn("Setting values on is_public will NOT update the remote Canvas instance.")
-        self._is_public = value
-
-    @property
-    def permissions(self):
-        """optional: the permissions the user has for the group. returned only for a single group and include[]=permissions."""
-        return self._permissions
-
-    @permissions.setter
-    def permissions(self, value):
-        """Setter for permissions property."""
-        self.logger.warn("Setting values on permissions will NOT update the remote Canvas instance.")
-        self._permissions = value
 
     @property
     def id(self):
@@ -831,21 +922,208 @@ class Group(BaseModel):
         self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
         self._name = value
 
+    @property
+    def description(self):
+        """A description of the group. This is plain text."""
+        return self._description
+
+    @description.setter
+    def description(self, value):
+        """Setter for description property."""
+        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self._description = value
+
+    @property
+    def is_public(self):
+        """Whether or not the group is public.  Currently only community groups can be made public.  Also, once a group has been set to public, it cannot be changed back to private."""
+        return self._is_public
+
+    @is_public.setter
+    def is_public(self, value):
+        """Setter for is_public property."""
+        self.logger.warn("Setting values on is_public will NOT update the remote Canvas instance.")
+        self._is_public = value
+
+    @property
+    def followed_by_user(self):
+        """Whether or not the current user is following this group."""
+        return self._followed_by_user
+
+    @followed_by_user.setter
+    def followed_by_user(self, value):
+        """Setter for followed_by_user property."""
+        self.logger.warn("Setting values on followed_by_user will NOT update the remote Canvas instance.")
+        self._followed_by_user = value
+
+    @property
+    def join_level(self):
+        """How people are allowed to join the group.  For all groups except for community groups, the user must share the group's parent course or account.  For student organized or community groups, where a user can be a member of as many or few as they want, the applicable levels are 'parent_context_auto_join', 'parent_context_request', and 'invitation_only'.  For class groups, where students are divided up and should only be part of one group of the category, this value will always be 'invitation_only', and is not relevant. * If 'parent_context_auto_join', anyone can join and will be automatically accepted. * If 'parent_context_request', anyone  can request to join, which must be approved by a group moderator. * If 'invitation_only', only those how have received an invitation my join the group, by accepting that invitation."""
+        return self._join_level
+
+    @join_level.setter
+    def join_level(self, value):
+        """Setter for join_level property."""
+        self.logger.warn("Setting values on join_level will NOT update the remote Canvas instance.")
+        self._join_level = value
+
+    @property
+    def members_count(self):
+        """The number of members currently in the group."""
+        return self._members_count
+
+    @members_count.setter
+    def members_count(self, value):
+        """Setter for members_count property."""
+        self.logger.warn("Setting values on members_count will NOT update the remote Canvas instance.")
+        self._members_count = value
+
+    @property
+    def avatar_url(self):
+        """The url of the group's avatar."""
+        return self._avatar_url
+
+    @avatar_url.setter
+    def avatar_url(self, value):
+        """Setter for avatar_url property."""
+        self.logger.warn("Setting values on avatar_url will NOT update the remote Canvas instance.")
+        self._avatar_url = value
+
+    @property
+    def context_type(self):
+        """The course or account that the group belongs to. The pattern here is that whatever the context_type is, there will be an _id field named after that type. So if instead context_type was 'account', the course_id field would be replaced by an account_id field."""
+        return self._context_type
+
+    @context_type.setter
+    def context_type(self, value):
+        """Setter for context_type property."""
+        self.logger.warn("Setting values on context_type will NOT update the remote Canvas instance.")
+        self._context_type = value
+
+    @property
+    def course_id(self):
+        """course_id."""
+        return self._course_id
+
+    @course_id.setter
+    def course_id(self, value):
+        """Setter for course_id property."""
+        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self._course_id = value
+
+    @property
+    def role(self):
+        """Certain types of groups have special role designations. Currently, these include: 'communities', 'student_organized', and 'imported'. Regular course/account groups have a role of null."""
+        return self._role
+
+    @role.setter
+    def role(self, value):
+        """Setter for role property."""
+        self.logger.warn("Setting values on role will NOT update the remote Canvas instance.")
+        self._role = value
+
+    @property
+    def group_category_id(self):
+        """The ID of the group's category."""
+        return self._group_category_id
+
+    @group_category_id.setter
+    def group_category_id(self, value):
+        """Setter for group_category_id property."""
+        self.logger.warn("Setting values on group_category_id will NOT update the remote Canvas instance.")
+        self._group_category_id = value
+
+    @property
+    def sis_group_id(self):
+        """The SIS ID of the group. Only included if the user has permission to view SIS information."""
+        return self._sis_group_id
+
+    @sis_group_id.setter
+    def sis_group_id(self, value):
+        """Setter for sis_group_id property."""
+        self.logger.warn("Setting values on sis_group_id will NOT update the remote Canvas instance.")
+        self._sis_group_id = value
+
+    @property
+    def sis_import_id(self):
+        """The id of the SIS import if created through SIS. Only included if the user has permission to manage SIS information."""
+        return self._sis_import_id
+
+    @sis_import_id.setter
+    def sis_import_id(self, value):
+        """Setter for sis_import_id property."""
+        self.logger.warn("Setting values on sis_import_id will NOT update the remote Canvas instance.")
+        self._sis_import_id = value
+
+    @property
+    def storage_quota_mb(self):
+        """the storage quota for the group, in megabytes."""
+        return self._storage_quota_mb
+
+    @storage_quota_mb.setter
+    def storage_quota_mb(self, value):
+        """Setter for storage_quota_mb property."""
+        self.logger.warn("Setting values on storage_quota_mb will NOT update the remote Canvas instance.")
+        self._storage_quota_mb = value
+
+    @property
+    def permissions(self):
+        """optional: the permissions the user has for the group. returned only for a single group and include[]=permissions."""
+        return self._permissions
+
+    @permissions.setter
+    def permissions(self, value):
+        """Setter for permissions property."""
+        self.logger.warn("Setting values on permissions will NOT update the remote Canvas instance.")
+        self._permissions = value
+
+    @property
+    def users(self):
+        """optional: A list of users that are members in the group. Returned only if include[]=users. WARNING: this collection's size is capped (if there are an extremely large number of users in the group (thousands) not all of them will be returned).  If you need to capture all the users in a group with certainty consider using the paginated /api/v1/groups/<group_id>/memberships endpoint."""
+        return self._users
+
+    @users.setter
+    def users(self, value):
+        """Setter for users property."""
+        self.logger.warn("Setting values on users will NOT update the remote Canvas instance.")
+        self._users = value
+
 
 class Groupmembership(BaseModel):
     """Groupmembership Model."""
 
-    def __init__(self, user_id=None, workflow_state=None, moderator=None, sis_import_id=None, just_created=None, group_id=None, id=None):
+    def __init__(self, id=None, group_id=None, user_id=None, workflow_state=None, moderator=None, just_created=None, sis_import_id=None):
         """Init method for Groupmembership class."""
+        self._id = id
+        self._group_id = group_id
         self._user_id = user_id
         self._workflow_state = workflow_state
         self._moderator = moderator
-        self._sis_import_id = sis_import_id
         self._just_created = just_created
-        self._group_id = group_id
-        self._id = id
+        self._sis_import_id = sis_import_id
 
         self.logger = logging.getLogger('py3canvas.Groupmembership')
+
+    @property
+    def id(self):
+        """The id of the membership object."""
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        """Setter for id property."""
+        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self._id = value
+
+    @property
+    def group_id(self):
+        """The id of the group object to which the membership belongs."""
+        return self._group_id
+
+    @group_id.setter
+    def group_id(self, value):
+        """Setter for group_id property."""
+        self.logger.warn("Setting values on group_id will NOT update the remote Canvas instance.")
+        self._group_id = value
 
     @property
     def user_id(self):
@@ -881,17 +1159,6 @@ class Groupmembership(BaseModel):
         self._moderator = value
 
     @property
-    def sis_import_id(self):
-        """The id of the SIS import if created through SIS. Only included if the user has permission to manage SIS information."""
-        return self._sis_import_id
-
-    @sis_import_id.setter
-    def sis_import_id(self, value):
-        """Setter for sis_import_id property."""
-        self.logger.warn("Setting values on sis_import_id will NOT update the remote Canvas instance.")
-        self._sis_import_id = value
-
-    @property
     def just_created(self):
         """optional: whether or not the record was just created on a create call (POST), i.e. was the user just added to the group, or was the user already a member."""
         return self._just_created
@@ -903,24 +1170,13 @@ class Groupmembership(BaseModel):
         self._just_created = value
 
     @property
-    def group_id(self):
-        """The id of the group object to which the membership belongs."""
-        return self._group_id
+    def sis_import_id(self):
+        """The id of the SIS import if created through SIS. Only included if the user has permission to manage SIS information."""
+        return self._sis_import_id
 
-    @group_id.setter
-    def group_id(self, value):
-        """Setter for group_id property."""
-        self.logger.warn("Setting values on group_id will NOT update the remote Canvas instance.")
-        self._group_id = value
-
-    @property
-    def id(self):
-        """The id of the membership object."""
-        return self._id
-
-    @id.setter
-    def id(self, value):
-        """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
-        self._id = value
+    @sis_import_id.setter
+    def sis_import_id(self, value):
+        """Setter for sis_import_id property."""
+        self.logger.warn("Setting values on sis_import_id will NOT update the remote Canvas instance.")
+        self._sis_import_id = value
 

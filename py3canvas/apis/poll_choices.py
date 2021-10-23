@@ -20,15 +20,18 @@ class PollChoicesAPI(BaseCanvasAPI):
         """
         List poll choices in a poll.
 
-        Returns the list of PollChoices in this poll.
+        Returns the paginated list of PollChoices in this poll.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - poll_id
-        """ID"""
+        """
+            ID
+        """
         path["poll_id"] = poll_id
+
 
         self.logger.debug("GET /api/v1/polls/{poll_id}/poll_choices with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/polls/{poll_id}/poll_choices".format(**path), data=data, params=params, no_data=True)
@@ -44,17 +47,23 @@ class PollChoicesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - poll_id
-        """ID"""
+        """
+            ID
+        """
         path["poll_id"] = poll_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/polls/{poll_id}/poll_choices/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/polls/{poll_id}/poll_choices/{id}".format(**path), data=data, params=params, no_data=True)
 
-    def create_single_poll_choice(self, poll_id, poll_choices_text, poll_choices_is_correct=None, poll_choices_position=None):
+    def create_single_poll_choice(self, poll_choices_text, poll_id, poll_choices_is_correct=None, poll_choices_position=None):
         """
         Create a single poll choice.
 
@@ -65,27 +74,39 @@ class PollChoicesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - poll_id
-        """ID"""
+        """
+            ID
+        """
         path["poll_id"] = poll_id
 
+
         # REQUIRED - poll_choices[text]
-        """The descriptive text of the poll choice."""
+        """
+            The descriptive text of the poll choice.
+        """
         data["poll_choices[text]"] = poll_choices_text
 
+
         # OPTIONAL - poll_choices[is_correct]
-        """Whether this poll choice is considered correct or not. Defaults to false."""
+        """
+            Whether this poll choice is considered correct or not. Defaults to false.
+        """
         if poll_choices_is_correct is not None:
             data["poll_choices[is_correct]"] = poll_choices_is_correct
 
+
         # OPTIONAL - poll_choices[position]
-        """The order this poll choice should be returned in the context it's sibling poll choices."""
+        """
+            The order this poll choice should be returned in the context it's sibling poll choices.
+        """
         if poll_choices_position is not None:
             data["poll_choices[position]"] = poll_choices_position
+
 
         self.logger.debug("POST /api/v1/polls/{poll_id}/poll_choices with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/polls/{poll_id}/poll_choices".format(**path), data=data, params=params, no_data=True)
 
-    def update_single_poll_choice(self, id, poll_id, poll_choices_text, poll_choices_is_correct=None, poll_choices_position=None):
+    def update_single_poll_choice(self, id, poll_choices_text, poll_id, poll_choices_is_correct=None, poll_choices_position=None):
         """
         Update a single poll choice.
 
@@ -96,26 +117,41 @@ class PollChoicesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - poll_id
-        """ID"""
+        """
+            ID
+        """
         path["poll_id"] = poll_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # REQUIRED - poll_choices[text]
-        """The descriptive text of the poll choice."""
+        """
+            The descriptive text of the poll choice.
+        """
         data["poll_choices[text]"] = poll_choices_text
 
+
         # OPTIONAL - poll_choices[is_correct]
-        """Whether this poll choice is considered correct or not.  Defaults to false."""
+        """
+            Whether this poll choice is considered correct or not.  Defaults to false.
+        """
         if poll_choices_is_correct is not None:
             data["poll_choices[is_correct]"] = poll_choices_is_correct
 
+
         # OPTIONAL - poll_choices[position]
-        """The order this poll choice should be returned in the context it's sibling poll choices."""
+        """
+            The order this poll choice should be returned in the context it's sibling poll choices.
+        """
         if poll_choices_position is not None:
             data["poll_choices[position]"] = poll_choices_position
+
 
         self.logger.debug("PUT /api/v1/polls/{poll_id}/poll_choices/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/polls/{poll_id}/poll_choices/{id}".format(**path), data=data, params=params, no_data=True)
@@ -131,12 +167,18 @@ class PollChoicesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - poll_id
-        """ID"""
+        """
+            ID
+        """
         path["poll_id"] = poll_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("DELETE /api/v1/polls/{poll_id}/poll_choices/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/polls/{poll_id}/poll_choices/{id}".format(**path), data=data, params=params, no_data=True)
@@ -147,35 +189,13 @@ class Pollchoice(BaseModel):
 
     def __init__(self, id, poll_id, text, is_correct=None, position=None):
         """Init method for Pollchoice class."""
-        self._is_correct = is_correct
-        self._position = position
         self._id = id
         self._poll_id = poll_id
+        self._is_correct = is_correct
         self._text = text
+        self._position = position
 
         self.logger = logging.getLogger('py3canvas.Pollchoice')
-
-    @property
-    def is_correct(self):
-        """Specifies whether or not this poll choice is a 'correct' choice."""
-        return self._is_correct
-
-    @is_correct.setter
-    def is_correct(self, value):
-        """Setter for is_correct property."""
-        self.logger.warn("Setting values on is_correct will NOT update the remote Canvas instance.")
-        self._is_correct = value
-
-    @property
-    def position(self):
-        """The order of the poll choice in relation to it's sibling poll choices."""
-        return self._position
-
-    @position.setter
-    def position(self, value):
-        """Setter for position property."""
-        self.logger.warn("Setting values on position will NOT update the remote Canvas instance.")
-        self._position = value
 
     @property
     def id(self):
@@ -200,6 +220,17 @@ class Pollchoice(BaseModel):
         self._poll_id = value
 
     @property
+    def is_correct(self):
+        """Specifies whether or not this poll choice is a 'correct' choice."""
+        return self._is_correct
+
+    @is_correct.setter
+    def is_correct(self, value):
+        """Setter for is_correct property."""
+        self.logger.warn("Setting values on is_correct will NOT update the remote Canvas instance.")
+        self._is_correct = value
+
+    @property
     def text(self):
         """The text of the poll choice."""
         return self._text
@@ -209,4 +240,15 @@ class Pollchoice(BaseModel):
         """Setter for text property."""
         self.logger.warn("Setting values on text will NOT update the remote Canvas instance.")
         self._text = value
+
+    @property
+    def position(self):
+        """The order of the poll choice in relation to it's sibling poll choices."""
+        return self._position
+
+    @position.setter
+    def position(self, value):
+        """Setter for position property."""
+        self.logger.warn("Setting values on position will NOT update the remote Canvas instance.")
+        self._position = value
 

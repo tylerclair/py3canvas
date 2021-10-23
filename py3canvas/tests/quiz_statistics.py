@@ -6,11 +6,11 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.quiz_statistics import QuizStatisticsAPI
-from py3canvas.apis.quiz_statistics import Quizstatisticsquestionstatistics
 from py3canvas.apis.quiz_statistics import Quizstatistics
-from py3canvas.apis.quiz_statistics import Quizstatisticsanswerpointbiserial
-from py3canvas.apis.quiz_statistics import Quizstatisticsanswerstatistics
 from py3canvas.apis.quiz_statistics import Quizstatisticslinks
+from py3canvas.apis.quiz_statistics import Quizstatisticsquestionstatistics
+from py3canvas.apis.quiz_statistics import Quizstatisticsanswerstatistics
+from py3canvas.apis.quiz_statistics import Quizstatisticsanswerpointbiserial
 from py3canvas.apis.quiz_statistics import Quizstatisticssubmissionstatistics
 
 
@@ -25,5 +25,5 @@ class TestQuizStatisticsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         quiz_id = None  # Change me!!
 
-        r = self.client.fetching_latest_quiz_statistics(quiz_id, course_id, all_versions=None)
+        r = self.client.fetching_latest_quiz_statistics(course_id, quiz_id, all_versions=None)
 

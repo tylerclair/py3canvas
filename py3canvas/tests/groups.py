@@ -69,7 +69,7 @@ class TestGroupsAPI(unittest.TestCase):
         """Integration test for the GroupsAPI.list_group_s_users method."""
         group_id = None  # Change me!!
 
-        r = self.client.list_group_s_users(group_id, include=None, search_term=None)
+        r = self.client.list_group_s_users(group_id, exclude_inactive=None, include=None, search_term=None)
 
     def test_upload_file(self):
         """Integration test for the GroupsAPI.upload_file method."""
@@ -93,6 +93,12 @@ class TestGroupsAPI(unittest.TestCase):
 
         r = self.client.group_activity_stream_summary(group_id)
 
+    def test_permissions(self):
+        """Integration test for the GroupsAPI.permissions method."""
+        group_id = None  # Change me!!
+
+        r = self.client.permissions(group_id, permissions=None)
+
     def test_list_group_memberships(self):
         """Integration test for the GroupsAPI.list_group_memberships method."""
         group_id = None  # Change me!!
@@ -111,7 +117,7 @@ class TestGroupsAPI(unittest.TestCase):
         group_id = None  # Change me!!
         user_id = None  # Change me!!
 
-        r = self.client.get_single_group_membership_users(user_id, group_id)
+        r = self.client.get_single_group_membership_users(group_id, user_id)
 
     def test_create_membership(self):
         """Integration test for the GroupsAPI.create_membership method."""
@@ -140,5 +146,5 @@ class TestGroupsAPI(unittest.TestCase):
         group_id = None  # Change me!!
         user_id = None  # Change me!!
 
-        r = self.client.leave_group_users(user_id, group_id)
+        r = self.client.leave_group_users(group_id, user_id)
 

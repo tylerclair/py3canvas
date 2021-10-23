@@ -6,8 +6,8 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.grading_standards import GradingStandardsAPI
-from py3canvas.apis.grading_standards import Gradingstandard
 from py3canvas.apis.grading_standards import Gradingschemeentry
+from py3canvas.apis.grading_standards import Gradingstandard
 
 
 class TestGradingStandardsAPI(unittest.TestCase):
@@ -37,4 +37,18 @@ class TestGradingStandardsAPI(unittest.TestCase):
         account_id = None  # Change me!!
 
         r = self.client.list_grading_standards_available_in_context_accounts(account_id)
+
+    def test_get_single_grading_standard_in_context_courses(self):
+        """Integration test for the GradingStandardsAPI.get_single_grading_standard_in_context_courses method."""
+        course_id = None  # Change me!!
+        grading_standard_id = None  # Change me!!
+
+        r = self.client.get_single_grading_standard_in_context_courses(course_id, grading_standard_id)
+
+    def test_get_single_grading_standard_in_context_accounts(self):
+        """Integration test for the GradingStandardsAPI.get_single_grading_standard_in_context_accounts method."""
+        account_id = None  # Change me!!
+        grading_standard_id = None  # Change me!!
+
+        r = self.client.get_single_grading_standard_in_context_accounts(account_id, grading_standard_id)
 

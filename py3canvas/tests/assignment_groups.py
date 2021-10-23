@@ -20,14 +20,14 @@ class TestAssignmentGroupsAPI(unittest.TestCase):
         """Integration test for the AssignmentGroupsAPI.list_assignment_groups method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_assignment_groups(course_id, exclude_assignment_submission_types=None, grading_period_id=None, include=None, override_assignment_dates=None, scope_assignments_to_student=None)
+        r = self.client.list_assignment_groups(course_id, assignment_ids=None, exclude_assignment_submission_types=None, grading_period_id=None, include=None, override_assignment_dates=None, scope_assignments_to_student=None)
 
     def test_get_assignment_group(self):
         """Integration test for the AssignmentGroupsAPI.get_assignment_group method."""
         course_id = None  # Change me!!
         assignment_group_id = None  # Change me!!
 
-        r = self.client.get_assignment_group(course_id, assignment_group_id, grading_period_id=None, include=None, override_assignment_dates=None)
+        r = self.client.get_assignment_group(assignment_group_id, course_id, grading_period_id=None, include=None, override_assignment_dates=None)
 
     def test_create_assignment_group(self):
         """Integration test for the AssignmentGroupsAPI.create_assignment_group method."""
@@ -44,5 +44,5 @@ class TestAssignmentGroupsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         assignment_group_id = None  # Change me!!
 
-        r = self.client.destroy_assignment_group(course_id, assignment_group_id, move_assignments_to=None)
+        r = self.client.destroy_assignment_group(assignment_group_id, course_id, move_assignments_to=None)
 

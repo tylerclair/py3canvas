@@ -6,8 +6,8 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.custom_gradebook_columns import CustomGradebookColumnsAPI
-from py3canvas.apis.custom_gradebook_columns import Columndatum
 from py3canvas.apis.custom_gradebook_columns import Customcolumn
+from py3canvas.apis.custom_gradebook_columns import Columndatum
 
 
 class TestCustomGradebookColumnsAPI(unittest.TestCase):
@@ -37,7 +37,7 @@ class TestCustomGradebookColumnsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_custom_gradebook_column(id, course_id)
+        r = self.client.delete_custom_gradebook_column(course_id, id)
 
     def test_reorder_custom_columns(self):
         """Integration test for the CustomGradebookColumnsAPI.reorder_custom_columns method."""
@@ -49,10 +49,15 @@ class TestCustomGradebookColumnsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.list_entries_for_column(id, course_id, include_hidden=None)
+        r = self.client.list_entries_for_column(course_id, id, include_hidden=None)
 
     def test_update_column_data(self):
         """Integration test for the CustomGradebookColumnsAPI.update_column_data method."""
+        # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
+        pass
+
+    def test_bulk_update_column_data(self):
+        """Integration test for the CustomGradebookColumnsAPI.bulk_update_column_data method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
 

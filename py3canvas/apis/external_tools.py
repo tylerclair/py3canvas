@@ -28,23 +28,35 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # OPTIONAL - search_term
-        """The partial name of the tools to match and return."""
+        """
+            The partial name of the tools to match and return.
+        """
         if search_term is not None:
             params["search_term"] = search_term
 
+
         # OPTIONAL - selectable
-        """If true, then only tools that are meant to be selectable are returned"""
+        """
+            If true, then only tools that are meant to be selectable are returned
+        """
         if selectable is not None:
             params["selectable"] = selectable
 
+
         # OPTIONAL - include_parents
-        """If true, then include tools installed in all accounts above the current context"""
+        """
+            If true, then include tools installed in all accounts above the current context
+        """
         if include_parents is not None:
             params["include_parents"] = include_parents
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/external_tools".format(**path), data=data, params=params, no_data=True)
@@ -61,23 +73,35 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # OPTIONAL - search_term
-        """The partial name of the tools to match and return."""
+        """
+            The partial name of the tools to match and return.
+        """
         if search_term is not None:
             params["search_term"] = search_term
 
+
         # OPTIONAL - selectable
-        """If true, then only tools that are meant to be selectable are returned"""
+        """
+            If true, then only tools that are meant to be selectable are returned
+        """
         if selectable is not None:
             params["selectable"] = selectable
 
+
         # OPTIONAL - include_parents
-        """If true, then include tools installed in all accounts above the current context"""
+        """
+            If true, then include tools installed in all accounts above the current context
+        """
         if include_parents is not None:
             params["include_parents"] = include_parents
+
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/external_tools".format(**path), data=data, params=params, no_data=True)
@@ -94,23 +118,35 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # OPTIONAL - search_term
-        """The partial name of the tools to match and return."""
+        """
+            The partial name of the tools to match and return.
+        """
         if search_term is not None:
             params["search_term"] = search_term
 
+
         # OPTIONAL - selectable
-        """If true, then only tools that are meant to be selectable are returned"""
+        """
+            If true, then only tools that are meant to be selectable are returned
+        """
         if selectable is not None:
             params["selectable"] = selectable
 
+
         # OPTIONAL - include_parents
-        """If true, then include tools installed in all accounts above the current context"""
+        """
+            If true, then include tools installed in all accounts above the current context
+        """
         if include_parents is not None:
             params["include_parents"] = include_parents
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/external_tools".format(**path), data=data, params=params, no_data=True)
@@ -128,36 +164,54 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # OPTIONAL - id
-        """The external id of the tool to launch."""
+        """
+            The external id of the tool to launch.
+        """
         if id is not None:
             params["id"] = id
 
+
         # OPTIONAL - url
-        """The LTI launch url for the external tool."""
+        """
+            The LTI launch url for the external tool.
+        """
         if url is not None:
             params["url"] = url
 
+
         # OPTIONAL - assignment_id
-        """The assignment id for an assignment launch. Required if launch_type is set to "assessment"."""
+        """
+            The assignment id for an assignment launch. Required if launch_type is set to "assessment".
+        """
         if assignment_id is not None:
             params["assignment_id"] = assignment_id
 
+
         # OPTIONAL - module_item_id
-        """The assignment id for a module item launch. Required if launch_type is set to "module_item"."""
+        """
+            The assignment id for a module item launch. Required if launch_type is set to "module_item".
+        """
         if module_item_id is not None:
             params["module_item_id"] = module_item_id
 
+
         # OPTIONAL - launch_type
-        """The type of launch to perform on the external tool. Placement names (eg. "course_navigation")
+        """
+            The type of launch to perform on the external tool. Placement names (eg. "course_navigation")
         can also be specified to use the custom launch url for that placement; if done, the tool id
-        must be provided."""
+        must be provided.
+        """
         if launch_type is not None:
             self._validate_enum(launch_type, ["assessment", "module_item"])
             params["launch_type"] = launch_type
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/external_tools/sessionless_launch with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/external_tools/sessionless_launch".format(**path), data=data, params=params, no_data=True)
@@ -175,36 +229,54 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # OPTIONAL - id
-        """The external id of the tool to launch."""
+        """
+            The external id of the tool to launch.
+        """
         if id is not None:
             params["id"] = id
 
+
         # OPTIONAL - url
-        """The LTI launch url for the external tool."""
+        """
+            The LTI launch url for the external tool.
+        """
         if url is not None:
             params["url"] = url
 
+
         # OPTIONAL - assignment_id
-        """The assignment id for an assignment launch. Required if launch_type is set to "assessment"."""
+        """
+            The assignment id for an assignment launch. Required if launch_type is set to "assessment".
+        """
         if assignment_id is not None:
             params["assignment_id"] = assignment_id
 
+
         # OPTIONAL - module_item_id
-        """The assignment id for a module item launch. Required if launch_type is set to "module_item"."""
+        """
+            The assignment id for a module item launch. Required if launch_type is set to "module_item".
+        """
         if module_item_id is not None:
             params["module_item_id"] = module_item_id
 
+
         # OPTIONAL - launch_type
-        """The type of launch to perform on the external tool. Placement names (eg. "course_navigation")
+        """
+            The type of launch to perform on the external tool. Placement names (eg. "course_navigation")
         can also be specified to use the custom launch url for that placement; if done, the tool id
-        must be provided."""
+        must be provided.
+        """
         if launch_type is not None:
             self._validate_enum(launch_type, ["assessment", "module_item"])
             params["launch_type"] = launch_type
+
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/external_tools/sessionless_launch with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/external_tools/sessionless_launch".format(**path), data=data, params=params, no_data=True)
@@ -220,12 +292,18 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - external_tool_id
-        """ID"""
+        """
+            ID
+        """
         path["external_tool_id"] = external_tool_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
@@ -241,670 +319,1152 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # REQUIRED - PATH - external_tool_id
-        """ID"""
+        """
+            ID
+        """
         path["external_tool_id"] = external_tool_id
+
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
 
-    def create_external_tool_courses(self, name, course_id, consumer_key, privacy_level, shared_secret, account_navigation_enabled=None, account_navigation_selection_height=None, account_navigation_selection_width=None, account_navigation_text=None, account_navigation_url=None, config_type=None, config_url=None, config_xml=None, course_home_sub_navigation_enabled=None, course_home_sub_navigation_icon_url=None, course_home_sub_navigation_text=None, course_home_sub_navigation_url=None, course_navigation_default=None, course_navigation_enabled=None, course_navigation_text=None, course_navigation_visibility=None, course_navigation_windowTarget=None, custom_fields_field_name=None, description=None, domain=None, editor_button_enabled=None, editor_button_icon_url=None, editor_button_message_type=None, editor_button_selection_height=None, editor_button_selection_width=None, editor_button_url=None, homework_submission_enabled=None, homework_submission_message_type=None, homework_submission_text=None, homework_submission_url=None, icon_url=None, link_selection_enabled=None, link_selection_message_type=None, link_selection_text=None, link_selection_url=None, migration_selection_enabled=None, migration_selection_message_type=None, migration_selection_url=None, not_selectable=None, oauth_compliant=None, resource_selection_enabled=None, resource_selection_icon_url=None, resource_selection_selection_height=None, resource_selection_selection_width=None, resource_selection_url=None, text=None, tool_configuration_enabled=None, tool_configuration_message_type=None, tool_configuration_prefer_sis_email=None, tool_configuration_url=None, url=None, user_navigation_enabled=None, user_navigation_text=None, user_navigation_url=None):
+    def create_external_tool_courses(self, client_id, consumer_key, course_id, name, privacy_level, shared_secret, account_navigation_display_type=None, account_navigation_enabled=None, account_navigation_selection_height=None, account_navigation_selection_width=None, account_navigation_text=None, account_navigation_url=None, config_type=None, config_url=None, config_xml=None, course_home_sub_navigation_enabled=None, course_home_sub_navigation_icon_url=None, course_home_sub_navigation_text=None, course_home_sub_navigation_url=None, course_navigation_default=None, course_navigation_display_type=None, course_navigation_enabled=None, course_navigation_text=None, course_navigation_visibility=None, course_navigation_windowTarget=None, custom_fields_field_name=None, description=None, domain=None, editor_button_enabled=None, editor_button_icon_url=None, editor_button_message_type=None, editor_button_selection_height=None, editor_button_selection_width=None, editor_button_url=None, homework_submission_enabled=None, homework_submission_message_type=None, homework_submission_text=None, homework_submission_url=None, icon_url=None, is_rce_favorite=None, link_selection_enabled=None, link_selection_message_type=None, link_selection_text=None, link_selection_url=None, migration_selection_enabled=None, migration_selection_message_type=None, migration_selection_url=None, not_selectable=None, oauth_compliant=None, resource_selection_enabled=None, resource_selection_icon_url=None, resource_selection_selection_height=None, resource_selection_selection_width=None, resource_selection_url=None, text=None, tool_configuration_enabled=None, tool_configuration_message_type=None, tool_configuration_prefer_sis_email=None, tool_configuration_url=None, url=None, user_navigation_enabled=None, user_navigation_text=None, user_navigation_url=None, user_navigation_visibility=None):
         """
         Create an external tool.
 
         Create an external tool in the specified course/account.
         The created tool will be returned, see the "show" endpoint for an example.
+        If a client ID is supplied canvas will attempt to create a context external
+        tool using the LTI 1.3 standard.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
+        # REQUIRED - client_id
+        """
+            The client id is attached to the developer key.
+        If supplied all other parameters are unnecessary and will be ignored
+        """
+        data["client_id"] = client_id
+
+
         # REQUIRED - name
-        """The name of the tool"""
+        """
+            The name of the tool
+        """
         data["name"] = name
 
+
         # REQUIRED - privacy_level
-        """What information to send to the external tool."""
+        """
+            What information to send to the external tool.
+        """
         self._validate_enum(privacy_level, ["anonymous", "name_only", "public"])
         data["privacy_level"] = privacy_level
 
+
         # REQUIRED - consumer_key
-        """The consumer key for the external tool"""
+        """
+            The consumer key for the external tool
+        """
         data["consumer_key"] = consumer_key
 
+
         # REQUIRED - shared_secret
-        """The shared secret with the external tool"""
+        """
+            The shared secret with the external tool
+        """
         data["shared_secret"] = shared_secret
 
+
         # OPTIONAL - description
-        """A description of the tool"""
+        """
+            A description of the tool
+        """
         if description is not None:
             data["description"] = description
 
+
         # OPTIONAL - url
-        """The url to match links against. Either "url" or "domain" should be set,
-        not both."""
+        """
+            The url to match links against. Either "url" or "domain" should be set,
+        not both.
+        """
         if url is not None:
             data["url"] = url
 
+
         # OPTIONAL - domain
-        """The domain to match links against. Either "url" or "domain" should be
-        set, not both."""
+        """
+            The domain to match links against. Either "url" or "domain" should be
+        set, not both.
+        """
         if domain is not None:
             data["domain"] = domain
 
+
         # OPTIONAL - icon_url
-        """The url of the icon to show for this tool"""
+        """
+            The url of the icon to show for this tool
+        """
         if icon_url is not None:
             data["icon_url"] = icon_url
 
+
         # OPTIONAL - text
-        """The default text to show for this tool"""
+        """
+            The default text to show for this tool
+        """
         if text is not None:
             data["text"] = text
 
+
         # OPTIONAL - custom_fields[field_name]
-        """Custom fields that will be sent to the tool consumer; can be used
-        multiple times"""
+        """
+            Custom fields that will be sent to the tool consumer; can be used
+        multiple times
+        """
         if custom_fields_field_name is not None:
             data["custom_fields[field_name]"] = custom_fields_field_name
 
+
+        # OPTIONAL - is_rce_favorite
+        """
+            (Deprecated in favor of {api:ExternalToolsController#add_rce_favorite Add tool to RCE Favorites} and
+        {api:ExternalToolsController#remove_rce_favorite Remove tool from RCE Favorites})
+        Whether this tool should appear in a preferred location in the RCE.
+        This only applies to tools in root account contexts that have an editor
+        button placement.
+        """
+        if is_rce_favorite is not None:
+            data["is_rce_favorite"] = is_rce_favorite
+
+
         # OPTIONAL - account_navigation[url]
-        """The url of the external tool for account navigation"""
+        """
+            The url of the external tool for account navigation
+        """
         if account_navigation_url is not None:
             data["account_navigation[url]"] = account_navigation_url
 
+
         # OPTIONAL - account_navigation[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if account_navigation_enabled is not None:
             data["account_navigation[enabled]"] = account_navigation_enabled
 
+
         # OPTIONAL - account_navigation[text]
-        """The text that will show on the left-tab in the account navigation"""
+        """
+            The text that will show on the left-tab in the account navigation
+        """
         if account_navigation_text is not None:
             data["account_navigation[text]"] = account_navigation_text
 
+
         # OPTIONAL - account_navigation[selection_width]
-        """The width of the dialog the tool is launched in"""
+        """
+            The width of the dialog the tool is launched in
+        """
         if account_navigation_selection_width is not None:
             data["account_navigation[selection_width]"] = account_navigation_selection_width
 
+
         # OPTIONAL - account_navigation[selection_height]
-        """The height of the dialog the tool is launched in"""
+        """
+            The height of the dialog the tool is launched in
+        """
         if account_navigation_selection_height is not None:
             data["account_navigation[selection_height]"] = account_navigation_selection_height
 
+
+        # OPTIONAL - account_navigation[display_type]
+        """
+            The layout type to use when launching the tool. Must be
+        "full_width", "full_width_in_context", "in_nav_context", "borderless", or "default"
+        """
+        if account_navigation_display_type is not None:
+            data["account_navigation[display_type]"] = account_navigation_display_type
+
+
         # OPTIONAL - user_navigation[url]
-        """The url of the external tool for user navigation"""
+        """
+            The url of the external tool for user navigation
+        """
         if user_navigation_url is not None:
             data["user_navigation[url]"] = user_navigation_url
 
+
         # OPTIONAL - user_navigation[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if user_navigation_enabled is not None:
             data["user_navigation[enabled]"] = user_navigation_enabled
 
+
         # OPTIONAL - user_navigation[text]
-        """The text that will show on the left-tab in the user navigation"""
+        """
+            The text that will show on the left-tab in the user navigation
+        """
         if user_navigation_text is not None:
             data["user_navigation[text]"] = user_navigation_text
 
+
+        # OPTIONAL - user_navigation[visibility]
+        """
+            Who will see the navigation tab. "admins" for admins, "public" or
+        "members" for everyone. Setting this to `null` will remove this configuration
+        and use the default behavior, which is "public".
+        """
+        if user_navigation_visibility is not None:
+            self._validate_enum(user_navigation_visibility, ["admins", "members", "public"])
+            data["user_navigation[visibility]"] = user_navigation_visibility
+
+
         # OPTIONAL - course_home_sub_navigation[url]
-        """The url of the external tool for right-side course home navigation menu"""
+        """
+            The url of the external tool for right-side course home navigation menu
+        """
         if course_home_sub_navigation_url is not None:
             data["course_home_sub_navigation[url]"] = course_home_sub_navigation_url
 
+
         # OPTIONAL - course_home_sub_navigation[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if course_home_sub_navigation_enabled is not None:
             data["course_home_sub_navigation[enabled]"] = course_home_sub_navigation_enabled
 
+
         # OPTIONAL - course_home_sub_navigation[text]
-        """The text that will show on the right-side course home navigation menu"""
+        """
+            The text that will show on the right-side course home navigation menu
+        """
         if course_home_sub_navigation_text is not None:
             data["course_home_sub_navigation[text]"] = course_home_sub_navigation_text
 
+
         # OPTIONAL - course_home_sub_navigation[icon_url]
-        """The url of the icon to show in the right-side course home navigation menu"""
+        """
+            The url of the icon to show in the right-side course home navigation menu
+        """
         if course_home_sub_navigation_icon_url is not None:
             data["course_home_sub_navigation[icon_url]"] = course_home_sub_navigation_icon_url
 
+
         # OPTIONAL - course_navigation[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if course_navigation_enabled is not None:
             data["course_navigation[enabled]"] = course_navigation_enabled
 
+
         # OPTIONAL - course_navigation[text]
-        """The text that will show on the left-tab in the course navigation"""
+        """
+            The text that will show on the left-tab in the course navigation
+        """
         if course_navigation_text is not None:
             data["course_navigation[text]"] = course_navigation_text
 
+
         # OPTIONAL - course_navigation[visibility]
-        """Who will see the navigation tab. "admins" for course admins, "members" for
-        students, null for everyone"""
+        """
+            Who will see the navigation tab. "admins" for course admins, "members" for
+        students, "public" for everyone. Setting this to `null` will remove this configuration
+        and use the default behavior, which is "public".
+        """
         if course_navigation_visibility is not None:
-            self._validate_enum(course_navigation_visibility, ["admins", "members"])
+            self._validate_enum(course_navigation_visibility, ["admins", "members", "public"])
             data["course_navigation[visibility]"] = course_navigation_visibility
 
+
         # OPTIONAL - course_navigation[windowTarget]
-        """Determines how the navigation tab will be opened.
+        """
+            Determines how the navigation tab will be opened.
         "_blank"	Launches the external tool in a new window or tab.
-        "_self"	(Default) Launches the external tool in an iframe inside of Canvas."""
+        "_self"	(Default) Launches the external tool in an iframe inside of Canvas.
+        """
         if course_navigation_windowTarget is not None:
             self._validate_enum(course_navigation_windowTarget, ["_blank", "_self"])
             data["course_navigation[windowTarget]"] = course_navigation_windowTarget
 
+
         # OPTIONAL - course_navigation[default]
-        """Whether the navigation option will show in the course by default or
-        whether the teacher will have to explicitly enable it"""
+        """
+            If set to "disabled" the tool will not appear in the course navigation
+        until a teacher explicitly enables it.
+
+        If set to "enabled" the tool will appear in the course navigation
+        without requiring a teacher to explicitly enable it.
+
+        defaults to "enabled"
+        """
         if course_navigation_default is not None:
+            self._validate_enum(course_navigation_default, ["disabled", "enabled"])
             data["course_navigation[default]"] = course_navigation_default
 
+
+        # OPTIONAL - course_navigation[display_type]
+        """
+            The layout type to use when launching the tool. Must be
+        "full_width", "full_width_in_context", "in_nav_context", "borderless", or "default"
+        """
+        if course_navigation_display_type is not None:
+            data["course_navigation[display_type]"] = course_navigation_display_type
+
+
         # OPTIONAL - editor_button[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if editor_button_url is not None:
             data["editor_button[url]"] = editor_button_url
 
+
         # OPTIONAL - editor_button[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if editor_button_enabled is not None:
             data["editor_button[enabled]"] = editor_button_enabled
 
+
         # OPTIONAL - editor_button[icon_url]
-        """The url of the icon to show in the WYSIWYG editor"""
+        """
+            The url of the icon to show in the WYSIWYG editor
+        """
         if editor_button_icon_url is not None:
             data["editor_button[icon_url]"] = editor_button_icon_url
 
+
         # OPTIONAL - editor_button[selection_width]
-        """The width of the dialog the tool is launched in"""
+        """
+            The width of the dialog the tool is launched in
+        """
         if editor_button_selection_width is not None:
             data["editor_button[selection_width]"] = editor_button_selection_width
 
+
         # OPTIONAL - editor_button[selection_height]
-        """The height of the dialog the tool is launched in"""
+        """
+            The height of the dialog the tool is launched in
+        """
         if editor_button_selection_height is not None:
             data["editor_button[selection_height]"] = editor_button_selection_height
 
+
         # OPTIONAL - editor_button[message_type]
-        """Set this to ContentItemSelectionRequest to tell the tool to use
-        content-item; otherwise, omit"""
+        """
+            Set this to ContentItemSelectionRequest to tell the tool to use
+        content-item; otherwise, omit
+        """
         if editor_button_message_type is not None:
             data["editor_button[message_type]"] = editor_button_message_type
 
+
         # OPTIONAL - homework_submission[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if homework_submission_url is not None:
             data["homework_submission[url]"] = homework_submission_url
 
+
         # OPTIONAL - homework_submission[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if homework_submission_enabled is not None:
             data["homework_submission[enabled]"] = homework_submission_enabled
 
+
         # OPTIONAL - homework_submission[text]
-        """The text that will show on the homework submission tab"""
+        """
+            The text that will show on the homework submission tab
+        """
         if homework_submission_text is not None:
             data["homework_submission[text]"] = homework_submission_text
 
+
         # OPTIONAL - homework_submission[message_type]
-        """Set this to ContentItemSelectionRequest to tell the tool to use
-        content-item; otherwise, omit"""
+        """
+            Set this to ContentItemSelectionRequest to tell the tool to use
+        content-item; otherwise, omit
+        """
         if homework_submission_message_type is not None:
             data["homework_submission[message_type]"] = homework_submission_message_type
 
+
         # OPTIONAL - link_selection[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if link_selection_url is not None:
             data["link_selection[url]"] = link_selection_url
 
+
         # OPTIONAL - link_selection[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if link_selection_enabled is not None:
             data["link_selection[enabled]"] = link_selection_enabled
 
+
         # OPTIONAL - link_selection[text]
-        """The text that will show for the link selection text"""
+        """
+            The text that will show for the link selection text
+        """
         if link_selection_text is not None:
             data["link_selection[text]"] = link_selection_text
 
+
         # OPTIONAL - link_selection[message_type]
-        """Set this to ContentItemSelectionRequest to tell the tool to use
-        content-item; otherwise, omit"""
+        """
+            Set this to ContentItemSelectionRequest to tell the tool to use
+        content-item; otherwise, omit
+        """
         if link_selection_message_type is not None:
             data["link_selection[message_type]"] = link_selection_message_type
 
+
         # OPTIONAL - migration_selection[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if migration_selection_url is not None:
             data["migration_selection[url]"] = migration_selection_url
 
+
         # OPTIONAL - migration_selection[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if migration_selection_enabled is not None:
             data["migration_selection[enabled]"] = migration_selection_enabled
 
+
         # OPTIONAL - migration_selection[message_type]
-        """Set this to ContentItemSelectionRequest to tell the tool to use
-        content-item; otherwise, omit"""
+        """
+            Set this to ContentItemSelectionRequest to tell the tool to use
+        content-item; otherwise, omit
+        """
         if migration_selection_message_type is not None:
             data["migration_selection[message_type]"] = migration_selection_message_type
 
+
         # OPTIONAL - tool_configuration[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if tool_configuration_url is not None:
             data["tool_configuration[url]"] = tool_configuration_url
 
+
         # OPTIONAL - tool_configuration[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if tool_configuration_enabled is not None:
             data["tool_configuration[enabled]"] = tool_configuration_enabled
 
+
         # OPTIONAL - tool_configuration[message_type]
-        """Set this to ContentItemSelectionRequest to tell the tool to use
-        content-item; otherwise, omit"""
+        """
+            Set this to ContentItemSelectionRequest to tell the tool to use
+        content-item; otherwise, omit
+        """
         if tool_configuration_message_type is not None:
             data["tool_configuration[message_type]"] = tool_configuration_message_type
 
+
         # OPTIONAL - tool_configuration[prefer_sis_email]
-        """Set this to default the lis_person_contact_email_primary to prefer
-        provisioned sis_email; otherwise, omit"""
+        """
+            Set this to default the lis_person_contact_email_primary to prefer
+        provisioned sis_email; otherwise, omit
+        """
         if tool_configuration_prefer_sis_email is not None:
             data["tool_configuration[prefer_sis_email]"] = tool_configuration_prefer_sis_email
 
+
         # OPTIONAL - resource_selection[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if resource_selection_url is not None:
             data["resource_selection[url]"] = resource_selection_url
 
+
         # OPTIONAL - resource_selection[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature. If set to false,
+        not_selectable must also be set to true in order to hide this tool
+        from the selection UI in modules and assignments.
+        """
         if resource_selection_enabled is not None:
             data["resource_selection[enabled]"] = resource_selection_enabled
 
+
         # OPTIONAL - resource_selection[icon_url]
-        """The url of the icon to show in the module external tool list"""
+        """
+            The url of the icon to show in the module external tool list
+        """
         if resource_selection_icon_url is not None:
             data["resource_selection[icon_url]"] = resource_selection_icon_url
 
+
         # OPTIONAL - resource_selection[selection_width]
-        """The width of the dialog the tool is launched in"""
+        """
+            The width of the dialog the tool is launched in
+        """
         if resource_selection_selection_width is not None:
             data["resource_selection[selection_width]"] = resource_selection_selection_width
 
+
         # OPTIONAL - resource_selection[selection_height]
-        """The height of the dialog the tool is launched in"""
+        """
+            The height of the dialog the tool is launched in
+        """
         if resource_selection_selection_height is not None:
             data["resource_selection[selection_height]"] = resource_selection_selection_height
 
+
         # OPTIONAL - config_type
-        """Configuration can be passed in as CC xml instead of using query
+        """
+            Configuration can be passed in as CC xml instead of using query
         parameters. If this value is "by_url" or "by_xml" then an xml
         configuration will be expected in either the "config_xml" or "config_url"
         parameter. Note that the name parameter overrides the tool name provided
-        in the xml"""
+        in the xml
+        """
         if config_type is not None:
             data["config_type"] = config_type
 
+
         # OPTIONAL - config_xml
-        """XML tool configuration, as specified in the CC xml specification. This is
-        required if "config_type" is set to 'by_xml'"""
+        """
+            XML tool configuration, as specified in the CC xml specification. This is
+        required if "config_type" is set to "by_xml"
+        """
         if config_xml is not None:
             data["config_xml"] = config_xml
 
+
         # OPTIONAL - config_url
-        """URL where the server can retrieve an XML tool configuration, as specified
+        """
+            URL where the server can retrieve an XML tool configuration, as specified
         in the CC xml specification. This is required if "config_type" is set to
-        'by_url'"""
+        "by_url"
+        """
         if config_url is not None:
             data["config_url"] = config_url
 
+
         # OPTIONAL - not_selectable
-        """Default: false, if set to true the tool won't show up in the external tool
-        selection UI in modules and assignments"""
+        """
+            Default: false. If set to true, and if resource_selection is set to false,
+        the tool won't show up in the external tool
+        selection UI in modules and assignments
+        """
         if not_selectable is not None:
             data["not_selectable"] = not_selectable
 
+
         # OPTIONAL - oauth_compliant
-        """Default: false, if set to true LTI query params will not be copied to the
-        post body."""
+        """
+            Default: false, if set to true LTI query params will not be copied to the
+        post body.
+        """
         if oauth_compliant is not None:
             data["oauth_compliant"] = oauth_compliant
+
 
         self.logger.debug("POST /api/v1/courses/{course_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/courses/{course_id}/external_tools".format(**path), data=data, params=params, no_data=True)
 
-    def create_external_tool_accounts(self, name, account_id, consumer_key, privacy_level, shared_secret, account_navigation_enabled=None, account_navigation_selection_height=None, account_navigation_selection_width=None, account_navigation_text=None, account_navigation_url=None, config_type=None, config_url=None, config_xml=None, course_home_sub_navigation_enabled=None, course_home_sub_navigation_icon_url=None, course_home_sub_navigation_text=None, course_home_sub_navigation_url=None, course_navigation_default=None, course_navigation_enabled=None, course_navigation_text=None, course_navigation_visibility=None, course_navigation_windowTarget=None, custom_fields_field_name=None, description=None, domain=None, editor_button_enabled=None, editor_button_icon_url=None, editor_button_message_type=None, editor_button_selection_height=None, editor_button_selection_width=None, editor_button_url=None, homework_submission_enabled=None, homework_submission_message_type=None, homework_submission_text=None, homework_submission_url=None, icon_url=None, link_selection_enabled=None, link_selection_message_type=None, link_selection_text=None, link_selection_url=None, migration_selection_enabled=None, migration_selection_message_type=None, migration_selection_url=None, not_selectable=None, oauth_compliant=None, resource_selection_enabled=None, resource_selection_icon_url=None, resource_selection_selection_height=None, resource_selection_selection_width=None, resource_selection_url=None, text=None, tool_configuration_enabled=None, tool_configuration_message_type=None, tool_configuration_prefer_sis_email=None, tool_configuration_url=None, url=None, user_navigation_enabled=None, user_navigation_text=None, user_navigation_url=None):
+    def create_external_tool_accounts(self, account_id, client_id, consumer_key, name, privacy_level, shared_secret, account_navigation_display_type=None, account_navigation_enabled=None, account_navigation_selection_height=None, account_navigation_selection_width=None, account_navigation_text=None, account_navigation_url=None, config_type=None, config_url=None, config_xml=None, course_home_sub_navigation_enabled=None, course_home_sub_navigation_icon_url=None, course_home_sub_navigation_text=None, course_home_sub_navigation_url=None, course_navigation_default=None, course_navigation_display_type=None, course_navigation_enabled=None, course_navigation_text=None, course_navigation_visibility=None, course_navigation_windowTarget=None, custom_fields_field_name=None, description=None, domain=None, editor_button_enabled=None, editor_button_icon_url=None, editor_button_message_type=None, editor_button_selection_height=None, editor_button_selection_width=None, editor_button_url=None, homework_submission_enabled=None, homework_submission_message_type=None, homework_submission_text=None, homework_submission_url=None, icon_url=None, is_rce_favorite=None, link_selection_enabled=None, link_selection_message_type=None, link_selection_text=None, link_selection_url=None, migration_selection_enabled=None, migration_selection_message_type=None, migration_selection_url=None, not_selectable=None, oauth_compliant=None, resource_selection_enabled=None, resource_selection_icon_url=None, resource_selection_selection_height=None, resource_selection_selection_width=None, resource_selection_url=None, text=None, tool_configuration_enabled=None, tool_configuration_message_type=None, tool_configuration_prefer_sis_email=None, tool_configuration_url=None, url=None, user_navigation_enabled=None, user_navigation_text=None, user_navigation_url=None, user_navigation_visibility=None):
         """
         Create an external tool.
 
         Create an external tool in the specified course/account.
         The created tool will be returned, see the "show" endpoint for an example.
+        If a client ID is supplied canvas will attempt to create a context external
+        tool using the LTI 1.3 standard.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
+        # REQUIRED - client_id
+        """
+            The client id is attached to the developer key.
+        If supplied all other parameters are unnecessary and will be ignored
+        """
+        data["client_id"] = client_id
+
+
         # REQUIRED - name
-        """The name of the tool"""
+        """
+            The name of the tool
+        """
         data["name"] = name
 
+
         # REQUIRED - privacy_level
-        """What information to send to the external tool."""
+        """
+            What information to send to the external tool.
+        """
         self._validate_enum(privacy_level, ["anonymous", "name_only", "public"])
         data["privacy_level"] = privacy_level
 
+
         # REQUIRED - consumer_key
-        """The consumer key for the external tool"""
+        """
+            The consumer key for the external tool
+        """
         data["consumer_key"] = consumer_key
 
+
         # REQUIRED - shared_secret
-        """The shared secret with the external tool"""
+        """
+            The shared secret with the external tool
+        """
         data["shared_secret"] = shared_secret
 
+
         # OPTIONAL - description
-        """A description of the tool"""
+        """
+            A description of the tool
+        """
         if description is not None:
             data["description"] = description
 
+
         # OPTIONAL - url
-        """The url to match links against. Either "url" or "domain" should be set,
-        not both."""
+        """
+            The url to match links against. Either "url" or "domain" should be set,
+        not both.
+        """
         if url is not None:
             data["url"] = url
 
+
         # OPTIONAL - domain
-        """The domain to match links against. Either "url" or "domain" should be
-        set, not both."""
+        """
+            The domain to match links against. Either "url" or "domain" should be
+        set, not both.
+        """
         if domain is not None:
             data["domain"] = domain
 
+
         # OPTIONAL - icon_url
-        """The url of the icon to show for this tool"""
+        """
+            The url of the icon to show for this tool
+        """
         if icon_url is not None:
             data["icon_url"] = icon_url
 
+
         # OPTIONAL - text
-        """The default text to show for this tool"""
+        """
+            The default text to show for this tool
+        """
         if text is not None:
             data["text"] = text
 
+
         # OPTIONAL - custom_fields[field_name]
-        """Custom fields that will be sent to the tool consumer; can be used
-        multiple times"""
+        """
+            Custom fields that will be sent to the tool consumer; can be used
+        multiple times
+        """
         if custom_fields_field_name is not None:
             data["custom_fields[field_name]"] = custom_fields_field_name
 
+
+        # OPTIONAL - is_rce_favorite
+        """
+            (Deprecated in favor of {api:ExternalToolsController#add_rce_favorite Add tool to RCE Favorites} and
+        {api:ExternalToolsController#remove_rce_favorite Remove tool from RCE Favorites})
+        Whether this tool should appear in a preferred location in the RCE.
+        This only applies to tools in root account contexts that have an editor
+        button placement.
+        """
+        if is_rce_favorite is not None:
+            data["is_rce_favorite"] = is_rce_favorite
+
+
         # OPTIONAL - account_navigation[url]
-        """The url of the external tool for account navigation"""
+        """
+            The url of the external tool for account navigation
+        """
         if account_navigation_url is not None:
             data["account_navigation[url]"] = account_navigation_url
 
+
         # OPTIONAL - account_navigation[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if account_navigation_enabled is not None:
             data["account_navigation[enabled]"] = account_navigation_enabled
 
+
         # OPTIONAL - account_navigation[text]
-        """The text that will show on the left-tab in the account navigation"""
+        """
+            The text that will show on the left-tab in the account navigation
+        """
         if account_navigation_text is not None:
             data["account_navigation[text]"] = account_navigation_text
 
+
         # OPTIONAL - account_navigation[selection_width]
-        """The width of the dialog the tool is launched in"""
+        """
+            The width of the dialog the tool is launched in
+        """
         if account_navigation_selection_width is not None:
             data["account_navigation[selection_width]"] = account_navigation_selection_width
 
+
         # OPTIONAL - account_navigation[selection_height]
-        """The height of the dialog the tool is launched in"""
+        """
+            The height of the dialog the tool is launched in
+        """
         if account_navigation_selection_height is not None:
             data["account_navigation[selection_height]"] = account_navigation_selection_height
 
+
+        # OPTIONAL - account_navigation[display_type]
+        """
+            The layout type to use when launching the tool. Must be
+        "full_width", "full_width_in_context", "in_nav_context", "borderless", or "default"
+        """
+        if account_navigation_display_type is not None:
+            data["account_navigation[display_type]"] = account_navigation_display_type
+
+
         # OPTIONAL - user_navigation[url]
-        """The url of the external tool for user navigation"""
+        """
+            The url of the external tool for user navigation
+        """
         if user_navigation_url is not None:
             data["user_navigation[url]"] = user_navigation_url
 
+
         # OPTIONAL - user_navigation[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if user_navigation_enabled is not None:
             data["user_navigation[enabled]"] = user_navigation_enabled
 
+
         # OPTIONAL - user_navigation[text]
-        """The text that will show on the left-tab in the user navigation"""
+        """
+            The text that will show on the left-tab in the user navigation
+        """
         if user_navigation_text is not None:
             data["user_navigation[text]"] = user_navigation_text
 
+
+        # OPTIONAL - user_navigation[visibility]
+        """
+            Who will see the navigation tab. "admins" for admins, "public" or
+        "members" for everyone. Setting this to `null` will remove this configuration
+        and use the default behavior, which is "public".
+        """
+        if user_navigation_visibility is not None:
+            self._validate_enum(user_navigation_visibility, ["admins", "members", "public"])
+            data["user_navigation[visibility]"] = user_navigation_visibility
+
+
         # OPTIONAL - course_home_sub_navigation[url]
-        """The url of the external tool for right-side course home navigation menu"""
+        """
+            The url of the external tool for right-side course home navigation menu
+        """
         if course_home_sub_navigation_url is not None:
             data["course_home_sub_navigation[url]"] = course_home_sub_navigation_url
 
+
         # OPTIONAL - course_home_sub_navigation[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if course_home_sub_navigation_enabled is not None:
             data["course_home_sub_navigation[enabled]"] = course_home_sub_navigation_enabled
 
+
         # OPTIONAL - course_home_sub_navigation[text]
-        """The text that will show on the right-side course home navigation menu"""
+        """
+            The text that will show on the right-side course home navigation menu
+        """
         if course_home_sub_navigation_text is not None:
             data["course_home_sub_navigation[text]"] = course_home_sub_navigation_text
 
+
         # OPTIONAL - course_home_sub_navigation[icon_url]
-        """The url of the icon to show in the right-side course home navigation menu"""
+        """
+            The url of the icon to show in the right-side course home navigation menu
+        """
         if course_home_sub_navigation_icon_url is not None:
             data["course_home_sub_navigation[icon_url]"] = course_home_sub_navigation_icon_url
 
+
         # OPTIONAL - course_navigation[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if course_navigation_enabled is not None:
             data["course_navigation[enabled]"] = course_navigation_enabled
 
+
         # OPTIONAL - course_navigation[text]
-        """The text that will show on the left-tab in the course navigation"""
+        """
+            The text that will show on the left-tab in the course navigation
+        """
         if course_navigation_text is not None:
             data["course_navigation[text]"] = course_navigation_text
 
+
         # OPTIONAL - course_navigation[visibility]
-        """Who will see the navigation tab. "admins" for course admins, "members" for
-        students, null for everyone"""
+        """
+            Who will see the navigation tab. "admins" for course admins, "members" for
+        students, "public" for everyone. Setting this to `null` will remove this configuration
+        and use the default behavior, which is "public".
+        """
         if course_navigation_visibility is not None:
-            self._validate_enum(course_navigation_visibility, ["admins", "members"])
+            self._validate_enum(course_navigation_visibility, ["admins", "members", "public"])
             data["course_navigation[visibility]"] = course_navigation_visibility
 
+
         # OPTIONAL - course_navigation[windowTarget]
-        """Determines how the navigation tab will be opened.
+        """
+            Determines how the navigation tab will be opened.
         "_blank"	Launches the external tool in a new window or tab.
-        "_self"	(Default) Launches the external tool in an iframe inside of Canvas."""
+        "_self"	(Default) Launches the external tool in an iframe inside of Canvas.
+        """
         if course_navigation_windowTarget is not None:
             self._validate_enum(course_navigation_windowTarget, ["_blank", "_self"])
             data["course_navigation[windowTarget]"] = course_navigation_windowTarget
 
+
         # OPTIONAL - course_navigation[default]
-        """Whether the navigation option will show in the course by default or
-        whether the teacher will have to explicitly enable it"""
+        """
+            If set to "disabled" the tool will not appear in the course navigation
+        until a teacher explicitly enables it.
+
+        If set to "enabled" the tool will appear in the course navigation
+        without requiring a teacher to explicitly enable it.
+
+        defaults to "enabled"
+        """
         if course_navigation_default is not None:
+            self._validate_enum(course_navigation_default, ["disabled", "enabled"])
             data["course_navigation[default]"] = course_navigation_default
 
+
+        # OPTIONAL - course_navigation[display_type]
+        """
+            The layout type to use when launching the tool. Must be
+        "full_width", "full_width_in_context", "in_nav_context", "borderless", or "default"
+        """
+        if course_navigation_display_type is not None:
+            data["course_navigation[display_type]"] = course_navigation_display_type
+
+
         # OPTIONAL - editor_button[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if editor_button_url is not None:
             data["editor_button[url]"] = editor_button_url
 
+
         # OPTIONAL - editor_button[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if editor_button_enabled is not None:
             data["editor_button[enabled]"] = editor_button_enabled
 
+
         # OPTIONAL - editor_button[icon_url]
-        """The url of the icon to show in the WYSIWYG editor"""
+        """
+            The url of the icon to show in the WYSIWYG editor
+        """
         if editor_button_icon_url is not None:
             data["editor_button[icon_url]"] = editor_button_icon_url
 
+
         # OPTIONAL - editor_button[selection_width]
-        """The width of the dialog the tool is launched in"""
+        """
+            The width of the dialog the tool is launched in
+        """
         if editor_button_selection_width is not None:
             data["editor_button[selection_width]"] = editor_button_selection_width
 
+
         # OPTIONAL - editor_button[selection_height]
-        """The height of the dialog the tool is launched in"""
+        """
+            The height of the dialog the tool is launched in
+        """
         if editor_button_selection_height is not None:
             data["editor_button[selection_height]"] = editor_button_selection_height
 
+
         # OPTIONAL - editor_button[message_type]
-        """Set this to ContentItemSelectionRequest to tell the tool to use
-        content-item; otherwise, omit"""
+        """
+            Set this to ContentItemSelectionRequest to tell the tool to use
+        content-item; otherwise, omit
+        """
         if editor_button_message_type is not None:
             data["editor_button[message_type]"] = editor_button_message_type
 
+
         # OPTIONAL - homework_submission[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if homework_submission_url is not None:
             data["homework_submission[url]"] = homework_submission_url
 
+
         # OPTIONAL - homework_submission[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if homework_submission_enabled is not None:
             data["homework_submission[enabled]"] = homework_submission_enabled
 
+
         # OPTIONAL - homework_submission[text]
-        """The text that will show on the homework submission tab"""
+        """
+            The text that will show on the homework submission tab
+        """
         if homework_submission_text is not None:
             data["homework_submission[text]"] = homework_submission_text
 
+
         # OPTIONAL - homework_submission[message_type]
-        """Set this to ContentItemSelectionRequest to tell the tool to use
-        content-item; otherwise, omit"""
+        """
+            Set this to ContentItemSelectionRequest to tell the tool to use
+        content-item; otherwise, omit
+        """
         if homework_submission_message_type is not None:
             data["homework_submission[message_type]"] = homework_submission_message_type
 
+
         # OPTIONAL - link_selection[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if link_selection_url is not None:
             data["link_selection[url]"] = link_selection_url
 
+
         # OPTIONAL - link_selection[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if link_selection_enabled is not None:
             data["link_selection[enabled]"] = link_selection_enabled
 
+
         # OPTIONAL - link_selection[text]
-        """The text that will show for the link selection text"""
+        """
+            The text that will show for the link selection text
+        """
         if link_selection_text is not None:
             data["link_selection[text]"] = link_selection_text
 
+
         # OPTIONAL - link_selection[message_type]
-        """Set this to ContentItemSelectionRequest to tell the tool to use
-        content-item; otherwise, omit"""
+        """
+            Set this to ContentItemSelectionRequest to tell the tool to use
+        content-item; otherwise, omit
+        """
         if link_selection_message_type is not None:
             data["link_selection[message_type]"] = link_selection_message_type
 
+
         # OPTIONAL - migration_selection[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if migration_selection_url is not None:
             data["migration_selection[url]"] = migration_selection_url
 
+
         # OPTIONAL - migration_selection[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if migration_selection_enabled is not None:
             data["migration_selection[enabled]"] = migration_selection_enabled
 
+
         # OPTIONAL - migration_selection[message_type]
-        """Set this to ContentItemSelectionRequest to tell the tool to use
-        content-item; otherwise, omit"""
+        """
+            Set this to ContentItemSelectionRequest to tell the tool to use
+        content-item; otherwise, omit
+        """
         if migration_selection_message_type is not None:
             data["migration_selection[message_type]"] = migration_selection_message_type
 
+
         # OPTIONAL - tool_configuration[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if tool_configuration_url is not None:
             data["tool_configuration[url]"] = tool_configuration_url
 
+
         # OPTIONAL - tool_configuration[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature
+        """
         if tool_configuration_enabled is not None:
             data["tool_configuration[enabled]"] = tool_configuration_enabled
 
+
         # OPTIONAL - tool_configuration[message_type]
-        """Set this to ContentItemSelectionRequest to tell the tool to use
-        content-item; otherwise, omit"""
+        """
+            Set this to ContentItemSelectionRequest to tell the tool to use
+        content-item; otherwise, omit
+        """
         if tool_configuration_message_type is not None:
             data["tool_configuration[message_type]"] = tool_configuration_message_type
 
+
         # OPTIONAL - tool_configuration[prefer_sis_email]
-        """Set this to default the lis_person_contact_email_primary to prefer
-        provisioned sis_email; otherwise, omit"""
+        """
+            Set this to default the lis_person_contact_email_primary to prefer
+        provisioned sis_email; otherwise, omit
+        """
         if tool_configuration_prefer_sis_email is not None:
             data["tool_configuration[prefer_sis_email]"] = tool_configuration_prefer_sis_email
 
+
         # OPTIONAL - resource_selection[url]
-        """The url of the external tool"""
+        """
+            The url of the external tool
+        """
         if resource_selection_url is not None:
             data["resource_selection[url]"] = resource_selection_url
 
+
         # OPTIONAL - resource_selection[enabled]
-        """Set this to enable this feature"""
+        """
+            Set this to enable this feature. If set to false,
+        not_selectable must also be set to true in order to hide this tool
+        from the selection UI in modules and assignments.
+        """
         if resource_selection_enabled is not None:
             data["resource_selection[enabled]"] = resource_selection_enabled
 
+
         # OPTIONAL - resource_selection[icon_url]
-        """The url of the icon to show in the module external tool list"""
+        """
+            The url of the icon to show in the module external tool list
+        """
         if resource_selection_icon_url is not None:
             data["resource_selection[icon_url]"] = resource_selection_icon_url
 
+
         # OPTIONAL - resource_selection[selection_width]
-        """The width of the dialog the tool is launched in"""
+        """
+            The width of the dialog the tool is launched in
+        """
         if resource_selection_selection_width is not None:
             data["resource_selection[selection_width]"] = resource_selection_selection_width
 
+
         # OPTIONAL - resource_selection[selection_height]
-        """The height of the dialog the tool is launched in"""
+        """
+            The height of the dialog the tool is launched in
+        """
         if resource_selection_selection_height is not None:
             data["resource_selection[selection_height]"] = resource_selection_selection_height
 
+
         # OPTIONAL - config_type
-        """Configuration can be passed in as CC xml instead of using query
+        """
+            Configuration can be passed in as CC xml instead of using query
         parameters. If this value is "by_url" or "by_xml" then an xml
         configuration will be expected in either the "config_xml" or "config_url"
         parameter. Note that the name parameter overrides the tool name provided
-        in the xml"""
+        in the xml
+        """
         if config_type is not None:
             data["config_type"] = config_type
 
+
         # OPTIONAL - config_xml
-        """XML tool configuration, as specified in the CC xml specification. This is
-        required if "config_type" is set to 'by_xml'"""
+        """
+            XML tool configuration, as specified in the CC xml specification. This is
+        required if "config_type" is set to "by_xml"
+        """
         if config_xml is not None:
             data["config_xml"] = config_xml
 
+
         # OPTIONAL - config_url
-        """URL where the server can retrieve an XML tool configuration, as specified
+        """
+            URL where the server can retrieve an XML tool configuration, as specified
         in the CC xml specification. This is required if "config_type" is set to
-        'by_url'"""
+        "by_url"
+        """
         if config_url is not None:
             data["config_url"] = config_url
 
+
         # OPTIONAL - not_selectable
-        """Default: false, if set to true the tool won't show up in the external tool
-        selection UI in modules and assignments"""
+        """
+            Default: false. If set to true, and if resource_selection is set to false,
+        the tool won't show up in the external tool
+        selection UI in modules and assignments
+        """
         if not_selectable is not None:
             data["not_selectable"] = not_selectable
 
+
         # OPTIONAL - oauth_compliant
-        """Default: false, if set to true LTI query params will not be copied to the
-        post body."""
+        """
+            Default: false, if set to true LTI query params will not be copied to the
+        post body.
+        """
         if oauth_compliant is not None:
             data["oauth_compliant"] = oauth_compliant
+
 
         self.logger.debug("POST /api/v1/accounts/{account_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/accounts/{account_id}/external_tools".format(**path), data=data, params=params, no_data=True)
@@ -920,12 +1480,18 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - external_tool_id
-        """ID"""
+        """
+            ID
+        """
         path["external_tool_id"] = external_tool_id
+
 
         self.logger.debug("PUT /api/v1/courses/{course_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/courses/{course_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
@@ -941,12 +1507,18 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # REQUIRED - PATH - external_tool_id
-        """ID"""
+        """
+            ID
+        """
         path["external_tool_id"] = external_tool_id
+
 
         self.logger.debug("PUT /api/v1/accounts/{account_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/accounts/{account_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
@@ -962,12 +1534,18 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - external_tool_id
-        """ID"""
+        """
+            ID
+        """
         path["external_tool_id"] = external_tool_id
+
 
         self.logger.debug("DELETE /api/v1/courses/{course_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/courses/{course_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
@@ -983,13 +1561,126 @@ class ExternalToolsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # REQUIRED - PATH - external_tool_id
-        """ID"""
+        """
+            ID
+        """
         path["external_tool_id"] = external_tool_id
+
 
         self.logger.debug("DELETE /api/v1/accounts/{account_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
+
+    def add_tool_to_rce_favorites(self, account_id, id):
+        """
+        Add tool to RCE Favorites.
+
+        Add the specified editor_button external tool to a preferred location in the RCE
+        for courses in the given account and its subaccounts (if the subaccounts
+        haven't set their own RCE Favorites). Cannot set more than 2 RCE Favorites.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - account_id
+        """
+            ID
+        """
+        path["account_id"] = account_id
+
+
+        # REQUIRED - PATH - id
+        """
+            ID
+        """
+        path["id"] = id
+
+
+        self.logger.debug("POST /api/v1/accounts/{account_id}/external_tools/rce_favorites/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("POST", "/api/v1/accounts/{account_id}/external_tools/rce_favorites/{id}".format(**path), data=data, params=params, no_data=True)
+
+    def remove_tool_from_rce_favorites(self, account_id, id):
+        """
+        Remove tool from RCE Favorites.
+
+        Remove the specified external tool from a preferred location in the RCE
+        for the given account
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - account_id
+        """
+            ID
+        """
+        path["account_id"] = account_id
+
+
+        # REQUIRED - PATH - id
+        """
+            ID
+        """
+        path["id"] = id
+
+
+        self.logger.debug("DELETE /api/v1/accounts/{account_id}/external_tools/rce_favorites/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/external_tools/rce_favorites/{id}".format(**path), data=data, params=params, no_data=True)
+
+    def get_visible_course_navigation_tools(self, context_codes):
+        """
+        Get visible course navigation tools.
+
+        Get a list of external tools with the course_navigation placement that have not been hidden in
+        course settings and whose visibility settings apply to the requesting user. These tools are the
+        same that appear in the course navigation.
+        
+        The response format is the same as for List external tools, but with additional context_id and
+        context_name fields on each element in the array.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - context_codes
+        """
+            List of context_codes to retrieve visible course nav tools for (for example, +course_123+). Only
+        courses are presently supported.
+        """
+        params["context_codes"] = context_codes
+
+
+        self.logger.debug("GET /api/v1/external_tools/visible_course_nav_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/external_tools/visible_course_nav_tools".format(**path), data=data, params=params, no_data=True)
+
+    def get_visible_course_navigation_tools_for_single_course(self, course_id):
+        """
+        Get visible course navigation tools for a single course.
+
+        Get a list of external tools with the course_navigation placement that have not been hidden in
+        course settings and whose visibility settings apply to the requesting user. These tools are the
+        same that appear in the course navigation.
+        
+        The response format is the same as Get visible course navigation tools.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - course_id
+        """
+            ID
+        """
+        path["course_id"] = course_id
+
+
+        self.logger.debug("GET /api/v1/courses/{course_id}/external_tools/visible_course_nav_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/external_tools/visible_course_nav_tools".format(**path), data=data, params=params, no_data=True)
 

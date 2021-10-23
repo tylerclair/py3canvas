@@ -38,14 +38,14 @@ class TestContentExportsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.show_content_export_courses(id, course_id)
+        r = self.client.show_content_export_courses(course_id, id)
 
     def test_show_content_export_groups(self):
         """Integration test for the ContentExportsAPI.show_content_export_groups method."""
         group_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.show_content_export_groups(id, group_id)
+        r = self.client.show_content_export_groups(group_id, id)
 
     def test_show_content_export_users(self):
         """Integration test for the ContentExportsAPI.show_content_export_users method."""

@@ -6,15 +6,12 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.modules import ModulesAPI
-from py3canvas.apis.modules import Contentdetails
-from py3canvas.apis.modules import Moduleitemsequenceasset
-from py3canvas.apis.modules import Moduleitemcompletionrequirement
 from py3canvas.apis.modules import Module
-from py3canvas.apis.modules import Moduleitemsequence
 from py3canvas.apis.modules import Completionrequirement
+from py3canvas.apis.modules import Contentdetails
 from py3canvas.apis.modules import Moduleitem
 from py3canvas.apis.modules import Moduleitemsequencenode
-from py3canvas.apis.modules import Moduleitemcontentdetails
+from py3canvas.apis.modules import Moduleitemsequence
 
 
 class TestModulesAPI(unittest.TestCase):
@@ -34,7 +31,7 @@ class TestModulesAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.show_module(id, course_id, include=None, student_id=None)
+        r = self.client.show_module(course_id, id, include=None, student_id=None)
 
     def test_create_module(self):
         """Integration test for the ModulesAPI.create_module method."""
@@ -51,7 +48,7 @@ class TestModulesAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_module(id, course_id)
+        r = self.client.delete_module(course_id, id)
 
     def test_re_lock_module_progressions(self):
         """Integration test for the ModulesAPI.re_lock_module_progressions method."""
@@ -71,7 +68,7 @@ class TestModulesAPI(unittest.TestCase):
         module_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.show_module_item(id, course_id, module_id, include=None, student_id=None)
+        r = self.client.show_module_item(course_id, id, module_id, include=None, student_id=None)
 
     def test_create_module_item(self):
         """Integration test for the ModulesAPI.create_module_item method."""
@@ -94,7 +91,7 @@ class TestModulesAPI(unittest.TestCase):
         module_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_module_item(id, course_id, module_id)
+        r = self.client.delete_module_item(course_id, id, module_id)
 
     def test_mark_module_item_as_done_not_done(self):
         """Integration test for the ModulesAPI.mark_module_item_as_done_not_done method."""

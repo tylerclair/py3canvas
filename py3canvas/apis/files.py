@@ -27,8 +27,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/files/quota with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/files/quota".format(**path), data=data, params=params, no_data=True)
@@ -44,8 +47,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/files/quota with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/files/quota".format(**path), data=data, params=params, no_data=True)
@@ -61,13 +67,16 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
+
 
         self.logger.debug("GET /api/v1/users/{user_id}/files/quota with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/{user_id}/files/quota".format(**path), data=data, params=params, no_data=True)
 
-    def list_files_courses(self, course_id, content_types=None, include=None, only=None, order=None, search_term=None, sort=None):
+    def list_files_courses(self, course_id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None):
         """
         List files.
 
@@ -78,53 +87,84 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # OPTIONAL - content_types
-        """Filter results by content-type. You can specify type/subtype pairs (e.g.,
+        """
+            Filter results by content-type. You can specify type/subtype pairs (e.g.,
         'image/jpeg'), or simply types (e.g., 'image', which will match
-        'image/gif', 'image/jpeg', etc.)."""
+        'image/gif', 'image/jpeg', etc.).
+        """
         if content_types is not None:
             params["content_types"] = content_types
 
+
+        # OPTIONAL - exclude_content_types
+        """
+            Exclude given content-types from your results. You can specify type/subtype pairs (e.g.,
+        'image/jpeg'), or simply types (e.g., 'image', which will match
+        'image/gif', 'image/jpeg', etc.).
+        """
+        if exclude_content_types is not None:
+            params["exclude_content_types"] = exclude_content_types
+
+
         # OPTIONAL - search_term
-        """The partial name of the files to match and return."""
+        """
+            The partial name of the files to match and return.
+        """
         if search_term is not None:
             params["search_term"] = search_term
 
+
         # OPTIONAL - include
-        """Array of additional information to include.
-        
+        """
+            Array of additional information to include.
+
         "user":: the user who uploaded the file or last edited its content
-        "usage_rights":: copyright and license information for the file (see UsageRights)"""
+        "usage_rights":: copyright and license information for the file (see UsageRights)
+        """
         if include is not None:
             self._validate_enum(include, ["user"])
             params["include"] = include
 
+
         # OPTIONAL - only
-        """Array of information to restrict to. Overrides include[]
-        
-        "names":: only returns file name information"""
+        """
+            Array of information to restrict to. Overrides include[]
+
+        "names":: only returns file name information
+        """
         if only is not None:
             params["only"] = only
 
+
         # OPTIONAL - sort
-        """Sort results by this field. Defaults to 'name'. Note that `sort=user` implies `include[]=user`."""
+        """
+            Sort results by this field. Defaults to 'name'. Note that `sort=user` implies `include[]=user`.
+        """
         if sort is not None:
             self._validate_enum(sort, ["name", "size", "created_at", "updated_at", "content_type", "user"])
             params["sort"] = sort
 
+
         # OPTIONAL - order
-        """The sorting order. Defaults to 'asc'."""
+        """
+            The sorting order. Defaults to 'asc'.
+        """
         if order is not None:
             self._validate_enum(order, ["asc", "desc"])
             params["order"] = order
 
+
         self.logger.debug("GET /api/v1/courses/{course_id}/files with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/files".format(**path), data=data, params=params, all_pages=True)
 
-    def list_files_users(self, user_id, content_types=None, include=None, only=None, order=None, search_term=None, sort=None):
+    def list_files_users(self, user_id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None):
         """
         List files.
 
@@ -135,53 +175,84 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
 
+
         # OPTIONAL - content_types
-        """Filter results by content-type. You can specify type/subtype pairs (e.g.,
+        """
+            Filter results by content-type. You can specify type/subtype pairs (e.g.,
         'image/jpeg'), or simply types (e.g., 'image', which will match
-        'image/gif', 'image/jpeg', etc.)."""
+        'image/gif', 'image/jpeg', etc.).
+        """
         if content_types is not None:
             params["content_types"] = content_types
 
+
+        # OPTIONAL - exclude_content_types
+        """
+            Exclude given content-types from your results. You can specify type/subtype pairs (e.g.,
+        'image/jpeg'), or simply types (e.g., 'image', which will match
+        'image/gif', 'image/jpeg', etc.).
+        """
+        if exclude_content_types is not None:
+            params["exclude_content_types"] = exclude_content_types
+
+
         # OPTIONAL - search_term
-        """The partial name of the files to match and return."""
+        """
+            The partial name of the files to match and return.
+        """
         if search_term is not None:
             params["search_term"] = search_term
 
+
         # OPTIONAL - include
-        """Array of additional information to include.
-        
+        """
+            Array of additional information to include.
+
         "user":: the user who uploaded the file or last edited its content
-        "usage_rights":: copyright and license information for the file (see UsageRights)"""
+        "usage_rights":: copyright and license information for the file (see UsageRights)
+        """
         if include is not None:
             self._validate_enum(include, ["user"])
             params["include"] = include
 
+
         # OPTIONAL - only
-        """Array of information to restrict to. Overrides include[]
-        
-        "names":: only returns file name information"""
+        """
+            Array of information to restrict to. Overrides include[]
+
+        "names":: only returns file name information
+        """
         if only is not None:
             params["only"] = only
 
+
         # OPTIONAL - sort
-        """Sort results by this field. Defaults to 'name'. Note that `sort=user` implies `include[]=user`."""
+        """
+            Sort results by this field. Defaults to 'name'. Note that `sort=user` implies `include[]=user`.
+        """
         if sort is not None:
             self._validate_enum(sort, ["name", "size", "created_at", "updated_at", "content_type", "user"])
             params["sort"] = sort
 
+
         # OPTIONAL - order
-        """The sorting order. Defaults to 'asc'."""
+        """
+            The sorting order. Defaults to 'asc'.
+        """
         if order is not None:
             self._validate_enum(order, ["asc", "desc"])
             params["order"] = order
 
+
         self.logger.debug("GET /api/v1/users/{user_id}/files with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/{user_id}/files".format(**path), data=data, params=params, all_pages=True)
 
-    def list_files_groups(self, group_id, content_types=None, include=None, only=None, order=None, search_term=None, sort=None):
+    def list_files_groups(self, group_id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None):
         """
         List files.
 
@@ -192,53 +263,84 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # OPTIONAL - content_types
-        """Filter results by content-type. You can specify type/subtype pairs (e.g.,
+        """
+            Filter results by content-type. You can specify type/subtype pairs (e.g.,
         'image/jpeg'), or simply types (e.g., 'image', which will match
-        'image/gif', 'image/jpeg', etc.)."""
+        'image/gif', 'image/jpeg', etc.).
+        """
         if content_types is not None:
             params["content_types"] = content_types
 
+
+        # OPTIONAL - exclude_content_types
+        """
+            Exclude given content-types from your results. You can specify type/subtype pairs (e.g.,
+        'image/jpeg'), or simply types (e.g., 'image', which will match
+        'image/gif', 'image/jpeg', etc.).
+        """
+        if exclude_content_types is not None:
+            params["exclude_content_types"] = exclude_content_types
+
+
         # OPTIONAL - search_term
-        """The partial name of the files to match and return."""
+        """
+            The partial name of the files to match and return.
+        """
         if search_term is not None:
             params["search_term"] = search_term
 
+
         # OPTIONAL - include
-        """Array of additional information to include.
-        
+        """
+            Array of additional information to include.
+
         "user":: the user who uploaded the file or last edited its content
-        "usage_rights":: copyright and license information for the file (see UsageRights)"""
+        "usage_rights":: copyright and license information for the file (see UsageRights)
+        """
         if include is not None:
             self._validate_enum(include, ["user"])
             params["include"] = include
 
+
         # OPTIONAL - only
-        """Array of information to restrict to. Overrides include[]
-        
-        "names":: only returns file name information"""
+        """
+            Array of information to restrict to. Overrides include[]
+
+        "names":: only returns file name information
+        """
         if only is not None:
             params["only"] = only
 
+
         # OPTIONAL - sort
-        """Sort results by this field. Defaults to 'name'. Note that `sort=user` implies `include[]=user`."""
+        """
+            Sort results by this field. Defaults to 'name'. Note that `sort=user` implies `include[]=user`.
+        """
         if sort is not None:
             self._validate_enum(sort, ["name", "size", "created_at", "updated_at", "content_type", "user"])
             params["sort"] = sort
 
+
         # OPTIONAL - order
-        """The sorting order. Defaults to 'asc'."""
+        """
+            The sorting order. Defaults to 'asc'.
+        """
         if order is not None:
             self._validate_enum(order, ["asc", "desc"])
             params["order"] = order
 
+
         self.logger.debug("GET /api/v1/groups/{group_id}/files with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/files".format(**path), data=data, params=params, all_pages=True)
 
-    def list_files_folders(self, id, content_types=None, include=None, only=None, order=None, search_term=None, sort=None):
+    def list_files_folders(self, id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None):
         """
         List files.
 
@@ -249,48 +351,79 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - content_types
-        """Filter results by content-type. You can specify type/subtype pairs (e.g.,
+        """
+            Filter results by content-type. You can specify type/subtype pairs (e.g.,
         'image/jpeg'), or simply types (e.g., 'image', which will match
-        'image/gif', 'image/jpeg', etc.)."""
+        'image/gif', 'image/jpeg', etc.).
+        """
         if content_types is not None:
             params["content_types"] = content_types
 
+
+        # OPTIONAL - exclude_content_types
+        """
+            Exclude given content-types from your results. You can specify type/subtype pairs (e.g.,
+        'image/jpeg'), or simply types (e.g., 'image', which will match
+        'image/gif', 'image/jpeg', etc.).
+        """
+        if exclude_content_types is not None:
+            params["exclude_content_types"] = exclude_content_types
+
+
         # OPTIONAL - search_term
-        """The partial name of the files to match and return."""
+        """
+            The partial name of the files to match and return.
+        """
         if search_term is not None:
             params["search_term"] = search_term
 
+
         # OPTIONAL - include
-        """Array of additional information to include.
-        
+        """
+            Array of additional information to include.
+
         "user":: the user who uploaded the file or last edited its content
-        "usage_rights":: copyright and license information for the file (see UsageRights)"""
+        "usage_rights":: copyright and license information for the file (see UsageRights)
+        """
         if include is not None:
             self._validate_enum(include, ["user"])
             params["include"] = include
 
+
         # OPTIONAL - only
-        """Array of information to restrict to. Overrides include[]
-        
-        "names":: only returns file name information"""
+        """
+            Array of information to restrict to. Overrides include[]
+
+        "names":: only returns file name information
+        """
         if only is not None:
             params["only"] = only
 
+
         # OPTIONAL - sort
-        """Sort results by this field. Defaults to 'name'. Note that `sort=user` implies `include[]=user`."""
+        """
+            Sort results by this field. Defaults to 'name'. Note that `sort=user` implies `include[]=user`.
+        """
         if sort is not None:
             self._validate_enum(sort, ["name", "size", "created_at", "updated_at", "content_type", "user"])
             params["sort"] = sort
 
+
         # OPTIONAL - order
-        """The sorting order. Defaults to 'asc'."""
+        """
+            The sorting order. Defaults to 'asc'.
+        """
         if order is not None:
             self._validate_enum(order, ["asc", "desc"])
             params["order"] = order
+
 
         self.logger.debug("GET /api/v1/folders/{id}/files with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/folders/{id}/files".format(**path), data=data, params=params, all_pages=True)
@@ -306,15 +439,21 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - submission_id
-        """The id of the submission the file is associated with.  Provide this argument to gain access to a file
+        """
+            The id of the submission the file is associated with.  Provide this argument to gain access to a file
         that has been submitted to an assignment (Canvas will verify that the file belongs to the submission
-        and the calling user has rights to view the submission)."""
+        and the calling user has rights to view the submission).
+        """
         if submission_id is not None:
             params["submission_id"] = submission_id
+
 
         self.logger.debug("GET /api/v1/files/{id}/public_url with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/files/{id}/public_url".format(**path), data=data, params=params, no_data=True)
@@ -330,22 +469,28 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - include
-        """Array of additional information to include.
-        
+        """
+            Array of additional information to include.
+
         "user":: the user who uploaded the file or last edited its content
-        "usage_rights":: copyright and license information for the file (see UsageRights)"""
+        "usage_rights":: copyright and license information for the file (see UsageRights)
+        """
         if include is not None:
             self._validate_enum(include, ["user"])
             params["include"] = include
 
+
         self.logger.debug("GET /api/v1/files/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/files/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def get_file_courses(self, id, course_id, include=None):
+    def get_file_courses(self, course_id, id, include=None):
         """
         Get file.
 
@@ -356,26 +501,35 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - include
-        """Array of additional information to include.
-        
+        """
+            Array of additional information to include.
+
         "user":: the user who uploaded the file or last edited its content
-        "usage_rights":: copyright and license information for the file (see UsageRights)"""
+        "usage_rights":: copyright and license information for the file (see UsageRights)
+        """
         if include is not None:
             self._validate_enum(include, ["user"])
             params["include"] = include
 
+
         self.logger.debug("GET /api/v1/courses/{course_id}/files/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/files/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def get_file_groups(self, id, group_id, include=None):
+    def get_file_groups(self, group_id, id, include=None):
         """
         Get file.
 
@@ -386,21 +540,30 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - include
-        """Array of additional information to include.
-        
+        """
+            Array of additional information to include.
+
         "user":: the user who uploaded the file or last edited its content
-        "usage_rights":: copyright and license information for the file (see UsageRights)"""
+        "usage_rights":: copyright and license information for the file (see UsageRights)
+        """
         if include is not None:
             self._validate_enum(include, ["user"])
             params["include"] = include
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/files/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/files/{id}".format(**path), data=data, params=params, single_item=True)
@@ -416,21 +579,30 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - include
-        """Array of additional information to include.
-        
+        """
+            Array of additional information to include.
+
         "user":: the user who uploaded the file or last edited its content
-        "usage_rights":: copyright and license information for the file (see UsageRights)"""
+        "usage_rights":: copyright and license information for the file (see UsageRights)
+        """
         if include is not None:
             self._validate_enum(include, ["user"])
             params["include"] = include
+
 
         self.logger.debug("GET /api/v1/users/{user_id}/files/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/{user_id}/files/{id}".format(**path), data=data, params=params, single_item=True)
@@ -446,34 +618,48 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - name
-        """The new display name of the file"""
+        """
+            The new display name of the file, with a limit of 255 characters.
+        """
         if name is not None:
             data["name"] = name
 
+
         # OPTIONAL - parent_folder_id
-        """The id of the folder to move this file into.
+        """
+            The id of the folder to move this file into.
         The new folder must be in the same context as the original parent folder.
-        If the file is in a context without folders this does not apply."""
+        If the file is in a context without folders this does not apply.
+        """
         if parent_folder_id is not None:
             data["parent_folder_id"] = parent_folder_id
 
+
         # OPTIONAL - on_duplicate
-        """If the file is moved to a folder containing a file with the same name,
+        """
+            If the file is moved to a folder containing a file with the same name,
         or renamed to a name matching an existing file, the API call will fail
         unless this parameter is supplied.
-        
+
         "overwrite":: Replace the existing file with the same name
-        "rename":: Add a qualifier to make the new filename unique"""
+        "rename":: Add a qualifier to make the new filename unique
+        """
         if on_duplicate is not None:
             self._validate_enum(on_duplicate, ["overwrite", "rename"])
             data["on_duplicate"] = on_duplicate
 
+
         # OPTIONAL - lock_at
-        """The datetime to lock the file at"""
+        """
+            The datetime to lock the file at
+        """
         if lock_at is not None:
             if issubclass(lock_at.__class__, str):
                 lock_at = self._validate_iso8601_string(lock_at)
@@ -481,8 +667,11 @@ class FilesAPI(BaseCanvasAPI):
                 lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
+
         # OPTIONAL - unlock_at
-        """The datetime to unlock the file at"""
+        """
+            The datetime to unlock the file at
+        """
         if unlock_at is not None:
             if issubclass(unlock_at.__class__, str):
                 unlock_at = self._validate_iso8601_string(unlock_at)
@@ -490,15 +679,22 @@ class FilesAPI(BaseCanvasAPI):
                 unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
+
         # OPTIONAL - locked
-        """Flag the file as locked"""
+        """
+            Flag the file as locked
+        """
         if locked is not None:
             data["locked"] = locked
 
+
         # OPTIONAL - hidden
-        """Flag the file as hidden"""
+        """
+            Flag the file as hidden
+        """
         if hidden is not None:
             data["hidden"] = hidden
+
 
         self.logger.debug("PUT /api/v1/files/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/files/{id}".format(**path), data=data, params=params, single_item=True)
@@ -507,27 +703,61 @@ class FilesAPI(BaseCanvasAPI):
         """
         Delete file.
 
-        Remove the specified file
+        Remove the specified file. Unlike most other DELETE endpoints, using this
+        endpoint will result in comprehensive, irretrievable destruction of the file.
+        It should be used with the `replace` parameter set to true in cases where the
+        file preview also needs to be destroyed (such as to remove files that violate
+        privacy laws).
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - replace
-        """This action is irreversible.
+        """
+            This action is irreversible.
         If replace is set to true the file contents will be replaced with a
         generic "file has been removed" file. This also destroys any previews
         that have been generated for the file.
-        Must have manage files and become other users permissions"""
+        Must have manage files and become other users permissions
+        """
         if replace is not None:
             params["replace"] = replace
 
+
         self.logger.debug("DELETE /api/v1/files/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/files/{id}".format(**path), data=data, params=params, single_item=True)
+
+    def reset_link_verifier(self, id):
+        """
+        Reset link verifier.
+
+        Resets the link verifier. Any existing links to the file using
+        the previous hard-coded "verifier" parameter will no longer
+        automatically grant access.
+        
+        Must have manage files and become other users permissions
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - id
+        """
+            ID
+        """
+        path["id"] = id
+
+
+        self.logger.debug("POST /api/v1/files/{id}/reset_verifier with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("POST", "/api/v1/files/{id}/reset_verifier".format(**path), data=data, params=params, single_item=True)
 
     def list_folders(self, id):
         """
@@ -540,8 +770,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/folders/{id}/folders with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/folders/{id}/folders".format(**path), data=data, params=params, all_pages=True)
@@ -558,8 +791,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/folders with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/folders".format(**path), data=data, params=params, all_pages=True)
@@ -576,8 +812,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
+
 
         self.logger.debug("GET /api/v1/users/{user_id}/folders with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/{user_id}/folders".format(**path), data=data, params=params, all_pages=True)
@@ -594,8 +833,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/folders with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/folders".format(**path), data=data, params=params, all_pages=True)
@@ -616,8 +858,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/folders/by_path/*full_path with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/folders/by_path/*full_path".format(**path), data=data, params=params, all_pages=True)
@@ -638,8 +883,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/folders/by_path with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/folders/by_path".format(**path), data=data, params=params, all_pages=True)
@@ -660,8 +908,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
+
 
         self.logger.debug("GET /api/v1/users/{user_id}/folders/by_path/*full_path with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/{user_id}/folders/by_path/*full_path".format(**path), data=data, params=params, all_pages=True)
@@ -682,8 +933,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
+
 
         self.logger.debug("GET /api/v1/users/{user_id}/folders/by_path with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/{user_id}/folders/by_path".format(**path), data=data, params=params, all_pages=True)
@@ -704,8 +958,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/folders/by_path/*full_path with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/folders/by_path/*full_path".format(**path), data=data, params=params, all_pages=True)
@@ -726,13 +983,16 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/folders/by_path with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/folders/by_path".format(**path), data=data, params=params, all_pages=True)
 
-    def get_folder_courses(self, id, course_id):
+    def get_folder_courses(self, course_id, id):
         """
         Get folder.
 
@@ -746,12 +1006,18 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/folders/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/folders/{id}".format(**path), data=data, params=params, single_item=True)
@@ -770,17 +1036,23 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/users/{user_id}/folders/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/{user_id}/folders/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def get_folder_groups(self, id, group_id):
+    def get_folder_groups(self, group_id, id):
         """
         Get folder.
 
@@ -794,12 +1066,18 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/folders/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/folders/{id}".format(**path), data=data, params=params, single_item=True)
@@ -818,8 +1096,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/folders/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/folders/{id}".format(**path), data=data, params=params, single_item=True)
@@ -835,21 +1116,32 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - name
-        """The new name of the folder"""
+        """
+            The new name of the folder
+        """
         if name is not None:
             data["name"] = name
 
+
         # OPTIONAL - parent_folder_id
-        """The id of the folder to move this folder into. The new folder must be in the same context as the original parent folder."""
+        """
+            The id of the folder to move this folder into. The new folder must be in the same context as the original parent folder.
+        """
         if parent_folder_id is not None:
             data["parent_folder_id"] = parent_folder_id
 
+
         # OPTIONAL - lock_at
-        """The datetime to lock the folder at"""
+        """
+            The datetime to lock the folder at
+        """
         if lock_at is not None:
             if issubclass(lock_at.__class__, str):
                 lock_at = self._validate_iso8601_string(lock_at)
@@ -857,8 +1149,11 @@ class FilesAPI(BaseCanvasAPI):
                 lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
+
         # OPTIONAL - unlock_at
-        """The datetime to unlock the folder at"""
+        """
+            The datetime to unlock the folder at
+        """
         if unlock_at is not None:
             if issubclass(unlock_at.__class__, str):
                 unlock_at = self._validate_iso8601_string(unlock_at)
@@ -866,25 +1161,35 @@ class FilesAPI(BaseCanvasAPI):
                 unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
+
         # OPTIONAL - locked
-        """Flag the folder as locked"""
+        """
+            Flag the folder as locked
+        """
         if locked is not None:
             data["locked"] = locked
 
+
         # OPTIONAL - hidden
-        """Flag the folder as hidden"""
+        """
+            Flag the folder as hidden
+        """
         if hidden is not None:
             data["hidden"] = hidden
 
+
         # OPTIONAL - position
-        """Set an explicit sort position for the folder"""
+        """
+            Set an explicit sort position for the folder
+        """
         if position is not None:
             data["position"] = position
+
 
         self.logger.debug("PUT /api/v1/folders/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/folders/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def create_folder_courses(self, name, course_id, hidden=None, lock_at=None, locked=None, parent_folder_id=None, parent_folder_path=None, position=None, unlock_at=None):
+    def create_folder_courses(self, course_id, name, hidden=None, lock_at=None, locked=None, parent_folder_id=None, parent_folder_path=None, position=None, unlock_at=None):
         """
         Create folder.
 
@@ -895,25 +1200,39 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - name
-        """The name of the folder"""
+        """
+            The name of the folder
+        """
         data["name"] = name
 
+
         # OPTIONAL - parent_folder_id
-        """The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used."""
+        """
+            The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used.
+        """
         if parent_folder_id is not None:
             data["parent_folder_id"] = parent_folder_id
 
+
         # OPTIONAL - parent_folder_path
-        """The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used."""
+        """
+            The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used.
+        """
         if parent_folder_path is not None:
             data["parent_folder_path"] = parent_folder_path
 
+
         # OPTIONAL - lock_at
-        """The datetime to lock the folder at"""
+        """
+            The datetime to lock the folder at
+        """
         if lock_at is not None:
             if issubclass(lock_at.__class__, str):
                 lock_at = self._validate_iso8601_string(lock_at)
@@ -921,8 +1240,11 @@ class FilesAPI(BaseCanvasAPI):
                 lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
+
         # OPTIONAL - unlock_at
-        """The datetime to unlock the folder at"""
+        """
+            The datetime to unlock the folder at
+        """
         if unlock_at is not None:
             if issubclass(unlock_at.__class__, str):
                 unlock_at = self._validate_iso8601_string(unlock_at)
@@ -930,20 +1252,30 @@ class FilesAPI(BaseCanvasAPI):
                 unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
+
         # OPTIONAL - locked
-        """Flag the folder as locked"""
+        """
+            Flag the folder as locked
+        """
         if locked is not None:
             data["locked"] = locked
 
+
         # OPTIONAL - hidden
-        """Flag the folder as hidden"""
+        """
+            Flag the folder as hidden
+        """
         if hidden is not None:
             data["hidden"] = hidden
 
+
         # OPTIONAL - position
-        """Set an explicit sort position for the folder"""
+        """
+            Set an explicit sort position for the folder
+        """
         if position is not None:
             data["position"] = position
+
 
         self.logger.debug("POST /api/v1/courses/{course_id}/folders with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/courses/{course_id}/folders".format(**path), data=data, params=params, single_item=True)
@@ -959,25 +1291,39 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
 
+
         # REQUIRED - name
-        """The name of the folder"""
+        """
+            The name of the folder
+        """
         data["name"] = name
 
+
         # OPTIONAL - parent_folder_id
-        """The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used."""
+        """
+            The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used.
+        """
         if parent_folder_id is not None:
             data["parent_folder_id"] = parent_folder_id
 
+
         # OPTIONAL - parent_folder_path
-        """The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used."""
+        """
+            The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used.
+        """
         if parent_folder_path is not None:
             data["parent_folder_path"] = parent_folder_path
 
+
         # OPTIONAL - lock_at
-        """The datetime to lock the folder at"""
+        """
+            The datetime to lock the folder at
+        """
         if lock_at is not None:
             if issubclass(lock_at.__class__, str):
                 lock_at = self._validate_iso8601_string(lock_at)
@@ -985,8 +1331,11 @@ class FilesAPI(BaseCanvasAPI):
                 lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
+
         # OPTIONAL - unlock_at
-        """The datetime to unlock the folder at"""
+        """
+            The datetime to unlock the folder at
+        """
         if unlock_at is not None:
             if issubclass(unlock_at.__class__, str):
                 unlock_at = self._validate_iso8601_string(unlock_at)
@@ -994,25 +1343,35 @@ class FilesAPI(BaseCanvasAPI):
                 unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
+
         # OPTIONAL - locked
-        """Flag the folder as locked"""
+        """
+            Flag the folder as locked
+        """
         if locked is not None:
             data["locked"] = locked
 
+
         # OPTIONAL - hidden
-        """Flag the folder as hidden"""
+        """
+            Flag the folder as hidden
+        """
         if hidden is not None:
             data["hidden"] = hidden
 
+
         # OPTIONAL - position
-        """Set an explicit sort position for the folder"""
+        """
+            Set an explicit sort position for the folder
+        """
         if position is not None:
             data["position"] = position
+
 
         self.logger.debug("POST /api/v1/users/{user_id}/folders with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/users/{user_id}/folders".format(**path), data=data, params=params, single_item=True)
 
-    def create_folder_groups(self, name, group_id, hidden=None, lock_at=None, locked=None, parent_folder_id=None, parent_folder_path=None, position=None, unlock_at=None):
+    def create_folder_groups(self, group_id, name, hidden=None, lock_at=None, locked=None, parent_folder_id=None, parent_folder_path=None, position=None, unlock_at=None):
         """
         Create folder.
 
@@ -1023,25 +1382,39 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - name
-        """The name of the folder"""
+        """
+            The name of the folder
+        """
         data["name"] = name
 
+
         # OPTIONAL - parent_folder_id
-        """The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used."""
+        """
+            The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used.
+        """
         if parent_folder_id is not None:
             data["parent_folder_id"] = parent_folder_id
 
+
         # OPTIONAL - parent_folder_path
-        """The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used."""
+        """
+            The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used.
+        """
         if parent_folder_path is not None:
             data["parent_folder_path"] = parent_folder_path
 
+
         # OPTIONAL - lock_at
-        """The datetime to lock the folder at"""
+        """
+            The datetime to lock the folder at
+        """
         if lock_at is not None:
             if issubclass(lock_at.__class__, str):
                 lock_at = self._validate_iso8601_string(lock_at)
@@ -1049,8 +1422,11 @@ class FilesAPI(BaseCanvasAPI):
                 lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
+
         # OPTIONAL - unlock_at
-        """The datetime to unlock the folder at"""
+        """
+            The datetime to unlock the folder at
+        """
         if unlock_at is not None:
             if issubclass(unlock_at.__class__, str):
                 unlock_at = self._validate_iso8601_string(unlock_at)
@@ -1058,25 +1434,35 @@ class FilesAPI(BaseCanvasAPI):
                 unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
+
         # OPTIONAL - locked
-        """Flag the folder as locked"""
+        """
+            Flag the folder as locked
+        """
         if locked is not None:
             data["locked"] = locked
 
+
         # OPTIONAL - hidden
-        """Flag the folder as hidden"""
+        """
+            Flag the folder as hidden
+        """
         if hidden is not None:
             data["hidden"] = hidden
 
+
         # OPTIONAL - position
-        """Set an explicit sort position for the folder"""
+        """
+            Set an explicit sort position for the folder
+        """
         if position is not None:
             data["position"] = position
+
 
         self.logger.debug("POST /api/v1/groups/{group_id}/folders with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/groups/{group_id}/folders".format(**path), data=data, params=params, single_item=True)
 
-    def create_folder_folders(self, name, folder_id, hidden=None, lock_at=None, locked=None, parent_folder_id=None, parent_folder_path=None, position=None, unlock_at=None):
+    def create_folder_folders(self, folder_id, name, hidden=None, lock_at=None, locked=None, parent_folder_id=None, parent_folder_path=None, position=None, unlock_at=None):
         """
         Create folder.
 
@@ -1087,25 +1473,39 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - folder_id
-        """ID"""
+        """
+            ID
+        """
         path["folder_id"] = folder_id
 
+
         # REQUIRED - name
-        """The name of the folder"""
+        """
+            The name of the folder
+        """
         data["name"] = name
 
+
         # OPTIONAL - parent_folder_id
-        """The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used."""
+        """
+            The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used.
+        """
         if parent_folder_id is not None:
             data["parent_folder_id"] = parent_folder_id
 
+
         # OPTIONAL - parent_folder_path
-        """The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used."""
+        """
+            The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used.
+        """
         if parent_folder_path is not None:
             data["parent_folder_path"] = parent_folder_path
 
+
         # OPTIONAL - lock_at
-        """The datetime to lock the folder at"""
+        """
+            The datetime to lock the folder at
+        """
         if lock_at is not None:
             if issubclass(lock_at.__class__, str):
                 lock_at = self._validate_iso8601_string(lock_at)
@@ -1113,8 +1513,11 @@ class FilesAPI(BaseCanvasAPI):
                 lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["lock_at"] = lock_at
 
+
         # OPTIONAL - unlock_at
-        """The datetime to unlock the folder at"""
+        """
+            The datetime to unlock the folder at
+        """
         if unlock_at is not None:
             if issubclass(unlock_at.__class__, str):
                 unlock_at = self._validate_iso8601_string(unlock_at)
@@ -1122,20 +1525,30 @@ class FilesAPI(BaseCanvasAPI):
                 unlock_at = unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
             data["unlock_at"] = unlock_at
 
+
         # OPTIONAL - locked
-        """Flag the folder as locked"""
+        """
+            Flag the folder as locked
+        """
         if locked is not None:
             data["locked"] = locked
 
+
         # OPTIONAL - hidden
-        """Flag the folder as hidden"""
+        """
+            Flag the folder as hidden
+        """
         if hidden is not None:
             data["hidden"] = hidden
 
+
         # OPTIONAL - position
-        """Set an explicit sort position for the folder"""
+        """
+            Set an explicit sort position for the folder
+        """
         if position is not None:
             data["position"] = position
+
 
         self.logger.debug("POST /api/v1/folders/{folder_id}/folders with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/folders/{folder_id}/folders".format(**path), data=data, params=params, single_item=True)
@@ -1152,13 +1565,19 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - force
-        """Set to 'true' to allow deleting a non-empty folder"""
+        """
+            Set to 'true' to allow deleting a non-empty folder
+        """
         if force is not None:
             params["force"] = force
+
 
         self.logger.debug("DELETE /api/v1/folders/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/folders/{id}".format(**path), data=data, params=params, no_data=True)
@@ -1181,8 +1600,11 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - folder_id
-        """ID"""
+        """
+            ID
+        """
         path["folder_id"] = folder_id
+
 
         self.logger.debug("POST /api/v1/folders/{folder_id}/files with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/folders/{folder_id}/files".format(**path), data=data, params=params, no_data=True)
@@ -1201,22 +1623,31 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - dest_folder_id
-        """ID"""
+        """
+            ID
+        """
         path["dest_folder_id"] = dest_folder_id
 
+
         # REQUIRED - source_file_id
-        """The id of the source file"""
+        """
+            The id of the source file
+        """
         data["source_file_id"] = source_file_id
 
+
         # OPTIONAL - on_duplicate
-        """What to do if a file with the same name already exists at the destination.
+        """
+            What to do if a file with the same name already exists at the destination.
         If such a file exists and this parameter is not given, the call will fail.
-        
+
         "overwrite":: Replace an existing file with the same name
-        "rename":: Add a qualifier to make the new filename unique"""
+        "rename":: Add a qualifier to make the new filename unique
+        """
         if on_duplicate is not None:
             self._validate_enum(on_duplicate, ["overwrite", "rename"])
             data["on_duplicate"] = on_duplicate
+
 
         self.logger.debug("POST /api/v1/folders/{dest_folder_id}/copy_file with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/folders/{dest_folder_id}/copy_file".format(**path), data=data, params=params, single_item=True)
@@ -1239,17 +1670,71 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - dest_folder_id
-        """ID"""
+        """
+            ID
+        """
         path["dest_folder_id"] = dest_folder_id
 
+
         # REQUIRED - source_folder_id
-        """The id of the source folder"""
+        """
+            The id of the source folder
+        """
         data["source_folder_id"] = source_folder_id
+
 
         self.logger.debug("POST /api/v1/folders/{dest_folder_id}/copy_folder with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/folders/{dest_folder_id}/copy_folder".format(**path), data=data, params=params, single_item=True)
 
-    def set_usage_rights_courses(self, file_ids, course_id, usage_rights_use_justification, folder_ids=None, publish=None, usage_rights_legal_copyright=None, usage_rights_license=None):
+    def get_uploaded_media_folder_for_user_courses(self, course_id):
+        """
+        Get uploaded media folder for user.
+
+        Returns the details for a designated upload folder that the user has rights to
+        upload to, and creates it if it doesn't exist.
+        
+        If the current user does not have the permissions to manage files
+        in the course or group, the folder will belong to the current user directly.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - course_id
+        """
+            ID
+        """
+        path["course_id"] = course_id
+
+
+        self.logger.debug("GET /api/v1/courses/{course_id}/folders/media with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/folders/media".format(**path), data=data, params=params, single_item=True)
+
+    def get_uploaded_media_folder_for_user_groups(self, group_id):
+        """
+        Get uploaded media folder for user.
+
+        Returns the details for a designated upload folder that the user has rights to
+        upload to, and creates it if it doesn't exist.
+        
+        If the current user does not have the permissions to manage files
+        in the course or group, the folder will belong to the current user directly.
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - group_id
+        """
+            ID
+        """
+        path["group_id"] = group_id
+
+
+        self.logger.debug("GET /api/v1/groups/{group_id}/folders/media with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/groups/{group_id}/folders/media".format(**path), data=data, params=params, single_item=True)
+
+    def set_usage_rights_courses(self, course_id, file_ids, usage_rights_use_justification, folder_ids=None, publish=None, usage_rights_legal_copyright=None, usage_rights_license=None):
         """
         Set usage rights.
 
@@ -1260,43 +1745,64 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - file_ids
-        """List of ids of files to set usage rights for."""
+        """
+            List of ids of files to set usage rights for.
+        """
         data["file_ids"] = file_ids
 
+
         # OPTIONAL - folder_ids
-        """List of ids of folders to search for files to set usage rights for.
-        Note that new files uploaded to these folders do not automatically inherit these rights."""
+        """
+            List of ids of folders to search for files to set usage rights for.
+        Note that new files uploaded to these folders do not automatically inherit these rights.
+        """
         if folder_ids is not None:
             data["folder_ids"] = folder_ids
 
+
         # OPTIONAL - publish
-        """Whether the file(s) or folder(s) should be published on save, provided that usage rights have been specified (set to `true` to publish on save)."""
+        """
+            Whether the file(s) or folder(s) should be published on save, provided that usage rights have been specified (set to `true` to publish on save).
+        """
         if publish is not None:
             data["publish"] = publish
 
+
         # REQUIRED - usage_rights[use_justification]
-        """The intellectual property justification for using the files in Canvas"""
+        """
+            The intellectual property justification for using the files in Canvas
+        """
         self._validate_enum(usage_rights_use_justification, ["own_copyright", "used_by_permission", "fair_use", "public_domain", "creative_commons"])
         data["usage_rights[use_justification]"] = usage_rights_use_justification
 
+
         # OPTIONAL - usage_rights[legal_copyright]
-        """The legal copyright line for the files"""
+        """
+            The legal copyright line for the files
+        """
         if usage_rights_legal_copyright is not None:
             data["usage_rights[legal_copyright]"] = usage_rights_legal_copyright
 
+
         # OPTIONAL - usage_rights[license]
-        """The license that applies to the files. See the {api:UsageRightsController#licenses List licenses endpoint} for the supported license types."""
+        """
+            The license that applies to the files. See the {api:UsageRightsController#licenses List licenses endpoint} for the supported license types.
+        """
         if usage_rights_license is not None:
             data["usage_rights[license]"] = usage_rights_license
+
 
         self.logger.debug("PUT /api/v1/courses/{course_id}/usage_rights with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/courses/{course_id}/usage_rights".format(**path), data=data, params=params, single_item=True)
 
-    def set_usage_rights_groups(self, group_id, file_ids, usage_rights_use_justification, folder_ids=None, publish=None, usage_rights_legal_copyright=None, usage_rights_license=None):
+    def set_usage_rights_groups(self, file_ids, group_id, usage_rights_use_justification, folder_ids=None, publish=None, usage_rights_legal_copyright=None, usage_rights_license=None):
         """
         Set usage rights.
 
@@ -1307,43 +1813,64 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - file_ids
-        """List of ids of files to set usage rights for."""
+        """
+            List of ids of files to set usage rights for.
+        """
         data["file_ids"] = file_ids
 
+
         # OPTIONAL - folder_ids
-        """List of ids of folders to search for files to set usage rights for.
-        Note that new files uploaded to these folders do not automatically inherit these rights."""
+        """
+            List of ids of folders to search for files to set usage rights for.
+        Note that new files uploaded to these folders do not automatically inherit these rights.
+        """
         if folder_ids is not None:
             data["folder_ids"] = folder_ids
 
+
         # OPTIONAL - publish
-        """Whether the file(s) or folder(s) should be published on save, provided that usage rights have been specified (set to `true` to publish on save)."""
+        """
+            Whether the file(s) or folder(s) should be published on save, provided that usage rights have been specified (set to `true` to publish on save).
+        """
         if publish is not None:
             data["publish"] = publish
 
+
         # REQUIRED - usage_rights[use_justification]
-        """The intellectual property justification for using the files in Canvas"""
+        """
+            The intellectual property justification for using the files in Canvas
+        """
         self._validate_enum(usage_rights_use_justification, ["own_copyright", "used_by_permission", "fair_use", "public_domain", "creative_commons"])
         data["usage_rights[use_justification]"] = usage_rights_use_justification
 
+
         # OPTIONAL - usage_rights[legal_copyright]
-        """The legal copyright line for the files"""
+        """
+            The legal copyright line for the files
+        """
         if usage_rights_legal_copyright is not None:
             data["usage_rights[legal_copyright]"] = usage_rights_legal_copyright
 
+
         # OPTIONAL - usage_rights[license]
-        """The license that applies to the files. See the {api:UsageRightsController#licenses List licenses endpoint} for the supported license types."""
+        """
+            The license that applies to the files. See the {api:UsageRightsController#licenses List licenses endpoint} for the supported license types.
+        """
         if usage_rights_license is not None:
             data["usage_rights[license]"] = usage_rights_license
+
 
         self.logger.debug("PUT /api/v1/groups/{group_id}/usage_rights with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/groups/{group_id}/usage_rights".format(**path), data=data, params=params, single_item=True)
 
-    def set_usage_rights_users(self, user_id, file_ids, usage_rights_use_justification, folder_ids=None, publish=None, usage_rights_legal_copyright=None, usage_rights_license=None):
+    def set_usage_rights_users(self, file_ids, usage_rights_use_justification, user_id, folder_ids=None, publish=None, usage_rights_legal_copyright=None, usage_rights_license=None):
         """
         Set usage rights.
 
@@ -1354,43 +1881,64 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
 
+
         # REQUIRED - file_ids
-        """List of ids of files to set usage rights for."""
+        """
+            List of ids of files to set usage rights for.
+        """
         data["file_ids"] = file_ids
 
+
         # OPTIONAL - folder_ids
-        """List of ids of folders to search for files to set usage rights for.
-        Note that new files uploaded to these folders do not automatically inherit these rights."""
+        """
+            List of ids of folders to search for files to set usage rights for.
+        Note that new files uploaded to these folders do not automatically inherit these rights.
+        """
         if folder_ids is not None:
             data["folder_ids"] = folder_ids
 
+
         # OPTIONAL - publish
-        """Whether the file(s) or folder(s) should be published on save, provided that usage rights have been specified (set to `true` to publish on save)."""
+        """
+            Whether the file(s) or folder(s) should be published on save, provided that usage rights have been specified (set to `true` to publish on save).
+        """
         if publish is not None:
             data["publish"] = publish
 
+
         # REQUIRED - usage_rights[use_justification]
-        """The intellectual property justification for using the files in Canvas"""
+        """
+            The intellectual property justification for using the files in Canvas
+        """
         self._validate_enum(usage_rights_use_justification, ["own_copyright", "used_by_permission", "fair_use", "public_domain", "creative_commons"])
         data["usage_rights[use_justification]"] = usage_rights_use_justification
 
+
         # OPTIONAL - usage_rights[legal_copyright]
-        """The legal copyright line for the files"""
+        """
+            The legal copyright line for the files
+        """
         if usage_rights_legal_copyright is not None:
             data["usage_rights[legal_copyright]"] = usage_rights_legal_copyright
 
+
         # OPTIONAL - usage_rights[license]
-        """The license that applies to the files. See the {api:UsageRightsController#licenses List licenses endpoint} for the supported license types."""
+        """
+            The license that applies to the files. See the {api:UsageRightsController#licenses List licenses endpoint} for the supported license types.
+        """
         if usage_rights_license is not None:
             data["usage_rights[license]"] = usage_rights_license
+
 
         self.logger.debug("PUT /api/v1/users/{user_id}/usage_rights with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/users/{user_id}/usage_rights".format(**path), data=data, params=params, single_item=True)
 
-    def remove_usage_rights_courses(self, file_ids, course_id, folder_ids=None):
+    def remove_usage_rights_courses(self, course_id, file_ids, folder_ids=None):
         """
         Remove usage rights.
 
@@ -1401,22 +1949,31 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - file_ids
-        """List of ids of files to remove associated usage rights from."""
+        """
+            List of ids of files to remove associated usage rights from.
+        """
         params["file_ids"] = file_ids
 
+
         # OPTIONAL - folder_ids
-        """List of ids of folders. Usage rights will be removed from all files in these folders."""
+        """
+            List of ids of folders. Usage rights will be removed from all files in these folders.
+        """
         if folder_ids is not None:
             params["folder_ids"] = folder_ids
+
 
         self.logger.debug("DELETE /api/v1/courses/{course_id}/usage_rights with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/courses/{course_id}/usage_rights".format(**path), data=data, params=params, no_data=True)
 
-    def remove_usage_rights_groups(self, group_id, file_ids, folder_ids=None):
+    def remove_usage_rights_groups(self, file_ids, group_id, folder_ids=None):
         """
         Remove usage rights.
 
@@ -1427,22 +1984,31 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - file_ids
-        """List of ids of files to remove associated usage rights from."""
+        """
+            List of ids of files to remove associated usage rights from.
+        """
         params["file_ids"] = file_ids
 
+
         # OPTIONAL - folder_ids
-        """List of ids of folders. Usage rights will be removed from all files in these folders."""
+        """
+            List of ids of folders. Usage rights will be removed from all files in these folders.
+        """
         if folder_ids is not None:
             params["folder_ids"] = folder_ids
+
 
         self.logger.debug("DELETE /api/v1/groups/{group_id}/usage_rights with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/groups/{group_id}/usage_rights".format(**path), data=data, params=params, no_data=True)
 
-    def remove_usage_rights_users(self, user_id, file_ids, folder_ids=None):
+    def remove_usage_rights_users(self, file_ids, user_id, folder_ids=None):
         """
         Remove usage rights.
 
@@ -1453,17 +2019,26 @@ class FilesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
 
+
         # REQUIRED - file_ids
-        """List of ids of files to remove associated usage rights from."""
+        """
+            List of ids of files to remove associated usage rights from.
+        """
         params["file_ids"] = file_ids
 
+
         # OPTIONAL - folder_ids
-        """List of ids of folders. Usage rights will be removed from all files in these folders."""
+        """
+            List of ids of folders. Usage rights will be removed from all files in these folders.
+        """
         if folder_ids is not None:
             params["folder_ids"] = folder_ids
+
 
         self.logger.debug("DELETE /api/v1/users/{user_id}/usage_rights with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/users/{user_id}/usage_rights".format(**path), data=data, params=params, no_data=True)
@@ -1472,15 +2047,18 @@ class FilesAPI(BaseCanvasAPI):
         """
         List licenses.
 
-        Lists licenses that can be applied
+        A paginated list of licenses that can be applied
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/content_licenses with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/content_licenses".format(**path), data=data, params=params, all_pages=True)
@@ -1489,15 +2067,18 @@ class FilesAPI(BaseCanvasAPI):
         """
         List licenses.
 
-        Lists licenses that can be applied
+        A paginated list of licenses that can be applied
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/content_licenses with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/content_licenses".format(**path), data=data, params=params, all_pages=True)
@@ -1506,58 +2087,174 @@ class FilesAPI(BaseCanvasAPI):
         """
         List licenses.
 
-        Lists licenses that can be applied
+        A paginated list of licenses that can be applied
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
+
 
         self.logger.debug("GET /api/v1/users/{user_id}/content_licenses with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/{user_id}/content_licenses".format(**path), data=data, params=params, all_pages=True)
 
 
-class Folder(BaseModel):
-    """Folder Model."""
+class File(BaseModel):
+    """File Model."""
 
-    def __init__(self, folders_count=None, locked=None, name=None, parent_folder_id=None, context_type=None, context_id=None, created_at=None, updated_at=None, lock_at=None, files_url=None, hidden_for_user=None, files_count=None, full_name=None, for_submissions=None, position=None, hidden=None, locked_for_user=None, id=None, folders_url=None, unlock_at=None):
-        """Init method for Folder class."""
-        self._folders_count = folders_count
-        self._locked = locked
-        self._name = name
-        self._parent_folder_id = parent_folder_id
-        self._context_type = context_type
-        self._context_id = context_id
+    def __init__(self, id=None, uuid=None, folder_id=None, display_name=None, filename=None, content_type=None, url=None, size=None, created_at=None, updated_at=None, unlock_at=None, locked=None, hidden=None, lock_at=None, hidden_for_user=None, thumbnail_url=None, modified_at=None, mime_class=None, media_entry_id=None, locked_for_user=None, lock_info=None, lock_explanation=None, preview_url=None):
+        """Init method for File class."""
+        self._id = id
+        self._uuid = uuid
+        self._folder_id = folder_id
+        self._display_name = display_name
+        self._filename = filename
+        self._content_type = content_type
+        self._url = url
+        self._size = size
         self._created_at = created_at
         self._updated_at = updated_at
-        self._lock_at = lock_at
-        self._files_url = files_url
-        self._hidden_for_user = hidden_for_user
-        self._files_count = files_count
-        self._full_name = full_name
-        self._for_submissions = for_submissions
-        self._position = position
-        self._hidden = hidden
-        self._locked_for_user = locked_for_user
-        self._id = id
-        self._folders_url = folders_url
         self._unlock_at = unlock_at
+        self._locked = locked
+        self._hidden = hidden
+        self._lock_at = lock_at
+        self._hidden_for_user = hidden_for_user
+        self._thumbnail_url = thumbnail_url
+        self._modified_at = modified_at
+        self._mime_class = mime_class
+        self._media_entry_id = media_entry_id
+        self._locked_for_user = locked_for_user
+        self._lock_info = lock_info
+        self._lock_explanation = lock_explanation
+        self._preview_url = preview_url
 
-        self.logger = logging.getLogger('py3canvas.Folder')
+        self.logger = logging.getLogger('py3canvas.File')
 
     @property
-    def folders_count(self):
-        """folders_count."""
-        return self._folders_count
+    def id(self):
+        """id."""
+        return self._id
 
-    @folders_count.setter
-    def folders_count(self, value):
-        """Setter for folders_count property."""
-        self.logger.warn("Setting values on folders_count will NOT update the remote Canvas instance.")
-        self._folders_count = value
+    @id.setter
+    def id(self, value):
+        """Setter for id property."""
+        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self._id = value
+
+    @property
+    def uuid(self):
+        """uuid."""
+        return self._uuid
+
+    @uuid.setter
+    def uuid(self, value):
+        """Setter for uuid property."""
+        self.logger.warn("Setting values on uuid will NOT update the remote Canvas instance.")
+        self._uuid = value
+
+    @property
+    def folder_id(self):
+        """folder_id."""
+        return self._folder_id
+
+    @folder_id.setter
+    def folder_id(self, value):
+        """Setter for folder_id property."""
+        self.logger.warn("Setting values on folder_id will NOT update the remote Canvas instance.")
+        self._folder_id = value
+
+    @property
+    def display_name(self):
+        """display_name."""
+        return self._display_name
+
+    @display_name.setter
+    def display_name(self, value):
+        """Setter for display_name property."""
+        self.logger.warn("Setting values on display_name will NOT update the remote Canvas instance.")
+        self._display_name = value
+
+    @property
+    def filename(self):
+        """filename."""
+        return self._filename
+
+    @filename.setter
+    def filename(self, value):
+        """Setter for filename property."""
+        self.logger.warn("Setting values on filename will NOT update the remote Canvas instance.")
+        self._filename = value
+
+    @property
+    def content_type(self):
+        """content_type."""
+        return self._content_type
+
+    @content_type.setter
+    def content_type(self, value):
+        """Setter for content_type property."""
+        self.logger.warn("Setting values on content_type will NOT update the remote Canvas instance.")
+        self._content_type = value
+
+    @property
+    def url(self):
+        """url."""
+        return self._url
+
+    @url.setter
+    def url(self, value):
+        """Setter for url property."""
+        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self._url = value
+
+    @property
+    def size(self):
+        """file size in bytes."""
+        return self._size
+
+    @size.setter
+    def size(self, value):
+        """Setter for size property."""
+        self.logger.warn("Setting values on size will NOT update the remote Canvas instance.")
+        self._size = value
+
+    @property
+    def created_at(self):
+        """created_at."""
+        return self._created_at
+
+    @created_at.setter
+    def created_at(self, value):
+        """Setter for created_at property."""
+        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self._created_at = value
+
+    @property
+    def updated_at(self):
+        """updated_at."""
+        return self._updated_at
+
+    @updated_at.setter
+    def updated_at(self, value):
+        """Setter for updated_at property."""
+        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self._updated_at = value
+
+    @property
+    def unlock_at(self):
+        """unlock_at."""
+        return self._unlock_at
+
+    @unlock_at.setter
+    def unlock_at(self, value):
+        """Setter for unlock_at property."""
+        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self._unlock_at = value
 
     @property
     def locked(self):
@@ -1571,26 +2268,154 @@ class Folder(BaseModel):
         self._locked = value
 
     @property
-    def name(self):
-        """name."""
-        return self._name
+    def hidden(self):
+        """hidden."""
+        return self._hidden
 
-    @name.setter
-    def name(self, value):
-        """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
-        self._name = value
+    @hidden.setter
+    def hidden(self, value):
+        """Setter for hidden property."""
+        self.logger.warn("Setting values on hidden will NOT update the remote Canvas instance.")
+        self._hidden = value
 
     @property
-    def parent_folder_id(self):
-        """parent_folder_id."""
-        return self._parent_folder_id
+    def lock_at(self):
+        """lock_at."""
+        return self._lock_at
 
-    @parent_folder_id.setter
-    def parent_folder_id(self, value):
-        """Setter for parent_folder_id property."""
-        self.logger.warn("Setting values on parent_folder_id will NOT update the remote Canvas instance.")
-        self._parent_folder_id = value
+    @lock_at.setter
+    def lock_at(self, value):
+        """Setter for lock_at property."""
+        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self._lock_at = value
+
+    @property
+    def hidden_for_user(self):
+        """hidden_for_user."""
+        return self._hidden_for_user
+
+    @hidden_for_user.setter
+    def hidden_for_user(self, value):
+        """Setter for hidden_for_user property."""
+        self.logger.warn("Setting values on hidden_for_user will NOT update the remote Canvas instance.")
+        self._hidden_for_user = value
+
+    @property
+    def thumbnail_url(self):
+        """thumbnail_url."""
+        return self._thumbnail_url
+
+    @thumbnail_url.setter
+    def thumbnail_url(self, value):
+        """Setter for thumbnail_url property."""
+        self.logger.warn("Setting values on thumbnail_url will NOT update the remote Canvas instance.")
+        self._thumbnail_url = value
+
+    @property
+    def modified_at(self):
+        """modified_at."""
+        return self._modified_at
+
+    @modified_at.setter
+    def modified_at(self, value):
+        """Setter for modified_at property."""
+        self.logger.warn("Setting values on modified_at will NOT update the remote Canvas instance.")
+        self._modified_at = value
+
+    @property
+    def mime_class(self):
+        """simplified content-type mapping."""
+        return self._mime_class
+
+    @mime_class.setter
+    def mime_class(self, value):
+        """Setter for mime_class property."""
+        self.logger.warn("Setting values on mime_class will NOT update the remote Canvas instance.")
+        self._mime_class = value
+
+    @property
+    def media_entry_id(self):
+        """identifier for file in third-party transcoding service."""
+        return self._media_entry_id
+
+    @media_entry_id.setter
+    def media_entry_id(self, value):
+        """Setter for media_entry_id property."""
+        self.logger.warn("Setting values on media_entry_id will NOT update the remote Canvas instance.")
+        self._media_entry_id = value
+
+    @property
+    def locked_for_user(self):
+        """locked_for_user."""
+        return self._locked_for_user
+
+    @locked_for_user.setter
+    def locked_for_user(self, value):
+        """Setter for locked_for_user property."""
+        self.logger.warn("Setting values on locked_for_user will NOT update the remote Canvas instance.")
+        self._locked_for_user = value
+
+    @property
+    def lock_info(self):
+        """lock_info."""
+        return self._lock_info
+
+    @lock_info.setter
+    def lock_info(self, value):
+        """Setter for lock_info property."""
+        self.logger.warn("Setting values on lock_info will NOT update the remote Canvas instance.")
+        self._lock_info = value
+
+    @property
+    def lock_explanation(self):
+        """lock_explanation."""
+        return self._lock_explanation
+
+    @lock_explanation.setter
+    def lock_explanation(self, value):
+        """Setter for lock_explanation property."""
+        self.logger.warn("Setting values on lock_explanation will NOT update the remote Canvas instance.")
+        self._lock_explanation = value
+
+    @property
+    def preview_url(self):
+        """optional: url to the document preview. This url is specific to the user making the api call. Only included in submission endpoints."""
+        return self._preview_url
+
+    @preview_url.setter
+    def preview_url(self, value):
+        """Setter for preview_url property."""
+        self.logger.warn("Setting values on preview_url will NOT update the remote Canvas instance.")
+        self._preview_url = value
+
+
+class Folder(BaseModel):
+    """Folder Model."""
+
+    def __init__(self, context_type=None, context_id=None, files_count=None, position=None, updated_at=None, folders_url=None, files_url=None, full_name=None, lock_at=None, id=None, folders_count=None, name=None, parent_folder_id=None, created_at=None, unlock_at=None, hidden=None, hidden_for_user=None, locked=None, locked_for_user=None, for_submissions=None):
+        """Init method for Folder class."""
+        self._context_type = context_type
+        self._context_id = context_id
+        self._files_count = files_count
+        self._position = position
+        self._updated_at = updated_at
+        self._folders_url = folders_url
+        self._files_url = files_url
+        self._full_name = full_name
+        self._lock_at = lock_at
+        self._id = id
+        self._folders_count = folders_count
+        self._name = name
+        self._parent_folder_id = parent_folder_id
+        self._created_at = created_at
+        self._unlock_at = unlock_at
+        self._hidden = hidden
+        self._hidden_for_user = hidden_for_user
+        self._locked = locked
+        self._locked_for_user = locked_for_user
+        self._for_submissions = for_submissions
+
+        self.logger = logging.getLogger('py3canvas.Folder')
 
     @property
     def context_type(self):
@@ -1615,61 +2440,6 @@ class Folder(BaseModel):
         self._context_id = value
 
     @property
-    def created_at(self):
-        """created_at."""
-        return self._created_at
-
-    @created_at.setter
-    def created_at(self, value):
-        """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
-        self._created_at = value
-
-    @property
-    def updated_at(self):
-        """updated_at."""
-        return self._updated_at
-
-    @updated_at.setter
-    def updated_at(self, value):
-        """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
-        self._updated_at = value
-
-    @property
-    def lock_at(self):
-        """lock_at."""
-        return self._lock_at
-
-    @lock_at.setter
-    def lock_at(self, value):
-        """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
-        self._lock_at = value
-
-    @property
-    def files_url(self):
-        """files_url."""
-        return self._files_url
-
-    @files_url.setter
-    def files_url(self, value):
-        """Setter for files_url property."""
-        self.logger.warn("Setting values on files_url will NOT update the remote Canvas instance.")
-        self._files_url = value
-
-    @property
-    def hidden_for_user(self):
-        """hidden_for_user."""
-        return self._hidden_for_user
-
-    @hidden_for_user.setter
-    def hidden_for_user(self, value):
-        """Setter for hidden_for_user property."""
-        self.logger.warn("Setting values on hidden_for_user will NOT update the remote Canvas instance.")
-        self._hidden_for_user = value
-
-    @property
     def files_count(self):
         """files_count."""
         return self._files_count
@@ -1679,28 +2449,6 @@ class Folder(BaseModel):
         """Setter for files_count property."""
         self.logger.warn("Setting values on files_count will NOT update the remote Canvas instance.")
         self._files_count = value
-
-    @property
-    def full_name(self):
-        """full_name."""
-        return self._full_name
-
-    @full_name.setter
-    def full_name(self, value):
-        """Setter for full_name property."""
-        self.logger.warn("Setting values on full_name will NOT update the remote Canvas instance.")
-        self._full_name = value
-
-    @property
-    def for_submissions(self):
-        """If true, indicates this is a read-only folder containing files submitted to assignments."""
-        return self._for_submissions
-
-    @for_submissions.setter
-    def for_submissions(self, value):
-        """Setter for for_submissions property."""
-        self.logger.warn("Setting values on for_submissions will NOT update the remote Canvas instance.")
-        self._for_submissions = value
 
     @property
     def position(self):
@@ -1714,37 +2462,15 @@ class Folder(BaseModel):
         self._position = value
 
     @property
-    def hidden(self):
-        """hidden."""
-        return self._hidden
+    def updated_at(self):
+        """updated_at."""
+        return self._updated_at
 
-    @hidden.setter
-    def hidden(self, value):
-        """Setter for hidden property."""
-        self.logger.warn("Setting values on hidden will NOT update the remote Canvas instance.")
-        self._hidden = value
-
-    @property
-    def locked_for_user(self):
-        """locked_for_user."""
-        return self._locked_for_user
-
-    @locked_for_user.setter
-    def locked_for_user(self, value):
-        """Setter for locked_for_user property."""
-        self.logger.warn("Setting values on locked_for_user will NOT update the remote Canvas instance.")
-        self._locked_for_user = value
-
-    @property
-    def id(self):
-        """id."""
-        return self._id
-
-    @id.setter
-    def id(self, value):
-        """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
-        self._id = value
+    @updated_at.setter
+    def updated_at(self, value):
+        """Setter for updated_at property."""
+        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self._updated_at = value
 
     @property
     def folders_url(self):
@@ -1758,6 +2484,94 @@ class Folder(BaseModel):
         self._folders_url = value
 
     @property
+    def files_url(self):
+        """files_url."""
+        return self._files_url
+
+    @files_url.setter
+    def files_url(self, value):
+        """Setter for files_url property."""
+        self.logger.warn("Setting values on files_url will NOT update the remote Canvas instance.")
+        self._files_url = value
+
+    @property
+    def full_name(self):
+        """full_name."""
+        return self._full_name
+
+    @full_name.setter
+    def full_name(self, value):
+        """Setter for full_name property."""
+        self.logger.warn("Setting values on full_name will NOT update the remote Canvas instance.")
+        self._full_name = value
+
+    @property
+    def lock_at(self):
+        """lock_at."""
+        return self._lock_at
+
+    @lock_at.setter
+    def lock_at(self, value):
+        """Setter for lock_at property."""
+        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self._lock_at = value
+
+    @property
+    def id(self):
+        """id."""
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        """Setter for id property."""
+        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self._id = value
+
+    @property
+    def folders_count(self):
+        """folders_count."""
+        return self._folders_count
+
+    @folders_count.setter
+    def folders_count(self, value):
+        """Setter for folders_count property."""
+        self.logger.warn("Setting values on folders_count will NOT update the remote Canvas instance.")
+        self._folders_count = value
+
+    @property
+    def name(self):
+        """name."""
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        """Setter for name property."""
+        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self._name = value
+
+    @property
+    def parent_folder_id(self):
+        """parent_folder_id."""
+        return self._parent_folder_id
+
+    @parent_folder_id.setter
+    def parent_folder_id(self, value):
+        """Setter for parent_folder_id property."""
+        self.logger.warn("Setting values on parent_folder_id will NOT update the remote Canvas instance.")
+        self._parent_folder_id = value
+
+    @property
+    def created_at(self):
+        """created_at."""
+        return self._created_at
+
+    @created_at.setter
+    def created_at(self, value):
+        """Setter for created_at property."""
+        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self._created_at = value
+
+    @property
     def unlock_at(self):
         """unlock_at."""
         return self._unlock_at
@@ -1768,54 +2582,76 @@ class Folder(BaseModel):
         self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
         self._unlock_at = value
 
+    @property
+    def hidden(self):
+        """hidden."""
+        return self._hidden
+
+    @hidden.setter
+    def hidden(self, value):
+        """Setter for hidden property."""
+        self.logger.warn("Setting values on hidden will NOT update the remote Canvas instance.")
+        self._hidden = value
+
+    @property
+    def hidden_for_user(self):
+        """hidden_for_user."""
+        return self._hidden_for_user
+
+    @hidden_for_user.setter
+    def hidden_for_user(self, value):
+        """Setter for hidden_for_user property."""
+        self.logger.warn("Setting values on hidden_for_user will NOT update the remote Canvas instance.")
+        self._hidden_for_user = value
+
+    @property
+    def locked(self):
+        """locked."""
+        return self._locked
+
+    @locked.setter
+    def locked(self, value):
+        """Setter for locked property."""
+        self.logger.warn("Setting values on locked will NOT update the remote Canvas instance.")
+        self._locked = value
+
+    @property
+    def locked_for_user(self):
+        """locked_for_user."""
+        return self._locked_for_user
+
+    @locked_for_user.setter
+    def locked_for_user(self, value):
+        """Setter for locked_for_user property."""
+        self.logger.warn("Setting values on locked_for_user will NOT update the remote Canvas instance.")
+        self._locked_for_user = value
+
+    @property
+    def for_submissions(self):
+        """If true, indicates this is a read-only folder containing files submitted to assignments."""
+        return self._for_submissions
+
+    @for_submissions.setter
+    def for_submissions(self, value):
+        """Setter for for_submissions property."""
+        self.logger.warn("Setting values on for_submissions will NOT update the remote Canvas instance.")
+        self._for_submissions = value
+
 
 class Usagerights(BaseModel):
     """Usagerights Model.
     Describes the copyright and license information for a File"""
 
-    def __init__(self, license=None, license_name=None, file_ids=None, legal_copyright=None, use_justification=None, message=None):
+    def __init__(self, legal_copyright=None, use_justification=None, license=None, license_name=None, message=None, file_ids=None):
         """Init method for Usagerights class."""
-        self._license = license
-        self._license_name = license_name
-        self._file_ids = file_ids
         self._legal_copyright = legal_copyright
         self._use_justification = use_justification
+        self._license = license
+        self._license_name = license_name
         self._message = message
+        self._file_ids = file_ids
 
         self.logger = logging.getLogger('py3canvas.Usagerights')
-
-    @property
-    def license(self):
-        """License identifier for the file."""
-        return self._license
-
-    @license.setter
-    def license(self, value):
-        """Setter for license property."""
-        self.logger.warn("Setting values on license will NOT update the remote Canvas instance.")
-        self._license = value
-
-    @property
-    def license_name(self):
-        """Readable license name."""
-        return self._license_name
-
-    @license_name.setter
-    def license_name(self, value):
-        """Setter for license_name property."""
-        self.logger.warn("Setting values on license_name will NOT update the remote Canvas instance.")
-        self._license_name = value
-
-    @property
-    def file_ids(self):
-        """List of ids of files that were updated."""
-        return self._file_ids
-
-    @file_ids.setter
-    def file_ids(self, value):
-        """Setter for file_ids property."""
-        self.logger.warn("Setting values on file_ids will NOT update the remote Canvas instance.")
-        self._file_ids = value
 
     @property
     def legal_copyright(self):
@@ -1840,6 +2676,28 @@ class Usagerights(BaseModel):
         self._use_justification = value
 
     @property
+    def license(self):
+        """License identifier for the file."""
+        return self._license
+
+    @license.setter
+    def license(self, value):
+        """Setter for license property."""
+        self.logger.warn("Setting values on license will NOT update the remote Canvas instance.")
+        self._license = value
+
+    @property
+    def license_name(self):
+        """Readable license name."""
+        return self._license_name
+
+    @license_name.setter
+    def license_name(self, value):
+        """Setter for license_name property."""
+        self.logger.warn("Setting values on license_name will NOT update the remote Canvas instance.")
+        self._license_name = value
+
+    @property
     def message(self):
         """Explanation of the action performed."""
         return self._message
@@ -1850,28 +2708,28 @@ class Usagerights(BaseModel):
         self.logger.warn("Setting values on message will NOT update the remote Canvas instance.")
         self._message = value
 
+    @property
+    def file_ids(self):
+        """List of ids of files that were updated."""
+        return self._file_ids
+
+    @file_ids.setter
+    def file_ids(self, value):
+        """Setter for file_ids property."""
+        self.logger.warn("Setting values on file_ids will NOT update the remote Canvas instance.")
+        self._file_ids = value
+
 
 class License(BaseModel):
     """License Model."""
 
-    def __init__(self, url=None, id=None, name=None):
+    def __init__(self, id=None, name=None, url=None):
         """Init method for License class."""
-        self._url = url
         self._id = id
         self._name = name
+        self._url = url
 
         self.logger = logging.getLogger('py3canvas.License')
-
-    @property
-    def url(self):
-        """a link to the license text."""
-        return self._url
-
-    @url.setter
-    def url(self, value):
-        """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
-        self._url = value
 
     @property
     def id(self):
@@ -1895,82 +2753,9 @@ class License(BaseModel):
         self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
         self._name = value
 
-
-class File(BaseModel):
-    """File Model."""
-
-    def __init__(self, media_entry_id=None, display_name=None, unlock_at=None, mime_class=None, url=None, created_at=None, modified_at=None, updated_at=None, preview_url=None, lock_info=None, lock_at=None, thumbnail_url=None, hidden_for_user=None, lock_explanation=None, locked=None, hidden=None, locked_for_user=None, content_type=None, id=None, size=None):
-        """Init method for File class."""
-        self._media_entry_id = media_entry_id
-        self._display_name = display_name
-        self._unlock_at = unlock_at
-        self._mime_class = mime_class
-        self._url = url
-        self._created_at = created_at
-        self._modified_at = modified_at
-        self._updated_at = updated_at
-        self._preview_url = preview_url
-        self._lock_info = lock_info
-        self._lock_at = lock_at
-        self._thumbnail_url = thumbnail_url
-        self._hidden_for_user = hidden_for_user
-        self._lock_explanation = lock_explanation
-        self._locked = locked
-        self._hidden = hidden
-        self._locked_for_user = locked_for_user
-        self._content_type = content_type
-        self._id = id
-        self._size = size
-
-        self.logger = logging.getLogger('py3canvas.File')
-
-    @property
-    def media_entry_id(self):
-        """identifier for file in third-party transcoding service."""
-        return self._media_entry_id
-
-    @media_entry_id.setter
-    def media_entry_id(self, value):
-        """Setter for media_entry_id property."""
-        self.logger.warn("Setting values on media_entry_id will NOT update the remote Canvas instance.")
-        self._media_entry_id = value
-
-    @property
-    def display_name(self):
-        """display_name."""
-        return self._display_name
-
-    @display_name.setter
-    def display_name(self, value):
-        """Setter for display_name property."""
-        self.logger.warn("Setting values on display_name will NOT update the remote Canvas instance.")
-        self._display_name = value
-
-    @property
-    def unlock_at(self):
-        """unlock_at."""
-        return self._unlock_at
-
-    @unlock_at.setter
-    def unlock_at(self, value):
-        """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
-        self._unlock_at = value
-
-    @property
-    def mime_class(self):
-        """simplified content-type mapping."""
-        return self._mime_class
-
-    @mime_class.setter
-    def mime_class(self, value):
-        """Setter for mime_class property."""
-        self.logger.warn("Setting values on mime_class will NOT update the remote Canvas instance.")
-        self._mime_class = value
-
     @property
     def url(self):
-        """url."""
+        """a link to the license text."""
         return self._url
 
     @url.setter
@@ -1978,169 +2763,4 @@ class File(BaseModel):
         """Setter for url property."""
         self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
         self._url = value
-
-    @property
-    def created_at(self):
-        """created_at."""
-        return self._created_at
-
-    @created_at.setter
-    def created_at(self, value):
-        """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
-        self._created_at = value
-
-    @property
-    def modified_at(self):
-        """modified_at."""
-        return self._modified_at
-
-    @modified_at.setter
-    def modified_at(self, value):
-        """Setter for modified_at property."""
-        self.logger.warn("Setting values on modified_at will NOT update the remote Canvas instance.")
-        self._modified_at = value
-
-    @property
-    def updated_at(self):
-        """updated_at."""
-        return self._updated_at
-
-    @updated_at.setter
-    def updated_at(self, value):
-        """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
-        self._updated_at = value
-
-    @property
-    def preview_url(self):
-        """optional: url to the document preview. This url is specific to the user making the api call. Only included in submission endpoints."""
-        return self._preview_url
-
-    @preview_url.setter
-    def preview_url(self, value):
-        """Setter for preview_url property."""
-        self.logger.warn("Setting values on preview_url will NOT update the remote Canvas instance.")
-        self._preview_url = value
-
-    @property
-    def lock_info(self):
-        """lock_info."""
-        return self._lock_info
-
-    @lock_info.setter
-    def lock_info(self, value):
-        """Setter for lock_info property."""
-        self.logger.warn("Setting values on lock_info will NOT update the remote Canvas instance.")
-        self._lock_info = value
-
-    @property
-    def lock_at(self):
-        """lock_at."""
-        return self._lock_at
-
-    @lock_at.setter
-    def lock_at(self, value):
-        """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
-        self._lock_at = value
-
-    @property
-    def thumbnail_url(self):
-        """thumbnail_url."""
-        return self._thumbnail_url
-
-    @thumbnail_url.setter
-    def thumbnail_url(self, value):
-        """Setter for thumbnail_url property."""
-        self.logger.warn("Setting values on thumbnail_url will NOT update the remote Canvas instance.")
-        self._thumbnail_url = value
-
-    @property
-    def hidden_for_user(self):
-        """hidden_for_user."""
-        return self._hidden_for_user
-
-    @hidden_for_user.setter
-    def hidden_for_user(self, value):
-        """Setter for hidden_for_user property."""
-        self.logger.warn("Setting values on hidden_for_user will NOT update the remote Canvas instance.")
-        self._hidden_for_user = value
-
-    @property
-    def lock_explanation(self):
-        """lock_explanation."""
-        return self._lock_explanation
-
-    @lock_explanation.setter
-    def lock_explanation(self, value):
-        """Setter for lock_explanation property."""
-        self.logger.warn("Setting values on lock_explanation will NOT update the remote Canvas instance.")
-        self._lock_explanation = value
-
-    @property
-    def locked(self):
-        """locked."""
-        return self._locked
-
-    @locked.setter
-    def locked(self, value):
-        """Setter for locked property."""
-        self.logger.warn("Setting values on locked will NOT update the remote Canvas instance.")
-        self._locked = value
-
-    @property
-    def hidden(self):
-        """hidden."""
-        return self._hidden
-
-    @hidden.setter
-    def hidden(self, value):
-        """Setter for hidden property."""
-        self.logger.warn("Setting values on hidden will NOT update the remote Canvas instance.")
-        self._hidden = value
-
-    @property
-    def locked_for_user(self):
-        """locked_for_user."""
-        return self._locked_for_user
-
-    @locked_for_user.setter
-    def locked_for_user(self, value):
-        """Setter for locked_for_user property."""
-        self.logger.warn("Setting values on locked_for_user will NOT update the remote Canvas instance.")
-        self._locked_for_user = value
-
-    @property
-    def content_type(self):
-        """content_type."""
-        return self._content_type
-
-    @content_type.setter
-    def content_type(self, value):
-        """Setter for content_type property."""
-        self.logger.warn("Setting values on content_type will NOT update the remote Canvas instance.")
-        self._content_type = value
-
-    @property
-    def id(self):
-        """id."""
-        return self._id
-
-    @id.setter
-    def id(self, value):
-        """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
-        self._id = value
-
-    @property
-    def size(self):
-        """size."""
-        return self._size
-
-    @size.setter
-    def size(self, value):
-        """Setter for size property."""
-        self.logger.warn("Setting values on size will NOT update the remote Canvas instance.")
-        self._size = value
 

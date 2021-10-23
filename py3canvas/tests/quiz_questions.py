@@ -6,8 +6,8 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.quiz_questions import QuizQuestionsAPI
-from py3canvas.apis.quiz_questions import Answer
 from py3canvas.apis.quiz_questions import Quizquestion
+from py3canvas.apis.quiz_questions import Answer
 
 
 class TestQuizQuestionsAPI(unittest.TestCase):
@@ -21,7 +21,7 @@ class TestQuizQuestionsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         quiz_id = None  # Change me!!
 
-        r = self.client.list_questions_in_quiz_or_submission(quiz_id, course_id, quiz_submission_attempt=None, quiz_submission_id=None)
+        r = self.client.list_questions_in_quiz_or_submission(course_id, quiz_id, quiz_submission_attempt=None, quiz_submission_id=None)
 
     def test_get_single_quiz_question(self):
         """Integration test for the QuizQuestionsAPI.get_single_quiz_question method."""
@@ -29,7 +29,7 @@ class TestQuizQuestionsAPI(unittest.TestCase):
         quiz_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_quiz_question(id, quiz_id, course_id)
+        r = self.client.get_single_quiz_question(course_id, id, quiz_id)
 
     def test_create_single_quiz_question(self):
         """Integration test for the QuizQuestionsAPI.create_single_quiz_question method."""
@@ -47,5 +47,5 @@ class TestQuizQuestionsAPI(unittest.TestCase):
         quiz_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_quiz_question(id, quiz_id, course_id)
+        r = self.client.delete_quiz_question(course_id, id, quiz_id)
 

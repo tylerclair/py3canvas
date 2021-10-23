@@ -6,9 +6,9 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.live_assessments import LiveAssessmentsAPI
-from py3canvas.apis.live_assessments import Assessment
 from py3canvas.apis.live_assessments import Result
 from py3canvas.apis.live_assessments import Resultlinks
+from py3canvas.apis.live_assessments import Assessment
 
 
 class TestLiveAssessmentsAPI(unittest.TestCase):
@@ -27,7 +27,7 @@ class TestLiveAssessmentsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         assessment_id = None  # Change me!!
 
-        r = self.client.list_live_assessment_results(course_id, assessment_id, user_id=None)
+        r = self.client.list_live_assessment_results(assessment_id, course_id, user_id=None)
 
     def test_create_or_find_live_assessment(self):
         """Integration test for the LiveAssessmentsAPI.create_or_find_live_assessment method."""

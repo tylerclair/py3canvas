@@ -21,7 +21,7 @@ class TestQuizQuestionGroupsAPI(unittest.TestCase):
         quiz_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_quiz_group(id, quiz_id, course_id)
+        r = self.client.get_single_quiz_group(course_id, id, quiz_id)
 
     def test_create_question_group(self):
         """Integration test for the QuizQuestionGroupsAPI.create_question_group method."""
@@ -39,7 +39,7 @@ class TestQuizQuestionGroupsAPI(unittest.TestCase):
         quiz_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_question_group(id, quiz_id, course_id)
+        r = self.client.delete_question_group(course_id, id, quiz_id)
 
     def test_reorder_question_groups(self):
         """Integration test for the QuizQuestionGroupsAPI.reorder_question_groups method."""

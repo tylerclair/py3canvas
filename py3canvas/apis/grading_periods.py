@@ -20,15 +20,18 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         """
         List grading periods.
 
-        Returns the list of grading periods for the current course.
+        Returns the paginated list of grading periods for the current course.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
+
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/grading_periods with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/grading_periods".format(**path), data=data, params=params, no_data=True)
@@ -37,20 +40,23 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         """
         List grading periods.
 
-        Returns the list of grading periods for the current course.
+        Returns the paginated list of grading periods for the current course.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/grading_periods with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_periods".format(**path), data=data, params=params, no_data=True)
 
-    def get_single_grading_period(self, id, course_id):
+    def get_single_grading_period(self, course_id, id):
         """
         Get a single grading period.
 
@@ -61,17 +67,23 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_periods/{id}".format(**path), data=data, params=params, no_data=True)
 
-    def update_single_grading_period(self, id, course_id, grading_periods_end_date, grading_periods_start_date, grading_periods_weight=None):
+    def update_single_grading_period(self, course_id, grading_periods_end_date, grading_periods_start_date, id, grading_periods_weight=None):
         """
         Update a single grading period.
 
@@ -82,30 +94,45 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # REQUIRED - grading_periods[start_date]
-        """The date the grading period starts."""
+        """
+            The date the grading period starts.
+        """
         data["grading_periods[start_date]"] = grading_periods_start_date
 
+
         # REQUIRED - grading_periods[end_date]
-        """no description"""
+        """
+            no description
+        """
         data["grading_periods[end_date]"] = grading_periods_end_date
 
+
         # OPTIONAL - grading_periods[weight]
-        """A weight value that contributes to the overall weight of a grading period set which is used to calculate how much assignments in this period contribute to the total grade"""
+        """
+            A weight value that contributes to the overall weight of a grading period set which is used to calculate how much assignments in this period contribute to the total grade
+        """
         if grading_periods_weight is not None:
             data["grading_periods[weight]"] = grading_periods_weight
+
 
         self.logger.debug("PUT /api/v1/courses/{course_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/courses/{course_id}/grading_periods/{id}".format(**path), data=data, params=params, no_data=True)
 
-    def delete_grading_period_courses(self, id, course_id):
+    def delete_grading_period_courses(self, course_id, id):
         """
         Delete a grading period.
 
@@ -117,17 +144,23 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("DELETE /api/v1/courses/{course_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/courses/{course_id}/grading_periods/{id}".format(**path), data=data, params=params, no_data=True)
 
-    def delete_grading_period_accounts(self, id, account_id):
+    def delete_grading_period_accounts(self, account_id, id):
         """
         Delete a grading period.
 
@@ -139,12 +172,18 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("DELETE /api/v1/accounts/{account_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/grading_periods/{id}".format(**path), data=data, params=params, no_data=True)
@@ -153,49 +192,17 @@ class GradingPeriodsAPI(BaseCanvasAPI):
 class Gradingperiod(BaseModel):
     """Gradingperiod Model."""
 
-    def __init__(self, id, start_date, end_date, weight=None, title=None, close_date=None):
+    def __init__(self, id, start_date, end_date, title=None, close_date=None, weight=None, is_closed=None):
         """Init method for Gradingperiod class."""
-        self._end_date = end_date
-        self._weight = weight
-        self._title = title
         self._id = id
-        self._close_date = close_date
+        self._title = title
         self._start_date = start_date
+        self._end_date = end_date
+        self._close_date = close_date
+        self._weight = weight
+        self._is_closed = is_closed
 
         self.logger = logging.getLogger('py3canvas.Gradingperiod')
-
-    @property
-    def end_date(self):
-        """The end date of the grading period."""
-        return self._end_date
-
-    @end_date.setter
-    def end_date(self, value):
-        """Setter for end_date property."""
-        self.logger.warn("Setting values on end_date will NOT update the remote Canvas instance.")
-        self._end_date = value
-
-    @property
-    def weight(self):
-        """A weight value that contributes to the overall weight of a grading period set which is used to calculate how much assignments in this period contribute to the total grade."""
-        return self._weight
-
-    @weight.setter
-    def weight(self, value):
-        """Setter for weight property."""
-        self.logger.warn("Setting values on weight will NOT update the remote Canvas instance.")
-        self._weight = value
-
-    @property
-    def title(self):
-        """The title for the grading period."""
-        return self._title
-
-    @title.setter
-    def title(self, value):
-        """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
-        self._title = value
 
     @property
     def id(self):
@@ -209,15 +216,15 @@ class Gradingperiod(BaseModel):
         self._id = value
 
     @property
-    def close_date(self):
-        """Grades can only be changed before the close date of the grading period."""
-        return self._close_date
+    def title(self):
+        """The title for the grading period."""
+        return self._title
 
-    @close_date.setter
-    def close_date(self, value):
-        """Setter for close_date property."""
-        self.logger.warn("Setting values on close_date will NOT update the remote Canvas instance.")
-        self._close_date = value
+    @title.setter
+    def title(self, value):
+        """Setter for title property."""
+        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self._title = value
 
     @property
     def start_date(self):
@@ -229,4 +236,48 @@ class Gradingperiod(BaseModel):
         """Setter for start_date property."""
         self.logger.warn("Setting values on start_date will NOT update the remote Canvas instance.")
         self._start_date = value
+
+    @property
+    def end_date(self):
+        """The end date of the grading period."""
+        return self._end_date
+
+    @end_date.setter
+    def end_date(self, value):
+        """Setter for end_date property."""
+        self.logger.warn("Setting values on end_date will NOT update the remote Canvas instance.")
+        self._end_date = value
+
+    @property
+    def close_date(self):
+        """Grades can only be changed before the close date of the grading period."""
+        return self._close_date
+
+    @close_date.setter
+    def close_date(self, value):
+        """Setter for close_date property."""
+        self.logger.warn("Setting values on close_date will NOT update the remote Canvas instance.")
+        self._close_date = value
+
+    @property
+    def weight(self):
+        """A weight value that contributes to the overall weight of a grading period set which is used to calculate how much assignments in this period contribute to the total grade."""
+        return self._weight
+
+    @weight.setter
+    def weight(self, value):
+        """Setter for weight property."""
+        self.logger.warn("Setting values on weight will NOT update the remote Canvas instance.")
+        self._weight = value
+
+    @property
+    def is_closed(self):
+        """If true, the grading period's close_date has passed."""
+        return self._is_closed
+
+    @is_closed.setter
+    def is_closed(self, value):
+        """Setter for is_closed property."""
+        self.logger.warn("Setting values on is_closed will NOT update the remote Canvas instance.")
+        self._is_closed = value
 

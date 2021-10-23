@@ -6,8 +6,8 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.conferences import ConferencesAPI
-from py3canvas.apis.conferences import Conference
 from py3canvas.apis.conferences import Conferencerecording
+from py3canvas.apis.conferences import Conference
 
 
 class TestConferencesAPI(unittest.TestCase):
@@ -27,4 +27,9 @@ class TestConferencesAPI(unittest.TestCase):
         group_id = None  # Change me!!
 
         r = self.client.list_conferences_groups(group_id)
+
+    def test_list_conferences_for_current_user(self):
+        """Integration test for the ConferencesAPI.list_conferences_for_current_user method."""
+
+        r = self.client.list_conferences_for_current_user(state=None)
 

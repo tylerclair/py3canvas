@@ -32,7 +32,7 @@ class TestAccountReportsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         report = None  # Change me!!
 
-        r = self.client.index_of_reports(report, account_id)
+        r = self.client.index_of_reports(account_id, report)
 
     def test_status_of_report(self):
         """Integration test for the AccountReportsAPI.status_of_report method."""
@@ -40,7 +40,7 @@ class TestAccountReportsAPI(unittest.TestCase):
         report = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.status_of_report(id, report, account_id)
+        r = self.client.status_of_report(account_id, id, report)
 
     def test_delete_report(self):
         """Integration test for the AccountReportsAPI.delete_report method."""
@@ -48,5 +48,5 @@ class TestAccountReportsAPI(unittest.TestCase):
         report = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_report(id, report, account_id)
+        r = self.client.delete_report(account_id, id, report)
 

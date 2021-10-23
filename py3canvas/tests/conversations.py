@@ -7,6 +7,7 @@ import requests
 import secrets
 from py3canvas.apis.conversations import ConversationsAPI
 from py3canvas.apis.conversations import Conversation
+from py3canvas.apis.conversations import Conversationparticipant
 
 
 class TestConversationsAPI(unittest.TestCase):

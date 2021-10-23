@@ -27,8 +27,11 @@ class OutcomesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/outcomes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/outcomes/{id}".format(**path), data=data, params=params, single_item=True)
@@ -55,139 +58,154 @@ class OutcomesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - title
-        """The new outcome title."""
+        """
+            The new outcome title.
+        """
         if title is not None:
             data["title"] = title
 
+
         # OPTIONAL - display_name
-        """A friendly name shown in reports for outcomes with cryptic titles,
-        such as common core standards names."""
+        """
+            A friendly name shown in reports for outcomes with cryptic titles,
+        such as common core standards names.
+        """
         if display_name is not None:
             data["display_name"] = display_name
 
+
         # OPTIONAL - description
-        """The new outcome description."""
+        """
+            The new outcome description.
+        """
         if description is not None:
             data["description"] = description
 
+
         # OPTIONAL - vendor_guid
-        """A custom GUID for the learning standard."""
+        """
+            A custom GUID for the learning standard.
+        """
         if vendor_guid is not None:
             data["vendor_guid"] = vendor_guid
 
+
         # OPTIONAL - mastery_points
-        """The new mastery threshold for the embedded rubric criterion."""
+        """
+            The new mastery threshold for the embedded rubric criterion.
+        """
         if mastery_points is not None:
             data["mastery_points"] = mastery_points
 
+
         # OPTIONAL - ratings[description]
-        """The description of a new rating level for the embedded rubric criterion."""
+        """
+            The description of a new rating level for the embedded rubric criterion.
+        """
         if ratings_description is not None:
             data["ratings[description]"] = ratings_description
 
+
         # OPTIONAL - ratings[points]
-        """The points corresponding to a new rating level for the embedded rubric
-        criterion."""
+        """
+            The points corresponding to a new rating level for the embedded rubric
+        criterion.
+        """
         if ratings_points is not None:
             data["ratings[points]"] = ratings_points
 
+
         # OPTIONAL - calculation_method
-        """The new calculation method."""
+        """
+            The new calculation method.
+        """
         if calculation_method is not None:
             self._validate_enum(calculation_method, ["decaying_average", "n_mastery", "latest", "highest"])
             data["calculation_method"] = calculation_method
 
+
         # OPTIONAL - calculation_int
-        """The new calculation int.  Only applies if the calculation_method is "decaying_average" or 'n_mastery'"""
+        """
+            The new calculation int.  Only applies if the calculation_method is "decaying_average" or "n_mastery"
+        """
         if calculation_int is not None:
             data["calculation_int"] = calculation_int
 
+
         self.logger.debug("PUT /api/v1/outcomes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/outcomes/{id}".format(**path), data=data, params=params, single_item=True)
+
+    def get_aligned_assignments_for_outcome_in_course_for_particular_student(self, course_id, student_id=None):
+        """
+        Get aligned assignments for an outcome in a course for a particular student.
+
+        
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - course_id
+        """
+            The id of the course
+        """
+        path["course_id"] = course_id
+
+
+        # OPTIONAL - student_id
+        """
+            The id of the student
+        """
+        if student_id is not None:
+            params["student_id"] = student_id
+
+
+        self.logger.debug("GET /api/v1/courses/{course_id}/outcome_alignments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/outcome_alignments".format(**path), data=data, params=params, all_pages=True)
 
 
 class Outcome(BaseModel):
     """Outcome Model."""
 
-    def __init__(self, vendor_guid=None, can_edit=None, display_name=None, description=None, title=None, url=None, context_id=None, points_possible=None, can_unlink=None, context_type=None, ratings=None, calculation_int=None, calculation_method=None, assessed=None, id=None, mastery_points=None):
+    def __init__(self, id=None, url=None, context_id=None, context_type=None, title=None, display_name=None, description=None, vendor_guid=None, points_possible=None, mastery_points=None, calculation_method=None, calculation_int=None, ratings=None, can_edit=None, can_unlink=None, assessed=None, has_updateable_rubrics=None):
         """Init method for Outcome class."""
-        self._vendor_guid = vendor_guid
-        self._can_edit = can_edit
-        self._display_name = display_name
-        self._description = description
-        self._title = title
+        self._id = id
         self._url = url
         self._context_id = context_id
-        self._points_possible = points_possible
-        self._can_unlink = can_unlink
         self._context_type = context_type
-        self._ratings = ratings
-        self._calculation_int = calculation_int
-        self._calculation_method = calculation_method
-        self._assessed = assessed
-        self._id = id
+        self._title = title
+        self._display_name = display_name
+        self._description = description
+        self._vendor_guid = vendor_guid
+        self._points_possible = points_possible
         self._mastery_points = mastery_points
+        self._calculation_method = calculation_method
+        self._calculation_int = calculation_int
+        self._ratings = ratings
+        self._can_edit = can_edit
+        self._can_unlink = can_unlink
+        self._assessed = assessed
+        self._has_updateable_rubrics = has_updateable_rubrics
 
         self.logger = logging.getLogger('py3canvas.Outcome')
 
     @property
-    def vendor_guid(self):
-        """A custom GUID for the learning standard."""
-        return self._vendor_guid
+    def id(self):
+        """the ID of the outcome."""
+        return self._id
 
-    @vendor_guid.setter
-    def vendor_guid(self, value):
-        """Setter for vendor_guid property."""
-        self.logger.warn("Setting values on vendor_guid will NOT update the remote Canvas instance.")
-        self._vendor_guid = value
-
-    @property
-    def can_edit(self):
-        """whether the current user can update the outcome."""
-        return self._can_edit
-
-    @can_edit.setter
-    def can_edit(self, value):
-        """Setter for can_edit property."""
-        self.logger.warn("Setting values on can_edit will NOT update the remote Canvas instance.")
-        self._can_edit = value
-
-    @property
-    def display_name(self):
-        """Optional friendly name for reporting."""
-        return self._display_name
-
-    @display_name.setter
-    def display_name(self, value):
-        """Setter for display_name property."""
-        self.logger.warn("Setting values on display_name will NOT update the remote Canvas instance.")
-        self._display_name = value
-
-    @property
-    def description(self):
-        """description of the outcome. omitted in the abbreviated form."""
-        return self._description
-
-    @description.setter
-    def description(self, value):
-        """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
-        self._description = value
-
-    @property
-    def title(self):
-        """title of the outcome."""
-        return self._title
-
-    @title.setter
-    def title(self, value):
-        """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
-        self._title = value
+    @id.setter
+    def id(self, value):
+        """Setter for id property."""
+        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self._id = value
 
     @property
     def url(self):
@@ -212,28 +230,6 @@ class Outcome(BaseModel):
         self._context_id = value
 
     @property
-    def points_possible(self):
-        """maximum points possible. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form."""
-        return self._points_possible
-
-    @points_possible.setter
-    def points_possible(self, value):
-        """Setter for points_possible property."""
-        self.logger.warn("Setting values on points_possible will NOT update the remote Canvas instance.")
-        self._points_possible = value
-
-    @property
-    def can_unlink(self):
-        """whether the outcome can be unlinked."""
-        return self._can_unlink
-
-    @can_unlink.setter
-    def can_unlink(self, value):
-        """Setter for can_unlink property."""
-        self.logger.warn("Setting values on can_unlink will NOT update the remote Canvas instance.")
-        self._can_unlink = value
-
-    @property
     def context_type(self):
         """context_type."""
         return self._context_type
@@ -245,26 +241,70 @@ class Outcome(BaseModel):
         self._context_type = value
 
     @property
-    def ratings(self):
-        """possible ratings for this outcome. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form."""
-        return self._ratings
+    def title(self):
+        """title of the outcome."""
+        return self._title
 
-    @ratings.setter
-    def ratings(self, value):
-        """Setter for ratings property."""
-        self.logger.warn("Setting values on ratings will NOT update the remote Canvas instance.")
-        self._ratings = value
+    @title.setter
+    def title(self, value):
+        """Setter for title property."""
+        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self._title = value
 
     @property
-    def calculation_int(self):
-        """this defines the variable value used by the calculation_method. included only if calculation_method uses it."""
-        return self._calculation_int
+    def display_name(self):
+        """Optional friendly name for reporting."""
+        return self._display_name
 
-    @calculation_int.setter
-    def calculation_int(self, value):
-        """Setter for calculation_int property."""
-        self.logger.warn("Setting values on calculation_int will NOT update the remote Canvas instance.")
-        self._calculation_int = value
+    @display_name.setter
+    def display_name(self, value):
+        """Setter for display_name property."""
+        self.logger.warn("Setting values on display_name will NOT update the remote Canvas instance.")
+        self._display_name = value
+
+    @property
+    def description(self):
+        """description of the outcome. omitted in the abbreviated form."""
+        return self._description
+
+    @description.setter
+    def description(self, value):
+        """Setter for description property."""
+        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self._description = value
+
+    @property
+    def vendor_guid(self):
+        """A custom GUID for the learning standard."""
+        return self._vendor_guid
+
+    @vendor_guid.setter
+    def vendor_guid(self, value):
+        """Setter for vendor_guid property."""
+        self.logger.warn("Setting values on vendor_guid will NOT update the remote Canvas instance.")
+        self._vendor_guid = value
+
+    @property
+    def points_possible(self):
+        """maximum points possible. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form."""
+        return self._points_possible
+
+    @points_possible.setter
+    def points_possible(self, value):
+        """Setter for points_possible property."""
+        self.logger.warn("Setting values on points_possible will NOT update the remote Canvas instance.")
+        self._points_possible = value
+
+    @property
+    def mastery_points(self):
+        """points necessary to demonstrate mastery outcomes. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form."""
+        return self._mastery_points
+
+    @mastery_points.setter
+    def mastery_points(self, value):
+        """Setter for mastery_points property."""
+        self.logger.warn("Setting values on mastery_points will NOT update the remote Canvas instance.")
+        self._mastery_points = value
 
     @property
     def calculation_method(self):
@@ -278,6 +318,50 @@ class Outcome(BaseModel):
         self._calculation_method = value
 
     @property
+    def calculation_int(self):
+        """this defines the variable value used by the calculation_method. included only if calculation_method uses it."""
+        return self._calculation_int
+
+    @calculation_int.setter
+    def calculation_int(self, value):
+        """Setter for calculation_int property."""
+        self.logger.warn("Setting values on calculation_int will NOT update the remote Canvas instance.")
+        self._calculation_int = value
+
+    @property
+    def ratings(self):
+        """possible ratings for this outcome. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form."""
+        return self._ratings
+
+    @ratings.setter
+    def ratings(self, value):
+        """Setter for ratings property."""
+        self.logger.warn("Setting values on ratings will NOT update the remote Canvas instance.")
+        self._ratings = value
+
+    @property
+    def can_edit(self):
+        """whether the current user can update the outcome."""
+        return self._can_edit
+
+    @can_edit.setter
+    def can_edit(self, value):
+        """Setter for can_edit property."""
+        self.logger.warn("Setting values on can_edit will NOT update the remote Canvas instance.")
+        self._can_edit = value
+
+    @property
+    def can_unlink(self):
+        """whether the outcome can be unlinked."""
+        return self._can_unlink
+
+    @can_unlink.setter
+    def can_unlink(self, value):
+        """Setter for can_unlink property."""
+        self.logger.warn("Setting values on can_unlink will NOT update the remote Canvas instance.")
+        self._can_unlink = value
+
+    @property
     def assessed(self):
         """whether this outcome has been used to assess a student."""
         return self._assessed
@@ -289,8 +373,34 @@ class Outcome(BaseModel):
         self._assessed = value
 
     @property
+    def has_updateable_rubrics(self):
+        """whether updates to this outcome will propagate to unassessed rubrics that have imported it."""
+        return self._has_updateable_rubrics
+
+    @has_updateable_rubrics.setter
+    def has_updateable_rubrics(self, value):
+        """Setter for has_updateable_rubrics property."""
+        self.logger.warn("Setting values on has_updateable_rubrics will NOT update the remote Canvas instance.")
+        self._has_updateable_rubrics = value
+
+
+class Outcomealignment(BaseModel):
+    """Outcomealignment Model."""
+
+    def __init__(self, id=None, assignment_id=None, assessment_id=None, submission_types=None, url=None, title=None):
+        """Init method for Outcomealignment class."""
+        self._id = id
+        self._assignment_id = assignment_id
+        self._assessment_id = assessment_id
+        self._submission_types = submission_types
+        self._url = url
+        self._title = title
+
+        self.logger = logging.getLogger('py3canvas.Outcomealignment')
+
+    @property
     def id(self):
-        """the ID of the outcome."""
+        """the id of the aligned learning outcome."""
         return self._id
 
     @id.setter
@@ -300,13 +410,57 @@ class Outcome(BaseModel):
         self._id = value
 
     @property
-    def mastery_points(self):
-        """points necessary to demonstrate mastery outcomes. included only if the outcome embeds a rubric criterion. omitted in the abbreviated form."""
-        return self._mastery_points
+    def assignment_id(self):
+        """the id of the aligned assignment (null for live assessments)."""
+        return self._assignment_id
 
-    @mastery_points.setter
-    def mastery_points(self, value):
-        """Setter for mastery_points property."""
-        self.logger.warn("Setting values on mastery_points will NOT update the remote Canvas instance.")
-        self._mastery_points = value
+    @assignment_id.setter
+    def assignment_id(self, value):
+        """Setter for assignment_id property."""
+        self.logger.warn("Setting values on assignment_id will NOT update the remote Canvas instance.")
+        self._assignment_id = value
+
+    @property
+    def assessment_id(self):
+        """the id of the aligned live assessment (null for assignments)."""
+        return self._assessment_id
+
+    @assessment_id.setter
+    def assessment_id(self, value):
+        """Setter for assessment_id property."""
+        self.logger.warn("Setting values on assessment_id will NOT update the remote Canvas instance.")
+        self._assessment_id = value
+
+    @property
+    def submission_types(self):
+        """a string representing the different submission types of an aligned assignment."""
+        return self._submission_types
+
+    @submission_types.setter
+    def submission_types(self, value):
+        """Setter for submission_types property."""
+        self.logger.warn("Setting values on submission_types will NOT update the remote Canvas instance.")
+        self._submission_types = value
+
+    @property
+    def url(self):
+        """the URL for the aligned assignment."""
+        return self._url
+
+    @url.setter
+    def url(self, value):
+        """Setter for url property."""
+        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self._url = value
+
+    @property
+    def title(self):
+        """the title of the aligned assignment."""
+        return self._title
+
+    @title.setter
+    def title(self, value):
+        """Setter for title property."""
+        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self._title = value
 

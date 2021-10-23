@@ -32,7 +32,7 @@ class TestGradingPeriodsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_grading_period(id, course_id)
+        r = self.client.get_single_grading_period(course_id, id)
 
     def test_update_single_grading_period(self):
         """Integration test for the GradingPeriodsAPI.update_single_grading_period method."""
@@ -44,12 +44,12 @@ class TestGradingPeriodsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_grading_period_courses(id, course_id)
+        r = self.client.delete_grading_period_courses(course_id, id)
 
     def test_delete_grading_period_accounts(self):
         """Integration test for the GradingPeriodsAPI.delete_grading_period_accounts method."""
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_grading_period_accounts(id, account_id)
+        r = self.client.delete_grading_period_accounts(account_id, id)
 

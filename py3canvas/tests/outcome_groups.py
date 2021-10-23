@@ -68,14 +68,14 @@ class TestOutcomeGroupsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.show_outcome_group_accounts(id, account_id)
+        r = self.client.show_outcome_group_accounts(account_id, id)
 
     def test_show_outcome_group_courses(self):
         """Integration test for the OutcomeGroupsAPI.show_outcome_group_courses method."""
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.show_outcome_group_courses(id, course_id)
+        r = self.client.show_outcome_group_courses(course_id, id)
 
     def test_update_outcome_group_global(self):
         """Integration test for the OutcomeGroupsAPI.update_outcome_group_global method."""
@@ -103,14 +103,14 @@ class TestOutcomeGroupsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_outcome_group_accounts(id, account_id)
+        r = self.client.delete_outcome_group_accounts(account_id, id)
 
     def test_delete_outcome_group_courses(self):
         """Integration test for the OutcomeGroupsAPI.delete_outcome_group_courses method."""
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_outcome_group_courses(id, course_id)
+        r = self.client.delete_outcome_group_courses(course_id, id)
 
     def test_list_linked_outcomes_global(self):
         """Integration test for the OutcomeGroupsAPI.list_linked_outcomes_global method."""
@@ -123,14 +123,14 @@ class TestOutcomeGroupsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.list_linked_outcomes_accounts(id, account_id, outcome_style=None)
+        r = self.client.list_linked_outcomes_accounts(account_id, id, outcome_style=None)
 
     def test_list_linked_outcomes_courses(self):
         """Integration test for the OutcomeGroupsAPI.list_linked_outcomes_courses method."""
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.list_linked_outcomes_courses(id, course_id, outcome_style=None)
+        r = self.client.list_linked_outcomes_courses(course_id, id, outcome_style=None)
 
     def test_create_link_outcome_global(self):
         """Integration test for the OutcomeGroupsAPI.create_link_outcome_global method."""
@@ -175,7 +175,7 @@ class TestOutcomeGroupsAPI(unittest.TestCase):
         id = None  # Change me!!
         outcome_id = None  # Change me!!
 
-        r = self.client.unlink_outcome_accounts(id, account_id, outcome_id)
+        r = self.client.unlink_outcome_accounts(account_id, id, outcome_id)
 
     def test_unlink_outcome_courses(self):
         """Integration test for the OutcomeGroupsAPI.unlink_outcome_courses method."""
@@ -183,7 +183,7 @@ class TestOutcomeGroupsAPI(unittest.TestCase):
         id = None  # Change me!!
         outcome_id = None  # Change me!!
 
-        r = self.client.unlink_outcome_courses(id, course_id, outcome_id)
+        r = self.client.unlink_outcome_courses(course_id, id, outcome_id)
 
     def test_list_subgroups_global(self):
         """Integration test for the OutcomeGroupsAPI.list_subgroups_global method."""
@@ -196,14 +196,14 @@ class TestOutcomeGroupsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.list_subgroups_accounts(id, account_id)
+        r = self.client.list_subgroups_accounts(account_id, id)
 
     def test_list_subgroups_courses(self):
         """Integration test for the OutcomeGroupsAPI.list_subgroups_courses method."""
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.list_subgroups_courses(id, course_id)
+        r = self.client.list_subgroups_courses(course_id, id)
 
     def test_create_subgroup_global(self):
         """Integration test for the OutcomeGroupsAPI.create_subgroup_global method."""

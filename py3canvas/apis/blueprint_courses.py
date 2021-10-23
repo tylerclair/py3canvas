@@ -28,12 +28,18 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - template_id
-        """ID"""
+        """
+            ID
+        """
         path["template_id"] = template_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/blueprint_templates/{template_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/blueprint_templates/{template_id}".format(**path), data=data, params=params, single_item=True)
@@ -49,12 +55,18 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - template_id
-        """ID"""
+        """
+            ID
+        """
         path["template_id"] = template_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/blueprint_templates/{template_id}/associated_courses with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/blueprint_templates/{template_id}/associated_courses".format(**path), data=data, params=params, all_pages=True)
@@ -66,33 +78,47 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         Send a list of course ids to add or remove new associations for the template.
         Cannot add courses that do not belong to the blueprint course's account. Also cannot add
         other blueprint courses or courses that already have an association with another blueprint course.
+        
+        After associating new courses, {api:MasterCourses::MasterTemplatesController#queue_migration start a sync} to populate their contents from the blueprint.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - template_id
-        """ID"""
+        """
+            ID
+        """
         path["template_id"] = template_id
 
+
         # OPTIONAL - course_ids_to_add
-        """Courses to add as associated courses"""
+        """
+            Courses to add as associated courses
+        """
         if course_ids_to_add is not None:
             data["course_ids_to_add"] = course_ids_to_add
 
+
         # OPTIONAL - course_ids_to_remove
-        """Courses to remove as associated courses"""
+        """
+            Courses to remove as associated courses
+        """
         if course_ids_to_remove is not None:
             data["course_ids_to_remove"] = course_ids_to_remove
+
 
         self.logger.debug("PUT /api/v1/courses/{course_id}/blueprint_templates/{template_id}/update_associations with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/courses/{course_id}/blueprint_templates/{template_id}/update_associations".format(**path), data=data, params=params, no_data=True)
 
-    def begin_migration_to_push_to_associated_courses(self, course_id, template_id, comment=None, copy_settings=None, send_notification=None):
+    def begin_migration_to_push_to_associated_courses(self, course_id, template_id, comment=None, copy_settings=None, publish_after_initial_sync=None, send_notification=None):
         """
         Begin a migration to push to associated courses.
 
@@ -104,28 +130,51 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - template_id
-        """ID"""
+        """
+            ID
+        """
         path["template_id"] = template_id
 
+
         # OPTIONAL - comment
-        """An optional comment to be included in the sync history."""
+        """
+            An optional comment to be included in the sync history.
+        """
         if comment is not None:
             data["comment"] = comment
 
+
         # OPTIONAL - send_notification
-        """Send a notification to the calling user when the sync completes."""
+        """
+            Send a notification to the calling user when the sync completes.
+        """
         if send_notification is not None:
             data["send_notification"] = send_notification
 
+
         # OPTIONAL - copy_settings
-        """Whether course settings should be copied over to associated courses.
-        Defaults to true for newly associated courses."""
+        """
+            Whether course settings should be copied over to associated courses.
+        Defaults to true for newly associated courses.
+        """
         if copy_settings is not None:
             data["copy_settings"] = copy_settings
+
+
+        # OPTIONAL - publish_after_initial_sync
+        """
+            If set, newly associated courses will be automatically published after the sync completes
+        """
+        if publish_after_initial_sync is not None:
+            data["publish_after_initial_sync"] = publish_after_initial_sync
+
 
         self.logger.debug("POST /api/v1/courses/{course_id}/blueprint_templates/{template_id}/migrations with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/courses/{course_id}/blueprint_templates/{template_id}/migrations".format(**path), data=data, params=params, single_item=True)
@@ -141,34 +190,52 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - template_id
-        """ID"""
+        """
+            ID
+        """
         path["template_id"] = template_id
 
+
         # OPTIONAL - content_type
-        """The type of the object."""
+        """
+            The type of the object.
+        """
         if content_type is not None:
             self._validate_enum(content_type, ["assignment", "attachment", "discussion_topic", "external_tool", "quiz", "wiki_page"])
             data["content_type"] = content_type
 
+
         # OPTIONAL - content_id
-        """The ID of the object."""
+        """
+            The ID of the object.
+        """
         if content_id is not None:
             data["content_id"] = content_id
 
+
         # OPTIONAL - restricted
-        """Whether to apply restrictions."""
+        """
+            Whether to apply restrictions.
+        """
         if restricted is not None:
             data["restricted"] = restricted
 
+
         # OPTIONAL - restrictions
-        """(Optional) If the object is restricted, this specifies a set of restrictions. If not specified,
-        the course-level restrictions will be used. See {api:CoursesController#update Course API update documentation}"""
+        """
+            (Optional) If the object is restricted, this specifies a set of restrictions. If not specified,
+        the course-level restrictions will be used. See {api:CoursesController#update Course API update documentation}
+        """
         if restrictions is not None:
             data["restrictions"] = restrictions
+
 
         self.logger.debug("PUT /api/v1/courses/{course_id}/blueprint_templates/{template_id}/restrict_item with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/courses/{course_id}/blueprint_templates/{template_id}/restrict_item".format(**path), data=data, params=params, no_data=True)
@@ -178,18 +245,25 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         Get unsynced changes.
 
         Retrieve a list of learning objects that have changed since the last blueprint sync operation.
+        If no syncs have been completed, a ChangeRecord with a change_type of +initial_sync+ is returned.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - template_id
-        """ID"""
+        """
+            ID
+        """
         path["template_id"] = template_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/blueprint_templates/{template_id}/unsynced_changes with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/blueprint_templates/{template_id}/unsynced_changes".format(**path), data=data, params=params, all_pages=True)
@@ -198,7 +272,7 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         """
         List blueprint migrations.
 
-        Shows migrations for the template, starting with the most recent. This endpoint can be called on a
+        Shows a paginated list of migrations for the template, starting with the most recent. This endpoint can be called on a
         blueprint course. See also {api:MasterCourses::MasterTemplatesController#imports_index the associated course side}.
         """
         path = {}
@@ -206,17 +280,23 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - template_id
-        """ID"""
+        """
+            ID
+        """
         path["template_id"] = template_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/blueprint_templates/{template_id}/migrations with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/blueprint_templates/{template_id}/migrations".format(**path), data=data, params=params, all_pages=True)
 
-    def show_blueprint_migration(self, id, course_id, template_id):
+    def show_blueprint_migration(self, course_id, id, template_id):
         """
         Show a blueprint migration.
 
@@ -228,21 +308,30 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - template_id
-        """ID"""
+        """
+            ID
+        """
         path["template_id"] = template_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/blueprint_templates/{template_id}/migrations/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/blueprint_templates/{template_id}/migrations/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def get_migration_details(self, id, course_id, template_id):
+    def get_migration_details(self, course_id, id, template_id):
         """
         Get migration details.
 
@@ -254,25 +343,54 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - template_id
-        """ID"""
+        """
+            ID
+        """
         path["template_id"] = template_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/blueprint_templates/{template_id}/migrations/{id}/details with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/blueprint_templates/{template_id}/migrations/{id}/details".format(**path), data=data, params=params, all_pages=True)
+
+    def list_blueprint_subscriptions(self, course_id):
+        """
+        List blueprint subscriptions.
+
+        Returns a list of blueprint subscriptions for the given course. (Currently a course may have no more than one.)
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - course_id
+        """
+            ID
+        """
+        path["course_id"] = course_id
+
+
+        self.logger.debug("GET /api/v1/courses/{course_id}/blueprint_subscriptions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/courses/{course_id}/blueprint_subscriptions".format(**path), data=data, params=params, all_pages=True)
 
     def list_blueprint_imports(self, course_id, subscription_id):
         """
         List blueprint imports.
 
-        Shows migrations imported into a course associated with a blueprint, starting with the most recent. See also
+        Shows a paginated list of migrations imported into a course associated with a blueprint, starting with the most recent. See also
         {api:MasterCourses::MasterTemplatesController#migrations_index the blueprint course side}.
         
         Use 'default' as the subscription_id to use the currently active blueprint subscription.
@@ -282,17 +400,23 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - subscription_id
-        """ID"""
+        """
+            ID
+        """
         path["subscription_id"] = subscription_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/blueprint_subscriptions/{subscription_id}/migrations with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/blueprint_subscriptions/{subscription_id}/migrations".format(**path), data=data, params=params, all_pages=True)
 
-    def show_blueprint_import(self, id, course_id, subscription_id):
+    def show_blueprint_import(self, course_id, id, subscription_id):
         """
         Show a blueprint import.
 
@@ -304,21 +428,30 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - subscription_id
-        """ID"""
+        """
+            ID
+        """
         path["subscription_id"] = subscription_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/blueprint_subscriptions/{subscription_id}/migrations/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/blueprint_subscriptions/{subscription_id}/migrations/{id}".format(**path), data=data, params=params, single_item=True)
 
-    def get_import_details(self, id, course_id, subscription_id):
+    def get_import_details(self, course_id, id, subscription_id):
         """
         Get import details.
 
@@ -330,89 +463,53 @@ class BlueprintCoursesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - subscription_id
-        """ID"""
+        """
+            ID
+        """
         path["subscription_id"] = subscription_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/blueprint_subscriptions/{subscription_id}/migrations/{id}/details with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/blueprint_subscriptions/{subscription_id}/migrations/{id}/details".format(**path), data=data, params=params, all_pages=True)
 
 
-class Blueprintrestriction(BaseModel):
-    """Blueprintrestriction Model.
-    A set of restrictions on editing for copied objects in associated courses"""
-
-    def __init__(self, content=None, due_dates=None, points=None, availability_dates=None):
-        """Init method for Blueprintrestriction class."""
-        self._content = content
-        self._due_dates = due_dates
-        self._points = points
-        self._availability_dates = availability_dates
-
-        self.logger = logging.getLogger('py3canvas.Blueprintrestriction')
-
-    @property
-    def content(self):
-        """Restriction on main content (e.g. title, description)."""
-        return self._content
-
-    @content.setter
-    def content(self, value):
-        """Setter for content property."""
-        self.logger.warn("Setting values on content will NOT update the remote Canvas instance.")
-        self._content = value
-
-    @property
-    def due_dates(self):
-        """Restriction on due dates for assignments and graded learning objects."""
-        return self._due_dates
-
-    @due_dates.setter
-    def due_dates(self, value):
-        """Setter for due_dates property."""
-        self.logger.warn("Setting values on due_dates will NOT update the remote Canvas instance.")
-        self._due_dates = value
-
-    @property
-    def points(self):
-        """Restriction on points possible for assignments and graded learning objects."""
-        return self._points
-
-    @points.setter
-    def points(self, value):
-        """Setter for points property."""
-        self.logger.warn("Setting values on points will NOT update the remote Canvas instance.")
-        self._points = value
-
-    @property
-    def availability_dates(self):
-        """Restriction on availability dates for an object."""
-        return self._availability_dates
-
-    @availability_dates.setter
-    def availability_dates(self, value):
-        """Setter for availability_dates property."""
-        self.logger.warn("Setting values on availability_dates will NOT update the remote Canvas instance.")
-        self._availability_dates = value
-
-
 class Blueprinttemplate(BaseModel):
     """Blueprinttemplate Model."""
 
-    def __init__(self, course_id=None, last_export_completed_at=None, id=None):
+    def __init__(self, id=None, course_id=None, last_export_completed_at=None, associated_course_count=None, latest_migration=None):
         """Init method for Blueprinttemplate class."""
+        self._id = id
         self._course_id = course_id
         self._last_export_completed_at = last_export_completed_at
-        self._id = id
+        self._associated_course_count = associated_course_count
+        self._latest_migration = latest_migration
 
         self.logger = logging.getLogger('py3canvas.Blueprinttemplate')
+
+    @property
+    def id(self):
+        """The ID of the template."""
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        """Setter for id property."""
+        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self._id = value
 
     @property
     def course_id(self):
@@ -437,8 +534,49 @@ class Blueprinttemplate(BaseModel):
         self._last_export_completed_at = value
 
     @property
+    def associated_course_count(self):
+        """Number of associated courses for the template."""
+        return self._associated_course_count
+
+    @associated_course_count.setter
+    def associated_course_count(self, value):
+        """Setter for associated_course_count property."""
+        self.logger.warn("Setting values on associated_course_count will NOT update the remote Canvas instance.")
+        self._associated_course_count = value
+
+    @property
+    def latest_migration(self):
+        """Details of the latest migration."""
+        return self._latest_migration
+
+    @latest_migration.setter
+    def latest_migration(self, value):
+        """Setter for latest_migration property."""
+        self.logger.warn("Setting values on latest_migration will NOT update the remote Canvas instance.")
+        self._latest_migration = value
+
+
+class Blueprintmigration(BaseModel):
+    """Blueprintmigration Model."""
+
+    def __init__(self, id=None, template_id=None, subscription_id=None, user_id=None, workflow_state=None, created_at=None, exports_started_at=None, imports_queued_at=None, imports_completed_at=None, comment=None):
+        """Init method for Blueprintmigration class."""
+        self._id = id
+        self._template_id = template_id
+        self._subscription_id = subscription_id
+        self._user_id = user_id
+        self._workflow_state = workflow_state
+        self._created_at = created_at
+        self._exports_started_at = exports_started_at
+        self._imports_queued_at = imports_queued_at
+        self._imports_completed_at = imports_completed_at
+        self._comment = comment
+
+        self.logger = logging.getLogger('py3canvas.Blueprintmigration')
+
+    @property
     def id(self):
-        """The ID of the template."""
+        """The ID of the migration."""
         return self._id
 
     @id.setter
@@ -447,129 +585,27 @@ class Blueprinttemplate(BaseModel):
         self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
         self._id = value
 
+    @property
+    def template_id(self):
+        """The ID of the template the migration belongs to. Only present when querying a blueprint course."""
+        return self._template_id
 
-class Changerecord(BaseModel):
-    """Changerecord Model.
-    Describes a learning object change propagated to associated courses from a blueprint course"""
-
-    def __init__(self, asset_id=None, change_type=None, html_url=None, asset_name=None, exceptions=None, locked=None, asset_type=None):
-        """Init method for Changerecord class."""
-        self._asset_id = asset_id
-        self._change_type = change_type
-        self._html_url = html_url
-        self._asset_name = asset_name
-        self._exceptions = exceptions
-        self._locked = locked
-        self._asset_type = asset_type
-
-        self.logger = logging.getLogger('py3canvas.Changerecord')
+    @template_id.setter
+    def template_id(self, value):
+        """Setter for template_id property."""
+        self.logger.warn("Setting values on template_id will NOT update the remote Canvas instance.")
+        self._template_id = value
 
     @property
-    def asset_id(self):
-        """The ID of the learning object that was changed in the blueprint course."""
-        return self._asset_id
+    def subscription_id(self):
+        """The ID of the associated course's blueprint subscription. Only present when querying a course associated with a blueprint."""
+        return self._subscription_id
 
-    @asset_id.setter
-    def asset_id(self, value):
-        """Setter for asset_id property."""
-        self.logger.warn("Setting values on asset_id will NOT update the remote Canvas instance.")
-        self._asset_id = value
-
-    @property
-    def change_type(self):
-        """The type of change; one of 'created', 'updated', 'deleted'."""
-        return self._change_type
-
-    @change_type.setter
-    def change_type(self, value):
-        """Setter for change_type property."""
-        self.logger.warn("Setting values on change_type will NOT update the remote Canvas instance.")
-        self._change_type = value
-
-    @property
-    def html_url(self):
-        """The URL of the changed object."""
-        return self._html_url
-
-    @html_url.setter
-    def html_url(self, value):
-        """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
-        self._html_url = value
-
-    @property
-    def asset_name(self):
-        """The name of the learning object that was changed in the blueprint course."""
-        return self._asset_name
-
-    @asset_name.setter
-    def asset_name(self, value):
-        """Setter for asset_name property."""
-        self.logger.warn("Setting values on asset_name will NOT update the remote Canvas instance.")
-        self._asset_name = value
-
-    @property
-    def exceptions(self):
-        """A list of ExceptionRecords for linked courses that did not receive this update."""
-        return self._exceptions
-
-    @exceptions.setter
-    def exceptions(self, value):
-        """Setter for exceptions property."""
-        self.logger.warn("Setting values on exceptions will NOT update the remote Canvas instance.")
-        self._exceptions = value
-
-    @property
-    def locked(self):
-        """Whether the object is locked in the blueprint."""
-        return self._locked
-
-    @locked.setter
-    def locked(self, value):
-        """Setter for locked property."""
-        self.logger.warn("Setting values on locked will NOT update the remote Canvas instance.")
-        self._locked = value
-
-    @property
-    def asset_type(self):
-        """The type of the learning object that was changed in the blueprint course.  One of 'assignment', 'attachment', 'discussion_topic', 'external_tool', 'quiz', or 'wiki_page'."""
-        return self._asset_type
-
-    @asset_type.setter
-    def asset_type(self, value):
-        """Setter for asset_type property."""
-        self.logger.warn("Setting values on asset_type will NOT update the remote Canvas instance.")
-        self._asset_type = value
-
-
-class Blueprintmigration(BaseModel):
-    """Blueprintmigration Model."""
-
-    def __init__(self, comment=None, user_id=None, workflow_state=None, created_at=None, imports_queued_at=None, imports_completed_at=None, template_id=None, exports_started_at=None, subscription_id=None, id=None):
-        """Init method for Blueprintmigration class."""
-        self._comment = comment
-        self._user_id = user_id
-        self._workflow_state = workflow_state
-        self._created_at = created_at
-        self._imports_queued_at = imports_queued_at
-        self._imports_completed_at = imports_completed_at
-        self._template_id = template_id
-        self._exports_started_at = exports_started_at
-        self._subscription_id = subscription_id
-        self._id = id
-
-        self.logger = logging.getLogger('py3canvas.Blueprintmigration')
-
-    @property
-    def comment(self):
-        """User-specified comment describing changes made in this operation."""
-        return self._comment
-
-    @comment.setter
-    def comment(self, value):
-        """Setter for comment property."""
-        self.logger.warn("Setting values on comment will NOT update the remote Canvas instance.")
-        self._comment = value
+    @subscription_id.setter
+    def subscription_id(self, value):
+        """Setter for subscription_id property."""
+        self.logger.warn("Setting values on subscription_id will NOT update the remote Canvas instance.")
+        self._subscription_id = value
 
     @property
     def user_id(self):
@@ -605,6 +641,17 @@ class Blueprintmigration(BaseModel):
         self._created_at = value
 
     @property
+    def exports_started_at(self):
+        """Time when the exports begun."""
+        return self._exports_started_at
+
+    @exports_started_at.setter
+    def exports_started_at(self, value):
+        """Setter for exports_started_at property."""
+        self.logger.warn("Setting values on exports_started_at will NOT update the remote Canvas instance.")
+        self._exports_started_at = value
+
+    @property
     def imports_queued_at(self):
         """Time when the exports were completed and imports were queued."""
         return self._imports_queued_at
@@ -627,48 +674,167 @@ class Blueprintmigration(BaseModel):
         self._imports_completed_at = value
 
     @property
-    def template_id(self):
-        """The ID of the template the migration belongs to. Only present when querying a blueprint course."""
-        return self._template_id
+    def comment(self):
+        """User-specified comment describing changes made in this operation."""
+        return self._comment
 
-    @template_id.setter
-    def template_id(self, value):
-        """Setter for template_id property."""
-        self.logger.warn("Setting values on template_id will NOT update the remote Canvas instance.")
-        self._template_id = value
+    @comment.setter
+    def comment(self, value):
+        """Setter for comment property."""
+        self.logger.warn("Setting values on comment will NOT update the remote Canvas instance.")
+        self._comment = value
 
-    @property
-    def exports_started_at(self):
-        """Time when the exports begun."""
-        return self._exports_started_at
 
-    @exports_started_at.setter
-    def exports_started_at(self, value):
-        """Setter for exports_started_at property."""
-        self.logger.warn("Setting values on exports_started_at will NOT update the remote Canvas instance.")
-        self._exports_started_at = value
+class Blueprintrestriction(BaseModel):
+    """Blueprintrestriction Model.
+    A set of restrictions on editing for copied objects in associated courses"""
 
-    @property
-    def subscription_id(self):
-        """The ID of the associated course's blueprint subscription. Only present when querying a course associated with a blueprint."""
-        return self._subscription_id
+    def __init__(self, content=None, points=None, due_dates=None, availability_dates=None):
+        """Init method for Blueprintrestriction class."""
+        self._content = content
+        self._points = points
+        self._due_dates = due_dates
+        self._availability_dates = availability_dates
 
-    @subscription_id.setter
-    def subscription_id(self, value):
-        """Setter for subscription_id property."""
-        self.logger.warn("Setting values on subscription_id will NOT update the remote Canvas instance.")
-        self._subscription_id = value
+        self.logger = logging.getLogger('py3canvas.Blueprintrestriction')
 
     @property
-    def id(self):
-        """The ID of the migration."""
-        return self._id
+    def content(self):
+        """Restriction on main content (e.g. title, description)."""
+        return self._content
 
-    @id.setter
-    def id(self, value):
-        """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
-        self._id = value
+    @content.setter
+    def content(self, value):
+        """Setter for content property."""
+        self.logger.warn("Setting values on content will NOT update the remote Canvas instance.")
+        self._content = value
+
+    @property
+    def points(self):
+        """Restriction on points possible for assignments and graded learning objects."""
+        return self._points
+
+    @points.setter
+    def points(self, value):
+        """Setter for points property."""
+        self.logger.warn("Setting values on points will NOT update the remote Canvas instance.")
+        self._points = value
+
+    @property
+    def due_dates(self):
+        """Restriction on due dates for assignments and graded learning objects."""
+        return self._due_dates
+
+    @due_dates.setter
+    def due_dates(self, value):
+        """Setter for due_dates property."""
+        self.logger.warn("Setting values on due_dates will NOT update the remote Canvas instance.")
+        self._due_dates = value
+
+    @property
+    def availability_dates(self):
+        """Restriction on availability dates for an object."""
+        return self._availability_dates
+
+    @availability_dates.setter
+    def availability_dates(self, value):
+        """Setter for availability_dates property."""
+        self.logger.warn("Setting values on availability_dates will NOT update the remote Canvas instance.")
+        self._availability_dates = value
+
+
+class Changerecord(BaseModel):
+    """Changerecord Model.
+    Describes a learning object change propagated to associated courses from a blueprint course"""
+
+    def __init__(self, asset_id=None, asset_type=None, asset_name=None, change_type=None, html_url=None, locked=None, exceptions=None):
+        """Init method for Changerecord class."""
+        self._asset_id = asset_id
+        self._asset_type = asset_type
+        self._asset_name = asset_name
+        self._change_type = change_type
+        self._html_url = html_url
+        self._locked = locked
+        self._exceptions = exceptions
+
+        self.logger = logging.getLogger('py3canvas.Changerecord')
+
+    @property
+    def asset_id(self):
+        """The ID of the learning object that was changed in the blueprint course."""
+        return self._asset_id
+
+    @asset_id.setter
+    def asset_id(self, value):
+        """Setter for asset_id property."""
+        self.logger.warn("Setting values on asset_id will NOT update the remote Canvas instance.")
+        self._asset_id = value
+
+    @property
+    def asset_type(self):
+        """The type of the learning object that was changed in the blueprint course.  One of 'assignment', 'attachment', 'discussion_topic', 'external_tool', 'quiz', 'wiki_page', 'syllabus', or 'settings'.  For 'syllabus' or 'settings', the asset_id is the course id."""
+        return self._asset_type
+
+    @asset_type.setter
+    def asset_type(self, value):
+        """Setter for asset_type property."""
+        self.logger.warn("Setting values on asset_type will NOT update the remote Canvas instance.")
+        self._asset_type = value
+
+    @property
+    def asset_name(self):
+        """The name of the learning object that was changed in the blueprint course."""
+        return self._asset_name
+
+    @asset_name.setter
+    def asset_name(self, value):
+        """Setter for asset_name property."""
+        self.logger.warn("Setting values on asset_name will NOT update the remote Canvas instance.")
+        self._asset_name = value
+
+    @property
+    def change_type(self):
+        """The type of change; one of 'created', 'updated', 'deleted'."""
+        return self._change_type
+
+    @change_type.setter
+    def change_type(self, value):
+        """Setter for change_type property."""
+        self.logger.warn("Setting values on change_type will NOT update the remote Canvas instance.")
+        self._change_type = value
+
+    @property
+    def html_url(self):
+        """The URL of the changed object."""
+        return self._html_url
+
+    @html_url.setter
+    def html_url(self, value):
+        """Setter for html_url property."""
+        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self._html_url = value
+
+    @property
+    def locked(self):
+        """Whether the object is locked in the blueprint."""
+        return self._locked
+
+    @locked.setter
+    def locked(self, value):
+        """Setter for locked property."""
+        self.logger.warn("Setting values on locked will NOT update the remote Canvas instance.")
+        self._locked = value
+
+    @property
+    def exceptions(self):
+        """A list of ExceptionRecords for linked courses that did not receive this update."""
+        return self._exceptions
+
+    @exceptions.setter
+    def exceptions(self, value):
+        """Setter for exceptions property."""
+        self.logger.warn("Setting values on exceptions will NOT update the remote Canvas instance.")
+        self._exceptions = value
 
 
 class Exceptionrecord(BaseModel):
@@ -703,4 +869,50 @@ class Exceptionrecord(BaseModel):
         """Setter for conflicting_changes property."""
         self.logger.warn("Setting values on conflicting_changes will NOT update the remote Canvas instance.")
         self._conflicting_changes = value
+
+
+class Blueprintsubscription(BaseModel):
+    """Blueprintsubscription Model.
+    Associates a course with a blueprint"""
+
+    def __init__(self, id=None, template_id=None, blueprint_course=None):
+        """Init method for Blueprintsubscription class."""
+        self._id = id
+        self._template_id = template_id
+        self._blueprint_course = blueprint_course
+
+        self.logger = logging.getLogger('py3canvas.Blueprintsubscription')
+
+    @property
+    def id(self):
+        """The ID of the blueprint course subscription."""
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        """Setter for id property."""
+        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self._id = value
+
+    @property
+    def template_id(self):
+        """The ID of the blueprint template the associated course is subscribed to."""
+        return self._template_id
+
+    @template_id.setter
+    def template_id(self, value):
+        """Setter for template_id property."""
+        self.logger.warn("Setting values on template_id will NOT update the remote Canvas instance.")
+        self._template_id = value
+
+    @property
+    def blueprint_course(self):
+        """The blueprint course subscribed to."""
+        return self._blueprint_course
+
+    @blueprint_course.setter
+    def blueprint_course(self, value):
+        """Setter for blueprint_course property."""
+        self.logger.warn("Setting values on blueprint_course will NOT update the remote Canvas instance.")
+        self._blueprint_course = value
 

@@ -6,8 +6,8 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.content_migrations import ContentMigrationsAPI
-from py3canvas.apis.content_migrations import Contentmigration
 from py3canvas.apis.content_migrations import Migrationissue
+from py3canvas.apis.content_migrations import Contentmigration
 from py3canvas.apis.content_migrations import Migrator
 
 
@@ -29,21 +29,21 @@ class TestContentMigrationsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         content_migration_id = None  # Change me!!
 
-        r = self.client.list_migration_issues_courses(course_id, content_migration_id)
+        r = self.client.list_migration_issues_courses(content_migration_id, course_id)
 
     def test_list_migration_issues_groups(self):
         """Integration test for the ContentMigrationsAPI.list_migration_issues_groups method."""
         group_id = None  # Change me!!
         content_migration_id = None  # Change me!!
 
-        r = self.client.list_migration_issues_groups(group_id, content_migration_id)
+        r = self.client.list_migration_issues_groups(content_migration_id, group_id)
 
     def test_list_migration_issues_users(self):
         """Integration test for the ContentMigrationsAPI.list_migration_issues_users method."""
         user_id = None  # Change me!!
         content_migration_id = None  # Change me!!
 
-        r = self.client.list_migration_issues_users(user_id, content_migration_id)
+        r = self.client.list_migration_issues_users(content_migration_id, user_id)
 
     def test_get_migration_issue_accounts(self):
         """Integration test for the ContentMigrationsAPI.get_migration_issue_accounts method."""
@@ -51,7 +51,7 @@ class TestContentMigrationsAPI(unittest.TestCase):
         content_migration_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_migration_issue_accounts(id, account_id, content_migration_id)
+        r = self.client.get_migration_issue_accounts(account_id, content_migration_id, id)
 
     def test_get_migration_issue_courses(self):
         """Integration test for the ContentMigrationsAPI.get_migration_issue_courses method."""
@@ -59,7 +59,7 @@ class TestContentMigrationsAPI(unittest.TestCase):
         content_migration_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_migration_issue_courses(id, course_id, content_migration_id)
+        r = self.client.get_migration_issue_courses(content_migration_id, course_id, id)
 
     def test_get_migration_issue_groups(self):
         """Integration test for the ContentMigrationsAPI.get_migration_issue_groups method."""
@@ -67,7 +67,7 @@ class TestContentMigrationsAPI(unittest.TestCase):
         content_migration_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_migration_issue_groups(id, group_id, content_migration_id)
+        r = self.client.get_migration_issue_groups(content_migration_id, group_id, id)
 
     def test_get_migration_issue_users(self):
         """Integration test for the ContentMigrationsAPI.get_migration_issue_users method."""
@@ -75,7 +75,7 @@ class TestContentMigrationsAPI(unittest.TestCase):
         content_migration_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_migration_issue_users(id, user_id, content_migration_id)
+        r = self.client.get_migration_issue_users(content_migration_id, id, user_id)
 
     def test_update_migration_issue_accounts(self):
         """Integration test for the ContentMigrationsAPI.update_migration_issue_accounts method."""
@@ -126,21 +126,21 @@ class TestContentMigrationsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_content_migration_accounts(id, account_id)
+        r = self.client.get_content_migration_accounts(account_id, id)
 
     def test_get_content_migration_courses(self):
         """Integration test for the ContentMigrationsAPI.get_content_migration_courses method."""
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_content_migration_courses(id, course_id)
+        r = self.client.get_content_migration_courses(course_id, id)
 
     def test_get_content_migration_groups(self):
         """Integration test for the ContentMigrationsAPI.get_content_migration_groups method."""
         group_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_content_migration_groups(id, group_id)
+        r = self.client.get_content_migration_groups(group_id, id)
 
     def test_get_content_migration_users(self):
         """Integration test for the ContentMigrationsAPI.get_content_migration_users method."""
@@ -212,4 +212,32 @@ class TestContentMigrationsAPI(unittest.TestCase):
         user_id = None  # Change me!!
 
         r = self.client.list_migration_systems_users(user_id)
+
+    def test_list_items_for_selective_import_accounts(self):
+        """Integration test for the ContentMigrationsAPI.list_items_for_selective_import_accounts method."""
+        account_id = None  # Change me!!
+        id = None  # Change me!!
+
+        r = self.client.list_items_for_selective_import_accounts(account_id, id, type=None)
+
+    def test_list_items_for_selective_import_courses(self):
+        """Integration test for the ContentMigrationsAPI.list_items_for_selective_import_courses method."""
+        course_id = None  # Change me!!
+        id = None  # Change me!!
+
+        r = self.client.list_items_for_selective_import_courses(course_id, id, type=None)
+
+    def test_list_items_for_selective_import_groups(self):
+        """Integration test for the ContentMigrationsAPI.list_items_for_selective_import_groups method."""
+        group_id = None  # Change me!!
+        id = None  # Change me!!
+
+        r = self.client.list_items_for_selective_import_groups(group_id, id, type=None)
+
+    def test_list_items_for_selective_import_users(self):
+        """Integration test for the ContentMigrationsAPI.list_items_for_selective_import_users method."""
+        user_id = None  # Change me!!
+        id = None  # Change me!!
+
+        r = self.client.list_items_for_selective_import_users(id, user_id, type=None)
 

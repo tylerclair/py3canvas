@@ -6,9 +6,9 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.course_audit_log import CourseAuditLogAPI
-from py3canvas.apis.course_audit_log import Createdeventdata
-from py3canvas.apis.course_audit_log import Courseevent
 from py3canvas.apis.course_audit_log import Courseeventlink
+from py3canvas.apis.course_audit_log import Courseevent
+from py3canvas.apis.course_audit_log import Createdeventdata
 from py3canvas.apis.course_audit_log import Updatedeventdata
 
 
@@ -23,4 +23,10 @@ class TestCourseAuditLogAPI(unittest.TestCase):
         course_id = None  # Change me!!
 
         r = self.client.query_by_course(course_id, end_time=None, start_time=None)
+
+    def test_query_by_account(self):
+        """Integration test for the CourseAuditLogAPI.query_by_account method."""
+        account_id = None  # Change me!!
+
+        r = self.client.query_by_account(account_id, end_time=None, start_time=None)
 

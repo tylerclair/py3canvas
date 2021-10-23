@@ -16,7 +16,7 @@ class AdminsAPI(BaseCanvasAPI):
         super(AdminsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.AdminsAPI")
 
-    def make_account_admin(self, user_id, account_id, role=None, role_id=None, send_confirmation=None):
+    def make_account_admin(self, account_id, user_id, role=None, role_id=None, send_confirmation=None):
         """
         Make an account admin.
 
@@ -27,36 +27,50 @@ class AdminsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # REQUIRED - user_id
-        """The id of the user to promote."""
+        """
+            The id of the user to promote.
+        """
         data["user_id"] = user_id
 
+
         # OPTIONAL - role
-        """(deprecated)
-        The user's admin relationship with the account will be created with the
-        given role. Defaults to 'AccountAdmin'."""
+        """
+            [DEPRECATED] The user's admin relationship with the account will be
+        created with the given role. Defaults to 'AccountAdmin'.
+        """
         if role is not None:
             data["role"] = role
 
+
         # OPTIONAL - role_id
-        """The user's admin relationship with the account will be created with the
-        given role. Defaults to the built-in role for 'AccountAdmin'."""
+        """
+            The user's admin relationship with the account will be created with the
+        given role. Defaults to the built-in role for 'AccountAdmin'.
+        """
         if role_id is not None:
             data["role_id"] = role_id
 
+
         # OPTIONAL - send_confirmation
-        """Send a notification email to
-        the new admin if true. Default is true."""
+        """
+            Send a notification email to
+        the new admin if true. Default is true.
+        """
         if send_confirmation is not None:
             data["send_confirmation"] = send_confirmation
+
 
         self.logger.debug("POST /api/v1/accounts/{account_id}/admins with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/accounts/{account_id}/admins".format(**path), data=data, params=params, single_item=True)
 
-    def remove_account_admin(self, user_id, account_id, role=None, role_id=None):
+    def remove_account_admin(self, account_id, user_id, role=None, role_id=None):
         """
         Remove account admin.
 
@@ -67,25 +81,36 @@ class AdminsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # REQUIRED - PATH - user_id
-        """ID"""
+        """
+            ID
+        """
         path["user_id"] = user_id
 
+
         # OPTIONAL - role
-        """(Deprecated)
-        Account role to remove from the user. Defaults to 'AccountAdmin'. Any
-        other account role must be specified explicitly."""
+        """
+            [DEPRECATED] Account role to remove from the user. Defaults to
+        'AccountAdmin'. Any other account role must be specified explicitly.
+        """
         if role is not None:
             params["role"] = role
 
+
         # OPTIONAL - role_id
-        """The user's admin relationship with the account will be created with the
-        given role. Defaults to the built-in role for 'AccountAdmin'."""
+        """
+            The user's admin relationship with the account will be created with the
+        given role. Defaults to the built-in role for 'AccountAdmin'.
+        """
         if role_id is not None:
             params["role_id"] = role_id
+
 
         self.logger.debug("DELETE /api/v1/accounts/{account_id}/admins/{user_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/admins/{user_id}".format(**path), data=data, params=params, single_item=True)
@@ -94,20 +119,26 @@ class AdminsAPI(BaseCanvasAPI):
         """
         List account admins.
 
-        List the admins in the account
+        A paginated list of the admins in the account
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - account_id
-        """ID"""
+        """
+            ID
+        """
         path["account_id"] = account_id
 
+
         # OPTIONAL - user_id
-        """Scope the results to those with user IDs equal to any of the IDs specified here."""
+        """
+            Scope the results to those with user IDs equal to any of the IDs specified here.
+        """
         if user_id is not None:
             params["user_id"] = user_id
+
 
         self.logger.debug("GET /api/v1/accounts/{account_id}/admins with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/accounts/{account_id}/admins".format(**path), data=data, params=params, all_pages=True)
@@ -116,36 +147,14 @@ class AdminsAPI(BaseCanvasAPI):
 class Admin(BaseModel):
     """Admin Model."""
 
-    def __init__(self, id, workflow_state=None, role=None, user=None):
+    def __init__(self, id, role=None, user=None, workflow_state=None):
         """Init method for Admin class."""
-        self._workflow_state = workflow_state
-        self._role = role
         self._id = id
+        self._role = role
         self._user = user
+        self._workflow_state = workflow_state
 
         self.logger = logging.getLogger('py3canvas.Admin')
-
-    @property
-    def workflow_state(self):
-        """The status of the account role/user assignment."""
-        return self._workflow_state
-
-    @workflow_state.setter
-    def workflow_state(self, value):
-        """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
-        self._workflow_state = value
-
-    @property
-    def role(self):
-        """The account role assigned. This can be 'AccountAdmin' or a user-defined role created by the Roles API."""
-        return self._role
-
-    @role.setter
-    def role(self, value):
-        """Setter for role property."""
-        self.logger.warn("Setting values on role will NOT update the remote Canvas instance.")
-        self._role = value
 
     @property
     def id(self):
@@ -159,6 +168,17 @@ class Admin(BaseModel):
         self._id = value
 
     @property
+    def role(self):
+        """The account role assigned. This can be 'AccountAdmin' or a user-defined role created by the Roles API."""
+        return self._role
+
+    @role.setter
+    def role(self, value):
+        """Setter for role property."""
+        self.logger.warn("Setting values on role will NOT update the remote Canvas instance.")
+        self._role = value
+
+    @property
     def user(self):
         """The user the role is assigned to. See the Users API for details."""
         return self._user
@@ -168,4 +188,15 @@ class Admin(BaseModel):
         """Setter for user property."""
         self.logger.warn("Setting values on user will NOT update the remote Canvas instance.")
         self._user = value
+
+    @property
+    def workflow_state(self):
+        """The status of the account role/user assignment."""
+        return self._workflow_state
+
+    @workflow_state.setter
+    def workflow_state(self, value):
+        """Setter for workflow_state property."""
+        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self._workflow_state = value
 

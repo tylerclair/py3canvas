@@ -26,6 +26,14 @@ class TestQuizSubmissionQuestionsAPI(unittest.TestCase):
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
 
+    def test_get_formatted_student_numerical_answer(self):
+        """Integration test for the QuizSubmissionQuestionsAPI.get_formatted_student_numerical_answer method."""
+        quiz_submission_id = None  # Change me!!
+        id = None  # Change me!!
+        answer = None  # Change me!!
+
+        r = self.client.get_formatted_student_numerical_answer(answer, id, quiz_submission_id)
+
     def test_flagging_question(self):
         """Integration test for the QuizSubmissionQuestionsAPI.flagging_question method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.

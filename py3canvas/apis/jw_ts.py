@@ -16,7 +16,7 @@ class JwTsAPI(BaseCanvasAPI):
         super(JwTsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.JwTsAPI")
 
-    def create_jwt(self):
+    def create_jwt(self, workflows=None):
         """
         Create JWT.
 
@@ -28,6 +28,14 @@ class JwTsAPI(BaseCanvasAPI):
         path = {}
         data = {}
         params = {}
+
+        # OPTIONAL - workflows
+        """
+            Adds additional data to the JWT to be used by the consuming service workflow
+        """
+        if workflows is not None:
+            data["workflows"] = workflows
+
 
         self.logger.debug("POST /api/v1/jwts with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/jwts".format(**path), data=data, params=params, single_item=True)
@@ -46,9 +54,12 @@ class JwTsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - jwt
-        """An existing JWT token to be refreshed. The new token will have
-        the same context and workflows as the existing token."""
+        """
+            An existing JWT token to be refreshed. The new token will have
+        the same context and workflows as the existing token.
+        """
         data["jwt"] = jwt
+
 
         self.logger.debug("POST /api/v1/jwts/refresh with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/jwts/refresh".format(**path), data=data, params=params, single_item=True)

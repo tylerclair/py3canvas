@@ -19,13 +19,13 @@ class TestCalendarEventsAPI(unittest.TestCase):
     def test_list_calendar_events(self):
         """Integration test for the CalendarEventsAPI.list_calendar_events method."""
 
-        r = self.client.list_calendar_events(all_events=None, context_codes=None, end_date=None, excludes=None, start_date=None, type=None, undated=None)
+        r = self.client.list_calendar_events(all_events=None, context_codes=None, end_date=None, excludes=None, important_dates=None, start_date=None, type=None, undated=None)
 
     def test_list_calendar_events_for_user(self):
         """Integration test for the CalendarEventsAPI.list_calendar_events_for_user method."""
         user_id = None  # Change me!!
 
-        r = self.client.list_calendar_events_for_user(user_id, all_events=None, context_codes=None, end_date=None, excludes=None, start_date=None, type=None, undated=None)
+        r = self.client.list_calendar_events_for_user(user_id, all_events=None, context_codes=None, end_date=None, exclude_submission_types=None, excludes=None, important_dates=None, start_date=None, submission_types=None, type=None, undated=None)
 
     def test_create_calendar_event(self):
         """Integration test for the CalendarEventsAPI.create_calendar_event method."""

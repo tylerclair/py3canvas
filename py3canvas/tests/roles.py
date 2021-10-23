@@ -28,7 +28,7 @@ class TestRolesAPI(unittest.TestCase):
         account_id = None  # Change me!!
         role_id = None  # Change me!!
 
-        r = self.client.get_single_role(id, role_id, account_id, role=None)
+        r = self.client.get_single_role(account_id, id, role_id, role=None)
 
     def test_create_new_role(self):
         """Integration test for the RolesAPI.create_new_role method."""
@@ -41,7 +41,7 @@ class TestRolesAPI(unittest.TestCase):
         id = None  # Change me!!
         role_id = None  # Change me!!
 
-        r = self.client.deactivate_role(id, role_id, account_id, role=None)
+        r = self.client.deactivate_role(account_id, id, role_id, role=None)
 
     def test_activate_role(self):
         """Integration test for the RolesAPI.activate_role method."""

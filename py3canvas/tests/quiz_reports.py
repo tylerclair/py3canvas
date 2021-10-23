@@ -20,7 +20,7 @@ class TestQuizReportsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         quiz_id = None  # Change me!!
 
-        r = self.client.retrieve_all_quiz_reports(quiz_id, course_id, includes_all_versions=None)
+        r = self.client.retrieve_all_quiz_reports(course_id, quiz_id, includes_all_versions=None)
 
     def test_create_quiz_report(self):
         """Integration test for the QuizReportsAPI.create_quiz_report method."""
@@ -33,7 +33,7 @@ class TestQuizReportsAPI(unittest.TestCase):
         quiz_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_quiz_report(id, quiz_id, course_id, include=None)
+        r = self.client.get_quiz_report(course_id, id, quiz_id, include=None)
 
     def test_abort_generation_of_report_or_remove_previously_generated_one(self):
         """Integration test for the QuizReportsAPI.abort_generation_of_report_or_remove_previously_generated_one method."""
@@ -41,5 +41,5 @@ class TestQuizReportsAPI(unittest.TestCase):
         quiz_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.abort_generation_of_report_or_remove_previously_generated_one(id, quiz_id, course_id)
+        r = self.client.abort_generation_of_report_or_remove_previously_generated_one(course_id, id, quiz_id)
 

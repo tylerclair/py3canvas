@@ -6,13 +6,14 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.users import UsersAPI
+from py3canvas.apis.users import Userdisplay
+from py3canvas.apis.users import Anonymoususerdisplay
+from py3canvas.apis.users import User
 from py3canvas.apis.users import Profile
-from py3canvas.apis.users import Coursenickname
+from py3canvas.apis.users import Avatar
 from py3canvas.apis.users import Pageview
 from py3canvas.apis.users import Pageviewlinks
-from py3canvas.apis.users import User
-from py3canvas.apis.users import Userdisplay
-from py3canvas.apis.users import Avatar
+from py3canvas.apis.users import Coursenickname
 
 
 class TestUsersAPI(unittest.TestCase):
@@ -25,17 +26,17 @@ class TestUsersAPI(unittest.TestCase):
         """Integration test for the UsersAPI.list_users_in_account method."""
         account_id = None  # Change me!!
 
-        r = self.client.list_users_in_account(account_id, search_term=None)
+        r = self.client.list_users_in_account(account_id, enrollment_type=None, order=None, search_term=None, sort=None)
 
     def test_list_activity_stream_self(self):
         """Integration test for the UsersAPI.list_activity_stream_self method."""
 
-        r = self.client.list_activity_stream_self()
+        r = self.client.list_activity_stream_self(only_active_courses=None)
 
     def test_list_activity_stream_activity_stream(self):
         """Integration test for the UsersAPI.list_activity_stream_activity_stream method."""
 
-        r = self.client.list_activity_stream_activity_stream()
+        r = self.client.list_activity_stream_activity_stream(only_active_courses=None)
 
     def test_activity_stream_summary(self):
         """Integration test for the UsersAPI.activity_stream_summary method."""
@@ -47,6 +48,11 @@ class TestUsersAPI(unittest.TestCase):
 
         r = self.client.list_todo_items(include=None)
 
+    def test_list_counts_for_todo_items(self):
+        """Integration test for the UsersAPI.list_counts_for_todo_items method."""
+
+        r = self.client.list_counts_for_todo_items(include=None)
+
     def test_list_upcoming_assignments_calendar_events(self):
         """Integration test for the UsersAPI.list_upcoming_assignments_calendar_events method."""
 
@@ -56,7 +62,7 @@ class TestUsersAPI(unittest.TestCase):
         """Integration test for the UsersAPI.list_missing_submissions method."""
         user_id = None  # Change me!!
 
-        r = self.client.list_missing_submissions(user_id)
+        r = self.client.list_missing_submissions(user_id, course_ids=None, filter=None, include=None)
 
     def test_hide_stream_item(self):
         """Integration test for the UsersAPI.hide_stream_item method."""
@@ -78,15 +84,15 @@ class TestUsersAPI(unittest.TestCase):
         """Integration test for the UsersAPI.show_user_details method."""
         id = None  # Change me!!
 
-        r = self.client.show_user_details(id)
+        r = self.client.show_user_details(id, include=None)
 
     def test_create_user(self):
         """Integration test for the UsersAPI.create_user method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
 
-    def test_self_register_user(self):
-        """Integration test for the UsersAPI.self_register_user method."""
+    def test_deprecated_self_register_user(self):
+        """Integration test for the UsersAPI.deprecated_self_register_user method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
 
@@ -94,7 +100,7 @@ class TestUsersAPI(unittest.TestCase):
         """Integration test for the UsersAPI.update_user_settings method."""
         id = None  # Change me!!
 
-        r = self.client.update_user_settings(id, collapse_global_nav=None, manual_mark_as_read=None)
+        r = self.client.update_user_settings(id, collapse_global_nav=None, comment_library_suggestions_enabled=None, elementary_dashboard_disabled=None, hide_dashcard_color_overlays=None, manual_mark_as_read=None, release_notes_badge_disabled=None)
 
     def test_get_custom_colors(self):
         """Integration test for the UsersAPI.get_custom_colors method."""
@@ -107,18 +113,18 @@ class TestUsersAPI(unittest.TestCase):
         id = None  # Change me!!
         asset_string = None  # Change me!!
 
-        r = self.client.get_custom_color(id, asset_string)
+        r = self.client.get_custom_color(asset_string, id)
 
     def test_update_custom_color(self):
         """Integration test for the UsersAPI.update_custom_color method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
 
-    def test_get_dashboard_postions(self):
-        """Integration test for the UsersAPI.get_dashboard_postions method."""
+    def test_get_dashboard_positions(self):
+        """Integration test for the UsersAPI.get_dashboard_positions method."""
         id = None  # Change me!!
 
-        r = self.client.get_dashboard_postions(id)
+        r = self.client.get_dashboard_positions(id)
 
     def test_update_dashboard_positions(self):
         """Integration test for the UsersAPI.update_dashboard_positions method."""
@@ -144,6 +150,17 @@ class TestUsersAPI(unittest.TestCase):
         """Integration test for the UsersAPI.split_merged_users_into_separate_users method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
+
+    def test_get_pandata_events_jwt_token_and_its_expiration_date(self):
+        """Integration test for the UsersAPI.get_pandata_events_jwt_token_and_its_expiration_date method."""
+        # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
+        pass
+
+    def test_get_users_most_recently_graded_submissions(self):
+        """Integration test for the UsersAPI.get_users_most_recently_graded_submissions method."""
+        id = None  # Change me!!
+
+        r = self.client.get_users_most_recently_graded_submissions(id, include=None, only_current_enrollments=None, only_published_assignments=None)
 
     def test_get_user_profile(self):
         """Integration test for the UsersAPI.get_user_profile method."""

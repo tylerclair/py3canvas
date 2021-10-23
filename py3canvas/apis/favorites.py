@@ -20,7 +20,7 @@ class FavoritesAPI(BaseCanvasAPI):
         """
         List favorite courses.
 
-        Retrieve the list of favorite courses for the current user. If the user has not chosen
+        Retrieve the paginated list of favorite courses for the current user. If the user has not chosen
         any favorites, then a selection of currently enrolled courses will be returned.
         
         See the {api:CoursesController#index List courses API} for details on accepted include[] parameters.
@@ -30,9 +30,12 @@ class FavoritesAPI(BaseCanvasAPI):
         params = {}
 
         # OPTIONAL - exclude_blueprint_courses
-        """When set, only return courses that are not configured as blueprint courses."""
+        """
+            When set, only return courses that are not configured as blueprint courses.
+        """
         if exclude_blueprint_courses is not None:
             params["exclude_blueprint_courses"] = exclude_blueprint_courses
+
 
         self.logger.debug("GET /api/v1/users/self/favorites/courses with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/users/self/favorites/courses".format(**path), data=data, params=params, all_pages=True)
@@ -41,7 +44,7 @@ class FavoritesAPI(BaseCanvasAPI):
         """
         List favorite groups.
 
-        Retrieve the list of favorite groups for the current user. If the user has not chosen
+        Retrieve the paginated list of favorite groups for the current user. If the user has not chosen
         any favorites, then a selection of groups that the user is a member of will be returned.
         """
         path = {}
@@ -56,16 +59,21 @@ class FavoritesAPI(BaseCanvasAPI):
         Add course to favorites.
 
         Add a course to the current user's favorites.  If the course is already
-        in the user's favorites, nothing happens.
+        in the user's favorites, nothing happens. Canvas for Elementary subject
+        and homeroom courses can be added to favorites, but this has no effect in
+        the UI.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - id
-        """The ID or SIS ID of the course to add.  The current user must be
-        registered in the course."""
+        """
+            The ID or SIS ID of the course to add.  The current user must be
+        registered in the course.
+        """
         path["id"] = id
+
 
         self.logger.debug("POST /api/v1/users/self/favorites/courses/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/users/self/favorites/courses/{id}".format(**path), data=data, params=params, single_item=True)
@@ -82,9 +90,12 @@ class FavoritesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """The ID or SIS ID of the group to add.  The current user must be
-        a member of the group."""
+        """
+            The ID or SIS ID of the group to add.  The current user must be
+        a member of the group.
+        """
         path["id"] = id
+
 
         self.logger.debug("POST /api/v1/users/self/favorites/groups/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/users/self/favorites/groups/{id}".format(**path), data=data, params=params, single_item=True)
@@ -100,8 +111,11 @@ class FavoritesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """the ID or SIS ID of the course to remove"""
+        """
+            the ID or SIS ID of the course to remove
+        """
         path["id"] = id
+
 
         self.logger.debug("DELETE /api/v1/users/self/favorites/courses/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/users/self/favorites/courses/{id}".format(**path), data=data, params=params, single_item=True)
@@ -117,8 +131,11 @@ class FavoritesAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - id
-        """the ID or SIS ID of the group to remove"""
+        """
+            the ID or SIS ID of the group to remove
+        """
         path["id"] = id
+
 
         self.logger.debug("DELETE /api/v1/users/self/favorites/groups/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/users/self/favorites/groups/{id}".format(**path), data=data, params=params, single_item=True)
@@ -155,23 +172,12 @@ class FavoritesAPI(BaseCanvasAPI):
 class Favorite(BaseModel):
     """Favorite Model."""
 
-    def __init__(self, , context_type=None, context_id=None):
+    def __init__(self, , context_id=None, context_type=None):
         """Init method for Favorite class."""
-        self._context_type = context_type
         self._context_id = context_id
+        self._context_type = context_type
 
         self.logger = logging.getLogger('py3canvas.Favorite')
-
-    @property
-    def context_type(self):
-        """The type of the object the Favorite refers to (currently, only 'Course' is supported)."""
-        return self._context_type
-
-    @context_type.setter
-    def context_type(self, value):
-        """Setter for context_type property."""
-        self.logger.warn("Setting values on context_type will NOT update the remote Canvas instance.")
-        self._context_type = value
 
     @property
     def context_id(self):
@@ -183,4 +189,15 @@ class Favorite(BaseModel):
         """Setter for context_id property."""
         self.logger.warn("Setting values on context_id will NOT update the remote Canvas instance.")
         self._context_id = value
+
+    @property
+    def context_type(self):
+        """The type of the object the Favorite refers to (currently, only 'Course' is supported)."""
+        return self._context_type
+
+    @context_type.setter
+    def context_type(self, value):
+        """Setter for context_type property."""
+        self.logger.warn("Setting values on context_type will NOT update the remote Canvas instance.")
+        self._context_type = value
 

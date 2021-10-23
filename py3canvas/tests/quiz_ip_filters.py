@@ -20,5 +20,5 @@ class TestQuizIpFiltersAPI(unittest.TestCase):
         course_id = None  # Change me!!
         quiz_id = None  # Change me!!
 
-        r = self.client.get_available_quiz_ip_filters(quiz_id, course_id)
+        r = self.client.get_available_quiz_ip_filters(course_id, quiz_id)
 

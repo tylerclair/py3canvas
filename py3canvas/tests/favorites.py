@@ -18,7 +18,7 @@ class TestFavoritesAPI(unittest.TestCase):
     def test_list_favorite_courses(self):
         """Integration test for the FavoritesAPI.list_favorite_courses method."""
 
-        r = self.client.list_favorite_courses()
+        r = self.client.list_favorite_courses(exclude_blueprint_courses=None)
 
     def test_list_favorite_groups(self):
         """Integration test for the FavoritesAPI.list_favorite_groups method."""

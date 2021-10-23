@@ -20,7 +20,7 @@ class TestNotificationPreferencesAPI(unittest.TestCase):
         user_id = None  # Change me!!
         communication_channel_id = None  # Change me!!
 
-        r = self.client.list_preferences_communication_channel_id(user_id, communication_channel_id)
+        r = self.client.list_preferences_communication_channel_id(communication_channel_id, user_id)
 
     def test_list_preferences_type(self):
         """Integration test for the NotificationPreferencesAPI.list_preferences_type method."""
@@ -28,14 +28,14 @@ class TestNotificationPreferencesAPI(unittest.TestCase):
         type = None  # Change me!!
         address = None  # Change me!!
 
-        r = self.client.list_preferences_type(type, user_id, address)
+        r = self.client.list_preferences_type(address, type, user_id)
 
     def test_list_of_preference_categories(self):
         """Integration test for the NotificationPreferencesAPI.list_of_preference_categories method."""
         user_id = None  # Change me!!
         communication_channel_id = None  # Change me!!
 
-        r = self.client.list_of_preference_categories(user_id, communication_channel_id)
+        r = self.client.list_of_preference_categories(communication_channel_id, user_id)
 
     def test_get_preference_communication_channel_id(self):
         """Integration test for the NotificationPreferencesAPI.get_preference_communication_channel_id method."""
@@ -43,7 +43,7 @@ class TestNotificationPreferencesAPI(unittest.TestCase):
         communication_channel_id = None  # Change me!!
         notification = None  # Change me!!
 
-        r = self.client.get_preference_communication_channel_id(user_id, notification, communication_channel_id)
+        r = self.client.get_preference_communication_channel_id(communication_channel_id, notification, user_id)
 
     def test_get_preference_type(self):
         """Integration test for the NotificationPreferencesAPI.get_preference_type method."""
@@ -52,7 +52,7 @@ class TestNotificationPreferencesAPI(unittest.TestCase):
         address = None  # Change me!!
         notification = None  # Change me!!
 
-        r = self.client.get_preference_type(type, user_id, address, notification)
+        r = self.client.get_preference_type(address, notification, type, user_id)
 
     def test_update_preference_communication_channel_id(self):
         """Integration test for the NotificationPreferencesAPI.update_preference_communication_channel_id method."""

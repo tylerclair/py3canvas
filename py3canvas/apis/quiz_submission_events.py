@@ -16,7 +16,7 @@ class QuizSubmissionEventsAPI(BaseCanvasAPI):
         super(QuizSubmissionEventsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.QuizSubmissionEventsAPI")
 
-    def submit_captured_events(self, id, quiz_id, course_id, quiz_submission_events):
+    def submit_captured_events(self, course_id, id, quiz_id, quiz_submission_events):
         """
         Submit captured events.
 
@@ -29,25 +29,37 @@ class QuizSubmissionEventsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - quiz_id
-        """ID"""
+        """
+            ID
+        """
         path["quiz_id"] = quiz_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # REQUIRED - quiz_submission_events
-        """The submission events to be recorded"""
+        """
+            The submission events to be recorded
+        """
         data["quiz_submission_events"] = quiz_submission_events
+
 
         self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events".format(**path), data=data, params=params, no_data=True)
 
-    def retrieve_captured_events(self, id, quiz_id, course_id, attempt=None):
+    def retrieve_captured_events(self, course_id, id, quiz_id, attempt=None):
         """
         Retrieve captured events.
 
@@ -58,22 +70,34 @@ class QuizSubmissionEventsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - quiz_id
-        """ID"""
+        """
+            ID
+        """
         path["quiz_id"] = quiz_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # OPTIONAL - attempt
-        """The specific submission attempt to look up the events for. If unspecified,
-        the latest attempt will be used."""
+        """
+            The specific submission attempt to look up the events for. If unspecified,
+        the latest attempt will be used.
+        """
         if attempt is not None:
             params["attempt"] = attempt
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events".format(**path), data=data, params=params, no_data=True)

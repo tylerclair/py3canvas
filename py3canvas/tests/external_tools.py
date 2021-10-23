@@ -92,3 +92,27 @@ class TestExternalToolsAPI(unittest.TestCase):
 
         r = self.client.delete_external_tool_accounts(account_id, external_tool_id)
 
+    def test_add_tool_to_rce_favorites(self):
+        """Integration test for the ExternalToolsAPI.add_tool_to_rce_favorites method."""
+        # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
+        pass
+
+    def test_remove_tool_from_rce_favorites(self):
+        """Integration test for the ExternalToolsAPI.remove_tool_from_rce_favorites method."""
+        account_id = None  # Change me!!
+        id = None  # Change me!!
+
+        r = self.client.remove_tool_from_rce_favorites(account_id, id)
+
+    def test_get_visible_course_navigation_tools(self):
+        """Integration test for the ExternalToolsAPI.get_visible_course_navigation_tools method."""
+        context_codes = None  # Change me!!
+
+        r = self.client.get_visible_course_navigation_tools(context_codes)
+
+    def test_get_visible_course_navigation_tools_for_single_course(self):
+        """Integration test for the ExternalToolsAPI.get_visible_course_navigation_tools_for_single_course method."""
+        course_id = None  # Change me!!
+
+        r = self.client.get_visible_course_navigation_tools_for_single_course(course_id)
+

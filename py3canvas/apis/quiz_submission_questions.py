@@ -29,19 +29,25 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - quiz_submission_id
-        """ID"""
+        """
+            ID
+        """
         path["quiz_submission_id"] = quiz_submission_id
 
+
         # OPTIONAL - include
-        """Associations to include with the quiz submission question."""
+        """
+            Associations to include with the quiz submission question.
+        """
         if include is not None:
             self._validate_enum(include, ["quiz_question"])
             params["include"] = include
 
+
         self.logger.debug("GET /api/v1/quiz_submissions/{quiz_submission_id}/questions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/quiz_submissions/{quiz_submission_id}/questions".format(**path), data=data, params=params, no_data=True)
 
-    def answering_questions(self, attempt, validation_token, quiz_submission_id, access_code=None, quiz_questions=None):
+    def answering_questions(self, attempt, quiz_submission_id, validation_token, access_code=None, quiz_questions=None):
         """
         Answering questions.
 
@@ -52,37 +58,87 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - quiz_submission_id
-        """ID"""
+        """
+            ID
+        """
         path["quiz_submission_id"] = quiz_submission_id
 
+
         # REQUIRED - attempt
-        """The attempt number of the quiz submission being taken. Note that this
+        """
+            The attempt number of the quiz submission being taken. Note that this
         must be the latest attempt index, as questions for earlier attempts can
-        not be modified."""
+        not be modified.
+        """
         data["attempt"] = attempt
 
+
         # REQUIRED - validation_token
-        """The unique validation token you received when the Quiz Submission was
-        created."""
+        """
+            The unique validation token you received when the Quiz Submission was
+        created.
+        """
         data["validation_token"] = validation_token
 
+
         # OPTIONAL - access_code
-        """Access code for the Quiz, if any."""
+        """
+            Access code for the Quiz, if any.
+        """
         if access_code is not None:
             data["access_code"] = access_code
 
+
         # OPTIONAL - quiz_questions
-        """Set of question IDs and the answer value.
-        
+        """
+            Set of question IDs and the answer value.
+
         See {Appendix: Question Answer Formats} for the accepted answer formats
-        for each question type."""
+        for each question type.
+        """
         if quiz_questions is not None:
             data["quiz_questions"] = quiz_questions
+
 
         self.logger.debug("POST /api/v1/quiz_submissions/{quiz_submission_id}/questions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/quiz_submissions/{quiz_submission_id}/questions".format(**path), data=data, params=params, all_pages=True)
 
-    def flagging_question(self, id, attempt, validation_token, quiz_submission_id, access_code=None):
+    def get_formatted_student_numerical_answer(self, answer, id, quiz_submission_id):
+        """
+        Get a formatted student numerical answer.
+
+        Matches the intended behavior of the UI when a numerical answer is entered
+        and returns the resulting formatted number
+        """
+        path = {}
+        data = {}
+        params = {}
+
+        # REQUIRED - PATH - quiz_submission_id
+        """
+            ID
+        """
+        path["quiz_submission_id"] = quiz_submission_id
+
+
+        # REQUIRED - PATH - id
+        """
+            ID
+        """
+        path["id"] = id
+
+
+        # REQUIRED - answer
+        """
+            no description
+        """
+        params["answer"] = answer
+
+
+        self.logger.debug("GET /api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/formatted_answer with query params: {params} and form data: {data}".format(params=params, data=data, **path))
+        return self.generic_request("GET", "/api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/formatted_answer".format(**path), data=data, params=params, no_data=True)
+
+    def flagging_question(self, attempt, id, quiz_submission_id, validation_token, access_code=None):
         """
         Flagging a question.
 
@@ -94,33 +150,48 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - quiz_submission_id
-        """ID"""
+        """
+            ID
+        """
         path["quiz_submission_id"] = quiz_submission_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # REQUIRED - attempt
-        """The attempt number of the quiz submission being taken. Note that this
+        """
+            The attempt number of the quiz submission being taken. Note that this
         must be the latest attempt index, as questions for earlier attempts can
-        not be modified."""
+        not be modified.
+        """
         data["attempt"] = attempt
 
+
         # REQUIRED - validation_token
-        """The unique validation token you received when the Quiz Submission was
-        created."""
+        """
+            The unique validation token you received when the Quiz Submission was
+        created.
+        """
         data["validation_token"] = validation_token
 
+
         # OPTIONAL - access_code
-        """Access code for the Quiz, if any."""
+        """
+            Access code for the Quiz, if any.
+        """
         if access_code is not None:
             data["access_code"] = access_code
+
 
         self.logger.debug("PUT /api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/flag with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/flag".format(**path), data=data, params=params, no_data=True)
 
-    def unflagging_question(self, id, attempt, validation_token, quiz_submission_id, access_code=None):
+    def unflagging_question(self, attempt, id, quiz_submission_id, validation_token, access_code=None):
         """
         Unflagging a question.
 
@@ -132,28 +203,43 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - quiz_submission_id
-        """ID"""
+        """
+            ID
+        """
         path["quiz_submission_id"] = quiz_submission_id
 
+
         # REQUIRED - PATH - id
-        """ID"""
+        """
+            ID
+        """
         path["id"] = id
 
+
         # REQUIRED - attempt
-        """The attempt number of the quiz submission being taken. Note that this
+        """
+            The attempt number of the quiz submission being taken. Note that this
         must be the latest attempt index, as questions for earlier attempts can
-        not be modified."""
+        not be modified.
+        """
         data["attempt"] = attempt
 
+
         # REQUIRED - validation_token
-        """The unique validation token you received when the Quiz Submission was
-        created."""
+        """
+            The unique validation token you received when the Quiz Submission was
+        created.
+        """
         data["validation_token"] = validation_token
 
+
         # OPTIONAL - access_code
-        """Access code for the Quiz, if any."""
+        """
+            Access code for the Quiz, if any.
+        """
         if access_code is not None:
             data["access_code"] = access_code
+
 
         self.logger.debug("PUT /api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/unflag with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("PUT", "/api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/unflag".format(**path), data=data, params=params, no_data=True)
@@ -162,25 +248,14 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
 class Quizsubmissionquestion(BaseModel):
     """Quizsubmissionquestion Model."""
 
-    def __init__(self, id, answer=None, answers=None, flagged=None):
+    def __init__(self, id, flagged=None, answer=None, answers=None):
         """Init method for Quizsubmissionquestion class."""
-        self._answer = answer
         self._id = id
-        self._answers = answers
         self._flagged = flagged
+        self._answer = answer
+        self._answers = answers
 
         self.logger = logging.getLogger('py3canvas.Quizsubmissionquestion')
-
-    @property
-    def answer(self):
-        """The provided answer (if any) for this question. The format of this parameter depends on the type of the question, see the Appendix for more information."""
-        return self._answer
-
-    @answer.setter
-    def answer(self, value):
-        """Setter for answer property."""
-        self.logger.warn("Setting values on answer will NOT update the remote Canvas instance.")
-        self._answer = value
 
     @property
     def id(self):
@@ -194,17 +269,6 @@ class Quizsubmissionquestion(BaseModel):
         self._id = value
 
     @property
-    def answers(self):
-        """The possible answers for this question when those possible answers are necessary.  The presence of this parameter is dependent on permissions."""
-        return self._answers
-
-    @answers.setter
-    def answers(self, value):
-        """Setter for answers property."""
-        self.logger.warn("Setting values on answers will NOT update the remote Canvas instance.")
-        self._answers = value
-
-    @property
     def flagged(self):
         """Whether this question is flagged."""
         return self._flagged
@@ -214,4 +278,26 @@ class Quizsubmissionquestion(BaseModel):
         """Setter for flagged property."""
         self.logger.warn("Setting values on flagged will NOT update the remote Canvas instance.")
         self._flagged = value
+
+    @property
+    def answer(self):
+        """The provided answer (if any) for this question. The format of this parameter depends on the type of the question, see the Appendix for more information."""
+        return self._answer
+
+    @answer.setter
+    def answer(self, value):
+        """Setter for answer property."""
+        self.logger.warn("Setting values on answer will NOT update the remote Canvas instance.")
+        self._answer = value
+
+    @property
+    def answers(self):
+        """The possible answers for this question when those possible answers are necessary.  The presence of this parameter is dependent on permissions."""
+        return self._answers
+
+    @answers.setter
+    def answers(self, value):
+        """Setter for answers property."""
+        self.logger.warn("Setting values on answers will NOT update the remote Canvas instance.")
+        self._answers = value
 

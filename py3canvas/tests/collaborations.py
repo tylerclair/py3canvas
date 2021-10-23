@@ -6,8 +6,8 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.collaborations import CollaborationsAPI
-from py3canvas.apis.collaborations import Collaborator
 from py3canvas.apis.collaborations import Collaboration
+from py3canvas.apis.collaborations import Collaborator
 
 
 class TestCollaborationsAPI(unittest.TestCase):
@@ -33,4 +33,16 @@ class TestCollaborationsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.list_members_of_collaboration(id, include=None)
+
+    def test_list_potential_members_courses(self):
+        """Integration test for the CollaborationsAPI.list_potential_members_courses method."""
+        course_id = None  # Change me!!
+
+        r = self.client.list_potential_members_courses(course_id)
+
+    def test_list_potential_members_groups(self):
+        """Integration test for the CollaborationsAPI.list_potential_members_groups method."""
+        group_id = None  # Change me!!
+
+        r = self.client.list_potential_members_groups(group_id)
 

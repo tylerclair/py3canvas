@@ -6,8 +6,8 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.quizzes import QuizzesAPI
-from py3canvas.apis.quizzes import Quizpermissions
 from py3canvas.apis.quizzes import Quiz
+from py3canvas.apis.quizzes import Quizpermissions
 
 
 class TestQuizzesAPI(unittest.TestCase):
@@ -27,7 +27,7 @@ class TestQuizzesAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_quiz(id, course_id)
+        r = self.client.get_single_quiz(course_id, id)
 
     def test_create_quiz(self):
         """Integration test for the QuizzesAPI.create_quiz method."""
@@ -44,7 +44,7 @@ class TestQuizzesAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_quiz(id, course_id)
+        r = self.client.delete_quiz(course_id, id)
 
     def test_reorder_quiz_items(self):
         """Integration test for the QuizzesAPI.reorder_quiz_items method."""

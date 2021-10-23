@@ -6,10 +6,10 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.files import FilesAPI
+from py3canvas.apis.files import File
 from py3canvas.apis.files import Folder
 from py3canvas.apis.files import Usagerights
 from py3canvas.apis.files import License
-from py3canvas.apis.files import File
 
 
 class TestFilesAPI(unittest.TestCase):
@@ -40,25 +40,25 @@ class TestFilesAPI(unittest.TestCase):
         """Integration test for the FilesAPI.list_files_courses method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_files_courses(course_id, content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
+        r = self.client.list_files_courses(course_id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
 
     def test_list_files_users(self):
         """Integration test for the FilesAPI.list_files_users method."""
         user_id = None  # Change me!!
 
-        r = self.client.list_files_users(user_id, content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
+        r = self.client.list_files_users(user_id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
 
     def test_list_files_groups(self):
         """Integration test for the FilesAPI.list_files_groups method."""
         group_id = None  # Change me!!
 
-        r = self.client.list_files_groups(group_id, content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
+        r = self.client.list_files_groups(group_id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
 
     def test_list_files_folders(self):
         """Integration test for the FilesAPI.list_files_folders method."""
         id = None  # Change me!!
 
-        r = self.client.list_files_folders(id, content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
+        r = self.client.list_files_folders(id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
 
     def test_get_public_inline_preview_url(self):
         """Integration test for the FilesAPI.get_public_inline_preview_url method."""
@@ -77,14 +77,14 @@ class TestFilesAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_file_courses(id, course_id, include=None)
+        r = self.client.get_file_courses(course_id, id, include=None)
 
     def test_get_file_groups(self):
         """Integration test for the FilesAPI.get_file_groups method."""
         group_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_file_groups(id, group_id, include=None)
+        r = self.client.get_file_groups(group_id, id, include=None)
 
     def test_get_file_users(self):
         """Integration test for the FilesAPI.get_file_users method."""
@@ -102,7 +102,12 @@ class TestFilesAPI(unittest.TestCase):
         """Integration test for the FilesAPI.delete_file method."""
         id = None  # Change me!!
 
-        r = self.client.delete_file(id)
+        r = self.client.delete_file(id, replace=None)
+
+    def test_reset_link_verifier(self):
+        """Integration test for the FilesAPI.reset_link_verifier method."""
+        # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
+        pass
 
     def test_list_folders(self):
         """Integration test for the FilesAPI.list_folders method."""
@@ -169,7 +174,7 @@ class TestFilesAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_folder_courses(id, course_id)
+        r = self.client.get_folder_courses(course_id, id)
 
     def test_get_folder_users(self):
         """Integration test for the FilesAPI.get_folder_users method."""
@@ -183,7 +188,7 @@ class TestFilesAPI(unittest.TestCase):
         group_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_folder_groups(id, group_id)
+        r = self.client.get_folder_groups(group_id, id)
 
     def test_get_folder_folders(self):
         """Integration test for the FilesAPI.get_folder_folders method."""
@@ -237,6 +242,18 @@ class TestFilesAPI(unittest.TestCase):
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
 
+    def test_get_uploaded_media_folder_for_user_courses(self):
+        """Integration test for the FilesAPI.get_uploaded_media_folder_for_user_courses method."""
+        course_id = None  # Change me!!
+
+        r = self.client.get_uploaded_media_folder_for_user_courses(course_id)
+
+    def test_get_uploaded_media_folder_for_user_groups(self):
+        """Integration test for the FilesAPI.get_uploaded_media_folder_for_user_groups method."""
+        group_id = None  # Change me!!
+
+        r = self.client.get_uploaded_media_folder_for_user_groups(group_id)
+
     def test_set_usage_rights_courses(self):
         """Integration test for the FilesAPI.set_usage_rights_courses method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
@@ -257,21 +274,21 @@ class TestFilesAPI(unittest.TestCase):
         course_id = None  # Change me!!
         file_ids = None  # Change me!!
 
-        r = self.client.remove_usage_rights_courses(file_ids, course_id, folder_ids=None)
+        r = self.client.remove_usage_rights_courses(course_id, file_ids, folder_ids=None)
 
     def test_remove_usage_rights_groups(self):
         """Integration test for the FilesAPI.remove_usage_rights_groups method."""
         group_id = None  # Change me!!
         file_ids = None  # Change me!!
 
-        r = self.client.remove_usage_rights_groups(group_id, file_ids, folder_ids=None)
+        r = self.client.remove_usage_rights_groups(file_ids, group_id, folder_ids=None)
 
     def test_remove_usage_rights_users(self):
         """Integration test for the FilesAPI.remove_usage_rights_users method."""
         user_id = None  # Change me!!
         file_ids = None  # Change me!!
 
-        r = self.client.remove_usage_rights_users(user_id, file_ids, folder_ids=None)
+        r = self.client.remove_usage_rights_users(file_ids, user_id, folder_ids=None)
 
     def test_list_licenses_courses(self):
         """Integration test for the FilesAPI.list_licenses_courses method."""

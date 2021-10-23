@@ -20,14 +20,14 @@ class TestQuizSubmissionsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         quiz_id = None  # Change me!!
 
-        r = self.client.get_all_quiz_submissions(quiz_id, course_id, include=None)
+        r = self.client.get_all_quiz_submissions(course_id, quiz_id, include=None)
 
     def test_get_quiz_submission(self):
         """Integration test for the QuizSubmissionsAPI.get_quiz_submission method."""
         course_id = None  # Change me!!
         quiz_id = None  # Change me!!
 
-        r = self.client.get_quiz_submission(quiz_id, course_id, include=None)
+        r = self.client.get_quiz_submission(course_id, quiz_id, include=None)
 
     def test_get_single_quiz_submission(self):
         """Integration test for the QuizSubmissionsAPI.get_single_quiz_submission method."""
@@ -35,7 +35,7 @@ class TestQuizSubmissionsAPI(unittest.TestCase):
         quiz_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_quiz_submission(id, quiz_id, course_id, include=None)
+        r = self.client.get_single_quiz_submission(course_id, id, quiz_id, include=None)
 
     def test_create_quiz_submission_start_quiz_taking_session(self):
         """Integration test for the QuizSubmissionsAPI.create_quiz_submission_start_quiz_taking_session method."""
@@ -58,5 +58,5 @@ class TestQuizSubmissionsAPI(unittest.TestCase):
         quiz_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_current_quiz_submission_times(id, quiz_id, course_id)
+        r = self.client.get_current_quiz_submission_times(course_id, id, quiz_id)
 

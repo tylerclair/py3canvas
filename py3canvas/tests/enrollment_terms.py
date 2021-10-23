@@ -7,6 +7,7 @@ import requests
 import secrets
 from py3canvas.apis.enrollment_terms import EnrollmentTermsAPI
 from py3canvas.apis.enrollment_terms import Enrollmentterm
+from py3canvas.apis.enrollment_terms import Enrollmenttermslist
 
 
 class TestEnrollmentTermsAPI(unittest.TestCase):
@@ -30,11 +31,18 @@ class TestEnrollmentTermsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_enrollment_term(id, account_id)
+        r = self.client.delete_enrollment_term(account_id, id)
 
     def test_list_enrollment_terms(self):
         """Integration test for the EnrollmentTermsAPI.list_enrollment_terms method."""
         account_id = None  # Change me!!
 
-        r = self.client.list_enrollment_terms(account_id, workflow_state=None)
+        r = self.client.list_enrollment_terms(account_id, include=None, workflow_state=None)
+
+    def test_retrieve_enrollment_term(self):
+        """Integration test for the EnrollmentTermsAPI.retrieve_enrollment_term method."""
+        account_id = None  # Change me!!
+        id = None  # Change me!!
+
+        r = self.client.retrieve_enrollment_term(account_id, id)
 

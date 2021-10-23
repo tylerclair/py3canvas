@@ -43,6 +43,11 @@ class TestGroupCategoriesAPI(unittest.TestCase):
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
 
+    def test_import_category_groups(self):
+        """Integration test for the GroupCategoriesAPI.import_category_groups method."""
+        # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
+        pass
+
     def test_update_group_category(self):
         """Integration test for the GroupCategoriesAPI.update_group_category method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
@@ -59,6 +64,12 @@ class TestGroupCategoriesAPI(unittest.TestCase):
         group_category_id = None  # Change me!!
 
         r = self.client.list_groups_in_group_category(group_category_id)
+
+    def test_export_groups_in_and_users_in_category(self):
+        """Integration test for the GroupCategoriesAPI.export_groups_in_and_users_in_category method."""
+        group_category_id = None  # Change me!!
+
+        r = self.client.export_groups_in_and_users_in_category(group_category_id)
 
     def test_list_users_in_group_category(self):
         """Integration test for the GroupCategoriesAPI.list_users_in_group_category method."""

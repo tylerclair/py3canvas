@@ -49,5 +49,5 @@ class TestAnnouncementExternalFeedsAPI(unittest.TestCase):
         group_id = None  # Change me!!
         external_feed_id = None  # Change me!!
 
-        r = self.client.delete_external_feed_groups(group_id, external_feed_id)
+        r = self.client.delete_external_feed_groups(external_feed_id, group_id)
 

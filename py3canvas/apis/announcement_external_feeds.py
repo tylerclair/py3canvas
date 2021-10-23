@@ -20,15 +20,18 @@ class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
         """
         List external feeds.
 
-        Returns the list of External Feeds this course or group.
+        Returns the paginated list of External Feeds this course or group.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/external_feeds with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/external_feeds".format(**path), data=data, params=params, all_pages=True)
@@ -37,20 +40,23 @@ class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
         """
         List external feeds.
 
-        Returns the list of External Feeds this course or group.
+        Returns the paginated list of External Feeds this course or group.
         """
         path = {}
         data = {}
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
+
 
         self.logger.debug("GET /api/v1/groups/{group_id}/external_feeds with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/groups/{group_id}/external_feeds".format(**path), data=data, params=params, all_pages=True)
 
-    def create_external_feed_courses(self, url, course_id, header_match=None, verbosity=None):
+    def create_external_feed_courses(self, course_id, url, header_match=None, verbosity=None):
         """
         Create an external feed.
 
@@ -61,28 +67,40 @@ class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - url
-        """The url to the external rss or atom feed"""
+        """
+            The url to the external rss or atom feed
+        """
         data["url"] = url
 
+
         # OPTIONAL - header_match
-        """If given, only feed entries that contain this string in their title will be imported"""
+        """
+            If given, only feed entries that contain this string in their title will be imported
+        """
         if header_match is not None:
             data["header_match"] = header_match
 
+
         # OPTIONAL - verbosity
-        """Defaults to 'full'"""
+        """
+            Defaults to "full"
+        """
         if verbosity is not None:
             self._validate_enum(verbosity, ["full", "truncate", "link_only"])
             data["verbosity"] = verbosity
 
+
         self.logger.debug("POST /api/v1/courses/{course_id}/external_feeds with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/courses/{course_id}/external_feeds".format(**path), data=data, params=params, single_item=True)
 
-    def create_external_feed_groups(self, url, group_id, header_match=None, verbosity=None):
+    def create_external_feed_groups(self, group_id, url, header_match=None, verbosity=None):
         """
         Create an external feed.
 
@@ -93,23 +111,35 @@ class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - url
-        """The url to the external rss or atom feed"""
+        """
+            The url to the external rss or atom feed
+        """
         data["url"] = url
 
+
         # OPTIONAL - header_match
-        """If given, only feed entries that contain this string in their title will be imported"""
+        """
+            If given, only feed entries that contain this string in their title will be imported
+        """
         if header_match is not None:
             data["header_match"] = header_match
 
+
         # OPTIONAL - verbosity
-        """Defaults to 'full'"""
+        """
+            Defaults to "full"
+        """
         if verbosity is not None:
             self._validate_enum(verbosity, ["full", "truncate", "link_only"])
             data["verbosity"] = verbosity
+
 
         self.logger.debug("POST /api/v1/groups/{group_id}/external_feeds with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("POST", "/api/v1/groups/{group_id}/external_feeds".format(**path), data=data, params=params, single_item=True)
@@ -125,17 +155,23 @@ class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - external_feed_id
-        """ID"""
+        """
+            ID
+        """
         path["external_feed_id"] = external_feed_id
+
 
         self.logger.debug("DELETE /api/v1/courses/{course_id}/external_feeds/{external_feed_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/courses/{course_id}/external_feeds/{external_feed_id}".format(**path), data=data, params=params, single_item=True)
 
-    def delete_external_feed_groups(self, group_id, external_feed_id):
+    def delete_external_feed_groups(self, external_feed_id, group_id):
         """
         Delete an external feed.
 
@@ -146,12 +182,18 @@ class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - group_id
-        """ID"""
+        """
+            ID
+        """
         path["group_id"] = group_id
 
+
         # REQUIRED - PATH - external_feed_id
-        """ID"""
+        """
+            ID
+        """
         path["external_feed_id"] = external_feed_id
+
 
         self.logger.debug("DELETE /api/v1/groups/{group_id}/external_feeds/{external_feed_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("DELETE", "/api/v1/groups/{group_id}/external_feeds/{external_feed_id}".format(**path), data=data, params=params, single_item=True)
@@ -160,16 +202,27 @@ class AnnouncementExternalFeedsAPI(BaseCanvasAPI):
 class Externalfeed(BaseModel):
     """Externalfeed Model."""
 
-    def __init__(self, display_name=None, url=None, created_at=None, id=None, header_match=None, verbosity=None):
+    def __init__(self, id=None, display_name=None, url=None, header_match=None, created_at=None, verbosity=None):
         """Init method for Externalfeed class."""
+        self._id = id
         self._display_name = display_name
         self._url = url
-        self._created_at = created_at
-        self._id = id
         self._header_match = header_match
+        self._created_at = created_at
         self._verbosity = verbosity
 
         self.logger = logging.getLogger('py3canvas.Externalfeed')
+
+    @property
+    def id(self):
+        """The ID of the feed."""
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        """Setter for id property."""
+        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self._id = value
 
     @property
     def display_name(self):
@@ -194,28 +247,6 @@ class Externalfeed(BaseModel):
         self._url = value
 
     @property
-    def created_at(self):
-        """When this external feed was added to Canvas."""
-        return self._created_at
-
-    @created_at.setter
-    def created_at(self, value):
-        """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
-        self._created_at = value
-
-    @property
-    def id(self):
-        """The ID of the feed."""
-        return self._id
-
-    @id.setter
-    def id(self, value):
-        """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
-        self._id = value
-
-    @property
     def header_match(self):
         """If not null, only feed entries whose title contains this string will trigger new posts in Canvas."""
         return self._header_match
@@ -225,6 +256,17 @@ class Externalfeed(BaseModel):
         """Setter for header_match property."""
         self.logger.warn("Setting values on header_match will NOT update the remote Canvas instance.")
         self._header_match = value
+
+    @property
+    def created_at(self):
+        """When this external feed was added to Canvas."""
+        return self._created_at
+
+    @created_at.setter
+    def created_at(self, value):
+        """Setter for created_at property."""
+        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self._created_at = value
 
     @property
     def verbosity(self):

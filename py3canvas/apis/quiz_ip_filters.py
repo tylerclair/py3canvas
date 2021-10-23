@@ -16,7 +16,7 @@ class QuizIpFiltersAPI(BaseCanvasAPI):
         super(QuizIpFiltersAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.QuizIpFiltersAPI")
 
-    def get_available_quiz_ip_filters(self, quiz_id, course_id):
+    def get_available_quiz_ip_filters(self, course_id, quiz_id):
         """
         Get available quiz IP filters.
 
@@ -29,12 +29,18 @@ class QuizIpFiltersAPI(BaseCanvasAPI):
         params = {}
 
         # REQUIRED - PATH - course_id
-        """ID"""
+        """
+            ID
+        """
         path["course_id"] = course_id
 
+
         # REQUIRED - PATH - quiz_id
-        """ID"""
+        """
+            ID
+        """
         path["quiz_id"] = quiz_id
+
 
         self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/ip_filters with query params: {params} and form data: {data}".format(params=params, data=data, **path))
         return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/ip_filters".format(**path), data=data, params=params, no_data=True)
@@ -45,22 +51,22 @@ class Quizipfilter(BaseModel):
 
     def __init__(self, name, account, filter):
         """Init method for Quizipfilter class."""
-        self._filter = filter
-        self._account = account
         self._name = name
+        self._account = account
+        self._filter = filter
 
         self.logger = logging.getLogger('py3canvas.Quizipfilter')
 
     @property
-    def filter(self):
-        """An IP address (or range mask) this filter embodies."""
-        return self._filter
+    def name(self):
+        """A unique name for the filter."""
+        return self._name
 
-    @filter.setter
-    def filter(self, value):
-        """Setter for filter property."""
-        self.logger.warn("Setting values on filter will NOT update the remote Canvas instance.")
-        self._filter = value
+    @name.setter
+    def name(self, value):
+        """Setter for name property."""
+        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self._name = value
 
     @property
     def account(self):
@@ -74,13 +80,13 @@ class Quizipfilter(BaseModel):
         self._account = value
 
     @property
-    def name(self):
-        """A unique name for the filter."""
-        return self._name
+    def filter(self):
+        """An IP address (or range mask) this filter embodies."""
+        return self._filter
 
-    @name.setter
-    def name(self, value):
-        """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
-        self._name = value
+    @filter.setter
+    def filter(self, value):
+        """Setter for filter property."""
+        self.logger.warn("Setting values on filter will NOT update the remote Canvas instance.")
+        self._filter = value
 

@@ -6,9 +6,9 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.courses import CoursesAPI
-from py3canvas.apis.courses import Course
 from py3canvas.apis.courses import Term
 from py3canvas.apis.courses import Courseprogress
+from py3canvas.apis.courses import Course
 from py3canvas.apis.courses import Calendarlink
 
 
@@ -21,13 +21,20 @@ class TestCoursesAPI(unittest.TestCase):
     def test_list_your_courses(self):
         """Integration test for the CoursesAPI.list_your_courses method."""
 
-        r = self.client.list_your_courses(enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, include=None, state=None)
+        r = self.client.list_your_courses(enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, exclude_blueprint_courses=None, include=None, state=None)
 
     def test_list_courses_for_user(self):
         """Integration test for the CoursesAPI.list_courses_for_user method."""
         user_id = None  # Change me!!
 
-        r = self.client.list_courses_for_user(user_id, enrollment_state=None, include=None, state=None)
+        r = self.client.list_courses_for_user(user_id, enrollment_state=None, homeroom=None, include=None, state=None)
+
+    def test_get_user_progress(self):
+        """Integration test for the CoursesAPI.get_user_progress method."""
+        course_id = None  # Change me!!
+        user_id = None  # Change me!!
+
+        r = self.client.get_user_progress(course_id, user_id)
 
     def test_create_new_course(self):
         """Integration test for the CoursesAPI.create_new_course method."""
@@ -49,13 +56,13 @@ class TestCoursesAPI(unittest.TestCase):
         """Integration test for the CoursesAPI.list_users_in_course_users method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_users_in_course_users(course_id, enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, include=None, search_term=None, user_id=None, user_ids=None)
+        r = self.client.list_users_in_course_users(course_id, enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, include=None, search_term=None, sort=None, user_id=None, user_ids=None)
 
     def test_list_users_in_course_search_users(self):
         """Integration test for the CoursesAPI.list_users_in_course_search_users method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_users_in_course_search_users(course_id, enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, include=None, search_term=None, user_id=None, user_ids=None)
+        r = self.client.list_users_in_course_search_users(course_id, enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, include=None, search_term=None, sort=None, user_id=None, user_ids=None)
 
     def test_list_recently_logged_in_students(self):
         """Integration test for the CoursesAPI.list_recently_logged_in_students method."""
@@ -68,7 +75,14 @@ class TestCoursesAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_user(id, course_id)
+        r = self.client.get_single_user(course_id, id)
+
+    def test_search_for_content_share_users(self):
+        """Integration test for the CoursesAPI.search_for_content_share_users method."""
+        course_id = None  # Change me!!
+        search_term = None  # Change me!!
+
+        r = self.client.search_for_content_share_users(course_id, search_term)
 
     def test_preview_processed_html(self):
         """Integration test for the CoursesAPI.preview_processed_html method."""
@@ -93,12 +107,12 @@ class TestCoursesAPI(unittest.TestCase):
 
         r = self.client.course_todo_items(course_id)
 
-    def test_conclude_course(self):
-        """Integration test for the CoursesAPI.conclude_course method."""
+    def test_delete_conclude_course(self):
+        """Integration test for the CoursesAPI.delete_conclude_course method."""
         id = None  # Change me!!
         event = None  # Change me!!
 
-        r = self.client.conclude_course(id, event)
+        r = self.client.delete_conclude_course(event, id)
 
     def test_get_course_settings(self):
         """Integration test for the CoursesAPI.get_course_settings method."""
@@ -111,18 +125,24 @@ class TestCoursesAPI(unittest.TestCase):
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
 
+    def test_return_test_student_for_course(self):
+        """Integration test for the CoursesAPI.return_test_student_for_course method."""
+        course_id = None  # Change me!!
+
+        r = self.client.return_test_student_for_course(course_id)
+
     def test_get_single_course_courses(self):
         """Integration test for the CoursesAPI.get_single_course_courses method."""
         id = None  # Change me!!
 
-        r = self.client.get_single_course_courses(id, include=None)
+        r = self.client.get_single_course_courses(id, include=None, teacher_limit=None)
 
     def test_get_single_course_accounts(self):
         """Integration test for the CoursesAPI.get_single_course_accounts method."""
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_course_accounts(id, account_id, include=None)
+        r = self.client.get_single_course_accounts(account_id, id, include=None, teacher_limit=None)
 
     def test_update_course(self):
         """Integration test for the CoursesAPI.update_course method."""
@@ -151,12 +171,18 @@ class TestCoursesAPI(unittest.TestCase):
 
         r = self.client.permissions(course_id, permissions=None)
 
+    def test_get_bulk_user_progress(self):
+        """Integration test for the CoursesAPI.get_bulk_user_progress method."""
+        course_id = None  # Change me!!
+
+        r = self.client.get_bulk_user_progress(course_id)
+
     def test_get_course_copy_status(self):
         """Integration test for the CoursesAPI.get_course_copy_status method."""
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_course_copy_status(id, course_id)
+        r = self.client.get_course_copy_status(course_id, id)
 
     def test_copy_course_content(self):
         """Integration test for the CoursesAPI.copy_course_content method."""

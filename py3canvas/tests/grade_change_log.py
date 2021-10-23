@@ -6,8 +6,8 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.grade_change_log import GradeChangeLogAPI
-from py3canvas.apis.grade_change_log import Gradechangeevent
 from py3canvas.apis.grade_change_log import Gradechangeeventlinks
+from py3canvas.apis.grade_change_log import Gradechangeevent
 
 
 class TestGradeChangeLogAPI(unittest.TestCase):
@@ -39,4 +39,9 @@ class TestGradeChangeLogAPI(unittest.TestCase):
         grader_id = None  # Change me!!
 
         r = self.client.query_by_grader(grader_id, end_time=None, start_time=None)
+
+    def test_advanced_query(self):
+        """Integration test for the GradeChangeLogAPI.advanced_query method."""
+
+        r = self.client.advanced_query(assignment_id=None, course_id=None, end_time=None, grader_id=None, start_time=None, student_id=None)
 

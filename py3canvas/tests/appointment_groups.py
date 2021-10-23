@@ -6,8 +6,8 @@ import unittest
 import requests
 import secrets
 from py3canvas.apis.appointment_groups import AppointmentGroupsAPI
-from py3canvas.apis.appointment_groups import Appointmentgroup
 from py3canvas.apis.appointment_groups import Appointment
+from py3canvas.apis.appointment_groups import Appointmentgroup
 
 
 class TestAppointmentGroupsAPI(unittest.TestCase):
