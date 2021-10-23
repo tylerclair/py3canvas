@@ -75,3 +75,7 @@ pip.ini
 
 #Visual Studio code
 .vscode/
+*.code-workspace
+
+#virtaul environments
+venv/
