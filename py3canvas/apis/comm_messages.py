@@ -32,7 +32,6 @@ class CommMessagesAPI(BaseCanvasAPI):
         """
         params["user_id"] = user_id
 
-
         # OPTIONAL - start_time
         """
             The beginning of the time range you want to retrieve message from.
@@ -41,10 +40,11 @@ class CommMessagesAPI(BaseCanvasAPI):
         if start_time is not None:
             if issubclass(start_time.__class__, str):
                 start_time = self._validate_iso8601_string(start_time)
-            elif issubclass(start_time.__class__, date) or issubclass(start_time.__class__, datetime):
-                start_time = start_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(start_time.__class__, date) or issubclass(
+                start_time.__class__, datetime
+            ):
+                start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["start_time"] = start_time
-
 
         # OPTIONAL - end_time
         """
@@ -54,25 +54,49 @@ class CommMessagesAPI(BaseCanvasAPI):
         if end_time is not None:
             if issubclass(end_time.__class__, str):
                 end_time = self._validate_iso8601_string(end_time)
-            elif issubclass(end_time.__class__, date) or issubclass(end_time.__class__, datetime):
-                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(end_time.__class__, date) or issubclass(
+                end_time.__class__, datetime
+            ):
+                end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["end_time"] = end_time
 
-
-        self.logger.debug("GET /api/v1/comm_messages with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/comm_messages".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/comm_messages with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/comm_messages".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
 
 class Commmessage(BaseModel):
     """Commmessage Model."""
 
-    def __init__(self, id=None, created_at=None, sent_at=None, workflow_state=None, from=None, from_name=None, to=None, reply_to=None, subject=None, body=None, html_body=None):
+    def __init__(
+        self,
+        id=None,
+        created_at=None,
+        sent_at=None,
+        workflow_state=None,
+        _from=None,
+        from_name=None,
+        to=None,
+        reply_to=None,
+        subject=None,
+        body=None,
+        html_body=None,
+    ):
         """Init method for Commmessage class."""
         self._id = id
         self._created_at = created_at
         self._sent_at = sent_at
         self._workflow_state = workflow_state
-        self._from = from
+        self._from = _from
         self._from_name = from_name
         self._to = to
         self._reply_to = reply_to
@@ -80,7 +104,7 @@ class Commmessage(BaseModel):
         self._body = body
         self._html_body = html_body
 
-        self.logger = logging.getLogger('py3canvas.Commmessage')
+        self.logger = logging.getLogger("py3canvas.Commmessage")
 
     @property
     def id(self):
@@ -90,7 +114,9 @@ class Commmessage(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -101,7 +127,9 @@ class Commmessage(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -112,7 +140,9 @@ class Commmessage(BaseModel):
     @sent_at.setter
     def sent_at(self, value):
         """Setter for sent_at property."""
-        self.logger.warn("Setting values on sent_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sent_at will NOT update the remote Canvas instance."
+        )
         self._sent_at = value
 
     @property
@@ -123,18 +153,22 @@ class Commmessage(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
-    def from(self):
+    def _from(self):
         """The address that was put in the 'from' field of the message."""
         return self._from
 
-    @from.setter
-    def from(self, value):
+    @_from.setter
+    def _from(self, value):
         """Setter for from property."""
-        self.logger.warn("Setting values on from will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on from will NOT update the remote Canvas instance."
+        )
         self._from = value
 
     @property
@@ -145,7 +179,9 @@ class Commmessage(BaseModel):
     @from_name.setter
     def from_name(self, value):
         """Setter for from_name property."""
-        self.logger.warn("Setting values on from_name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on from_name will NOT update the remote Canvas instance."
+        )
         self._from_name = value
 
     @property
@@ -156,7 +192,9 @@ class Commmessage(BaseModel):
     @to.setter
     def to(self, value):
         """Setter for to property."""
-        self.logger.warn("Setting values on to will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on to will NOT update the remote Canvas instance."
+        )
         self._to = value
 
     @property
@@ -167,7 +205,9 @@ class Commmessage(BaseModel):
     @reply_to.setter
     def reply_to(self, value):
         """Setter for reply_to property."""
-        self.logger.warn("Setting values on reply_to will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on reply_to will NOT update the remote Canvas instance."
+        )
         self._reply_to = value
 
     @property
@@ -178,7 +218,9 @@ class Commmessage(BaseModel):
     @subject.setter
     def subject(self, value):
         """Setter for subject property."""
-        self.logger.warn("Setting values on subject will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on subject will NOT update the remote Canvas instance."
+        )
         self._subject = value
 
     @property
@@ -189,7 +231,9 @@ class Commmessage(BaseModel):
     @body.setter
     def body(self, value):
         """Setter for body property."""
-        self.logger.warn("Setting values on body will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on body will NOT update the remote Canvas instance."
+        )
         self._body = value
 
     @property
@@ -200,6 +244,7 @@ class Commmessage(BaseModel):
     @html_body.setter
     def html_body(self, value):
         """Setter for html_body property."""
-        self.logger.warn("Setting values on html_body will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on html_body will NOT update the remote Canvas instance."
+        )
         self._html_body = value
-
