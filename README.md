@@ -29,17 +29,17 @@ I have updated the builder scripts to use Python 3 rather than Python 2.7.
 ### Update spec files
 To update the spec files run the following command:
 ```commandline
-$ python builder.py update_spec_files --specfile-path specs/
+$ python builder.py update-spec-files --specfile-path specs/
 ```
 
 ### Build API modules
 single file:
 ```commandline
-$ python builder.py build_api_from_specfile --specfile specs/late_policy.json --output-folder pycanvas/apis/
+$ python builder.py build-api-from-specfile --specfile specs/late_policy.json --output-folder py3canvas/apis/
 ```
 
 whole folder:
 ```commandline
-$ python builder.py build_all_apis --specfile-path specs/ --output-folder pycanvas/apis/
+$ python builder.py build-all-apis --specfile-path specs/ --output-folder py3canvas/apis/
 ```
 You may get some errors, so sometimes after you have ran the generation scripts on the entire directory you will need to go back and fix individual api endpoints.
