@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
@@ -46,9 +50,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
@@ -69,7 +77,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -77,10 +86,14 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
-          "type": "the page that was created"
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "Page"
         }
       ]
     },
@@ -100,7 +113,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -108,7 +122,8 @@
               "description": "The title for the new page. NOTE: changing a page's title will change its\nurl. The updated url will be returned in the result.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -116,7 +131,8 @@
               "description": "The content for the new page.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -125,6 +141,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "teachers",
                 "students",
@@ -138,7 +155,8 @@
               "description": "Whether participants should be notified when this page changes.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -146,9 +164,13 @@
               "description": "Whether the page is published (true) or draft state (false).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
@@ -169,7 +191,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -177,7 +200,8 @@
               "description": "The title for the new page. NOTE: changing a page's title will change its\nurl. The updated url will be returned in the result.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -185,7 +209,8 @@
               "description": "The content for the new page.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -194,6 +219,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "teachers",
                 "students",
@@ -207,7 +233,8 @@
               "description": "Whether participants should be notified when this page changes.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -215,21 +242,25 @@
               "description": "Whether the page is published (true) or draft state (false).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/pages",
-      "description": "List the wiki pages associated with a course or group",
+      "description": "A paginated list of the wiki pages associated with a course or group",
       "operations": [
         {
           "method": "GET",
           "summary": "List pages",
-          "notes": "List the wiki pages associated with a course or group",
+          "notes": "A paginated list of the wiki pages associated with a course or group",
           "nickname": "list_pages_courses",
           "parameters": [
             {
@@ -238,7 +269,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -247,6 +279,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "title",
                 "created_at",
@@ -260,6 +293,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "asc",
                 "desc"
@@ -271,7 +305,8 @@
               "description": "The partial title of the pages to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -279,9 +314,13 @@
               "description": "If true, include only published paqes. If false, exclude published\npages. If not present, do not filter on published status.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Page"
@@ -291,12 +330,12 @@
     },
     {
       "path": "/v1/groups/{group_id}/pages",
-      "description": "List the wiki pages associated with a course or group",
+      "description": "A paginated list of the wiki pages associated with a course or group",
       "operations": [
         {
           "method": "GET",
           "summary": "List pages",
-          "notes": "List the wiki pages associated with a course or group",
+          "notes": "A paginated list of the wiki pages associated with a course or group",
           "nickname": "list_pages_groups",
           "parameters": [
             {
@@ -305,7 +344,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -314,6 +354,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "title",
                 "created_at",
@@ -327,6 +368,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "asc",
                 "desc"
@@ -338,7 +380,8 @@
               "description": "The partial title of the pages to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -346,9 +389,13 @@
               "description": "If true, include only published paqes. If false, exclude published\npages. If not present, do not filter on published status.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Page"
@@ -372,7 +419,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -380,7 +428,8 @@
               "description": "The title for the new page.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -388,7 +437,8 @@
               "description": "The content for the new page.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -397,6 +447,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "teachers",
                 "students",
@@ -410,7 +461,8 @@
               "description": "Whether participants should be notified when this page changes.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -418,7 +470,8 @@
               "description": "Whether the page is published (true) or draft state (false).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -426,9 +479,13 @@
               "description": "Set an unhidden page as the front page (if true)",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
@@ -449,7 +506,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -457,7 +515,8 @@
               "description": "The title for the new page.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -465,7 +524,8 @@
               "description": "The content for the new page.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -474,6 +534,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "teachers",
                 "students",
@@ -487,7 +548,8 @@
               "description": "Whether participants should be notified when this page changes.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -495,7 +557,8 @@
               "description": "Whether the page is published (true) or draft state (false).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -503,9 +566,13 @@
               "description": "Set an unhidden page as the front page (if true)",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
@@ -526,7 +593,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -534,9 +602,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
@@ -557,7 +629,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -565,9 +638,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
@@ -588,7 +665,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -596,7 +674,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -604,7 +683,8 @@
               "description": "The title for the new page. NOTE: changing a page's title will change its\nurl. The updated url will be returned in the result.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -612,7 +692,8 @@
               "description": "The content for the new page.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -621,6 +702,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "teachers",
                 "students",
@@ -634,7 +716,8 @@
               "description": "Whether participants should be notified when this page changes.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -642,7 +725,8 @@
               "description": "Whether the page is published (true) or draft state (false).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -650,9 +734,13 @@
               "description": "Set an unhidden page as the front page (if true)",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
@@ -673,7 +761,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -681,7 +770,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -689,7 +779,8 @@
               "description": "The title for the new page. NOTE: changing a page's title will change its\nurl. The updated url will be returned in the result.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -697,7 +788,8 @@
               "description": "The content for the new page.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -706,6 +798,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "teachers",
                 "students",
@@ -719,7 +812,8 @@
               "description": "Whether participants should be notified when this page changes.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -727,7 +821,8 @@
               "description": "Whether the page is published (true) or draft state (false).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -735,9 +830,13 @@
               "description": "Set an unhidden page as the front page (if true)",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
@@ -758,7 +857,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -766,9 +866,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
@@ -789,7 +893,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -797,21 +902,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Page"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/pages/{url}/revisions",
-      "description": "List the revisions of a page. Callers must have update rights on the page in order to see page history.",
+      "description": "A paginated list of the revisions of a page. Callers must have update rights on the page in order to see page history.",
       "operations": [
         {
           "method": "GET",
           "summary": "List revisions",
-          "notes": "List the revisions of a page. Callers must have update rights on the page in order to see page history.",
+          "notes": "A paginated list of the revisions of a page. Callers must have update rights on the page in order to see page history.",
           "nickname": "list_revisions_courses",
           "parameters": [
             {
@@ -820,7 +929,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -828,9 +938,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "PageRevision"
@@ -840,12 +954,12 @@
     },
     {
       "path": "/v1/groups/{group_id}/pages/{url}/revisions",
-      "description": "List the revisions of a page. Callers must have update rights on the page in order to see page history.",
+      "description": "A paginated list of the revisions of a page. Callers must have update rights on the page in order to see page history.",
       "operations": [
         {
           "method": "GET",
           "summary": "List revisions",
-          "notes": "List the revisions of a page. Callers must have update rights on the page in order to see page history.",
+          "notes": "A paginated list of the revisions of a page. Callers must have update rights on the page in order to see page history.",
           "nickname": "list_revisions_groups",
           "parameters": [
             {
@@ -854,7 +968,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -862,9 +977,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "PageRevision"
@@ -888,7 +1007,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -896,7 +1016,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -904,9 +1025,13 @@
               "description": "If set, exclude page content from results",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "PageRevision"
         }
       ]
@@ -927,7 +1052,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -935,7 +1061,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -943,9 +1070,13 @@
               "description": "If set, exclude page content from results",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "PageRevision"
         }
       ]
@@ -966,7 +1097,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -974,7 +1106,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -982,7 +1115,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -990,9 +1124,13 @@
               "description": "If set, exclude page content from results",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "PageRevision"
         }
       ]
@@ -1013,7 +1151,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1021,7 +1160,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1029,7 +1169,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -1037,9 +1178,13 @@
               "description": "If set, exclude page content from results",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "PageRevision"
         }
       ]
@@ -1060,7 +1205,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1068,7 +1214,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1076,9 +1223,13 @@
               "description": "The revision to revert to (use the\n{api:WikiPagesApiController#revisions List Revisions API} to see\navailable revisions)",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "PageRevision"
         }
       ]
@@ -1099,7 +1250,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1107,7 +1259,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1115,9 +1268,13 @@
               "description": "The revision to revert to (use the\n{api:WikiPagesApiController#revisions List Revisions API} to see\navailable revisions)",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "PageRevision"
         }
       ]
@@ -1127,9 +1284,9 @@
     "Page": {
       "id": "Page",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "url": {
           "description": "the unique locator for the page",
@@ -1199,9 +1356,9 @@
     "PageRevision": {
       "id": "PageRevision",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "revision_id": {
           "description": "an identifier for this revision of the page",

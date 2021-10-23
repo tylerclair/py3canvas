@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/users/{user_id}/communication_channels",
-      "description": "Returns a list of communication channels for the specified user, sorted by\nposition.",
+      "description": "Returns a paginated list of communication channels for the specified user,\nsorted by position.",
       "operations": [
         {
           "method": "GET",
           "summary": "List user communication channels",
-          "notes": "Returns a list of communication channels for the specified user, sorted by\nposition.",
+          "notes": "Returns a paginated list of communication channels for the specified user,\nsorted by position.",
           "nickname": "list_user_communication_channels",
           "parameters": [
             {
@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "CommunicationChannel"
@@ -49,7 +53,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -57,7 +62,8 @@
               "description": "An email address or SMS number. Not required for \"push\" type channels.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -66,6 +72,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "email",
                 "sms",
@@ -78,7 +85,8 @@
               "description": "A registration id, device token, or equivalent token given to an app when\nregistering with a push notification provider. Only valid for \"push\" type channels.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -86,9 +94,13 @@
               "description": "Only valid for site admins and account admins making requests; If true, the channel is\nautomatically validated and no confirmation email or SMS is sent.\nOtherwise, the user must respond to a confirmation message to confirm the\nchannel.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "CommunicationChannel"
         }
       ]
@@ -109,7 +121,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -117,9 +130,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "CommunicationChannel"
         }
       ]
@@ -140,7 +157,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -148,7 +166,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -156,10 +175,31 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "CommunicationChannel"
+        }
+      ]
+    },
+    {
+      "path": "/v1/users/self/communication_channels/push",
+      "description": "",
+      "operations": [
+        {
+          "method": "DELETE",
+          "summary": "Delete a push notification endpoint",
+          "notes": "",
+          "nickname": "delete_push_notification_endpoint",
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "{success: true}"
         }
       ]
     }
@@ -168,9 +208,9 @@
     "CommunicationChannel": {
       "id": "CommunicationChannel",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the communication channel.",
@@ -183,7 +223,7 @@
           "type": "string"
         },
         "type": {
-          "description": "The type of communcation channel being described. Possible values are: 'email', 'push', 'sms', 'twitter' or 'yo'. This field determines the type of value seen in 'address'.",
+          "description": "The type of communcation channel being described. Possible values are: 'email', 'push', 'sms', or 'twitter'. This field determines the type of value seen in 'address'.",
           "example": "email",
           "type": "string",
           "allowableValues": {
@@ -191,8 +231,7 @@
               "email",
               "push",
               "sms",
-              "twitter",
-              "yo"
+              "twitter"
             ]
           }
         },

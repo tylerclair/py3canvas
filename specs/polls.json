@@ -9,16 +9,17 @@
   "apis": [
     {
       "path": "/v1/polls",
-      "description": "Returns the list of polls for the current user.",
+      "description": "Returns the paginated list of polls for the current user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List polls",
-          "notes": "Returns the list of polls for the current user.",
+          "notes": "Returns the paginated list of polls for the current user.",
           "nickname": "list_polls",
-          "parameters": [
-
-          ],
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -39,9 +40,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -63,6 +68,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -74,11 +80,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -99,7 +109,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -108,6 +119,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -119,11 +131,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -144,9 +160,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -160,6 +180,8 @@
         "id",
         "question"
       ],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The unique identifier for the poll.",

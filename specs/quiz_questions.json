@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/quizzes/{quiz_id}/questions",
-      "description": "Returns the list of QuizQuestions in this quiz.",
+      "description": "Returns the paginated list of QuizQuestions in this quiz.",
       "operations": [
         {
           "method": "GET",
           "summary": "List questions in a quiz or a submission",
-          "notes": "Returns the list of QuizQuestions in this quiz.",
+          "notes": "Returns the paginated list of QuizQuestions in this quiz.",
           "nickname": "list_questions_in_quiz_or_submission",
           "parameters": [
             {
@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,7 +32,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -39,7 +41,8 @@
               "description": "If specified, the endpoint will return the questions that were presented\nfor that submission. This is useful if the quiz has been modified after\nthe submission was created and the latest quiz version's set of questions\ndoes not match the submission's.\nNOTE: you must specify quiz_submission_attempt as well if you specify this\nparameter.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -47,9 +50,13 @@
               "description": "The attempt of the submission you want the questions for.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "QuizQuestion"
@@ -73,7 +80,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -81,7 +89,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -89,9 +98,13 @@
               "description": "The quiz question unique identifier.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "QuizQuestion"
         }
       ]
@@ -112,7 +125,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -120,7 +134,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -128,7 +143,8 @@
               "description": "The name of the question.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -136,7 +152,8 @@
               "description": "The text of the question.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -144,7 +161,8 @@
               "description": "The id of the quiz group to assign the question to.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -153,6 +171,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "calculated_question",
                 "essay_question",
@@ -174,7 +193,8 @@
               "description": "The order in which the question will be displayed in the quiz in relation to other questions.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -182,7 +202,8 @@
               "description": "The maximum amount of points received for answering this question correctly.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -190,7 +211,8 @@
               "description": "The comment to display if the student answers the question correctly.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -198,7 +220,8 @@
               "description": "The comment to display if the student answers incorrectly.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -206,7 +229,8 @@
               "description": "The comment to display regardless of how the student answered.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -214,7 +238,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -222,9 +247,13 @@
               "description": "no description",
               "type": "[Answer]",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "QuizQuestion"
         }
       ]
@@ -245,7 +274,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -253,7 +283,8 @@
               "description": "The associated quiz's unique identifier.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -261,7 +292,8 @@
               "description": "The quiz question's unique identifier.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -269,7 +301,8 @@
               "description": "The name of the question.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -277,7 +310,8 @@
               "description": "The text of the question.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -285,7 +319,8 @@
               "description": "The id of the quiz group to assign the question to.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -294,6 +329,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "calculated_question",
                 "essay_question",
@@ -315,7 +351,8 @@
               "description": "The order in which the question will be displayed in the quiz in relation to other questions.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -323,7 +360,8 @@
               "description": "The maximum amount of points received for answering this question correctly.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -331,7 +369,8 @@
               "description": "The comment to display if the student answers the question correctly.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -339,7 +378,8 @@
               "description": "The comment to display if the student answers incorrectly.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -347,7 +387,8 @@
               "description": "The comment to display regardless of how the student answered.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -355,7 +396,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -363,9 +405,13 @@
               "description": "no description",
               "type": "[Answer]",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "QuizQuestion"
         }
       ]
@@ -386,7 +432,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -394,7 +441,8 @@
               "description": "The associated quiz's unique identifier",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -402,9 +450,13 @@
               "description": "The quiz question's unique identifier",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -418,6 +470,8 @@
         "id",
         "quiz_id"
       ],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the quiz question.",
@@ -489,6 +543,8 @@
         "answer_text",
         "answer_weight"
       ],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The unique identifier for the answer.  Do not supply if this answer is part of a new question",
@@ -502,7 +558,7 @@
           "type": "string"
         },
         "answer_weight": {
-          "description": "An integer to determine correctness of the answer. Incorrect answers should be 0, correct answers should be non-negative.",
+          "description": "An integer to determine correctness of the answer. Incorrect answers should be 0, correct answers should be 100.",
           "example": 100,
           "type": "integer",
           "format": "int64"

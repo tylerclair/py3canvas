@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,9 +32,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -54,9 +59,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -77,9 +86,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -100,7 +113,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -108,9 +122,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -131,9 +149,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -154,9 +176,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -177,7 +203,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -185,9 +212,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -208,9 +239,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -231,9 +266,103 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/analytics/terms/{term_id}/statistics_by_subaccount",
+      "description": "Returns numeric statistics about the department subaccounts and term (or filter).\n\nShares the same variations on endpoint as the participation data.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get department-level statistics, broken down by subaccount",
+          "notes": "Returns numeric statistics about the department subaccounts and term (or filter).\n\nShares the same variations on endpoint as the participation data.",
+          "nickname": "get_department_level_statistics_broken_down_by_subaccount_terms",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "term_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/analytics/current/statistics_by_subaccount",
+      "description": "Returns numeric statistics about the department subaccounts and term (or filter).\n\nShares the same variations on endpoint as the participation data.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get department-level statistics, broken down by subaccount",
+          "notes": "Returns numeric statistics about the department subaccounts and term (or filter).\n\nShares the same variations on endpoint as the participation data.",
+          "nickname": "get_department_level_statistics_broken_down_by_subaccount_current",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/analytics/completed/statistics_by_subaccount",
+      "description": "Returns numeric statistics about the department subaccounts and term (or filter).\n\nShares the same variations on endpoint as the participation data.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get department-level statistics, broken down by subaccount",
+          "notes": "Returns numeric statistics about the department subaccounts and term (or filter).\n\nShares the same variations on endpoint as the participation data.",
+          "nickname": "get_department_level_statistics_broken_down_by_subaccount_completed",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -254,9 +383,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -277,7 +410,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -285,9 +419,13 @@
               "description": "If async is true, then the course_assignments call can happen asynch-\nronously and MAY return a response containing a progress_url key instead\nof an assignments array. If it does, then it is the caller's\nresponsibility to poll the API again to see if the progress is complete.\nIf the data is ready (possibly even on the first async call) then it\nwill be passed back normally, as documented in the example response.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -308,7 +446,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -317,6 +456,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "name",
                 "name_descending",
@@ -334,9 +474,13 @@
               "description": "If set, returns only the specified student.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -357,7 +501,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -365,9 +510,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -388,7 +537,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -396,9 +546,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -419,7 +573,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -427,14 +582,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     }
   ],
-  "models": {
-  }
+  "models": {}
 }

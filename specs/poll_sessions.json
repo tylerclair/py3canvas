@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/polls/{poll_id}/poll_sessions",
-      "description": "Returns the list of PollSessions in this poll.",
+      "description": "Returns the paginated list of PollSessions in this poll.",
       "operations": [
         {
           "method": "GET",
           "summary": "List poll sessions for a poll",
-          "notes": "Returns the list of PollSessions in this poll.",
+          "notes": "Returns the paginated list of PollSessions in this poll.",
           "nickname": "list_poll_sessions_for_poll",
           "parameters": [
             {
@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -46,7 +50,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -54,9 +59,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -77,7 +86,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -86,6 +96,7 @@
               "type": "array",
               "format": "int64",
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -97,6 +108,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -108,11 +120,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "boolean"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -133,7 +149,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -141,7 +158,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -150,6 +168,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -161,6 +180,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -172,11 +192,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "boolean"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -197,7 +221,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -205,9 +230,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -228,7 +257,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -236,9 +266,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -259,7 +293,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -267,41 +302,47 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/poll_sessions/opened",
-      "description": "Lists all opened poll sessions available to the current user.",
+      "description": "A paginated list of all opened poll sessions available to the current user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List opened poll sessions",
-          "notes": "Lists all opened poll sessions available to the current user.",
+          "notes": "A paginated list of all opened poll sessions available to the current user.",
           "nickname": "list_opened_poll_sessions",
-          "parameters": [
-
-          ],
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/poll_sessions/closed",
-      "description": "Lists all closed poll sessions available to the current user.",
+      "description": "A paginated list of all closed poll sessions available to the current user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List closed poll sessions",
-          "notes": "Lists all closed poll sessions available to the current user.",
+          "notes": "A paginated list of all closed poll sessions available to the current user.",
           "nickname": "list_closed_poll_sessions",
-          "parameters": [
-
-          ],
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -316,6 +357,8 @@
         "poll_id",
         "course_id"
       ],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The unique identifier for the poll session.",

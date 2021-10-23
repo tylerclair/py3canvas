@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,7 +32,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -39,9 +41,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "QuizGroup"
         }
       ]
@@ -62,7 +68,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -70,7 +77,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -79,6 +87,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -90,6 +99,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -101,6 +111,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -112,11 +123,15 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -137,7 +152,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -145,7 +161,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -153,7 +170,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -162,6 +180,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -173,6 +192,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -184,11 +204,15 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -209,7 +233,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -217,7 +242,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -225,9 +251,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -248,7 +278,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -256,7 +287,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -264,7 +296,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -273,6 +306,7 @@
               "type": "array",
               "format": "int64",
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -284,6 +318,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "question"
               ],
@@ -292,6 +327,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -305,6 +343,8 @@
         "id",
         "quiz_id"
       ],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the question group.",

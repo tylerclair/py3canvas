@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/calendar_events",
-      "description": "Retrieve the list of calendar events or assignments for the current user",
+      "description": "Retrieve the paginated list of calendar events or assignments for the current user",
       "operations": [
         {
           "method": "GET",
           "summary": "List calendar events",
-          "notes": "Retrieve the list of calendar events or assignments for the current user",
+          "notes": "Retrieve the paginated list of calendar events or assignments for the current user",
           "nickname": "list_calendar_events",
           "parameters": [
             {
@@ -24,6 +24,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "event",
                 "assignment"
@@ -35,7 +36,8 @@
               "description": "Only return events since the start_date (inclusive).\nDefaults to today. The value should be formatted as: yyyy-mm-dd or ISO 8601 YYYY-MM-DDTHH:MM:SSZ.",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -43,7 +45,8 @@
               "description": "Only return events before the end_date (inclusive).\nDefaults to start_date. The value should be formatted as: yyyy-mm-dd or ISO 8601 YYYY-MM-DDTHH:MM:SSZ.\nIf end_date is the same as start_date, then only events on that day are\nreturned.",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -51,7 +54,8 @@
               "description": "Defaults to false (dated events only).\nIf true, only return undated events and ignore start_date and end_date.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -59,7 +63,8 @@
               "description": "Defaults to false (uses start_date, end_date, and undated criteria).\nIf true, all events are returned, ignoring start_date, end_date, and undated criteria.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -68,6 +73,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -79,11 +85,24 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "Array"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "important_dates",
+              "description": "Defaults to false\nIf true, only events with important dates set to true will be returned. This requires the Important Dates\nfeature flag to be turned on or it will be ignored.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "CalendarEvent"
@@ -93,12 +112,12 @@
     },
     {
       "path": "/v1/users/{user_id}/calendar_events",
-      "description": "Retrieve the list of calendar events or assignments for the specified user.\nTo view calendar events for a user other than yourself,\nyou must either be an observer of that user or an administrator.",
+      "description": "Retrieve the paginated list of calendar events or assignments for the specified user.\nTo view calendar events for a user other than yourself,\nyou must either be an observer of that user or an administrator.",
       "operations": [
         {
           "method": "GET",
           "summary": "List calendar events for a user",
-          "notes": "Retrieve the list of calendar events or assignments for the specified user.\nTo view calendar events for a user other than yourself,\nyou must either be an observer of that user or an administrator.",
+          "notes": "Retrieve the paginated list of calendar events or assignments for the specified user.\nTo view calendar events for a user other than yourself,\nyou must either be an observer of that user or an administrator.",
           "nickname": "list_calendar_events_for_user",
           "parameters": [
             {
@@ -107,7 +126,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -116,6 +136,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "event",
                 "assignment"
@@ -127,7 +148,8 @@
               "description": "Only return events since the start_date (inclusive).\nDefaults to today. The value should be formatted as: yyyy-mm-dd or ISO 8601 YYYY-MM-DDTHH:MM:SSZ.",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -135,7 +157,8 @@
               "description": "Only return events before the end_date (inclusive).\nDefaults to start_date. The value should be formatted as: yyyy-mm-dd or ISO 8601 YYYY-MM-DDTHH:MM:SSZ.\nIf end_date is the same as start_date, then only events on that day are\nreturned.",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -143,7 +166,8 @@
               "description": "Defaults to false (dated events only).\nIf true, only return undated events and ignore start_date and end_date.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -151,7 +175,8 @@
               "description": "Defaults to false (uses start_date, end_date, and undated criteria).\nIf true, all events are returned, ignoring start_date, end_date, and undated criteria.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -160,6 +185,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -171,11 +197,48 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "Array"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "submission_types",
+              "description": "When type is \"assignment\", specifies the allowable submission types for returned assignments.\nIgnored if type is not \"assignment\" or if exclude_submission_types is provided.",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "items": {
+                "$ref": "Array"
+              }
+            },
+            {
+              "paramType": "query",
+              "name": "exclude_submission_types",
+              "description": "When type is \"assignment\", specifies the submission types to be excluded from the returned\nassignments. Ignored if type is not \"assignment\".",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "items": {
+                "$ref": "Array"
+              }
+            },
+            {
+              "paramType": "query",
+              "name": "important_dates",
+              "description": "Defaults to false\nIf true, only events with important dates set to true will be returned. This requires the Important Dates\nfeature flag to be turned on or it will be ignored.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "CalendarEvent"
@@ -199,7 +262,8 @@
               "description": "Context code of the course/group/user whose calendar this event should be\nadded to.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -207,7 +271,8 @@
               "description": "Short title for the calendar event.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -215,7 +280,8 @@
               "description": "Longer HTML description of the event.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -223,7 +289,8 @@
               "description": "Start date/time of the event.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -231,7 +298,8 @@
               "description": "End date/time of the event.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -239,7 +307,8 @@
               "description": "Location name of the event.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -247,7 +316,8 @@
               "description": "Location address",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -255,7 +325,17 @@
               "description": "Time zone of the user editing the event. Allowed time zones are\n{http://www.iana.org/time-zones IANA time zones} or friendlier\n{http://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html Ruby on Rails time zones}.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "calendar_event[all_day]",
+              "description": "When true event is considered to span the whole day and times are ignored.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -263,7 +343,8 @@
               "description": "Section-level start time(s) if this is a course event. X can be any\nidentifier, provided that it is consistent across the start_at, end_at\nand context_code",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -271,7 +352,8 @@
               "description": "Section-level end time(s) if this is a course event.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -279,15 +361,17 @@
               "description": "Context code(s) corresponding to the section-level start and end time(s).",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "calendar_event[duplicate][count]",
-              "description": "Number of times to copy/duplicate the event.",
+              "description": "Number of times to copy/duplicate the event.  Count cannot exceed 200.",
               "type": "number",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -295,7 +379,8 @@
               "description": "Defaults to 1 if duplicate `count` is set.  The interval between the duplicated events.",
               "type": "number",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -304,6 +389,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "daily",
                 "weekly",
@@ -316,9 +402,13 @@
               "description": "Defaults to false.  If set to `true`, an increasing counter number will be appended to the event title\nwhen the event is duplicated.  (e.g. Event 1, Event 2, Event 3, etc)",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -339,9 +429,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "CalendarEvent"
         }
       ]
@@ -362,7 +456,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -370,7 +465,8 @@
               "description": "User or group id for whom you are making the reservation (depends on the\nparticipant type). Defaults to the current user (or user's candidate group).",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -378,7 +474,8 @@
               "description": "Comments to associate with this reservation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -386,9 +483,13 @@
               "description": "Defaults to false. If true, cancel any previous reservation(s) for this\nparticipant and appointment group.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -409,7 +510,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -417,7 +519,8 @@
               "description": "User or group id for whom you are making the reservation (depends on the\nparticipant type). Defaults to the current user (or user's candidate group).",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -425,7 +528,8 @@
               "description": "Comments to associate with this reservation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -433,9 +537,13 @@
               "description": "Defaults to false. If true, cancel any previous reservation(s) for this\nparticipant and appointment group.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -456,7 +564,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -464,7 +573,8 @@
               "description": "Context code of the course/group/user to move this event to.\nScheduler appointments and events with section-specific times cannot be moved between calendars.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -472,7 +582,8 @@
               "description": "Short title for the calendar event.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -480,7 +591,8 @@
               "description": "Longer HTML description of the event.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -488,7 +600,8 @@
               "description": "Start date/time of the event.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -496,7 +609,8 @@
               "description": "End date/time of the event.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -504,7 +618,8 @@
               "description": "Location name of the event.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -512,7 +627,8 @@
               "description": "Location address",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -520,7 +636,17 @@
               "description": "Time zone of the user editing the event. Allowed time zones are\n{http://www.iana.org/time-zones IANA time zones} or friendlier\n{http://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html Ruby on Rails time zones}.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "calendar_event[all_day]",
+              "description": "When true event is considered to span the whole day and times are ignored.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -528,7 +654,8 @@
               "description": "Section-level start time(s) if this is a course event. X can be any\nidentifier, provided that it is consistent across the start_at, end_at\nand context_code",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -536,7 +663,8 @@
               "description": "Section-level end time(s) if this is a course event.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -544,9 +672,13 @@
               "description": "Context code(s) corresponding to the section-level start and end time(s).",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -567,7 +699,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -575,9 +708,13 @@
               "description": "Reason for deleting/canceling the event.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -598,7 +735,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -607,6 +745,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "Array"
               }
@@ -618,6 +757,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -629,6 +769,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -640,6 +781,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -651,11 +793,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -676,9 +822,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -699,7 +849,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -707,7 +858,8 @@
               "description": "Events will be created for the course section specified by course_section_id.\nIf not present, events will be created for the entire course.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -716,6 +868,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "Array"
               }
@@ -727,6 +880,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "DateTime"
               }
@@ -738,6 +892,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "DateTime"
               }
@@ -749,6 +904,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -760,11 +916,27 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "paramType": "form",
+              "name": "events[title]",
+              "description": "Title for the meeting. If not present, will default to the associated course's name",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -774,9 +946,9 @@
     "CalendarEvent": {
       "id": "CalendarEvent",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the calendar event",
@@ -820,6 +992,11 @@
         },
         "effective_context_code": {
           "description": "if specified, it indicates which calendar this event should be displayed on. for example, a section-level event would have the course's context code here, while the section's context code would be returned above)",
+          "type": "string"
+        },
+        "context_name": {
+          "description": "the context name of the calendar this event belongs to (course, user or group)",
+          "example": "Chemistry 101",
           "type": "string"
         },
         "all_context_codes": {
@@ -925,15 +1102,20 @@
         "group": {
           "description": "If the event is a group-level reservation, this will contain the group participant JSON (refer to the Groups API).",
           "type": "string"
+        },
+        "important_dates": {
+          "description": "Boolean indicating whether this has important dates. Only present if the Important Dates feature flag is enabled",
+          "example": true,
+          "type": "boolean"
         }
       }
     },
     "AssignmentEvent": {
       "id": "AssignmentEvent",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "A synthetic ID for the assignment",
@@ -1013,6 +1195,11 @@
         "assignment_overrides": {
           "description": "The list of AssignmentOverrides that apply to this event (See the Assignments API). This information is useful for determining which students or sections this assignment-due event applies to.",
           "$ref": "AssignmentOverride"
+        },
+        "important_dates": {
+          "description": "Boolean indicating whether this has important dates. Only present if the Important Dates feature flag is enabled",
+          "example": true,
+          "type": "boolean"
         }
       }
     }

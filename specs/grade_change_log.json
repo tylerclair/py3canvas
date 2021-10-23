@@ -13,7 +13,7 @@
       "operations": [
         {
           "method": "GET",
-          "summary": "Query by assignment.",
+          "summary": "Query by assignment",
           "notes": "List grade change events for a given assignment.",
           "nickname": "query_by_assignment",
           "parameters": [
@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -31,7 +32,8 @@
               "description": "The beginning of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -39,9 +41,13 @@
               "description": "The end of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "GradeChangeEvent"
@@ -55,7 +61,7 @@
       "operations": [
         {
           "method": "GET",
-          "summary": "Query by course.",
+          "summary": "Query by course",
           "notes": "List grade change events for a given course.",
           "nickname": "query_by_course",
           "parameters": [
@@ -65,7 +71,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -73,7 +80,8 @@
               "description": "The beginning of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -81,9 +89,13 @@
               "description": "The end of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "GradeChangeEvent"
@@ -97,7 +109,7 @@
       "operations": [
         {
           "method": "GET",
-          "summary": "Query by student.",
+          "summary": "Query by student",
           "notes": "List grade change events for a given student.",
           "nickname": "query_by_student",
           "parameters": [
@@ -107,7 +119,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -115,7 +128,8 @@
               "description": "The beginning of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -123,9 +137,13 @@
               "description": "The end of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "GradeChangeEvent"
@@ -139,7 +157,7 @@
       "operations": [
         {
           "method": "GET",
-          "summary": "Query by grader.",
+          "summary": "Query by grader",
           "notes": "List grade change events for a given grader.",
           "nickname": "query_by_grader",
           "parameters": [
@@ -149,7 +167,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -157,7 +176,8 @@
               "description": "The beginning of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -165,9 +185,88 @@
               "description": "The end of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "array",
+          "items": {
+            "$ref": "GradeChangeEvent"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/v1/audit/grade_change",
+      "description": "List grade change events satisfying all given parameters. Teachers may query for events in courses they teach.\nQueries without +course_id+ require account administrator rights.\n\nAt least one of +course_id+, +assignment_id+, +student_id+, or +grader_id+ must be specified.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Advanced query",
+          "notes": "List grade change events satisfying all given parameters. Teachers may query for events in courses they teach.\nQueries without +course_id+ require account administrator rights.\n\nAt least one of +course_id+, +assignment_id+, +student_id+, or +grader_id+ must be specified.",
+          "nickname": "advanced_query",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "course_id",
+              "description": "Restrict query to events in the specified course.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "assignment_id",
+              "description": "Restrict query to the given assignment. If \"override\" is given, query the course final grade override instead.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "student_id",
+              "description": "User id of a student to search grading events for.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "grader_id",
+              "description": "User id of a grader to search grading events for.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "start_time",
+              "description": "The beginning of the time range from which you want events.",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "end_time",
+              "description": "The end of the time range from which you want events.",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "GradeChangeEvent"
@@ -180,9 +279,9 @@
     "GradeChangeEventLinks": {
       "id": "GradeChangeEventLinks",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "assignment": {
           "description": "ID of the assignment associated with the event",
@@ -214,9 +313,9 @@
     "GradeChangeEvent": {
       "id": "GradeChangeEvent",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "ID of the event.",

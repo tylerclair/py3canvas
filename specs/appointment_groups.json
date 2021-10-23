@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/appointment_groups",
-      "description": "Retrieve the list of appointment groups that can be reserved or managed by\nthe current user.",
+      "description": "Retrieve the paginated list of appointment groups that can be reserved or\nmanaged by the current user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List appointment groups",
-          "notes": "Retrieve the list of appointment groups that can be reserved or managed by\nthe current user.",
+          "notes": "Retrieve the paginated list of appointment groups that can be reserved or\nmanaged by the current user.",
           "nickname": "list_appointment_groups",
           "parameters": [
             {
@@ -24,6 +24,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "reservable",
                 "manageable"
@@ -36,6 +37,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -46,7 +48,8 @@
               "description": "Defaults to false. If true, includes past appointment groups",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -55,6 +58,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "appointments",
                 "child_events",
@@ -67,6 +71,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -88,6 +95,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -99,6 +107,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -109,7 +118,8 @@
               "description": "Short title for the appointment group.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -117,7 +127,8 @@
               "description": "Longer text description of the appointment group.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -125,7 +136,8 @@
               "description": "Location name of the appointment group.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -133,7 +145,8 @@
               "description": "Location address.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -141,7 +154,8 @@
               "description": "Indicates whether this appointment group should be published (i.e. made\navailable for signup). Once published, an appointment group cannot be\nunpublished. Defaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -149,7 +163,8 @@
               "description": "Maximum number of participants that may register for each time slot.\nDefaults to null (no limit).",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -157,7 +172,8 @@
               "description": "Minimum number of time slots a user must register for. If not set, users\ndo not need to sign up for any time slots.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -165,7 +181,8 @@
               "description": "Maximum number of time slots a user may register for.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -174,6 +191,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -185,12 +203,16 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "private",
                 "protected"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -211,7 +233,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -220,6 +243,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "child_events",
                 "appointments",
@@ -230,6 +254,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -250,7 +277,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -259,6 +287,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -270,6 +299,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -280,7 +310,8 @@
               "description": "Short title for the appointment group.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -288,7 +319,8 @@
               "description": "Longer text description of the appointment group.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -296,7 +328,8 @@
               "description": "Location name of the appointment group.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -304,7 +337,8 @@
               "description": "Location address.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -312,7 +346,8 @@
               "description": "Indicates whether this appointment group should be published (i.e. made\navailable for signup). Once published, an appointment group cannot be\nunpublished. Defaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -320,7 +355,8 @@
               "description": "Maximum number of participants that may register for each time slot.\nDefaults to null (no limit).",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -328,7 +364,8 @@
               "description": "Minimum number of time slots a user must register for. If not set, users\ndo not need to sign up for any time slots.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -336,7 +373,8 @@
               "description": "Maximum number of time slots a user may register for.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -345,6 +383,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -356,12 +395,16 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "private",
                 "protected"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -382,7 +425,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -390,21 +434,25 @@
               "description": "Reason for deleting/canceling the appointment group.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/appointment_groups/{id}/users",
-      "description": "List users that are (or may be) participating in this appointment group.\nRefer to the Users API for the response fields. Returns no results for\nappointment groups with the \"Group\" participant_type.",
+      "description": "A paginated list of users that are (or may be) participating in this\nappointment group.  Refer to the Users API for the response fields. Returns\nno results for appointment groups with the \"Group\" participant_type.",
       "operations": [
         {
           "method": "GET",
           "summary": "List user participants",
-          "notes": "List users that are (or may be) participating in this appointment group.\nRefer to the Users API for the response fields. Returns no results for\nappointment groups with the \"Group\" participant_type.",
+          "notes": "A paginated list of users that are (or may be) participating in this\nappointment group.  Refer to the Users API for the response fields. Returns\nno results for appointment groups with the \"Group\" participant_type.",
           "nickname": "list_user_participants",
           "parameters": [
             {
@@ -413,7 +461,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -422,6 +471,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "all",
                 "registered",
@@ -429,18 +479,21 @@
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/appointment_groups/{id}/groups",
-      "description": "List student groups that are (or may be) participating in this appointment\ngroup. Refer to the Groups API for the response fields. Returns no results\nfor appointment groups with the \"User\" participant_type.",
+      "description": "A paginated list of student groups that are (or may be) participating in\nthis appointment group. Refer to the Groups API for the response fields.\nReturns no results for appointment groups with the \"User\" participant_type.",
       "operations": [
         {
           "method": "GET",
           "summary": "List student group participants",
-          "notes": "List student groups that are (or may be) participating in this appointment\ngroup. Refer to the Groups API for the response fields. Returns no results\nfor appointment groups with the \"User\" participant_type.",
+          "notes": "A paginated list of student groups that are (or may be) participating in\nthis appointment group. Refer to the Groups API for the response fields.\nReturns no results for appointment groups with the \"User\" participant_type.",
           "nickname": "list_student_group_participants",
           "parameters": [
             {
@@ -449,7 +502,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -458,6 +512,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "all",
                 "registered",
@@ -465,6 +520,9 @@
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -486,11 +544,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "CalendarEvent"
@@ -503,9 +565,9 @@
     "Appointment": {
       "id": "Appointment",
       "description": "Date and time for an appointment",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The appointment identifier.",
@@ -527,9 +589,9 @@
     "AppointmentGroup": {
       "id": "AppointmentGroup",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the appointment group",
@@ -629,9 +691,7 @@
         },
         "appointments": {
           "description": "Calendar Events representing the time slots (see include[] argument) Refer to the Calendar Events API for more information",
-          "example": [
-
-          ],
+          "example": [],
           "type": "array",
           "items": {
             "$ref": "CalendarEvent"
@@ -639,9 +699,7 @@
         },
         "new_appointments": {
           "description": "Newly created time slots (same format as appointments above). Only returned in Create/Update responses where new time slots have been added",
-          "example": [
-
-          ],
+          "example": [],
           "type": "array",
           "items": {
             "$ref": "CalendarEvent"

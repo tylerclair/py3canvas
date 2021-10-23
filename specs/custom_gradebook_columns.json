@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/custom_gradebook_columns",
-      "description": "List all custom gradebook columns for a course",
+      "description": "A paginated list of all custom gradebook columns for a course",
       "operations": [
         {
           "method": "GET",
           "summary": "List custom gradebook columns",
-          "notes": "List all custom gradebook columns for a course",
+          "notes": "A paginated list of all custom gradebook columns for a course",
           "nickname": "list_custom_gradebook_columns",
           "parameters": [
             {
@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -31,9 +32,13 @@
               "description": "Include hidden parameters (defaults to false)",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "CustomColumn"
@@ -57,7 +62,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -65,7 +71,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -73,7 +80,8 @@
               "description": "The position of the column relative to other custom columns",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -81,7 +89,8 @@
               "description": "Hidden columns are not displayed in the gradebook",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -89,9 +98,22 @@
               "description": "Set this if the column is created by a teacher.  The gradebook only\nsupports one teacher_notes column.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "column[read_only]",
+              "description": "Set this to prevent the column from being editable in the gradebook ui",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "CustomColumn"
         }
       ]
@@ -112,7 +134,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -120,9 +143,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "CustomColumn"
         }
       ]
@@ -143,7 +170,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -151,9 +179,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "CustomColumn"
         }
       ]
@@ -174,7 +206,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -183,11 +216,15 @@
               "type": "array",
               "format": "int64",
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -208,7 +245,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -216,7 +254,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -224,9 +263,13 @@
               "description": "If true, hidden columns will be included in the\nresult. If false or absent, only visible columns\nwill be returned.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ColumnDatum"
@@ -250,7 +293,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -258,7 +302,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -266,7 +311,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -274,10 +320,53 @@
               "description": "Column content.  Setting this to blank will delete the datum object.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ColumnDatum"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/custom_gradebook_column_data",
+      "description": "Set the content of custom columns\n\n{\n  \"column_data\": [\n    {\n      \"column_id\": example_column_id,\n      \"user_id\": example_student_id,\n      \"content\": example_content\n      },\n      {\n      \"column_id\": example_column_id,\n      \"user_id\": example_student_id,\n      \"content: example_content\n    }\n  ]\n}",
+      "operations": [
+        {
+          "method": "PUT",
+          "summary": "Bulk update column data",
+          "notes": "Set the content of custom columns\n\n{\n  \"column_data\": [\n    {\n      \"column_id\": example_column_id,\n      \"user_id\": example_student_id,\n      \"content\": example_content\n      },\n      {\n      \"column_id\": example_column_id,\n      \"user_id\": example_student_id,\n      \"content: example_content\n    }\n  ]\n}",
+          "nickname": "bulk_update_column_data",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "column_data",
+              "description": "Column content. Setting this to an empty string will delete the data object.",
+              "type": "array",
+              "format": null,
+              "required": true,
+              "deprecated": false,
+              "items": {
+                "$ref": "Array"
+              }
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "Progress"
         }
       ]
     }
@@ -286,10 +375,20 @@
     "CustomColumn": {
       "id": "CustomColumn",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
+        "id": {
+          "description": "The ID of the custom gradebook column",
+          "example": 2,
+          "type": "integer"
+        },
+        "teacher_notes": {
+          "description": "When true, this column's visibility will be toggled in the Gradebook when a user selects to show or hide notes",
+          "example": false,
+          "type": "boolean"
+        },
         "title": {
           "description": "header text",
           "example": "Stuff",
@@ -304,15 +403,20 @@
           "description": "won't be displayed if hidden is true",
           "example": false,
           "type": "boolean"
+        },
+        "read_only": {
+          "description": "won't be editable in the gradebook UI",
+          "example": true,
+          "type": "boolean"
         }
       }
     },
     "ColumnDatum": {
       "id": "ColumnDatum",
       "description": "ColumnDatum objects contain the entry for a column for each user.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "content": {
           "example": "Nut allergy",

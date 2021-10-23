@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/assignments/{assignment_id}/submissions",
-      "description": "Make a submission for an assignment. You must be enrolled as a student in\nthe course/section to do this.\n\nAll online turn-in submission types are supported in this API. However,\nthere are a few things that are not yet supported:\n\n* Files can be submitted based on a file ID of a user or group file. However, there is no API yet for listing the user and group files, or uploading new files via the API. A file upload API is coming soon.\n* Media comments can be submitted, however, there is no API yet for creating a media comment to submit.\n* Integration with Google Docs is not yet supported.",
+      "description": "Make a submission for an assignment. You must be enrolled as a student in\nthe course/section to do this.\n\nAll online turn-in submission types are supported in this API. However,\nthere are a few things that are not yet supported:\n\n* Files can be submitted based on a file ID of a user or group file or through the {api:SubmissionsApiController#create_file file upload API}. However, there is no API yet for listing the user and group files.\n* Media comments can be submitted, however, there is no API yet for creating a media comment to submit.\n* Integration with Google Docs is not yet supported.",
       "operations": [
         {
           "method": "POST",
           "summary": "Submit an assignment",
-          "notes": "Make a submission for an assignment. You must be enrolled as a student in\nthe course/section to do this.\n\nAll online turn-in submission types are supported in this API. However,\nthere are a few things that are not yet supported:\n\n* Files can be submitted based on a file ID of a user or group file. However, there is no API yet for listing the user and group files, or uploading new files via the API. A file upload API is coming soon.\n* Media comments can be submitted, however, there is no API yet for creating a media comment to submit.\n* Integration with Google Docs is not yet supported.",
+          "notes": "Make a submission for an assignment. You must be enrolled as a student in\nthe course/section to do this.\n\nAll online turn-in submission types are supported in this API. However,\nthere are a few things that are not yet supported:\n\n* Files can be submitted based on a file ID of a user or group file or through the {api:SubmissionsApiController#create_file file upload API}. However, there is no API yet for listing the user and group files.\n* Media comments can be submitted, however, there is no API yet for creating a media comment to submit.\n* Integration with Google Docs is not yet supported.",
           "nickname": "submit_assignment_courses",
           "parameters": [
             {
@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,7 +32,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -39,7 +41,8 @@
               "description": "Include a textual comment with the submission.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -48,12 +51,14 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "online_text_entry",
                 "online_url",
                 "online_upload",
                 "media_recording",
-                "basic_lti_launch"
+                "basic_lti_launch",
+                "student_annotation"
               ]
             },
             {
@@ -62,7 +67,8 @@
               "description": "Submit the assignment as an HTML document snippet. Note this HTML snippet\nwill be sanitized using the same ruleset as a submission made from the\nCanvas web UI. The sanitized HTML will be returned in the response as the\nsubmission body. Requires a submission_type of \"online_text_entry\".",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -70,7 +76,8 @@
               "description": "Submit the assignment as a URL. The URL scheme must be \"http\" or \"https\",\nno \"ftp\" or other URL schemes are allowed. If no scheme is given (e.g.\n\"www.example.com\") then \"http\" will be assumed. Requires a submission_type\nof \"online_url\" or \"basic_lti_launch\".",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -79,6 +86,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -89,7 +97,8 @@
               "description": "The media comment id to submit. Media comment ids can be submitted via\nthis API, however, note that there is not yet an API to generate or list\nexisting media comments, so this functionality is currently of limited use.\n\nRequires a submission_type of \"media_recording\".",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -98,24 +107,55 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "audio",
                 "video"
               ]
+            },
+            {
+              "paramType": "form",
+              "name": "submission[user_id]",
+              "description": "Submit on behalf of the given user. Requires grading permission.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "submission[annotatable_attachment_id]",
+              "description": "The Attachment ID of the document being annotated. This should match\nthe annotatable_attachment_id on the assignment.\n\nRequires a submission_type of \"student_annotation\".",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "submission[submitted_at]",
+              "description": "Choose the time the submission is listed as submitted at.  Requires grading permission.",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/sections/{section_id}/assignments/{assignment_id}/submissions",
-      "description": "Make a submission for an assignment. You must be enrolled as a student in\nthe course/section to do this.\n\nAll online turn-in submission types are supported in this API. However,\nthere are a few things that are not yet supported:\n\n* Files can be submitted based on a file ID of a user or group file. However, there is no API yet for listing the user and group files, or uploading new files via the API. A file upload API is coming soon.\n* Media comments can be submitted, however, there is no API yet for creating a media comment to submit.\n* Integration with Google Docs is not yet supported.",
+      "description": "Make a submission for an assignment. You must be enrolled as a student in\nthe course/section to do this.\n\nAll online turn-in submission types are supported in this API. However,\nthere are a few things that are not yet supported:\n\n* Files can be submitted based on a file ID of a user or group file or through the {api:SubmissionsApiController#create_file file upload API}. However, there is no API yet for listing the user and group files.\n* Media comments can be submitted, however, there is no API yet for creating a media comment to submit.\n* Integration with Google Docs is not yet supported.",
       "operations": [
         {
           "method": "POST",
           "summary": "Submit an assignment",
-          "notes": "Make a submission for an assignment. You must be enrolled as a student in\nthe course/section to do this.\n\nAll online turn-in submission types are supported in this API. However,\nthere are a few things that are not yet supported:\n\n* Files can be submitted based on a file ID of a user or group file. However, there is no API yet for listing the user and group files, or uploading new files via the API. A file upload API is coming soon.\n* Media comments can be submitted, however, there is no API yet for creating a media comment to submit.\n* Integration with Google Docs is not yet supported.",
+          "notes": "Make a submission for an assignment. You must be enrolled as a student in\nthe course/section to do this.\n\nAll online turn-in submission types are supported in this API. However,\nthere are a few things that are not yet supported:\n\n* Files can be submitted based on a file ID of a user or group file or through the {api:SubmissionsApiController#create_file file upload API}. However, there is no API yet for listing the user and group files.\n* Media comments can be submitted, however, there is no API yet for creating a media comment to submit.\n* Integration with Google Docs is not yet supported.",
           "nickname": "submit_assignment_sections",
           "parameters": [
             {
@@ -124,7 +164,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -132,7 +173,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -140,7 +182,8 @@
               "description": "Include a textual comment with the submission.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -149,12 +192,14 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "online_text_entry",
                 "online_url",
                 "online_upload",
                 "media_recording",
-                "basic_lti_launch"
+                "basic_lti_launch",
+                "student_annotation"
               ]
             },
             {
@@ -163,7 +208,8 @@
               "description": "Submit the assignment as an HTML document snippet. Note this HTML snippet\nwill be sanitized using the same ruleset as a submission made from the\nCanvas web UI. The sanitized HTML will be returned in the response as the\nsubmission body. Requires a submission_type of \"online_text_entry\".",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -171,7 +217,8 @@
               "description": "Submit the assignment as a URL. The URL scheme must be \"http\" or \"https\",\nno \"ftp\" or other URL schemes are allowed. If no scheme is given (e.g.\n\"www.example.com\") then \"http\" will be assumed. Requires a submission_type\nof \"online_url\" or \"basic_lti_launch\".",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -180,6 +227,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -190,7 +238,8 @@
               "description": "The media comment id to submit. Media comment ids can be submitted via\nthis API, however, note that there is not yet an API to generate or list\nexisting media comments, so this functionality is currently of limited use.\n\nRequires a submission_type of \"media_recording\".",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -199,24 +248,55 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "audio",
                 "video"
               ]
+            },
+            {
+              "paramType": "form",
+              "name": "submission[user_id]",
+              "description": "Submit on behalf of the given user. Requires grading permission.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "submission[annotatable_attachment_id]",
+              "description": "The Attachment ID of the document being annotated. This should match\nthe annotatable_attachment_id on the assignment.\n\nRequires a submission_type of \"student_annotation\".",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "submission[submitted_at]",
+              "description": "Choose the time the submission is listed as submitted at.  Requires grading permission.",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/assignments/{assignment_id}/submissions",
-      "description": "Get all existing submissions for an assignment.",
+      "description": "A paginated list of all existing submissions for an assignment.",
       "operations": [
         {
           "method": "GET",
           "summary": "List assignment submissions",
-          "notes": "Get all existing submissions for an assignment.",
+          "notes": "A paginated list of all existing submissions for an assignment.",
           "nickname": "list_assignment_submissions_courses",
           "parameters": [
             {
@@ -225,7 +305,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -233,7 +314,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -242,6 +324,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "submission_history",
                 "submission_comments",
@@ -250,7 +333,8 @@
                 "visibility",
                 "course",
                 "user",
-                "group"
+                "group",
+                "read_status"
               ],
               "items": {
                 "type": "string"
@@ -262,9 +346,89 @@
               "description": "If this argument is true, the response will be grouped by student groups.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [
+            {
+              "name": "assignment_id",
+              "description": "The unique identifier for the assignment.",
+              "deprecated": false
+            },
+            {
+              "name": "user_id",
+              "description": "The id of the user who submitted the assignment.",
+              "deprecated": false
+            },
+            {
+              "name": "grader_id",
+              "description": "The id of the user who graded the submission. This will be null for submissions that haven't been graded yet. It will be a positive number if a real user has graded the submission and a negative number if the submission was graded by a process (e.g. Quiz autograder and autograding LTI tools).  Specifically autograded quizzes set grader_id to the negative of the quiz id.  Submissions autograded by LTI tools set grader_id to the negative of the tool id.",
+              "deprecated": false
+            },
+            {
+              "name": "canvadoc_document_id",
+              "description": "The id for the canvadoc document associated with this submission, if it was a file upload.",
+              "deprecated": false
+            },
+            {
+              "name": "submitted_at",
+              "description": "The timestamp when the assignment was submitted, if an actual submission has been made.",
+              "deprecated": false
+            },
+            {
+              "name": "score",
+              "description": "The raw score for the assignment submission.",
+              "deprecated": false
+            },
+            {
+              "name": "attempt",
+              "description": "If multiple submissions have been made, this is the attempt number.",
+              "deprecated": false
+            },
+            {
+              "name": "body",
+              "description": "The content of the submission, if it was submitted directly in a text field.",
+              "deprecated": false
+            },
+            {
+              "name": "grade",
+              "description": "The grade for the submission, translated into the assignment grading scheme (so a letter grade, for example).",
+              "deprecated": false
+            },
+            {
+              "name": "grade_matches_current_submission",
+              "description": "A boolean flag which is false if the student has re-submitted since the submission was last graded.",
+              "deprecated": false
+            },
+            {
+              "name": "preview_url",
+              "description": "Link to the URL in canvas where the submission can be previewed. This will require the user to log in.",
+              "deprecated": false
+            },
+            {
+              "name": "url",
+              "description": "If the submission was made as a URL.",
+              "deprecated": false
+            },
+            {
+              "name": "late",
+              "description": "Whether the submission was made after the applicable due date.",
+              "deprecated": false
+            },
+            {
+              "name": "assignment_visible",
+              "description": "Whether this assignment is visible to the user who submitted the assignment.",
+              "deprecated": false
+            },
+            {
+              "name": "workflow_state",
+              "description": "The current status of the submission. Possible values: “submitted”, “unsubmitted”, “graded”, “pending_review”",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Submission"
@@ -274,12 +438,12 @@
     },
     {
       "path": "/v1/sections/{section_id}/assignments/{assignment_id}/submissions",
-      "description": "Get all existing submissions for an assignment.",
+      "description": "A paginated list of all existing submissions for an assignment.",
       "operations": [
         {
           "method": "GET",
           "summary": "List assignment submissions",
-          "notes": "Get all existing submissions for an assignment.",
+          "notes": "A paginated list of all existing submissions for an assignment.",
           "nickname": "list_assignment_submissions_sections",
           "parameters": [
             {
@@ -288,7 +452,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -296,7 +461,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -305,6 +471,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "submission_history",
                 "submission_comments",
@@ -313,7 +480,8 @@
                 "visibility",
                 "course",
                 "user",
-                "group"
+                "group",
+                "read_status"
               ],
               "items": {
                 "type": "string"
@@ -325,9 +493,89 @@
               "description": "If this argument is true, the response will be grouped by student groups.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [
+            {
+              "name": "assignment_id",
+              "description": "The unique identifier for the assignment.",
+              "deprecated": false
+            },
+            {
+              "name": "user_id",
+              "description": "The id of the user who submitted the assignment.",
+              "deprecated": false
+            },
+            {
+              "name": "grader_id",
+              "description": "The id of the user who graded the submission. This will be null for submissions that haven't been graded yet. It will be a positive number if a real user has graded the submission and a negative number if the submission was graded by a process (e.g. Quiz autograder and autograding LTI tools).  Specifically autograded quizzes set grader_id to the negative of the quiz id.  Submissions autograded by LTI tools set grader_id to the negative of the tool id.",
+              "deprecated": false
+            },
+            {
+              "name": "canvadoc_document_id",
+              "description": "The id for the canvadoc document associated with this submission, if it was a file upload.",
+              "deprecated": false
+            },
+            {
+              "name": "submitted_at",
+              "description": "The timestamp when the assignment was submitted, if an actual submission has been made.",
+              "deprecated": false
+            },
+            {
+              "name": "score",
+              "description": "The raw score for the assignment submission.",
+              "deprecated": false
+            },
+            {
+              "name": "attempt",
+              "description": "If multiple submissions have been made, this is the attempt number.",
+              "deprecated": false
+            },
+            {
+              "name": "body",
+              "description": "The content of the submission, if it was submitted directly in a text field.",
+              "deprecated": false
+            },
+            {
+              "name": "grade",
+              "description": "The grade for the submission, translated into the assignment grading scheme (so a letter grade, for example).",
+              "deprecated": false
+            },
+            {
+              "name": "grade_matches_current_submission",
+              "description": "A boolean flag which is false if the student has re-submitted since the submission was last graded.",
+              "deprecated": false
+            },
+            {
+              "name": "preview_url",
+              "description": "Link to the URL in canvas where the submission can be previewed. This will require the user to log in.",
+              "deprecated": false
+            },
+            {
+              "name": "url",
+              "description": "If the submission was made as a URL.",
+              "deprecated": false
+            },
+            {
+              "name": "late",
+              "description": "Whether the submission was made after the applicable due date.",
+              "deprecated": false
+            },
+            {
+              "name": "assignment_visible",
+              "description": "Whether this assignment is visible to the user who submitted the assignment.",
+              "deprecated": false
+            },
+            {
+              "name": "workflow_state",
+              "description": "The current status of the submission. Possible values: “submitted”, “unsubmitted”, “graded”, “pending_review”",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Submission"
@@ -337,12 +585,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/students/submissions",
-      "description": "Get all existing submissions for a given set of students and assignments.",
+      "description": "A paginated list of all existing submissions for a given set of students and assignments.",
       "operations": [
         {
           "method": "GET",
           "summary": "List submissions for multiple assignments",
-          "notes": "Get all existing submissions for a given set of students and assignments.",
+          "notes": "A paginated list of all existing submissions for a given set of students and assignments.",
           "nickname": "list_submissions_for_multiple_assignments_courses",
           "parameters": [
             {
@@ -351,7 +599,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -360,6 +609,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -371,6 +621,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -381,15 +632,35 @@
               "description": "If this argument is present, the response will be grouped by student,\nrather than a flat array of submissions.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "post_to_sis",
-              "description": "If this argument is set to true, the response will only include\nassignments that have the post_to_sis flag set to true.",
+              "description": "If this argument is set to true, the response will only include\nsubmissions for assignments that have the post_to_sis flag set to true and\nuser enrollments that were added through sis.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "submitted_since",
+              "description": "If this argument is set, the response will only include submissions that\nwere submitted after the specified date_time. This will exclude\nsubmissions that do not have a submitted_at which will exclude unsubmitted\nsubmissions.\nThe value must be formatted as ISO 8601 YYYY-MM-DDTHH:MM:SSZ.",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "graded_since",
+              "description": "If this argument is set, the response will only include submissions that\nwere graded after the specified date_time. This will exclude\nsubmissions that have not been graded.\nThe value must be formatted as ISO 8601 YYYY-MM-DDTHH:MM:SSZ.",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -397,7 +668,8 @@
               "description": "The id of the grading period in which submissions are being requested\n(Requires grading periods to exist on the account)",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -406,6 +678,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "submitted",
                 "unsubmitted",
@@ -420,10 +693,20 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "concluded"
               ]
+            },
+            {
+              "paramType": "query",
+              "name": "state_based_on_date",
+              "description": "If omitted it is set to true. When set to false it will ignore the effective\nstate of the student enrollments and use the workflow_state for the\nenrollments. The argument is ignored unless enrollment_state argument is\nalso passed.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -432,6 +715,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "id",
                 "graded_at"
@@ -440,10 +724,11 @@
             {
               "paramType": "query",
               "name": "order_direction",
-              "description": "Determines whether ordered results are retured in ascending or descending\norder.  Defaults to \"ascending\".  Doesn't affect results for \"grouped\" mode.",
+              "description": "Determines whether ordered results are returned in ascending or descending\norder.  Defaults to \"ascending\".  Doesn't affect results for \"grouped\" mode.",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "ascending",
                 "descending"
@@ -456,6 +741,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "submission_history",
                 "submission_comments",
@@ -471,18 +757,21 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/sections/{section_id}/students/submissions",
-      "description": "Get all existing submissions for a given set of students and assignments.",
+      "description": "A paginated list of all existing submissions for a given set of students and assignments.",
       "operations": [
         {
           "method": "GET",
           "summary": "List submissions for multiple assignments",
-          "notes": "Get all existing submissions for a given set of students and assignments.",
+          "notes": "A paginated list of all existing submissions for a given set of students and assignments.",
           "nickname": "list_submissions_for_multiple_assignments_sections",
           "parameters": [
             {
@@ -491,7 +780,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -500,6 +790,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -511,6 +802,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -521,15 +813,35 @@
               "description": "If this argument is present, the response will be grouped by student,\nrather than a flat array of submissions.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "post_to_sis",
-              "description": "If this argument is set to true, the response will only include\nassignments that have the post_to_sis flag set to true.",
+              "description": "If this argument is set to true, the response will only include\nsubmissions for assignments that have the post_to_sis flag set to true and\nuser enrollments that were added through sis.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "submitted_since",
+              "description": "If this argument is set, the response will only include submissions that\nwere submitted after the specified date_time. This will exclude\nsubmissions that do not have a submitted_at which will exclude unsubmitted\nsubmissions.\nThe value must be formatted as ISO 8601 YYYY-MM-DDTHH:MM:SSZ.",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "graded_since",
+              "description": "If this argument is set, the response will only include submissions that\nwere graded after the specified date_time. This will exclude\nsubmissions that have not been graded.\nThe value must be formatted as ISO 8601 YYYY-MM-DDTHH:MM:SSZ.",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -537,7 +849,8 @@
               "description": "The id of the grading period in which submissions are being requested\n(Requires grading periods to exist on the account)",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -546,6 +859,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "submitted",
                 "unsubmitted",
@@ -560,10 +874,20 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "concluded"
               ]
+            },
+            {
+              "paramType": "query",
+              "name": "state_based_on_date",
+              "description": "If omitted it is set to true. When set to false it will ignore the effective\nstate of the student enrollments and use the workflow_state for the\nenrollments. The argument is ignored unless enrollment_state argument is\nalso passed.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -572,6 +896,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "id",
                 "graded_at"
@@ -580,10 +905,11 @@
             {
               "paramType": "query",
               "name": "order_direction",
-              "description": "Determines whether ordered results are retured in ascending or descending\norder.  Defaults to \"ascending\".  Doesn't affect results for \"grouped\" mode.",
+              "description": "Determines whether ordered results are returned in ascending or descending\norder.  Defaults to \"ascending\".  Doesn't affect results for \"grouped\" mode.",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "ascending",
                 "descending"
@@ -596,6 +922,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "submission_history",
                 "submission_comments",
@@ -611,6 +938,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -631,7 +961,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -639,7 +970,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -647,7 +979,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -656,19 +989,25 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "submission_history",
                 "submission_comments",
                 "rubric_assessment",
+                "full_rubric_assessment",
                 "visibility",
                 "course",
-                "user"
+                "user",
+                "read_status"
               ],
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -689,7 +1028,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -697,7 +1037,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -705,7 +1046,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -714,19 +1056,25 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "submission_history",
                 "submission_comments",
                 "rubric_assessment",
+                "full_rubric_assessment",
                 "visibility",
                 "course",
-                "user"
+                "user",
+                "read_status"
               ],
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -747,7 +1095,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -755,7 +1104,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -763,9 +1113,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -786,7 +1140,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -794,7 +1149,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -802,9 +1158,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -825,7 +1185,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -833,7 +1194,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -841,7 +1203,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -849,7 +1212,8 @@
               "description": "Add a textual comment to the submission.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -857,7 +1221,8 @@
               "description": "Whether or not this comment should be sent to the entire group (defaults\nto false). Ignored if this is not a group assignment or if no text_comment\nis provided.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -865,7 +1230,8 @@
               "description": "Add an audio/video comment to the submission. Media comments can be added\nvia this API, however, note that there is not yet an API to generate or\nlist existing media comments, so this functionality is currently of\nlimited use.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -874,6 +1240,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "audio",
                 "video"
@@ -886,6 +1253,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -896,7 +1264,8 @@
               "description": "Whether this assignment is visible to the owner of the submission",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -904,7 +1273,8 @@
               "description": "Assign a score to the submission, updating both the \"score\" and \"grade\"\nfields on the submission record. This parameter can be passed in a few\ndifferent formats:\n\npoints:: A floating point or integral value, such as \"13.5\". The grade\n  will be interpreted directly as the score of the assignment.\n  Values above assignment.points_possible are allowed, for awarding\n  extra credit.\npercentage:: A floating point value appended with a percent sign, such as\n   \"40%\". The grade will be interpreted as a percentage score on the\n   assignment, where 100% == assignment.points_possible. Values above 100%\n   are allowed, for awarding extra credit.\nletter grade:: A letter grade, following the assignment's defined letter\n   grading scheme. For example, \"A-\". The resulting score will be the high\n   end of the defined range for the letter grade. For instance, if \"B\" is\n   defined as 86% to 84%, a letter grade of \"B\" will be worth 86%. The\n   letter grade will be rejected if the assignment does not have a defined\n   letter grading scheme. For more fine-grained control of scores, pass in\n   points or percentage rather than the letter grade.\n\"pass/complete/fail/incomplete\":: A string value of \"pass\" or \"complete\"\n   will give a score of 100%. \"fail\" or \"incomplete\" will give a score of\n   0.\n\nNote that assignments with grading_type of \"pass_fail\" can only be\nassigned a score of 0 or assignment.points_possible, nothing inbetween. If\na posted_grade in the \"points\" or \"percentage\" format is sent, the grade\nwill only be accepted if the grade equals one of those two values.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -912,7 +1282,8 @@
               "description": "Sets the \"excused\" status of an assignment.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -920,7 +1291,8 @@
               "description": "Sets the late policy status to either \"late\", \"missing\", \"none\", or null.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -928,17 +1300,22 @@
               "description": "Sets the seconds late if late policy status is \"late\"",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "rubric_assessment",
-              "description": "Assign a rubric assessment to this assignment submission. The\nsub-parameters here depend on the rubric for the assignment. The general\nformat is, for each row in the rubric:\n\nThe points awarded for this row.\n  rubric_assessment[criterion_id][points]\n\nComments to add for this row.\n  rubric_assessment[criterion_id][comments]\n\nFor example, if the assignment rubric is (in JSON format):\n  !!!javascript\n  [\n    {\n      'id': 'crit1',\n      'points': 10,\n      'description': 'Criterion 1',\n      'ratings':\n      [\n        { 'description': 'Good', 'points': 10 },\n        { 'description': 'Poor', 'points': 3 }\n      ]\n    },\n    {\n      'id': 'crit2',\n      'points': 5,\n      'description': 'Criterion 2',\n      'ratings':\n      [\n        { 'description': 'Complete', 'points': 5 },\n        { 'description': 'Incomplete', 'points': 0 }\n      ]\n    }\n  ]\n\nThen a possible set of values for rubric_assessment would be:\n    rubric_assessment[crit1][points]=3&rubric_assessment[crit2][points]=5&rubric_assessment[crit2][comments]=Well%20Done.",
+              "description": "Assign a rubric assessment to this assignment submission. The\nsub-parameters here depend on the rubric for the assignment. The general\nformat is, for each row in the rubric:\n\nThe points awarded for this row.\n  rubric_assessment[criterion_id][points]\n\nThe rating id for the row.\n  rubric_assessment[criterion_id][rating_id]\n\nComments to add for this row.\n  rubric_assessment[criterion_id][comments]\n\nFor example, if the assignment rubric is (in JSON format):\n  !!!javascript\n  [\n    {\n      'id': 'crit1',\n      'points': 10,\n      'description': 'Criterion 1',\n      'ratings':\n      [\n        { 'id': 'rat1', 'description': 'Good', 'points': 10 },\n        { 'id': 'rat2', 'description': 'Poor', 'points': 3 }\n      ]\n    },\n    {\n      'id': 'crit2',\n      'points': 5,\n      'description': 'Criterion 2',\n      'ratings':\n      [\n        { 'id': 'rat1', 'description': 'Exemplary', 'points': 5 },\n        { 'id': 'rat2', 'description': 'Complete', 'points': 5 },\n        { 'id': 'rat3', 'description': 'Incomplete', 'points': 0 }\n      ]\n    }\n  ]\n\nThen a possible set of values for rubric_assessment would be:\n    rubric_assessment[crit1][points]=3&rubric_assessment[crit1][rating_id]=rat1&rubric_assessment[crit2][points]=5&rubric_assessment[crit2][rating_id]=rat2&rubric_assessment[crit2][comments]=Well%20Done.",
               "type": "RubricAssessment",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -959,7 +1336,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -967,7 +1345,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -975,7 +1354,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -983,7 +1363,8 @@
               "description": "Add a textual comment to the submission.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -991,7 +1372,8 @@
               "description": "Whether or not this comment should be sent to the entire group (defaults\nto false). Ignored if this is not a group assignment or if no text_comment\nis provided.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -999,7 +1381,8 @@
               "description": "Add an audio/video comment to the submission. Media comments can be added\nvia this API, however, note that there is not yet an API to generate or\nlist existing media comments, so this functionality is currently of\nlimited use.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1008,6 +1391,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "audio",
                 "video"
@@ -1020,6 +1404,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -1030,7 +1415,8 @@
               "description": "Whether this assignment is visible to the owner of the submission",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1038,7 +1424,8 @@
               "description": "Assign a score to the submission, updating both the \"score\" and \"grade\"\nfields on the submission record. This parameter can be passed in a few\ndifferent formats:\n\npoints:: A floating point or integral value, such as \"13.5\". The grade\n  will be interpreted directly as the score of the assignment.\n  Values above assignment.points_possible are allowed, for awarding\n  extra credit.\npercentage:: A floating point value appended with a percent sign, such as\n   \"40%\". The grade will be interpreted as a percentage score on the\n   assignment, where 100% == assignment.points_possible. Values above 100%\n   are allowed, for awarding extra credit.\nletter grade:: A letter grade, following the assignment's defined letter\n   grading scheme. For example, \"A-\". The resulting score will be the high\n   end of the defined range for the letter grade. For instance, if \"B\" is\n   defined as 86% to 84%, a letter grade of \"B\" will be worth 86%. The\n   letter grade will be rejected if the assignment does not have a defined\n   letter grading scheme. For more fine-grained control of scores, pass in\n   points or percentage rather than the letter grade.\n\"pass/complete/fail/incomplete\":: A string value of \"pass\" or \"complete\"\n   will give a score of 100%. \"fail\" or \"incomplete\" will give a score of\n   0.\n\nNote that assignments with grading_type of \"pass_fail\" can only be\nassigned a score of 0 or assignment.points_possible, nothing inbetween. If\na posted_grade in the \"points\" or \"percentage\" format is sent, the grade\nwill only be accepted if the grade equals one of those two values.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1046,7 +1433,8 @@
               "description": "Sets the \"excused\" status of an assignment.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1054,7 +1442,8 @@
               "description": "Sets the late policy status to either \"late\", \"missing\", \"none\", or null.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1062,29 +1451,34 @@
               "description": "Sets the seconds late if late policy status is \"late\"",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "rubric_assessment",
-              "description": "Assign a rubric assessment to this assignment submission. The\nsub-parameters here depend on the rubric for the assignment. The general\nformat is, for each row in the rubric:\n\nThe points awarded for this row.\n  rubric_assessment[criterion_id][points]\n\nComments to add for this row.\n  rubric_assessment[criterion_id][comments]\n\nFor example, if the assignment rubric is (in JSON format):\n  !!!javascript\n  [\n    {\n      'id': 'crit1',\n      'points': 10,\n      'description': 'Criterion 1',\n      'ratings':\n      [\n        { 'description': 'Good', 'points': 10 },\n        { 'description': 'Poor', 'points': 3 }\n      ]\n    },\n    {\n      'id': 'crit2',\n      'points': 5,\n      'description': 'Criterion 2',\n      'ratings':\n      [\n        { 'description': 'Complete', 'points': 5 },\n        { 'description': 'Incomplete', 'points': 0 }\n      ]\n    }\n  ]\n\nThen a possible set of values for rubric_assessment would be:\n    rubric_assessment[crit1][points]=3&rubric_assessment[crit2][points]=5&rubric_assessment[crit2][comments]=Well%20Done.",
+              "description": "Assign a rubric assessment to this assignment submission. The\nsub-parameters here depend on the rubric for the assignment. The general\nformat is, for each row in the rubric:\n\nThe points awarded for this row.\n  rubric_assessment[criterion_id][points]\n\nThe rating id for the row.\n  rubric_assessment[criterion_id][rating_id]\n\nComments to add for this row.\n  rubric_assessment[criterion_id][comments]\n\nFor example, if the assignment rubric is (in JSON format):\n  !!!javascript\n  [\n    {\n      'id': 'crit1',\n      'points': 10,\n      'description': 'Criterion 1',\n      'ratings':\n      [\n        { 'id': 'rat1', 'description': 'Good', 'points': 10 },\n        { 'id': 'rat2', 'description': 'Poor', 'points': 3 }\n      ]\n    },\n    {\n      'id': 'crit2',\n      'points': 5,\n      'description': 'Criterion 2',\n      'ratings':\n      [\n        { 'id': 'rat1', 'description': 'Exemplary', 'points': 5 },\n        { 'id': 'rat2', 'description': 'Complete', 'points': 5 },\n        { 'id': 'rat3', 'description': 'Incomplete', 'points': 0 }\n      ]\n    }\n  ]\n\nThen a possible set of values for rubric_assessment would be:\n    rubric_assessment[crit1][points]=3&rubric_assessment[crit1][rating_id]=rat1&rubric_assessment[crit2][points]=5&rubric_assessment[crit2][rating_id]=rat2&rubric_assessment[crit2][comments]=Well%20Done.",
               "type": "RubricAssessment",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/assignments/{assignment_id}/gradeable_students",
-      "description": "List students eligible to submit the assignment. The caller must have permission to view grades.\n\nSection-limited instructors will only see students in their own sections.\n\nreturns [UserDisplay]",
+      "description": "A paginated list of students eligible to submit the assignment. The caller must have permission to view grades.\n\nIf anonymous grading is enabled for the current assignment and the allow_new_anonymous_id parameter is passed,\nthe returned data will not include any values identifying the student, but will instead include an\nassignment-specific anonymous ID for each student.\n\nSection-limited instructors will only see students in their own sections.",
       "operations": [
         {
           "method": "GET",
           "summary": "List gradeable students",
-          "notes": "List students eligible to submit the assignment. The caller must have permission to view grades.\n\nSection-limited instructors will only see students in their own sections.\n\nreturns [UserDisplay]",
+          "notes": "A paginated list of students eligible to submit the assignment. The caller must have permission to view grades.\n\nIf anonymous grading is enabled for the current assignment and the allow_new_anonymous_id parameter is passed,\nthe returned data will not include any values identifying the student, but will instead include an\nassignment-specific anonymous ID for each student.\n\nSection-limited instructors will only see students in their own sections.",
           "nickname": "list_gradeable_students",
           "parameters": [
             {
@@ -1093,7 +1487,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1101,21 +1496,28 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
-          "type": "void"
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "array",
+          "items": {
+            "$ref": "UserDisplay if anonymous grading is not enabled for the assignment or if the allow_new_anonymous_id parameter is not true"
+          }
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/assignments/gradeable_students",
-      "description": "List students eligible to submit a list of assignments. The caller must have\npermission to view grades for the requested course.\n\nSection-limited instructors will only see students in their own sections.",
+      "description": "A paginated list of students eligible to submit a list of assignments. The caller must have\npermission to view grades for the requested course.\n\nSection-limited instructors will only see students in their own sections.",
       "operations": [
         {
           "method": "GET",
           "summary": "List multiple assignments gradeable students",
-          "notes": "List students eligible to submit a list of assignments. The caller must have\npermission to view grades for the requested course.\n\nSection-limited instructors will only see students in their own sections.",
+          "notes": "A paginated list of students eligible to submit a list of assignments. The caller must have\npermission to view grades for the requested course.\n\nSection-limited instructors will only see students in their own sections.",
           "nickname": "list_multiple_assignments_gradeable_students",
           "parameters": [
             {
@@ -1124,7 +1526,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -1133,11 +1536,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1158,7 +1565,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1166,7 +1574,8 @@
               "description": "See documentation for the posted_grade argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1174,7 +1583,8 @@
               "description": "See documentation for the excuse argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1182,7 +1592,8 @@
               "description": "See documentation for the rubric_assessment argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "RubricAssessment",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1190,7 +1601,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1198,7 +1610,8 @@
               "description": "no description",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1206,7 +1619,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1215,6 +1629,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "audio",
                 "video"
@@ -1227,19 +1642,24 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
             },
             {
               "paramType": "form",
-              "name": "grade_data[<student_id>][assignment_id]",
+              "name": "grade_data[<assignment_id>][<student_id>]",
               "description": "Specifies which assignment to grade.  This argument is not necessary when\nusing the assignment-specific endpoints.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Progress"
         }
       ]
@@ -1260,7 +1680,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1268,7 +1689,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1276,7 +1698,8 @@
               "description": "See documentation for the posted_grade argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1284,7 +1707,8 @@
               "description": "See documentation for the excuse argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1292,7 +1716,8 @@
               "description": "See documentation for the rubric_assessment argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "RubricAssessment",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1300,7 +1725,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1308,7 +1734,8 @@
               "description": "no description",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1316,7 +1743,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1325,6 +1753,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "audio",
                 "video"
@@ -1337,19 +1766,24 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
             },
             {
               "paramType": "form",
-              "name": "grade_data[<student_id>][assignment_id]",
+              "name": "grade_data[<assignment_id>][<student_id>]",
               "description": "Specifies which assignment to grade.  This argument is not necessary when\nusing the assignment-specific endpoints.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Progress"
         }
       ]
@@ -1370,7 +1804,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1378,7 +1813,8 @@
               "description": "See documentation for the posted_grade argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1386,7 +1822,8 @@
               "description": "See documentation for the excuse argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1394,7 +1831,8 @@
               "description": "See documentation for the rubric_assessment argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "RubricAssessment",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1402,7 +1840,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1410,7 +1849,8 @@
               "description": "no description",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1418,7 +1858,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1427,6 +1868,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "audio",
                 "video"
@@ -1439,19 +1881,24 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
             },
             {
               "paramType": "form",
-              "name": "grade_data[<student_id>][assignment_id]",
+              "name": "grade_data[<assignment_id>][<student_id>]",
               "description": "Specifies which assignment to grade.  This argument is not necessary when\nusing the assignment-specific endpoints.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Progress"
         }
       ]
@@ -1472,7 +1919,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1480,7 +1928,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1488,7 +1937,8 @@
               "description": "See documentation for the posted_grade argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1496,7 +1946,8 @@
               "description": "See documentation for the excuse argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1504,7 +1955,8 @@
               "description": "See documentation for the rubric_assessment argument in the\n{api:SubmissionsApiController#update Submissions Update} documentation",
               "type": "RubricAssessment",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1512,7 +1964,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1520,7 +1973,8 @@
               "description": "no description",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1528,7 +1982,8 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1537,6 +1992,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "audio",
                 "video"
@@ -1549,19 +2005,24 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
             },
             {
               "paramType": "form",
-              "name": "grade_data[<student_id>][assignment_id]",
+              "name": "grade_data[<assignment_id>][<student_id>]",
               "description": "Specifies which assignment to grade.  This argument is not necessary when\nusing the assignment-specific endpoints.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Progress"
         }
       ]
@@ -1582,7 +2043,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1590,7 +2052,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1598,9 +2061,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1621,7 +2088,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1629,7 +2097,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1637,9 +2106,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1660,7 +2133,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1668,7 +2142,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1676,9 +2151,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1699,7 +2178,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1707,7 +2187,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1715,9 +2196,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1738,7 +2223,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1746,9 +2232,22 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "grouped",
+              "description": "If this argument is true, the response will take into account student groups.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1769,7 +2268,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1777,9 +2277,22 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "grouped",
+              "description": "If this argument is true, the response will take into account student groups.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1789,9 +2302,9 @@
     "MediaComment": {
       "id": "MediaComment",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "content-type": {
           "example": "audio/mp4",
@@ -1818,9 +2331,9 @@
     "SubmissionComment": {
       "id": "SubmissionComment",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "example": 37,
@@ -1847,6 +2360,10 @@
           "example": "2012-01-01T01:00:00Z",
           "type": "datetime"
         },
+        "edited_at": {
+          "example": "2012-01-02T01:00:00Z",
+          "type": "datetime"
+        },
         "media_comment": {
           "$ref": "MediaComment"
         }
@@ -1855,9 +2372,9 @@
     "Submission": {
       "id": "Submission",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "assignment_id": {
           "description": "The submission's assignment id",
@@ -1866,13 +2383,11 @@
         },
         "assignment": {
           "description": "The submission's assignment (see the assignments API) (optional)",
-          "example": "Assignment",
-          "type": "string"
+          "$ref": "Assignment"
         },
         "course": {
           "description": "The submission's course (see the course API) (optional)",
-          "example": "Course",
-          "type": "string"
+          "$ref": "Course"
         },
         "attempt": {
           "description": "This is the submission attempt number.",
@@ -1917,7 +2432,7 @@
           }
         },
         "submission_type": {
-          "description": "The types of submission ex: ('online_text_entry'|'online_url'|'online_upload'|'media_recording')",
+          "description": "The types of submission ex: ('online_text_entry'|'online_url'|'online_upload'|'media_recording'|'student_annotation')",
           "example": "online_text_entry",
           "type": "string",
           "allowableValues": {
@@ -1925,7 +2440,8 @@
               "online_text_entry",
               "online_url",
               "online_upload",
-              "media_recording"
+              "media_recording",
+              "student_annotation"
             ]
           }
         },
@@ -1948,10 +2464,13 @@
           "example": 86,
           "type": "integer"
         },
+        "graded_at": {
+          "example": "2012-01-02T03:05:34Z",
+          "type": "datetime"
+        },
         "user": {
           "description": "The submissions user (see user API) (optional)",
-          "example": "User",
-          "type": "string"
+          "$ref": "User"
         },
         "late": {
           "description": "Whether the submission was made after the applicable due date",
@@ -1998,6 +2517,32 @@
               "submitted",
               "unsubmitted",
               "pending_review"
+            ]
+          }
+        },
+        "extra_attempts": {
+          "description": "Extra submission attempts allowed for the given user and assignment.",
+          "example": 10,
+          "type": "number"
+        },
+        "anonymous_id": {
+          "description": "A unique short ID identifying this submission without reference to the owning user. Only included if the caller has administrator access for the current account.",
+          "example": "acJ4Q",
+          "type": "string"
+        },
+        "posted_at": {
+          "description": "The date this submission was posted to the student, or nil if it has not been posted.",
+          "example": "2020-01-02T11:10:30Z",
+          "type": "datetime"
+        },
+        "read_status": {
+          "description": "The read status of this submission for the given user (optional). Including read_status will mark submission(s) as read.",
+          "example": "read",
+          "type": "string",
+          "allowableValues": {
+            "values": [
+              "read",
+              "unread"
             ]
           }
         }

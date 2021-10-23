@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -31,7 +32,8 @@
               "description": "The title for the Grading Standard.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -40,6 +42,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -51,11 +54,15 @@
               "type": "array",
               "format": "int64",
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GradingStandard"
         }
       ]
@@ -76,7 +83,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -84,7 +92,8 @@
               "description": "The title for the Grading Standard.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -93,6 +102,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -104,23 +114,27 @@
               "type": "array",
               "format": "int64",
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GradingStandard"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/grading_standards",
-      "description": "Returns the list of grading standards for the given context that are visible to the user.",
+      "description": "Returns the paginated list of grading standards for the given context that are visible to the user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List the grading standards available in a context.",
-          "notes": "Returns the list of grading standards for the given context that are visible to the user.",
+          "notes": "Returns the paginated list of grading standards for the given context that are visible to the user.",
           "nickname": "list_grading_standards_available_in_context_courses",
           "parameters": [
             {
@@ -129,9 +143,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "GradingStandard"
@@ -141,12 +159,12 @@
     },
     {
       "path": "/v1/accounts/{account_id}/grading_standards",
-      "description": "Returns the list of grading standards for the given context that are visible to the user.",
+      "description": "Returns the paginated list of grading standards for the given context that are visible to the user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List the grading standards available in a context.",
-          "notes": "Returns the list of grading standards for the given context that are visible to the user.",
+          "notes": "Returns the paginated list of grading standards for the given context that are visible to the user.",
           "nickname": "list_grading_standards_available_in_context_accounts",
           "parameters": [
             {
@@ -155,9 +173,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "GradingStandard"
@@ -181,7 +203,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -189,9 +212,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GradingStandard"
         }
       ]
@@ -212,7 +239,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -220,9 +248,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GradingStandard"
         }
       ]
@@ -232,9 +264,9 @@
     "GradingSchemeEntry": {
       "id": "GradingSchemeEntry",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "name": {
           "description": "The name for an entry value within a GradingStandard that describes the range of the value",
@@ -251,9 +283,9 @@
     "GradingStandard": {
       "id": "GradingStandard",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "title": {
           "description": "the title of the grading standard",

@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/accounts/{account_id}/group_categories",
-      "description": "Returns a list of group categories in a context",
+      "description": "Returns a paginated list of group categories in a context",
       "operations": [
         {
           "method": "GET",
           "summary": "List group categories for a context",
-          "notes": "Returns a list of group categories in a context",
+          "notes": "Returns a paginated list of group categories in a context",
           "nickname": "list_group_categories_for_context_accounts",
           "parameters": [
             {
@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "GroupCategory"
@@ -35,12 +39,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/group_categories",
-      "description": "Returns a list of group categories in a context",
+      "description": "Returns a paginated list of group categories in a context",
       "operations": [
         {
           "method": "GET",
           "summary": "List group categories for a context",
-          "notes": "Returns a list of group categories in a context",
+          "notes": "Returns a paginated list of group categories in a context",
           "nickname": "list_group_categories_for_context_courses",
           "parameters": [
             {
@@ -49,9 +53,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "GroupCategory"
@@ -75,9 +83,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GroupCategory"
         }
       ]
@@ -98,7 +110,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -106,7 +119,8 @@
               "description": "Name of the group category",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -115,6 +129,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "enabled",
                 "restricted"
@@ -127,6 +142,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "first",
                 "random"
@@ -138,7 +154,17 @@
               "description": "Limit the maximum number of users in each group (Course Only). Requires\nself signup.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "sis_group_category_id",
+              "description": "The unique SIS identifier.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -146,7 +172,8 @@
               "description": "Create this number of groups (Course Only).",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -154,9 +181,13 @@
               "description": "(Deprecated)\nCreate this number of groups, and evenly distribute students\namong them. not allowed with \"enable_self_signup\". because\nthe group assignment happens synchronously, it's recommended\nthat you instead use the assign_unassigned_members endpoint.\n(Course Only)",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GroupCategory"
         }
       ]
@@ -177,7 +208,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -185,7 +217,8 @@
               "description": "Name of the group category",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -194,6 +227,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "enabled",
                 "restricted"
@@ -206,6 +240,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "first",
                 "random"
@@ -217,7 +252,17 @@
               "description": "Limit the maximum number of users in each group (Course Only). Requires\nself signup.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "sis_group_category_id",
+              "description": "The unique SIS identifier.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -225,7 +270,8 @@
               "description": "Create this number of groups (Course Only).",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -233,10 +279,50 @@
               "description": "(Deprecated)\nCreate this number of groups, and evenly distribute students\namong them. not allowed with \"enable_self_signup\". because\nthe group assignment happens synchronously, it's recommended\nthat you instead use the assign_unassigned_members endpoint.\n(Course Only)",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GroupCategory"
+        }
+      ]
+    },
+    {
+      "path": "/v1/group_categories/{group_category_id}/import",
+      "description": "Create Groups in a Group Category through a CSV import\n\nFor more information on the format that's expected here, please see the\n\"Group Category CSV\" section in the API docs.",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Import category groups",
+          "notes": "Create Groups in a Group Category through a CSV import\n\nFor more information on the format that's expected here, please see the\n\"Group Category CSV\" section in the API docs.",
+          "nickname": "import_category_groups",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "group_category_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "attachment",
+              "description": "There are two ways to post group category import data - either via a\nmultipart/form-data form-field-style attachment, or via a non-multipart\nraw post request.\n\n'attachment' is required for multipart/form-data style posts. Assumed to\nbe outcome data from a file upload form field named 'attachment'.\n\nExamples:\n  curl -F attachment=@<filename> -H \"Authorization: Bearer <token>\" \\\n      'https://<canvas>/api/v1/group_categories/<category_id>/import'\n\nIf you decide to do a raw post, you can skip the 'attachment' argument,\nbut you will then be required to provide a suitable Content-Type header.\nYou are encouraged to also provide the 'extension' argument.\n\nExamples:\n  curl -H 'Content-Type: text/csv' --data-binary @<filename>.csv \\\n      -H \"Authorization: Bearer <token>\" \\\n      'https://<canvas>/api/v1/group_categories/<category_id>/import'",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "Progress"
         }
       ]
     },
@@ -256,7 +342,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -264,7 +351,8 @@
               "description": "Name of the group category",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -273,6 +361,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "enabled",
                 "restricted"
@@ -285,6 +374,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "first",
                 "random"
@@ -296,7 +386,17 @@
               "description": "Limit the maximum number of users in each group (Course Only). Requires\nself signup.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "sis_group_category_id",
+              "description": "The unique SIS identifier.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -304,7 +404,8 @@
               "description": "Create this number of groups (Course Only).",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -312,9 +413,13 @@
               "description": "(Deprecated)\nCreate this number of groups, and evenly distribute students\namong them. not allowed with \"enable_self_signup\". because\nthe group assignment happens synchronously, it's recommended\nthat you instead use the assign_unassigned_members endpoint.\n(Course Only)",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GroupCategory"
         }
       ]
@@ -335,21 +440,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/group_categories/{group_category_id}/groups",
-      "description": "Returns a list of groups in a group category",
+      "description": "Returns a paginated list of groups in a group category",
       "operations": [
         {
           "method": "GET",
           "summary": "List groups in group category",
-          "notes": "Returns a list of groups in a group category",
+          "notes": "Returns a paginated list of groups in a group category",
           "nickname": "list_groups_in_group_category",
           "parameters": [
             {
@@ -358,9 +467,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Group"
@@ -369,13 +482,40 @@
       ]
     },
     {
+      "path": "/v1/group_categories/{group_category_id}/export",
+      "description": "Returns a csv file of users in format ready to import.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "export groups in and users in category",
+          "notes": "Returns a csv file of users in format ready to import.",
+          "nickname": "export_groups_in_and_users_in_category",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "group_category_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
       "path": "/v1/group_categories/{group_category_id}/users",
-      "description": "Returns a list of users in the group category.",
+      "description": "Returns a paginated list of users in the group category.",
       "operations": [
         {
           "method": "GET",
           "summary": "List users in group category",
-          "notes": "Returns a list of users in the group category.",
+          "notes": "Returns a paginated list of users in the group category.",
           "nickname": "list_users_in_group_category",
           "parameters": [
             {
@@ -384,7 +524,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -392,7 +533,8 @@
               "description": "The partial name or full ID of the users to match and return in the results\nlist. Must be at least 3 characters.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -400,9 +542,13 @@
               "description": "Set this value to true if you wish only to search unassigned users in the\ngroup category.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "User"
@@ -426,7 +572,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -434,9 +581,13 @@
               "description": "The assigning is done asynchronously by default. If you would like to\noverride this and have the assigning done synchronously, set this value\nto true.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GroupMembership | Progress"
         }
       ]
@@ -446,9 +597,9 @@
     "GroupCategory": {
       "id": "GroupCategory",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the group category.",
@@ -496,6 +647,14 @@
         },
         "group_limit": {
           "description": "If self-signup is enabled, group_limit can be set to cap the number of users in each group. If null, there is no limit.",
+          "type": "integer"
+        },
+        "sis_group_category_id": {
+          "description": "The SIS identifier for the group category. This field is only included if the user has permission to manage or view SIS information.",
+          "type": "string"
+        },
+        "sis_import_id": {
+          "description": "The unique identifier for the SIS import. This field is only included if the user has permission to manage SIS information.",
           "type": "integer"
         },
         "progress": {

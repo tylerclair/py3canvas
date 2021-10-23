@@ -13,9 +13,9 @@
       "operations": [
         {
           "method": "GET",
-          "summary": "Retrieve assignment-overridden dates for quizzes",
+          "summary": "Retrieve assignment-overridden dates for Classic Quizzes",
           "notes": "Retrieve the actual due-at, unlock-at, and available-at dates for quizzes\nbased on the assignment overrides active for the current API user.",
-          "nickname": "retrieve_assignment_overridden_dates_for_quizzes",
+          "nickname": "retrieve_assignment_overridden_dates_for_classic_quizzes",
           "parameters": [
             {
               "paramType": "path",
@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -32,11 +33,54 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "QuizAssignmentOverrideSetContainer"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/new_quizzes/assignment_overrides",
+      "description": "Retrieve the actual due-at, unlock-at, and available-at dates for quizzes\nbased on the assignment overrides active for the current API user.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Retrieve assignment-overridden dates for New Quizzes",
+          "notes": "Retrieve the actual due-at, unlock-at, and available-at dates for quizzes\nbased on the assignment overrides active for the current API user.",
+          "nickname": "retrieve_assignment_overridden_dates_for_new_quizzes",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "quiz_assignment_overrides[0][quiz_ids]",
+              "description": "An array of quiz IDs. If omitted, overrides for all quizzes available to\nthe operating user will be returned.",
+              "type": "array",
+              "format": "int64",
+              "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "integer"
+              }
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "QuizAssignmentOverrideSetContainer"
         }
       ]
@@ -46,9 +90,9 @@
     "QuizAssignmentOverrideSet": {
       "id": "QuizAssignmentOverrideSet",
       "description": "Set of assignment-overridden dates for a quiz.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "quiz_id": {
           "description": "ID of the quiz those dates are for.",
@@ -68,9 +112,9 @@
     "QuizAssignmentOverrideSetContainer": {
       "id": "QuizAssignmentOverrideSetContainer",
       "description": "Container for set of assignment-overridden dates for a quiz.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "quiz_assignment_overrides": {
           "description": "The QuizAssignmentOverrideSet",
@@ -84,9 +128,9 @@
     "QuizAssignmentOverride": {
       "id": "QuizAssignmentOverride",
       "description": "Set of assignment-overridden dates for a quiz.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "type": "integer",

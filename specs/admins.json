@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -31,15 +32,17 @@
               "description": "The id of the user to promote.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "role",
-              "description": "(deprecated)\nThe user's admin relationship with the account will be created with the\ngiven role. Defaults to 'AccountAdmin'.",
+              "description": "[DEPRECATED] The user's admin relationship with the account will be\ncreated with the given role. Defaults to 'AccountAdmin'.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -47,7 +50,8 @@
               "description": "The user's admin relationship with the account will be created with the\ngiven role. Defaults to the built-in role for 'AccountAdmin'.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -55,9 +59,13 @@
               "description": "Send a notification email to\nthe new admin if true. Default is true.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Admin"
         }
       ]
@@ -78,7 +86,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -86,15 +95,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "role",
-              "description": "(Deprecated)\nAccount role to remove from the user. Defaults to 'AccountAdmin'. Any\nother account role must be specified explicitly.",
+              "description": "[DEPRECATED] Account role to remove from the user. Defaults to\n'AccountAdmin'. Any other account role must be specified explicitly.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -102,21 +113,25 @@
               "description": "The user's admin relationship with the account will be created with the\ngiven role. Defaults to the built-in role for 'AccountAdmin'.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Admin"
         }
       ]
     },
     {
       "path": "/v1/accounts/{account_id}/admins",
-      "description": "List the admins in the account",
+      "description": "A paginated list of the admins in the account",
       "operations": [
         {
           "method": "GET",
           "summary": "List account admins",
-          "notes": "List the admins in the account",
+          "notes": "A paginated list of the admins in the account",
           "nickname": "list_account_admins",
           "parameters": [
             {
@@ -125,7 +140,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -134,11 +150,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "[Integer]"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Admin"
@@ -154,6 +174,8 @@
       "required": [
         "id"
       ],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The unique identifier for the account role/user assignment.",

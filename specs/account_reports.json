@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/accounts/{account_id}/reports",
-      "description": "Returns the list of reports for the current context.",
+      "description": "Returns a paginated list of reports for the current context.",
       "operations": [
         {
           "method": "GET",
           "summary": "List Available Reports",
-          "notes": "Returns the list of reports for the current context.",
+          "notes": "Returns a paginated list of reports for the current context.",
           "nickname": "list_available_reports",
           "parameters": [
             {
@@ -23,21 +23,36 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [
+            {
+              "name": "name",
+              "description": "The name of the report.",
+              "deprecated": false
+            },
+            {
+              "name": "parameters",
+              "description": "The parameters will vary for each report",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/accounts/{account_id}/reports/{report}",
-      "description": "Generates a report instance for the account.",
+      "description": "Generates a report instance for the account. Note that \"report\" in the\nrequest must match one of the available report names. To fetch a list of\navailable report names and parameters for each report (including whether or\nnot those parameters are required), see\n{api:AccountReportsController#available_reports List Available Reports}.",
       "operations": [
         {
           "method": "POST",
           "summary": "Start a Report",
-          "notes": "Generates a report instance for the account.",
+          "notes": "Generates a report instance for the account. Note that \"report\" in the\nrequest must match one of the available report names. To fetch a list of\navailable report names and parameters for each report (including whether or\nnot those parameters are required), see\n{api:AccountReportsController#available_reports List Available Reports}.",
           "nickname": "start_report",
           "parameters": [
             {
@@ -46,7 +61,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -54,17 +70,40 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
-              "name": "[parameters]",
-              "description": "The parameters will vary for each report",
+              "name": "parameters",
+              "description": "The parameters will vary for each report. To fetch a list\nof available parameters for each report, see {api:AccountReportsController#available_reports List Available Reports}.\nA few example parameters have been provided below. Note that the example\nparameters provided below may not be valid for every report.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "parameters[course_id]",
+              "description": "The id of the course to report on.\nNote: this parameter has been listed to serve as an example and may not be\nvalid for every report.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "parameters[users]",
+              "description": "If true, user data will be included. If\nfalse, user data will be omitted. Note: this parameter has been listed to\nserve as an example and may not be valid for every report.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Report"
         }
       ]
@@ -85,7 +124,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -93,9 +133,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Report"
@@ -119,7 +163,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -127,7 +172,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -135,9 +181,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Report"
         }
       ]
@@ -158,7 +208,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -166,7 +217,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -174,9 +226,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Report"
         }
       ]
@@ -186,9 +242,9 @@
     "Report": {
       "id": "Report",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The unique identifier for the report.",
@@ -206,11 +262,28 @@
           "type": "string"
         },
         "attachment": {
+          "description": "The attachment api object of the report. Only available after the report has completed.",
+          "$ref": "File"
         },
         "status": {
           "description": "The status of the report",
           "example": "complete",
           "type": "string"
+        },
+        "created_at": {
+          "description": "The date and time the report was created.",
+          "example": "2013-12-01T23:59:00-06:00",
+          "type": "datetime"
+        },
+        "started_at": {
+          "description": "The date and time the report started processing.",
+          "example": "2013-12-02T00:03:21-06:00",
+          "type": "datetime"
+        },
+        "ended_at": {
+          "description": "The date and time the report finished processing.",
+          "example": "2013-12-02T00:03:21-06:00",
+          "type": "datetime"
         },
         "parameters": {
           "description": "The report parameters",
@@ -236,9 +309,9 @@
     "ReportParameters": {
       "id": "ReportParameters",
       "description": "The parameters returned will vary for each report.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "enrollment_term_id": {
           "description": "The canvas id of the term to get grades from",
@@ -246,12 +319,12 @@
           "type": "integer"
         },
         "include_deleted": {
-          "description": "Include deleted objects",
+          "description": "If true, deleted objects will be included. If false, deleted objects will be omitted.",
           "example": false,
           "type": "boolean"
         },
         "course_id": {
-          "description": "The course to report on",
+          "description": "The id of the course to report on",
           "example": 2,
           "type": "integer"
         },
@@ -268,42 +341,42 @@
           }
         },
         "users": {
-          "description": "Get the data for users",
+          "description": "If true, user data will be included. If false, user data will be omitted.",
           "example": false,
           "type": "boolean"
         },
         "accounts": {
-          "description": "Get the data for accounts",
+          "description": "If true, account data will be included. If false, account data will be omitted.",
           "example": false,
           "type": "boolean"
         },
         "terms": {
-          "description": "Get the data for terms",
+          "description": "If true, term data will be included. If false, term data will be omitted.",
           "example": false,
           "type": "boolean"
         },
         "courses": {
-          "description": "Get the data for courses",
+          "description": "If true, course data will be included. If false, course data will be omitted.",
           "example": false,
           "type": "boolean"
         },
         "sections": {
-          "description": "Get the data for sections",
+          "description": "If true, section data will be included. If false, section data will be omitted.",
           "example": false,
           "type": "boolean"
         },
         "enrollments": {
-          "description": "Get the data for enrollments",
+          "description": "If true, enrollment data will be included. If false, enrollment data will be omitted.",
           "example": false,
           "type": "boolean"
         },
         "groups": {
-          "description": "Get the data for groups",
+          "description": "If true, group data will be included. If false, group data will be omitted.",
           "example": false,
           "type": "boolean"
         },
         "xlist": {
-          "description": "Get the data for cross-listed courses",
+          "description": "If true, data for crosslisted courses will be included. If false, data for crosslisted courses will be omitted.",
           "example": false,
           "type": "boolean"
         },
@@ -316,7 +389,7 @@
           "type": "integer"
         },
         "include_enrollment_state": {
-          "description": "Include enrollment state. Defaults to false",
+          "description": "If true, enrollment state will be included. If false, enrollment state will be omitted. Defaults to false.",
           "example": false,
           "type": "boolean"
         },

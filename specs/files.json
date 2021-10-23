@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -46,9 +50,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -69,9 +77,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -92,7 +104,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -101,6 +114,19 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "paramType": "query",
+              "name": "exclude_content_types",
+              "description": "Exclude given content-types from your results. You can specify type/subtype pairs (e.g.,\n'image/jpeg'), or simply types (e.g., 'image', which will match\n'image/gif', 'image/jpeg', etc.).",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -111,7 +137,8 @@
               "description": "The partial name of the files to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -120,6 +147,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "user"
               ],
@@ -134,6 +162,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "Array"
               }
@@ -145,6 +174,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "name",
                 "size",
@@ -161,12 +191,16 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "asc",
                 "desc"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "File"
@@ -190,7 +224,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -199,6 +234,19 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "paramType": "query",
+              "name": "exclude_content_types",
+              "description": "Exclude given content-types from your results. You can specify type/subtype pairs (e.g.,\n'image/jpeg'), or simply types (e.g., 'image', which will match\n'image/gif', 'image/jpeg', etc.).",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -209,7 +257,8 @@
               "description": "The partial name of the files to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -218,6 +267,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "user"
               ],
@@ -232,6 +282,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "Array"
               }
@@ -243,6 +294,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "name",
                 "size",
@@ -259,12 +311,16 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "asc",
                 "desc"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "File"
@@ -288,7 +344,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -297,6 +354,19 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "paramType": "query",
+              "name": "exclude_content_types",
+              "description": "Exclude given content-types from your results. You can specify type/subtype pairs (e.g.,\n'image/jpeg'), or simply types (e.g., 'image', which will match\n'image/gif', 'image/jpeg', etc.).",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -307,7 +377,8 @@
               "description": "The partial name of the files to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -316,6 +387,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "user"
               ],
@@ -330,6 +402,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "Array"
               }
@@ -341,6 +414,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "name",
                 "size",
@@ -357,12 +431,16 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "asc",
                 "desc"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "File"
@@ -386,7 +464,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -395,6 +474,19 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "paramType": "query",
+              "name": "exclude_content_types",
+              "description": "Exclude given content-types from your results. You can specify type/subtype pairs (e.g.,\n'image/jpeg'), or simply types (e.g., 'image', which will match\n'image/gif', 'image/jpeg', etc.).",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -405,7 +497,8 @@
               "description": "The partial name of the files to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -414,6 +507,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "user"
               ],
@@ -428,6 +522,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "Array"
               }
@@ -439,6 +534,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "name",
                 "size",
@@ -455,12 +551,16 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "asc",
                 "desc"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "File"
@@ -484,7 +584,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -492,9 +593,13 @@
               "description": "The id of the submission the file is associated with.  Provide this argument to gain access to a file\nthat has been submitted to an assignment (Canvas will verify that the file belongs to the submission\nand the calling user has rights to view the submission).",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -515,7 +620,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -524,6 +630,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "user"
               ],
@@ -532,6 +639,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "File"
         }
       ]
@@ -552,7 +662,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -560,7 +671,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -569,6 +681,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "user"
               ],
@@ -577,6 +690,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "File"
         }
       ]
@@ -597,7 +713,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -605,7 +722,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -614,6 +732,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "user"
               ],
@@ -622,6 +741,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "File"
         }
       ]
@@ -642,7 +764,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -650,7 +773,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -659,6 +783,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "user"
               ],
@@ -667,6 +792,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "File"
         }
       ]
@@ -687,15 +815,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "name",
-              "description": "The new display name of the file",
+              "description": "The new display name of the file, with a limit of 255 characters.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -703,7 +833,8 @@
               "description": "The id of the folder to move this file into.\nThe new folder must be in the same context as the original parent folder.\nIf the file is in a context without folders this does not apply.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -712,6 +843,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "overwrite",
                 "rename"
@@ -723,7 +855,8 @@
               "description": "The datetime to lock the file at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -731,7 +864,8 @@
               "description": "The datetime to unlock the file at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -739,7 +873,8 @@
               "description": "Flag the file as locked",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -747,21 +882,25 @@
               "description": "Flag the file as hidden",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "File"
         }
       ]
     },
     {
       "path": "/v1/files/{id}",
-      "description": "Remove the specified file",
+      "description": "Remove the specified file. Unlike most other DELETE endpoints, using this\nendpoint will result in comprehensive, irretrievable destruction of the file.\nIt should be used with the `replace` parameter set to true in cases where the\nfile preview also needs to be destroyed (such as to remove files that violate\nprivacy laws).",
       "operations": [
         {
           "method": "DELETE",
           "summary": "Delete file",
-          "notes": "Remove the specified file",
+          "notes": "Remove the specified file. Unlike most other DELETE endpoints, using this\nendpoint will result in comprehensive, irretrievable destruction of the file.\nIt should be used with the `replace` parameter set to true in cases where the\nfile preview also needs to be destroyed (such as to remove files that violate\nprivacy laws).",
           "nickname": "delete_file",
           "parameters": [
             {
@@ -770,7 +909,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -778,9 +918,40 @@
               "description": "This action is irreversible.\nIf replace is set to true the file contents will be replaced with a\ngeneric \"file has been removed\" file. This also destroys any previews\nthat have been generated for the file.\nMust have manage files and become other users permissions",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "File"
+        }
+      ]
+    },
+    {
+      "path": "/v1/files/{id}/reset_verifier",
+      "description": "Resets the link verifier. Any existing links to the file using\nthe previous hard-coded \"verifier\" parameter will no longer\nautomatically grant access.\n\nMust have manage files and become other users permissions",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Reset link verifier",
+          "notes": "Resets the link verifier. Any existing links to the file using\nthe previous hard-coded \"verifier\" parameter will no longer\nautomatically grant access.\n\nMust have manage files and become other users permissions",
+          "nickname": "reset_link_verifier",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "File"
         }
       ]
@@ -801,9 +972,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Folder"
@@ -827,9 +1002,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Folder"
@@ -853,9 +1032,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Folder"
@@ -879,9 +1062,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Folder"
@@ -905,9 +1092,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Folder"
@@ -931,9 +1122,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Folder"
@@ -957,9 +1152,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Folder"
@@ -983,9 +1182,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Folder"
@@ -1009,9 +1212,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Folder"
@@ -1035,9 +1242,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Folder"
@@ -1061,7 +1272,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1069,9 +1281,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -1092,7 +1308,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1100,9 +1317,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -1123,7 +1344,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1131,9 +1353,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -1154,9 +1380,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -1177,7 +1407,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1185,7 +1416,8 @@
               "description": "The new name of the folder",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1193,7 +1425,8 @@
               "description": "The id of the folder to move this folder into. The new folder must be in the same context as the original parent folder.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1201,7 +1434,8 @@
               "description": "The datetime to lock the folder at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1209,7 +1443,8 @@
               "description": "The datetime to unlock the folder at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1217,7 +1452,8 @@
               "description": "Flag the folder as locked",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1225,7 +1461,8 @@
               "description": "Flag the folder as hidden",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1233,9 +1470,13 @@
               "description": "Set an explicit sort position for the folder",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -1256,7 +1497,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1264,7 +1506,8 @@
               "description": "The name of the folder",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1272,7 +1515,8 @@
               "description": "The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1280,7 +1524,8 @@
               "description": "The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1288,7 +1533,8 @@
               "description": "The datetime to lock the folder at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1296,7 +1542,8 @@
               "description": "The datetime to unlock the folder at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1304,7 +1551,8 @@
               "description": "Flag the folder as locked",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1312,7 +1560,8 @@
               "description": "Flag the folder as hidden",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1320,9 +1569,13 @@
               "description": "Set an explicit sort position for the folder",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -1343,7 +1596,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1351,7 +1605,8 @@
               "description": "The name of the folder",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1359,7 +1614,8 @@
               "description": "The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1367,7 +1623,8 @@
               "description": "The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1375,7 +1632,8 @@
               "description": "The datetime to lock the folder at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1383,7 +1641,8 @@
               "description": "The datetime to unlock the folder at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1391,7 +1650,8 @@
               "description": "Flag the folder as locked",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1399,7 +1659,8 @@
               "description": "Flag the folder as hidden",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1407,9 +1668,13 @@
               "description": "Set an explicit sort position for the folder",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -1430,7 +1695,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1438,7 +1704,8 @@
               "description": "The name of the folder",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1446,7 +1713,8 @@
               "description": "The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1454,7 +1722,8 @@
               "description": "The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1462,7 +1731,8 @@
               "description": "The datetime to lock the folder at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1470,7 +1740,8 @@
               "description": "The datetime to unlock the folder at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1478,7 +1749,8 @@
               "description": "Flag the folder as locked",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1486,7 +1758,8 @@
               "description": "Flag the folder as hidden",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1494,9 +1767,13 @@
               "description": "Set an explicit sort position for the folder",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -1517,7 +1794,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1525,7 +1803,8 @@
               "description": "The name of the folder",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1533,7 +1812,8 @@
               "description": "The id of the folder to store the file in. If this and parent_folder_path are sent an error will be returned. If neither is given, a default folder will be used.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1541,7 +1821,8 @@
               "description": "The path of the folder to store the new folder in. The path separator is the forward slash `/`, never a back slash. The parent folder will be created if it does not already exist. This parameter only applies to new folders in a context that has folders, such as a user, a course, or a group. If this and parent_folder_id are sent an error will be returned. If neither is given, a default folder will be used.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1549,7 +1830,8 @@
               "description": "The datetime to lock the folder at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1557,7 +1839,8 @@
               "description": "The datetime to unlock the folder at",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1565,7 +1848,8 @@
               "description": "Flag the folder as locked",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1573,7 +1857,8 @@
               "description": "Flag the folder as hidden",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1581,9 +1866,13 @@
               "description": "Set an explicit sort position for the folder",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -1604,7 +1893,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -1612,9 +1902,13 @@
               "description": "Set to 'true' to allow deleting a non-empty folder",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1635,9 +1929,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1658,7 +1956,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1666,7 +1965,8 @@
               "description": "The id of the source file",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1675,12 +1975,16 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "overwrite",
                 "rename"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "File"
         }
       ]
@@ -1701,7 +2005,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1709,9 +2014,67 @@
               "description": "The id of the source folder",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "Folder"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/folders/media",
+      "description": "Returns the details for a designated upload folder that the user has rights to\nupload to, and creates it if it doesn't exist.\n\nIf the current user does not have the permissions to manage files\nin the course or group, the folder will belong to the current user directly.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get uploaded media folder for user",
+          "notes": "Returns the details for a designated upload folder that the user has rights to\nupload to, and creates it if it doesn't exist.\n\nIf the current user does not have the permissions to manage files\nin the course or group, the folder will belong to the current user directly.",
+          "nickname": "get_uploaded_media_folder_for_user_courses",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "Folder"
+        }
+      ]
+    },
+    {
+      "path": "/v1/groups/{group_id}/folders/media",
+      "description": "Returns the details for a designated upload folder that the user has rights to\nupload to, and creates it if it doesn't exist.\n\nIf the current user does not have the permissions to manage files\nin the course or group, the folder will belong to the current user directly.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get uploaded media folder for user",
+          "notes": "Returns the details for a designated upload folder that the user has rights to\nupload to, and creates it if it doesn't exist.\n\nIf the current user does not have the permissions to manage files\nin the course or group, the folder will belong to the current user directly.",
+          "nickname": "get_uploaded_media_folder_for_user_groups",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "group_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -1732,7 +2095,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1741,6 +2105,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1752,6 +2117,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1762,7 +2128,8 @@
               "description": "Whether the file(s) or folder(s) should be published on save, provided that usage rights have been specified (set to `true` to publish on save).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1771,6 +2138,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "own_copyright",
                 "used_by_permission",
@@ -1785,7 +2153,8 @@
               "description": "The legal copyright line for the files",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1793,9 +2162,13 @@
               "description": "The license that applies to the files. See the {api:UsageRightsController#licenses List licenses endpoint} for the supported license types.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "UsageRights"
         }
       ]
@@ -1816,7 +2189,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1825,6 +2199,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1836,6 +2211,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1846,7 +2222,8 @@
               "description": "Whether the file(s) or folder(s) should be published on save, provided that usage rights have been specified (set to `true` to publish on save).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1855,6 +2232,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "own_copyright",
                 "used_by_permission",
@@ -1869,7 +2247,8 @@
               "description": "The legal copyright line for the files",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1877,9 +2256,13 @@
               "description": "The license that applies to the files. See the {api:UsageRightsController#licenses List licenses endpoint} for the supported license types.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "UsageRights"
         }
       ]
@@ -1900,7 +2283,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1909,6 +2293,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1920,6 +2305,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1930,7 +2316,8 @@
               "description": "Whether the file(s) or folder(s) should be published on save, provided that usage rights have been specified (set to `true` to publish on save).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1939,6 +2326,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "own_copyright",
                 "used_by_permission",
@@ -1953,7 +2341,8 @@
               "description": "The legal copyright line for the files",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1961,9 +2350,13 @@
               "description": "The license that applies to the files. See the {api:UsageRightsController#licenses List licenses endpoint} for the supported license types.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "UsageRights"
         }
       ]
@@ -1984,7 +2377,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -1993,6 +2387,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -2004,11 +2399,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -2029,7 +2428,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -2038,6 +2438,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -2049,11 +2450,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -2074,7 +2479,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -2083,6 +2489,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -2094,23 +2501,27 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/content_licenses",
-      "description": "Lists licenses that can be applied",
+      "description": "A paginated list of licenses that can be applied",
       "operations": [
         {
           "method": "GET",
           "summary": "List licenses",
-          "notes": "Lists licenses that can be applied",
+          "notes": "A paginated list of licenses that can be applied",
           "nickname": "list_licenses_courses",
           "parameters": [
             {
@@ -2119,9 +2530,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "License"
@@ -2131,12 +2546,12 @@
     },
     {
       "path": "/v1/groups/{group_id}/content_licenses",
-      "description": "Lists licenses that can be applied",
+      "description": "A paginated list of licenses that can be applied",
       "operations": [
         {
           "method": "GET",
           "summary": "List licenses",
-          "notes": "Lists licenses that can be applied",
+          "notes": "A paginated list of licenses that can be applied",
           "nickname": "list_licenses_groups",
           "parameters": [
             {
@@ -2145,9 +2560,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "License"
@@ -2157,12 +2576,12 @@
     },
     {
       "path": "/v1/users/{user_id}/content_licenses",
-      "description": "Lists licenses that can be applied",
+      "description": "A paginated list of licenses that can be applied",
       "operations": [
         {
           "method": "GET",
           "summary": "List licenses",
-          "notes": "Lists licenses that can be applied",
+          "notes": "A paginated list of licenses that can be applied",
           "nickname": "list_licenses_users",
           "parameters": [
             {
@@ -2171,9 +2590,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "License"
@@ -2186,13 +2609,29 @@
     "File": {
       "id": "File",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
-        "size": {
-          "example": 4,
+        "id": {
+          "example": 569,
           "type": "integer"
+        },
+        "uuid": {
+          "example": "SUj23659sdfASF35h265kf352YTdnC4",
+          "type": "string"
+        },
+        "folder_id": {
+          "example": 4207,
+          "type": "integer"
+        },
+        "display_name": {
+          "example": "file.txt",
+          "type": "string"
+        },
+        "filename": {
+          "example": "file.txt",
+          "type": "string"
         },
         "content-type": {
           "example": "text/plain",
@@ -2202,13 +2641,10 @@
           "example": "http://www.example.com/files/569/download?download_frd=1&verifier=c6HdZmxOZa0Fiin2cbvZeI8I5ry7yqD7RChQzb6P",
           "type": "string"
         },
-        "id": {
-          "example": 569,
-          "type": "integer"
-        },
-        "display_name": {
-          "example": "file.txt",
-          "type": "string"
+        "size": {
+          "example": 43451,
+          "type": "integer",
+          "description": "file size in bytes"
         },
         "created_at": {
           "example": "2012-07-06T14:58:50Z",
@@ -2219,10 +2655,7 @@
           "type": "datetime"
         },
         "unlock_at": {
-          "type": "datetime"
-        },
-        "modified_at": {
-          "example": "2012-07-06T14:58:50Z",
+          "example": "2012-07-07T14:58:50Z",
           "type": "datetime"
         },
         "locked": {
@@ -2234,7 +2667,29 @@
           "type": "boolean"
         },
         "lock_at": {
+          "example": "2012-07-20T14:58:50Z",
           "type": "datetime"
+        },
+        "hidden_for_user": {
+          "example": false,
+          "type": "boolean"
+        },
+        "thumbnail_url": {
+          "type": "string"
+        },
+        "modified_at": {
+          "example": "2012-07-06T14:58:50Z",
+          "type": "datetime"
+        },
+        "mime_class": {
+          "type": "string",
+          "example": "html",
+          "description": "simplified content-type mapping"
+        },
+        "media_entry_id": {
+          "type": "string",
+          "example": "m-3z31gfpPf129dD3sSDF85SwSDFnwe",
+          "description": "identifier for file in third-party transcoding service"
         },
         "locked_for_user": {
           "example": false,
@@ -2247,21 +2702,6 @@
           "example": "This assignment is locked until September 1 at 12:00am",
           "type": "string"
         },
-        "hidden_for_user": {
-          "example": false,
-          "type": "boolean"
-        },
-        "thumbnail_url": {
-          "type": "string"
-        },
-        "mime_class": {
-          "type": "string",
-          "description": "simplified content-type mapping"
-        },
-        "media_entry_id": {
-          "type": "string",
-          "description": "identifier for file in third-party transcoding service"
-        },
         "preview_url": {
           "type": "string",
           "description": "optional: url to the document preview. This url is specific to the user making the api call. Only included in submission endpoints."
@@ -2271,9 +2711,9 @@
     "Folder": {
       "id": "Folder",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "context_type": {
           "example": "Course",
@@ -2360,9 +2800,9 @@
     "UsageRights": {
       "id": "UsageRights",
       "description": "Describes the copyright and license information for a File",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "legal_copyright": {
           "type": "string",
@@ -2406,9 +2846,9 @@
     "License": {
       "id": "License",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "type": "string",

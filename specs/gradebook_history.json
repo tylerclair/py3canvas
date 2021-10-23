@@ -23,9 +23,13 @@
               "description": "The id of the contextual course for this API call",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Day"
@@ -49,7 +53,8 @@
               "description": "The id of the contextual course for this API call",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -57,9 +62,13 @@
               "description": "The date for which you would like to see detailed information",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Grader"
@@ -83,7 +92,8 @@
               "description": "The id of the contextual course for this API call",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -91,7 +101,8 @@
               "description": "The date for which you would like to see submissions",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -99,7 +110,8 @@
               "description": "The ID of the grader for which you want to see submissions",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -107,9 +119,13 @@
               "description": "The ID of the assignment for which you want to see submissions",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "SubmissionHistory"
@@ -133,7 +149,8 @@
               "description": "The id of the contextual course for this API call",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -141,7 +158,8 @@
               "description": "The ID of the assignment for which you want to see submissions. If\nabsent, versions of submissions from any assignment in the course are\nincluded.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -149,7 +167,8 @@
               "description": "The ID of the user for which you want to see submissions. If absent,\nversions of submissions from any user in the course are included.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -157,9 +176,13 @@
               "description": "Returns submission versions in ascending date order (oldest first). If\nabsent, returns submission versions in descending date order (newest\nfirst).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "SubmissionVersion"
@@ -172,9 +195,9 @@
     "Grader": {
       "id": "Grader",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the user_id of the user who graded the contained submissions",
@@ -203,9 +226,9 @@
     "Day": {
       "id": "Day",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "date": {
           "description": "the date represented by this entry",
@@ -222,9 +245,9 @@
     "SubmissionVersion": {
       "id": "SubmissionVersion",
       "description": "A SubmissionVersion object contains all the fields that a Submission object does, plus additional fields prefixed with current_* new_* and previous_* described below.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "assignment_id": {
           "description": "the id of the assignment this submissions is for",
@@ -345,9 +368,9 @@
     "SubmissionHistory": {
       "id": "SubmissionHistory",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "submission_id": {
           "description": "the id of the submission",

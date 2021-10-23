@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/features",
-      "description": "List all features that apply to a given Account, Course, or User.",
+      "description": "A paginated list of all features that apply to a given Account, Course, or User.",
       "operations": [
         {
           "method": "GET",
           "summary": "List features",
-          "notes": "List all features that apply to a given Account, Course, or User.",
+          "notes": "A paginated list of all features that apply to a given Account, Course, or User.",
           "nickname": "list_features_courses",
           "parameters": [
             {
@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Feature"
@@ -35,12 +39,12 @@
     },
     {
       "path": "/v1/accounts/{account_id}/features",
-      "description": "List all features that apply to a given Account, Course, or User.",
+      "description": "A paginated list of all features that apply to a given Account, Course, or User.",
       "operations": [
         {
           "method": "GET",
           "summary": "List features",
-          "notes": "List all features that apply to a given Account, Course, or User.",
+          "notes": "A paginated list of all features that apply to a given Account, Course, or User.",
           "nickname": "list_features_accounts",
           "parameters": [
             {
@@ -49,9 +53,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Feature"
@@ -61,12 +69,12 @@
     },
     {
       "path": "/v1/users/{user_id}/features",
-      "description": "List all features that apply to a given Account, Course, or User.",
+      "description": "A paginated list of all features that apply to a given Account, Course, or User.",
       "operations": [
         {
           "method": "GET",
           "summary": "List features",
-          "notes": "List all features that apply to a given Account, Course, or User.",
+          "notes": "A paginated list of all features that apply to a given Account, Course, or User.",
           "nickname": "list_features_users",
           "parameters": [
             {
@@ -75,9 +83,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Feature"
@@ -87,12 +99,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/features/enabled",
-      "description": "List all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
+      "description": "A paginated list of all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
       "operations": [
         {
           "method": "GET",
           "summary": "List enabled features",
-          "notes": "List all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
+          "notes": "A paginated list of all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
           "nickname": "list_enabled_features_courses",
           "parameters": [
             {
@@ -101,21 +113,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/accounts/{account_id}/features/enabled",
-      "description": "List all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
+      "description": "A paginated list of all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
       "operations": [
         {
           "method": "GET",
           "summary": "List enabled features",
-          "notes": "List all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
+          "notes": "A paginated list of all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
           "nickname": "list_enabled_features_accounts",
           "parameters": [
             {
@@ -124,21 +140,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/users/{user_id}/features/enabled",
-      "description": "List all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
+      "description": "A paginated list of all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
       "operations": [
         {
           "method": "GET",
           "summary": "List enabled features",
-          "notes": "List all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
+          "notes": "A paginated list of all features that are enabled on a given Account, Course, or User.\nOnly the feature names are returned.",
           "nickname": "list_enabled_features_users",
           "parameters": [
             {
@@ -147,9 +167,30 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/features/environment",
+      "description": "Return a hash of global feature settings that pertain to the\nCanvas user interface. This is the same information supplied to the\nweb interface as +ENV.FEATURES+.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List environment features",
+          "notes": "Return a hash of global feature settings that pertain to the\nCanvas user interface. This is the same information supplied to the\nweb interface as +ENV.FEATURES+.",
+          "nickname": "list_environment_features",
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -170,7 +211,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -178,9 +220,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "FeatureFlag"
         }
       ]
@@ -201,7 +247,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -209,9 +256,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "FeatureFlag"
         }
       ]
@@ -232,7 +283,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -240,9 +292,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "FeatureFlag"
         }
       ]
@@ -263,7 +319,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -271,7 +328,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -280,6 +338,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "off",
                 "allowed",
@@ -287,6 +346,9 @@
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "FeatureFlag"
         }
       ]
@@ -307,7 +369,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -315,7 +378,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -324,6 +388,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "off",
                 "allowed",
@@ -331,6 +396,9 @@
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "FeatureFlag"
         }
       ]
@@ -351,7 +419,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -359,7 +428,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -368,6 +438,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "off",
                 "allowed",
@@ -375,6 +446,9 @@
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "FeatureFlag"
         }
       ]
@@ -395,7 +469,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -403,9 +478,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "FeatureFlag"
         }
       ]
@@ -426,7 +505,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -434,9 +514,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "FeatureFlag"
         }
       ]
@@ -457,7 +541,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -465,9 +550,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "FeatureFlag"
         }
       ]
@@ -477,11 +566,11 @@
     "Feature": {
       "id": "Feature",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
-        "name": {
+        "feature": {
           "description": "The symbolic name of the feature, used in FeatureFlags",
           "example": "fancy_wickets",
           "type": "string"
@@ -527,14 +616,14 @@
           "example": true,
           "type": "boolean"
         },
-        "autoexpand": {
-          "description": "Whether the details of the feature are autoexpanded on page load vs. the user clicking to expand.",
+        "pending_enforcement": {
+          "description": "Whether the feature is nearing completion and will be finalized at an upcoming date.",
           "example": true,
           "type": "boolean"
         },
-        "development": {
-          "description": "Whether the feature is in active development. Features in this state are only visible in test and beta instances and are not yet available for production use.",
-          "example": false,
+        "autoexpand": {
+          "description": "Whether the details of the feature are autoexpanded on page load vs. the user clicking to expand.",
+          "example": true,
           "type": "boolean"
         },
         "release_notes_url": {
@@ -547,9 +636,9 @@
     "FeatureFlag": {
       "id": "FeatureFlag",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "context_type": {
           "description": "The type of object to which this flag applies (Account, Course, or User). (This field is not present if this FeatureFlag represents the global Canvas default)",
@@ -574,13 +663,14 @@
           "type": "string"
         },
         "state": {
-          "description": "The policy for the feature at this context.  can be 'off', 'allowed', or 'on'.",
+          "description": "The policy for the feature at this context.  can be 'off', 'allowed', 'allowed_on', or 'on'.",
           "example": "allowed",
           "type": "string",
           "allowableValues": {
             "values": [
               "off",
               "allowed",
+              "allowed_on",
               "on"
             ]
           }

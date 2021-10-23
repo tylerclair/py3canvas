@@ -8,13 +8,55 @@
   ],
   "apis": [
     {
-      "path": "/v1/courses/{course_id}/tabs",
-      "description": "Returns a list of navigation tabs available in the current context.",
+      "path": "/v1/accounts/{account_id}/tabs",
+      "description": "Returns a paginated list of navigation tabs available in the current context.",
       "operations": [
         {
           "method": "GET",
           "summary": "List available tabs for a course or group",
-          "notes": "Returns a list of navigation tabs available in the current context.",
+          "notes": "Returns a paginated list of navigation tabs available in the current context.",
+          "nickname": "list_available_tabs_for_course_or_group_accounts",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "include",
+              "description": "- \"course_subject_tabs\": Optional flag to return the tabs associated with a canvas_for_elementary subject course's\n  home page instead of the typical sidebar navigation. Only takes effect if this request is for a course context\n  in a canvas_for_elementary-enabled account or sub-account.",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "course_subject_tabs"
+              ],
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/tabs",
+      "description": "Returns a paginated list of navigation tabs available in the current context.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List available tabs for a course or group",
+          "notes": "Returns a paginated list of navigation tabs available in the current context.",
           "nickname": "list_available_tabs_for_course_or_group_courses",
           "parameters": [
             {
@@ -23,35 +65,40 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "\"external\":: Optionally include external tool tabs in the returned list of tabs (Only has effect for courses, not groups)",
+              "description": "- \"course_subject_tabs\": Optional flag to return the tabs associated with a canvas_for_elementary subject course's\n  home page instead of the typical sidebar navigation. Only takes effect if this request is for a course context\n  in a canvas_for_elementary-enabled account or sub-account.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
-                "external"
+                "course_subject_tabs"
               ],
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/groups/{group_id}/tabs",
-      "description": "Returns a list of navigation tabs available in the current context.",
+      "description": "Returns a paginated list of navigation tabs available in the current context.",
       "operations": [
         {
           "method": "GET",
           "summary": "List available tabs for a course or group",
-          "notes": "Returns a list of navigation tabs available in the current context.",
+          "notes": "Returns a paginated list of navigation tabs available in the current context.",
           "nickname": "list_available_tabs_for_course_or_group_groups",
           "parameters": [
             {
@@ -60,23 +107,70 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "\"external\":: Optionally include external tool tabs in the returned list of tabs (Only has effect for courses, not groups)",
+              "description": "- \"course_subject_tabs\": Optional flag to return the tabs associated with a canvas_for_elementary subject course's\n  home page instead of the typical sidebar navigation. Only takes effect if this request is for a course context\n  in a canvas_for_elementary-enabled account or sub-account.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
-                "external"
+                "course_subject_tabs"
               ],
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/users/{user_id}/tabs",
+      "description": "Returns a paginated list of navigation tabs available in the current context.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List available tabs for a course or group",
+          "notes": "Returns a paginated list of navigation tabs available in the current context.",
+          "nickname": "list_available_tabs_for_course_or_group_users",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "user_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "include",
+              "description": "- \"course_subject_tabs\": Optional flag to return the tabs associated with a canvas_for_elementary subject course's\n  home page instead of the typical sidebar navigation. Only takes effect if this request is for a course context\n  in a canvas_for_elementary-enabled account or sub-account.",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "course_subject_tabs"
+              ],
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -97,7 +191,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -105,7 +200,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -113,7 +209,8 @@
               "description": "The new position of the tab, 1-based",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -121,9 +218,13 @@
               "description": "no description",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Tab"
         }
       ]
@@ -133,9 +234,9 @@
     "Tab": {
       "id": "Tab",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "html_url": {
           "example": "/courses/1/external_tools/4",

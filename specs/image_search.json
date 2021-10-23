@@ -1,0 +1,118 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "https://canvas.instructure.com/api",
+  "resourcePath": "/image_search",
+  "produces": [
+    "application/json"
+  ],
+  "apis": [
+    {
+      "path": "/v1/image_search",
+      "description": "Find public domain images for use in courses and user content.  If you select an image using this API, please use the {api:InternetImageController#image_selection Confirm image selection API} to indicate photo usage to the server.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Find images",
+          "notes": "Find public domain images for use in courses and user content.  If you select an image using this API, please use the {api:InternetImageController#image_selection Confirm image selection API} to indicate photo usage to the server.",
+          "nickname": "find_images",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "query",
+              "description": "Search terms used for matching images (e.g. \"cats\").",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [
+            {
+              "name": "id",
+              "description": "The unique identifier for the image.",
+              "deprecated": false
+            },
+            {
+              "name": "description",
+              "description": "Description of the image.",
+              "deprecated": false
+            },
+            {
+              "name": "alt",
+              "description": "Accessible alternative text for the image.",
+              "deprecated": false
+            },
+            {
+              "name": "user",
+              "description": "The name of the user who owns the image",
+              "deprecated": false
+            },
+            {
+              "name": "user_url",
+              "description": "The URL to view the user's profile on the image upload site",
+              "deprecated": false
+            },
+            {
+              "name": "large_url",
+              "description": "The URL of the image sized large",
+              "deprecated": false
+            },
+            {
+              "name": "regular_url",
+              "description": "The URL of the image",
+              "deprecated": false
+            },
+            {
+              "name": "small_url",
+              "description": "The URL of the image sized small",
+              "deprecated": false
+            },
+            {
+              "name": "raw_url",
+              "description": "The raw URL of the photo",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/image_selection/{id}",
+      "description": "After you have used the search API, you should hit this API to indicate photo usage to the server.",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Confirm image selection",
+          "notes": "After you have used the search API, you should hit this API to indicate photo usage to the server.",
+          "nickname": "confirm_image_selection",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "The ID from the image_search result.",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [
+            {
+              "name": "message",
+              "description": "Confirmation success message or error",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    }
+  ],
+  "models": {}
+}

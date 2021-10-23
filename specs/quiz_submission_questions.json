@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -32,6 +33,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "quiz_question"
               ],
@@ -40,6 +42,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -60,7 +65,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -68,7 +74,8 @@
               "description": "The attempt number of the quiz submission being taken. Note that this\nmust be the latest attempt index, as questions for earlier attempts can\nnot be modified.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -76,7 +83,8 @@
               "description": "The unique validation token you received when the Quiz Submission was\ncreated.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -84,7 +92,8 @@
               "description": "Access code for the Quiz, if any.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -93,15 +102,64 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "QuizSubmissionQuestion"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "QuizSubmissionQuestion"
           }
+        }
+      ]
+    },
+    {
+      "path": "/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/formatted_answer",
+      "description": "Matches the intended behavior of the UI when a numerical answer is entered\nand returns the resulting formatted number",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get a formatted student numerical answer.",
+          "notes": "Matches the intended behavior of the UI when a numerical answer is entered\nand returns the resulting formatted number",
+          "nickname": "get_formatted_student_numerical_answer",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "quiz_submission_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "answer",
+              "description": "no description",
+              "type": "Numeric",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
         }
       ]
     },
@@ -121,7 +179,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -129,7 +188,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -137,7 +197,8 @@
               "description": "The attempt number of the quiz submission being taken. Note that this\nmust be the latest attempt index, as questions for earlier attempts can\nnot be modified.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -145,7 +206,8 @@
               "description": "The unique validation token you received when the Quiz Submission was\ncreated.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -153,9 +215,13 @@
               "description": "Access code for the Quiz, if any.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -176,7 +242,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -184,7 +251,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -192,7 +260,8 @@
               "description": "The attempt number of the quiz submission being taken. Note that this\nmust be the latest attempt index, as questions for earlier attempts can\nnot be modified.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -200,7 +269,8 @@
               "description": "The unique validation token you received when the Quiz Submission was\ncreated.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -208,9 +278,13 @@
               "description": "Access code for the Quiz, if any.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -223,6 +297,8 @@
       "required": [
         "id"
       ],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the QuizQuestion this answer is for.",
@@ -241,7 +317,10 @@
         },
         "answers": {
           "description": "The possible answers for this question when those possible answers are necessary.  The presence of this parameter is dependent on permissions.",
-          "type": "array"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

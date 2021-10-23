@@ -9,16 +9,17 @@
   "apis": [
     {
       "path": "/v1/epub_exports",
-      "description": "Lists all courses a user is actively participating in,\nand the latest ePub export associated with the user & course.",
+      "description": "A paginated list of all courses a user is actively participating in, and\nthe latest ePub export associated with the user & course.",
       "operations": [
         {
           "method": "GET",
           "summary": "List courses with their latest ePub export",
-          "notes": "Lists all courses a user is actively participating in,\nand the latest ePub export associated with the user & course.",
+          "notes": "A paginated list of all courses a user is actively participating in, and\nthe latest ePub export associated with the user & course.",
           "nickname": "list_courses_with_their_latest_epub_export",
-          "parameters": [
-
-          ],
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "CourseEpubExport"
@@ -42,9 +43,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "EpubExport"
         }
       ]
@@ -65,7 +70,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -73,9 +79,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "EpubExport"
         }
       ]
@@ -85,9 +95,9 @@
     "CourseEpubExport": {
       "id": "CourseEpubExport",
       "description": "Combination of a Course & EpubExport.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the unique identifier for the course",
@@ -108,9 +118,9 @@
     "EpubExport": {
       "id": "EpubExport",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the unique identifier for the export",

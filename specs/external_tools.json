@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -31,7 +32,8 @@
               "description": "The partial name of the tools to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -39,7 +41,8 @@
               "description": "If true, then only tools that are meant to be selectable are returned",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -47,9 +50,13 @@
               "description": "If true, then include tools installed in all accounts above the current context",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -70,7 +77,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -78,7 +86,8 @@
               "description": "The partial name of the tools to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -86,7 +95,8 @@
               "description": "If true, then only tools that are meant to be selectable are returned",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -94,9 +104,13 @@
               "description": "If true, then include tools installed in all accounts above the current context",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -117,7 +131,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -125,7 +140,8 @@
               "description": "The partial name of the tools to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -133,7 +149,8 @@
               "description": "If true, then only tools that are meant to be selectable are returned",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -141,9 +158,13 @@
               "description": "If true, then include tools installed in all accounts above the current context",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -164,7 +185,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -172,7 +194,8 @@
               "description": "The external id of the tool to launch.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -180,7 +203,8 @@
               "description": "The LTI launch url for the external tool.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -188,7 +212,8 @@
               "description": "The assignment id for an assignment launch. Required if launch_type is set to \"assessment\".",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -196,7 +221,8 @@
               "description": "The assignment id for a module item launch. Required if launch_type is set to \"module_item\".",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -205,12 +231,32 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "assessment",
                 "module_item"
               ]
             }
           ],
+          "response_fields": [
+            {
+              "name": "id",
+              "description": "The id for the external tool to be launched.",
+              "deprecated": false
+            },
+            {
+              "name": "name",
+              "description": "The name of the external tool to be launched.",
+              "deprecated": false
+            },
+            {
+              "name": "url",
+              "description": "The url to load to launch the external tool for the user.",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -231,7 +277,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -239,7 +286,8 @@
               "description": "The external id of the tool to launch.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -247,7 +295,8 @@
               "description": "The LTI launch url for the external tool.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -255,7 +304,8 @@
               "description": "The assignment id for an assignment launch. Required if launch_type is set to \"assessment\".",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -263,7 +313,8 @@
               "description": "The assignment id for a module item launch. Required if launch_type is set to \"module_item\".",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -272,12 +323,32 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "assessment",
                 "module_item"
               ]
             }
           ],
+          "response_fields": [
+            {
+              "name": "id",
+              "description": "The id for the external tool to be launched.",
+              "deprecated": false
+            },
+            {
+              "name": "name",
+              "description": "The name of the external tool to be launched.",
+              "deprecated": false
+            },
+            {
+              "name": "url",
+              "description": "The url to load to launch the external tool for the user.",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -298,7 +369,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -306,9 +378,144 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [
+            {
+              "name": "id",
+              "description": "The unique identifier for the tool",
+              "deprecated": false
+            },
+            {
+              "name": "domain",
+              "description": "The domain to match links against",
+              "deprecated": false
+            },
+            {
+              "name": "url",
+              "description": "The url to match links against",
+              "deprecated": false
+            },
+            {
+              "name": "consumer_key",
+              "description": "The consumer key used by the tool (The associated shared secret is not returned)",
+              "deprecated": false
+            },
+            {
+              "name": "name",
+              "description": "The name of the tool",
+              "deprecated": false
+            },
+            {
+              "name": "description",
+              "description": "A description of the tool",
+              "deprecated": false
+            },
+            {
+              "name": "created_at",
+              "description": "Timestamp of creation",
+              "deprecated": false
+            },
+            {
+              "name": "updated_at",
+              "description": "Timestamp of last update",
+              "deprecated": false
+            },
+            {
+              "name": "privacy_level",
+              "description": "What information to send to the external tool, \"anonymous\", \"name_only\", \"public\"",
+              "deprecated": false
+            },
+            {
+              "name": "custom_fields",
+              "description": "Custom fields that will be sent to the tool consumer",
+              "deprecated": false
+            },
+            {
+              "name": "is_rce_favorite",
+              "description": "Boolean determining whether this tool should be in a preferred location in the RCE.",
+              "deprecated": false
+            },
+            {
+              "name": "account_navigation",
+              "description": "The configuration for account navigation links (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "assignment_selection",
+              "description": "The configuration for assignment selection links (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "course_home_sub_navigation",
+              "description": "The configuration for course home navigation links (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "course_navigation",
+              "description": "The configuration for course navigation links (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "editor_button",
+              "description": "The configuration for a WYSIWYG editor button (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "homework_submission",
+              "description": "The configuration for homework submission selection (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "link_selection",
+              "description": "The configuration for link selection (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "migration_selection",
+              "description": "The configuration for migration selection (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "resource_selection",
+              "description": "The configuration for a resource selector in modules (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "tool_configuration",
+              "description": "The configuration for a tool configuration link (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "user_navigation",
+              "description": "The configuration for user navigation links (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "selection_width",
+              "description": "The pixel width of the iFrame that the tool will be rendered in",
+              "deprecated": false
+            },
+            {
+              "name": "selection_height",
+              "description": "The pixel height of the iFrame that the tool will be rendered in",
+              "deprecated": false
+            },
+            {
+              "name": "icon_url",
+              "description": "The url for the tool icon",
+              "deprecated": false
+            },
+            {
+              "name": "not_selectable",
+              "description": "whether the tool is not selectable from assignment and modules",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -329,7 +536,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -337,21 +545,156 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [
+            {
+              "name": "id",
+              "description": "The unique identifier for the tool",
+              "deprecated": false
+            },
+            {
+              "name": "domain",
+              "description": "The domain to match links against",
+              "deprecated": false
+            },
+            {
+              "name": "url",
+              "description": "The url to match links against",
+              "deprecated": false
+            },
+            {
+              "name": "consumer_key",
+              "description": "The consumer key used by the tool (The associated shared secret is not returned)",
+              "deprecated": false
+            },
+            {
+              "name": "name",
+              "description": "The name of the tool",
+              "deprecated": false
+            },
+            {
+              "name": "description",
+              "description": "A description of the tool",
+              "deprecated": false
+            },
+            {
+              "name": "created_at",
+              "description": "Timestamp of creation",
+              "deprecated": false
+            },
+            {
+              "name": "updated_at",
+              "description": "Timestamp of last update",
+              "deprecated": false
+            },
+            {
+              "name": "privacy_level",
+              "description": "What information to send to the external tool, \"anonymous\", \"name_only\", \"public\"",
+              "deprecated": false
+            },
+            {
+              "name": "custom_fields",
+              "description": "Custom fields that will be sent to the tool consumer",
+              "deprecated": false
+            },
+            {
+              "name": "is_rce_favorite",
+              "description": "Boolean determining whether this tool should be in a preferred location in the RCE.",
+              "deprecated": false
+            },
+            {
+              "name": "account_navigation",
+              "description": "The configuration for account navigation links (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "assignment_selection",
+              "description": "The configuration for assignment selection links (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "course_home_sub_navigation",
+              "description": "The configuration for course home navigation links (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "course_navigation",
+              "description": "The configuration for course navigation links (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "editor_button",
+              "description": "The configuration for a WYSIWYG editor button (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "homework_submission",
+              "description": "The configuration for homework submission selection (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "link_selection",
+              "description": "The configuration for link selection (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "migration_selection",
+              "description": "The configuration for migration selection (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "resource_selection",
+              "description": "The configuration for a resource selector in modules (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "tool_configuration",
+              "description": "The configuration for a tool configuration link (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "user_navigation",
+              "description": "The configuration for user navigation links (see create API for values)",
+              "deprecated": false
+            },
+            {
+              "name": "selection_width",
+              "description": "The pixel width of the iFrame that the tool will be rendered in",
+              "deprecated": false
+            },
+            {
+              "name": "selection_height",
+              "description": "The pixel height of the iFrame that the tool will be rendered in",
+              "deprecated": false
+            },
+            {
+              "name": "icon_url",
+              "description": "The url for the tool icon",
+              "deprecated": false
+            },
+            {
+              "name": "not_selectable",
+              "description": "whether the tool is not selectable from assignment and modules",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/external_tools",
-      "description": "Create an external tool in the specified course/account.\nThe created tool will be returned, see the \"show\" endpoint for an example.",
+      "description": "Create an external tool in the specified course/account.\nThe created tool will be returned, see the \"show\" endpoint for an example.\nIf a client ID is supplied canvas will attempt to create a context external\ntool using the LTI 1.3 standard.",
       "operations": [
         {
           "method": "POST",
           "summary": "Create an external tool",
-          "notes": "Create an external tool in the specified course/account.\nThe created tool will be returned, see the \"show\" endpoint for an example.",
+          "notes": "Create an external tool in the specified course/account.\nThe created tool will be returned, see the \"show\" endpoint for an example.\nIf a client ID is supplied canvas will attempt to create a context external\ntool using the LTI 1.3 standard.",
           "nickname": "create_external_tool_courses",
           "parameters": [
             {
@@ -360,7 +703,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "client_id",
+              "description": "The client id is attached to the developer key.\nIf supplied all other parameters are unnecessary and will be ignored",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -368,7 +721,8 @@
               "description": "The name of the tool",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -377,6 +731,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "anonymous",
                 "name_only",
@@ -389,7 +744,8 @@
               "description": "The consumer key for the external tool",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -397,7 +753,8 @@
               "description": "The shared secret with the external tool",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -405,7 +762,8 @@
               "description": "A description of the tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -413,7 +771,8 @@
               "description": "The url to match links against. Either \"url\" or \"domain\" should be set,\nnot both.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -421,7 +780,8 @@
               "description": "The domain to match links against. Either \"url\" or \"domain\" should be\nset, not both.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -429,7 +789,8 @@
               "description": "The url of the icon to show for this tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -437,7 +798,8 @@
               "description": "The default text to show for this tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -445,7 +807,17 @@
               "description": "Custom fields that will be sent to the tool consumer; can be used\nmultiple times",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "is_rce_favorite",
+              "description": "(Deprecated in favor of {api:ExternalToolsController#add_rce_favorite Add tool to RCE Favorites} and\n{api:ExternalToolsController#remove_rce_favorite Remove tool from RCE Favorites})\nWhether this tool should appear in a preferred location in the RCE.\nThis only applies to tools in root account contexts that have an editor\nbutton placement.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -453,7 +825,8 @@
               "description": "The url of the external tool for account navigation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -461,7 +834,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -469,7 +843,8 @@
               "description": "The text that will show on the left-tab in the account navigation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -477,7 +852,8 @@
               "description": "The width of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -485,7 +861,17 @@
               "description": "The height of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account_navigation[display_type]",
+              "description": "The layout type to use when launching the tool. Must be\n\"full_width\", \"full_width_in_context\", \"in_nav_context\", \"borderless\", or \"default\"",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -493,7 +879,8 @@
               "description": "The url of the external tool for user navigation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -501,7 +888,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -509,7 +897,22 @@
               "description": "The text that will show on the left-tab in the user navigation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "user_navigation[visibility]",
+              "description": "Who will see the navigation tab. \"admins\" for admins, \"public\" or\n\"members\" for everyone. Setting this to `null` will remove this configuration\nand use the default behavior, which is \"public\".",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "admins",
+                "members",
+                "public"
+              ]
             },
             {
               "paramType": "form",
@@ -517,7 +920,8 @@
               "description": "The url of the external tool for right-side course home navigation menu",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -525,7 +929,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -533,7 +938,8 @@
               "description": "The text that will show on the right-side course home navigation menu",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -541,7 +947,8 @@
               "description": "The url of the icon to show in the right-side course home navigation menu",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -549,7 +956,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -557,18 +965,21 @@
               "description": "The text that will show on the left-tab in the course navigation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course_navigation[visibility]",
-              "description": "Who will see the navigation tab. \"admins\" for course admins, \"members\" for\nstudents, null for everyone",
+              "description": "Who will see the navigation tab. \"admins\" for course admins, \"members\" for\nstudents, \"public\" for everyone. Setting this to `null` will remove this configuration\nand use the default behavior, which is \"public\".",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "admins",
-                "members"
+                "members",
+                "public"
               ]
             },
             {
@@ -578,6 +989,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "_blank",
                 "_self"
@@ -586,10 +998,24 @@
             {
               "paramType": "form",
               "name": "course_navigation[default]",
-              "description": "Whether the navigation option will show in the course by default or\nwhether the teacher will have to explicitly enable it",
-              "type": "boolean",
+              "description": "If set to \"disabled\" the tool will not appear in the course navigation\nuntil a teacher explicitly enables it.\n\nIf set to \"enabled\" the tool will appear in the course navigation\nwithout requiring a teacher to explicitly enable it.\n\ndefaults to \"enabled\"",
+              "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "disabled",
+                "enabled"
+              ]
+            },
+            {
+              "paramType": "form",
+              "name": "course_navigation[display_type]",
+              "description": "The layout type to use when launching the tool. Must be\n\"full_width\", \"full_width_in_context\", \"in_nav_context\", \"borderless\", or \"default\"",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -597,7 +1023,8 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -605,7 +1032,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -613,7 +1041,8 @@
               "description": "The url of the icon to show in the WYSIWYG editor",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -621,7 +1050,8 @@
               "description": "The width of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -629,7 +1059,8 @@
               "description": "The height of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -637,7 +1068,8 @@
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -645,7 +1077,8 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -653,7 +1086,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -661,7 +1095,8 @@
               "description": "The text that will show on the homework submission tab",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -669,7 +1104,8 @@
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -677,7 +1113,8 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -685,7 +1122,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -693,7 +1131,8 @@
               "description": "The text that will show for the link selection text",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -701,7 +1140,8 @@
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -709,7 +1149,8 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -717,7 +1158,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -725,7 +1167,8 @@
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -733,7 +1176,8 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -741,7 +1185,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -749,7 +1194,8 @@
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -757,7 +1203,8 @@
               "description": "Set this to default the lis_person_contact_email_primary to prefer\nprovisioned sis_email; otherwise, omit",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -765,15 +1212,17 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "resource_selection[enabled]",
-              "description": "Set this to enable this feature",
+              "description": "Set this to enable this feature. If set to false,\nnot_selectable must also be set to true in order to hide this tool\nfrom the selection UI in modules and assignments.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -781,7 +1230,8 @@
               "description": "The url of the icon to show in the module external tool list",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -789,7 +1239,8 @@
               "description": "The width of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -797,7 +1248,8 @@
               "description": "The height of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -805,7 +1257,8 @@
               "description": "Configuration can be passed in as CC xml instead of using query\nparameters. If this value is \"by_url\" or \"by_xml\" then an xml\nconfiguration will be expected in either the \"config_xml\" or \"config_url\"\nparameter. Note that the name parameter overrides the tool name provided\nin the xml",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -813,7 +1266,8 @@
               "description": "XML tool configuration, as specified in the CC xml specification. This is\nrequired if \"config_type\" is set to \"by_xml\"",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -821,15 +1275,17 @@
               "description": "URL where the server can retrieve an XML tool configuration, as specified\nin the CC xml specification. This is required if \"config_type\" is set to\n\"by_url\"",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "not_selectable",
-              "description": "Default: false, if set to true the tool won't show up in the external tool\nselection UI in modules and assignments",
+              "description": "Default: false. If set to true, and if resource_selection is set to false,\nthe tool won't show up in the external tool\nselection UI in modules and assignments",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -837,21 +1293,25 @@
               "description": "Default: false, if set to true LTI query params will not be copied to the\npost body.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/accounts/{account_id}/external_tools",
-      "description": "Create an external tool in the specified course/account.\nThe created tool will be returned, see the \"show\" endpoint for an example.",
+      "description": "Create an external tool in the specified course/account.\nThe created tool will be returned, see the \"show\" endpoint for an example.\nIf a client ID is supplied canvas will attempt to create a context external\ntool using the LTI 1.3 standard.",
       "operations": [
         {
           "method": "POST",
           "summary": "Create an external tool",
-          "notes": "Create an external tool in the specified course/account.\nThe created tool will be returned, see the \"show\" endpoint for an example.",
+          "notes": "Create an external tool in the specified course/account.\nThe created tool will be returned, see the \"show\" endpoint for an example.\nIf a client ID is supplied canvas will attempt to create a context external\ntool using the LTI 1.3 standard.",
           "nickname": "create_external_tool_accounts",
           "parameters": [
             {
@@ -860,7 +1320,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "client_id",
+              "description": "The client id is attached to the developer key.\nIf supplied all other parameters are unnecessary and will be ignored",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -868,7 +1338,8 @@
               "description": "The name of the tool",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -877,6 +1348,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "anonymous",
                 "name_only",
@@ -889,7 +1361,8 @@
               "description": "The consumer key for the external tool",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -897,7 +1370,8 @@
               "description": "The shared secret with the external tool",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -905,7 +1379,8 @@
               "description": "A description of the tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -913,7 +1388,8 @@
               "description": "The url to match links against. Either \"url\" or \"domain\" should be set,\nnot both.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -921,7 +1397,8 @@
               "description": "The domain to match links against. Either \"url\" or \"domain\" should be\nset, not both.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -929,7 +1406,8 @@
               "description": "The url of the icon to show for this tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -937,7 +1415,8 @@
               "description": "The default text to show for this tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -945,7 +1424,17 @@
               "description": "Custom fields that will be sent to the tool consumer; can be used\nmultiple times",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "is_rce_favorite",
+              "description": "(Deprecated in favor of {api:ExternalToolsController#add_rce_favorite Add tool to RCE Favorites} and\n{api:ExternalToolsController#remove_rce_favorite Remove tool from RCE Favorites})\nWhether this tool should appear in a preferred location in the RCE.\nThis only applies to tools in root account contexts that have an editor\nbutton placement.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -953,7 +1442,8 @@
               "description": "The url of the external tool for account navigation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -961,7 +1451,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -969,7 +1460,8 @@
               "description": "The text that will show on the left-tab in the account navigation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -977,7 +1469,8 @@
               "description": "The width of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -985,7 +1478,17 @@
               "description": "The height of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account_navigation[display_type]",
+              "description": "The layout type to use when launching the tool. Must be\n\"full_width\", \"full_width_in_context\", \"in_nav_context\", \"borderless\", or \"default\"",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -993,7 +1496,8 @@
               "description": "The url of the external tool for user navigation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1001,7 +1505,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1009,7 +1514,22 @@
               "description": "The text that will show on the left-tab in the user navigation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "user_navigation[visibility]",
+              "description": "Who will see the navigation tab. \"admins\" for admins, \"public\" or\n\"members\" for everyone. Setting this to `null` will remove this configuration\nand use the default behavior, which is \"public\".",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "admins",
+                "members",
+                "public"
+              ]
             },
             {
               "paramType": "form",
@@ -1017,7 +1537,8 @@
               "description": "The url of the external tool for right-side course home navigation menu",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1025,7 +1546,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1033,7 +1555,8 @@
               "description": "The text that will show on the right-side course home navigation menu",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1041,7 +1564,8 @@
               "description": "The url of the icon to show in the right-side course home navigation menu",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1049,7 +1573,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1057,18 +1582,21 @@
               "description": "The text that will show on the left-tab in the course navigation",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course_navigation[visibility]",
-              "description": "Who will see the navigation tab. \"admins\" for course admins, \"members\" for\nstudents, null for everyone",
+              "description": "Who will see the navigation tab. \"admins\" for course admins, \"members\" for\nstudents, \"public\" for everyone. Setting this to `null` will remove this configuration\nand use the default behavior, which is \"public\".",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "admins",
-                "members"
+                "members",
+                "public"
               ]
             },
             {
@@ -1078,6 +1606,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "_blank",
                 "_self"
@@ -1086,10 +1615,24 @@
             {
               "paramType": "form",
               "name": "course_navigation[default]",
-              "description": "Whether the navigation option will show in the course by default or\nwhether the teacher will have to explicitly enable it",
-              "type": "boolean",
+              "description": "If set to \"disabled\" the tool will not appear in the course navigation\nuntil a teacher explicitly enables it.\n\nIf set to \"enabled\" the tool will appear in the course navigation\nwithout requiring a teacher to explicitly enable it.\n\ndefaults to \"enabled\"",
+              "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "disabled",
+                "enabled"
+              ]
+            },
+            {
+              "paramType": "form",
+              "name": "course_navigation[display_type]",
+              "description": "The layout type to use when launching the tool. Must be\n\"full_width\", \"full_width_in_context\", \"in_nav_context\", \"borderless\", or \"default\"",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1097,7 +1640,8 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1105,7 +1649,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1113,7 +1658,8 @@
               "description": "The url of the icon to show in the WYSIWYG editor",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1121,7 +1667,8 @@
               "description": "The width of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1129,7 +1676,8 @@
               "description": "The height of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1137,7 +1685,8 @@
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1145,7 +1694,8 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1153,7 +1703,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1161,7 +1712,8 @@
               "description": "The text that will show on the homework submission tab",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1169,7 +1721,8 @@
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1177,7 +1730,8 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1185,7 +1739,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1193,7 +1748,8 @@
               "description": "The text that will show for the link selection text",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1201,7 +1757,8 @@
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1209,7 +1766,8 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1217,7 +1775,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1225,7 +1784,8 @@
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1233,7 +1793,8 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1241,7 +1802,8 @@
               "description": "Set this to enable this feature",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1249,7 +1811,8 @@
               "description": "Set this to ContentItemSelectionRequest to tell the tool to use\ncontent-item; otherwise, omit",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1257,7 +1820,8 @@
               "description": "Set this to default the lis_person_contact_email_primary to prefer\nprovisioned sis_email; otherwise, omit",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1265,15 +1829,17 @@
               "description": "The url of the external tool",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "resource_selection[enabled]",
-              "description": "Set this to enable this feature",
+              "description": "Set this to enable this feature. If set to false,\nnot_selectable must also be set to true in order to hide this tool\nfrom the selection UI in modules and assignments.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1281,7 +1847,8 @@
               "description": "The url of the icon to show in the module external tool list",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1289,7 +1856,8 @@
               "description": "The width of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1297,7 +1865,8 @@
               "description": "The height of the dialog the tool is launched in",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1305,7 +1874,8 @@
               "description": "Configuration can be passed in as CC xml instead of using query\nparameters. If this value is \"by_url\" or \"by_xml\" then an xml\nconfiguration will be expected in either the \"config_xml\" or \"config_url\"\nparameter. Note that the name parameter overrides the tool name provided\nin the xml",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1313,7 +1883,8 @@
               "description": "XML tool configuration, as specified in the CC xml specification. This is\nrequired if \"config_type\" is set to \"by_xml\"",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1321,15 +1892,17 @@
               "description": "URL where the server can retrieve an XML tool configuration, as specified\nin the CC xml specification. This is required if \"config_type\" is set to\n\"by_url\"",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "not_selectable",
-              "description": "Default: false, if set to true the tool won't show up in the external tool\nselection UI in modules and assignments",
+              "description": "Default: false. If set to true, and if resource_selection is set to false,\nthe tool won't show up in the external tool\nselection UI in modules and assignments",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1337,9 +1910,13 @@
               "description": "Default: false, if set to true LTI query params will not be copied to the\npost body.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1360,7 +1937,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1368,9 +1946,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1391,7 +1973,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1399,9 +1982,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1422,7 +2009,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1430,9 +2018,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1453,7 +2045,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1461,14 +2054,157 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/external_tools/rce_favorites/{id}",
+      "description": "Add the specified editor_button external tool to a preferred location in the RCE\nfor courses in the given account and its subaccounts (if the subaccounts\nhaven't set their own RCE Favorites). Cannot set more than 2 RCE Favorites.",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Add tool to RCE Favorites",
+          "notes": "Add the specified editor_button external tool to a preferred location in the RCE\nfor courses in the given account and its subaccounts (if the subaccounts\nhaven't set their own RCE Favorites). Cannot set more than 2 RCE Favorites.",
+          "nickname": "add_tool_to_rce_favorites",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/external_tools/rce_favorites/{id}",
+      "description": "Remove the specified external tool from a preferred location in the RCE\nfor the given account",
+      "operations": [
+        {
+          "method": "DELETE",
+          "summary": "Remove tool from RCE Favorites",
+          "notes": "Remove the specified external tool from a preferred location in the RCE\nfor the given account",
+          "nickname": "remove_tool_from_rce_favorites",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/external_tools/visible_course_nav_tools",
+      "description": "Get a list of external tools with the course_navigation placement that have not been hidden in\ncourse settings and whose visibility settings apply to the requesting user. These tools are the\nsame that appear in the course navigation.\n\nThe response format is the same as for List external tools, but with additional context_id and\ncontext_name fields on each element in the array.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get visible course navigation tools",
+          "notes": "Get a list of external tools with the course_navigation placement that have not been hidden in\ncourse settings and whose visibility settings apply to the requesting user. These tools are the\nsame that appear in the course navigation.\n\nThe response format is the same as for List external tools, but with additional context_id and\ncontext_name fields on each element in the array.",
+          "nickname": "get_visible_course_navigation_tools",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "context_codes",
+              "description": "List of context_codes to retrieve visible course nav tools for (for example, +course_123+). Only\ncourses are presently supported.",
+              "type": "array",
+              "format": null,
+              "required": true,
+              "deprecated": false,
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "response_fields": [
+            {
+              "name": "context_id",
+              "description": "The unique identifier of the associated context",
+              "deprecated": false
+            },
+            {
+              "name": "context_name",
+              "description": "The name of the associated context",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/external_tools/visible_course_nav_tools",
+      "description": "Get a list of external tools with the course_navigation placement that have not been hidden in\ncourse settings and whose visibility settings apply to the requesting user. These tools are the\nsame that appear in the course navigation.\n\nThe response format is the same as Get visible course navigation tools.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get visible course navigation tools for a single course",
+          "notes": "Get a list of external tools with the course_navigation placement that have not been hidden in\ncourse settings and whose visibility settings apply to the requesting user. These tools are the\nsame that appear in the course navigation.\n\nThe response format is the same as Get visible course navigation tools.",
+          "nickname": "get_visible_course_navigation_tools_for_single_course",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     }
   ],
-  "models": {
-  }
+  "models": {}
 }

@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,9 +32,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "BlueprintTemplate"
         }
       ]
@@ -54,7 +59,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -62,9 +68,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Course"
@@ -74,12 +84,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/blueprint_templates/{template_id}/update_associations",
-      "description": "Send a list of course ids to add or remove new associations for the template.\nCannot add courses that do not belong to the blueprint course's account. Also cannot add\nother blueprint courses or courses that already have an association with another blueprint course.",
+      "description": "Send a list of course ids to add or remove new associations for the template.\nCannot add courses that do not belong to the blueprint course's account. Also cannot add\nother blueprint courses or courses that already have an association with another blueprint course.\n\nAfter associating new courses, {api:MasterCourses::MasterTemplatesController#queue_migration start a sync} to populate their contents from the blueprint.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Update associated courses",
-          "notes": "Send a list of course ids to add or remove new associations for the template.\nCannot add courses that do not belong to the blueprint course's account. Also cannot add\nother blueprint courses or courses that already have an association with another blueprint course.",
+          "notes": "Send a list of course ids to add or remove new associations for the template.\nCannot add courses that do not belong to the blueprint course's account. Also cannot add\nother blueprint courses or courses that already have an association with another blueprint course.\n\nAfter associating new courses, {api:MasterCourses::MasterTemplatesController#queue_migration start a sync} to populate their contents from the blueprint.",
           "nickname": "update_associated_courses",
           "parameters": [
             {
@@ -88,7 +98,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -96,7 +107,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -104,7 +116,8 @@
               "description": "Courses to add as associated courses",
               "type": "Array",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -112,9 +125,13 @@
               "description": "Courses to remove as associated courses",
               "type": "Array",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -135,7 +152,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -143,7 +161,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -151,7 +170,8 @@
               "description": "An optional comment to be included in the sync history.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -159,7 +179,8 @@
               "description": "Send a notification to the calling user when the sync completes.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -167,9 +188,22 @@
               "description": "Whether course settings should be copied over to associated courses.\nDefaults to true for newly associated courses.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "publish_after_initial_sync",
+              "description": "If set, newly associated courses will be automatically published after the sync completes",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "BlueprintMigration"
         }
       ]
@@ -190,7 +224,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -198,7 +233,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -207,6 +243,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "assignment",
                 "attachment",
@@ -222,7 +259,8 @@
               "description": "The ID of the object.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -230,7 +268,8 @@
               "description": "Whether to apply restrictions.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -238,21 +277,25 @@
               "description": "(Optional) If the object is restricted, this specifies a set of restrictions. If not specified,\nthe course-level restrictions will be used. See {api:CoursesController#update Course API update documentation}",
               "type": "BlueprintRestriction",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/blueprint_templates/{template_id}/unsynced_changes",
-      "description": "Retrieve a list of learning objects that have changed since the last blueprint sync operation.",
+      "description": "Retrieve a list of learning objects that have changed since the last blueprint sync operation.\nIf no syncs have been completed, a ChangeRecord with a change_type of +initial_sync+ is returned.",
       "operations": [
         {
           "method": "GET",
           "summary": "Get unsynced changes",
-          "notes": "Retrieve a list of learning objects that have changed since the last blueprint sync operation.",
+          "notes": "Retrieve a list of learning objects that have changed since the last blueprint sync operation.\nIf no syncs have been completed, a ChangeRecord with a change_type of +initial_sync+ is returned.",
           "nickname": "get_unsynced_changes",
           "parameters": [
             {
@@ -261,7 +304,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -269,9 +313,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ChangeRecord"
@@ -281,12 +329,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/blueprint_templates/{template_id}/migrations",
-      "description": "Shows migrations for the template, starting with the most recent. This endpoint can be called on a\nblueprint course. See also {api:MasterCourses::MasterTemplatesController#imports_index the associated course side}.",
+      "description": "Shows a paginated list of migrations for the template, starting with the most recent. This endpoint can be called on a\nblueprint course. See also {api:MasterCourses::MasterTemplatesController#imports_index the associated course side}.",
       "operations": [
         {
           "method": "GET",
           "summary": "List blueprint migrations",
-          "notes": "Shows migrations for the template, starting with the most recent. This endpoint can be called on a\nblueprint course. See also {api:MasterCourses::MasterTemplatesController#imports_index the associated course side}.",
+          "notes": "Shows a paginated list of migrations for the template, starting with the most recent. This endpoint can be called on a\nblueprint course. See also {api:MasterCourses::MasterTemplatesController#imports_index the associated course side}.",
           "nickname": "list_blueprint_migrations",
           "parameters": [
             {
@@ -295,7 +343,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -303,9 +352,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "BlueprintMigration"
@@ -329,7 +382,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -337,7 +391,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -345,9 +400,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "BlueprintMigration"
         }
       ]
@@ -368,7 +427,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -376,7 +436,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -384,9 +445,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ChangeRecord"
@@ -395,13 +460,43 @@
       ]
     },
     {
+      "path": "/v1/courses/{course_id}/blueprint_subscriptions",
+      "description": "Returns a list of blueprint subscriptions for the given course. (Currently a course may have no more than one.)",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List blueprint subscriptions",
+          "notes": "Returns a list of blueprint subscriptions for the given course. (Currently a course may have no more than one.)",
+          "nickname": "list_blueprint_subscriptions",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "array",
+          "items": {
+            "$ref": "BlueprintSubscription"
+          }
+        }
+      ]
+    },
+    {
       "path": "/v1/courses/{course_id}/blueprint_subscriptions/{subscription_id}/migrations",
-      "description": "Shows migrations imported into a course associated with a blueprint, starting with the most recent. See also\n{api:MasterCourses::MasterTemplatesController#migrations_index the blueprint course side}.\n\nUse 'default' as the subscription_id to use the currently active blueprint subscription.",
+      "description": "Shows a paginated list of migrations imported into a course associated with a blueprint, starting with the most recent. See also\n{api:MasterCourses::MasterTemplatesController#migrations_index the blueprint course side}.\n\nUse 'default' as the subscription_id to use the currently active blueprint subscription.",
       "operations": [
         {
           "method": "GET",
           "summary": "List blueprint imports",
-          "notes": "Shows migrations imported into a course associated with a blueprint, starting with the most recent. See also\n{api:MasterCourses::MasterTemplatesController#migrations_index the blueprint course side}.\n\nUse 'default' as the subscription_id to use the currently active blueprint subscription.",
+          "notes": "Shows a paginated list of migrations imported into a course associated with a blueprint, starting with the most recent. See also\n{api:MasterCourses::MasterTemplatesController#migrations_index the blueprint course side}.\n\nUse 'default' as the subscription_id to use the currently active blueprint subscription.",
           "nickname": "list_blueprint_imports",
           "parameters": [
             {
@@ -410,7 +505,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -418,9 +514,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "BlueprintMigration"
@@ -444,7 +544,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -452,7 +553,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -460,9 +562,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "BlueprintMigration"
         }
       ]
@@ -483,7 +589,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -491,7 +598,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -499,9 +607,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ChangeRecord"
@@ -514,9 +626,9 @@
     "BlueprintTemplate": {
       "id": "BlueprintTemplate",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the template.",
@@ -534,15 +646,24 @@
           "description": "Time when the last export was completed",
           "example": "2013-08-28T23:59:00-06:00",
           "type": "datetime"
+        },
+        "associated_course_count": {
+          "description": "Number of associated courses for the template",
+          "example": 3,
+          "type": "integer"
+        },
+        "latest_migration": {
+          "description": "Details of the latest migration",
+          "$ref": "BlueprintMigration"
         }
       }
     },
     "BlueprintMigration": {
       "id": "BlueprintMigration",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the migration.",
@@ -603,9 +724,9 @@
     "BlueprintRestriction": {
       "id": "BlueprintRestriction",
       "description": "A set of restrictions on editing for copied objects in associated courses",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "content": {
           "description": "Restriction on main content (e.g. title, description).",
@@ -632,9 +753,9 @@
     "ChangeRecord": {
       "id": "ChangeRecord",
       "description": "Describes a learning object change propagated to associated courses from a blueprint course",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "asset_id": {
           "description": "The ID of the learning object that was changed in the blueprint course.",
@@ -643,7 +764,7 @@
           "format": "int64"
         },
         "asset_type": {
-          "description": "The type of the learning object that was changed in the blueprint course.  One of 'assignment', 'attachment', 'discussion_topic', 'external_tool', 'quiz', or 'wiki_page'.",
+          "description": "The type of the learning object that was changed in the blueprint course.  One of 'assignment', 'attachment', 'discussion_topic', 'external_tool', 'quiz', 'wiki_page', 'syllabus', or 'settings'.  For 'syllabus' or 'settings', the asset_id is the course id.",
           "example": "assignment",
           "type": "string"
         },
@@ -687,9 +808,9 @@
     "ExceptionRecord": {
       "id": "ExceptionRecord",
       "description": "Lists associated courses that did not receive a change propagated from a blueprint",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "course_id": {
           "description": "The ID of the associated course",
@@ -705,6 +826,37 @@
           "type": "array",
           "items": {
             "type": "object"
+          }
+        }
+      }
+    },
+    "BlueprintSubscription": {
+      "id": "BlueprintSubscription",
+      "description": "Associates a course with a blueprint",
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
+      "properties": {
+        "id": {
+          "description": "The ID of the blueprint course subscription",
+          "example": 101,
+          "type": "integer",
+          "format": "int64"
+        },
+        "template_id": {
+          "description": "The ID of the blueprint template the associated course is subscribed to",
+          "example": 1,
+          "type": "integer",
+          "format": "int64"
+        },
+        "blueprint_course": {
+          "description": "The blueprint course subscribed to",
+          "type": "object",
+          "example": {
+            "id": 2,
+            "name": "Biology 100 Blueprint",
+            "course_code": "BIOL 100 BP",
+            "term_name": "Default term"
           }
         }
       }

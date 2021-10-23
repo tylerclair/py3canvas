@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,21 +32,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/live_assessments/{assessment_id}/results",
-      "description": "Returns a list of live assessment results",
+      "description": "Returns a paginated list of live assessment results",
       "operations": [
         {
           "method": "GET",
           "summary": "List live assessment results",
-          "notes": "Returns a list of live assessment results",
+          "notes": "Returns a paginated list of live assessment results",
           "nickname": "list_live_assessment_results",
           "parameters": [
             {
@@ -54,7 +59,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -62,7 +68,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -70,9 +77,13 @@
               "description": "If set, restrict results to those for this user",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -93,21 +104,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/live_assessments",
-      "description": "Returns a list of live assessments.",
+      "description": "Returns a paginated list of live assessments.",
       "operations": [
         {
           "method": "GET",
           "summary": "List live assessments",
-          "notes": "Returns a list of live assessments.",
+          "notes": "Returns a paginated list of live assessments.",
           "nickname": "list_live_assessments",
           "parameters": [
             {
@@ -116,9 +131,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -128,9 +147,9 @@
     "Result": {
       "id": "Result",
       "description": "A pass/fail results for a student",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "type": "string",
@@ -161,9 +180,9 @@
     "ResultLinks": {
       "id": "ResultLinks",
       "description": "Unique identifiers of objects associated with a result",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "user": {
           "type": "string",
@@ -185,9 +204,9 @@
     "Assessment": {
       "id": "Assessment",
       "description": "A simple assessment that collects pass/fail results for a student",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "type": "string",

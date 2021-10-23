@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/comm_messages",
-      "description": "Retrieve messages sent to a user.",
+      "description": "Retrieve a paginated list of messages sent to a user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List of CommMessages for a user",
-          "notes": "Retrieve messages sent to a user.",
+          "notes": "Retrieve a paginated list of messages sent to a user.",
           "nickname": "list_of_commmessages_for_user",
           "parameters": [
             {
@@ -23,25 +23,31 @@
               "description": "The user id for whom you want to retrieve CommMessages",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "start_time",
-              "description": "The beginning of the time range you want to retrieve message from.",
+              "description": "The beginning of the time range you want to retrieve message from.\nUp to a year prior to the current date is available.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "end_time",
-              "description": "The end of the time range you want to retrieve messages for.",
+              "description": "The end of the time range you want to retrieve messages for.\nUp to a year prior to the current date is available.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "CommMessage"
@@ -54,9 +60,9 @@
     "CommMessage": {
       "id": "CommMessage",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the CommMessage.",

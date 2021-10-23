@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses",
-      "description": "Returns the list of active courses for the current user.",
+      "description": "Returns the paginated list of active courses for the current user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List your courses",
-          "notes": "Returns the list of active courses for the current user.",
+          "notes": "Returns the paginated list of active courses for the current user.",
           "nickname": "list_your_courses",
           "parameters": [
             {
@@ -24,6 +24,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "teacher",
                 "student",
@@ -38,7 +39,8 @@
               "description": "Deprecated\nWhen set, only return courses where the user is enrolled with the specified\ncourse-level role.  This can be a role created with the\n{api:RoleOverridesController#add_role Add Role API} or a base role type of\n'StudentEnrollment', 'TeacherEnrollment', 'TaEnrollment', 'ObserverEnrollment',\nor 'DesignerEnrollment'.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -46,7 +48,8 @@
               "description": "When set, only return courses where the user is enrolled with the specified\ncourse-level role.  This can be a role created with the\n{api:RoleOverridesController#add_role Add Role API} or a built_in role type of\n'StudentEnrollment', 'TeacherEnrollment', 'TaEnrollment', 'ObserverEnrollment',\nor 'DesignerEnrollment'.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -55,6 +58,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "invited_or_pending",
@@ -67,22 +71,26 @@
               "description": "When set, only return courses that are not configured as blueprint courses.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"needs_grading_count\": Optional information to include with each Course.\n  When needs_grading_count is given, and the current user has grading\n  rights, the total number of submissions needing grading for all\n  assignments is returned.\n- \"syllabus_body\": Optional information to include with each Course.\n  When syllabus_body is given the user-generated html for the course\n  syllabus is returned.\n- \"public_description\": Optional information to include with each Course.\n  When public_description is given the user-generated text for the course\n  public description is returned.\n- \"total_scores\": Optional information to include with each Course.\n  When total_scores is given, any student enrollments will also\n  include the fields 'computed_current_score', 'computed_final_score',\n  'computed_current_grade', and 'computed_final_grade' (see Enrollment\n  documentation for more information on these fields). This argument\n  is ignored if the course is configured to hide final grades.\n- \"current_grading_period_scores\": Optional information to include with\n  each Course. When current_grading_period_scores is given and total_scores\n  is given, any student enrollments will also include the fields\n  'has_grading_periods',\n  'totals_for_all_grading_periods_option', 'current_grading_period_title',\n  'current_grading_period_id', current_period_computed_current_score',\n  'current_period_computed_final_score',\n  'current_period_computed_current_grade', and\n  'current_period_computed_final_grade' (see Enrollment documentation for\n  more information on these fields). In addition, when this argument is\n  passed, the course will have a 'has_grading_periods' attribute\n  on it. This argument is ignored if the course is configured to hide final\n  grades or if the total_scores argument is not included.\n- \"term\": Optional information to include with each Course. When\n  term is given, the information for the enrollment term for each course\n  is returned.\n- \"course_progress\": Optional information to include with each Course.\n  When course_progress is given, each course will include a\n  'course_progress' object with the fields: 'requirement_count', an integer\n  specifying the total number of requirements in the course,\n  'requirement_completed_count', an integer specifying the total number of\n  requirements in this course that have been completed, and\n  'next_requirement_url', a string url to the next requirement item, and\n  'completed_at', the date the course was completed (null if incomplete).\n  'next_requirement_url' will be null if all requirements have been\n  completed or the current module does not require sequential progress.\n  \"course_progress\" will return an error message if the course is not\n  module based or the user is not enrolled as a student in the course.\n- \"sections\": Section enrollment information to include with each Course.\n  Returns an array of hashes containing the section ID (id), section name\n  (name), start and end dates (start_at, end_at), as well as the enrollment\n  type (enrollment_role, e.g. 'StudentEnrollment').\n- \"storage_quota_used_mb\": The amount of storage space used by the files in this course\n- \"total_students\": Optional information to include with each Course.\n  Returns an integer for the total amount of active and invited students.\n- \"passback_status\": Include the grade passback_status\n- \"favorites\": Optional information to include with each Course.\n  Indicates if the user has marked the course as a favorite course.\n- \"teachers\": Teacher information to include with each Course.\n  Returns an array of hashes containing the {api:Users:UserDisplay UserDisplay} information\n  for each teacher in the course.\n- \"observed_users\": Optional information to include with each Course.\n  Will include data for observed users if the current user has an\n  observer enrollment.\n- \"tabs\": Optional information to include with each Course.\n  Will include the list of tabs configured for each course.  See the\n  {api:TabsController#index List available tabs API} for more information.\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled",
+              "description": "- \"needs_grading_count\": Optional information to include with each Course.\n  When needs_grading_count is given, and the current user has grading\n  rights, the total number of submissions needing grading for all\n  assignments is returned.\n- \"syllabus_body\": Optional information to include with each Course.\n  When syllabus_body is given the user-generated html for the course\n  syllabus is returned.\n- \"public_description\": Optional information to include with each Course.\n  When public_description is given the user-generated text for the course\n  public description is returned.\n- \"total_scores\": Optional information to include with each Course.\n  When total_scores is given, any student enrollments will also\n  include the fields 'computed_current_score', 'computed_final_score',\n  'computed_current_grade', and 'computed_final_grade', as well as (if\n  the user has permission) 'unposted_current_score',\n  'unposted_final_score', 'unposted_current_grade', and\n  'unposted_final_grade' (see Enrollment documentation for more\n  information on these fields). This argument is ignored if the course is\n  configured to hide final grades.\n- \"current_grading_period_scores\": Optional information to include with\n  each Course. When current_grading_period_scores is given and total_scores\n  is given, any student enrollments will also include the fields\n  'has_grading_periods',\n  'totals_for_all_grading_periods_option', 'current_grading_period_title',\n  'current_grading_period_id', current_period_computed_current_score',\n  'current_period_computed_final_score',\n  'current_period_computed_current_grade', and\n  'current_period_computed_final_grade', as well as (if the user has permission)\n  'current_period_unposted_current_score',\n  'current_period_unposted_final_score',\n  'current_period_unposted_current_grade', and\n  'current_period_unposted_final_grade' (see Enrollment documentation for\n  more information on these fields). In addition, when this argument is\n  passed, the course will have a 'has_grading_periods' attribute\n  on it. This argument is ignored if the total_scores argument is not\n  included. If the course is configured to hide final grades, the\n  following fields are not returned:\n  'totals_for_all_grading_periods_option',\n  'current_period_computed_current_score',\n  'current_period_computed_final_score',\n  'current_period_computed_current_grade',\n  'current_period_computed_final_grade',\n  'current_period_unposted_current_score',\n  'current_period_unposted_final_score',\n  'current_period_unposted_current_grade', and\n  'current_period_unposted_final_grade'\n- \"grading_periods\": Optional information to include with each Course. When\n  grading_periods is given, a list of the grading periods associated with\n  each course is returned.\n- \"term\": Optional information to include with each Course. When\n  term is given, the information for the enrollment term for each course\n  is returned.\n- \"account\": Optional information to include with each Course. When\n  account is given, the account json for each course is returned.\n- \"course_progress\": Optional information to include with each Course.\n  When course_progress is given, each course will include a\n  'course_progress' object with the fields: 'requirement_count', an integer\n  specifying the total number of requirements in the course,\n  'requirement_completed_count', an integer specifying the total number of\n  requirements in this course that have been completed, and\n  'next_requirement_url', a string url to the next requirement item, and\n  'completed_at', the date the course was completed (null if incomplete).\n  'next_requirement_url' will be null if all requirements have been\n  completed or the current module does not require sequential progress.\n  \"course_progress\" will return an error message if the course is not\n  module based or the user is not enrolled as a student in the course.\n- \"sections\": Section enrollment information to include with each Course.\n  Returns an array of hashes containing the section ID (id), section name\n  (name), start and end dates (start_at, end_at), as well as the enrollment\n  type (enrollment_role, e.g. 'StudentEnrollment').\n- \"storage_quota_used_mb\": The amount of storage space used by the files in this course\n- \"total_students\": Optional information to include with each Course.\n  Returns an integer for the total amount of active and invited students.\n- \"passback_status\": Include the grade passback_status\n- \"favorites\": Optional information to include with each Course.\n  Indicates if the user has marked the course as a favorite course.\n- \"teachers\": Teacher information to include with each Course.\n  Returns an array of hashes containing the {api:Users:UserDisplay UserDisplay} information\n  for each teacher in the course.\n- \"observed_users\": Optional information to include with each Course.\n  Will include data for observed users if the current user has an\n  observer enrollment.\n- \"tabs\": Optional information to include with each Course.\n  Will include the list of tabs configured for each course.  See the\n  {api:TabsController#index List available tabs API} for more information.\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled\n- \"concluded\": Optional information to include with each Course. Indicates whether\n  the course has been concluded, taking course and term dates into account.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "needs_grading_count",
                 "syllabus_body",
                 "public_description",
                 "total_scores",
                 "current_grading_period_scores",
+                "grading_periods",
                 "term",
+                "account",
                 "course_progress",
                 "sections",
                 "storage_quota_used_mb",
@@ -91,7 +99,8 @@
                 "favorites",
                 "teachers",
                 "observed_users",
-                "course_image"
+                "course_image",
+                "concluded"
               ],
               "items": {
                 "type": "string"
@@ -104,6 +113,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "unpublished",
                 "available",
@@ -115,6 +125,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Course"
@@ -124,12 +137,12 @@
     },
     {
       "path": "/v1/users/{user_id}/courses",
-      "description": "Returns a list of active courses for this user. To view the course list for a user other than yourself, you must be either an observer of that user or an administrator.",
+      "description": "Returns a paginated list of active courses for this user. To view the course list for a user other than yourself, you must be either an observer of that user or an administrator.",
       "operations": [
         {
           "method": "GET",
           "summary": "List courses for a user",
-          "notes": "Returns a list of active courses for this user. To view the course list for a user other than yourself, you must be either an observer of that user or an administrator.",
+          "notes": "Returns a paginated list of active courses for this user. To view the course list for a user other than yourself, you must be either an observer of that user or an administrator.",
           "nickname": "list_courses_for_user",
           "parameters": [
             {
@@ -138,22 +151,26 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"needs_grading_count\": Optional information to include with each Course.\n  When needs_grading_count is given, and the current user has grading\n  rights, the total number of submissions needing grading for all\n  assignments is returned.\n- \"syllabus_body\": Optional information to include with each Course.\n  When syllabus_body is given the user-generated html for the course\n  syllabus is returned.\n- \"public_description\": Optional information to include with each Course.\n  When public_description is given the user-generated text for the course\n  public description is returned.\n- \"total_scores\": Optional information to include with each Course.\n  When total_scores is given, any student enrollments will also\n  include the fields 'computed_current_score', 'computed_final_score',\n  'computed_current_grade', and 'computed_final_grade' (see Enrollment\n  documentation for more information on these fields). This argument\n  is ignored if the course is configured to hide final grades.\n- \"current_grading_period_scores\": Optional information to include with\n  each Course. When current_grading_period_scores is given and total_scores\n  is given, any student enrollments will also include the fields\n  'has_grading_periods',\n  'totals_for_all_grading_periods_option', 'current_grading_period_title',\n  'current_grading_period_id', current_period_computed_current_score',\n  'current_period_computed_final_score',\n  'current_period_computed_current_grade', and\n  'current_period_computed_final_grade' (see Enrollment documentation for\n  more information on these fields). In addition, when this argument is\n  passed, the course will have a 'has_grading_periods' attribute\n  on it. This argument is ignored if the course is configured to hide final\n  grades or if the total_scores argument is not included.\n- \"term\": Optional information to include with each Course. When\n  term is given, the information for the enrollment term for each course\n  is returned.\n- \"course_progress\": Optional information to include with each Course.\n  When course_progress is given, each course will include a\n  'course_progress' object with the fields: 'requirement_count', an integer\n  specifying the total number of requirements in the course,\n  'requirement_completed_count', an integer specifying the total number of\n  requirements in this course that have been completed, and\n  'next_requirement_url', a string url to the next requirement item, and\n  'completed_at', the date the course was completed (null if incomplete).\n  'next_requirement_url' will be null if all requirements have been\n  completed or the current module does not require sequential progress.\n  \"course_progress\" will return an error message if the course is not\n  module based or the user is not enrolled as a student in the course.\n- \"sections\": Section enrollment information to include with each Course.\n  Returns an array of hashes containing the section ID (id), section name\n  (name), start and end dates (start_at, end_at), as well as the enrollment\n  type (enrollment_role, e.g. 'StudentEnrollment').\n- \"storage_quota_used_mb\": The amount of storage space used by the files in this course\n- \"total_students\": Optional information to include with each Course.\n  Returns an integer for the total amount of active and invited students.\n- \"passback_status\": Include the grade passback_status\n- \"favorites\": Optional information to include with each Course.\n  Indicates if the user has marked the course as a favorite course.\n- \"teachers\": Teacher information to include with each Course.\n  Returns an array of hashes containing the {api:Users:UserDisplay UserDisplay} information\n  for each teacher in the course.\n- \"observed_users\": Optional information to include with each Course.\n  Will include data for observed users if the current user has an\n  observer enrollment.\n- \"tabs\": Optional information to include with each Course.\n  Will include the list of tabs configured for each course.  See the\n  {api:TabsController#index List available tabs API} for more information.\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled",
+              "description": "- \"needs_grading_count\": Optional information to include with each Course.\n  When needs_grading_count is given, and the current user has grading\n  rights, the total number of submissions needing grading for all\n  assignments is returned.\n- \"syllabus_body\": Optional information to include with each Course.\n  When syllabus_body is given the user-generated html for the course\n  syllabus is returned.\n- \"public_description\": Optional information to include with each Course.\n  When public_description is given the user-generated text for the course\n  public description is returned.\n- \"total_scores\": Optional information to include with each Course.\n  When total_scores is given, any student enrollments will also\n  include the fields 'computed_current_score', 'computed_final_score',\n  'computed_current_grade', and 'computed_final_grade' (see Enrollment\n  documentation for more information on these fields). This argument\n  is ignored if the course is configured to hide final grades.\n- \"current_grading_period_scores\": Optional information to include with\n  each Course. When current_grading_period_scores is given and total_scores\n  is given, any student enrollments will also include the fields\n  'has_grading_periods',\n  'totals_for_all_grading_periods_option', 'current_grading_period_title',\n  'current_grading_period_id', current_period_computed_current_score',\n  'current_period_computed_final_score',\n  'current_period_computed_current_grade', and\n  'current_period_computed_final_grade', as well as (if the user has permission)\n  'current_period_unposted_current_score',\n  'current_period_unposted_final_score',\n  'current_period_unposted_current_grade', and\n  'current_period_unposted_final_grade' (see Enrollment documentation for\n  more information on these fields). In addition, when this argument is\n  passed, the course will have a 'has_grading_periods' attribute\n  on it. This argument is ignored if the course is configured to hide final\n  grades or if the total_scores argument is not included.\n- \"grading_periods\": Optional information to include with each Course. When\n  grading_periods is given, a list of the grading periods associated with\n  each course is returned.\n- \"term\": Optional information to include with each Course. When\n  term is given, the information for the enrollment term for each course\n  is returned.\n- \"account\": Optional information to include with each Course. When\n  account is given, the account json for each course is returned.\n- \"course_progress\": Optional information to include with each Course.\n  When course_progress is given, each course will include a\n  'course_progress' object with the fields: 'requirement_count', an integer\n  specifying the total number of requirements in the course,\n  'requirement_completed_count', an integer specifying the total number of\n  requirements in this course that have been completed, and\n  'next_requirement_url', a string url to the next requirement item, and\n  'completed_at', the date the course was completed (null if incomplete).\n  'next_requirement_url' will be null if all requirements have been\n  completed or the current module does not require sequential progress.\n  \"course_progress\" will return an error message if the course is not\n  module based or the user is not enrolled as a student in the course.\n- \"sections\": Section enrollment information to include with each Course.\n  Returns an array of hashes containing the section ID (id), section name\n  (name), start and end dates (start_at, end_at), as well as the enrollment\n  type (enrollment_role, e.g. 'StudentEnrollment').\n- \"storage_quota_used_mb\": The amount of storage space used by the files in this course\n- \"total_students\": Optional information to include with each Course.\n  Returns an integer for the total amount of active and invited students.\n- \"passback_status\": Include the grade passback_status\n- \"favorites\": Optional information to include with each Course.\n  Indicates if the user has marked the course as a favorite course.\n- \"teachers\": Teacher information to include with each Course.\n  Returns an array of hashes containing the {api:Users:UserDisplay UserDisplay} information\n  for each teacher in the course.\n- \"observed_users\": Optional information to include with each Course.\n  Will include data for observed users if the current user has an\n  observer enrollment.\n- \"tabs\": Optional information to include with each Course.\n  Will include the list of tabs configured for each course.  See the\n  {api:TabsController#index List available tabs API} for more information.\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled\n- \"concluded\": Optional information to include with each Course. Indicates whether\n  the course has been concluded, taking course and term dates into account.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "needs_grading_count",
                 "syllabus_body",
                 "public_description",
                 "total_scores",
                 "current_grading_period_scores",
+                "grading_periods",
                 "term",
+                "account",
                 "course_progress",
                 "sections",
                 "storage_quota_used_mb",
@@ -162,7 +179,8 @@
                 "favorites",
                 "teachers",
                 "observed_users",
-                "course_image"
+                "course_image",
+                "concluded"
               ],
               "items": {
                 "type": "string"
@@ -175,6 +193,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "unpublished",
                 "available",
@@ -192,17 +211,66 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "invited_or_pending",
                 "completed"
               ]
+            },
+            {
+              "paramType": "query",
+              "name": "homeroom",
+              "description": "If set, only return homeroom courses.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Course"
           }
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/users/{user_id}/progress",
+      "description": "Return progress information for the user and course\n\nYou can supply +self+ as the user_id to query your own progress in a course. To query another user's progress,\nyou must be a teacher in the course, an administrator, or a linked observer of the user.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get user progress",
+          "notes": "Return progress information for the user and course\n\nYou can supply +self+ as the user_id to query your own progress in a course. To query another user's progress,\nyou must be a teacher in the course, an administrator, or a linked observer of the user.",
+          "nickname": "get_user_progress",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "user_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "CourseProgress"
         }
       ]
     },
@@ -222,7 +290,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -230,7 +299,8 @@
               "description": "The name of the course. If omitted, the course will be named \"Unnamed\nCourse.\"",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -238,23 +308,26 @@
               "description": "The course code for the course.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course[start_at]",
-              "description": "Course start date in ISO8601 format, e.g. 2011-01-01T01:00Z",
+              "description": "Course start date in ISO8601 format, e.g. 2011-01-01T01:00Z\nThis value is ignored unless 'restrict_enrollments_to_course_dates' is set to true.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course[end_at]",
-              "description": "Course end date in ISO8601 format. e.g. 2011-01-01T01:00Z",
+              "description": "Course end date in ISO8601 format. e.g. 2011-01-01T01:00Z\nThis value is ignored unless 'restrict_enrollments_to_course_dates' is set to true.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -262,7 +335,8 @@
               "description": "The name of the licensing. Should be one of the following abbreviations\n(a descriptive name is included in parenthesis for reference):\n- 'private' (Private Copyrighted)\n- 'cc_by_nc_nd' (CC Attribution Non-Commercial No Derivatives)\n- 'cc_by_nc_sa' (CC Attribution Non-Commercial Share Alike)\n- 'cc_by_nc' (CC Attribution Non-Commercial)\n- 'cc_by_nd' (CC Attribution No Derivatives)\n- 'cc_by_sa' (CC Attribution Share Alike)\n- 'cc_by' (CC Attribution)\n- 'public_domain' (Public Domain).",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -270,7 +344,8 @@
               "description": "Set to true if course is public to both authenticated and unauthenticated users.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -278,7 +353,8 @@
               "description": "Set to true if course is public only to authenticated users.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -286,7 +362,8 @@
               "description": "Set to true to make the course syllabus public.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -294,7 +371,8 @@
               "description": "Set to true to make the course syllabus public for authenticated users.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -302,7 +380,8 @@
               "description": "A publicly visible description of the course.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -310,7 +389,8 @@
               "description": "If true, students will be able to modify the course wiki.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -318,7 +398,8 @@
               "description": "If true, course members will be able to comment on wiki pages.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -326,7 +407,8 @@
               "description": "If true, students can attach files to forum posts.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -334,7 +416,8 @@
               "description": "Set to true if the course is open enrollment.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -342,23 +425,26 @@
               "description": "Set to true if the course is self enrollment.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course[restrict_enrollments_to_course_dates]",
-              "description": "Set to true to restrict user enrollments to the start and end dates of the\ncourse.",
+              "description": "Set to true to restrict user enrollments to the start and end dates of the\ncourse. This parameter is required when using the API, as this option is\nnot displayed in the Course Settings page. This value must be set to true\nin order to specify a course start date and/or end date.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course[term_id]",
               "description": "The unique ID of the term to create to course in.",
-              "type": "integer",
-              "format": "int64",
-              "required": false
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -366,7 +452,8 @@
               "description": "The unique SIS identifier.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -374,7 +461,8 @@
               "description": "The unique Integration identifier.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -382,7 +470,8 @@
               "description": "If this option is set to true, the totals in student grades summary will\nbe hidden.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -390,7 +479,8 @@
               "description": "Set to true to weight final grade based on assignment groups percentages.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -398,7 +488,8 @@
               "description": "The time zone for the course. Allowed time zones are\n{http://www.iana.org/time-zones IANA time zones} or friendlier\n{http://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html Ruby on Rails time zones}.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -406,7 +497,8 @@
               "description": "If this option is set to true, the course will be available to students\nimmediately.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -414,7 +506,24 @@
               "description": "Set to true to enroll the current user as the teacher.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[default_view]",
+              "description": "The type of page that users will see when they first visit the course\n* 'feed' Recent Activity Dashboard\n* 'modules' Course Modules/Sections Page\n* 'assignments' Course Assignments List\n* 'syllabus' Course Syllabus Page\nother types may be added in the future",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "feed",
+                "wiki",
+                "modules",
+                "syllabus",
+                "assignments"
+              ]
             },
             {
               "paramType": "form",
@@ -422,7 +531,8 @@
               "description": "The syllabus body for the course",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -430,7 +540,17 @@
               "description": "The grading standard id to set for the course.  If no value is provided for this argument the current grading_standard will be un-set from this course.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[grade_passback_setting]",
+              "description": "Optional. The grade_passback_setting for the course. Only 'nightly_sync', 'disabled', and '' are allowed",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -438,7 +558,8 @@
               "description": "Optional. Specifies the format of the course. (Should be 'on_campus', 'online', or 'blended')",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -446,9 +567,13 @@
               "description": "When true, will first try to re-activate a deleted course with matching sis_course_id if possible.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Course"
         }
       ]
@@ -469,21 +594,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/students",
-      "description": "Returns the list of students enrolled in this course.\n\nDEPRECATED: Please use the {api:CoursesController#users course users} endpoint\nand pass \"student\" as the enrollment_type.",
+      "description": "Returns the paginated list of students enrolled in this course.\n\nDEPRECATED: Please use the {api:CoursesController#users course users} endpoint\nand pass \"student\" as the enrollment_type.",
       "operations": [
         {
           "method": "GET",
           "summary": "List students",
-          "notes": "Returns the list of students enrolled in this course.\n\nDEPRECATED: Please use the {api:CoursesController#users course users} endpoint\nand pass \"student\" as the enrollment_type.",
+          "notes": "Returns the paginated list of students enrolled in this course.\n\nDEPRECATED: Please use the {api:CoursesController#users course users} endpoint\nand pass \"student\" as the enrollment_type.",
           "nickname": "list_students",
           "parameters": [
             {
@@ -492,9 +621,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "User"
@@ -504,12 +637,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/users",
-      "description": "Returns the list of users in this course. And optionally the user's enrollments in the course.",
+      "description": "Returns the paginated list of users in this course. And optionally the user's enrollments in the course.",
       "operations": [
         {
           "method": "GET",
           "summary": "List users in course",
-          "notes": "Returns the list of users in this course. And optionally the user's enrollments in the course.",
+          "notes": "Returns the paginated list of users in this course. And optionally the user's enrollments in the course.",
           "nickname": "list_users_in_course_users",
           "parameters": [
             {
@@ -518,7 +651,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -526,7 +660,23 @@
               "description": "The partial name or full ID of the users to match and return in the results list.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "sort",
+              "description": "When set, sort the results of the search based on the given field.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "username",
+                "last_login",
+                "email",
+                "sis_id"
+              ]
             },
             {
               "paramType": "query",
@@ -535,6 +685,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "teacher",
                 "student",
@@ -553,7 +704,8 @@
               "description": "Deprecated\nWhen set, only return users enrolled with the specified course-level role.  This can be\na role created with the {api:RoleOverridesController#add_role Add Role API} or a\nbase role type of 'StudentEnrollment', 'TeacherEnrollment', 'TaEnrollment',\n'ObserverEnrollment', or 'DesignerEnrollment'.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -561,24 +713,26 @@
               "description": "When set, only return courses where the user is enrolled with the specified\ncourse-level role.  This can be a role created with the\n{api:RoleOverridesController#add_role Add Role API} or a built_in role id with type\n'StudentEnrollment', 'TeacherEnrollment', 'TaEnrollment', 'ObserverEnrollment',\nor 'DesignerEnrollment'.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"email\": Optional user email.\n- \"enrollments\":\nOptionally include with each Course the user's current and invited\nenrollments. If the user is enrolled as a student, and the account has\npermission to manage or view all grades, each enrollment will include a\n'grades' key with 'current_score', 'final_score', 'current_grade' and\n'final_grade' values.\n- \"locked\": Optionally include whether an enrollment is locked.\n- \"avatar_url\": Optionally include avatar_url.\n- \"bio\": Optionally include each user's bio.\n- \"test_student\": Optionally include the course's Test Student,\nif present. Default is to not include Test Student.\n- \"custom_links\": Optionally include plugin-supplied custom links for each student,\nsuch as analytics information\n- \"current_grading_period_scores\": if enrollments is included as\nwell as this directive, the scores returned in the enrollment\nwill be for the current grading period if there is one. A\n'grading_period_id' value will also be included with the\nscores. if grading_period_id is nil there is no current grading\nperiod and the score is a total score.",
+              "description": "- \"enrollments\":\nOptionally include with each Course the user's current and invited\nenrollments. If the user is enrolled as a student, and the account has\npermission to manage or view all grades, each enrollment will include a\n'grades' key with 'current_score', 'final_score', 'current_grade' and\n'final_grade' values.\n- \"locked\": Optionally include whether an enrollment is locked.\n- \"avatar_url\": Optionally include avatar_url.\n- \"bio\": Optionally include each user's bio.\n- \"test_student\": Optionally include the course's Test Student,\nif present. Default is to not include Test Student.\n- \"custom_links\": Optionally include plugin-supplied custom links for each student,\nsuch as analytics information\n- \"current_grading_period_scores\": if enrollments is included as\nwell as this directive, the scores returned in the enrollment\nwill be for the current grading period if there is one. A\n'grading_period_id' value will also be included with the\nscores. if grading_period_id is nil there is no current grading\nperiod and the score is a total score.\n- \"uuid\": Optionally include the users uuid",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
-                "email",
                 "enrollments",
                 "locked",
                 "avatar_url",
                 "test_student",
                 "bio",
                 "custom_links",
-                "current_grading_period_scores"
+                "current_grading_period_scores",
+                "uuid"
               ],
               "items": {
                 "type": "string"
@@ -590,7 +744,8 @@
               "description": "If this parameter is given and it corresponds to a user in the course,\nthe +page+ parameter will be ignored and the page containing the specified user\nwill be returned instead.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -599,6 +754,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -610,6 +766,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "invited",
@@ -622,6 +779,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "User"
@@ -631,12 +791,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/search_users",
-      "description": "Returns the list of users in this course. And optionally the user's enrollments in the course.",
+      "description": "Returns the paginated list of users in this course. And optionally the user's enrollments in the course.",
       "operations": [
         {
           "method": "GET",
           "summary": "List users in course",
-          "notes": "Returns the list of users in this course. And optionally the user's enrollments in the course.",
+          "notes": "Returns the paginated list of users in this course. And optionally the user's enrollments in the course.",
           "nickname": "list_users_in_course_search_users",
           "parameters": [
             {
@@ -645,7 +805,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -653,7 +814,23 @@
               "description": "The partial name or full ID of the users to match and return in the results list.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "sort",
+              "description": "When set, sort the results of the search based on the given field.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "username",
+                "last_login",
+                "email",
+                "sis_id"
+              ]
             },
             {
               "paramType": "query",
@@ -662,6 +839,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "teacher",
                 "student",
@@ -680,7 +858,8 @@
               "description": "Deprecated\nWhen set, only return users enrolled with the specified course-level role.  This can be\na role created with the {api:RoleOverridesController#add_role Add Role API} or a\nbase role type of 'StudentEnrollment', 'TeacherEnrollment', 'TaEnrollment',\n'ObserverEnrollment', or 'DesignerEnrollment'.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -688,24 +867,26 @@
               "description": "When set, only return courses where the user is enrolled with the specified\ncourse-level role.  This can be a role created with the\n{api:RoleOverridesController#add_role Add Role API} or a built_in role id with type\n'StudentEnrollment', 'TeacherEnrollment', 'TaEnrollment', 'ObserverEnrollment',\nor 'DesignerEnrollment'.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"email\": Optional user email.\n- \"enrollments\":\nOptionally include with each Course the user's current and invited\nenrollments. If the user is enrolled as a student, and the account has\npermission to manage or view all grades, each enrollment will include a\n'grades' key with 'current_score', 'final_score', 'current_grade' and\n'final_grade' values.\n- \"locked\": Optionally include whether an enrollment is locked.\n- \"avatar_url\": Optionally include avatar_url.\n- \"bio\": Optionally include each user's bio.\n- \"test_student\": Optionally include the course's Test Student,\nif present. Default is to not include Test Student.\n- \"custom_links\": Optionally include plugin-supplied custom links for each student,\nsuch as analytics information\n- \"current_grading_period_scores\": if enrollments is included as\nwell as this directive, the scores returned in the enrollment\nwill be for the current grading period if there is one. A\n'grading_period_id' value will also be included with the\nscores. if grading_period_id is nil there is no current grading\nperiod and the score is a total score.",
+              "description": "- \"enrollments\":\nOptionally include with each Course the user's current and invited\nenrollments. If the user is enrolled as a student, and the account has\npermission to manage or view all grades, each enrollment will include a\n'grades' key with 'current_score', 'final_score', 'current_grade' and\n'final_grade' values.\n- \"locked\": Optionally include whether an enrollment is locked.\n- \"avatar_url\": Optionally include avatar_url.\n- \"bio\": Optionally include each user's bio.\n- \"test_student\": Optionally include the course's Test Student,\nif present. Default is to not include Test Student.\n- \"custom_links\": Optionally include plugin-supplied custom links for each student,\nsuch as analytics information\n- \"current_grading_period_scores\": if enrollments is included as\nwell as this directive, the scores returned in the enrollment\nwill be for the current grading period if there is one. A\n'grading_period_id' value will also be included with the\nscores. if grading_period_id is nil there is no current grading\nperiod and the score is a total score.\n- \"uuid\": Optionally include the users uuid",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
-                "email",
                 "enrollments",
                 "locked",
                 "avatar_url",
                 "test_student",
                 "bio",
                 "custom_links",
-                "current_grading_period_scores"
+                "current_grading_period_scores",
+                "uuid"
               ],
               "items": {
                 "type": "string"
@@ -717,7 +898,8 @@
               "description": "If this parameter is given and it corresponds to a user in the course,\nthe +page+ parameter will be ignored and the page containing the specified user\nwill be returned instead.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -726,6 +908,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -737,6 +920,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "invited",
@@ -749,6 +933,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "User"
@@ -758,12 +945,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/recent_students",
-      "description": "Returns the list of users in this course, ordered by how recently they have\nlogged in. The records include the 'last_login' field which contains\na timestamp of the last time that user logged into canvas.  The querying\nuser must have the 'View usage reports' permission.",
+      "description": "Returns the paginated list of users in this course, ordered by how recently they have\nlogged in. The records include the 'last_login' field which contains\na timestamp of the last time that user logged into canvas.  The querying\nuser must have the 'View usage reports' permission.",
       "operations": [
         {
           "method": "GET",
           "summary": "List recently logged in students",
-          "notes": "Returns the list of users in this course, ordered by how recently they have\nlogged in. The records include the 'last_login' field which contains\na timestamp of the last time that user logged into canvas.  The querying\nuser must have the 'View usage reports' permission.",
+          "notes": "Returns the paginated list of users in this course, ordered by how recently they have\nlogged in. The records include the 'last_login' field which contains\na timestamp of the last time that user logged into canvas.  The querying\nuser must have the 'View usage reports' permission.",
           "nickname": "list_recently_logged_in_students",
           "parameters": [
             {
@@ -772,9 +959,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "User"
@@ -798,7 +989,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -806,10 +998,53 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "User"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/content_share_users",
+      "description": "Returns a paginated list of users you can share content with.  Requires the content share\nfeature and the user must have the manage content permission for the course.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Search for content share users",
+          "notes": "Returns a paginated list of users you can share content with.  Requires the content share\nfeature and the user must have the manage content permission for the course.",
+          "nickname": "search_for_content_share_users",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "search_term",
+              "description": "Term used to find users.  Will search available share users with the search term in their name.",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "array",
+          "items": {
+            "$ref": "User"
+          }
         }
       ]
     },
@@ -829,7 +1064,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -837,9 +1073,13 @@
               "description": "The html content to process",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -860,9 +1100,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -883,9 +1127,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -906,9 +1154,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -919,9 +1171,9 @@
       "operations": [
         {
           "method": "DELETE",
-          "summary": "Conclude a course",
+          "summary": "Delete/Conclude a course",
           "notes": "Delete or conclude an existing course",
-          "nickname": "conclude_course",
+          "nickname": "delete_conclude_course",
           "parameters": [
             {
               "paramType": "path",
@@ -929,7 +1181,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -938,12 +1191,16 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "delete",
                 "conclude"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -964,9 +1221,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -987,7 +1248,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -995,7 +1257,8 @@
               "description": "Let students create discussion topics",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1003,7 +1266,8 @@
               "description": "Let students attach files to discussions",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1011,7 +1275,8 @@
               "description": "Let students edit or delete their own discussion posts",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1019,7 +1284,17 @@
               "description": "Let students organize their own groups",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "filter_speed_grader_by_student_group",
+              "description": "Filter SpeedGrader to only the selected student group",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1027,7 +1302,8 @@
               "description": "Hide totals in student grades summary",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1035,7 +1311,17 @@
               "description": "Hide grade distribution graphs from students",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "hide_sections_on_course_users_page",
+              "description": "Disallow students from viewing students in sections they do not belong to",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1043,7 +1329,17 @@
               "description": "Disable comments on announcements",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "usage_rights_required",
+              "description": "Copyright and license information must be provided for files before they are published.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1051,7 +1347,8 @@
               "description": "Restrict students from viewing courses after end date",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1059,15 +1356,17 @@
               "description": "Restrict students from viewing courses before start date",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "show_announcements_on_home_page",
-              "description": "Show the most recent announcements on the Course home page (if a Wiki, defaults to five announcements, configurable via home_page_announcement_limit)",
+              "description": "Show the most recent announcements on the Course home page (if a Wiki, defaults to five announcements, configurable via home_page_announcement_limit).\nCanvas for Elementary subjects ignore this setting.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1075,10 +1374,50 @@
               "description": "Limit the number of announcements on the home page if enabled via show_announcements_on_home_page",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "syllabus_course_summary",
+              "description": "Show the course summary (list of assignments and calendar events) on the syllabus page. Default is true.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/student_view_student",
+      "description": "Returns information for a test student in this course. Creates a test\nstudent if one does not already exist for the course. The caller must have\npermission to access the course's student view.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Return test student for course",
+          "notes": "Returns information for a test student in this course. Creates a test\nstudent if one does not already exist for the course. The caller must have\npermission to access the course's student view.",
+          "nickname": "return_test_student_for_course",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "User"
         }
       ]
     },
@@ -1098,15 +1437,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"all_courses\": Also search recently deleted courses.\n- \"permissions\": Include permissions the current user has\n  for the course.\n- \"observed_users\": include observed users in the enrollments\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled",
+              "description": "- \"all_courses\": Also search recently deleted courses.\n- \"permissions\": Include permissions the current user has\n  for the course.\n- \"observed_users\": include observed users in the enrollments\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled\n- \"concluded\": Optional information to include with each Course. Indicates whether\n  the course has been concluded, taking course and term dates into account.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "needs_grading_count",
                 "syllabus_body",
@@ -1114,6 +1455,7 @@
                 "total_scores",
                 "current_grading_period_scores",
                 "term",
+                "account",
                 "course_progress",
                 "sections",
                 "storage_quota_used_mb",
@@ -1125,13 +1467,26 @@
                 "all_courses",
                 "permissions",
                 "observed_users",
-                "course_image"
+                "course_image",
+                "concluded"
               ],
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "teacher_limit",
+              "description": "The maximum number of teacher enrollments to show.\nIf the course contains more teachers than this, instead of giving the teacher\nenrollments, the count of teachers will be given under a _teacher_count_ key.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Course"
         }
       ]
@@ -1152,7 +1507,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1160,15 +1516,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"all_courses\": Also search recently deleted courses.\n- \"permissions\": Include permissions the current user has\n  for the course.\n- \"observed_users\": include observed users in the enrollments\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled",
+              "description": "- \"all_courses\": Also search recently deleted courses.\n- \"permissions\": Include permissions the current user has\n  for the course.\n- \"observed_users\": include observed users in the enrollments\n- \"course_image\": Optional course image data for when there is a course image\n  and the course image feature flag has been enabled\n- \"concluded\": Optional information to include with each Course. Indicates whether\n  the course has been concluded, taking course and term dates into account.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "needs_grading_count",
                 "syllabus_body",
@@ -1176,6 +1534,7 @@
                 "total_scores",
                 "current_grading_period_scores",
                 "term",
+                "account",
                 "course_progress",
                 "sections",
                 "storage_quota_used_mb",
@@ -1187,13 +1546,26 @@
                 "all_courses",
                 "permissions",
                 "observed_users",
-                "course_image"
+                "course_image",
+                "concluded"
               ],
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "teacher_limit",
+              "description": "The maximum number of teacher enrollments to show.\nIf the course contains more teachers than this, instead of giving the teacher\nenrollments, the count of teachers will be given under a _teacher_count_ key.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Course"
         }
       ]
@@ -1214,7 +1586,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1222,7 +1595,8 @@
               "description": "The unique ID of the account to move the course to.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1230,7 +1604,8 @@
               "description": "The name of the course. If omitted, the course will be named \"Unnamed\nCourse.\"",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1238,23 +1613,26 @@
               "description": "The course code for the course.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course[start_at]",
-              "description": "Course start date in ISO8601 format, e.g. 2011-01-01T01:00Z",
+              "description": "Course start date in ISO8601 format, e.g. 2011-01-01T01:00Z\nThis value is ignored unless 'restrict_enrollments_to_course_dates' is set to true,\nor the course is already published.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course[end_at]",
-              "description": "Course end date in ISO8601 format. e.g. 2011-01-01T01:00Z",
+              "description": "Course end date in ISO8601 format. e.g. 2011-01-01T01:00Z\nThis value is ignored unless 'restrict_enrollments_to_course_dates' is set to true.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1262,7 +1640,8 @@
               "description": "The name of the licensing. Should be one of the following abbreviations\n(a descriptive name is included in parenthesis for reference):\n- 'private' (Private Copyrighted)\n- 'cc_by_nc_nd' (CC Attribution Non-Commercial No Derivatives)\n- 'cc_by_nc_sa' (CC Attribution Non-Commercial Share Alike)\n- 'cc_by_nc' (CC Attribution Non-Commercial)\n- 'cc_by_nd' (CC Attribution No Derivatives)\n- 'cc_by_sa' (CC Attribution Share Alike)\n- 'cc_by' (CC Attribution)\n- 'public_domain' (Public Domain).",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1270,7 +1649,8 @@
               "description": "Set to true if course is public to both authenticated and unauthenticated users.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1278,7 +1658,8 @@
               "description": "Set to true if course is public only to authenticated users.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1286,7 +1667,8 @@
               "description": "Set to true to make the course syllabus public.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1294,7 +1676,8 @@
               "description": "Set to true to make the course syllabus to public for authenticated users.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1302,7 +1685,8 @@
               "description": "A publicly visible description of the course.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1310,7 +1694,8 @@
               "description": "If true, students will be able to modify the course wiki.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1318,7 +1703,8 @@
               "description": "If true, course members will be able to comment on wiki pages.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1326,7 +1712,8 @@
               "description": "If true, students can attach files to forum posts.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1334,7 +1721,8 @@
               "description": "Set to true if the course is open enrollment.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1342,15 +1730,17 @@
               "description": "Set to true if the course is self enrollment.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course[restrict_enrollments_to_course_dates]",
-              "description": "Set to true to restrict user enrollments to the start and end dates of the\ncourse.",
+              "description": "Set to true to restrict user enrollments to the start and end dates of the\ncourse. This parameter is required when using the API, as this option is\nnot displayed in the Course Settings page. Setting this value to false will\nremove the course end date (if it exists), as well as the course start date\n(if the course is unpublished).",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1358,7 +1748,8 @@
               "description": "The unique ID of the term to create to course in.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1366,7 +1757,8 @@
               "description": "The unique SIS identifier.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1374,7 +1766,8 @@
               "description": "The unique Integration identifier.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1382,7 +1775,8 @@
               "description": "If this option is set to true, the totals in student grades summary will\nbe hidden.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1390,7 +1784,8 @@
               "description": "The time zone for the course. Allowed time zones are\n{http://www.iana.org/time-zones IANA time zones} or friendlier\n{http://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html Ruby on Rails time zones}.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1398,7 +1793,8 @@
               "description": "Set to true to weight final grade based on assignment groups percentages.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1406,7 +1802,8 @@
               "description": "Set the storage quota for the course, in megabytes. The caller must have\nthe \"Manage storage quotas\" account permission.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1414,15 +1811,17 @@
               "description": "If this option is set to true, the course will be available to students\nimmediately.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course[event]",
-              "description": "The action to take on each course.\n* 'claim' makes a course no longer visible to students. This action is also called \"unpublish\" on the web site.\n  A course cannot be unpublished if students have received graded submissions.\n* 'offer' makes a course visible to students. This action is also called \"publish\" on the web site.\n* 'conclude' prevents future enrollments and makes a course read-only for all participants. The course still appears\n  in prior-enrollment lists.\n* 'delete' completely removes the course from the web site (including course menus and prior-enrollment lists).\n  All enrollments are deleted. Course content may be physically deleted at a future date.\n* 'undelete' attempts to recover a course that has been deleted. (Recovery is not guaranteed; please conclude\n  rather than delete a course if there is any possibility the course will be used again.) The recovered course\n  will be unpublished. Deleted enrollments will not be recovered.",
+              "description": "The action to take on each course.\n* 'claim' makes a course no longer visible to students. This action is also called \"unpublish\" on the web site.\n  A course cannot be unpublished if students have received graded submissions.\n* 'offer' makes a course visible to students. This action is also called \"publish\" on the web site.\n* 'conclude' prevents future enrollments and makes a course read-only for all participants. The course still appears\n  in prior-enrollment lists.\n* 'delete' completely removes the course from the web site (including course menus and prior-enrollment lists).\n  All enrollments are deleted. Course content may be physically deleted at a future date.\n* 'undelete' attempts to recover a course that has been deleted. This action requires account administrative rights.\n  (Recovery is not guaranteed; please conclude rather than delete a course if there is any possibility the course\n  will be used again.) The recovered course will be unpublished. Deleted enrollments will not be recovered.",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "claim",
                 "offer",
@@ -1433,11 +1832,37 @@
             },
             {
               "paramType": "form",
+              "name": "course[default_view]",
+              "description": "The type of page that users will see when they first visit the course\n* 'feed' Recent Activity Dashboard\n* 'wiki' Wiki Front Page\n* 'modules' Course Modules/Sections Page\n* 'assignments' Course Assignments List\n* 'syllabus' Course Syllabus Page\nother types may be added in the future",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "feed",
+                "wiki",
+                "modules",
+                "syllabus",
+                "assignments"
+              ]
+            },
+            {
+              "paramType": "form",
               "name": "course[syllabus_body]",
               "description": "The syllabus body for the course",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[syllabus_course_summary]",
+              "description": "Optional. Indicates whether the Course Summary (consisting of the course's assignments and calendar events) is displayed on the syllabus page. Defaults to +true+.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1445,7 +1870,17 @@
               "description": "The grading standard id to set for the course.  If no value is provided for this argument the current grading_standard will be un-set from this course.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[grade_passback_setting]",
+              "description": "Optional. The grade_passback_setting for the course. Only 'nightly_sync' and '' are allowed",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1453,7 +1888,8 @@
               "description": "Optional. Specifies the format of the course. (Should be either 'on_campus' or 'online')",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1461,7 +1897,8 @@
               "description": "This is a file ID corresponding to an image file in the course that will\nbe used as the course image.\nThis will clear the course's image_url setting if set.  If you attempt\nto provide image_url and image_id in a request it will fail.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1469,7 +1906,8 @@
               "description": "This is a URL to an image to be used as the course image.\nThis will clear the course's image_id setting if set.  If you attempt\nto provide image_url and image_id in a request it will fail.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1477,15 +1915,26 @@
               "description": "If this option is set to true, the course image url and course image\nID are both set to nil",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[remove_banner_image]",
+              "description": "If this option is set to true, the course banner image url and course\nbanner image ID are both set to nil",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course[blueprint]",
-              "description": "Sets the course as a blueprint course. NOTE: The Blueprint Courses feature is in beta",
+              "description": "Sets the course as a blueprint course.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1493,7 +1942,8 @@
               "description": "Sets a default set to apply to blueprint course objects when restricted,\nunless _use_blueprint_restrictions_by_object_type_ is enabled.\nSee the {api:Blueprint_Courses:BlueprintRestriction Blueprint Restriction} documentation",
               "type": "BlueprintRestriction",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1501,7 +1951,8 @@
               "description": "When enabled, the _blueprint_restrictions_ parameter will be ignored in favor of\nthe _blueprint_restrictions_by_object_type_ parameter",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1509,21 +1960,88 @@
               "description": "Allows setting multiple {api:Blueprint_Courses:BlueprintRestriction Blueprint Restriction}\nto apply to blueprint course objects of the matching type when restricted.\nThe possible object types are \"assignment\", \"attachment\", \"discussion_topic\", \"quiz\" and \"wiki_page\".\nExample usage:\n  course[blueprint_restrictions_by_object_type][assignment][content]=1",
               "type": "multiple BlueprintRestrictions",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[homeroom_course]",
+              "description": "Sets the course as a homeroom course. The setting takes effect only when the course is associated\nwith a Canvas for Elementary-enabled account.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[sync_enrollments_from_homeroom]",
+              "description": "Syncs enrollments from the homeroom that is set in homeroom_course_id. The setting only takes effect when the\ncourse is associated with a Canvas for Elementary-enabled account and sync_enrollments_from_homeroom is enabled.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[homeroom_course_id]",
+              "description": "Sets the Homeroom Course id to be used with sync_enrollments_from_homeroom. The setting only takes effect when the\ncourse is associated with a Canvas for Elementary-enabled account and sync_enrollments_from_homeroom is enabled.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[template]",
+              "description": "Enable or disable the course as a template that can be selected by an account",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[course_color]",
+              "description": "Sets a color in hex code format to be associated with the course. The setting takes effect only when the course\nis associated with a Canvas for Elementary-enabled account.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[friendly_name]",
+              "description": "Set a friendly name for the course. If this is provided and the course is associated with a Canvas for\nElementary account, it will be shown instead of the course name. This setting takes priority over\ncourse nicknames defined by individual users.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course[enable_pace_plans]",
+              "description": "Enable or disable Pace Plans for the course. This setting only has an effect when the Pace Plans feature flag is\nenabled for the sub-account. Otherwise, Pace Plans are always disabled.\n  Note: Pace Plans is in active development.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/accounts/{account_id}/courses",
-      "description": "Update multiple courses in an account.  Operates asynchronously; use the {api:ProgressController#show progress endpoint}\nto query the status of an operation.\n\nThe action to take on each course.  Must be one of 'offer', 'conclude', 'delete', or 'undelete'.\n  * 'offer' makes a course visible to students. This action is also called \"publish\" on the web site.\n  * 'conclude' prevents future enrollments and makes a course read-only for all participants. The course still appears\n    in prior-enrollment lists.\n  * 'delete' completely removes the course from the web site (including course menus and prior-enrollment lists).\n    All enrollments are deleted. Course content may be physically deleted at a future date.\n  * 'undelete' attempts to recover a course that has been deleted. (Recovery is not guaranteed; please conclude\n    rather than delete a course if there is any possibility the course will be used again.) The recovered course\n    will be unpublished. Deleted enrollments will not be recovered.",
+      "description": "Update multiple courses in an account.  Operates asynchronously; use the {api:ProgressController#show progress endpoint}\nto query the status of an operation.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Update courses",
-          "notes": "Update multiple courses in an account.  Operates asynchronously; use the {api:ProgressController#show progress endpoint}\nto query the status of an operation.\n\nThe action to take on each course.  Must be one of 'offer', 'conclude', 'delete', or 'undelete'.\n  * 'offer' makes a course visible to students. This action is also called \"publish\" on the web site.\n  * 'conclude' prevents future enrollments and makes a course read-only for all participants. The course still appears\n    in prior-enrollment lists.\n  * 'delete' completely removes the course from the web site (including course menus and prior-enrollment lists).\n    All enrollments are deleted. Course content may be physically deleted at a future date.\n  * 'undelete' attempts to recover a course that has been deleted. (Recovery is not guaranteed; please conclude\n    rather than delete a course if there is any possibility the course will be used again.) The recovered course\n    will be unpublished. Deleted enrollments will not be recovered.",
+          "notes": "Update multiple courses in an account.  Operates asynchronously; use the {api:ProgressController#show progress endpoint}\nto query the status of an operation.",
           "nickname": "update_courses",
           "parameters": [
             {
@@ -1532,7 +2050,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1541,6 +2060,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1548,10 +2068,11 @@
             {
               "paramType": "form",
               "name": "event",
-              "description": "no description",
+              "description": "The action to take on each course.  Must be one of 'offer', 'conclude', 'delete', or 'undelete'.\n* 'offer' makes a course visible to students. This action is also called \"publish\" on the web site.\n* 'conclude' prevents future enrollments and makes a course read-only for all participants. The course still appears\n  in prior-enrollment lists.\n* 'delete' completely removes the course from the web site (including course menus and prior-enrollment lists).\n  All enrollments are deleted. Course content may be physically deleted at a future date.\n* 'undelete' attempts to recover a course that has been deleted. (Recovery is not guaranteed; please conclude\n  rather than delete a course if there is any possibility the course will be used again.) The recovered course\n  will be unpublished. Deleted enrollments will not be recovered.",
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "offer",
                 "conclude",
@@ -1560,6 +2081,9 @@
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Progress"
         }
       ]
@@ -1580,9 +2104,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Course"
         }
       ]
@@ -1603,7 +2131,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -1612,23 +2141,27 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
-          "type": "{EffectiveDueDates}"
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/permissions",
-      "description": "Returns permission information for provided course & current_user",
+      "description": "Returns permission information for the calling user in the given course.\nSee also the {api:AccountsController#permissions Account} and\n{api:GroupsController#permissions Group} counterparts.",
       "operations": [
         {
           "method": "GET",
           "summary": "Permissions",
-          "notes": "Returns permission information for provided course & current_user",
+          "notes": "Returns permission information for the calling user in the given course.\nSee also the {api:AccountsController#permissions Account} and\n{api:GroupsController#permissions Group} counterparts.",
           "nickname": "permissions",
           "parameters": [
             {
@@ -1637,20 +2170,52 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "permissions",
-              "description": "List of permissions to check against authenticated user",
+              "description": "List of permissions to check against the authenticated user.\nPermission names are documented in the {api:RoleOverridesController#add_role Create a role} endpoint.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/bulk_user_progress",
+      "description": "Returns progress information for all users enrolled in the given course.\n\nYou must be a user who has permission to view all grades in the course (such as a teacher or administrator).",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get bulk user progress",
+          "notes": "Returns progress information for all users enrolled in the given course.\n\nYou must be a user who has permission to view all grades in the course (such as a teacher or administrator).",
+          "nickname": "get_bulk_user_progress",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1671,7 +2236,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1679,9 +2245,39 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [
+            {
+              "name": "id",
+              "description": "The unique identifier for the course copy.",
+              "deprecated": false
+            },
+            {
+              "name": "created_at",
+              "description": "The time that the copy was initiated.",
+              "deprecated": false
+            },
+            {
+              "name": "progress",
+              "description": "The progress of the copy as an integer. It is null before the copying starts, and 100 when finished.",
+              "deprecated": false
+            },
+            {
+              "name": "workflow_state",
+              "description": "The current status of the course copy. Possible values: \"created\", \"started\", \"completed\", \"failed\"",
+              "deprecated": false
+            },
+            {
+              "name": "status_url",
+              "description": "The url for the course copy status API endpoint.",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1702,7 +2298,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1710,7 +2307,8 @@
               "description": "ID or SIS-ID of the course to copy the content from",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1719,6 +2317,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "course_settings",
                 "assignments",
@@ -1742,6 +2341,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "course_settings",
                 "assignments",
@@ -1759,6 +2359,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -1768,9 +2371,9 @@
     "Term": {
       "id": "Term",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "example": 1,
@@ -1792,9 +2395,9 @@
     "CourseProgress": {
       "id": "CourseProgress",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "requirement_count": {
           "description": "total number of requirements from all modules",
@@ -1821,9 +2424,9 @@
     "Course": {
       "id": "Course",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the unique identifier for the course",
@@ -1842,6 +2445,11 @@
         "integration_id": {
           "description": "the integration identifier for the course, if defined. This field is only included if the user has permission to view SIS information.",
           "type": "string"
+        },
+        "sis_import_id": {
+          "description": "the unique identifier for the SIS import. This field is only included if the user has permission to manage SIS information.",
+          "example": 34,
+          "type": "integer"
         },
         "name": {
           "description": "the full name of the course",
@@ -1881,10 +2489,27 @@
           "example": 34,
           "type": "integer"
         },
+        "grading_periods": {
+          "description": "A list of grading periods associated with the course",
+          "type": "array",
+          "items": {
+            "$ref": "GradingPeriod"
+          }
+        },
         "grading_standard_id": {
           "description": "the grading standard associated with the course",
           "example": 25,
           "type": "integer"
+        },
+        "grade_passback_setting": {
+          "description": "the grade_passback_setting set on the course",
+          "example": "nightly_sync",
+          "type": "string"
+        },
+        "created_at": {
+          "description": "the date the course was created.",
+          "example": "2012-05-01T00:00:00-06:00",
+          "type": "datetime"
         },
         "start_at": {
           "description": "the start date for the course, if applicable",
@@ -1946,7 +2571,7 @@
           "$ref": "Term"
         },
         "course_progress": {
-          "description": "optional (beta): information on progress through the course returned only if include[]=course_progress",
+          "description": "optional: information on progress through the course returned only if include[]=course_progress",
           "$ref": "CourseProgress"
         },
         "apply_assignment_group_weights": {
@@ -2042,15 +2667,48 @@
           "description": "The course's IANA time zone name.",
           "example": "America/Denver",
           "type": "string"
+        },
+        "blueprint": {
+          "description": "optional: whether the course is set as a Blueprint Course (blueprint fields require the Blueprint Courses feature)",
+          "example": true,
+          "type": "boolean"
+        },
+        "blueprint_restrictions": {
+          "description": "optional: Set of restrictions applied to all locked course objects",
+          "example": {
+            "content": true,
+            "points": true,
+            "due_dates": false,
+            "availability_dates": false
+          },
+          "type": "object"
+        },
+        "blueprint_restrictions_by_object_type": {
+          "description": "optional: Sets of restrictions differentiated by object type applied to locked course objects",
+          "example": {
+            "assignment": {
+              "content": true,
+              "points": true
+            },
+            "wiki_page": {
+              "content": true
+            }
+          },
+          "type": "object"
+        },
+        "template": {
+          "description": "optional: whether the course is set as a template (requires the Course Templates feature)",
+          "example": true,
+          "type": "boolean"
         }
       }
     },
     "CalendarLink": {
       "id": "CalendarLink",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "ics": {
           "description": "The URL of the calendar in ICS format",

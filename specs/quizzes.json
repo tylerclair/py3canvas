@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/quizzes",
-      "description": "Returns the list of Quizzes in this course.",
+      "description": "Returns the paginated list of Quizzes in this course.",
       "operations": [
         {
           "method": "GET",
           "summary": "List quizzes in a course",
-          "notes": "Returns the list of Quizzes in this course.",
+          "notes": "Returns the paginated list of Quizzes in this course.",
           "nickname": "list_quizzes_in_course",
           "parameters": [
             {
@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -31,9 +32,13 @@
               "description": "The partial title of the quizzes to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Quiz"
@@ -57,7 +62,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -65,9 +71,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Quiz"
         }
       ]
@@ -88,7 +98,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -96,7 +107,8 @@
               "description": "The quiz title.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -104,7 +116,8 @@
               "description": "A description of the quiz.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -113,6 +126,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "practice_quiz",
                 "assignment",
@@ -126,7 +140,8 @@
               "description": "The assignment group id to put the assignment in. Defaults to the top\nassignment group in the course. Only valid if the quiz is graded, i.e. if\nquiz_type is \"assignment\" or \"graded_survey\".",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -134,7 +149,8 @@
               "description": "Time limit to take this quiz, in minutes. Set to null for no time limit.\nDefaults to null.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -142,7 +158,8 @@
               "description": "If true, quiz answers for multiple choice questions will be randomized for\neach student. Defaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -151,6 +168,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "always",
                 "until_after_last_attempt"
@@ -162,7 +180,8 @@
               "description": "Only valid if hide_results=null\nIf false, hides correct answers from students when quiz results are viewed.\nDefaults to true.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -170,7 +189,8 @@
               "description": "Only valid if show_correct_answers=true and allowed_attempts > 1\nIf true, hides correct answers from students when quiz results are viewed\nuntil they submit the last attempt for the quiz.\nDefaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -178,7 +198,8 @@
               "description": "Only valid if show_correct_answers=true\nIf set, the correct answers will be visible by students only after this\ndate, otherwise the correct answers are visible once the student hands in\ntheir quiz submission.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -186,7 +207,8 @@
               "description": "Only valid if show_correct_answers=true\nIf set, the correct answers will stop being visible once this date has\npassed. Otherwise, the correct answers will be visible indefinitely.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -194,7 +216,8 @@
               "description": "Number of times a student is allowed to take a quiz.\nSet to -1 for unlimited attempts.\nDefaults to 1.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -203,6 +226,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "keep_highest",
                 "keep_latest"
@@ -214,7 +238,8 @@
               "description": "If true, shows quiz to student one question at a time.\nDefaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -222,7 +247,8 @@
               "description": "Only valid if one_question_at_a_time=true\nIf true, questions are locked after answering.\nDefaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -230,7 +256,8 @@
               "description": "Restricts access to the quiz with a password.\nFor no access code restriction, set to null.\nDefaults to null.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -238,7 +265,8 @@
               "description": "Restricts access to the quiz to computers in a specified IP range.\nFilters can be a comma-separated list of addresses, or an address followed by a mask\n\nExamples:\n  \"192.168.217.1\"\n  \"192.168.217.1/24\"\n  \"192.168.217.1/255.255.255.0\"\n\nFor no IP filter restriction, set to null.\nDefaults to null.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -246,7 +274,8 @@
               "description": "The day/time the quiz is due.\nAccepts times in ISO 8601 format, e.g. 2011-10-21T18:48Z.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -254,7 +283,8 @@
               "description": "The day/time the quiz is locked for students.\nAccepts times in ISO 8601 format, e.g. 2011-10-21T18:48Z.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -262,7 +292,8 @@
               "description": "The day/time the quiz is unlocked for students.\nAccepts times in ISO 8601 format, e.g. 2011-10-21T18:48Z.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -270,7 +301,8 @@
               "description": "Whether the quiz should have a draft state of published or unpublished.\nNOTE: If students have started taking the quiz, or there are any\nsubmissions for the quiz, you may not unpublish a quiz and will recieve\nan error.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -278,7 +310,8 @@
               "description": "Whether students should be prevented from viewing their quiz results past\nthe first time (right after they turn the quiz in.)\nOnly valid if \"hide_results\" is not set to \"always\".\nDefaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -286,9 +319,13 @@
               "description": "Whether this quiz is only visible to overrides (Only useful if\n'differentiated assignments' account setting is on)\nDefaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Quiz"
         }
       ]
@@ -309,7 +346,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -317,7 +355,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -325,9 +364,13 @@
               "description": "If true, notifies users that the quiz has changed.\nDefaults to true",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Quiz"
         }
       ]
@@ -348,7 +391,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -356,9 +400,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Quiz"
         }
       ]
@@ -379,7 +427,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -387,7 +436,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -396,6 +446,7 @@
               "type": "array",
               "format": "int64",
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -407,6 +458,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "question",
                 "group"
@@ -416,6 +468,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -436,7 +491,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -444,7 +500,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -452,9 +509,13 @@
               "description": "The access code being validated",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "boolean"
         }
       ]
@@ -464,9 +525,9 @@
     "Quiz": {
       "id": "Quiz",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the ID of the quiz",
@@ -682,15 +743,20 @@
           "items": {
             "type": "string"
           }
+        },
+        "anonymous_submissions": {
+          "description": "Whether survey submissions will be kept anonymous (only applicable to 'graded_survey', 'survey' quiz types)",
+          "example": false,
+          "type": "boolean"
         }
       }
     },
     "QuizPermissions": {
       "id": "QuizPermissions",
       "description": "Permissions the user has for the quiz",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "read": {
           "description": "whether the user can view the quiz",

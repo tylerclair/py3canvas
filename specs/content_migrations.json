@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,9 +32,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "MigrationIssue"
@@ -57,7 +62,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -65,9 +71,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "MigrationIssue"
@@ -91,7 +101,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -99,9 +110,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "MigrationIssue"
@@ -125,7 +140,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -133,9 +149,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "MigrationIssue"
@@ -159,7 +179,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -167,7 +188,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -175,9 +197,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "MigrationIssue"
         }
       ]
@@ -198,7 +224,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -206,7 +233,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -214,9 +242,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "MigrationIssue"
         }
       ]
@@ -237,7 +269,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -245,7 +278,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -253,9 +287,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "MigrationIssue"
         }
       ]
@@ -276,7 +314,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -284,7 +323,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -292,9 +332,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "MigrationIssue"
         }
       ]
@@ -315,7 +359,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -323,7 +368,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -331,7 +377,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -340,12 +387,16 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "active",
                 "resolved"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "MigrationIssue"
         }
       ]
@@ -366,7 +417,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -374,7 +426,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -382,7 +435,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -391,12 +445,16 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "active",
                 "resolved"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "MigrationIssue"
         }
       ]
@@ -417,7 +475,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -425,7 +484,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -433,7 +493,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -442,12 +503,16 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "active",
                 "resolved"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "MigrationIssue"
         }
       ]
@@ -468,7 +533,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -476,7 +542,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -484,7 +551,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -493,12 +561,16 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "active",
                 "resolved"
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "MigrationIssue"
         }
       ]
@@ -519,9 +591,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ContentMigration"
@@ -545,9 +621,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ContentMigration"
@@ -571,9 +651,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ContentMigration"
@@ -597,9 +681,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ContentMigration"
@@ -623,7 +711,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -631,9 +720,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
@@ -654,7 +747,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -662,9 +756,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
@@ -685,7 +783,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -693,9 +792,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
@@ -716,7 +819,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -724,9 +828,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
@@ -747,7 +855,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -755,7 +864,8 @@
               "description": "The type of the migration. Use the\n{api:ContentMigrationsController#available_migrators Migrator} endpoint to\nsee all available migrators. Default allowed values:\ncanvas_cartridge_importer, common_cartridge_importer,\ncourse_copy_importer, zip_file_importer, qti_converter, moodle_converter",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -763,7 +873,8 @@
               "description": "Required if uploading a file. This is the first step in uploading a file\nto the content migration. See the {file:file_uploads.html File Upload\nDocumentation} for details on the file upload workflow.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -771,7 +882,8 @@
               "description": "Other file upload properties, See {file:file_uploads.html File Upload\nDocumentation}",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -779,7 +891,17 @@
               "description": "A URL to download the file from. Must not require authentication.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[content_export_id]",
+              "description": "The id of a ContentExport to import. This allows you to import content previously exported from Canvas\nwithout needing to download and re-upload it.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -787,7 +909,8 @@
               "description": "The course to copy from for a course copy migration. (required if doing\ncourse copy)",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -795,7 +918,8 @@
               "description": "The folder to unzip the .zip file into for a zip_file_import.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -803,7 +927,8 @@
               "description": "Whether to overwrite quizzes with the same identifiers between content\npackages.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -811,7 +936,8 @@
               "description": "The existing question bank ID to import questions into if not specified in\nthe content package.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -819,7 +945,51 @@
               "description": "The question bank to import questions into if not specified in the content\npackage, if both bank id and name are set, id will take precedence.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_id]",
+              "description": "The id of a module in the target course. This will add all imported items\n(that can be added to a module) to the given module.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_type]",
+              "description": "If provided (and +insert_into_module_id+ is supplied),\nonly add objects of the specified type to the module.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "assignment",
+                "discussion_topic",
+                "file",
+                "page",
+                "quiz"
+              ]
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_position]",
+              "description": "The (1-based) position to insert the imported items into the course\n(if +insert_into_module_id+ is supplied). If this parameter\nis omitted, items will be added to the end of the module.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[move_to_assignment_group_id]",
+              "description": "The id of an assignment group in the target course. If provided, all\nimported assignments will be moved to the given assignment group.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -827,7 +997,8 @@
               "description": "Whether to shift dates in the copied course",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -835,7 +1006,8 @@
               "description": "The original start date of the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -843,7 +1015,8 @@
               "description": "The original end date of the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -851,7 +1024,8 @@
               "description": "The new start date for the content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -859,7 +1033,8 @@
               "description": "The new end date for the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -867,7 +1042,8 @@
               "description": "Move anything scheduled for day 'X' to the specified day. (0-Sunday,\n1-Monday, 2-Tuesday, 3-Wednesday, 4-Thursday, 5-Friday, 6-Saturday)",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -875,9 +1051,45 @@
               "description": "Whether to remove dates in the copied course. Cannot be used\nin conjunction with *shift_dates*.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "selective_import",
+              "description": "If set, perform a selective import instead of importing all content.\nThe migration will identify the contents of the package and then stop\nin the +waiting_for_select+ workflow state. At this point, use the\n{api:ContentMigrationsController#content_list List items endpoint}\nto enumerate the contents of the package, identifying the copy\nparameters for the desired content. Then call the\n{api:ContentMigrationsController#update Update endpoint} and provide these\ncopy parameters to start the import.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "select",
+              "description": "For +course_copy_importer+ migrations, this parameter allows you to select\nthe objects to copy without using the +selective_import+ argument and\n+waiting_for_select+ state as is required for uploaded imports (though that\nworkflow is also supported for course copy migrations).\nThe keys are object types like 'files', 'folders', 'pages', etc. The value\nfor each key is a list of object ids. An id can be an integer or a string.\nMultiple object types can be selected in the same call.",
+              "type": "Hash",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "folders",
+                "files",
+                "attachments",
+                "quizzes",
+                "assignments",
+                "announcements",
+                "calendar_events",
+                "discussion_topics",
+                "modules",
+                "module_items",
+                "pages",
+                "rubrics"
+              ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
@@ -898,7 +1110,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -906,7 +1119,8 @@
               "description": "The type of the migration. Use the\n{api:ContentMigrationsController#available_migrators Migrator} endpoint to\nsee all available migrators. Default allowed values:\ncanvas_cartridge_importer, common_cartridge_importer,\ncourse_copy_importer, zip_file_importer, qti_converter, moodle_converter",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -914,7 +1128,8 @@
               "description": "Required if uploading a file. This is the first step in uploading a file\nto the content migration. See the {file:file_uploads.html File Upload\nDocumentation} for details on the file upload workflow.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -922,7 +1137,8 @@
               "description": "Other file upload properties, See {file:file_uploads.html File Upload\nDocumentation}",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -930,7 +1146,17 @@
               "description": "A URL to download the file from. Must not require authentication.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[content_export_id]",
+              "description": "The id of a ContentExport to import. This allows you to import content previously exported from Canvas\nwithout needing to download and re-upload it.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -938,7 +1164,8 @@
               "description": "The course to copy from for a course copy migration. (required if doing\ncourse copy)",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -946,7 +1173,8 @@
               "description": "The folder to unzip the .zip file into for a zip_file_import.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -954,7 +1182,8 @@
               "description": "Whether to overwrite quizzes with the same identifiers between content\npackages.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -962,7 +1191,8 @@
               "description": "The existing question bank ID to import questions into if not specified in\nthe content package.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -970,7 +1200,51 @@
               "description": "The question bank to import questions into if not specified in the content\npackage, if both bank id and name are set, id will take precedence.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_id]",
+              "description": "The id of a module in the target course. This will add all imported items\n(that can be added to a module) to the given module.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_type]",
+              "description": "If provided (and +insert_into_module_id+ is supplied),\nonly add objects of the specified type to the module.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "assignment",
+                "discussion_topic",
+                "file",
+                "page",
+                "quiz"
+              ]
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_position]",
+              "description": "The (1-based) position to insert the imported items into the course\n(if +insert_into_module_id+ is supplied). If this parameter\nis omitted, items will be added to the end of the module.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[move_to_assignment_group_id]",
+              "description": "The id of an assignment group in the target course. If provided, all\nimported assignments will be moved to the given assignment group.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -978,7 +1252,8 @@
               "description": "Whether to shift dates in the copied course",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -986,7 +1261,8 @@
               "description": "The original start date of the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -994,7 +1270,8 @@
               "description": "The original end date of the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1002,7 +1279,8 @@
               "description": "The new start date for the content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1010,7 +1288,8 @@
               "description": "The new end date for the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1018,7 +1297,8 @@
               "description": "Move anything scheduled for day 'X' to the specified day. (0-Sunday,\n1-Monday, 2-Tuesday, 3-Wednesday, 4-Thursday, 5-Friday, 6-Saturday)",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1026,9 +1306,45 @@
               "description": "Whether to remove dates in the copied course. Cannot be used\nin conjunction with *shift_dates*.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "selective_import",
+              "description": "If set, perform a selective import instead of importing all content.\nThe migration will identify the contents of the package and then stop\nin the +waiting_for_select+ workflow state. At this point, use the\n{api:ContentMigrationsController#content_list List items endpoint}\nto enumerate the contents of the package, identifying the copy\nparameters for the desired content. Then call the\n{api:ContentMigrationsController#update Update endpoint} and provide these\ncopy parameters to start the import.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "select",
+              "description": "For +course_copy_importer+ migrations, this parameter allows you to select\nthe objects to copy without using the +selective_import+ argument and\n+waiting_for_select+ state as is required for uploaded imports (though that\nworkflow is also supported for course copy migrations).\nThe keys are object types like 'files', 'folders', 'pages', etc. The value\nfor each key is a list of object ids. An id can be an integer or a string.\nMultiple object types can be selected in the same call.",
+              "type": "Hash",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "folders",
+                "files",
+                "attachments",
+                "quizzes",
+                "assignments",
+                "announcements",
+                "calendar_events",
+                "discussion_topics",
+                "modules",
+                "module_items",
+                "pages",
+                "rubrics"
+              ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
@@ -1049,7 +1365,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1057,7 +1374,8 @@
               "description": "The type of the migration. Use the\n{api:ContentMigrationsController#available_migrators Migrator} endpoint to\nsee all available migrators. Default allowed values:\ncanvas_cartridge_importer, common_cartridge_importer,\ncourse_copy_importer, zip_file_importer, qti_converter, moodle_converter",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1065,7 +1383,8 @@
               "description": "Required if uploading a file. This is the first step in uploading a file\nto the content migration. See the {file:file_uploads.html File Upload\nDocumentation} for details on the file upload workflow.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1073,7 +1392,8 @@
               "description": "Other file upload properties, See {file:file_uploads.html File Upload\nDocumentation}",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1081,7 +1401,17 @@
               "description": "A URL to download the file from. Must not require authentication.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[content_export_id]",
+              "description": "The id of a ContentExport to import. This allows you to import content previously exported from Canvas\nwithout needing to download and re-upload it.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1089,7 +1419,8 @@
               "description": "The course to copy from for a course copy migration. (required if doing\ncourse copy)",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1097,7 +1428,8 @@
               "description": "The folder to unzip the .zip file into for a zip_file_import.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1105,7 +1437,8 @@
               "description": "Whether to overwrite quizzes with the same identifiers between content\npackages.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1113,7 +1446,8 @@
               "description": "The existing question bank ID to import questions into if not specified in\nthe content package.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1121,7 +1455,51 @@
               "description": "The question bank to import questions into if not specified in the content\npackage, if both bank id and name are set, id will take precedence.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_id]",
+              "description": "The id of a module in the target course. This will add all imported items\n(that can be added to a module) to the given module.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_type]",
+              "description": "If provided (and +insert_into_module_id+ is supplied),\nonly add objects of the specified type to the module.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "assignment",
+                "discussion_topic",
+                "file",
+                "page",
+                "quiz"
+              ]
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_position]",
+              "description": "The (1-based) position to insert the imported items into the course\n(if +insert_into_module_id+ is supplied). If this parameter\nis omitted, items will be added to the end of the module.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[move_to_assignment_group_id]",
+              "description": "The id of an assignment group in the target course. If provided, all\nimported assignments will be moved to the given assignment group.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1129,7 +1507,8 @@
               "description": "Whether to shift dates in the copied course",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1137,7 +1516,8 @@
               "description": "The original start date of the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1145,7 +1525,8 @@
               "description": "The original end date of the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1153,7 +1534,8 @@
               "description": "The new start date for the content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1161,7 +1543,8 @@
               "description": "The new end date for the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1169,7 +1552,8 @@
               "description": "Move anything scheduled for day 'X' to the specified day. (0-Sunday,\n1-Monday, 2-Tuesday, 3-Wednesday, 4-Thursday, 5-Friday, 6-Saturday)",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1177,9 +1561,45 @@
               "description": "Whether to remove dates in the copied course. Cannot be used\nin conjunction with *shift_dates*.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "selective_import",
+              "description": "If set, perform a selective import instead of importing all content.\nThe migration will identify the contents of the package and then stop\nin the +waiting_for_select+ workflow state. At this point, use the\n{api:ContentMigrationsController#content_list List items endpoint}\nto enumerate the contents of the package, identifying the copy\nparameters for the desired content. Then call the\n{api:ContentMigrationsController#update Update endpoint} and provide these\ncopy parameters to start the import.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "select",
+              "description": "For +course_copy_importer+ migrations, this parameter allows you to select\nthe objects to copy without using the +selective_import+ argument and\n+waiting_for_select+ state as is required for uploaded imports (though that\nworkflow is also supported for course copy migrations).\nThe keys are object types like 'files', 'folders', 'pages', etc. The value\nfor each key is a list of object ids. An id can be an integer or a string.\nMultiple object types can be selected in the same call.",
+              "type": "Hash",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "folders",
+                "files",
+                "attachments",
+                "quizzes",
+                "assignments",
+                "announcements",
+                "calendar_events",
+                "discussion_topics",
+                "modules",
+                "module_items",
+                "pages",
+                "rubrics"
+              ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
@@ -1200,7 +1620,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1208,7 +1629,8 @@
               "description": "The type of the migration. Use the\n{api:ContentMigrationsController#available_migrators Migrator} endpoint to\nsee all available migrators. Default allowed values:\ncanvas_cartridge_importer, common_cartridge_importer,\ncourse_copy_importer, zip_file_importer, qti_converter, moodle_converter",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1216,7 +1638,8 @@
               "description": "Required if uploading a file. This is the first step in uploading a file\nto the content migration. See the {file:file_uploads.html File Upload\nDocumentation} for details on the file upload workflow.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1224,7 +1647,8 @@
               "description": "Other file upload properties, See {file:file_uploads.html File Upload\nDocumentation}",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1232,7 +1656,17 @@
               "description": "A URL to download the file from. Must not require authentication.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[content_export_id]",
+              "description": "The id of a ContentExport to import. This allows you to import content previously exported from Canvas\nwithout needing to download and re-upload it.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1240,7 +1674,8 @@
               "description": "The course to copy from for a course copy migration. (required if doing\ncourse copy)",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1248,7 +1683,8 @@
               "description": "The folder to unzip the .zip file into for a zip_file_import.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1256,7 +1692,8 @@
               "description": "Whether to overwrite quizzes with the same identifiers between content\npackages.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1264,7 +1701,8 @@
               "description": "The existing question bank ID to import questions into if not specified in\nthe content package.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1272,7 +1710,51 @@
               "description": "The question bank to import questions into if not specified in the content\npackage, if both bank id and name are set, id will take precedence.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_id]",
+              "description": "The id of a module in the target course. This will add all imported items\n(that can be added to a module) to the given module.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_type]",
+              "description": "If provided (and +insert_into_module_id+ is supplied),\nonly add objects of the specified type to the module.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "assignment",
+                "discussion_topic",
+                "file",
+                "page",
+                "quiz"
+              ]
+            },
+            {
+              "paramType": "form",
+              "name": "settings[insert_into_module_position]",
+              "description": "The (1-based) position to insert the imported items into the course\n(if +insert_into_module_id+ is supplied). If this parameter\nis omitted, items will be added to the end of the module.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "settings[move_to_assignment_group_id]",
+              "description": "The id of an assignment group in the target course. If provided, all\nimported assignments will be moved to the given assignment group.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1280,7 +1762,8 @@
               "description": "Whether to shift dates in the copied course",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1288,7 +1771,8 @@
               "description": "The original start date of the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1296,7 +1780,8 @@
               "description": "The original end date of the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1304,7 +1789,8 @@
               "description": "The new start date for the content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1312,7 +1798,8 @@
               "description": "The new end date for the source content/course",
               "type": "Date",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1320,7 +1807,8 @@
               "description": "Move anything scheduled for day 'X' to the specified day. (0-Sunday,\n1-Monday, 2-Tuesday, 3-Wednesday, 4-Thursday, 5-Friday, 6-Saturday)",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1328,21 +1816,57 @@
               "description": "Whether to remove dates in the copied course. Cannot be used\nin conjunction with *shift_dates*.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "selective_import",
+              "description": "If set, perform a selective import instead of importing all content.\nThe migration will identify the contents of the package and then stop\nin the +waiting_for_select+ workflow state. At this point, use the\n{api:ContentMigrationsController#content_list List items endpoint}\nto enumerate the contents of the package, identifying the copy\nparameters for the desired content. Then call the\n{api:ContentMigrationsController#update Update endpoint} and provide these\ncopy parameters to start the import.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "select",
+              "description": "For +course_copy_importer+ migrations, this parameter allows you to select\nthe objects to copy without using the +selective_import+ argument and\n+waiting_for_select+ state as is required for uploaded imports (though that\nworkflow is also supported for course copy migrations).\nThe keys are object types like 'files', 'folders', 'pages', etc. The value\nfor each key is a list of object ids. An id can be an integer or a string.\nMultiple object types can be selected in the same call.",
+              "type": "Hash",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "folders",
+                "files",
+                "attachments",
+                "quizzes",
+                "assignments",
+                "announcements",
+                "calendar_events",
+                "discussion_topics",
+                "modules",
+                "module_items",
+                "pages",
+                "rubrics"
+              ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
     },
     {
       "path": "/v1/accounts/{account_id}/content_migrations/{id}",
-      "description": "Update a content migration. Takes same arguments as create except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem. If the\nfirst upload has a problem you can supply new _pre_attachment_ values to\nstart the process again.",
+      "description": "Update a content migration. Takes same arguments as {api:ContentMigrationsController#create create} except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem, or when\nimporting content selectively. If the first upload has a problem you can\nsupply new _pre_attachment_ values to start the process again.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Update a content migration",
-          "notes": "Update a content migration. Takes same arguments as create except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem. If the\nfirst upload has a problem you can supply new _pre_attachment_ values to\nstart the process again.",
+          "notes": "Update a content migration. Takes same arguments as {api:ContentMigrationsController#create create} except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem, or when\nimporting content selectively. If the first upload has a problem you can\nsupply new _pre_attachment_ values to start the process again.",
           "nickname": "update_content_migration_accounts",
           "parameters": [
             {
@@ -1351,7 +1875,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1359,21 +1884,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/content_migrations/{id}",
-      "description": "Update a content migration. Takes same arguments as create except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem. If the\nfirst upload has a problem you can supply new _pre_attachment_ values to\nstart the process again.",
+      "description": "Update a content migration. Takes same arguments as {api:ContentMigrationsController#create create} except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem, or when\nimporting content selectively. If the first upload has a problem you can\nsupply new _pre_attachment_ values to start the process again.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Update a content migration",
-          "notes": "Update a content migration. Takes same arguments as create except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem. If the\nfirst upload has a problem you can supply new _pre_attachment_ values to\nstart the process again.",
+          "notes": "Update a content migration. Takes same arguments as {api:ContentMigrationsController#create create} except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem, or when\nimporting content selectively. If the first upload has a problem you can\nsupply new _pre_attachment_ values to start the process again.",
           "nickname": "update_content_migration_courses",
           "parameters": [
             {
@@ -1382,7 +1911,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1390,21 +1920,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
     },
     {
       "path": "/v1/groups/{group_id}/content_migrations/{id}",
-      "description": "Update a content migration. Takes same arguments as create except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem. If the\nfirst upload has a problem you can supply new _pre_attachment_ values to\nstart the process again.",
+      "description": "Update a content migration. Takes same arguments as {api:ContentMigrationsController#create create} except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem, or when\nimporting content selectively. If the first upload has a problem you can\nsupply new _pre_attachment_ values to start the process again.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Update a content migration",
-          "notes": "Update a content migration. Takes same arguments as create except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem. If the\nfirst upload has a problem you can supply new _pre_attachment_ values to\nstart the process again.",
+          "notes": "Update a content migration. Takes same arguments as {api:ContentMigrationsController#create create} except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem, or when\nimporting content selectively. If the first upload has a problem you can\nsupply new _pre_attachment_ values to start the process again.",
           "nickname": "update_content_migration_groups",
           "parameters": [
             {
@@ -1413,7 +1947,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1421,21 +1956,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
     },
     {
       "path": "/v1/users/{user_id}/content_migrations/{id}",
-      "description": "Update a content migration. Takes same arguments as create except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem. If the\nfirst upload has a problem you can supply new _pre_attachment_ values to\nstart the process again.",
+      "description": "Update a content migration. Takes same arguments as {api:ContentMigrationsController#create create} except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem, or when\nimporting content selectively. If the first upload has a problem you can\nsupply new _pre_attachment_ values to start the process again.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Update a content migration",
-          "notes": "Update a content migration. Takes same arguments as create except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem. If the\nfirst upload has a problem you can supply new _pre_attachment_ values to\nstart the process again.",
+          "notes": "Update a content migration. Takes same arguments as {api:ContentMigrationsController#create create} except that you\ncan't change the migration type. However, changing most settings after the\nmigration process has started will not do anything. Generally updating the\ncontent migration will be used when there is a file upload problem, or when\nimporting content selectively. If the first upload has a problem you can\nsupply new _pre_attachment_ values to start the process again.",
           "nickname": "update_content_migration_users",
           "parameters": [
             {
@@ -1444,7 +1983,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1452,9 +1992,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentMigration"
         }
       ]
@@ -1475,9 +2019,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Migrator"
@@ -1501,9 +2049,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Migrator"
@@ -1527,9 +2079,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Migrator"
@@ -1553,13 +2109,261 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Migrator"
           }
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/content_migrations/{id}/selective_data",
+      "description": "Enumerates the content available for selective import in a tree structure. Each node provides\na +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint}\nto selectively copy the content associated with that tree node and its children. Each node may also\nprovide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters\nfor a subset of the resources in a given node.\n\nIf no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:\n\n  [{\n    \"type\": \"course_settings\",\n    \"property\": \"copy[all_course_settings]\",\n    \"title\": \"Course Settings\"\n  },\n  {\n    \"type\": \"context_modules\",\n    \"property\": \"copy[all_context_modules]\",\n    \"title\": \"Modules\",\n    \"count\": 5,\n    \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"\n  },\n  {\n    \"type\": \"assignments\",\n    \"property\": \"copy[all_assignments]\",\n    \"title\": \"Assignments\",\n    \"count\": 2,\n    \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"\n  }]\n\nWhen a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+\nresults in a node for each assignment group and a sub_item for each assignment, like this:\n\n  [{\n    \"type\": \"assignment_groups\",\n    \"title\": \"An Assignment Group\",\n    \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",\n    \"sub_items\": [{\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 1\",\n        \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"\n    }, {\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 2\",\n        \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"\n    }]\n  }]\n\n\nTo import the items corresponding to a particular tree node, use the +property+ as a parameter to the\n{api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:\n\n  copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1\n\nYou can include multiple copy parameters to selectively import multiple items or groups of items.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List items for selective import",
+          "notes": "Enumerates the content available for selective import in a tree structure. Each node provides\na +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint}\nto selectively copy the content associated with that tree node and its children. Each node may also\nprovide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters\nfor a subset of the resources in a given node.\n\nIf no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:\n\n  [{\n    \"type\": \"course_settings\",\n    \"property\": \"copy[all_course_settings]\",\n    \"title\": \"Course Settings\"\n  },\n  {\n    \"type\": \"context_modules\",\n    \"property\": \"copy[all_context_modules]\",\n    \"title\": \"Modules\",\n    \"count\": 5,\n    \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"\n  },\n  {\n    \"type\": \"assignments\",\n    \"property\": \"copy[all_assignments]\",\n    \"title\": \"Assignments\",\n    \"count\": 2,\n    \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"\n  }]\n\nWhen a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+\nresults in a node for each assignment group and a sub_item for each assignment, like this:\n\n  [{\n    \"type\": \"assignment_groups\",\n    \"title\": \"An Assignment Group\",\n    \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",\n    \"sub_items\": [{\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 1\",\n        \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"\n    }, {\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 2\",\n        \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"\n    }]\n  }]\n\n\nTo import the items corresponding to a particular tree node, use the +property+ as a parameter to the\n{api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:\n\n  copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1\n\nYou can include multiple copy parameters to selectively import multiple items or groups of items.",
+          "nickname": "list_items_for_selective_import_accounts",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "type",
+              "description": "The type of content to enumerate.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "context_modules",
+                "assignments",
+                "quizzes",
+                "assessment_question_banks",
+                "discussion_topics",
+                "wiki_pages",
+                "context_external_tools",
+                "tool_profiles",
+                "announcements",
+                "calendar_events",
+                "rubrics",
+                "groups",
+                "learning_outcomes",
+                "attachments"
+              ]
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "list of content items"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/content_migrations/{id}/selective_data",
+      "description": "Enumerates the content available for selective import in a tree structure. Each node provides\na +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint}\nto selectively copy the content associated with that tree node and its children. Each node may also\nprovide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters\nfor a subset of the resources in a given node.\n\nIf no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:\n\n  [{\n    \"type\": \"course_settings\",\n    \"property\": \"copy[all_course_settings]\",\n    \"title\": \"Course Settings\"\n  },\n  {\n    \"type\": \"context_modules\",\n    \"property\": \"copy[all_context_modules]\",\n    \"title\": \"Modules\",\n    \"count\": 5,\n    \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"\n  },\n  {\n    \"type\": \"assignments\",\n    \"property\": \"copy[all_assignments]\",\n    \"title\": \"Assignments\",\n    \"count\": 2,\n    \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"\n  }]\n\nWhen a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+\nresults in a node for each assignment group and a sub_item for each assignment, like this:\n\n  [{\n    \"type\": \"assignment_groups\",\n    \"title\": \"An Assignment Group\",\n    \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",\n    \"sub_items\": [{\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 1\",\n        \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"\n    }, {\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 2\",\n        \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"\n    }]\n  }]\n\n\nTo import the items corresponding to a particular tree node, use the +property+ as a parameter to the\n{api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:\n\n  copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1\n\nYou can include multiple copy parameters to selectively import multiple items or groups of items.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List items for selective import",
+          "notes": "Enumerates the content available for selective import in a tree structure. Each node provides\na +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint}\nto selectively copy the content associated with that tree node and its children. Each node may also\nprovide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters\nfor a subset of the resources in a given node.\n\nIf no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:\n\n  [{\n    \"type\": \"course_settings\",\n    \"property\": \"copy[all_course_settings]\",\n    \"title\": \"Course Settings\"\n  },\n  {\n    \"type\": \"context_modules\",\n    \"property\": \"copy[all_context_modules]\",\n    \"title\": \"Modules\",\n    \"count\": 5,\n    \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"\n  },\n  {\n    \"type\": \"assignments\",\n    \"property\": \"copy[all_assignments]\",\n    \"title\": \"Assignments\",\n    \"count\": 2,\n    \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"\n  }]\n\nWhen a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+\nresults in a node for each assignment group and a sub_item for each assignment, like this:\n\n  [{\n    \"type\": \"assignment_groups\",\n    \"title\": \"An Assignment Group\",\n    \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",\n    \"sub_items\": [{\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 1\",\n        \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"\n    }, {\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 2\",\n        \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"\n    }]\n  }]\n\n\nTo import the items corresponding to a particular tree node, use the +property+ as a parameter to the\n{api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:\n\n  copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1\n\nYou can include multiple copy parameters to selectively import multiple items or groups of items.",
+          "nickname": "list_items_for_selective_import_courses",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "type",
+              "description": "The type of content to enumerate.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "context_modules",
+                "assignments",
+                "quizzes",
+                "assessment_question_banks",
+                "discussion_topics",
+                "wiki_pages",
+                "context_external_tools",
+                "tool_profiles",
+                "announcements",
+                "calendar_events",
+                "rubrics",
+                "groups",
+                "learning_outcomes",
+                "attachments"
+              ]
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "list of content items"
+        }
+      ]
+    },
+    {
+      "path": "/v1/groups/{group_id}/content_migrations/{id}/selective_data",
+      "description": "Enumerates the content available for selective import in a tree structure. Each node provides\na +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint}\nto selectively copy the content associated with that tree node and its children. Each node may also\nprovide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters\nfor a subset of the resources in a given node.\n\nIf no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:\n\n  [{\n    \"type\": \"course_settings\",\n    \"property\": \"copy[all_course_settings]\",\n    \"title\": \"Course Settings\"\n  },\n  {\n    \"type\": \"context_modules\",\n    \"property\": \"copy[all_context_modules]\",\n    \"title\": \"Modules\",\n    \"count\": 5,\n    \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"\n  },\n  {\n    \"type\": \"assignments\",\n    \"property\": \"copy[all_assignments]\",\n    \"title\": \"Assignments\",\n    \"count\": 2,\n    \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"\n  }]\n\nWhen a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+\nresults in a node for each assignment group and a sub_item for each assignment, like this:\n\n  [{\n    \"type\": \"assignment_groups\",\n    \"title\": \"An Assignment Group\",\n    \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",\n    \"sub_items\": [{\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 1\",\n        \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"\n    }, {\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 2\",\n        \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"\n    }]\n  }]\n\n\nTo import the items corresponding to a particular tree node, use the +property+ as a parameter to the\n{api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:\n\n  copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1\n\nYou can include multiple copy parameters to selectively import multiple items or groups of items.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List items for selective import",
+          "notes": "Enumerates the content available for selective import in a tree structure. Each node provides\na +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint}\nto selectively copy the content associated with that tree node and its children. Each node may also\nprovide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters\nfor a subset of the resources in a given node.\n\nIf no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:\n\n  [{\n    \"type\": \"course_settings\",\n    \"property\": \"copy[all_course_settings]\",\n    \"title\": \"Course Settings\"\n  },\n  {\n    \"type\": \"context_modules\",\n    \"property\": \"copy[all_context_modules]\",\n    \"title\": \"Modules\",\n    \"count\": 5,\n    \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"\n  },\n  {\n    \"type\": \"assignments\",\n    \"property\": \"copy[all_assignments]\",\n    \"title\": \"Assignments\",\n    \"count\": 2,\n    \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"\n  }]\n\nWhen a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+\nresults in a node for each assignment group and a sub_item for each assignment, like this:\n\n  [{\n    \"type\": \"assignment_groups\",\n    \"title\": \"An Assignment Group\",\n    \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",\n    \"sub_items\": [{\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 1\",\n        \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"\n    }, {\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 2\",\n        \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"\n    }]\n  }]\n\n\nTo import the items corresponding to a particular tree node, use the +property+ as a parameter to the\n{api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:\n\n  copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1\n\nYou can include multiple copy parameters to selectively import multiple items or groups of items.",
+          "nickname": "list_items_for_selective_import_groups",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "group_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "type",
+              "description": "The type of content to enumerate.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "context_modules",
+                "assignments",
+                "quizzes",
+                "assessment_question_banks",
+                "discussion_topics",
+                "wiki_pages",
+                "context_external_tools",
+                "tool_profiles",
+                "announcements",
+                "calendar_events",
+                "rubrics",
+                "groups",
+                "learning_outcomes",
+                "attachments"
+              ]
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "list of content items"
+        }
+      ]
+    },
+    {
+      "path": "/v1/users/{user_id}/content_migrations/{id}/selective_data",
+      "description": "Enumerates the content available for selective import in a tree structure. Each node provides\na +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint}\nto selectively copy the content associated with that tree node and its children. Each node may also\nprovide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters\nfor a subset of the resources in a given node.\n\nIf no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:\n\n  [{\n    \"type\": \"course_settings\",\n    \"property\": \"copy[all_course_settings]\",\n    \"title\": \"Course Settings\"\n  },\n  {\n    \"type\": \"context_modules\",\n    \"property\": \"copy[all_context_modules]\",\n    \"title\": \"Modules\",\n    \"count\": 5,\n    \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"\n  },\n  {\n    \"type\": \"assignments\",\n    \"property\": \"copy[all_assignments]\",\n    \"title\": \"Assignments\",\n    \"count\": 2,\n    \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"\n  }]\n\nWhen a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+\nresults in a node for each assignment group and a sub_item for each assignment, like this:\n\n  [{\n    \"type\": \"assignment_groups\",\n    \"title\": \"An Assignment Group\",\n    \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",\n    \"sub_items\": [{\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 1\",\n        \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"\n    }, {\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 2\",\n        \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"\n    }]\n  }]\n\n\nTo import the items corresponding to a particular tree node, use the +property+ as a parameter to the\n{api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:\n\n  copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1\n\nYou can include multiple copy parameters to selectively import multiple items or groups of items.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List items for selective import",
+          "notes": "Enumerates the content available for selective import in a tree structure. Each node provides\na +property+ copy argument that can be supplied to the {api:ContentMigrationsController#update Update endpoint}\nto selectively copy the content associated with that tree node and its children. Each node may also\nprovide a +sub_items_url+ or an array of +sub_items+ which you can use to obtain copy parameters\nfor a subset of the resources in a given node.\n\nIf no +type+ is sent you will get a list of the top-level sections in the content. It will look something like this:\n\n  [{\n    \"type\": \"course_settings\",\n    \"property\": \"copy[all_course_settings]\",\n    \"title\": \"Course Settings\"\n  },\n  {\n    \"type\": \"context_modules\",\n    \"property\": \"copy[all_context_modules]\",\n    \"title\": \"Modules\",\n    \"count\": 5,\n    \"sub_items_url\": \"http://example.com/api/v1/courses/22/content_migrations/77/selective_data?type=context_modules\"\n  },\n  {\n    \"type\": \"assignments\",\n    \"property\": \"copy[all_assignments]\",\n    \"title\": \"Assignments\",\n    \"count\": 2,\n    \"sub_items_url\": \"http://localhost:3000/api/v1/courses/22/content_migrations/77/selective_data?type=assignments\"\n  }]\n\nWhen a +type+ is provided, nodes may be further divided via +sub_items+. For example, using +type=assignments+\nresults in a node for each assignment group and a sub_item for each assignment, like this:\n\n  [{\n    \"type\": \"assignment_groups\",\n    \"title\": \"An Assignment Group\",\n    \"property\": \"copy[assignment_groups][id_i855cf145e5acc7435e1bf1c6e2126e5f]\",\n    \"sub_items\": [{\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 1\",\n        \"property\": \"copy[assignments][id_i2102a7fa93b29226774949298626719d]\"\n    }, {\n        \"type\": \"assignments\",\n        \"title\": \"Assignment 2\",\n        \"property\": \"copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]\"\n    }]\n  }]\n\n\nTo import the items corresponding to a particular tree node, use the +property+ as a parameter to the\n{api:ContentMigrationsController#update Update endpoint} and assign a value of 1, for example:\n\n  copy[assignments][id_i310cba275dc3f4aa8a3306bbbe380979]=1\n\nYou can include multiple copy parameters to selectively import multiple items or groups of items.",
+          "nickname": "list_items_for_selective_import_users",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "user_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "type",
+              "description": "The type of content to enumerate.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "context_modules",
+                "assignments",
+                "quizzes",
+                "assessment_question_banks",
+                "discussion_topics",
+                "wiki_pages",
+                "context_external_tools",
+                "tool_profiles",
+                "announcements",
+                "calendar_events",
+                "rubrics",
+                "groups",
+                "learning_outcomes",
+                "attachments"
+              ]
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "list of content items"
         }
       ]
     }
@@ -1568,9 +2372,9 @@
     "MigrationIssue": {
       "id": "MigrationIssue",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the unique identifier for the issue",
@@ -1640,9 +2444,9 @@
     "ContentMigration": {
       "id": "ContentMigration",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the unique identifier for the migration",
@@ -1714,9 +2518,9 @@
     "Migrator": {
       "id": "Migrator",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "type": {
           "description": "The value to pass to the create endpoint",

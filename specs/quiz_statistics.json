@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,7 +32,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -39,9 +41,13 @@
               "description": "Whether the statistics report should include all submissions attempts.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -55,6 +61,8 @@
         "id",
         "quiz_id"
       ],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the quiz statistics report.",
@@ -110,9 +118,9 @@
     "QuizStatisticsLinks": {
       "id": "QuizStatisticsLinks",
       "description": "Links to media related to QuizStatistics.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "quiz": {
           "description": "HTTP/HTTPS API URL to the quiz this statistics describe.",
@@ -124,9 +132,9 @@
     "QuizStatisticsQuestionStatistics": {
       "id": "QuizStatisticsQuestionStatistics",
       "description": "Statistics for submissions made to a specific quiz question.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "responses": {
           "description": "Number of students who have provided an answer to this question. Blank or empty responses are not counted.",
@@ -143,9 +151,9 @@
     "QuizStatisticsAnswerStatistics": {
       "id": "QuizStatisticsAnswerStatistics",
       "description": "Statistics for a specific pre-defined answer in a Multiple-Choice or True/False quiz question.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "ID of the answer.",
@@ -159,7 +167,7 @@
           "type": "string"
         },
         "weight": {
-          "description": "An integer to determine correctness of the answer. Incorrect answers should be 0, correct answers should be non-negative.",
+          "description": "An integer to determine correctness of the answer. Incorrect answers should be 0, correct answers should 100",
           "example": 100,
           "type": "integer",
           "format": "int64"
@@ -175,9 +183,9 @@
     "QuizStatisticsAnswerPointBiserial": {
       "id": "QuizStatisticsAnswerPointBiserial",
       "description": "A point-biserial construct for a single pre-defined answer in a Multiple-Choice or True/False question.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "answer_id": {
           "description": "ID of the answer the point biserial is for.",
@@ -205,9 +213,9 @@
     "QuizStatisticsSubmissionStatistics": {
       "id": "QuizStatisticsSubmissionStatistics",
       "description": "Generic statistics for all submissions for a quiz.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "unique_count": {
           "description": "The number of students who have taken the quiz.",

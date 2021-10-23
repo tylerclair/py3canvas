@@ -16,9 +16,10 @@
           "summary": "Redirect to root outcome group for context",
           "notes": "Convenience redirect to find the root outcome group for a particular\ncontext. Will redirect to the appropriate outcome group's URL.",
           "nickname": "redirect_to_root_outcome_group_for_context_global",
-          "parameters": [
-
-          ],
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -39,9 +40,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -62,9 +67,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -85,9 +94,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "OutcomeGroup"
@@ -111,9 +124,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "OutcomeGroup"
@@ -137,7 +154,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -145,7 +163,8 @@
               "description": "The detail level of the outcomes. Defaults to \"abbrev\".\nSpecify \"full\" for more information.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -153,9 +172,13 @@
               "description": "The detail level of the outcome groups. Defaults to \"abbrev\".\nSpecify \"full\" for more information.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "OutcomeLink"
@@ -179,7 +202,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -187,7 +211,8 @@
               "description": "The detail level of the outcomes. Defaults to \"abbrev\".\nSpecify \"full\" for more information.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -195,9 +220,13 @@
               "description": "The detail level of the outcome groups. Defaults to \"abbrev\".\nSpecify \"full\" for more information.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "OutcomeLink"
@@ -221,9 +250,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -244,7 +277,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -252,9 +286,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -275,7 +313,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -283,9 +322,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -306,7 +349,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -314,7 +358,8 @@
               "description": "The new outcome group title.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -322,7 +367,8 @@
               "description": "The new outcome group description.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -330,7 +376,8 @@
               "description": "A custom GUID for the learning standard.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -338,9 +385,13 @@
               "description": "The id of the new parent outcome group.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -361,7 +412,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -369,7 +421,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -377,7 +430,8 @@
               "description": "The new outcome group title.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -385,7 +439,8 @@
               "description": "The new outcome group description.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -393,7 +448,8 @@
               "description": "A custom GUID for the learning standard.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -401,9 +457,13 @@
               "description": "The id of the new parent outcome group.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -424,7 +484,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -432,7 +493,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -440,7 +502,8 @@
               "description": "The new outcome group title.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -448,7 +511,8 @@
               "description": "The new outcome group description.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -456,7 +520,8 @@
               "description": "A custom GUID for the learning standard.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -464,9 +529,13 @@
               "description": "The id of the new parent outcome group.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -487,9 +556,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -510,7 +583,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -518,9 +592,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -541,7 +619,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -549,21 +628,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
     },
     {
       "path": "/v1/global/outcome_groups/{id}/outcomes",
-      "description": "List the immediate OutcomeLink children of the outcome group. Paginated.",
+      "description": "A paginated list of the immediate OutcomeLink children of the outcome group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List linked outcomes",
-          "notes": "List the immediate OutcomeLink children of the outcome group. Paginated.",
+          "notes": "A paginated list of the immediate OutcomeLink children of the outcome group.",
           "nickname": "list_linked_outcomes_global",
           "parameters": [
             {
@@ -572,7 +655,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -580,9 +664,13 @@
               "description": "The detail level of the outcomes. Defaults to \"abbrev\".\nSpecify \"full\" for more information.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "OutcomeLink"
@@ -592,12 +680,12 @@
     },
     {
       "path": "/v1/accounts/{account_id}/outcome_groups/{id}/outcomes",
-      "description": "List the immediate OutcomeLink children of the outcome group. Paginated.",
+      "description": "A paginated list of the immediate OutcomeLink children of the outcome group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List linked outcomes",
-          "notes": "List the immediate OutcomeLink children of the outcome group. Paginated.",
+          "notes": "A paginated list of the immediate OutcomeLink children of the outcome group.",
           "nickname": "list_linked_outcomes_accounts",
           "parameters": [
             {
@@ -606,7 +694,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -614,7 +703,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -622,9 +712,13 @@
               "description": "The detail level of the outcomes. Defaults to \"abbrev\".\nSpecify \"full\" for more information.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "OutcomeLink"
@@ -634,12 +728,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/outcome_groups/{id}/outcomes",
-      "description": "List the immediate OutcomeLink children of the outcome group. Paginated.",
+      "description": "A paginated list of the immediate OutcomeLink children of the outcome group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List linked outcomes",
-          "notes": "List the immediate OutcomeLink children of the outcome group. Paginated.",
+          "notes": "A paginated list of the immediate OutcomeLink children of the outcome group.",
           "nickname": "list_linked_outcomes_courses",
           "parameters": [
             {
@@ -648,7 +742,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -656,7 +751,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -664,9 +760,13 @@
               "description": "The detail level of the outcomes. Defaults to \"abbrev\".\nSpecify \"full\" for more information.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "OutcomeLink"
@@ -676,12 +776,12 @@
     },
     {
       "path": "/v1/global/outcome_groups/{id}/outcomes",
-      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
       "operations": [
         {
           "method": "POST",
           "summary": "Create/link an outcome",
-          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
           "nickname": "create_link_outcome_global",
           "parameters": [
             {
@@ -690,7 +790,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -698,7 +799,17 @@
               "description": "The ID of the existing outcome to link.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "move_from",
+              "description": "The ID of the old outcome group. Only used if outcome_id is present.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -706,7 +817,8 @@
               "description": "The title of the new outcome. Required if outcome_id is absent.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -714,7 +826,8 @@
               "description": "A friendly name shown in reports for outcomes with cryptic titles,\nsuch as common core standards names.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -722,7 +835,8 @@
               "description": "The description of the new outcome.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -730,7 +844,8 @@
               "description": "A custom GUID for the learning standard.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -738,7 +853,8 @@
               "description": "The mastery threshold for the embedded rubric criterion.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -747,6 +863,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -758,6 +875,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -765,10 +883,11 @@
             {
               "paramType": "form",
               "name": "calculation_method",
-              "description": "The new calculation method.  Defaults to \"highest\"",
+              "description": "The new calculation method.  Defaults to \"decaying_average\"",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "decaying_average",
                 "n_mastery",
@@ -779,24 +898,28 @@
             {
               "paramType": "form",
               "name": "calculation_int",
-              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\"",
+              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\". Defaults to 65",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeLink"
         }
       ]
     },
     {
       "path": "/v1/global/outcome_groups/{id}/outcomes/{outcome_id}",
-      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Create/link an outcome",
-          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
           "nickname": "create_link_outcome_global_outcome_id",
           "parameters": [
             {
@@ -805,7 +928,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -813,7 +937,17 @@
               "description": "The ID of the existing outcome to link.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "move_from",
+              "description": "The ID of the old outcome group. Only used if outcome_id is present.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -821,7 +955,8 @@
               "description": "The title of the new outcome. Required if outcome_id is absent.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -829,7 +964,8 @@
               "description": "A friendly name shown in reports for outcomes with cryptic titles,\nsuch as common core standards names.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -837,7 +973,8 @@
               "description": "The description of the new outcome.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -845,7 +982,8 @@
               "description": "A custom GUID for the learning standard.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -853,7 +991,8 @@
               "description": "The mastery threshold for the embedded rubric criterion.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -862,6 +1001,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -873,6 +1013,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -880,10 +1021,11 @@
             {
               "paramType": "form",
               "name": "calculation_method",
-              "description": "The new calculation method.  Defaults to \"highest\"",
+              "description": "The new calculation method.  Defaults to \"decaying_average\"",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "decaying_average",
                 "n_mastery",
@@ -894,24 +1036,28 @@
             {
               "paramType": "form",
               "name": "calculation_int",
-              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\"",
+              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\". Defaults to 65",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeLink"
         }
       ]
     },
     {
       "path": "/v1/accounts/{account_id}/outcome_groups/{id}/outcomes",
-      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
       "operations": [
         {
           "method": "POST",
           "summary": "Create/link an outcome",
-          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
           "nickname": "create_link_outcome_accounts",
           "parameters": [
             {
@@ -920,7 +1066,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -928,7 +1075,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -936,7 +1084,17 @@
               "description": "The ID of the existing outcome to link.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "move_from",
+              "description": "The ID of the old outcome group. Only used if outcome_id is present.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -944,7 +1102,8 @@
               "description": "The title of the new outcome. Required if outcome_id is absent.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -952,7 +1111,8 @@
               "description": "A friendly name shown in reports for outcomes with cryptic titles,\nsuch as common core standards names.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -960,7 +1120,8 @@
               "description": "The description of the new outcome.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -968,7 +1129,8 @@
               "description": "A custom GUID for the learning standard.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -976,7 +1138,8 @@
               "description": "The mastery threshold for the embedded rubric criterion.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -985,6 +1148,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -996,6 +1160,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -1003,10 +1168,11 @@
             {
               "paramType": "form",
               "name": "calculation_method",
-              "description": "The new calculation method.  Defaults to \"highest\"",
+              "description": "The new calculation method.  Defaults to \"decaying_average\"",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "decaying_average",
                 "n_mastery",
@@ -1017,24 +1183,28 @@
             {
               "paramType": "form",
               "name": "calculation_int",
-              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\"",
+              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\". Defaults to 65",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeLink"
         }
       ]
     },
     {
       "path": "/v1/accounts/{account_id}/outcome_groups/{id}/outcomes/{outcome_id}",
-      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Create/link an outcome",
-          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
           "nickname": "create_link_outcome_accounts_outcome_id",
           "parameters": [
             {
@@ -1043,7 +1213,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1051,7 +1222,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1059,7 +1231,17 @@
               "description": "The ID of the existing outcome to link.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "move_from",
+              "description": "The ID of the old outcome group. Only used if outcome_id is present.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1067,7 +1249,8 @@
               "description": "The title of the new outcome. Required if outcome_id is absent.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1075,7 +1258,8 @@
               "description": "A friendly name shown in reports for outcomes with cryptic titles,\nsuch as common core standards names.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1083,7 +1267,8 @@
               "description": "The description of the new outcome.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1091,7 +1276,8 @@
               "description": "A custom GUID for the learning standard.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1099,7 +1285,8 @@
               "description": "The mastery threshold for the embedded rubric criterion.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1108,6 +1295,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1119,6 +1307,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -1126,10 +1315,11 @@
             {
               "paramType": "form",
               "name": "calculation_method",
-              "description": "The new calculation method.  Defaults to \"highest\"",
+              "description": "The new calculation method.  Defaults to \"decaying_average\"",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "decaying_average",
                 "n_mastery",
@@ -1140,24 +1330,28 @@
             {
               "paramType": "form",
               "name": "calculation_int",
-              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\"",
+              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\". Defaults to 65",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeLink"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/outcome_groups/{id}/outcomes",
-      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
       "operations": [
         {
           "method": "POST",
           "summary": "Create/link an outcome",
-          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
           "nickname": "create_link_outcome_courses",
           "parameters": [
             {
@@ -1166,7 +1360,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1174,7 +1369,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1182,7 +1378,17 @@
               "description": "The ID of the existing outcome to link.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "move_from",
+              "description": "The ID of the old outcome group. Only used if outcome_id is present.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1190,7 +1396,8 @@
               "description": "The title of the new outcome. Required if outcome_id is absent.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1198,7 +1405,8 @@
               "description": "A friendly name shown in reports for outcomes with cryptic titles,\nsuch as common core standards names.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1206,7 +1414,8 @@
               "description": "The description of the new outcome.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1214,7 +1423,8 @@
               "description": "A custom GUID for the learning standard.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1222,7 +1432,8 @@
               "description": "The mastery threshold for the embedded rubric criterion.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1231,6 +1442,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1242,6 +1454,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -1249,10 +1462,11 @@
             {
               "paramType": "form",
               "name": "calculation_method",
-              "description": "The new calculation method.  Defaults to \"highest\"",
+              "description": "The new calculation method.  Defaults to \"decaying_average\"",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "decaying_average",
                 "n_mastery",
@@ -1263,24 +1477,28 @@
             {
               "paramType": "form",
               "name": "calculation_int",
-              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\"",
+              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\". Defaults to 65",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeLink"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/outcome_groups/{id}/outcomes/{outcome_id}",
-      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+      "description": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Create/link an outcome",
-          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
+          "notes": "Link an outcome into the outcome group. The outcome to link can either be\nspecified by a PUT to the link URL for a specific outcome (the outcome_id\nin the PUT URLs) or by supplying the information for a new outcome (title,\ndescription, ratings, mastery_points) in a POST to the collection.\n\nIf linking an existing outcome, the outcome_id must identify an outcome\navailable to this context; i.e. an outcome owned by this group's context,\nan outcome owned by an associated account, or a global outcome. With\noutcome_id present, any other parameters (except move_from) are ignored.\n\nIf defining a new outcome, the outcome is created in the outcome group's\ncontext using the provided title, description, ratings, and mastery points;\nthe title is required but all other fields are optional. The new outcome\nis then linked into the outcome group.\n\nIf ratings are provided when creating a new outcome, an embedded rubric\ncriterion is included in the new outcome. This criterion's mastery_points\ndefault to the maximum points in the highest rating if not specified in the\nmastery_points parameter. Any ratings lacking a description are given a\ndefault of \"No description\". Any ratings lacking a point value are given a\ndefault of 0. If no ratings are provided, the mastery_points parameter is\nignored.",
           "nickname": "create_link_outcome_courses_outcome_id",
           "parameters": [
             {
@@ -1289,7 +1507,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1297,7 +1516,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1305,7 +1525,17 @@
               "description": "The ID of the existing outcome to link.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "move_from",
+              "description": "The ID of the old outcome group. Only used if outcome_id is present.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1313,7 +1543,8 @@
               "description": "The title of the new outcome. Required if outcome_id is absent.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1321,7 +1552,8 @@
               "description": "A friendly name shown in reports for outcomes with cryptic titles,\nsuch as common core standards names.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1329,7 +1561,8 @@
               "description": "The description of the new outcome.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1337,7 +1570,8 @@
               "description": "A custom GUID for the learning standard.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1345,7 +1579,8 @@
               "description": "The mastery threshold for the embedded rubric criterion.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1354,6 +1589,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1365,6 +1601,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -1372,10 +1609,11 @@
             {
               "paramType": "form",
               "name": "calculation_method",
-              "description": "The new calculation method.  Defaults to \"highest\"",
+              "description": "The new calculation method.  Defaults to \"decaying_average\"",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "decaying_average",
                 "n_mastery",
@@ -1386,12 +1624,16 @@
             {
               "paramType": "form",
               "name": "calculation_int",
-              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\"",
+              "description": "The new calculation int.  Only applies if the calculation_method is \"decaying_average\" or \"n_mastery\". Defaults to 65",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeLink"
         }
       ]
@@ -1412,7 +1654,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1420,9 +1663,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeLink"
         }
       ]
@@ -1443,7 +1690,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1451,7 +1699,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1459,9 +1708,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeLink"
         }
       ]
@@ -1482,7 +1735,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1490,7 +1744,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1498,21 +1753,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeLink"
         }
       ]
     },
     {
       "path": "/v1/global/outcome_groups/{id}/subgroups",
-      "description": "List the immediate OutcomeGroup children of the outcome group. Paginated.",
+      "description": "A paginated list of the immediate OutcomeGroup children of the outcome group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List subgroups",
-          "notes": "List the immediate OutcomeGroup children of the outcome group. Paginated.",
+          "notes": "A paginated list of the immediate OutcomeGroup children of the outcome group.",
           "nickname": "list_subgroups_global",
           "parameters": [
             {
@@ -1521,9 +1780,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "OutcomeGroup"
@@ -1533,12 +1796,12 @@
     },
     {
       "path": "/v1/accounts/{account_id}/outcome_groups/{id}/subgroups",
-      "description": "List the immediate OutcomeGroup children of the outcome group. Paginated.",
+      "description": "A paginated list of the immediate OutcomeGroup children of the outcome group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List subgroups",
-          "notes": "List the immediate OutcomeGroup children of the outcome group. Paginated.",
+          "notes": "A paginated list of the immediate OutcomeGroup children of the outcome group.",
           "nickname": "list_subgroups_accounts",
           "parameters": [
             {
@@ -1547,7 +1810,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1555,9 +1819,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "OutcomeGroup"
@@ -1567,12 +1835,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/outcome_groups/{id}/subgroups",
-      "description": "List the immediate OutcomeGroup children of the outcome group. Paginated.",
+      "description": "A paginated list of the immediate OutcomeGroup children of the outcome group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List subgroups",
-          "notes": "List the immediate OutcomeGroup children of the outcome group. Paginated.",
+          "notes": "A paginated list of the immediate OutcomeGroup children of the outcome group.",
           "nickname": "list_subgroups_courses",
           "parameters": [
             {
@@ -1581,7 +1849,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1589,9 +1858,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "OutcomeGroup"
@@ -1615,7 +1888,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1623,7 +1897,8 @@
               "description": "The title of the new outcome group.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1631,7 +1906,8 @@
               "description": "The description of the new outcome group.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1639,9 +1915,13 @@
               "description": "A custom GUID for the learning standard",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -1662,7 +1942,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1670,7 +1951,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1678,7 +1960,8 @@
               "description": "The title of the new outcome group.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1686,7 +1969,8 @@
               "description": "The description of the new outcome group.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1694,9 +1978,13 @@
               "description": "A custom GUID for the learning standard",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -1717,7 +2005,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1725,7 +2014,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1733,7 +2023,8 @@
               "description": "The title of the new outcome group.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1741,7 +2032,8 @@
               "description": "The description of the new outcome group.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1749,9 +2041,13 @@
               "description": "A custom GUID for the learning standard",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -1772,7 +2068,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1780,9 +2077,22 @@
               "description": "The ID of the source outcome group.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "async",
+              "description": "If true, perform action asynchronously.  In that case, this endpoint\nwill return a Progress object instead of an OutcomeGroup.\nUse the {api:ProgressController#show progress endpoint}\nto query the status of the operation.  The imported outcome group id\nand url will be returned in the results of the Progress object\nas \"outcome_group_id\" and \"outcome_group_url\"",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -1803,7 +2113,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1811,7 +2122,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1819,9 +2131,22 @@
               "description": "The ID of the source outcome group.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "async",
+              "description": "If true, perform action asynchronously.  In that case, this endpoint\nwill return a Progress object instead of an OutcomeGroup.\nUse the {api:ProgressController#show progress endpoint}\nto query the status of the operation.  The imported outcome group id\nand url will be returned in the results of the Progress object\nas \"outcome_group_id\" and \"outcome_group_url\"",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -1842,7 +2167,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1850,7 +2176,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1858,9 +2185,22 @@
               "description": "The ID of the source outcome group.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "async",
+              "description": "If true, perform action asynchronously.  In that case, this endpoint\nwill return a Progress object instead of an OutcomeGroup.\nUse the {api:ProgressController#show progress endpoint}\nto query the status of the operation.  The imported outcome group id\nand url will be returned in the results of the Progress object\nas \"outcome_group_id\" and \"outcome_group_url\"",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OutcomeGroup"
         }
       ]
@@ -1870,9 +2210,9 @@
     "OutcomeGroup": {
       "id": "OutcomeGroup",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the ID of the outcome group",
@@ -1937,9 +2277,9 @@
     "OutcomeLink": {
       "id": "OutcomeLink",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "url": {
           "description": "the URL for fetching/updating the outcome link. should be treated as opaque",

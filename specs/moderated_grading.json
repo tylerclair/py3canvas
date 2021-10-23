@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/assignments/{assignment_id}/moderated_students",
-      "description": "",
+      "description": "Returns a paginated list of students selected for moderation",
       "operations": [
         {
           "method": "GET",
           "summary": "List students selected for moderation",
-          "notes": "",
+          "notes": "Returns a paginated list of students selected for moderation",
           "nickname": "list_students_selected_for_moderation",
           "parameters": [
             {
@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,9 +32,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "User"
@@ -57,7 +62,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -65,7 +71,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -74,15 +81,55 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "number"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "User"
           }
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/bulk_select",
+      "description": "Choose which provisional grades will be received by associated students for an assignment.\nThe caller must be the final grader for the assignment or an admin with :select_final_grade rights.",
+      "operations": [
+        {
+          "method": "PUT",
+          "summary": "Bulk select provisional grades",
+          "notes": "Choose which provisional grades will be received by associated students for an assignment.\nThe caller must be the final grader for the assignment or an admin with :select_final_grade rights.",
+          "nickname": "bulk_select_provisional_grades",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "assignment_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
         }
       ]
     },
@@ -102,7 +149,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -110,7 +158,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -118,21 +167,25 @@
               "description": "The id of the student to show the status for",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/{provisional_grade_id}/select",
-      "description": "Choose which provisional grade the student should receive for a submission.\nThe caller must have :moderate_grades rights.",
+      "description": "Choose which provisional grade the student should receive for a submission.\nThe caller must be the final grader for the assignment or an admin with :select_final_grade rights.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Select provisional grade",
-          "notes": "Choose which provisional grade the student should receive for a submission.\nThe caller must have :moderate_grades rights.",
+          "notes": "Choose which provisional grade the student should receive for a submission.\nThe caller must be the final grader for the assignment or an admin with :select_final_grade rights.",
           "nickname": "select_provisional_grade",
           "parameters": [
             {
@@ -141,7 +194,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -149,7 +203,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -157,49 +212,14 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
-        }
-      ]
-    },
-    {
-      "path": "/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/{provisional_grade_id}/copy_to_final_mark",
-      "description": "Given a provisional grade, copy the grade (and associated submission comments and rubric assessments)\nto a \"final\" mark which can be edited or commented upon by a moderator prior to publication of grades.\n\nNotes:\n* The student must be in the moderation set for the assignment.\n* The newly created grade will be selected.\n* The caller must have \"Moderate Grades\" rights in the course.",
-      "operations": [
-        {
-          "method": "POST",
-          "summary": "Copy provisional grade",
-          "notes": "Given a provisional grade, copy the grade (and associated submission comments and rubric assessments)\nto a \"final\" mark which can be edited or commented upon by a moderator prior to publication of grades.\n\nNotes:\n* The student must be in the moderation set for the assignment.\n* The newly created grade will be selected.\n* The caller must have \"Moderate Grades\" rights in the course.",
-          "nickname": "copy_provisional_grade",
-          "parameters": [
-            {
-              "paramType": "path",
-              "name": "course_id",
-              "description": "ID",
-              "type": "string",
-              "format": null,
-              "required": true
-            },
-            {
-              "paramType": "path",
-              "name": "assignment_id",
-              "description": "ID",
-              "type": "string",
-              "format": null,
-              "required": true
-            },
-            {
-              "paramType": "path",
-              "name": "provisional_grade_id",
-              "description": "ID",
-              "type": "string",
-              "format": null,
-              "required": true
-            }
-          ],
-          "type": "ProvisionalGrade"
         }
       ]
     },
@@ -219,7 +239,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -227,9 +248,58 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/assignments/{assignment_id}/anonymous_provisional_grades/status",
+      "description": "Determine whether or not the student's submission needs one or more provisional grades.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Show provisional grade status for a student",
+          "notes": "Determine whether or not the student's submission needs one or more provisional grades.",
+          "nickname": "show_provisional_grade_status_for_student",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "assignment_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "anonymous_id",
+              "description": "The id of the student to show the status for",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -239,9 +309,9 @@
     "ProvisionalGrade": {
       "id": "ProvisionalGrade",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "provisional_grade_id": {
           "description": "The identifier for the provisional grade",
@@ -274,7 +344,7 @@
           "type": "boolean"
         },
         "speedgrader_url": {
-          "description": "A link to view this provisional grade in SpeedGrader",
+          "description": "A link to view this provisional grade in SpeedGrader™",
           "example": "http://www.example.com/courses/123/gradebook/speed_grader?...",
           "type": "string"
         }

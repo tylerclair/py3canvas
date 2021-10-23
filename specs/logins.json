@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/accounts/{account_id}/logins",
-      "description": "Given a user ID, return that user's logins for the given account.",
+      "description": "Given a user ID, return a paginated list of that user's logins for the given account.",
       "operations": [
         {
           "method": "GET",
           "summary": "List user logins",
-          "notes": "Given a user ID, return that user's logins for the given account.",
+          "notes": "Given a user ID, return a paginated list of that user's logins for the given account.",
           "nickname": "list_user_logins_accounts",
           "parameters": [
             {
@@ -23,21 +23,71 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [
+            {
+              "name": "account_id",
+              "description": "The ID of the login's account.",
+              "deprecated": false
+            },
+            {
+              "name": "id",
+              "description": "The unique, numeric ID for the login.",
+              "deprecated": false
+            },
+            {
+              "name": "sis_user_id",
+              "description": "The login's unique SIS ID.",
+              "deprecated": false
+            },
+            {
+              "name": "integration_id",
+              "description": "The login's unique integration ID.",
+              "deprecated": false
+            },
+            {
+              "name": "unique_id",
+              "description": "The unique ID for the login.",
+              "deprecated": false
+            },
+            {
+              "name": "user_id",
+              "description": "The unique ID of the login's user.",
+              "deprecated": false
+            },
+            {
+              "name": "authentication_provider_id",
+              "description": "The ID of the authentication\nprovider that this login is associated with",
+              "deprecated": false
+            },
+            {
+              "name": "authentication_provider_type",
+              "description": "The type of the authentication\nprovider that this login is associated with",
+              "deprecated": false
+            },
+            {
+              "name": "workflow_state",
+              "description": "The current status of the login",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/users/{user_id}/logins",
-      "description": "Given a user ID, return that user's logins for the given account.",
+      "description": "Given a user ID, return a paginated list of that user's logins for the given account.",
       "operations": [
         {
           "method": "GET",
           "summary": "List user logins",
-          "notes": "Given a user ID, return that user's logins for the given account.",
+          "notes": "Given a user ID, return a paginated list of that user's logins for the given account.",
           "nickname": "list_user_logins_users",
           "parameters": [
             {
@@ -46,9 +96,59 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [
+            {
+              "name": "account_id",
+              "description": "The ID of the login's account.",
+              "deprecated": false
+            },
+            {
+              "name": "id",
+              "description": "The unique, numeric ID for the login.",
+              "deprecated": false
+            },
+            {
+              "name": "sis_user_id",
+              "description": "The login's unique SIS ID.",
+              "deprecated": false
+            },
+            {
+              "name": "integration_id",
+              "description": "The login's unique integration ID.",
+              "deprecated": false
+            },
+            {
+              "name": "unique_id",
+              "description": "The unique ID for the login.",
+              "deprecated": false
+            },
+            {
+              "name": "user_id",
+              "description": "The unique ID of the login's user.",
+              "deprecated": false
+            },
+            {
+              "name": "authentication_provider_id",
+              "description": "The ID of the authentication\nprovider that this login is associated with",
+              "deprecated": false
+            },
+            {
+              "name": "authentication_provider_type",
+              "description": "The type of the authentication\nprovider that this login is associated with",
+              "deprecated": false
+            },
+            {
+              "name": "workflow_state",
+              "description": "The current status of the login",
+              "deprecated": false
+            }
+          ],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -69,7 +169,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -77,7 +178,8 @@
               "description": "The ID of the user to create the login for.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -85,7 +187,8 @@
               "description": "The unique ID for the new login.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -93,7 +196,8 @@
               "description": "The new login's password.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -101,7 +205,8 @@
               "description": "SIS ID for the login. To set this parameter, the caller must be able to\nmanage SIS permissions on the account.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -109,7 +214,8 @@
               "description": "Integration ID for the login. To set this parameter, the caller must be able to\nmanage SIS permissions on the account. The Integration ID is a secondary\nidentifier useful for more complex SIS integrations.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -117,9 +223,13 @@
               "description": "The authentication provider this login is associated with. Logins\nassociated with a specific provider can only be used with that provider.\nLegacy providers (LDAP, CAS, SAML) will search for logins associated with\nthem, or unassociated logins. New providers will only search for logins\nexplicitly associated with them. This can be the integer ID of the\nprovider, or the type of the provider (in which case, it will find the\nfirst matching provider).",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -140,7 +250,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -148,7 +259,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -156,7 +268,8 @@
               "description": "The new unique ID for the login.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -164,7 +277,8 @@
               "description": "The new password for the login. Can only be set by an admin user if admins\nare allowed to change passwords for the account.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -172,7 +286,8 @@
               "description": "SIS ID for the login. To set this parameter, the caller must be able to\nmanage SIS permissions on the account.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -180,9 +295,35 @@
               "description": "Integration ID for the login. To set this parameter, the caller must be able to\nmanage SIS permissions on the account. The Integration ID is a secondary\nidentifier useful for more complex SIS integrations.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "login[authentication_provider_id]",
+              "description": "The authentication provider this login is associated with. Logins\nassociated with a specific provider can only be used with that provider.\nLegacy providers (LDAP, CAS, SAML) will search for logins associated with\nthem, or unassociated logins. New providers will only search for logins\nexplicitly associated with them. This can be the integer ID of the\nprovider, or the type of the provider (in which case, it will find the\nfirst matching provider).",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "login[workflow_state]",
+              "description": "Used to suspend or re-activate a login.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "active",
+                "suspended"
+              ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -203,7 +344,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -211,14 +353,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     }
   ],
-  "models": {
-  }
+  "models": {}
 }

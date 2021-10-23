@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/collaborations",
-      "description": "List collaborations the current user has access to in the context of the course\nprovided in the url. NOTE: this only returns ExternalToolCollaboration type\ncollaborations.\n\n  curl https://<canvas>/api/v1/courses/1/collaborations/",
+      "description": "A paginated list of collaborations the current user has access to in the\ncontext of the course provided in the url. NOTE: this only returns\nExternalToolCollaboration type collaborations.\n\n  curl https://<canvas>/api/v1/courses/1/collaborations/",
       "operations": [
         {
           "method": "GET",
           "summary": "List collaborations",
-          "notes": "List collaborations the current user has access to in the context of the course\nprovided in the url. NOTE: this only returns ExternalToolCollaboration type\ncollaborations.\n\n  curl https://<canvas>/api/v1/courses/1/collaborations/",
+          "notes": "A paginated list of collaborations the current user has access to in the\ncontext of the course provided in the url. NOTE: this only returns\nExternalToolCollaboration type collaborations.\n\n  curl https://<canvas>/api/v1/courses/1/collaborations/",
           "nickname": "list_collaborations_courses",
           "parameters": [
             {
@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Collaboration"
@@ -35,12 +39,12 @@
     },
     {
       "path": "/v1/groups/{group_id}/collaborations",
-      "description": "List collaborations the current user has access to in the context of the course\nprovided in the url. NOTE: this only returns ExternalToolCollaboration type\ncollaborations.\n\n  curl https://<canvas>/api/v1/courses/1/collaborations/",
+      "description": "A paginated list of collaborations the current user has access to in the\ncontext of the course provided in the url. NOTE: this only returns\nExternalToolCollaboration type collaborations.\n\n  curl https://<canvas>/api/v1/courses/1/collaborations/",
       "operations": [
         {
           "method": "GET",
           "summary": "List collaborations",
-          "notes": "List collaborations the current user has access to in the context of the course\nprovided in the url. NOTE: this only returns ExternalToolCollaboration type\ncollaborations.\n\n  curl https://<canvas>/api/v1/courses/1/collaborations/",
+          "notes": "A paginated list of collaborations the current user has access to in the\ncontext of the course provided in the url. NOTE: this only returns\nExternalToolCollaboration type collaborations.\n\n  curl https://<canvas>/api/v1/courses/1/collaborations/",
           "nickname": "list_collaborations_groups",
           "parameters": [
             {
@@ -49,9 +53,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Collaboration"
@@ -61,12 +69,12 @@
     },
     {
       "path": "/v1/collaborations/{id}/members",
-      "description": "List the collaborators of a given collaboration",
+      "description": "A paginated list of the collaborators of a given collaboration",
       "operations": [
         {
           "method": "GET",
           "summary": "List members of a collaboration.",
-          "notes": "List the collaborators of a given collaboration",
+          "notes": "A paginated list of the collaborators of a given collaboration",
           "nickname": "list_members_of_collaboration",
           "parameters": [
             {
@@ -75,7 +83,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -84,6 +93,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "collaborator_lti_id",
                 "avatar_image_url"
@@ -93,6 +103,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Collaborator"
@@ -102,12 +115,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/potential_collaborators",
-      "description": "List the users who can potentially be added to a collaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
+      "description": "A paginated list of the users who can potentially be added to a\ncollaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List potential members",
-          "notes": "List the users who can potentially be added to a collaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
+          "notes": "A paginated list of the users who can potentially be added to a\ncollaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
           "nickname": "list_potential_members_courses",
           "parameters": [
             {
@@ -116,9 +129,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "User"
@@ -128,12 +145,12 @@
     },
     {
       "path": "/v1/groups/{group_id}/potential_collaborators",
-      "description": "List the users who can potentially be added to a collaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
+      "description": "A paginated list of the users who can potentially be added to a\ncollaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List potential members",
-          "notes": "List the users who can potentially be added to a collaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
+          "notes": "A paginated list of the users who can potentially be added to a\ncollaboration in the given context.\n\nFor courses, this consists of all enrolled users.  For groups, it is comprised of the\ngroup members plus the admins of the course containing the group.",
           "nickname": "list_potential_members_groups",
           "parameters": [
             {
@@ -142,9 +159,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "User"
@@ -157,9 +178,9 @@
     "Collaboration": {
       "id": "Collaboration",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The unique identifier for the collaboration",
@@ -233,6 +254,8 @@
       "required": [
         "id"
       ],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The unique user or group identifier for the collaborator.",

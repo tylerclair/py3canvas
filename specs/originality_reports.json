@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,23 +32,26 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "originality_report[file_id]",
-              "description": "The id of the file being given an originality score.",
+              "description": "The id of the file being given an originality score. Required\nif creating a report associated with a file.",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "originality_report[originality_score]",
               "description": "A number between 0 and 100 representing the measure of the\nspecified file's originality.",
-              "type": "Float",
-              "format": null,
-              "required": true
+              "type": "number",
+              "format": "float",
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -55,7 +59,8 @@
               "description": "The URL where the originality report for the specified\nfile may be found.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -63,7 +68,8 @@
               "description": "The ID of the file within Canvas that contains the originality\nreport for the submitted file provided in the request URL.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -71,7 +77,8 @@
               "description": "The resource type code of the resource handler Canvas should use for the\nLTI launch for viewing originality reports. If set Canvas will launch\nto the message with type 'basic-lti-launch-request' in the specified\nresource handler rather than using the originality_report_url.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -79,7 +86,8 @@
               "description": "The URL Canvas should launch to when showing an LTI originality report.\nNote that this value is inferred from the specified resource handler's\nmessage \"path\" value (See `resource_type_code`) unless\nit is specified. If this parameter is used a `resource_type_code`\nmust also be specified.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -87,21 +95,43 @@
               "description": "May be set to \"pending\", \"error\", or \"scored\". If an originality score\nis provided a workflow state of \"scored\" will be inferred.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "originality_report[error_message]",
+              "description": "A message describing the error. If set, the \"workflow_state\"\nwill be set to \"error.\"",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "originality_report[attempt]",
+              "description": "If no `file_id` is given, and no file is required for the assignment\n(that is, the assignment allows an online text entry), this parameter\nmay be given to clarify which attempt number the report is for (in the\ncase of resubmissions). If this field is omitted and no `file_id` is\ngiven, the report will be created (or updated, if it exists) for the\nfirst submission attempt with no associated file.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OriginalityReport"
         }
       ]
     },
     {
       "path": "/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report/{id}",
-      "description": "Modify an existing originality report",
+      "description": "Modify an existing originality report. An alternative to this endpoint is\nto POST the same parameters listed below to the CREATE endpoint.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Edit an Originality Report",
-          "notes": "Modify an existing originality report",
+          "notes": "Modify an existing originality report. An alternative to this endpoint is\nto POST the same parameters listed below to the CREATE endpoint.",
           "nickname": "edit_originality_report_submissions",
           "parameters": [
             {
@@ -110,7 +140,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -118,7 +149,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -126,15 +158,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "originality_report[originality_score]",
               "description": "A number between 0 and 100 representing the measure of the\nspecified file's originality.",
-              "type": "Float",
-              "format": null,
-              "required": false
+              "type": "number",
+              "format": "float",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -142,7 +176,8 @@
               "description": "The URL where the originality report for the specified\nfile may be found.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -150,7 +185,8 @@
               "description": "The ID of the file within Canvas that contains the originality\nreport for the submitted file provided in the request URL.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -158,7 +194,8 @@
               "description": "The resource type code of the resource handler Canvas should use for the\nLTI launch for viewing originality reports. If set Canvas will launch\nto the message with type 'basic-lti-launch-request' in the specified\nresource handler rather than using the originality_report_url.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -166,7 +203,8 @@
               "description": "The URL Canvas should launch to when showing an LTI originality report.\nNote that this value is inferred from the specified resource handler's\nmessage \"path\" value (See `resource_type_code`) unless\nit is specified. If this parameter is used a `resource_type_code`\nmust also be specified.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -174,21 +212,34 @@
               "description": "May be set to \"pending\", \"error\", or \"scored\". If an originality score\nis provided a workflow state of \"scored\" will be inferred.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "originality_report[error_message]",
+              "description": "A message describing the error. If set, the \"workflow_state\"\nwill be set to \"error.\"",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OriginalityReport"
         }
       ]
     },
     {
       "path": "/lti/assignments/{assignment_id}/files/{file_id}/originality_report",
-      "description": "Modify an existing originality report",
+      "description": "Modify an existing originality report. An alternative to this endpoint is\nto POST the same parameters listed below to the CREATE endpoint.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Edit an Originality Report",
-          "notes": "Modify an existing originality report",
+          "notes": "Modify an existing originality report. An alternative to this endpoint is\nto POST the same parameters listed below to the CREATE endpoint.",
           "nickname": "edit_originality_report_files",
           "parameters": [
             {
@@ -197,7 +248,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -205,15 +257,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "originality_report[originality_score]",
               "description": "A number between 0 and 100 representing the measure of the\nspecified file's originality.",
-              "type": "Float",
-              "format": null,
-              "required": false
+              "type": "number",
+              "format": "float",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -221,7 +275,8 @@
               "description": "The URL where the originality report for the specified\nfile may be found.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -229,7 +284,8 @@
               "description": "The ID of the file within Canvas that contains the originality\nreport for the submitted file provided in the request URL.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -237,7 +293,8 @@
               "description": "The resource type code of the resource handler Canvas should use for the\nLTI launch for viewing originality reports. If set Canvas will launch\nto the message with type 'basic-lti-launch-request' in the specified\nresource handler rather than using the originality_report_url.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -245,7 +302,8 @@
               "description": "The URL Canvas should launch to when showing an LTI originality report.\nNote that this value is inferred from the specified resource handler's\nmessage \"path\" value (See `resource_type_code`) unless\nit is specified. If this parameter is used a `resource_type_code`\nmust also be specified.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -253,9 +311,22 @@
               "description": "May be set to \"pending\", \"error\", or \"scored\". If an originality score\nis provided a workflow state of \"scored\" will be inferred.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "originality_report[error_message]",
+              "description": "A message describing the error. If set, the \"workflow_state\"\nwill be set to \"error.\"",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OriginalityReport"
         }
       ]
@@ -276,7 +347,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -284,7 +356,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -292,9 +365,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OriginalityReport"
         }
       ]
@@ -315,7 +392,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -323,9 +401,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "OriginalityReport"
         }
       ]
@@ -335,9 +417,9 @@
     "ToolSetting": {
       "id": "ToolSetting",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "resource_type_code": {
           "description": "the resource type code of the resource handler to use to display originality reports",
@@ -354,9 +436,9 @@
     "OriginalityReport": {
       "id": "OriginalityReport",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The id of the OriginalityReport",
@@ -385,7 +467,20 @@
         },
         "tool_setting": {
           "description": "A ToolSetting object containing optional 'resource_type_code' and 'resource_url'",
-          "type": "ToolSetting"
+          "$ref": "ToolSetting"
+        },
+        "error_report": {
+          "description": "A message describing the error. If set, the workflow_state will become 'error.'",
+          "type": "string"
+        },
+        "submission_time": {
+          "description": "The submitted_at date time of the submission.",
+          "type": "datetime"
+        },
+        "root_account_id": {
+          "description": "The id of the root Account associated with the OriginalityReport",
+          "example": "1",
+          "type": "integer"
         }
       }
     }

@@ -23,7 +23,8 @@
               "description": "campus name",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -31,30 +32,35 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "latitude",
               "description": "no description",
-              "type": "Float",
-              "format": null,
-              "required": false
+              "type": "number",
+              "format": "float",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "longitude",
               "description": "no description",
-              "type": "Float",
-              "format": null,
-              "required": false
+              "type": "number",
+              "format": "float",
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     }
   ],
-  "models": {
-  }
+  "models": {}
 }

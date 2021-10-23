@@ -23,15 +23,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "start_time",
-              "description": "The beginning of the time range from which you want events.",
+              "description": "The beginning of the time range from which you want events.\nEvents are stored for one year.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -39,9 +41,13 @@
               "description": "The end of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -62,15 +68,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "start_time",
-              "description": "The beginning of the time range from which you want events.",
+              "description": "The beginning of the time range from which you want events.\nEvents are stored for one year.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -78,9 +86,13 @@
               "description": "The end of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -101,15 +113,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "start_time",
-              "description": "The beginning of the time range from which you want events.",
+              "description": "The beginning of the time range from which you want events.\nEvents are stored for one year.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -117,9 +131,13 @@
               "description": "The end of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -129,9 +147,9 @@
     "AuthenticationEvent": {
       "id": "AuthenticationEvent",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "created_at": {
           "description": "timestamp of the event",

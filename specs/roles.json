@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/accounts/{account_id}/roles",
-      "description": "List the roles available to an account.",
+      "description": "A paginated list of the roles available to an account.",
       "operations": [
         {
           "method": "GET",
           "summary": "List roles",
-          "notes": "List the roles available to an account.",
+          "notes": "A paginated list of the roles available to an account.",
           "nickname": "list_roles",
           "parameters": [
             {
@@ -23,7 +23,8 @@
               "description": "The id of the account to retrieve roles for.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -32,6 +33,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "inactive"
@@ -46,9 +48,13 @@
               "description": "If this argument is true, all roles inherited from parent accounts will\nbe included.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Role"
@@ -72,7 +78,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -80,7 +87,8 @@
               "description": "The id of the account containing the role",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -88,7 +96,8 @@
               "description": "The unique identifier for the role",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -96,9 +105,13 @@
               "description": "The name for the role",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Role"
         }
       ]
@@ -119,7 +132,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -127,7 +141,8 @@
               "description": "Label for the role.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -135,7 +150,8 @@
               "description": "Deprecated alias for label.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -144,6 +160,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "AccountMembership",
                 "StudentEnrollment",
@@ -159,15 +176,17 @@
               "description": "no description",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "permissions[<X>][enabled]",
-              "description": "If explicit is 1 and enabled is 1, permission <X> will be explicitly\ngranted to this role. If explicit is 1 and enabled has any other value\n(typically 0), permission <X> will be explicitly denied to this role. If\nexplicit is any other value (typically 0) or absent, or if enabled is\nabsent, the value for permission <X> will be inherited from upstream.\nIgnored if permission <X> is locked upstream (in an ancestor account).\n\nMay occur multiple times with unique values for <X>. Recognized\npermission names for <X> are:\n\n  [For Account-Level Roles Only]\n  become_user                      -- Become other users\n  import_sis                       -- Import SIS data\n  manage_account_memberships       -- Add/remove other admins for the account\n  manage_account_settings          -- Manage account-level settings\n  manage_alerts                    -- Manage global alerts\n  manage_courses                   -- Manage ( add / edit / delete ) courses\n  manage_developer_keys            -- Manage developer keys\n  manage_global_outcomes           -- Manage learning outcomes\n  manage_jobs                      -- Manage background jobs\n  manage_role_overrides            -- Manage permissions\n  manage_storage_quotas            -- Set storage quotas for courses, groups, and users\n  manage_sis                       -- Manage SIS data\n  manage_site_settings             -- Manage site-wide and plugin settings\n  manage_user_logins               -- Modify login details for users\n  read_course_content              -- View course content\n  read_course_list                 -- View the list of courses\n  read_messages                    -- View notifications sent to users\n  site_admin                       -- Use the Site Admin section and admin all other accounts\n  view_error_reports               -- View error reports\n  view_statistics                  -- View statistics\n  manage_feature_flags             -- Enable or disable features at an account level\n\n  [For both Account-Level and Course-Level roles]\n   Note: Applicable enrollment types for course-level roles are given in brackets:\n         S = student, T = teacher, A = TA, D = designer, O = observer.\n         Lower-case letters indicate permissions that are off by default.\n         A missing letter indicates the permission cannot be enabled for the role\n         or any derived custom roles.\n  change_course_state              -- [ TaD ] Change course state\n  comment_on_others_submissions    -- [sTAD ] View all students' submissions and make comments on them\n  create_collaborations            -- [STADo] Create student collaborations\n  create_conferences               -- [STADo] Create web conferences\n  manage_admin_users               -- [ Tad ] Add/remove other teachers, course designers or TAs to the course\n  manage_assignments               -- [ TADo] Manage (add / edit / delete) assignments and quizzes\n  manage_calendar                  -- [sTADo] Add, edit and delete events on the course calendar\n  manage_content                   -- [ TADo] Manage all other course content\n  manage_files                     -- [ TADo] Manage (add / edit / delete) course files\n  manage_grades                    -- [ TA  ] Edit grades\n  manage_groups                    -- [ TAD ] Manage (create / edit / delete) groups\n  manage_interaction_alerts        -- [ Ta  ] Manage alerts\n  manage_outcomes                  -- [sTaDo] Manage learning outcomes\n  manage_sections                  -- [ TaD ] Manage (create / edit / delete) course sections\n  manage_students                  -- [ TAD ] Add/remove students for the course\n  manage_user_notes                -- [ TA  ] Manage faculty journal entries\n  manage_rubrics                   -- [ TAD ] Edit assessing rubrics\n  manage_wiki                      -- [ TADo] Manage (add / edit / delete) pages\n  read_forum                       -- [STADO] View discussions\n  moderate_forum                   -- [sTADo] Moderate discussions (delete/edit others' posts, lock topics)\n  post_to_forum                    -- [STADo] Post to discussions\n  read_announcements               -- [STADO] View announcements\n  read_question_banks              -- [ TADo] View and link to question banks\n  read_reports                     -- [ TAD ] View usage reports for the course\n  read_roster                      -- [STADo] See the list of users\n  read_sis                         -- [sTa  ] Read SIS data\n  send_messages                    -- [STADo] Send messages to individual course members\n  send_messages_all                -- [sTADo] Send messages to the entire class\n  view_all_grades                  -- [ TAd ] View all grades\n  view_group_pages                 -- [sTADo] View the group pages of all student groups\n  lti_add_edit                     -- [ TAD ] LTI add and edit\n\nSome of these permissions are applicable only for roles on the site admin\naccount, on a root account, or for course-level roles with a particular base role type;\nif a specified permission is inapplicable, it will be ignored.\n\nAdditional permissions may exist based on installed plugins.",
+              "description": "If explicit is 1 and enabled is 1, permission <X> will be explicitly\ngranted to this role. If explicit is 1 and enabled has any other value\n(typically 0), permission <X> will be explicitly denied to this role. If\nexplicit is any other value (typically 0) or absent, or if enabled is\nabsent, the value for permission <X> will be inherited from upstream.\nIgnored if permission <X> is locked upstream (in an ancestor account).\n\nMay occur multiple times with unique values for <X>. Recognized\npermission names for <X> are:\n\n  [For Account-Level Roles Only]\n  become_user                      -- Users - act as\n  import_sis                       -- SIS Data - import\n  manage_account_memberships       -- Admins - add / remove\n  manage_account_settings          -- Account-level settings - manage\n  manage_alerts                    -- Global announcements - add / edit / delete\n  manage_catalog                   -- Catalog - manage\n  Manage Course Templates granular permissions\n      add_course_template          -- Course Templates - add\n      delete_course_template       -- Course Templates - delete\n      edit_course_template         -- Course Templates - edit\n  manage_courses_add               -- Courses - add\n  manage_courses_admin             -- Courses - manage / update\n  manage_developer_keys            -- Developer keys - manage\n  manage_feature_flags             -- Feature Previews - enable / disable\n  manage_master_courses            -- Blueprint Courses - add / edit / associate / delete\n  manage_role_overrides            -- Permissions - manage\n  manage_storage_quotas            -- Storage Quotas - manage\n  manage_sis                       -- SIS data - manage\n  manage_user_logins               -- Users - manage login details\n  manage_user_observers            -- Users - manage observers\n  moderate_user_content            -- Users - moderate content\n  read_course_content              -- Course Content - view\n  read_course_list                 -- Courses - view list\n  view_course_changes              -- Courses - view change logs\n  view_feature_flags               -- Feature Previews - view\n  view_grade_changes               -- Grades - view change logs\n  view_notifications               -- Notifications - view\n  view_quiz_answer_audits          -- Quizzes - view submission log\n  view_statistics                  -- Statistics - view\n  undelete_courses                 -- Courses - undelete\n\n  [For both Account-Level and Course-Level roles]\n   Note: Applicable enrollment types for course-level roles are given in brackets:\n         S = student, T = teacher (instructor), A = TA, D = designer, O = observer.\n         Lower-case letters indicate permissions that are off by default.\n         A missing letter indicates the permission cannot be enabled for the role\n         or any derived custom roles.\n  allow_course_admin_actions       -- [ Tad ] Users - allow administrative actions in courses\n  create_collaborations            -- [STADo] Student Collaborations - create\n  create_conferences               -- [STADo] Web conferences - create\n  create_forum                     -- [STADo] Discussions - create\n  generate_observer_pairing_code   -- [ tado] Users - Generate observer pairing codes for students\n  import_outcomes                  -- [ TaDo] Learning Outcomes - import\n  lti_add_edit                     -- [ TAD ] LTI - add / edit / delete\n  manage_account_banks             -- [ td  ] Item Banks - manage account\n  manage_assignments               -- [ TADo] Assignments and Quizzes - add / edit / delete (deprecated)\n  Manage Assignments and Quizzes granular permissions\n      manage_assignments_add       -- [ TADo] Assignments and Quizzes - add\n      manage_assignments_edit      -- [ TADo] Assignments and Quizzes - edit / manage\n      manage_assignments_delete    -- [ TADo] Assignments and Quizzes - delete\n  manage_calendar                  -- [sTADo] Course Calendar - add / edit / delete\n  manage_content                   -- [ TADo] Course Content - add / edit / delete\n  manage_course_visibility         -- [ TAD ] Course - change visibility\n  Manage Courses granular permissions\n      manage_courses_conclude      -- [ TaD ] Courses - conclude\n      manage_courses_delete        -- [ TaD ] Courses - delete\n      manage_courses_publish       -- [ TaD ] Courses - publish\n      manage_courses_reset         -- [ TaD ] Courses - reset\n  Manage Files granular permissions\n      manage_files_add             -- [ TADo] Course Files - add\n      manage_files_edit            -- [ TADo] Course Files - edit\n      manage_files_delete          -- [ TADo] Course Files - delete\n  manage_grades                    -- [ TA  ] Grades - edit\n  Manage Groups granular permissions\n      manage_groups_add            -- [ TAD ] Groups - add\n      manage_groups_delete         -- [ TAD ] Groups - delete\n      manage_groups_manage         -- [ TAD ] Groups - manage\n  manage_interaction_alerts        -- [ Ta  ] Alerts - add / edit / delete\n  manage_outcomes                  -- [sTaDo] Learning Outcomes - add / edit / delete\n  manage_proficiency_calculations  -- [ t d ] Outcome Proficiency Calculations - add / edit / delete\n  manage_proficiency_scales        -- [ t d ] Outcome Proficiency/Mastery Scales - add / edit / delete\n  Manage Sections granular permissions\n      manage_sections_add          -- [ TaD ] Course Sections - add\n      manage_sections_edit         -- [ TaD ] Course Sections - edit\n      manage_sections_delete       -- [ TaD ] Course Sections - delete\n  manage_students                  -- [ TAD ] Users - manage students in courses\n  manage_user_notes                -- [ TA  ] Faculty Journal - manage entries\n  manage_rubrics                   -- [ TAD ] Rubrics - add / edit / delete\n  Manage Pages granular permissions\n      manage_wiki_create           -- [ TADo] Pages - create\n      manage_wiki_delete           -- [ TADo] Pages - delete\n      manage_wiki_update           -- [ TADo] Pages - update\n  moderate_forum                   -- [sTADo] Discussions - moderate\n  post_to_forum                    -- [STADo] Discussions - post\n  read_announcements               -- [STADO] Announcements - view\n  read_email_addresses             -- [sTAdo] Users - view primary email address\n  read_forum                       -- [STADO] Discussions - view\n  read_question_banks              -- [ TADo] Question banks - view and link\n  read_reports                     -- [ TAD ] Courses - view usage reports\n  read_roster                      -- [STADo] Users - view list\n  read_sis                         -- [sTa  ] SIS Data - read\n  select_final_grade               -- [ TA  ] Grades - select final grade for moderation\n  send_messages                    -- [STADo] Conversations - send messages to individual course members\n  send_messages_all                -- [sTADo] Conversations - send messages to entire class\n  Users - Teacher granular permissions\n      add_teacher_to_course        -- [ Tad ] Add a teacher enrollment to a course\n      remove_teacher_from_course   -- [ Tad ] Remove a Teacher enrollment from a course\n  Users - TA granular permissions\n      add_ta_to_course             -- [ Tad ] Add a TA enrollment to a course\n      remove_ta_from_course        -- [ Tad ] Remove a TA enrollment from a course\n  Users - Designer granular permissions\n      add_designer_to_course       -- [ Tad ] Add a designer enrollment to a course\n      remove_designer_from_course  -- [ Tad ] Remove a designer enrollment from a course\n  Users - Observer granular permissions\n      add_observer_to_course       -- [ Tad ] Add an observer enrollment to a course\n      remove_observer_from_course  -- [ Tad ] Remove an observer enrollment from a course\n  Users - Student granular permissions\n      add_student_to_course        -- [ Tad ] Add a student enrollment to a course\n      remove_student_from_course   -- [ Tad ] Remove a student enrollment from a course\n  view_all_grades                  -- [ TAd ] Grades - view all grades\n  view_analytics                   -- [sTA  ] Analytics - view pages\n  view_audit_trail                 -- [ t   ] Grades - view audit trail\n  view_group_pages                 -- [sTADo] Groups - view all student groups\n  view_user_logins                 -- [ TA  ] Users - view login IDs\n\nSome of these permissions are applicable only for roles on the site admin\naccount, on a root account, or for course-level roles with a particular base role type;\nif a specified permission is inapplicable, it will be ignored.\n\nAdditional permissions may exist based on installed plugins.\n\nA comprehensive list of all permissions are available:\n\nCourse Permissions PDF: http://bit.ly/cnvs-course-permissions\n\nAccount Permissions PDF: http://bit.ly/cnvs-acct-permissions",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -175,7 +194,8 @@
               "description": "If the value is 1, permission <X> will be locked downstream (new roles in\nsubaccounts cannot override the setting). For any other value, permission\n<X> is left unlocked. Ignored if permission <X> is already locked\nupstream. May occur multiple times with unique values for <X>.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -183,7 +203,8 @@
               "description": "If the value is 1, permission <X> applies to the account this role is in.\nThe default value is 1. Must be true if applies_to_descendants is false.\nThis value is only returned if enabled is true.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -191,9 +212,13 @@
               "description": "If the value is 1, permission <X> cascades down to sub accounts of the\naccount this role is in. The default value is 1.  Must be true if\napplies_to_self is false.This value is only returned if enabled is true.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Role"
         }
       ]
@@ -214,7 +239,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -222,7 +248,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -230,7 +257,8 @@
               "description": "The unique identifier for the role",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -238,9 +266,13 @@
               "description": "The name for the role",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Role"
         }
       ]
@@ -261,7 +293,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -269,7 +302,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -277,7 +311,8 @@
               "description": "The unique identifier for the role",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -285,9 +320,13 @@
               "description": "The name for the role",
               "type": "Deprecated",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Role"
         }
       ]
@@ -308,7 +347,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -316,7 +356,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -324,7 +365,8 @@
               "description": "The label for the role. Can only change the label of a custom role that belongs directly to the account.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -332,7 +374,8 @@
               "description": "no description",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -340,7 +383,8 @@
               "description": "These arguments are described in the documentation for the\n{api:RoleOverridesController#add_role add_role method}.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -348,7 +392,8 @@
               "description": "If the value is 1, permission <X> applies to the account this role is in.\nThe default value is 1. Must be true if applies_to_descendants is false.\nThis value is only returned if enabled is true.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -356,9 +401,13 @@
               "description": "If the value is 1, permission <X> cascades down to sub accounts of the\naccount this role is in. The default value is 1.  Must be true if\napplies_to_self is false.This value is only returned if enabled is true.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Role"
         }
       ]
@@ -368,9 +417,9 @@
     "RolePermissions": {
       "id": "RolePermissions",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "enabled": {
           "description": "Whether the role has the permission",
@@ -417,9 +466,9 @@
     "Role": {
       "id": "Role",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "label": {
           "description": "The label of the role.",

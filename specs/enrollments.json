@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/enrollments",
-      "description": "Depending on the URL given, return either (1) all of the enrollments in\na course, (2) all of the enrollments in a section or (3) all of a user's\nenrollments. This includes student, teacher, TA, and observer enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only an admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
+      "description": "Depending on the URL given, return a paginated list of either (1) all of\nthe enrollments in a course, (2) all of the enrollments in a section or (3)\nall of a user's enrollments. This includes student, teacher, TA, and\nobserver enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only a root level admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
       "operations": [
         {
           "method": "GET",
           "summary": "List enrollments",
-          "notes": "Depending on the URL given, return either (1) all of the enrollments in\na course, (2) all of the enrollments in a section or (3) all of a user's\nenrollments. This includes student, teacher, TA, and observer enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only an admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
+          "notes": "Depending on the URL given, return a paginated list of either (1) all of\nthe enrollments in a course, (2) all of the enrollments in a section or (3)\nall of a user's enrollments. This includes student, teacher, TA, and\nobserver enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only a root level admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
           "nickname": "list_enrollments_courses",
           "parameters": [
             {
@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -32,6 +33,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -43,6 +45,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -50,10 +53,11 @@
             {
               "paramType": "query",
               "name": "state",
-              "description": "Filter by enrollment state. If omitted, 'active' and 'invited' enrollments\nare returned. When querying a user's enrollments (either via user_id\nargument or via user enrollments endpoint), the following additional\nsynthetic states are supported: \"current_and_invited\"|\"current_and_future\"|\"current_and_concluded\"",
+              "description": "Filter by enrollment state. If omitted, 'active' and 'invited' enrollments\nare returned. The following synthetic states are supported only when\nquerying a user's enrollments (either via user_id argument or via user\nenrollments endpoint): +current_and_invited+, +current_and_future+, +current_and_concluded+",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "invited",
@@ -61,7 +65,10 @@
                 "deleted",
                 "rejected",
                 "completed",
-                "inactive"
+                "inactive",
+                "current_and_invited",
+                "current_and_future",
+                "current_and_concluded"
               ],
               "items": {
                 "type": "string"
@@ -70,16 +77,19 @@
             {
               "paramType": "query",
               "name": "include",
-              "description": "Array of additional information to include on the enrollment or user records.\n\"avatar_url\" and \"group_ids\" will be returned on the user record.",
+              "description": "Array of additional information to include on the enrollment or user records.\n\"avatar_url\" and \"group_ids\" will be returned on the user record. If \"current_points\"\nis specified, the fields \"current_points\" and (if the caller has\npermissions to manage grades) \"unposted_current_points\" will be included\nin the \"grades\" hash for student enrollments.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "avatar_url",
                 "group_ids",
                 "locked",
                 "observed_users",
-                "can_be_removed"
+                "can_be_removed",
+                "uuid",
+                "current_points"
               ],
               "items": {
                 "type": "string"
@@ -91,7 +101,8 @@
               "description": "Filter by user_id (only valid for course or section enrollment\nqueries). If set to the current user's id, this is a way to\ndetermine if the user has any enrollments in the course or section,\nindependent of whether the user has permission to view other people\non the roster.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -99,15 +110,26 @@
               "description": "Return grades for the given grading_period.  If this parameter is not\nspecified, the returned grades will be for the whole course.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "enrollment_term_id",
+              "description": "Returns only enrollments for the specified enrollment term. This parameter\nonly applies to the user enrollments path. May pass the ID from the\nenrollment terms api or the SIS id prepended with 'sis_term_id:'.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "sis_account_id",
-              "description": "Returns only enrollments for the specified SIS account ID(s). Does not\nlook into subaccounts. May pass in array or string.",
+              "description": "Returns only enrollments for the specified SIS account ID(s). Does not\nlook into sub_accounts. May pass in array or string.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -119,6 +141,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -130,6 +153,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -141,11 +165,27 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "created_for_sis_id",
+              "description": "If sis_user_id is present and created_for_sis_id is true, Returns only\nenrollments for the specified SIS ID(s).\nIf a user has two sis_id's, one enrollment may be created using one of the\ntwo ids. This would limit the enrollments returned from the endpoint to\nenrollments that were created from a sis_import with that sis_user_id",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "boolean"
+              }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Enrollment"
@@ -155,12 +195,12 @@
     },
     {
       "path": "/v1/sections/{section_id}/enrollments",
-      "description": "Depending on the URL given, return either (1) all of the enrollments in\na course, (2) all of the enrollments in a section or (3) all of a user's\nenrollments. This includes student, teacher, TA, and observer enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only an admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
+      "description": "Depending on the URL given, return a paginated list of either (1) all of\nthe enrollments in a course, (2) all of the enrollments in a section or (3)\nall of a user's enrollments. This includes student, teacher, TA, and\nobserver enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only a root level admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
       "operations": [
         {
           "method": "GET",
           "summary": "List enrollments",
-          "notes": "Depending on the URL given, return either (1) all of the enrollments in\na course, (2) all of the enrollments in a section or (3) all of a user's\nenrollments. This includes student, teacher, TA, and observer enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only an admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
+          "notes": "Depending on the URL given, return a paginated list of either (1) all of\nthe enrollments in a course, (2) all of the enrollments in a section or (3)\nall of a user's enrollments. This includes student, teacher, TA, and\nobserver enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only a root level admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
           "nickname": "list_enrollments_sections",
           "parameters": [
             {
@@ -169,7 +209,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -178,6 +219,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -189,6 +231,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -196,10 +239,11 @@
             {
               "paramType": "query",
               "name": "state",
-              "description": "Filter by enrollment state. If omitted, 'active' and 'invited' enrollments\nare returned. When querying a user's enrollments (either via user_id\nargument or via user enrollments endpoint), the following additional\nsynthetic states are supported: \"current_and_invited\"|\"current_and_future\"|\"current_and_concluded\"",
+              "description": "Filter by enrollment state. If omitted, 'active' and 'invited' enrollments\nare returned. The following synthetic states are supported only when\nquerying a user's enrollments (either via user_id argument or via user\nenrollments endpoint): +current_and_invited+, +current_and_future+, +current_and_concluded+",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "invited",
@@ -207,7 +251,10 @@
                 "deleted",
                 "rejected",
                 "completed",
-                "inactive"
+                "inactive",
+                "current_and_invited",
+                "current_and_future",
+                "current_and_concluded"
               ],
               "items": {
                 "type": "string"
@@ -216,16 +263,19 @@
             {
               "paramType": "query",
               "name": "include",
-              "description": "Array of additional information to include on the enrollment or user records.\n\"avatar_url\" and \"group_ids\" will be returned on the user record.",
+              "description": "Array of additional information to include on the enrollment or user records.\n\"avatar_url\" and \"group_ids\" will be returned on the user record. If \"current_points\"\nis specified, the fields \"current_points\" and (if the caller has\npermissions to manage grades) \"unposted_current_points\" will be included\nin the \"grades\" hash for student enrollments.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "avatar_url",
                 "group_ids",
                 "locked",
                 "observed_users",
-                "can_be_removed"
+                "can_be_removed",
+                "uuid",
+                "current_points"
               ],
               "items": {
                 "type": "string"
@@ -237,7 +287,8 @@
               "description": "Filter by user_id (only valid for course or section enrollment\nqueries). If set to the current user's id, this is a way to\ndetermine if the user has any enrollments in the course or section,\nindependent of whether the user has permission to view other people\non the roster.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -245,15 +296,26 @@
               "description": "Return grades for the given grading_period.  If this parameter is not\nspecified, the returned grades will be for the whole course.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "enrollment_term_id",
+              "description": "Returns only enrollments for the specified enrollment term. This parameter\nonly applies to the user enrollments path. May pass the ID from the\nenrollment terms api or the SIS id prepended with 'sis_term_id:'.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "sis_account_id",
-              "description": "Returns only enrollments for the specified SIS account ID(s). Does not\nlook into subaccounts. May pass in array or string.",
+              "description": "Returns only enrollments for the specified SIS account ID(s). Does not\nlook into sub_accounts. May pass in array or string.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -265,6 +327,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -276,6 +339,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -287,11 +351,27 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "created_for_sis_id",
+              "description": "If sis_user_id is present and created_for_sis_id is true, Returns only\nenrollments for the specified SIS ID(s).\nIf a user has two sis_id's, one enrollment may be created using one of the\ntwo ids. This would limit the enrollments returned from the endpoint to\nenrollments that were created from a sis_import with that sis_user_id",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "boolean"
+              }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Enrollment"
@@ -301,12 +381,12 @@
     },
     {
       "path": "/v1/users/{user_id}/enrollments",
-      "description": "Depending on the URL given, return either (1) all of the enrollments in\na course, (2) all of the enrollments in a section or (3) all of a user's\nenrollments. This includes student, teacher, TA, and observer enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only an admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
+      "description": "Depending on the URL given, return a paginated list of either (1) all of\nthe enrollments in a course, (2) all of the enrollments in a section or (3)\nall of a user's enrollments. This includes student, teacher, TA, and\nobserver enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only a root level admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
       "operations": [
         {
           "method": "GET",
           "summary": "List enrollments",
-          "notes": "Depending on the URL given, return either (1) all of the enrollments in\na course, (2) all of the enrollments in a section or (3) all of a user's\nenrollments. This includes student, teacher, TA, and observer enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only an admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
+          "notes": "Depending on the URL given, return a paginated list of either (1) all of\nthe enrollments in a course, (2) all of the enrollments in a section or (3)\nall of a user's enrollments. This includes student, teacher, TA, and\nobserver enrollments.\n\nIf a user has multiple enrollments in a context (e.g. as a teacher\nand a student or in multiple course sections), each enrollment will be\nlisted separately.\n\nnote: Currently, only a root level admin user can return other users' enrollments. A\nuser can, however, return his/her own enrollments.",
           "nickname": "list_enrollments_users",
           "parameters": [
             {
@@ -316,6 +396,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -327,6 +408,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -334,10 +416,11 @@
             {
               "paramType": "query",
               "name": "state",
-              "description": "Filter by enrollment state. If omitted, 'active' and 'invited' enrollments\nare returned. When querying a user's enrollments (either via user_id\nargument or via user enrollments endpoint), the following additional\nsynthetic states are supported: \"current_and_invited\"|\"current_and_future\"|\"current_and_concluded\"",
+              "description": "Filter by enrollment state. If omitted, 'active' and 'invited' enrollments\nare returned. The following synthetic states are supported only when\nquerying a user's enrollments (either via user_id argument or via user\nenrollments endpoint): +current_and_invited+, +current_and_future+, +current_and_concluded+",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "invited",
@@ -345,7 +428,10 @@
                 "deleted",
                 "rejected",
                 "completed",
-                "inactive"
+                "inactive",
+                "current_and_invited",
+                "current_and_future",
+                "current_and_concluded"
               ],
               "items": {
                 "type": "string"
@@ -354,16 +440,19 @@
             {
               "paramType": "query",
               "name": "include",
-              "description": "Array of additional information to include on the enrollment or user records.\n\"avatar_url\" and \"group_ids\" will be returned on the user record.",
+              "description": "Array of additional information to include on the enrollment or user records.\n\"avatar_url\" and \"group_ids\" will be returned on the user record. If \"current_points\"\nis specified, the fields \"current_points\" and (if the caller has\npermissions to manage grades) \"unposted_current_points\" will be included\nin the \"grades\" hash for student enrollments.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "avatar_url",
                 "group_ids",
                 "locked",
                 "observed_users",
-                "can_be_removed"
+                "can_be_removed",
+                "uuid",
+                "current_points"
               ],
               "items": {
                 "type": "string"
@@ -375,7 +464,8 @@
               "description": "Filter by user_id (only valid for course or section enrollment\nqueries). If set to the current user's id, this is a way to\ndetermine if the user has any enrollments in the course or section,\nindependent of whether the user has permission to view other people\non the roster.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -383,15 +473,26 @@
               "description": "Return grades for the given grading_period.  If this parameter is not\nspecified, the returned grades will be for the whole course.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "enrollment_term_id",
+              "description": "Returns only enrollments for the specified enrollment term. This parameter\nonly applies to the user enrollments path. May pass the ID from the\nenrollment terms api or the SIS id prepended with 'sis_term_id:'.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "sis_account_id",
-              "description": "Returns only enrollments for the specified SIS account ID(s). Does not\nlook into subaccounts. May pass in array or string.",
+              "description": "Returns only enrollments for the specified SIS account ID(s). Does not\nlook into sub_accounts. May pass in array or string.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -403,6 +504,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -414,6 +516,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -425,11 +528,27 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "created_for_sis_id",
+              "description": "If sis_user_id is present and created_for_sis_id is true, Returns only\nenrollments for the specified SIS ID(s).\nIf a user has two sis_id's, one enrollment may be created using one of the\ntwo ids. This would limit the enrollments returned from the endpoint to\nenrollments that were created from a sis_import with that sis_user_id",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "boolean"
+              }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Enrollment"
@@ -453,7 +572,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -461,9 +581,13 @@
               "description": "The ID of the enrollment object",
               "type": "integer",
               "format": "int64",
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Enrollment"
         }
       ]
@@ -484,7 +608,26 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "enrollment[start_at]",
+              "description": "The start time of the enrollment, in ISO8601 format. e.g. 2012-04-18T23:08:51Z",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "enrollment[end_at]",
+              "description": "The end time of the enrollment, in ISO8601 format. e.g. 2012-04-18T23:08:51Z",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -492,7 +635,8 @@
               "description": "The ID of the user to be enrolled in the course.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -501,6 +645,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "StudentEnrollment",
                 "TeacherEnrollment",
@@ -515,7 +660,8 @@
               "description": "Assigns a custom course-level role to the user.",
               "type": "Deprecated",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -523,7 +669,8 @@
               "description": "Assigns a custom course-level role to the user.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -532,6 +679,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "invited",
@@ -544,7 +692,8 @@
               "description": "The ID of the course section to enroll the student in. If the\nsection-specific URL is used, this argument is redundant and will be\nignored.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -552,7 +701,8 @@
               "description": "If set, the enrollment will only allow the user to see and interact with\nusers enrolled in the section given by course_section_id.\n* For teachers and TAs, this includes grading privileges.\n* Section-limited students will not see any users (including teachers\n  and TAs) not enrolled in their sections.\n* Users may have other enrollments that grant privileges to\n  multiple sections in the same course.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -560,7 +710,8 @@
               "description": "If true, a notification will be sent to the enrolled user.\nNotifications are not sent by default.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -568,7 +719,8 @@
               "description": "If the current user is not allowed to manage enrollments in this\ncourse, but the course allows self-enrollment, the user can self-\nenroll as a student in the default section by passing in a valid\ncode. When self-enrolling, the user_id must be 'self'. The\nenrollment_state will be set to 'active' and all other arguments\nwill be ignored.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -576,17 +728,22 @@
               "description": "If true, marks the enrollment as a self-enrollment, which gives\nstudents the ability to drop the course if desired. Defaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "enrollment[associated_user_id]",
-              "description": "For an observer enrollment, the ID of a student to observe. The\ncaller must have +manage_students+ permission in the course.\nThis is a one-off operation; to automatically observe all a\nstudent's enrollments (for example, as a parent), please use\nthe {api:UserObserveesController#create User Observees API}.",
+              "description": "For an observer enrollment, the ID of a student to observe.\nThis is a one-off operation; to automatically observe all a\nstudent's enrollments (for example, as a parent), please use\nthe {api:UserObserveesController#create User Observees API}.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Enrollment"
         }
       ]
@@ -607,7 +764,26 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "enrollment[start_at]",
+              "description": "The start time of the enrollment, in ISO8601 format. e.g. 2012-04-18T23:08:51Z",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "enrollment[end_at]",
+              "description": "The end time of the enrollment, in ISO8601 format. e.g. 2012-04-18T23:08:51Z",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -615,7 +791,8 @@
               "description": "The ID of the user to be enrolled in the course.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -624,6 +801,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "StudentEnrollment",
                 "TeacherEnrollment",
@@ -638,7 +816,8 @@
               "description": "Assigns a custom course-level role to the user.",
               "type": "Deprecated",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -646,7 +825,8 @@
               "description": "Assigns a custom course-level role to the user.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -655,6 +835,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "active",
                 "invited",
@@ -667,7 +848,8 @@
               "description": "The ID of the course section to enroll the student in. If the\nsection-specific URL is used, this argument is redundant and will be\nignored.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -675,7 +857,8 @@
               "description": "If set, the enrollment will only allow the user to see and interact with\nusers enrolled in the section given by course_section_id.\n* For teachers and TAs, this includes grading privileges.\n* Section-limited students will not see any users (including teachers\n  and TAs) not enrolled in their sections.\n* Users may have other enrollments that grant privileges to\n  multiple sections in the same course.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -683,7 +866,8 @@
               "description": "If true, a notification will be sent to the enrolled user.\nNotifications are not sent by default.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -691,7 +875,8 @@
               "description": "If the current user is not allowed to manage enrollments in this\ncourse, but the course allows self-enrollment, the user can self-\nenroll as a student in the default section by passing in a valid\ncode. When self-enrolling, the user_id must be 'self'. The\nenrollment_state will be set to 'active' and all other arguments\nwill be ignored.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -699,17 +884,22 @@
               "description": "If true, marks the enrollment as a self-enrollment, which gives\nstudents the ability to drop the course if desired. Defaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "enrollment[associated_user_id]",
-              "description": "For an observer enrollment, the ID of a student to observe. The\ncaller must have +manage_students+ permission in the course.\nThis is a one-off operation; to automatically observe all a\nstudent's enrollments (for example, as a parent), please use\nthe {api:UserObserveesController#create User Observees API}.",
+              "description": "For an observer enrollment, the ID of a student to observe.\nThis is a one-off operation; to automatically observe all a\nstudent's enrollments (for example, as a parent), please use\nthe {api:UserObserveesController#create User Observees API}.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Enrollment"
         }
       ]
@@ -730,7 +920,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -738,7 +929,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -747,6 +939,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "conclude",
                 "delete",
@@ -755,7 +948,82 @@
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Enrollment"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/enrollments/{id}/accept",
+      "description": "accepts a pending course invitation for the current user",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Accept Course Invitation",
+          "notes": "accepts a pending course invitation for the current user",
+          "nickname": "accept_course_invitation",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/enrollments/{id}/reject",
+      "description": "rejects a pending course invitation for the current user",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Reject Course Invitation",
+          "notes": "rejects a pending course invitation for the current user",
+          "nickname": "reject_course_invitation",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
         }
       ]
     },
@@ -775,7 +1043,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -783,9 +1052,49 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "Enrollment"
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/users/{user_id}/last_attended",
+      "description": "",
+      "operations": [
+        {
+          "method": "PUT",
+          "summary": "Adds last attended date to student enrollment in course",
+          "notes": "",
+          "nickname": "adds_last_attended_date_to_student_enrollment_in_course",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "user_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Enrollment"
         }
       ]
@@ -795,9 +1104,9 @@
     "Grade": {
       "id": "Grade",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "html_url": {
           "description": "The URL to the Canvas web UI page for the user's grades, if this is a student enrollment.",
@@ -823,15 +1132,45 @@
           "description": "The user's final score for the class. Only included if user has permissions to view this score.",
           "example": "",
           "type": "string"
+        },
+        "current_points": {
+          "description": "The total points the user has earned in the class. Only included if user has permissions to view this score and 'current_points' is passed in the request's 'include' parameter.",
+          "example": 150,
+          "type": "integer"
+        },
+        "unposted_current_grade": {
+          "description": "The user's current grade in the class including muted/unposted assignments. Only included if user has permissions to view this grade, typically teachers, TAs, and admins.",
+          "example": "",
+          "type": "string"
+        },
+        "unposted_final_grade": {
+          "description": "The user's final grade for the class including muted/unposted assignments. Only included if user has permissions to view this grade, typically teachers, TAs, and admins..",
+          "example": "",
+          "type": "string"
+        },
+        "unposted_current_score": {
+          "description": "The user's current score in the class including muted/unposted assignments. Only included if user has permissions to view this score, typically teachers, TAs, and admins..",
+          "example": "",
+          "type": "string"
+        },
+        "unposted_final_score": {
+          "description": "The user's final score for the class including muted/unposted assignments. Only included if user has permissions to view this score, typically teachers, TAs, and admins..",
+          "example": "",
+          "type": "string"
+        },
+        "unposted_current_points": {
+          "description": "The total points the user has earned in the class, including muted/unposted assignments. Only included if user has permissions to view this score (typically teachers, TAs, and admins) and 'current_points' is passed in the request's 'include' parameter.",
+          "example": 150,
+          "type": "integer"
         }
       }
     },
     "Enrollment": {
       "id": "Enrollment",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the enrollment.",
@@ -948,6 +1287,11 @@
           "example": "2012-04-18T23:08:51Z",
           "type": "datetime"
         },
+        "last_attended_at": {
+          "description": "The last attended date of the user for the enrollment in a course, in ISO8601 format.",
+          "example": "2012-04-18T23:08:51Z",
+          "type": "datetime"
+        },
         "total_activity_time": {
           "description": "The total activity time of the user for the enrollment, in seconds.",
           "example": 260,
@@ -960,26 +1304,53 @@
         },
         "grades": {
           "description": "The URL to the Canvas web UI page containing the grades associated with this enrollment.",
+          "example": {
+            "html_url": "https://...",
+            "current_score": 35,
+            "current_grade": null,
+            "final_score": 6.67,
+            "final_grade": null
+          },
           "$ref": "Grade"
         },
-        "computed_current_score": {
-          "description": "optional: The student's score in the course, ignoring ungraded assignments. (applies only to student enrollments, and only available in course endpoints)",
-          "example": 90.25,
-          "type": "number"
+        "user": {
+          "description": "A description of the user.",
+          "example": {
+            "id": 3,
+            "name": "Student 1",
+            "sortable_name": "1, Student",
+            "short_name": "Stud 1"
+          },
+          "$ref": "User"
         },
-        "computed_final_score": {
-          "description": "optional: The student's score in the course including ungraded assignments with a score of 0. (applies only to student enrollments, and only available in course endpoints)",
-          "example": 80.67,
-          "type": "number"
-        },
-        "computed_current_grade": {
-          "description": "optional: The letter grade equivalent of computed_current_score, if available. (applies only to student enrollments, and only available in course endpoints)",
-          "example": "A-",
+        "override_grade": {
+          "description": "The user's override grade for the course.",
+          "example": "A",
           "type": "string"
         },
-        "computed_final_grade": {
-          "description": "optional: The letter grade equivalent of computed_final_score, if available. (applies only to student enrollments, and only available in course endpoints)",
-          "example": "B-",
+        "override_score": {
+          "description": "The user's override score for the course.",
+          "example": 99.99,
+          "type": "number"
+        },
+        "unposted_current_grade": {
+          "description": "The user's current grade in the class including muted/unposted assignments. Only included if user has permissions to view this grade, typically teachers, TAs, and admins.",
+          "example": "",
+          "type": "string"
+        },
+        "unposted_final_grade": {
+          "description": "The user's final grade for the class including muted/unposted assignments. Only included if user has permissions to view this grade, typically teachers, TAs, and admins..",
+          "example": "",
+          "type": "string"
+        },
+        "unposted_current_score": {
+          "description": "The user's current score in the class including muted/unposted assignments. Only included if user has permissions to view this score, typically teachers, TAs, and admins..",
+          "example": "",
+          "type": "string"
+        },
+        "unposted_final_score": {
+          "description": "The user's final score for the class including muted/unposted assignments. Only included if user has permissions to view this score, typically teachers, TAs, and admins..",
+          "example": "",
           "type": "string"
         },
         "has_grading_periods": {
@@ -1002,23 +1373,33 @@
           "example": 5,
           "type": "integer"
         },
-        "current_period_computed_current_score": {
-          "description": "optional: The student's score in the course for the current grading period, ignoring ungraded assignments. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
-          "example": 95.8,
-          "type": "number"
-        },
-        "current_period_computed_final_score": {
-          "description": "optional: The student's score in the course for the current grading period, including ungraded assignments with a score of 0. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
-          "example": 85.25,
-          "type": "number"
-        },
-        "current_period_computed_current_grade": {
-          "description": "optional: The letter grade equivalent of current_period_computed_current_score, if available. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+        "current_period_override_grade": {
+          "description": "The user's override grade for the current grading period.",
           "example": "A",
           "type": "string"
         },
-        "current_period_computed_final_grade": {
-          "description": "optional: The letter grade equivalent of current_period_computed_final_score, if available. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+        "current_period_override_score": {
+          "description": "The user's override score for the current grading period.",
+          "example": 99.99,
+          "type": "number"
+        },
+        "current_period_unposted_current_score": {
+          "description": "optional: The student's score in the course for the current grading period, including muted/unposted assignments. Only included if user has permission to view this score, typically teachers, TAs, and admins. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+          "example": 95.8,
+          "type": "number"
+        },
+        "current_period_unposted_final_score": {
+          "description": "optional: The student's score in the course for the current grading period, including muted/unposted assignments and including ungraded assignments with a score of 0. Only included if user has permission to view this score, typically teachers, TAs, and admins. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+          "example": 85.25,
+          "type": "number"
+        },
+        "current_period_unposted_current_grade": {
+          "description": "optional: The letter grade equivalent of current_period_unposted_current_score, if available. Only included if user has permission to view this grade, typically teachers, TAs, and admins. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
+          "example": "A",
+          "type": "string"
+        },
+        "current_period_unposted_final_grade": {
+          "description": "optional: The letter grade equivalent of current_period_unposted_final_score, if available. Only included if user has permission to view this grade, typically teachers, TAs, and admins. If the course the enrollment belongs to does not have grading periods, or if no currently active grading period exists, the value will be null. (applies only to student enrollments, and only available in course endpoints)",
           "example": "B",
           "type": "string"
         }

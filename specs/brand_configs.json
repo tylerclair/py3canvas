@@ -16,14 +16,14 @@
           "summary": "Get the brand config variables that should be used for this domain",
           "notes": "Will redirect to a static json file that has all of the brand\nvariables used by this account. Even though this is a redirect,\ndo not store the redirected url since if the account makes any changes\nit will redirect to a new url. Needs no authentication.",
           "nickname": "get_brand_config_variables_that_should_be_used_for_this_domain",
-          "parameters": [
-
-          ],
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     }
   ],
-  "models": {
-  }
+  "models": {}
 }

@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -32,6 +33,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -43,6 +45,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -54,11 +57,24 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "include_hidden",
+              "description": "If true, results that are hidden from the learning mastery gradebook and student rollup\nscores will be included",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -79,17 +95,32 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "aggregate",
-              "description": "If specified, instead of returning one rollup for each user, all the user\nrollups will be combined into one rollup for the course that will contain\nthe average rollup score for each outcome.",
+              "description": "If specified, instead of returning one rollup for each user, all the user\nrollups will be combined into one rollup for the course that will contain\nthe average (or median, see below) rollup score for each outcome.",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "course"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "aggregate_stat",
+              "description": "If aggregate rollups requested, then this value determines what\nstatistic is used for the aggregate. Defaults to \"mean\" if this value\nis not specified.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "mean",
+                "median"
               ]
             },
             {
@@ -99,6 +130,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -110,6 +142,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -121,11 +154,65 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "exclude",
+              "description": "Specify additional values to exclude. \"missing_user_rollups\" excludes\nrollups for users without results.",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "missing_user_rollups"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "paramType": "query",
+              "name": "sort_by",
+              "description": "If specified, sorts outcome result rollups. \"student\" sorting will sort\nby a user's sortable name. \"outcome\" sorting will sort by the given outcome's\nrollup score. The latter requires specifying the \"sort_outcome_id\" parameter.\nBy default, the sort order is ascending.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "student",
+                "outcome"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "sort_outcome_id",
+              "description": "If outcome sorting requested, then this determines which outcome to use\nfor rollup score sorting.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "sort_order",
+              "description": "If sorting requested, then this allows changing the default sort order of\nascending to descending.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "asc",
+                "desc"
+              ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -135,9 +222,9 @@
     "OutcomeResult": {
       "id": "OutcomeResult",
       "description": "A student's result for an outcome",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "example": "42",
@@ -173,9 +260,9 @@
     "OutcomeRollupScoreLinks": {
       "id": "OutcomeRollupScoreLinks",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "outcome": {
           "description": "The id of the related outcome",
@@ -187,9 +274,9 @@
     "OutcomeRollupScore": {
       "id": "OutcomeRollupScore",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "score": {
           "description": "The rollup score for the outcome, based on the student alignment scores related to the outcome. This could be null if the student has no related scores.",
@@ -212,9 +299,9 @@
     "OutcomeRollupLinks": {
       "id": "OutcomeRollupLinks",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "course": {
           "description": "If an aggregate result was requested, the course field will be present. Otherwise, the user and section field will be present (Optional) The id of the course that this rollup applies to",
@@ -236,9 +323,9 @@
     "OutcomeRollup": {
       "id": "OutcomeRollup",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "scores": {
           "description": "an array of OutcomeRollupScore objects",
@@ -262,9 +349,9 @@
     "OutcomeAlignment": {
       "id": "OutcomeAlignment",
       "description": "An asset aligned with this outcome",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "A unique identifier for this alignment",
@@ -285,9 +372,9 @@
     "OutcomePath": {
       "id": "OutcomePath",
       "description": "The full path to an outcome",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "example": "42",
@@ -303,9 +390,9 @@
     "OutcomePathPart": {
       "id": "OutcomePathPart",
       "description": "An outcome or outcome group",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "name": {
           "example": "Spelling out numbers",

@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/conferences",
-      "description": "Retrieve the list of conferences for this context\n\nThis API returns a JSON object containing the list of conferences,\nthe key for the list of conferences is \"conferences\"",
+      "description": "Retrieve the paginated list of conferences for this context\n\nThis API returns a JSON object containing the list of conferences,\nthe key for the list of conferences is \"conferences\"",
       "operations": [
         {
           "method": "GET",
           "summary": "List conferences",
-          "notes": "Retrieve the list of conferences for this context\n\nThis API returns a JSON object containing the list of conferences,\nthe key for the list of conferences is \"conferences\"",
+          "notes": "Retrieve the paginated list of conferences for this context\n\nThis API returns a JSON object containing the list of conferences,\nthe key for the list of conferences is \"conferences\"",
           "nickname": "list_conferences_courses",
           "parameters": [
             {
@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Conference"
@@ -35,12 +39,12 @@
     },
     {
       "path": "/v1/groups/{group_id}/conferences",
-      "description": "Retrieve the list of conferences for this context\n\nThis API returns a JSON object containing the list of conferences,\nthe key for the list of conferences is \"conferences\"",
+      "description": "Retrieve the paginated list of conferences for this context\n\nThis API returns a JSON object containing the list of conferences,\nthe key for the list of conferences is \"conferences\"",
       "operations": [
         {
           "method": "GET",
           "summary": "List conferences",
-          "notes": "Retrieve the list of conferences for this context\n\nThis API returns a JSON object containing the list of conferences,\nthe key for the list of conferences is \"conferences\"",
+          "notes": "Retrieve the paginated list of conferences for this context\n\nThis API returns a JSON object containing the list of conferences,\nthe key for the list of conferences is \"conferences\"",
           "nickname": "list_conferences_groups",
           "parameters": [
             {
@@ -49,9 +53,43 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "array",
+          "items": {
+            "$ref": "Conference"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/v1/conferences",
+      "description": "Retrieve the paginated list of conferences for all courses and groups\nthe current user belongs to\n\nThis API returns a JSON object containing the list of conferences.\nThe key for the list of conferences is \"conferences\".",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List conferences for the current user",
+          "notes": "Retrieve the paginated list of conferences for all courses and groups\nthe current user belongs to\n\nThis API returns a JSON object containing the list of conferences.\nThe key for the list of conferences is \"conferences\".",
+          "nickname": "list_conferences_for_current_user",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "state",
+              "description": "If set to \"live\", returns only conferences that are live (i.e., have\nstarted and not finished yet). If omitted, returns all conferences for\nthis user's groups and courses.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Conference"
@@ -64,9 +102,9 @@
     "ConferenceRecording": {
       "id": "ConferenceRecording",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "duration_minutes": {
           "example": 0,
@@ -93,9 +131,9 @@
     "Conference": {
       "id": "Conference",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The id of the conference",
@@ -182,6 +220,14 @@
         "join_url": {
           "description": "URL to join the conference, may be null if the conference type doesn't set it",
           "type": "string"
+        },
+        "context_type": {
+          "description": "The type of this conference's context, typically 'Course' or 'Group'.",
+          "type": "string"
+        },
+        "context_id": {
+          "description": "The ID of this conference's context.",
+          "type": "integer"
         }
       }
     }

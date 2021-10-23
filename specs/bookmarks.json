@@ -9,16 +9,17 @@
   "apis": [
     {
       "path": "/v1/users/self/bookmarks",
-      "description": "Returns the list of bookmarks.",
+      "description": "Returns the paginated list of bookmarks.",
       "operations": [
         {
           "method": "GET",
           "summary": "List bookmarks",
-          "notes": "Returns the list of bookmarks.",
+          "notes": "Returns the paginated list of bookmarks.",
           "nickname": "list_bookmarks",
-          "parameters": [
-
-          ],
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Bookmark"
@@ -42,7 +43,8 @@
               "description": "The name of the bookmark",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -50,7 +52,8 @@
               "description": "The url of the bookmark",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -58,7 +61,8 @@
               "description": "The position of the bookmark. Defaults to the bottom.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -66,9 +70,13 @@
               "description": "The data associated with the bookmark",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Bookmark"
         }
       ]
@@ -89,9 +97,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Bookmark"
         }
       ]
@@ -112,7 +124,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -120,7 +133,8 @@
               "description": "The name of the bookmark",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -128,7 +142,8 @@
               "description": "The url of the bookmark",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -136,7 +151,8 @@
               "description": "The position of the bookmark. Defaults to the bottom.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -144,9 +160,13 @@
               "description": "The data associated with the bookmark",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Folder"
         }
       ]
@@ -167,9 +187,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -179,9 +203,9 @@
     "Bookmark": {
       "id": "Bookmark",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "example": 1,

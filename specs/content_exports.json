@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/content_exports",
-      "description": "List the past and pending content export jobs for a course, group, or user.\nExports are returned newest first.",
+      "description": "A paginated list of the past and pending content export jobs for a course,\ngroup, or user. Exports are returned newest first.",
       "operations": [
         {
           "method": "GET",
           "summary": "List content exports",
-          "notes": "List the past and pending content export jobs for a course, group, or user.\nExports are returned newest first.",
+          "notes": "A paginated list of the past and pending content export jobs for a course,\ngroup, or user. Exports are returned newest first.",
           "nickname": "list_content_exports_courses",
           "parameters": [
             {
@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ContentExport"
@@ -35,12 +39,12 @@
     },
     {
       "path": "/v1/groups/{group_id}/content_exports",
-      "description": "List the past and pending content export jobs for a course, group, or user.\nExports are returned newest first.",
+      "description": "A paginated list of the past and pending content export jobs for a course,\ngroup, or user. Exports are returned newest first.",
       "operations": [
         {
           "method": "GET",
           "summary": "List content exports",
-          "notes": "List the past and pending content export jobs for a course, group, or user.\nExports are returned newest first.",
+          "notes": "A paginated list of the past and pending content export jobs for a course,\ngroup, or user. Exports are returned newest first.",
           "nickname": "list_content_exports_groups",
           "parameters": [
             {
@@ -49,9 +53,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ContentExport"
@@ -61,12 +69,12 @@
     },
     {
       "path": "/v1/users/{user_id}/content_exports",
-      "description": "List the past and pending content export jobs for a course, group, or user.\nExports are returned newest first.",
+      "description": "A paginated list of the past and pending content export jobs for a course,\ngroup, or user. Exports are returned newest first.",
       "operations": [
         {
           "method": "GET",
           "summary": "List content exports",
-          "notes": "List the past and pending content export jobs for a course, group, or user.\nExports are returned newest first.",
+          "notes": "A paginated list of the past and pending content export jobs for a course,\ngroup, or user. Exports are returned newest first.",
           "nickname": "list_content_exports_users",
           "parameters": [
             {
@@ -75,9 +83,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ContentExport"
@@ -101,7 +113,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -109,9 +122,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentExport"
         }
       ]
@@ -132,7 +149,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -140,9 +158,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentExport"
         }
       ]
@@ -163,7 +185,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -171,9 +194,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentExport"
         }
       ]
@@ -194,7 +221,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -203,6 +231,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "common_cartridge",
                 "qti",
@@ -215,9 +244,36 @@
               "description": "Don't send the notifications about the export to the user. Default: false",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "select",
+              "description": "The select parameter allows exporting specific data. The keys are object types like 'files',\n'folders', 'pages', etc. The value for each key is a list of object ids. An id can be an\ninteger or a string.\n\nMultiple object types can be selected in the same call. However, not all object types are\nvalid for every export_type. Common Cartridge supports all object types. Zip and QTI only\nsupport the object types as described below.\n\n\"folders\":: Also supported for zip export_type.\n\"files\":: Also supported for zip export_type.\n\"quizzes\":: Also supported for qti export_type.",
+              "type": "Hash",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "folders",
+                "files",
+                "attachments",
+                "quizzes",
+                "assignments",
+                "announcements",
+                "calendar_events",
+                "discussion_topics",
+                "modules",
+                "module_items",
+                "pages",
+                "rubrics"
+              ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentExport"
         }
       ]
@@ -238,7 +294,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -247,6 +304,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "common_cartridge",
                 "qti",
@@ -259,9 +317,36 @@
               "description": "Don't send the notifications about the export to the user. Default: false",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "select",
+              "description": "The select parameter allows exporting specific data. The keys are object types like 'files',\n'folders', 'pages', etc. The value for each key is a list of object ids. An id can be an\ninteger or a string.\n\nMultiple object types can be selected in the same call. However, not all object types are\nvalid for every export_type. Common Cartridge supports all object types. Zip and QTI only\nsupport the object types as described below.\n\n\"folders\":: Also supported for zip export_type.\n\"files\":: Also supported for zip export_type.\n\"quizzes\":: Also supported for qti export_type.",
+              "type": "Hash",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "folders",
+                "files",
+                "attachments",
+                "quizzes",
+                "assignments",
+                "announcements",
+                "calendar_events",
+                "discussion_topics",
+                "modules",
+                "module_items",
+                "pages",
+                "rubrics"
+              ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentExport"
         }
       ]
@@ -282,7 +367,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -291,6 +377,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "common_cartridge",
                 "qti",
@@ -303,9 +390,36 @@
               "description": "Don't send the notifications about the export to the user. Default: false",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "select",
+              "description": "The select parameter allows exporting specific data. The keys are object types like 'files',\n'folders', 'pages', etc. The value for each key is a list of object ids. An id can be an\ninteger or a string.\n\nMultiple object types can be selected in the same call. However, not all object types are\nvalid for every export_type. Common Cartridge supports all object types. Zip and QTI only\nsupport the object types as described below.\n\n\"folders\":: Also supported for zip export_type.\n\"files\":: Also supported for zip export_type.\n\"quizzes\":: Also supported for qti export_type.",
+              "type": "Hash",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "folders",
+                "files",
+                "attachments",
+                "quizzes",
+                "assignments",
+                "announcements",
+                "calendar_events",
+                "discussion_topics",
+                "modules",
+                "module_items",
+                "pages",
+                "rubrics"
+              ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ContentExport"
         }
       ]
@@ -315,9 +429,9 @@
     "ContentExport": {
       "id": "ContentExport",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the unique identifier for the export",

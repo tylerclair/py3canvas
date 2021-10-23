@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -46,7 +50,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -54,7 +59,8 @@
               "description": "Whether to enable the missing submission deduction late policy.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -62,7 +68,8 @@
               "description": "How many percentage points to deduct from a missing submission.",
               "type": "number",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -70,7 +77,8 @@
               "description": "Whether to enable the late submission deduction late policy.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -78,7 +86,8 @@
               "description": "How many percentage points to deduct per the late submission interval.",
               "type": "number",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -86,7 +95,8 @@
               "description": "The interval for late policies.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -94,7 +104,8 @@
               "description": "Whether to enable the late submission minimum percent for a late policy.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -102,9 +113,13 @@
               "description": "The minimum grade a submissions can have in percentage points.",
               "type": "number",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -125,7 +140,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -133,7 +149,8 @@
               "description": "Whether to enable the missing submission deduction late policy.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -141,7 +158,8 @@
               "description": "How many percentage points to deduct from a missing submission.",
               "type": "number",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -149,7 +167,8 @@
               "description": "Whether to enable the late submission deduction late policy.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -157,7 +176,8 @@
               "description": "How many percentage points to deduct per the late submission interval.",
               "type": "number",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -165,7 +185,8 @@
               "description": "The interval for late policies.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -173,7 +194,8 @@
               "description": "Whether to enable the late submission minimum percent for a late policy.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -181,9 +203,13 @@
               "description": "The minimum grade a submissions can have in percentage points.",
               "type": "number",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -194,6 +220,8 @@
       "id": "LatePolicy",
       "description": "",
       "required": "course_id",
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the unique identifier for the late policy",

@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -31,7 +32,8 @@
               "description": "The beginning of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -39,9 +41,61 @@
               "description": "The end of the time range from which you want events.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "array",
+          "items": {
+            "$ref": "CourseEvent"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/v1/audit/course/accounts/{account_id}",
+      "description": "List course change events for a given account.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Query by account.",
+          "notes": "List course change events for a given account.",
+          "nickname": "query_by_account",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "start_time",
+              "description": "The beginning of the time range from which you want events.",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "end_time",
+              "description": "The end of the time range from which you want events.",
+              "type": "DateTime",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "CourseEvent"
@@ -54,9 +108,9 @@
     "CourseEventLink": {
       "id": "CourseEventLink",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "course": {
           "description": "ID of the course for the event.",
@@ -93,9 +147,9 @@
     "CourseEvent": {
       "id": "CourseEvent",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "ID of the event.",
@@ -136,9 +190,9 @@
     "CreatedEventData": {
       "id": "CreatedEventData",
       "description": "The created event data object returns all the fields that were set in the format of the following example.  If a field does not exist it was not set. The value of each field changed is in the format of [:old_value, :new_value].  The created event type also includes a created_source field to specify what triggered the creation of the course.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "name": {
           "example": [
@@ -190,9 +244,9 @@
     "UpdatedEventData": {
       "id": "UpdatedEventData",
       "description": "The updated event data object returns all the fields that have changed in the format of the following example.  If a field does not exist it was not changed.  The value is an array that contains the before and after values for the change as in [:old_value, :new_value].",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "name": {
           "example": [

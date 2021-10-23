@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/modules",
-      "description": "List the modules in a course",
+      "description": "A paginated list of the modules in a course",
       "operations": [
         {
           "method": "GET",
           "summary": "List modules",
-          "notes": "List the modules in a course",
+          "notes": "A paginated list of the modules in a course",
           "nickname": "list_modules",
           "parameters": [
             {
@@ -23,15 +23,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"items\": Return module items inline if possible.\n  This parameter suggests that Canvas return module items directly\n  in the Module object JSON, to avoid having to make separate API\n  requests for each module when enumerating modules and items. Canvas\n  is free to omit 'items' for any particular module if it deems them\n  too numerous to return inline. Callers must be prepared to use the\n  {api:ContextModuleItemsApiController#index List Module Items API}\n  if items are not returned.\n- \"content_details\": Requires include['items']. Returns additional\n  details with module items specific to their associated content items.\n  Includes standard lock information for each item.",
+              "description": "- \"items\": Return module items inline if possible.\n  This parameter suggests that Canvas return module items directly\n  in the Module object JSON, to avoid having to make separate API\n  requests for each module when enumerating modules and items. Canvas\n  is free to omit 'items' for any particular module if it deems them\n  too numerous to return inline. Callers must be prepared to use the\n  {api:ContextModuleItemsApiController#index List Module Items API}\n  if items are not returned.\n- \"content_details\": Requires 'items'. Returns additional\n  details with module items specific to their associated content items.\n  Includes standard lock information for each item.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "items",
                 "content_details"
@@ -43,10 +45,11 @@
             {
               "paramType": "query",
               "name": "search_term",
-              "description": "The partial name of the modules (and module items, if include['items'] is\nspecified) to match and return.",
+              "description": "The partial name of the modules (and module items, if 'items' is\nspecified with include[]) to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -54,9 +57,13 @@
               "description": "Returns module completion information for the student with this id.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Module"
@@ -80,7 +87,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -88,15 +96,17 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"items\": Return module items inline if possible.\n  This parameter suggests that Canvas return module items directly\n  in the Module object JSON, to avoid having to make separate API\n  requests for each module when enumerating modules and items. Canvas\n  is free to omit 'items' for any particular module if it deems them\n  too numerous to return inline. Callers must be prepared to use the\n  {api:ContextModuleItemsApiController#index List Module Items API}\n  if items are not returned.\n- \"content_details\": Requires include['items']. Returns additional\n  details with module items specific to their associated content items.\n  Includes standard lock information for each item.",
+              "description": "- \"items\": Return module items inline if possible.\n  This parameter suggests that Canvas return module items directly\n  in the Module object JSON, to avoid having to make separate API\n  requests for each module when enumerating modules and items. Canvas\n  is free to omit 'items' for any particular module if it deems them\n  too numerous to return inline. Callers must be prepared to use the\n  {api:ContextModuleItemsApiController#index List Module Items API}\n  if items are not returned.\n- \"content_details\": Requires 'items'. Returns additional\n  details with module items specific to their associated content items.\n  Includes standard lock information for each item.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "items",
                 "content_details"
@@ -111,9 +121,13 @@
               "description": "Returns module completion information for the student with this id.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Module"
         }
       ]
@@ -134,7 +148,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -142,7 +157,8 @@
               "description": "The name of the module",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -150,7 +166,8 @@
               "description": "The date the module will unlock",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -158,7 +175,8 @@
               "description": "The position of this module in the course (1-based)",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -166,7 +184,8 @@
               "description": "Whether module items must be unlocked in order",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -175,6 +194,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -185,9 +205,13 @@
               "description": "Whether to publish the student's final grade for the course upon\ncompletion of this module.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Module"
         }
       ]
@@ -208,7 +232,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -216,7 +241,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -224,7 +250,8 @@
               "description": "The name of the module",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -232,7 +259,8 @@
               "description": "The date the module will unlock",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -240,7 +268,8 @@
               "description": "The position of the module in the course (1-based)",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -248,7 +277,8 @@
               "description": "Whether module items must be unlocked in order",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -257,6 +287,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -267,7 +298,8 @@
               "description": "Whether to publish the student's final grade for the course upon\ncompletion of this module.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -275,9 +307,13 @@
               "description": "Whether the module is published and visible to students",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Module"
         }
       ]
@@ -298,7 +334,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -306,9 +343,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Module"
         }
       ]
@@ -329,7 +370,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -337,21 +379,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Module"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/modules/{module_id}/items",
-      "description": "List the items in a module",
+      "description": "A paginated list of the items in a module",
       "operations": [
         {
           "method": "GET",
           "summary": "List module items",
-          "notes": "List the items in a module",
+          "notes": "A paginated list of the items in a module",
           "nickname": "list_module_items",
           "parameters": [
             {
@@ -360,7 +406,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -368,7 +415,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -377,6 +425,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "content_details"
               ],
@@ -390,7 +439,8 @@
               "description": "The partial title of the items to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -398,9 +448,13 @@
               "description": "Returns module completion information for the student with this id.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ModuleItem"
@@ -424,7 +478,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -432,7 +487,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -440,7 +496,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -449,6 +506,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "content_details"
               ],
@@ -462,9 +520,13 @@
               "description": "Returns module completion information for the student with this id.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ModuleItem"
         }
       ]
@@ -485,7 +547,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -493,7 +556,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -501,7 +565,8 @@
               "description": "The name of the module item and associated content",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -510,6 +575,7 @@
               "type": "string",
               "format": null,
               "required": true,
+              "deprecated": false,
               "enum": [
                 "File",
                 "Page",
@@ -527,7 +593,8 @@
               "description": "The id of the content to link to the module item. Required, except for\n'ExternalUrl', 'Page', and 'SubHeader' types.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -535,7 +602,8 @@
               "description": "The position of this item in the module (1-based).",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -543,7 +611,8 @@
               "description": "0-based indent level; module items may be indented to show a hierarchy",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -551,7 +620,8 @@
               "description": "Suffix for the linked wiki page (e.g. 'front-page'). Required for 'Page'\ntype.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -559,7 +629,8 @@
               "description": "External url that the item points to. [Required for 'ExternalUrl' and\n'ExternalTool' types.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -567,19 +638,22 @@
               "description": "Whether the external tool opens in a new tab. Only applies to\n'ExternalTool' type.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "module_item[completion_requirement][type]",
-              "description": "Completion requirement for this module item.\n\"must_view\": Applies to all item types\n\"must_contribute\": Only applies to \"Assignment\", \"Discussion\", and \"Page\" types\n\"must_submit\", \"min_score\": Only apply to \"Assignment\" and \"Quiz\" types\nInapplicable types will be ignored",
+              "description": "Completion requirement for this module item.\n\"must_view\": Applies to all item types\n\"must_contribute\": Only applies to \"Assignment\", \"Discussion\", and \"Page\" types\n\"must_submit\", \"min_score\": Only apply to \"Assignment\" and \"Quiz\" types\n\"must_mark_done\": Only applies to \"Assignment\" and \"Page\" types\nInapplicable types will be ignored",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "must_view",
                 "must_contribute",
-                "must_submit"
+                "must_submit",
+                "must_mark_done"
               ]
             },
             {
@@ -588,9 +662,13 @@
               "description": "Minimum score required to complete. Required for completion_requirement\ntype 'min_score'.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ModuleItem"
         }
       ]
@@ -611,7 +689,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -619,7 +698,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -627,7 +707,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -635,7 +716,8 @@
               "description": "The name of the module item",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -643,7 +725,8 @@
               "description": "The position of this item in the module (1-based)",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -651,7 +734,8 @@
               "description": "0-based indent level; module items may be indented to show a hierarchy",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -659,7 +743,8 @@
               "description": "External url that the item points to. Only applies to 'ExternalUrl' type.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -667,19 +752,22 @@
               "description": "Whether the external tool opens in a new tab. Only applies to\n'ExternalTool' type.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "module_item[completion_requirement][type]",
-              "description": "Completion requirement for this module item.\n\"must_view\": Applies to all item types\n\"must_contribute\": Only applies to \"Assignment\", \"Discussion\", and \"Page\" types\n\"must_submit\", \"min_score\": Only apply to \"Assignment\" and \"Quiz\" types\nInapplicable types will be ignored",
+              "description": "Completion requirement for this module item.\n\"must_view\": Applies to all item types\n\"must_contribute\": Only applies to \"Assignment\", \"Discussion\", and \"Page\" types\n\"must_submit\", \"min_score\": Only apply to \"Assignment\" and \"Quiz\" types\n\"must_mark_done\": Only applies to \"Assignment\" and \"Page\" types\nInapplicable types will be ignored",
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "must_view",
                 "must_contribute",
-                "must_submit"
+                "must_submit",
+                "must_mark_done"
               ]
             },
             {
@@ -688,7 +776,8 @@
               "description": "Minimum score required to complete, Required for completion_requirement\ntype 'min_score'.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -696,7 +785,8 @@
               "description": "Whether the module item is published and visible to students.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -704,9 +794,13 @@
               "description": "Move this item to another module by specifying the target module id here.\nThe target module must be in the same course.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ModuleItem"
         }
       ]
@@ -727,7 +821,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -735,7 +830,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -743,7 +839,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -751,7 +848,8 @@
               "description": "Assignment set chosen, as specified in the mastery_paths portion of the\ncontext module item response",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -759,9 +857,13 @@
               "description": "Which student the selection applies to.  If not specified, current user is\nimplied.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -782,7 +884,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -790,7 +893,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -798,9 +902,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ModuleItem"
         }
       ]
@@ -821,7 +929,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -829,7 +938,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -837,21 +947,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/module_item_sequence",
-      "description": "Given an asset in a course, find the ModuleItem it belongs to, and also the previous and next Module Items\nin the course sequence.",
+      "description": "Given an asset in a course, find the ModuleItem it belongs to, the previous and next Module Items\nin the course sequence, and also any applicable mastery path rules",
       "operations": [
         {
           "method": "GET",
           "summary": "Get module item sequence",
-          "notes": "Given an asset in a course, find the ModuleItem it belongs to, and also the previous and next Module Items\nin the course sequence.",
+          "notes": "Given an asset in a course, find the ModuleItem it belongs to, the previous and next Module Items\nin the course sequence, and also any applicable mastery path rules",
           "nickname": "get_module_item_sequence",
           "parameters": [
             {
@@ -860,7 +974,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -869,6 +984,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "ModuleItem",
                 "File",
@@ -885,9 +1001,13 @@
               "description": "The id of the asset (or the url in the case of a Page)",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ModuleItemSequence"
         }
       ]
@@ -908,7 +1028,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -916,7 +1037,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -924,42 +1046,157 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     }
   ],
   "models": {
-    "ModuleItemCompletionRequirement": {
-      "id": "ModuleItemCompletionRequirement",
+    "Module": {
+      "id": "Module",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
-        "type": {
-          "example": "min_score",
+        "id": {
+          "description": "the unique identifier for the module",
+          "example": 123,
+          "type": "integer"
+        },
+        "workflow_state": {
+          "description": "the state of the module: 'active', 'deleted'",
+          "example": "active",
+          "type": "string",
+          "allowableValues": {
+            "values": [
+              "active",
+              "deleted"
+            ]
+          }
+        },
+        "position": {
+          "description": "the position of this module in the course (1-based)",
+          "example": 2,
+          "type": "integer"
+        },
+        "name": {
+          "description": "the name of this module",
+          "example": "Imaginary Numbers and You",
           "type": "string"
         },
+        "unlock_at": {
+          "description": "(Optional) the date this module will unlock",
+          "example": "2012-12-31T06:00:00-06:00",
+          "type": "datetime"
+        },
+        "require_sequential_progress": {
+          "description": "Whether module items must be unlocked in order",
+          "example": true,
+          "type": "boolean"
+        },
+        "prerequisite_module_ids": {
+          "description": "IDs of Modules that must be completed before this one is unlocked",
+          "example": [
+            121,
+            122
+          ],
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "items_count": {
+          "description": "The number of items in the module",
+          "example": 10,
+          "type": "integer"
+        },
+        "items_url": {
+          "description": "The API URL to retrive this module's items",
+          "example": "https://canvas.example.com/api/v1/modules/123/items",
+          "type": "string"
+        },
+        "items": {
+          "description": "The contents of this module, as an array of Module Items. (Present only if requested via include[]=items AND the module is not deemed too large by Canvas.)",
+          "type": "array",
+          "items": {
+            "$ref": "ModuleItem"
+          }
+        },
+        "state": {
+          "description": "The state of this Module for the calling user one of 'locked', 'unlocked', 'started', 'completed' (Optional; present only if the caller is a student or if the optional parameter 'student_id' is included)",
+          "example": "started",
+          "type": "string",
+          "allowableValues": {
+            "values": [
+              "locked",
+              "unlocked",
+              "started",
+              "completed"
+            ]
+          }
+        },
+        "completed_at": {
+          "description": "the date the calling user completed the module (Optional; present only if the caller is a student or if the optional parameter 'student_id' is included)",
+          "type": "datetime"
+        },
+        "publish_final_grade": {
+          "description": "if the student's final grade for the course should be published to the SIS upon completion of this module",
+          "type": "boolean"
+        },
+        "published": {
+          "description": "(Optional) Whether this module is published. This field is present only if the caller has permission to view unpublished modules.",
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "CompletionRequirement": {
+      "id": "CompletionRequirement",
+      "description": "",
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
+      "properties": {
+        "type": {
+          "description": "one of 'must_view', 'must_submit', 'must_contribute', 'min_score', 'must_mark_done'",
+          "example": "min_score",
+          "type": "string",
+          "allowableValues": {
+            "values": [
+              "must_view",
+              "must_submit",
+              "must_contribute",
+              "min_score",
+              "must_mark_done"
+            ]
+          }
+        },
         "min_score": {
+          "description": "minimum score required to complete (only present when type == 'min_score')",
           "example": 10,
           "type": "integer"
         },
         "completed": {
+          "description": "whether the calling user has met this requirement (Optional; present only if the caller is a student or if the optional parameter 'student_id' is included)",
           "example": true,
           "type": "boolean"
         }
       }
     },
-    "ModuleItemContentDetails": {
-      "id": "ModuleItemContentDetails",
+    "ContentDetails": {
+      "id": "ContentDetails",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "points_possible": {
           "example": 20,
@@ -990,8 +1227,7 @@
             "asset_string": "assignment_4",
             "unlock_at": "2012-12-31T06:00:00-06:00",
             "lock_at": "2012-12-31T06:00:00-06:00",
-            "context_module": {
-            }
+            "context_module": {}
           },
           "$ref": "LockInfo"
         }
@@ -1000,9 +1236,9 @@
     "ModuleItem": {
       "id": "ModuleItem",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the unique identifier for the module item",
@@ -1094,61 +1330,70 @@
             "lock_at": "2012-12-31T06:00:00-06:00"
           },
           "$ref": "ContentDetails"
-        }
-      }
-    },
-    "ModuleItemSequenceAsset": {
-      "id": "ModuleItemSequenceAsset",
-      "description": "",
-      "required": [
-
-      ],
-      "properties": {
-        "id": {
-          "example": 768,
-          "type": "integer"
         },
-        "module_id": {
-          "example": 123,
-          "type": "integer"
-        },
-        "title": {
-          "example": "A lonely page",
-          "type": "string"
-        },
-        "type": {
-          "example": "Page",
-          "type": "string"
+        "published": {
+          "description": "(Optional) Whether this module item is published. This field is present only if the caller has permission to view unpublished items.",
+          "type": "boolean",
+          "example": true
         }
       }
     },
     "ModuleItemSequenceNode": {
       "id": "ModuleItemSequenceNode",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "prev": {
-          "$ref": "ModuleItemSequenceAsset"
+          "description": "The previous ModuleItem in the sequence",
+          "$ref": "ModuleItem"
         },
         "current": {
-          "$ref": "ModuleItemSequenceAsset"
+          "description": "The ModuleItem being queried",
+          "$ref": "ModuleItem",
+          "example": {
+            "id": 768,
+            "module_id": 123,
+            "title": "A lonely page",
+            "type": "Page"
+          }
         },
         "next": {
-          "$ref": "ModuleItemSequenceAsset"
+          "description": "The next ModuleItem in the sequence",
+          "$ref": "ModuleItem",
+          "example": {
+            "id": 769,
+            "module_id": 127,
+            "title": "Project 1",
+            "type": "Assignment"
+          }
+        },
+        "mastery_path": {
+          "type": "object",
+          "description": "The conditional release rule for the module item, if applicable",
+          "example": {
+            "locked": true,
+            "assignment_sets": [],
+            "selected_set_id": null,
+            "awaiting_choice": false,
+            "still_processing": false,
+            "modules_url": "/courses/11/modules",
+            "choose_url": "/courses/11/modules/items/9/choose",
+            "modules_tab_disabled": false
+          }
         }
       }
     },
     "ModuleItemSequence": {
       "id": "ModuleItemSequence",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "items": {
-          "description": "an array containing one hash for each appearence of the asset in the module sequence (up to 10 total)",
+          "description": "an array containing one ModuleItemSequenceNode for each appearence of the asset in the module sequence (up to 10 total)",
           "example": [
             {
               "prev": null,
@@ -1163,12 +1408,22 @@
                 "module_id": 127,
                 "title": "Project 1",
                 "type": "Assignment"
+              },
+              "mastery_path": {
+                "locked": true,
+                "assignment_sets": [],
+                "selected_set_id": null,
+                "awaiting_choice": false,
+                "still_processing": false,
+                "modules_url": "/courses/11/modules",
+                "choose_url": "/courses/11/modules/items/9/choose",
+                "modules_tab_disabled": false
               }
             }
           ],
           "type": "array",
           "items": {
-            "type": "object"
+            "$ref": "ModuleItemSequenceNode"
           }
         },
         "modules": {
@@ -1176,176 +1431,17 @@
           "type": "array",
           "items": {
             "$ref": "Module"
-          }
-        }
-      }
-    },
-    "Module": {
-      "id": "Module",
-      "description": "",
-      "required": [
-
-      ],
-      "properties": {
-        "id": {
-          "description": "the unique identifier for the module",
-          "example": 123,
-          "type": "integer"
-        },
-        "workflow_state": {
-          "description": "the state of the module: 'active', 'deleted'",
-          "example": "active",
-          "type": "string",
-          "allowableValues": {
-            "values": [
-              "active",
-              "deleted"
-            ]
-          }
-        },
-        "position": {
-          "description": "the position of this module in the course (1-based)",
-          "example": 2,
-          "type": "integer"
-        },
-        "name": {
-          "description": "the name of this module",
-          "example": "Imaginary Numbers and You",
-          "type": "string"
-        },
-        "unlock_at": {
-          "description": "(Optional) the date this module will unlock",
-          "example": "2012-12-31T06:00:00-06:00",
-          "type": "datetime"
-        },
-        "require_sequential_progress": {
-          "description": "Whether module items must be unlocked in order",
-          "example": true,
-          "type": "boolean"
-        },
-        "prerequisite_module_ids": {
-          "description": "IDs of Modules that must be completed before this one is unlocked",
-          "example": [
-            121,
-            122
-          ],
-          "type": "array",
-          "items": {
-            "type": "integer"
-          }
-        },
-        "items_count": {
-          "description": "The number of items in the module",
-          "example": 10,
-          "type": "integer"
-        },
-        "items_url": {
-          "description": "The API URL to retrive this module's items",
-          "example": "https://canvas.example.com/api/v1/modules/123/items",
-          "type": "string"
-        },
-        "items": {
-          "description": "The contents of this module, as an array of Module Items. (Present only if requested via include[]=items AND the module is not deemed too large by Canvas.)",
-          "type": "array",
-          "items": {
-            "$ref": "ModuleItem"
-          }
-        },
-        "state": {
-          "description": "The state of this Module for the calling user one of 'locked', 'unlocked', 'started', 'completed' (Optional; present only if the caller is a student or if the optional parameter 'student_id' is included)",
-          "example": "started",
-          "type": "string",
-          "allowableValues": {
-            "values": [
-              "locked",
-              "unlocked",
-              "started",
-              "completed"
-            ]
-          }
-        },
-        "completed_at": {
-          "description": "the date the calling user completed the module (Optional; present only if the caller is a student or if the optional parameter 'student_id' is included)",
-          "type": "datetime"
-        },
-        "publish_final_grade": {
-          "description": "if the student's final grade for the course should be published to the SIS upon completion of this module",
-          "type": "boolean"
-        }
-      }
-    },
-    "CompletionRequirement": {
-      "id": "CompletionRequirement",
-      "description": "",
-      "required": [
-
-      ],
-      "properties": {
-        "type": {
-          "description": "one of 'must_view', 'must_submit', 'must_contribute', 'min_score'",
-          "example": "min_score",
-          "type": "string",
-          "allowableValues": {
-            "values": [
-              "must_view",
-              "must_submit",
-              "must_contribute",
-              "min_score"
-            ]
-          }
-        },
-        "min_score": {
-          "description": "minimum score required to complete (only present when type == 'min_score')",
-          "example": 10,
-          "type": "integer"
-        },
-        "completed": {
-          "description": "whether the calling user has met this requirement (Optional; present only if the caller is a student or if the optional parameter 'student_id' is included)",
-          "example": true,
-          "type": "boolean"
-        }
-      }
-    },
-    "ContentDetails": {
-      "id": "ContentDetails",
-      "description": "",
-      "required": [
-
-      ],
-      "properties": {
-        "points_possible": {
-          "example": 20,
-          "type": "integer"
-        },
-        "due_at": {
-          "example": "2012-12-31T06:00:00-06:00",
-          "type": "datetime"
-        },
-        "unlock_at": {
-          "example": "2012-12-31T06:00:00-06:00",
-          "type": "datetime"
-        },
-        "lock_at": {
-          "example": "2012-12-31T06:00:00-06:00",
-          "type": "datetime"
-        },
-        "locked_for_user": {
-          "example": true,
-          "type": "boolean"
-        },
-        "lock_explanation": {
-          "example": "This quiz is part of an unpublished module and is not available yet.",
-          "type": "string"
-        },
-        "lock_info": {
-          "example": {
-            "asset_string": "assignment_4",
-            "unlock_at": "2012-12-31T06:00:00-06:00",
-            "lock_at": "2012-12-31T06:00:00-06:00",
-            "context_module": {
-            }
           },
-          "$ref": "LockInfo"
+          "example": [
+            {
+              "id": 123,
+              "name": "Overview"
+            },
+            {
+              "id": 127,
+              "name": "Imaginary Numbers"
+            }
+          ]
         }
       }
     }

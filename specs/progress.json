@@ -23,9 +23,49 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "Progress"
+        }
+      ]
+    },
+    {
+      "path": "/lti/courses/{course_id}/progress/{id}",
+      "description": "Return completion and status information about an asynchronous job",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Query progress",
+          "notes": "Return completion and status information about an asynchronous job",
+          "nickname": "query_progress",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Progress"
         }
       ]
@@ -35,9 +75,9 @@
     "Progress": {
       "id": "Progress",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the ID of the Progress object",
@@ -96,9 +136,16 @@
           "example": "17 courses processed",
           "type": "string"
         },
+        "results": {
+          "description": "optional results of the job. omitted when job is still pending",
+          "example": {
+            "id": "123"
+          },
+          "type": "object"
+        },
         "url": {
-          "description": "url where a progress update can be retrieved",
-          "example": "https://canvas.example.edu/api/v1/progress/1",
+          "description": "url where a progress update can be retrieved with an LTI access token",
+          "example": "https://canvas.example.edu/api/lti/courses/1/progress/1",
           "type": "string"
         }
       }

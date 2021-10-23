@@ -8,13 +8,13 @@
   ],
   "apis": [
     {
-      "path": "/v1/accounts/{account_id}/users/{user_id}/account_notifications",
-      "description": "Returns a list of all global notifications in the account for this user\nAny notifications that have been closed by the user will not be returned",
+      "path": "/v1/accounts/{account_id}/account_notifications",
+      "description": "Returns a list of all global notifications in the account for the current user\nAny notifications that have been closed by the user will not be returned, unless\na include_past parameter is passed in as true.",
       "operations": [
         {
           "method": "GET",
           "summary": "Index of active global notification for the user",
-          "notes": "Returns a list of all global notifications in the account for this user\nAny notifications that have been closed by the user will not be returned",
+          "notes": "Returns a list of all global notifications in the account for the current user\nAny notifications that have been closed by the user will not be returned, unless\na include_past parameter is passed in as true.",
           "nickname": "index_of_active_global_notification_for_user",
           "parameters": [
             {
@@ -23,17 +23,22 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
-              "paramType": "path",
-              "name": "user_id",
-              "description": "ID",
-              "type": "string",
+              "paramType": "query",
+              "name": "include_past",
+              "description": "Include past and dismissed global announcements.",
+              "type": "boolean",
               "format": null,
-              "required": true
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "AccountNotification"
@@ -42,13 +47,13 @@
       ]
     },
     {
-      "path": "/v1/accounts/{account_id}/users/{user_id}/account_notifications/{id}",
-      "description": "Returns a global notification\nA notification that has been closed by the user will not be returned",
+      "path": "/v1/accounts/{account_id}/account_notifications/{id}",
+      "description": "Returns a global notification for the current user\nA notification that has been closed by the user will not be returned",
       "operations": [
         {
           "method": "GET",
           "summary": "Show a global notification",
-          "notes": "Returns a global notification\nA notification that has been closed by the user will not be returned",
+          "notes": "Returns a global notification for the current user\nA notification that has been closed by the user will not be returned",
           "nickname": "show_global_notification",
           "parameters": [
             {
@@ -57,15 +62,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
-            },
-            {
-              "paramType": "path",
-              "name": "user_id",
-              "description": "ID",
-              "type": "string",
-              "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -73,21 +71,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "AccountNotification"
         }
       ]
     },
     {
-      "path": "/v1/accounts/{account_id}/users/{user_id}/account_notifications/{id}",
-      "description": "If the user no long wants to see this notification it can be excused with this call",
+      "path": "/v1/accounts/{account_id}/account_notifications/{id}",
+      "description": "If the current user no long wants to see this notification it can be excused with this call",
       "operations": [
         {
           "method": "DELETE",
           "summary": "Close notification for user",
-          "notes": "If the user no long wants to see this notification it can be excused with this call",
+          "notes": "If the current user no long wants to see this notification it can be excused with this call",
           "nickname": "close_notification_for_user",
           "parameters": [
             {
@@ -96,15 +98,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
-            },
-            {
-              "paramType": "path",
-              "name": "user_id",
-              "description": "ID",
-              "type": "string",
-              "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -112,9 +107,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "AccountNotification"
         }
       ]
@@ -135,7 +134,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -143,7 +143,8 @@
               "description": "The subject of the notification.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -151,7 +152,8 @@
               "description": "The message body of the notification.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -159,7 +161,8 @@
               "description": "The start date and time of the notification in ISO8601 format.\ne.g. 2014-01-01T01:00Z",
               "type": "DateTime",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -167,7 +170,8 @@
               "description": "The end date and time of the notification in ISO8601 format.\ne.g. 2014-01-01T01:00Z",
               "type": "DateTime",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -176,6 +180,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "warning",
                 "information",
@@ -191,11 +196,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -216,7 +225,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -224,7 +234,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -232,7 +243,8 @@
               "description": "The subject of the notification.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -240,7 +252,8 @@
               "description": "The message body of the notification.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -248,7 +261,8 @@
               "description": "The start date and time of the notification in ISO8601 format.\ne.g. 2014-01-01T01:00Z",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -256,7 +270,8 @@
               "description": "The end date and time of the notification in ISO8601 format.\ne.g. 2014-01-01T01:00Z",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -265,6 +280,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "warning",
                 "information",
@@ -280,11 +296,15 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -294,9 +314,9 @@
     "AccountNotification": {
       "id": "AccountNotification",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "subject": {
           "description": "The subject of the notifications",

@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/users/self/groups",
-      "description": "Returns a list of active groups for the current user.",
+      "description": "Returns a paginated list of active groups for the current user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List your groups",
-          "notes": "Returns a list of active groups for the current user.",
+          "notes": "Returns a paginated list of active groups for the current user.",
           "nickname": "list_your_groups",
           "parameters": [
             {
@@ -24,6 +24,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "Account",
                 "Course"
@@ -36,6 +37,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "tabs"
               ],
@@ -44,6 +46,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Group"
@@ -53,12 +58,12 @@
     },
     {
       "path": "/v1/accounts/{account_id}/groups",
-      "description": "Returns the list of active groups in the given context that are visible to user.",
+      "description": "Returns the paginated list of active groups in the given context that are visible to user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List the groups available in a context.",
-          "notes": "Returns the list of active groups in the given context that are visible to user.",
+          "notes": "Returns the paginated list of active groups in the given context that are visible to user.",
           "nickname": "list_groups_available_in_context_accounts",
           "parameters": [
             {
@@ -67,7 +72,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -75,7 +81,8 @@
               "description": "Will only include groups that the user belongs to if this is set",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -84,6 +91,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "tabs"
               ],
@@ -92,6 +100,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Group"
@@ -101,12 +112,12 @@
     },
     {
       "path": "/v1/courses/{course_id}/groups",
-      "description": "Returns the list of active groups in the given context that are visible to user.",
+      "description": "Returns the paginated list of active groups in the given context that are visible to user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List the groups available in a context.",
-          "notes": "Returns the list of active groups in the given context that are visible to user.",
+          "notes": "Returns the paginated list of active groups in the given context that are visible to user.",
           "nickname": "list_groups_available_in_context_courses",
           "parameters": [
             {
@@ -115,7 +126,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -123,7 +135,8 @@
               "description": "Will only include groups that the user belongs to if this is set",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -132,6 +145,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "tabs"
               ],
@@ -140,6 +154,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Group"
@@ -163,7 +180,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -172,6 +190,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "permissions",
                 "tabs"
@@ -181,6 +200,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Group"
         }
       ]
@@ -201,7 +223,8 @@
               "description": "The name of the group",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -209,7 +232,8 @@
               "description": "A description of the group",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -217,7 +241,8 @@
               "description": "whether the group is public (applies only to community groups)",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -226,6 +251,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "parent_context_auto_join",
                 "parent_context_request",
@@ -238,9 +264,22 @@
               "description": "The allowed file storage for the group, in megabytes. This parameter is\nignored if the caller does not have the manage_storage_quotas permission.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "sis_group_id",
+              "description": "The sis ID of the group. Must have manage_sis permission to set.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Group"
         }
       ]
@@ -261,7 +300,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -269,7 +309,8 @@
               "description": "The name of the group",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -277,7 +318,8 @@
               "description": "A description of the group",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -285,7 +327,8 @@
               "description": "whether the group is public (applies only to community groups)",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -294,6 +337,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "parent_context_auto_join",
                 "parent_context_request",
@@ -306,9 +350,22 @@
               "description": "The allowed file storage for the group, in megabytes. This parameter is\nignored if the caller does not have the manage_storage_quotas permission.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "sis_group_id",
+              "description": "The sis ID of the group. Must have manage_sis permission to set.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Group"
         }
       ]
@@ -329,7 +386,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -337,7 +395,8 @@
               "description": "The name of the group",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -345,7 +404,8 @@
               "description": "A description of the group",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -353,7 +413,8 @@
               "description": "Whether the group is public (applies only to community groups). Currently\nyou cannot set a group back to private once it has been made public.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -362,6 +423,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "parent_context_auto_join",
                 "parent_context_request",
@@ -374,7 +436,8 @@
               "description": "The id of the attachment previously uploaded to the group that you would\nlike to use as the avatar image for this group.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -382,7 +445,8 @@
               "description": "The allowed file storage for the group, in megabytes. This parameter is\nignored if the caller does not have the manage_storage_quotas permission.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -391,11 +455,24 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "form",
+              "name": "sis_group_id",
+              "description": "The sis ID of the group. Must have manage_sis permission to set.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Group"
         }
       ]
@@ -416,9 +493,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Group"
         }
       ]
@@ -439,7 +520,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -448,23 +530,27 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/groups/{group_id}/users",
-      "description": "Returns a list of users in the group.",
+      "description": "Returns a paginated list of users in the group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List group's users",
-          "notes": "Returns a list of users in the group.",
+          "notes": "Returns a paginated list of users in the group.",
           "nickname": "list_group_s_users",
           "parameters": [
             {
@@ -473,7 +559,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -481,23 +568,37 @@
               "description": "The partial name or full ID of the users to match and return in the\nresults list. Must be at least 3 characters.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "- \"avatar_url\": Include users' avatar_urls.",
+              "description": "\"avatar_url\": Include users' avatar_urls.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "avatar_url"
               ],
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "exclude_inactive",
+              "description": "Whether to filter out inactive users from the results. Defaults to\nfalse unless explicitly provided.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "User"
@@ -521,9 +622,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -544,7 +649,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -552,9 +658,13 @@
               "description": "The html content to process",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -575,9 +685,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -598,21 +712,64 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/groups/{group_id}/permissions",
+      "description": "Returns permission information for the calling user in the given group.\nSee also the {api:AccountsController#permissions Account} and\n{api:CoursesController#permissions Course} counterparts.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Permissions",
+          "notes": "Returns permission information for the calling user in the given group.\nSee also the {api:AccountsController#permissions Account} and\n{api:CoursesController#permissions Course} counterparts.",
+          "nickname": "permissions",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "group_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "permissions",
+              "description": "List of permissions to check against the authenticated user.\nPermission names are documented in the {api:RoleOverridesController#add_role Create a role} endpoint.",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/groups/{group_id}/memberships",
-      "description": "List the members of a group.",
+      "description": "A paginated list of the members of a group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List group memberships",
-          "notes": "List the members of a group.",
+          "notes": "A paginated list of the members of a group.",
           "nickname": "list_group_memberships",
           "parameters": [
             {
@@ -621,7 +778,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -630,6 +788,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "accepted",
                 "invited",
@@ -640,6 +799,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "GroupMembership"
@@ -663,7 +825,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -671,9 +834,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GroupMembership"
         }
       ]
@@ -694,7 +861,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -702,9 +870,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GroupMembership"
         }
       ]
@@ -725,7 +897,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -733,9 +906,13 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GroupMembership"
         }
       ]
@@ -756,7 +933,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -764,7 +942,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -773,6 +952,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "accepted"
               ]
@@ -783,9 +963,13 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GroupMembership"
         }
       ]
@@ -806,7 +990,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -814,7 +999,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -823,6 +1009,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "accepted"
               ]
@@ -833,9 +1020,13 @@
               "description": "no description",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "GroupMembership"
         }
       ]
@@ -856,7 +1047,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -864,9 +1056,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -887,7 +1083,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -895,9 +1092,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -907,9 +1108,9 @@
     "Group": {
       "id": "Group",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the group.",
@@ -1010,15 +1211,22 @@
           "value": {
             "type": "boolean"
           }
+        },
+        "users": {
+          "description": "optional: A list of users that are members in the group. Returned only if include[]=users. WARNING: this collection's size is capped (if there are an extremely large number of users in the group (thousands) not all of them will be returned).  If you need to capture all the users in a group with certainty consider using the paginated /api/v1/groups/<group_id>/memberships endpoint.",
+          "type": "array",
+          "items": {
+            "$ref": "User"
+          }
         }
       }
     },
     "GroupMembership": {
       "id": "GroupMembership",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The id of the membership object",

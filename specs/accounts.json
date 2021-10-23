@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/accounts",
-      "description": "List accounts that the current user can view or manage.  Typically,\nstudents and even teachers will get an empty list in response, only\naccount admins can view the accounts that they are in.",
+      "description": "A paginated list of accounts that the current user can view or manage.\nTypically, students and even teachers will get an empty list in response,\nonly account admins can view the accounts that they are in.",
       "operations": [
         {
           "method": "GET",
           "summary": "List accounts",
-          "notes": "List accounts that the current user can view or manage.  Typically,\nstudents and even teachers will get an empty list in response, only\naccount admins can view the accounts that they are in.",
+          "notes": "A paginated list of accounts that the current user can view or manage.\nTypically, students and even teachers will get an empty list in response,\nonly account admins can view the accounts that they are in.",
           "nickname": "list_accounts",
           "parameters": [
             {
@@ -24,6 +24,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "lti_guid",
                 "registration_settings",
@@ -34,6 +35,29 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "array",
+          "items": {
+            "$ref": "Account"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/v1/manageable_accounts",
+      "description": "A paginated list of accounts where the current user has permission to create\nor manage courses. List will be empty for students and teachers as only admins\ncan view which accounts they are in.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get accounts that admins can manage",
+          "notes": "A paginated list of accounts where the current user has permission to create\nor manage courses. List will be empty for students and teachers as only admins\ncan view which accounts they are in.",
+          "nickname": "get_accounts_that_admins_can_manage",
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Account"
@@ -43,16 +67,17 @@
     },
     {
       "path": "/v1/course_accounts",
-      "description": "List accounts that the current user can view through their admin course enrollments.\n(Teacher, TA, or designer enrollments).\nOnly returns \"id\", \"name\", \"workflow_state\", \"root_account_id\" and \"parent_account_id\"",
+      "description": "A paginated list of accounts that the current user can view through their\nadmin course enrollments. (Teacher, TA, or designer enrollments).\nOnly returns \"id\", \"name\", \"workflow_state\", \"root_account_id\" and \"parent_account_id\"",
       "operations": [
         {
           "method": "GET",
           "summary": "List accounts for course admins",
-          "notes": "List accounts that the current user can view through their admin course enrollments.\n(Teacher, TA, or designer enrollments).\nOnly returns \"id\", \"name\", \"workflow_state\", \"root_account_id\" and \"parent_account_id\"",
+          "notes": "A paginated list of accounts that the current user can view through their\nadmin course enrollments. (Teacher, TA, or designer enrollments).\nOnly returns \"id\", \"name\", \"workflow_state\", \"root_account_id\" and \"parent_account_id\"",
           "nickname": "list_accounts_for_course_admins",
-          "parameters": [
-
-          ],
+          "parameters": [],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Account"
@@ -76,10 +101,80 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Account"
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/settings",
+      "description": "Returns all of the settings for the specified account as a JSON object. The caller must be an Account\nadmin with the manage_account_settings permission.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Settings",
+          "notes": "Returns all of the settings for the specified account as a JSON object. The caller must be an Account\nadmin with the manage_account_settings permission.",
+          "nickname": "settings",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/permissions",
+      "description": "Returns permission information for the calling user and the given account.\nYou may use `self` as the account id to check permissions against the domain root account.\nThe caller must have an account role or admin (teacher/TA/designer) enrollment in a course\nin the account.\n\nSee also the {api:CoursesController#permissions Course} and {api:GroupsController#permissions Group}\ncounterparts.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Permissions",
+          "notes": "Returns permission information for the calling user and the given account.\nYou may use `self` as the account id to check permissions against the domain root account.\nThe caller must have an account role or admin (teacher/TA/designer) enrollment in a course\nin the account.\n\nSee also the {api:CoursesController#permissions Course} and {api:GroupsController#permissions Group}\ncounterparts.",
+          "nickname": "permissions",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "permissions",
+              "description": "List of permissions to check against the authenticated user.\nPermission names are documented in the {api:RoleOverridesController#add_role Create a role} endpoint.",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "string"
+              }
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "void"
         }
       ]
     },
@@ -99,7 +194,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -107,9 +203,13 @@
               "description": "If true, the entire account tree underneath\nthis account will be returned (though still paginated). If false, only\ndirect sub-accounts of this account will be returned. Defaults to false.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Account"
@@ -118,13 +218,67 @@
       ]
     },
     {
+      "path": "/v1/accounts/{account_id}/terms_of_service",
+      "description": "Returns the terms of service for that account",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get the Terms of Service",
+          "notes": "Returns the terms of service for that account",
+          "nickname": "get_terms_of_service",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "TermsOfService"
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/help_links",
+      "description": "Returns the help links for that account",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "Get help links",
+          "notes": "Returns the help links for that account",
+          "nickname": "get_help_links",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "HelpLinks"
+        }
+      ]
+    },
+    {
       "path": "/v1/accounts/{account_id}/courses",
-      "description": "Retrieve the list of courses in this account.",
+      "description": "Retrieve a paginated list of courses in this account.",
       "operations": [
         {
           "method": "GET",
           "summary": "List active courses in an account",
-          "notes": "Retrieve the list of courses in this account.",
+          "notes": "Retrieve a paginated list of courses in this account.",
           "nickname": "list_active_courses_in_account",
           "parameters": [
             {
@@ -133,7 +287,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -141,7 +296,8 @@
               "description": "If true, include only courses with at least one enrollment.  If false,\ninclude only courses with no enrollments.  If not present, do not filter\non course enrollment status.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -150,6 +306,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "teacher",
                 "student",
@@ -167,7 +324,8 @@
               "description": "If true, include only published courses.  If false, exclude published\ncourses.  If not present, do not filter on published status.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -175,7 +333,8 @@
               "description": "If true, include only completed courses (these may be in state\n'completed', or their enrollment term may have ended).  If false, exclude\ncompleted courses.  If not present, do not filter on completed status.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -183,7 +342,8 @@
               "description": "If true, include only blueprint courses. If false, exclude them.\nIf not present, do not filter on this basis.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -191,7 +351,8 @@
               "description": "If true, include only courses that inherit content from a blueprint course.\nIf false, exclude them. If not present, do not filter on this basis.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -200,6 +361,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -211,6 +373,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -221,7 +384,8 @@
               "description": "If present, only return courses that have at least one enrollment.\nEquivalent to 'with_enrollments=true'; retained for compatibility.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -230,6 +394,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "created",
                 "claimed",
@@ -248,7 +413,8 @@
               "description": "If set, only includes courses from the specified term.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -256,7 +422,8 @@
               "description": "The partial course name, code, or full ID to match and return in the results list. Must be at least 3 characters.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -265,13 +432,16 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "syllabus_body",
                 "term",
                 "course_progress",
                 "storage_quota_used_mb",
                 "total_students",
-                "teachers"
+                "teachers",
+                "account_name",
+                "concluded"
               ],
               "items": {
                 "type": "string"
@@ -284,12 +454,12 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "course_name",
                 "sis_course_id",
                 "teacher",
-                "subaccount",
-                "enrollments"
+                "account_name"
               ]
             },
             {
@@ -299,6 +469,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "asc",
                 "desc"
@@ -311,12 +482,43 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "course",
                 "teacher"
               ]
+            },
+            {
+              "paramType": "query",
+              "name": "starts_before",
+              "description": "If set, only return courses that start before the value (inclusive)\nor their enrollment term starts before the value (inclusive)\nor both the course's start_at and the enrollment term's start_at are set to null.\nThe value should be formatted as: yyyy-mm-dd or ISO 8601 YYYY-MM-DDTHH:MM:SSZ.",
+              "type": "Date",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "ends_after",
+              "description": "If set, only return courses that end after the value (inclusive)\nor their enrollment term ends after the value (inclusive)\nor both the course's end_at and the enrollment term's end_at are set to null.\nThe value should be formatted as: yyyy-mm-dd or ISO 8601 YYYY-MM-DDTHH:MM:SSZ.",
+              "type": "Date",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "homeroom",
+              "description": "If set, only return homeroom courses.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Course"
@@ -340,7 +542,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -348,7 +551,8 @@
               "description": "Updates the account name",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -356,7 +560,8 @@
               "description": "Updates the account sis_account_id\nMust have manage_sis permission and must not be a root_account.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -364,7 +569,8 @@
               "description": "The default time zone of the account. Allowed time zones are\n{http://www.iana.org/time-zones IANA time zones} or friendlier\n{http://api.rubyonrails.org/classes/ActiveSupport/TimeZone.html Ruby on Rails time zones}.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -372,7 +578,8 @@
               "description": "The default course storage quota to be used, if not otherwise specified.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -380,7 +587,8 @@
               "description": "The default user storage quota to be used, if not otherwise specified.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -388,7 +596,17 @@
               "description": "The default group storage quota to be used, if not otherwise specified.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[course_template_id]",
+              "description": "The ID of a course to be used as a template for all newly created courses.\nEmpty means to inherit the setting from parent account, 0 means to not\nuse a template even if a parent account has one set. The course must be\nmarked as a template.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -396,7 +614,8 @@
               "description": "Restrict students from viewing courses after end date",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -404,7 +623,8 @@
               "description": "Lock this setting for sub-accounts and courses",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -412,7 +632,53 @@
               "description": "Restrict students from viewing courses before start date",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[settings][microsoft_sync_enabled]",
+              "description": "Determines whether this account has Microsoft Teams Sync enabled or not.\n\nNote that if you are altering Microsoft Teams sync settings you must enable\nthe Microsoft Group enrollment syncing feature flag. In addition, if you are enabling\nMicrosoft Teams sync, you must also specify a tenant, login attribute, and a remote attribute.\nSpecifying a suffix to use is optional.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[settings][microsoft_sync_tenant]",
+              "description": "The tenant this account should use when using Microsoft Teams Sync.\nThis should be an Azure Active Directory domain name.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[settings][microsoft_sync_login_attribute]",
+              "description": "The attribute this account should use to lookup users when using Microsoft Teams Sync.\nMust be one of \"sub\", \"email\", \"oid\", \"preferred_username\", or \"integration_id\".",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[settings][microsoft_sync_login_attribute_suffix]",
+              "description": "A suffix that will be appended to the result of the login attribute when associating\nCanvas users with Microsoft users. Must be under 255 characters and contain no whitespace.\nThis field is optional.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[settings][microsoft_sync_remote_attribute]",
+              "description": "The Active Directory attribute to use when associating Canvas users with Microsoft users.\nMust be one of \"mail\", \"mailNickname\", or \"userPrincipalName\".",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -420,7 +686,8 @@
               "description": "Lock this setting for sub-accounts and courses",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -428,7 +695,8 @@
               "description": "Disable comments on announcements",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -436,7 +704,26 @@
               "description": "Lock this setting for sub-accounts and courses",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[settings][usage_rights_required][value]",
+              "description": "Copyright and license information must be provided for files before they are published.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[settings][usage_rights_required][locked]",
+              "description": "Lock this setting for sub-accounts and courses",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -444,7 +731,8 @@
               "description": "Restrict students from viewing future enrollments in course list",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -452,7 +740,44 @@
               "description": "Lock this setting for sub-accounts and courses",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[settings][lock_outcome_proficiency][value]",
+              "description": "[DEPRECATED] Restrict instructors from changing mastery scale",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[lock_outcome_proficiency][locked]",
+              "description": "[DEPRECATED] Lock this setting for sub-accounts and courses",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[settings][lock_proficiency_calculation][value]",
+              "description": "[DEPRECATED] Restrict instructors from changing proficiency calculation method",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "account[lock_proficiency_calculation][locked]",
+              "description": "[DEPRECATED] Lock this setting for sub-accounts and courses",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -460,9 +785,13 @@
               "description": "Give this a set of keys and boolean values to enable or disable services matching the keys",
               "type": "Hash",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Account"
         }
       ]
@@ -483,7 +812,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -491,9 +821,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "User"
         }
       ]
@@ -514,7 +848,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -522,7 +857,8 @@
               "description": "The name of the new sub-account.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -530,7 +866,8 @@
               "description": "The account's identifier in the Student Information System.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -538,7 +875,8 @@
               "description": "The default course storage quota to be used, if not otherwise specified.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -546,7 +884,8 @@
               "description": "The default user storage quota to be used, if not otherwise specified.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -554,9 +893,49 @@
               "description": "The default group storage quota to be used, if not otherwise specified.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "Account"
+        }
+      ]
+    },
+    {
+      "path": "/v1/accounts/{account_id}/sub_accounts/{id}",
+      "description": "Cannot delete an account with active courses or active sub_accounts.\nCannot delete a root_account",
+      "operations": [
+        {
+          "method": "DELETE",
+          "summary": "Delete a sub-account",
+          "notes": "Cannot delete an account with active courses or active sub_accounts.\nCannot delete a root_account",
+          "nickname": "delete_sub_account",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "account_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Account"
         }
       ]
@@ -566,9 +945,9 @@
     "Account": {
       "id": "Account",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the ID of the Account object",
@@ -639,6 +1018,211 @@
           "description": "The state of the account. Can be 'active' or 'deleted'.",
           "example": "active",
           "type": "string"
+        }
+      }
+    },
+    "TermsOfService": {
+      "id": "TermsOfService",
+      "description": "",
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
+      "properties": {
+        "id": {
+          "description": "Terms Of Service id",
+          "example": 1,
+          "type": "integer"
+        },
+        "terms_type": {
+          "description": "The given type for the Terms of Service",
+          "enum": [
+            "default",
+            "custom",
+            "no_terms"
+          ],
+          "example": "default",
+          "type": "string"
+        },
+        "passive": {
+          "description": "Boolean dictating if the user must accept Terms of Service",
+          "example": false,
+          "type": "boolean"
+        },
+        "account_id": {
+          "description": "The id of the root account that owns the Terms of Service",
+          "example": 1,
+          "type": "integer"
+        },
+        "content": {
+          "description": "Content of the Terms of Service",
+          "example": "To be or not to be that is the question",
+          "type": "string"
+        },
+        "self_registration_type": {
+          "description": "The type of self registration allowed",
+          "example": [
+            "none",
+            "observer",
+            "all"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "HelpLink": {
+      "id": "HelpLink",
+      "description": "",
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
+      "properties": {
+        "id": {
+          "description": "The ID of the help link",
+          "example": "instructor_question",
+          "type": "string"
+        },
+        "text": {
+          "description": "The name of the help link",
+          "example": "Ask Your Instructor a Question",
+          "type": "string"
+        },
+        "subtext": {
+          "description": "The description of the help link",
+          "example": "Questions are submitted to your instructor",
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL of the help link",
+          "example": "#teacher_feedback",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the help link",
+          "enum": [
+            "default",
+            "custom"
+          ],
+          "example": "default",
+          "type": "string"
+        },
+        "available_to": {
+          "description": "The roles that have access to this help link",
+          "example": [
+            "user",
+            "student",
+            "teacher",
+            "admin",
+            "observer",
+            "unenrolled"
+          ],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HelpLinks": {
+      "id": "HelpLinks",
+      "description": "",
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
+      "properties": {
+        "help_link_name": {
+          "description": "Help link button title",
+          "example": "Help And Policies",
+          "type": "string"
+        },
+        "help_link_icon": {
+          "description": "Help link button icon",
+          "example": "help",
+          "type": "string"
+        },
+        "custom_help_links": {
+          "description": "Help links defined by the account. Could include default help links.",
+          "type": "array",
+          "items": {
+            "$ref": "HelpLink"
+          },
+          "example": [
+            {
+              "id": "link1",
+              "text": "Custom Link!",
+              "subtext": "Something something.",
+              "url": "https://google.com",
+              "type": "custom",
+              "available_to": [
+                "user",
+                "student",
+                "teacher",
+                "admin",
+                "observer",
+                "unenrolled"
+              ],
+              "is_featured": true,
+              "is_new": false,
+              "feature_headline": "Check this out!"
+            }
+          ]
+        },
+        "default_help_links": {
+          "description": "Default help links provided when account has not set help links of their own.",
+          "type": "array",
+          "items": {
+            "$ref": "HelpLink"
+          },
+          "example": [
+            {
+              "available_to": [
+                "student"
+              ],
+              "text": "Ask Your Instructor a Question",
+              "subtext": "Questions are submitted to your instructor",
+              "url": "#teacher_feedback",
+              "type": "default",
+              "id": "instructor_question",
+              "is_featured": false,
+              "is_new": true,
+              "feature_headline": ""
+            },
+            {
+              "available_to": [
+                "user",
+                "student",
+                "teacher",
+                "admin",
+                "observer",
+                "unenrolled"
+              ],
+              "text": "Search the Canvas Guides",
+              "subtext": "Find answers to common questions",
+              "url": "https://community.canvaslms.com/t5/Guides/ct-p/guides",
+              "type": "default",
+              "id": "search_the_canvas_guides",
+              "is_featured": false,
+              "is_new": false,
+              "feature_headline": ""
+            },
+            {
+              "available_to": [
+                "user",
+                "student",
+                "teacher",
+                "admin",
+                "observer",
+                "unenrolled"
+              ],
+              "text": "Report a Problem",
+              "subtext": "If Canvas misbehaves, tell us about it",
+              "url": "#create_ticket",
+              "type": "default",
+              "id": "report_a_problem",
+              "is_featured": false,
+              "is_new": false,
+              "feature_headline": ""
+            }
+          ]
         }
       }
     }

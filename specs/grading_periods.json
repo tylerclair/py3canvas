@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/accounts/{account_id}/grading_periods",
-      "description": "Returns the list of grading periods for the current course.",
+      "description": "Returns the paginated list of grading periods for the current course.",
       "operations": [
         {
           "method": "GET",
           "summary": "List grading periods",
-          "notes": "Returns the list of grading periods for the current course.",
+          "notes": "Returns the paginated list of grading periods for the current course.",
           "nickname": "list_grading_periods_accounts",
           "parameters": [
             {
@@ -23,21 +23,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/grading_periods",
-      "description": "Returns the list of grading periods for the current course.",
+      "description": "Returns the paginated list of grading periods for the current course.",
       "operations": [
         {
           "method": "GET",
           "summary": "List grading periods",
-          "notes": "Returns the list of grading periods for the current course.",
+          "notes": "Returns the paginated list of grading periods for the current course.",
           "nickname": "list_grading_periods_courses",
           "parameters": [
             {
@@ -46,9 +50,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -69,7 +77,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -77,9 +86,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -100,7 +113,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -108,7 +122,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -117,6 +132,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "$ref": "Date"
               }
@@ -128,6 +144,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "$ref": "Date"
               }
@@ -137,13 +154,17 @@
               "name": "grading_periods[weight]",
               "description": "A weight value that contributes to the overall weight of a grading period set which is used to calculate how much assignments in this period contribute to the total grade",
               "type": "array",
-              "format": null,
+              "format": "float",
               "required": false,
+              "deprecated": false,
               "items": {
-                "$ref": "Float"
+                "type": "number"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -164,7 +185,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -172,9 +194,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -195,7 +221,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -203,9 +230,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -220,6 +251,8 @@
         "start_date",
         "end_date"
       ],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The unique identifier for the grading period.",
@@ -253,6 +286,11 @@
           "description": "A weight value that contributes to the overall weight of a grading period set which is used to calculate how much assignments in this period contribute to the total grade",
           "type": "integer",
           "example": "33.33"
+        },
+        "is_closed": {
+          "description": "If true, the grading period's close_date has passed.",
+          "example": true,
+          "type": "boolean"
         }
       }
     }

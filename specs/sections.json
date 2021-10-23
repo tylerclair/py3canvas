@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/sections",
-      "description": "Returns the list of sections for this course.",
+      "description": "A paginated list of the list of sections for this course.",
       "operations": [
         {
           "method": "GET",
           "summary": "List course sections",
-          "notes": "Returns the list of sections for this course.",
+          "notes": "A paginated list of the list of sections for this course.",
           "nickname": "list_course_sections",
           "parameters": [
             {
@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -32,6 +33,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "students",
                 "avatar_url",
@@ -44,6 +46,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Section"
@@ -67,7 +72,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -75,15 +81,26 @@
               "description": "The name of the section",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course_section[sis_section_id]",
-              "description": "The sis ID of the section",
+              "description": "The sis ID of the section. Must have manage_sis permission to set. This is ignored if caller does not have permission to set.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course_section[integration_id]",
+              "description": "The integration_id of the section. Must have manage_sis permission to set. This is ignored if caller does not have permission to set.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -91,7 +108,8 @@
               "description": "Section start date in ISO8601 format, e.g. 2011-01-01T01:00Z",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -99,7 +117,8 @@
               "description": "Section end date in ISO8601 format. e.g. 2011-01-01T01:00Z",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -107,7 +126,8 @@
               "description": "Set to true to restrict user enrollments to the start and end dates of the section.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -115,9 +135,13 @@
               "description": "When true, will first try to re-activate a deleted section with matching sis_section_id if possible.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Section"
         }
       ]
@@ -138,7 +162,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -146,9 +171,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Section"
         }
       ]
@@ -169,9 +198,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Section"
         }
       ]
@@ -192,7 +225,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -200,15 +234,26 @@
               "description": "The name of the section",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "course_section[sis_section_id]",
-              "description": "The sis ID of the section",
+              "description": "The sis ID of the section. Must have manage_sis permission to set.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "course_section[integration_id]",
+              "description": "The integration_id of the section. Must have manage_sis permission to set.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -216,7 +261,8 @@
               "description": "Section start date in ISO8601 format, e.g. 2011-01-01T01:00Z",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -224,7 +270,8 @@
               "description": "Section end date in ISO8601 format. e.g. 2011-01-01T01:00Z",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -232,9 +279,13 @@
               "description": "Set to true to restrict user enrollments to the start and end dates of the section.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Section"
         }
       ]
@@ -255,7 +306,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -263,7 +315,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -272,6 +325,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "students",
                 "avatar_url",
@@ -284,6 +338,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Section"
         }
       ]
@@ -304,7 +361,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -313,6 +371,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "students",
                 "avatar_url",
@@ -325,6 +384,9 @@
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Section"
         }
       ]
@@ -345,9 +407,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Section"
         }
       ]
@@ -357,9 +423,9 @@
     "Section": {
       "id": "Section",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The unique identifier for the section.",

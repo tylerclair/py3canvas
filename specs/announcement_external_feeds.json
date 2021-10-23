@@ -9,12 +9,12 @@
   "apis": [
     {
       "path": "/v1/courses/{course_id}/external_feeds",
-      "description": "Returns the list of External Feeds this course or group.",
+      "description": "Returns the paginated list of External Feeds this course or group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List external feeds",
-          "notes": "Returns the list of External Feeds this course or group.",
+          "notes": "Returns the paginated list of External Feeds this course or group.",
           "nickname": "list_external_feeds_courses",
           "parameters": [
             {
@@ -23,9 +23,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ExternalFeed"
@@ -35,12 +39,12 @@
     },
     {
       "path": "/v1/groups/{group_id}/external_feeds",
-      "description": "Returns the list of External Feeds this course or group.",
+      "description": "Returns the paginated list of External Feeds this course or group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List external feeds",
-          "notes": "Returns the list of External Feeds this course or group.",
+          "notes": "Returns the paginated list of External Feeds this course or group.",
           "nickname": "list_external_feeds_groups",
           "parameters": [
             {
@@ -49,9 +53,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "ExternalFeed"
@@ -75,7 +83,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -83,7 +92,8 @@
               "description": "The url to the external rss or atom feed",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -91,7 +101,8 @@
               "description": "If given, only feed entries that contain this string in their title will be imported",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -100,6 +111,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "full",
                 "truncate",
@@ -107,6 +119,9 @@
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ExternalFeed"
         }
       ]
@@ -127,7 +142,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -135,7 +151,8 @@
               "description": "The url to the external rss or atom feed",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -143,7 +160,8 @@
               "description": "If given, only feed entries that contain this string in their title will be imported",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -152,6 +170,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "full",
                 "truncate",
@@ -159,6 +178,9 @@
               ]
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ExternalFeed"
         }
       ]
@@ -179,7 +201,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -187,9 +210,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ExternalFeed"
         }
       ]
@@ -210,7 +237,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -218,9 +246,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "ExternalFeed"
         }
       ]
@@ -230,9 +262,9 @@
     "ExternalFeed": {
       "id": "ExternalFeed",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "The ID of the feed",

@@ -23,7 +23,8 @@
               "description": "The summary of the problem",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -31,7 +32,8 @@
               "description": "URL from which the report was issued",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -39,7 +41,8 @@
               "description": "Email address for the reporting user",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -47,7 +50,8 @@
               "description": "The long version of the story from the user one what they experienced",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -55,9 +59,13 @@
               "description": "A collection of metadata about the users' environment.  If not provided,\ncanvas will collect it based on information found in the request.\n(Doesn't have to be HTTPENV info, could be anything JSON object that can be\nserialized as a hash, a mobile app might include relevant metadata for\nitself)",
               "type": "SerializedHash",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -67,9 +75,9 @@
     "ErrorReport": {
       "id": "ErrorReport",
       "description": "A collection of information around a specific notification of a problem",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "subject": {
           "description": "The users problem summary, like an email subject line",

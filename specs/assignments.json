@@ -23,7 +23,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -31,22 +32,26 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Assignment"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/assignments",
-      "description": "Returns the list of assignments for the current context.",
+      "description": "Returns the paginated list of assignments for the current course or assignment group.",
       "operations": [
         {
           "method": "GET",
           "summary": "List assignments",
-          "notes": "Returns the list of assignments for the current context.",
-          "nickname": "list_assignments",
+          "notes": "Returns the paginated list of assignments for the current course or assignment group.",
+          "nickname": "list_assignments_assignments",
           "parameters": [
             {
               "paramType": "path",
@@ -54,21 +59,25 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "Associations to include with the assignment. The \"assignment_visibility\" option\nrequires that the Differentiated Assignments course feature be turned on. If\n\"observed_users\" is passed, submissions for observed users will also be included as an array.",
+              "description": "Optional information to include with each assignment:\nsubmission:: The current user's current +Submission+\nassignment_visibility:: An array of ids of students who can see the assignment\nall_dates:: An array of +AssignmentDate+ structures, one for each override, and also a +base+ if the assignment has an \"Everyone\" / \"Everyone Else\" date\noverrides:: An array of +AssignmentOverride+ structures\nobserved_users:: An array of submissions for observed users\ncan_edit:: an extra Boolean value will be included with each +Assignment+ (and +AssignmentDate+ if +all_dates+ is supplied) to indicate whether the caller can edit the assignment or date. Moderated grading and closed grading periods may restrict a user's ability to edit an assignment.\nscore_statistics:: An object containing min, max, and mean score on this assignment. This will not be included for students if there are less than 5 graded assignments or if disabled by the instructor. Only valid if 'submission' is also included.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "submission",
                 "assignment_visibility",
                 "all_dates",
                 "overrides",
-                "observed_users"
+                "observed_users",
+                "can_edit",
+                "score_statistics"
               ],
               "items": {
                 "type": "string"
@@ -80,7 +89,8 @@
               "description": "The partial title of the assignments to match and return.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -88,7 +98,8 @@
               "description": "Apply assignment overrides for each assignment, defaults to true.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -96,7 +107,8 @@
               "description": "Split up \"needs_grading_count\" by sections into the \"needs_grading_count_by_section\" key, defaults to false",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -105,6 +117,7 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "past",
                 "overdue",
@@ -122,11 +135,178 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
+            },
+            {
+              "paramType": "query",
+              "name": "order_by",
+              "description": "Determines the order of the assignments. Defaults to \"position\".",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "position",
+                "name",
+                "due_at"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "post_to_sis",
+              "description": "Return only assignments that have post_to_sis set or not set.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "array",
+          "items": {
+            "$ref": "Assignment"
+          }
+        }
+      ]
+    },
+    {
+      "path": "/v1/courses/{course_id}/assignment_groups/{assignment_group_id}/assignments",
+      "description": "Returns the paginated list of assignments for the current course or assignment group.",
+      "operations": [
+        {
+          "method": "GET",
+          "summary": "List assignments",
+          "notes": "Returns the paginated list of assignments for the current course or assignment group.",
+          "nickname": "list_assignments_assignment_groups",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "assignment_group_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "include",
+              "description": "Optional information to include with each assignment:\nsubmission:: The current user's current +Submission+\nassignment_visibility:: An array of ids of students who can see the assignment\nall_dates:: An array of +AssignmentDate+ structures, one for each override, and also a +base+ if the assignment has an \"Everyone\" / \"Everyone Else\" date\noverrides:: An array of +AssignmentOverride+ structures\nobserved_users:: An array of submissions for observed users\ncan_edit:: an extra Boolean value will be included with each +Assignment+ (and +AssignmentDate+ if +all_dates+ is supplied) to indicate whether the caller can edit the assignment or date. Moderated grading and closed grading periods may restrict a user's ability to edit an assignment.\nscore_statistics:: An object containing min, max, and mean score on this assignment. This will not be included for students if there are less than 5 graded assignments or if disabled by the instructor. Only valid if 'submission' is also included.",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "submission",
+                "assignment_visibility",
+                "all_dates",
+                "overrides",
+                "observed_users",
+                "can_edit",
+                "score_statistics"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "paramType": "query",
+              "name": "search_term",
+              "description": "The partial title of the assignments to match and return.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "override_assignment_dates",
+              "description": "Apply assignment overrides for each assignment, defaults to true.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "needs_grading_count_by_section",
+              "description": "Split up \"needs_grading_count\" by sections into the \"needs_grading_count_by_section\" key, defaults to false",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "query",
+              "name": "bucket",
+              "description": "If included, only return certain assignments depending on due date and submission status.",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "past",
+                "overdue",
+                "undated",
+                "ungraded",
+                "unsubmitted",
+                "upcoming",
+                "future"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "assignment_ids",
+              "description": "if set, return only assignments specified",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "paramType": "query",
+              "name": "order_by",
+              "description": "Determines the order of the assignments. Defaults to \"position\".",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "position",
+                "name",
+                "due_at"
+              ]
+            },
+            {
+              "paramType": "query",
+              "name": "post_to_sis",
+              "description": "Return only assignments that have post_to_sis set or not set.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "Assignment"
@@ -136,12 +316,12 @@
     },
     {
       "path": "/v1/users/{user_id}/courses/{course_id}/assignments",
-      "description": "Returns the list of assignments for the specified user if the current user has rights to view.\nSee {api:AssignmentsApiController#index List assignments} for valid arguments.",
+      "description": "Returns the paginated list of assignments for the specified user if the current user has rights to view.\nSee {api:AssignmentsApiController#index List assignments} for valid arguments.",
       "operations": [
         {
           "method": "GET",
           "summary": "List assignments for user",
-          "notes": "Returns the list of assignments for the specified user if the current user has rights to view.\nSee {api:AssignmentsApiController#index List assignments} for valid arguments.",
+          "notes": "Returns the paginated list of assignments for the specified user if the current user has rights to view.\nSee {api:AssignmentsApiController#index List assignments} for valid arguments.",
           "nickname": "list_assignments_for_user",
           "parameters": [
             {
@@ -150,7 +330,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -158,21 +339,73 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
     },
     {
+      "path": "/v1/courses/{course_id}/assignments/{assignment_id}/duplicate",
+      "description": "Duplicate an assignment and return a json based on result_type argument.",
+      "operations": [
+        {
+          "method": "POST",
+          "summary": "Duplicate assignnment",
+          "notes": "Duplicate an assignment and return a json based on result_type argument.",
+          "nickname": "duplicate_assignnment",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "path",
+              "name": "assignment_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "result_type",
+              "description": "Optional information:\nWhen the root account has the feature `newquizzes_on_quiz_page` enabled\nand this argument is set to \"Quiz\" the response will be serialized into a\nquiz format({file:doc/api/quizzes.html#Quiz});\nWhen this argument isn't specified the response will be serialized into an\nassignment format;",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false,
+              "enum": [
+                "Quiz"
+              ]
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "Assignment"
+        }
+      ]
+    },
+    {
       "path": "/v1/courses/{course_id}/assignments/{id}",
-      "description": "Returns the assignment with the given id.\n \"observed_users\" is passed, submissions for observed users will also be included.",
+      "description": "Returns the assignment with the given id.",
       "operations": [
         {
           "method": "GET",
           "summary": "Get a single assignment",
-          "notes": "Returns the assignment with the given id.\n \"observed_users\" is passed, submissions for observed users will also be included.",
+          "notes": "Returns the assignment with the given id.",
           "nickname": "get_single_assignment",
           "parameters": [
             {
@@ -181,7 +414,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -189,20 +423,24 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
               "name": "include",
-              "description": "Associations to include with the assignment. The \"assignment_visibility\" option\nrequires that the Differentiated Assignments course feature be turned on. If",
+              "description": "Associations to include with the assignment. The \"assignment_visibility\" option\nrequires that the Differentiated Assignments course feature be turned on. If\n\"observed_users\" is passed, submissions for observed users will also be included.\nFor \"score_statistics\" to be included, the \"submission\" option must also be set.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "submission",
                 "assignment_visibility",
                 "overrides",
-                "observed_users"
+                "observed_users",
+                "can_edit",
+                "score_statistics"
               ],
               "items": {
                 "type": "string"
@@ -214,7 +452,8 @@
               "description": "Apply assignment overrides to the assignment, defaults to true.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -222,7 +461,8 @@
               "description": "Split up \"needs_grading_count\" by sections into the \"needs_grading_count_by_section\" key, defaults to false",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -230,9 +470,13 @@
               "description": "All dates associated with the assignment, if applicable",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Assignment"
         }
       ]
@@ -253,7 +497,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -261,7 +506,8 @@
               "description": "The assignment name.",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -269,26 +515,28 @@
               "description": "The position of this assignment in the group when displaying\nassignment lists.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[submission_types]",
-              "description": "List of supported submission types for the assignment.\nUnless the assignment is allowing online submissions, the array should\nonly have one element.\n\nIf not allowing online submissions, your options are:\n  \"online_quiz\"\n  \"none\"\n  \"on_paper\"\n  \"online_quiz\"\n  \"discussion_topic\"\n  \"external_tool\"\n\nIf you are allowing online submissions, you can have one or many\nallowed submission types:\n\n  \"online_upload\"\n  \"online_text_entry\"\n  \"online_url\"\n  \"media_recording\" (Only valid when the Kaltura plugin is enabled)",
+              "description": "List of supported submission types for the assignment.\nUnless the assignment is allowing online submissions, the array should\nonly have one element.\n\nIf not allowing online submissions, your options are:\n  \"online_quiz\"\n  \"none\"\n  \"on_paper\"\n  \"discussion_topic\"\n  \"external_tool\"\n\nIf you are allowing online submissions, you can have one or many\nallowed submission types:\n\n  \"online_upload\"\n  \"online_text_entry\"\n  \"online_url\"\n  \"media_recording\" (Only valid when the Kaltura plugin is enabled)\n  \"student_annotation\"",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "online_quiz",
                 "none",
                 "on_paper",
-                "online_quiz",
                 "discussion_topic",
                 "external_tool",
                 "online_upload",
                 "online_text_entry",
                 "online_url",
-                "media_recording"
+                "media_recording",
+                "student_annotation"
               ],
               "items": {
                 "type": "string"
@@ -301,6 +549,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -311,7 +560,8 @@
               "description": "Only applies when the Turnitin plugin is enabled for a course and\nthe submission_types array includes \"online_upload\".\nToggles Turnitin submissions for the assignment.\nWill be ignored if Turnitin is not available for the course.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -319,7 +569,8 @@
               "description": "Only applies when the VeriCite plugin is enabled for a course and\nthe submission_types array includes \"online_upload\".\nToggles VeriCite submissions for the assignment.\nWill be ignored if VeriCite is not available for the course.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -327,15 +578,17 @@
               "description": "Settings to send along to turnitin. See Assignment object definition for\nformat.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[integration_data]",
-              "description": "Data related to third party integrations, JSON string required.",
+              "description": "Data used for SIS integrations. Requires admin-level token with the \"Manage SIS\" permission. JSON string required.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -343,7 +596,8 @@
               "description": "Unique ID from third party integrations",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -351,7 +605,8 @@
               "description": "If submission_types does not include external_tool,discussion_topic,\nonline_quiz, or on_paper, determines whether or not peer reviews\nwill be turned on for the assignment.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -359,7 +614,8 @@
               "description": "Whether peer reviews will be assigned automatically by Canvas or if\nteachers must manually assign peer reviews. Does not apply if peer reviews\nare not enabled.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -367,7 +623,8 @@
               "description": "If true, Canvas will send a notification to students in the class\nnotifying them that the content has changed.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -375,7 +632,8 @@
               "description": "If present, the assignment will become a group assignment assigned\nto the group.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -383,7 +641,8 @@
               "description": "If this is a group assignment, teachers have the options to grade\nstudents individually. If false, Canvas will apply the assignment's\nscore to each member of the group. If true, the teacher can manually\nassign scores to each member of the group.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -391,15 +650,17 @@
               "description": "Hash of external tool parameters if submission_types is [\"external_tool\"].\nSee Assignment object definition for format.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[points_possible]",
               "description": "The maximum points possible on the assignment.",
-              "type": "Float",
-              "format": null,
-              "required": false
+              "type": "number",
+              "format": "float",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -408,37 +669,42 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "pass_fail",
                 "percent",
                 "letter_grade",
                 "gpa_scale",
-                "points"
+                "points",
+                "not_graded"
               ]
             },
             {
               "paramType": "form",
               "name": "assignment[due_at]",
-              "description": "The day/time the assignment is due.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
+              "description": "The day/time the assignment is due. Must be between the lock dates if there are lock dates.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[lock_at]",
-              "description": "The day/time the assignment is locked after.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
+              "description": "The day/time the assignment is locked after. Must be after the due date if there is a due date.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[unlock_at]",
-              "description": "The day/time the assignment is unlocked.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
+              "description": "The day/time the assignment is unlocked. Must be before the due date if there is a due date.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -446,7 +712,8 @@
               "description": "The assignment's description, supports HTML.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -454,23 +721,17 @@
               "description": "The assignment group id to put the assignment in.\nDefaults to the top assignment group in the course.",
               "type": "integer",
               "format": "int64",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "assignment[muted]",
-              "description": "Whether this assignment is muted.\nA muted assignment does not send change notifications\nand hides grades from students.\nDefaults to false.",
-              "type": "boolean",
-              "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[assignment_overrides]",
-              "description": "List of overrides for the assignment.\nNOTE: The assignment overrides feature is in beta.",
+              "description": "List of overrides for the assignment.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "AssignmentOverride"
               }
@@ -481,7 +742,8 @@
               "description": "Whether this assignment is only visible to overrides\n(Only useful if 'differentiated assignments' account setting is on)",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -489,7 +751,8 @@
               "description": "Whether this assignment is published.\n(Only useful if 'draft state' account setting is on)\nUnpublished assignments are not visible to students.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -497,7 +760,8 @@
               "description": "The grading standard id to set for the course.  If no value is provided for this argument the current grading_standard will be un-set from this course.\nThis will update the grading_type for the course to 'letter_grade' unless it is already 'gpa_scale'.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -505,7 +769,8 @@
               "description": "Whether this assignment is counted towards a student's final grade.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -513,21 +778,106 @@
               "description": "Whether this assignment should use the Quizzes 2 LTI tool. Sets the\nsubmission type to 'external_tool' and configures the external tool\nattributes to use the Quizzes 2 LTI tool configured for this course.\nHas no effect if no Quizzes 2 LTI tool is configured.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[moderated_grading]",
+              "description": "Whether this assignment is moderated.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[grader_count]",
+              "description": "The maximum number of provisional graders who may issue grades for this\nassignment. Only relevant for moderated assignments. Must be a positive\nvalue, and must be set to 1 if the course has fewer than two active\ninstructors. Otherwise, the maximum value is the number of active\ninstructors in the course minus one, or 10 if the course has more than 11\nactive instructors.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[final_grader_id]",
+              "description": "The user ID of the grader responsible for choosing final grades for this\nassignment. Only relevant for moderated assignments.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[grader_comments_visible_to_graders]",
+              "description": "Boolean indicating if provisional graders' comments are visible to other\nprovisional graders. Only relevant for moderated assignments.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[graders_anonymous_to_graders]",
+              "description": "Boolean indicating if provisional graders' identities are hidden from\nother provisional graders. Only relevant for moderated assignments.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[graders_names_visible_to_final_grader]",
+              "description": "Boolean indicating if provisional grader identities are visible to the\nthe final grader. Only relevant for moderated assignments.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[anonymous_grading]",
+              "description": "Boolean indicating if the assignment is graded anonymously. If true,\ngraders cannot see student identities.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[allowed_attempts]",
+              "description": "The number of submission attempts allowed for this assignment. Set to -1 for unlimited attempts.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[annotatable_attachment_id]",
+              "description": "The Attachment ID of the document being annotated.\n\nOnly applies when submission_types includes \"student_annotation\".",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Assignment"
         }
       ]
     },
     {
       "path": "/v1/courses/{course_id}/assignments/{id}",
-      "description": "Modify an existing assignment.\n\nIf the assignment [assignment_overrides] key is absent, any existing\noverrides are kept as is. If the assignment [assignment_overrides] key is\npresent, existing overrides are updated or deleted (and new ones created,\nas necessary) to match the provided list.\n\nNOTE: The assignment overrides feature is in beta.",
+      "description": "Modify an existing assignment.",
       "operations": [
         {
           "method": "PUT",
           "summary": "Edit an assignment",
-          "notes": "Modify an existing assignment.\n\nIf the assignment [assignment_overrides] key is absent, any existing\noverrides are kept as is. If the assignment [assignment_overrides] key is\npresent, existing overrides are updated or deleted (and new ones created,\nas necessary) to match the provided list.\n\nNOTE: The assignment overrides feature is in beta.",
+          "notes": "Modify an existing assignment.",
           "nickname": "edit_assignment",
           "parameters": [
             {
@@ -536,7 +886,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -544,7 +895,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -552,7 +904,8 @@
               "description": "The assignment name.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -560,26 +913,28 @@
               "description": "The position of this assignment in the group when displaying\nassignment lists.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[submission_types]",
-              "description": "List of supported submission types for the assignment.\nUnless the assignment is allowing online submissions, the array should\nonly have one element.\n\nIf not allowing online submissions, your options are:\n  \"online_quiz\"\n  \"none\"\n  \"on_paper\"\n  \"online_quiz\"\n  \"discussion_topic\"\n  \"external_tool\"\n\nIf you are allowing online submissions, you can have one or many\nallowed submission types:\n\n  \"online_upload\"\n  \"online_text_entry\"\n  \"online_url\"\n  \"media_recording\" (Only valid when the Kaltura plugin is enabled)",
+              "description": "Only applies if the assignment doesn't have student submissions.\n\nList of supported submission types for the assignment.\nUnless the assignment is allowing online submissions, the array should\nonly have one element.\n\nIf not allowing online submissions, your options are:\n  \"online_quiz\"\n  \"none\"\n  \"on_paper\"\n  \"discussion_topic\"\n  \"external_tool\"\n\nIf you are allowing online submissions, you can have one or many\nallowed submission types:\n\n  \"online_upload\"\n  \"online_text_entry\"\n  \"online_url\"\n  \"media_recording\" (Only valid when the Kaltura plugin is enabled)\n  \"student_annotation\"",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "online_quiz",
                 "none",
                 "on_paper",
-                "online_quiz",
                 "discussion_topic",
                 "external_tool",
                 "online_upload",
                 "online_text_entry",
                 "online_url",
-                "media_recording"
+                "media_recording",
+                "student_annotation"
               ],
               "items": {
                 "type": "string"
@@ -592,6 +947,7 @@
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -602,7 +958,8 @@
               "description": "Only applies when the Turnitin plugin is enabled for a course and\nthe submission_types array includes \"online_upload\".\nToggles Turnitin submissions for the assignment.\nWill be ignored if Turnitin is not available for the course.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -610,7 +967,8 @@
               "description": "Only applies when the VeriCite plugin is enabled for a course and\nthe submission_types array includes \"online_upload\".\nToggles VeriCite submissions for the assignment.\nWill be ignored if VeriCite is not available for the course.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -618,15 +976,26 @@
               "description": "Settings to send along to turnitin. See Assignment object definition for\nformat.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[sis_assignment_id]",
+              "description": "The sis id of the Assignment",
+              "type": "string",
+              "format": null,
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[integration_data]",
-              "description": "Data related to third party integrations, JSON string required.",
+              "description": "Data used for SIS integrations. Requires admin-level token with the \"Manage SIS\" permission. JSON string required.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -634,7 +1003,8 @@
               "description": "Unique ID from third party integrations",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -642,7 +1012,8 @@
               "description": "If submission_types does not include external_tool,discussion_topic,\nonline_quiz, or on_paper, determines whether or not peer reviews\nwill be turned on for the assignment.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -650,7 +1021,8 @@
               "description": "Whether peer reviews will be assigned automatically by Canvas or if\nteachers must manually assign peer reviews. Does not apply if peer reviews\nare not enabled.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -658,7 +1030,8 @@
               "description": "If true, Canvas will send a notification to students in the class\nnotifying them that the content has changed.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -666,7 +1039,8 @@
               "description": "If present, the assignment will become a group assignment assigned\nto the group.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -674,7 +1048,8 @@
               "description": "If this is a group assignment, teachers have the options to grade\nstudents individually. If false, Canvas will apply the assignment's\nscore to each member of the group. If true, the teacher can manually\nassign scores to each member of the group.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -682,15 +1057,17 @@
               "description": "Hash of external tool parameters if submission_types is [\"external_tool\"].\nSee Assignment object definition for format.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[points_possible]",
               "description": "The maximum points possible on the assignment.",
-              "type": "Float",
-              "format": null,
-              "required": false
+              "type": "number",
+              "format": "float",
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -699,12 +1076,14 @@
               "type": "string",
               "format": null,
               "required": false,
+              "deprecated": false,
               "enum": [
                 "pass_fail",
                 "percent",
                 "letter_grade",
                 "gpa_scale",
-                "points"
+                "points",
+                "not_graded"
               ]
             },
             {
@@ -713,23 +1092,26 @@
               "description": "The day/time the assignment is due.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[lock_at]",
-              "description": "The day/time the assignment is locked after.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
+              "description": "The day/time the assignment is locked after. Must be after the due date if there is a due date.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[unlock_at]",
-              "description": "The day/time the assignment is unlocked.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
+              "description": "The day/time the assignment is unlocked. Must be before the due date if there is a due date.\nAccepts times in ISO 8601 format, e.g. 2014-10-21T18:48:00Z.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -737,7 +1119,8 @@
               "description": "The assignment's description, supports HTML.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -745,23 +1128,17 @@
               "description": "The assignment group id to put the assignment in.\nDefaults to the top assignment group in the course.",
               "type": "integer",
               "format": "int64",
-              "required": false
-            },
-            {
-              "paramType": "form",
-              "name": "assignment[muted]",
-              "description": "Whether this assignment is muted.\nA muted assignment does not send change notifications\nand hides grades from students.\nDefaults to false.",
-              "type": "boolean",
-              "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
               "name": "assignment[assignment_overrides]",
-              "description": "List of overrides for the assignment.\nNOTE: The assignment overrides feature is in beta.",
+              "description": "List of overrides for the assignment.\nIf the +assignment[assignment_overrides]+ key is absent, any existing\noverrides are kept as is. If the +assignment[assignment_overrides]+ key is\npresent, existing overrides are updated or deleted (and new ones created,\nas necessary) to match the provided list.",
               "type": "array",
               "format": null,
               "required": false,
+              "deprecated": false,
               "items": {
                 "$ref": "AssignmentOverride"
               }
@@ -772,7 +1149,8 @@
               "description": "Whether this assignment is only visible to overrides\n(Only useful if 'differentiated assignments' account setting is on)",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -780,7 +1158,8 @@
               "description": "Whether this assignment is published.\n(Only useful if 'draft state' account setting is on)\nUnpublished assignments are not visible to students.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -788,7 +1167,8 @@
               "description": "The grading standard id to set for the course.  If no value is provided for this argument the current grading_standard will be un-set from this course.\nThis will update the grading_type for the course to 'letter_grade' unless it is already 'gpa_scale'.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -796,21 +1176,145 @@
               "description": "Whether this assignment is counted towards a student's final grade.",
               "type": "boolean",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[moderated_grading]",
+              "description": "Whether this assignment is moderated.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[grader_count]",
+              "description": "The maximum number of provisional graders who may issue grades for this\nassignment. Only relevant for moderated assignments. Must be a positive\nvalue, and must be set to 1 if the course has fewer than two active\ninstructors. Otherwise, the maximum value is the number of active\ninstructors in the course minus one, or 10 if the course has more than 11\nactive instructors.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[final_grader_id]",
+              "description": "The user ID of the grader responsible for choosing final grades for this\nassignment. Only relevant for moderated assignments.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[grader_comments_visible_to_graders]",
+              "description": "Boolean indicating if provisional graders' comments are visible to other\nprovisional graders. Only relevant for moderated assignments.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[graders_anonymous_to_graders]",
+              "description": "Boolean indicating if provisional graders' identities are hidden from\nother provisional graders. Only relevant for moderated assignments.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[graders_names_visible_to_final_grader]",
+              "description": "Boolean indicating if provisional grader identities are visible to the\nthe final grader. Only relevant for moderated assignments.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[anonymous_grading]",
+              "description": "Boolean indicating if the assignment is graded anonymously. If true,\ngraders cannot see student identities.",
+              "type": "boolean",
+              "format": null,
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[allowed_attempts]",
+              "description": "The number of submission attempts allowed for this assignment. Set to -1 or null for\nunlimited attempts.",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[annotatable_attachment_id]",
+              "description": "The Attachment ID of the document being annotated.\n\nOnly applies when submission_types includes \"student_annotation\".",
+              "type": "integer",
+              "format": "int64",
+              "required": false,
+              "deprecated": false
+            },
+            {
+              "paramType": "form",
+              "name": "assignment[submission_types]",
+              "description": "Only applies if the assignment doesn't have student submissions.",
+              "type": "array",
+              "format": null,
+              "required": false,
+              "deprecated": true,
+              "items": {
+                "type": "string"
+              }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "Assignment"
         }
       ]
     },
     {
+      "path": "/v1/courses/{course_id}/assignments/bulk_update",
+      "description": "Update due dates and availability dates for multiple assignments in a course.\n\nAccepts a JSON array of objects containing two keys each: +id+, the assignment id,\nand +all_dates+, an array of +AssignmentDate+ structures containing the base and/or override\ndates for the assignment, as returned from the {api:AssignmentsApiController#index List assignments}\nendpoint with +include[]=all_dates+.\n\nThis endpoint cannot create or destroy assignment overrides; any existing assignment overrides\nthat are not referenced in the arguments will be left alone. If an override is given, any dates\nthat are not supplied with it will be defaulted. To clear a date, specify null explicitly.\n\nAll referenced assignments will be validated before any are saved. A list of errors will\nbe returned if any provided dates are invalid, and no changes will be saved.\n\nThe bulk update is performed in a background job, use the {api:ProgressController#show Progress API}\nto check its status.",
+      "operations": [
+        {
+          "method": "PUT",
+          "summary": "Bulk update assignment dates",
+          "notes": "Update due dates and availability dates for multiple assignments in a course.\n\nAccepts a JSON array of objects containing two keys each: +id+, the assignment id,\nand +all_dates+, an array of +AssignmentDate+ structures containing the base and/or override\ndates for the assignment, as returned from the {api:AssignmentsApiController#index List assignments}\nendpoint with +include[]=all_dates+.\n\nThis endpoint cannot create or destroy assignment overrides; any existing assignment overrides\nthat are not referenced in the arguments will be left alone. If an override is given, any dates\nthat are not supplied with it will be defaulted. To clear a date, specify null explicitly.\n\nAll referenced assignments will be validated before any are saved. A list of errors will\nbe returned if any provided dates are invalid, and no changes will be saved.\n\nThe bulk update is performed in a background job, use the {api:ProgressController#show Progress API}\nto check its status.",
+          "nickname": "bulk_update_assignment_dates",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "course_id",
+              "description": "ID",
+              "type": "string",
+              "format": null,
+              "required": true,
+              "deprecated": false
+            }
+          ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
+          "type": "Progress"
+        }
+      ]
+    },
+    {
       "path": "/v1/courses/{course_id}/assignments/{assignment_id}/overrides",
-      "description": "Returns the list of overrides for this assignment that target\nsections/groups/students visible to the current user.",
+      "description": "Returns the paginated list of overrides for this assignment that target\nsections/groups/students visible to the current user.",
       "operations": [
         {
           "method": "GET",
           "summary": "List assignment overrides",
-          "notes": "Returns the list of overrides for this assignment that target\nsections/groups/students visible to the current user.",
+          "notes": "Returns the paginated list of overrides for this assignment that target\nsections/groups/students visible to the current user.",
           "nickname": "list_assignment_overrides",
           "parameters": [
             {
@@ -819,7 +1323,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -827,9 +1332,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "AssignmentOverride"
@@ -853,7 +1362,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -861,7 +1371,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -869,9 +1380,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "AssignmentOverride"
         }
       ]
@@ -892,7 +1407,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -900,9 +1416,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -923,7 +1443,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -931,9 +1452,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "void"
         }
       ]
@@ -954,7 +1479,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -962,7 +1488,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -971,6 +1498,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -981,7 +1509,8 @@
               "description": "The title of the adhoc\nassignment override. Required if student_ids is present, ignored\notherwise (the title is set to the name of the targetted group or section\ninstead).",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -989,7 +1518,8 @@
               "description": "The ID of the\noverride's target group. If present, the following conditions must be met\nfor the override to be successful:\n\n1. the assignment MUST be a group assignment (a group_category_id is assigned to it)\n2. the ID must identify an active group in the group set the assignment is in\n3. the ID must not be targetted by a different override\n\nSee {Appendix: Group assignments} for more info.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -997,7 +1527,8 @@
               "description": "The ID\nof the override's target section. If present, must identify an active\nsection of the assignment's course not already targetted by a different\noverride.",
               "type": "integer",
               "format": "int64",
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1005,7 +1536,8 @@
               "description": "The day/time\nthe overridden assignment is due. Accepts times in ISO 8601 format, e.g.\n2014-10-21T18:48:00Z. If absent, this override will not affect due date.\nMay be present but null to indicate the override removes any previous due\ndate.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1013,7 +1545,8 @@
               "description": "The day/time\nthe overridden assignment becomes unlocked. Accepts times in ISO 8601\nformat, e.g. 2014-10-21T18:48:00Z. If absent, this override will not\naffect the unlock date. May be present but null to indicate the override\nremoves any previous unlock date.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1021,9 +1554,13 @@
               "description": "The day/time\nthe overridden assignment becomes locked. Accepts times in ISO 8601\nformat, e.g. 2014-10-21T18:48:00Z. If absent, this override will not\naffect the lock date. May be present but null to indicate the override\nremoves any previous lock date.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "AssignmentOverride"
         }
       ]
@@ -1044,7 +1581,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1052,7 +1590,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1060,7 +1599,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1069,6 +1609,7 @@
               "type": "array",
               "format": "int64",
               "required": false,
+              "deprecated": false,
               "items": {
                 "type": "integer"
               }
@@ -1079,7 +1620,8 @@
               "description": "The title of an adhoc\nassignment override. Ignored unless the override being updated is adhoc.",
               "type": "string",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1087,7 +1629,8 @@
               "description": "The day/time\nthe overridden assignment is due. Accepts times in ISO 8601 format, e.g.\n2014-10-21T18:48:00Z. If absent, this override will not affect due date.\nMay be present but null to indicate the override removes any previous due\ndate.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1095,7 +1638,8 @@
               "description": "The day/time\nthe overridden assignment becomes unlocked. Accepts times in ISO 8601\nformat, e.g. 2014-10-21T18:48:00Z. If absent, this override will not\naffect the unlock date. May be present but null to indicate the override\nremoves any previous unlock date.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1103,9 +1647,13 @@
               "description": "The day/time\nthe overridden assignment becomes locked. Accepts times in ISO 8601\nformat, e.g. 2014-10-21T18:48:00Z. If absent, this override will not\naffect the lock date. May be present but null to indicate the override\nremoves any previous lock date.",
               "type": "DateTime",
               "format": null,
-              "required": false
+              "required": false,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "AssignmentOverride"
         }
       ]
@@ -1126,7 +1674,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1134,7 +1683,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "path",
@@ -1142,9 +1692,13 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "AssignmentOverride"
         }
       ]
@@ -1165,7 +1719,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "query",
@@ -1174,6 +1729,7 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
@@ -1185,11 +1741,15 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "type": "string"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "AssignmentOverride"
@@ -1213,7 +1773,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1222,11 +1783,15 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "$ref": "AssignmentOverride"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "AssignmentOverride"
@@ -1250,7 +1815,8 @@
               "description": "ID",
               "type": "string",
               "format": null,
-              "required": true
+              "required": true,
+              "deprecated": false
             },
             {
               "paramType": "form",
@@ -1259,11 +1825,15 @@
               "type": "array",
               "format": null,
               "required": true,
+              "deprecated": false,
               "items": {
                 "$ref": "AssignmentOverride"
               }
             }
           ],
+          "response_fields": [],
+          "deprecated": false,
+          "deprecation_description": "",
           "type": "array",
           "items": {
             "$ref": "AssignmentOverride"
@@ -1276,9 +1846,9 @@
     "ExternalToolTagAttributes": {
       "id": "ExternalToolTagAttributes",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "url": {
           "description": "URL to the external tool",
@@ -1300,9 +1870,9 @@
     "LockInfo": {
       "id": "LockInfo",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "asset_string": {
           "description": "Asset string for the object causing the lock",
@@ -1310,12 +1880,12 @@
           "type": "string"
         },
         "unlock_at": {
-          "description": "(Optional) Time at which this was/will be unlocked.",
+          "description": "(Optional) Time at which this was/will be unlocked. Must be before the due date.",
           "example": "2013-01-01T00:00:00-06:00",
           "type": "datetime"
         },
         "lock_at": {
-          "description": "(Optional) Time at which this was/will be locked.",
+          "description": "(Optional) Time at which this was/will be locked. Must be after the due date.",
           "example": "2013-02-01T00:00:00-06:00",
           "type": "datetime"
         },
@@ -1333,9 +1903,9 @@
     "RubricRating": {
       "id": "RubricRating",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "points": {
           "example": 10,
@@ -1348,15 +1918,19 @@
         "description": {
           "example": "Full marks",
           "type": "string"
+        },
+        "long_description": {
+          "example": "Student completed the assignment flawlessly.",
+          "type": "string"
         }
       }
     },
     "RubricCriteria": {
       "id": "RubricCriteria",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "points": {
           "example": 10,
@@ -1385,20 +1959,28 @@
           "example": "Criterion 1 more details",
           "type": "string"
         },
+        "criterion_use_range": {
+          "example": true,
+          "type": "boolean"
+        },
         "ratings": {
           "type": "array",
           "items": {
             "$ref": "RubricRating"
           }
+        },
+        "ignore_for_scoring": {
+          "type": "boolean",
+          "example": true
         }
       }
     },
     "AssignmentDate": {
       "id": "AssignmentDate",
       "description": "Object representing a due date for an assignment or quiz. If the due date came from an assignment override, it will have an 'id' field.",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "example": 1,
@@ -1415,14 +1997,17 @@
           "type": "string"
         },
         "due_at": {
+          "description": "The due date for the assignment. Must be between the unlock date and the lock date if there are lock dates",
           "example": "2013-08-28T23:59:00-06:00",
           "type": "datetime"
         },
         "unlock_at": {
+          "description": "The unlock date for the assignment. Must be before the due date if there is a due date.",
           "example": "2013-08-01T00:00:00-06:00",
           "type": "datetime"
         },
         "lock_at": {
+          "description": "The lock date for the assignment. Must be after the due date if there is a due date.",
           "example": "2013-08-31T23:59:00-06:00",
           "type": "datetime"
         }
@@ -1431,9 +2016,9 @@
     "TurnitinSettings": {
       "id": "TurnitinSettings",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "originality_report_visibility": {
           "example": "after_grading",
@@ -1472,9 +2057,9 @@
     "NeedsGradingCount": {
       "id": "NeedsGradingCount",
       "description": "Used by Assignment model",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "section_id": {
           "description": "The section ID",
@@ -1488,12 +2073,36 @@
         }
       }
     },
+    "ScoreStatistic": {
+      "id": "ScoreStatistic",
+      "description": "Used by Assignment model",
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
+      "properties": {
+        "min": {
+          "description": "Min score",
+          "example": 1,
+          "type": "integer"
+        },
+        "max": {
+          "description": "Max score",
+          "example": 10,
+          "type": "integer"
+        },
+        "mean": {
+          "description": "Mean score",
+          "example": 6,
+          "type": "integer"
+        }
+      }
+    },
     "Assignment": {
       "id": "Assignment",
       "description": "",
-      "required": [
-
-      ],
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the ID of the assignment",
@@ -1637,7 +2246,7 @@
           "type": "boolean"
         },
         "group_category_id": {
-          "description": "The ID of the assignment's group set, if this is a group assignment. For group discussions, set group_category_id on the discussion topic, not the linked assignment.",
+          "description": "The ID of the assignment’s group set, if this is a group assignment. For group discussions, set group_category_id on the discussion topic, not the linked assignment.",
           "example": 1,
           "type": "integer"
         },
@@ -1679,21 +2288,19 @@
           "description": "(optional, Third Party unique identifier for Assignment)"
         },
         "integration_data": {
-          "example": "12341234",
-          "type": "string",
+          "example": {
+            "5678": "0954"
+          },
+          "type": "object",
           "description": "(optional, Third Party integration data for assignment)"
-        },
-        "muted": {
-          "description": "whether the assignment is muted",
-          "type": "boolean"
         },
         "points_possible": {
           "description": "the maximum points possible for the assignment",
-          "example": 12,
-          "type": "integer"
+          "example": 12.0,
+          "type": "number"
         },
         "submission_types": {
-          "description": "the types of submissions allowed for this assignment list containing one or more of the following: 'discussion_topic', 'online_quiz', 'on_paper', 'none', 'external_tool', 'online_text_entry', 'online_url', 'online_upload' 'media_recording'",
+          "description": "the types of submissions allowed for this assignment list containing one or more of the following: 'discussion_topic', 'online_quiz', 'on_paper', 'none', 'external_tool', 'online_text_entry', 'online_url', 'online_upload', 'media_recording', 'student_annotation'",
           "example": [
             "online_text_entry"
           ],
@@ -1712,9 +2319,15 @@
               "online_text_entry",
               "online_url",
               "online_upload",
-              "media_recording"
+              "media_recording",
+              "student_annotation"
             ]
           }
+        },
+        "has_submitted_submissions": {
+          "description": "If true, the assignment has been submitted to by at least one student",
+          "example": true,
+          "type": "boolean"
         },
         "grading_type": {
           "description": "The type of grading the assignment receives; one of 'pass_fail', 'percent', 'letter_grade', 'gpa_scale', 'points'",
@@ -1838,7 +2451,61 @@
           }
         },
         "omit_from_final_grade": {
-          "description": "(Optional) If true, the assignment will be ommitted from the student's final grade",
+          "description": "(Optional) If true, the assignment will be omitted from the student's final grade",
+          "example": true,
+          "type": "boolean"
+        },
+        "moderated_grading": {
+          "description": "Boolean indicating if the assignment is moderated.",
+          "example": true,
+          "type": "boolean"
+        },
+        "grader_count": {
+          "description": "The maximum number of provisional graders who may issue grades for this assignment. Only relevant for moderated assignments. Must be a positive value, and must be set to 1 if the course has fewer than two active instructors. Otherwise, the maximum value is the number of active instructors in the course minus one, or 10 if the course has more than 11 active instructors.",
+          "example": 3,
+          "type": "integer"
+        },
+        "final_grader_id": {
+          "description": "The user ID of the grader responsible for choosing final grades for this assignment. Only relevant for moderated assignments.",
+          "example": 3,
+          "type": "integer"
+        },
+        "grader_comments_visible_to_graders": {
+          "description": "Boolean indicating if provisional graders' comments are visible to other provisional graders. Only relevant for moderated assignments.",
+          "example": true,
+          "type": "boolean"
+        },
+        "graders_anonymous_to_graders": {
+          "description": "Boolean indicating if provisional graders' identities are hidden from other provisional graders. Only relevant for moderated assignments with grader_comments_visible_to_graders set to true.",
+          "example": true,
+          "type": "boolean"
+        },
+        "grader_names_visible_to_final_grader": {
+          "description": "Boolean indicating if provisional grader identities are visible to the final grader. Only relevant for moderated assignments.",
+          "example": true,
+          "type": "boolean"
+        },
+        "anonymous_grading": {
+          "description": "Boolean indicating if the assignment is graded anonymously. If true, graders cannot see student identities.",
+          "example": true,
+          "type": "boolean"
+        },
+        "allowed_attempts": {
+          "description": "The number of submission attempts a student can make for this assignment. -1 is considered unlimited.",
+          "example": 2,
+          "type": "integer"
+        },
+        "post_manually": {
+          "description": "Whether the assignment has manual posting enabled. Only relevant for courses using New Gradebook.",
+          "example": true,
+          "type": "boolean"
+        },
+        "score_statistics": {
+          "description": "(Optional) If 'score_statistics' and 'submission' are included in the 'include' parameter and statistics are available, includes the min, max, and mode for this assignment",
+          "$ref": "ScoreStatistic"
+        },
+        "can_submit": {
+          "description": "(Optional) If retrieving a single assignment and 'can_submit' is included in the 'include' parameter, flags whether user has the right to submit the assignment (i.e. checks enrollment dates, submission types, locked status, attempts remaining, etc...). Including 'can submit' automatically includes 'submission' in the include parameter. Not available when observed_users are included.",
           "example": true,
           "type": "boolean"
         }
@@ -1846,10 +2513,10 @@
     },
     "AssignmentOverride": {
       "id": "AssignmentOverride",
-      "description": "NOTE: The Assignment Override feature is in beta! This API is not finalized and there could be breaking changes before its final release.",
-      "required": [
-
-      ],
+      "description": "",
+      "required": [],
+      "deprecated": false,
+      "deprecation_description": null,
       "properties": {
         "id": {
           "description": "the ID of the assignment override",
@@ -1896,7 +2563,7 @@
         "all_day": {
           "description": "the overridden all day flag (present if due_at is overridden)",
           "example": true,
-          "type": "integer"
+          "type": "boolean"
         },
         "all_day_date": {
           "description": "the overridden all day date (present if due_at is overridden)",
