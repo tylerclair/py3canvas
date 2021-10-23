@@ -8,12 +8,12 @@ from .base import BaseCanvasAPI
 from .base import BaseModel
 
 
-class Accounts(lti)API(BaseCanvasAPI):
+class AccountsLtiAPI(BaseCanvasAPI):
     """Accounts(lti) API Version 1.0."""
 
     def __init__(self, *args, **kwargs):
         """Init method for Accounts(lti)API."""
-        super(Accounts(lti)API, self).__init__(*args, **kwargs)
+        super(AccountsLtiAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.Accounts(lti)API")
 
     def get_account(self, account_id):
@@ -32,15 +32,32 @@ class Accounts(lti)API(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
-        self.logger.debug("GET /api/lti/accounts/{account_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/accounts/{account_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/lti/accounts/{account_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/accounts/{account_id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Account(BaseModel):
     """Account Model."""
 
-    def __init__(self, id=None, name=None, uuid=None, parent_account_id=None, root_account_id=None, workflow_state=None):
+    def __init__(
+        self,
+        id=None,
+        name=None,
+        uuid=None,
+        parent_account_id=None,
+        root_account_id=None,
+        workflow_state=None,
+    ):
         """Init method for Account class."""
         self._id = id
         self._name = name
@@ -49,7 +66,7 @@ class Account(BaseModel):
         self._root_account_id = root_account_id
         self._workflow_state = workflow_state
 
-        self.logger = logging.getLogger('py3canvas.Account')
+        self.logger = logging.getLogger("py3canvas.Account")
 
     @property
     def id(self):
@@ -59,7 +76,9 @@ class Account(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -70,7 +89,9 @@ class Account(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -81,7 +102,9 @@ class Account(BaseModel):
     @uuid.setter
     def uuid(self, value):
         """Setter for uuid property."""
-        self.logger.warn("Setting values on uuid will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on uuid will NOT update the remote Canvas instance."
+        )
         self._uuid = value
 
     @property
@@ -92,7 +115,9 @@ class Account(BaseModel):
     @parent_account_id.setter
     def parent_account_id(self, value):
         """Setter for parent_account_id property."""
-        self.logger.warn("Setting values on parent_account_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on parent_account_id will NOT update the remote Canvas instance."
+        )
         self._parent_account_id = value
 
     @property
@@ -103,7 +128,9 @@ class Account(BaseModel):
     @root_account_id.setter
     def root_account_id(self, value):
         """Setter for root_account_id property."""
-        self.logger.warn("Setting values on root_account_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on root_account_id will NOT update the remote Canvas instance."
+        )
         self._root_account_id = value
 
     @property
@@ -114,6 +141,7 @@ class Account(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
-
