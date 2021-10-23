@@ -12,5 +12,6 @@ class TestDocumentPreviewsAPI(unittest.TestCase):
     """Tests for the DocumentPreviewsAPI."""
 
     def setUp(self):
-        self.client = DocumentPreviewsAPI(secrets.instance_address, secrets.access_token)
-
+        self.client = DocumentPreviewsAPI(
+            secrets.instance_address, secrets.access_token
+        )

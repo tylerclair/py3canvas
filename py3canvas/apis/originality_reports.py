@@ -16,7 +16,20 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         super(OriginalityReportsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.OriginalityReportsAPI")
 
-    def create_originality_report(self, assignment_id, originality_report_originality_score, submission_id, originality_report_attempt=None, originality_report_error_message=None, originality_report_file_id=None, originality_report_originality_report_file_id=None, originality_report_originality_report_url=None, originality_report_tool_setting_resource_type_code=None, originality_report_tool_setting_resource_url=None, originality_report_workflow_state=None):
+    def create_originality_report(
+        self,
+        assignment_id,
+        originality_report_originality_score,
+        submission_id,
+        originality_report_attempt=None,
+        originality_report_error_message=None,
+        originality_report_file_id=None,
+        originality_report_originality_report_file_id=None,
+        originality_report_originality_report_url=None,
+        originality_report_tool_setting_resource_type_code=None,
+        originality_report_tool_setting_resource_url=None,
+        originality_report_workflow_state=None,
+    ):
         """
         Create an Originality Report.
 
@@ -32,13 +45,11 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         """
         path["assignment_id"] = assignment_id
 
-
         # REQUIRED - PATH - submission_id
         """
             ID
         """
         path["submission_id"] = submission_id
-
 
         # OPTIONAL - originality_report[file_id]
         """
@@ -48,14 +59,14 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         if originality_report_file_id is not None:
             data["originality_report[file_id]"] = originality_report_file_id
 
-
         # REQUIRED - originality_report[originality_score]
         """
             A number between 0 and 100 representing the measure of the
         specified file's originality.
         """
-        data["originality_report[originality_score]"] = originality_report_originality_score
-
+        data[
+            "originality_report[originality_score]"
+        ] = originality_report_originality_score
 
         # OPTIONAL - originality_report[originality_report_url]
         """
@@ -63,8 +74,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         file may be found.
         """
         if originality_report_originality_report_url is not None:
-            data["originality_report[originality_report_url]"] = originality_report_originality_report_url
-
+            data[
+                "originality_report[originality_report_url]"
+            ] = originality_report_originality_report_url
 
         # OPTIONAL - originality_report[originality_report_file_id]
         """
@@ -72,8 +84,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         report for the submitted file provided in the request URL.
         """
         if originality_report_originality_report_file_id is not None:
-            data["originality_report[originality_report_file_id]"] = originality_report_originality_report_file_id
-
+            data[
+                "originality_report[originality_report_file_id]"
+            ] = originality_report_originality_report_file_id
 
         # OPTIONAL - originality_report[tool_setting][resource_type_code]
         """
@@ -83,8 +96,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         resource handler rather than using the originality_report_url.
         """
         if originality_report_tool_setting_resource_type_code is not None:
-            data["originality_report[tool_setting][resource_type_code]"] = originality_report_tool_setting_resource_type_code
-
+            data[
+                "originality_report[tool_setting][resource_type_code]"
+            ] = originality_report_tool_setting_resource_type_code
 
         # OPTIONAL - originality_report[tool_setting][resource_url]
         """
@@ -95,8 +109,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         must also be specified.
         """
         if originality_report_tool_setting_resource_url is not None:
-            data["originality_report[tool_setting][resource_url]"] = originality_report_tool_setting_resource_url
-
+            data[
+                "originality_report[tool_setting][resource_url]"
+            ] = originality_report_tool_setting_resource_url
 
         # OPTIONAL - originality_report[workflow_state]
         """
@@ -104,8 +119,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         is provided a workflow state of "scored" will be inferred.
         """
         if originality_report_workflow_state is not None:
-            data["originality_report[workflow_state]"] = originality_report_workflow_state
-
+            data[
+                "originality_report[workflow_state]"
+            ] = originality_report_workflow_state
 
         # OPTIONAL - originality_report[error_message]
         """
@@ -114,7 +130,6 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         """
         if originality_report_error_message is not None:
             data["originality_report[error_message]"] = originality_report_error_message
-
 
         # OPTIONAL - originality_report[attempt]
         """
@@ -128,11 +143,34 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         if originality_report_attempt is not None:
             data["originality_report[attempt]"] = originality_report_attempt
 
+        self.logger.debug(
+            "POST /api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report".format(**path), data=data, params=params, single_item=True)
-
-    def edit_originality_report_submissions(self, assignment_id, id, submission_id, originality_report_error_message=None, originality_report_originality_report_file_id=None, originality_report_originality_report_url=None, originality_report_originality_score=None, originality_report_tool_setting_resource_type_code=None, originality_report_tool_setting_resource_url=None, originality_report_workflow_state=None):
+    def edit_originality_report_submissions(
+        self,
+        assignment_id,
+        id,
+        submission_id,
+        originality_report_error_message=None,
+        originality_report_originality_report_file_id=None,
+        originality_report_originality_report_url=None,
+        originality_report_originality_score=None,
+        originality_report_tool_setting_resource_type_code=None,
+        originality_report_tool_setting_resource_url=None,
+        originality_report_workflow_state=None,
+    ):
         """
         Edit an Originality Report.
 
@@ -148,7 +186,6 @@ class OriginalityReportsAPI(BaseCanvasAPI):
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # REQUIRED - PATH - submission_id
         """
@@ -156,13 +193,11 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         """
         path["submission_id"] = submission_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - originality_report[originality_score]
         """
@@ -170,8 +205,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         specified file's originality.
         """
         if originality_report_originality_score is not None:
-            data["originality_report[originality_score]"] = originality_report_originality_score
-
+            data[
+                "originality_report[originality_score]"
+            ] = originality_report_originality_score
 
         # OPTIONAL - originality_report[originality_report_url]
         """
@@ -179,8 +215,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         file may be found.
         """
         if originality_report_originality_report_url is not None:
-            data["originality_report[originality_report_url]"] = originality_report_originality_report_url
-
+            data[
+                "originality_report[originality_report_url]"
+            ] = originality_report_originality_report_url
 
         # OPTIONAL - originality_report[originality_report_file_id]
         """
@@ -188,8 +225,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         report for the submitted file provided in the request URL.
         """
         if originality_report_originality_report_file_id is not None:
-            data["originality_report[originality_report_file_id]"] = originality_report_originality_report_file_id
-
+            data[
+                "originality_report[originality_report_file_id]"
+            ] = originality_report_originality_report_file_id
 
         # OPTIONAL - originality_report[tool_setting][resource_type_code]
         """
@@ -199,8 +237,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         resource handler rather than using the originality_report_url.
         """
         if originality_report_tool_setting_resource_type_code is not None:
-            data["originality_report[tool_setting][resource_type_code]"] = originality_report_tool_setting_resource_type_code
-
+            data[
+                "originality_report[tool_setting][resource_type_code]"
+            ] = originality_report_tool_setting_resource_type_code
 
         # OPTIONAL - originality_report[tool_setting][resource_url]
         """
@@ -211,8 +250,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         must also be specified.
         """
         if originality_report_tool_setting_resource_url is not None:
-            data["originality_report[tool_setting][resource_url]"] = originality_report_tool_setting_resource_url
-
+            data[
+                "originality_report[tool_setting][resource_url]"
+            ] = originality_report_tool_setting_resource_url
 
         # OPTIONAL - originality_report[workflow_state]
         """
@@ -220,8 +260,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         is provided a workflow state of "scored" will be inferred.
         """
         if originality_report_workflow_state is not None:
-            data["originality_report[workflow_state]"] = originality_report_workflow_state
-
+            data[
+                "originality_report[workflow_state]"
+            ] = originality_report_workflow_state
 
         # OPTIONAL - originality_report[error_message]
         """
@@ -231,11 +272,33 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         if originality_report_error_message is not None:
             data["originality_report[error_message]"] = originality_report_error_message
 
+        self.logger.debug(
+            "PUT /api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("PUT /api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def edit_originality_report_files(self, assignment_id, file_id, originality_report_error_message=None, originality_report_originality_report_file_id=None, originality_report_originality_report_url=None, originality_report_originality_score=None, originality_report_tool_setting_resource_type_code=None, originality_report_tool_setting_resource_url=None, originality_report_workflow_state=None):
+    def edit_originality_report_files(
+        self,
+        assignment_id,
+        file_id,
+        originality_report_error_message=None,
+        originality_report_originality_report_file_id=None,
+        originality_report_originality_report_url=None,
+        originality_report_originality_score=None,
+        originality_report_tool_setting_resource_type_code=None,
+        originality_report_tool_setting_resource_url=None,
+        originality_report_workflow_state=None,
+    ):
         """
         Edit an Originality Report.
 
@@ -252,13 +315,11 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         """
         path["assignment_id"] = assignment_id
 
-
         # REQUIRED - PATH - file_id
         """
             ID
         """
         path["file_id"] = file_id
-
 
         # OPTIONAL - originality_report[originality_score]
         """
@@ -266,8 +327,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         specified file's originality.
         """
         if originality_report_originality_score is not None:
-            data["originality_report[originality_score]"] = originality_report_originality_score
-
+            data[
+                "originality_report[originality_score]"
+            ] = originality_report_originality_score
 
         # OPTIONAL - originality_report[originality_report_url]
         """
@@ -275,8 +337,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         file may be found.
         """
         if originality_report_originality_report_url is not None:
-            data["originality_report[originality_report_url]"] = originality_report_originality_report_url
-
+            data[
+                "originality_report[originality_report_url]"
+            ] = originality_report_originality_report_url
 
         # OPTIONAL - originality_report[originality_report_file_id]
         """
@@ -284,8 +347,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         report for the submitted file provided in the request URL.
         """
         if originality_report_originality_report_file_id is not None:
-            data["originality_report[originality_report_file_id]"] = originality_report_originality_report_file_id
-
+            data[
+                "originality_report[originality_report_file_id]"
+            ] = originality_report_originality_report_file_id
 
         # OPTIONAL - originality_report[tool_setting][resource_type_code]
         """
@@ -295,8 +359,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         resource handler rather than using the originality_report_url.
         """
         if originality_report_tool_setting_resource_type_code is not None:
-            data["originality_report[tool_setting][resource_type_code]"] = originality_report_tool_setting_resource_type_code
-
+            data[
+                "originality_report[tool_setting][resource_type_code]"
+            ] = originality_report_tool_setting_resource_type_code
 
         # OPTIONAL - originality_report[tool_setting][resource_url]
         """
@@ -307,8 +372,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         must also be specified.
         """
         if originality_report_tool_setting_resource_url is not None:
-            data["originality_report[tool_setting][resource_url]"] = originality_report_tool_setting_resource_url
-
+            data[
+                "originality_report[tool_setting][resource_url]"
+            ] = originality_report_tool_setting_resource_url
 
         # OPTIONAL - originality_report[workflow_state]
         """
@@ -316,8 +382,9 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         is provided a workflow state of "scored" will be inferred.
         """
         if originality_report_workflow_state is not None:
-            data["originality_report[workflow_state]"] = originality_report_workflow_state
-
+            data[
+                "originality_report[workflow_state]"
+            ] = originality_report_workflow_state
 
         # OPTIONAL - originality_report[error_message]
         """
@@ -327,9 +394,20 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         if originality_report_error_message is not None:
             data["originality_report[error_message]"] = originality_report_error_message
 
-
-        self.logger.debug("PUT /api/lti/assignments/{assignment_id}/files/{file_id}/originality_report with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/lti/assignments/{assignment_id}/files/{file_id}/originality_report".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/lti/assignments/{assignment_id}/files/{file_id}/originality_report with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/lti/assignments/{assignment_id}/files/{file_id}/originality_report".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_originality_report_submissions(self, assignment_id, id, submission_id):
         """
@@ -347,13 +425,11 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         """
         path["assignment_id"] = assignment_id
 
-
         # REQUIRED - PATH - submission_id
         """
             ID
         """
         path["submission_id"] = submission_id
-
 
         # REQUIRED - PATH - id
         """
@@ -361,9 +437,20 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/assignments/{assignment_id}/submissions/{submission_id}/originality_report/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_originality_report_files(self, assignment_id, file_id):
         """
@@ -381,16 +468,26 @@ class OriginalityReportsAPI(BaseCanvasAPI):
         """
         path["assignment_id"] = assignment_id
 
-
         # REQUIRED - PATH - file_id
         """
             ID
         """
         path["file_id"] = file_id
 
-
-        self.logger.debug("GET /api/lti/assignments/{assignment_id}/files/{file_id}/originality_report with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/assignments/{assignment_id}/files/{file_id}/originality_report".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/lti/assignments/{assignment_id}/files/{file_id}/originality_report with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/assignments/{assignment_id}/files/{file_id}/originality_report".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Toolsetting(BaseModel):
@@ -401,7 +498,7 @@ class Toolsetting(BaseModel):
         self._resource_type_code = resource_type_code
         self._resource_url = resource_url
 
-        self.logger = logging.getLogger('py3canvas.Toolsetting')
+        self.logger = logging.getLogger("py3canvas.Toolsetting")
 
     @property
     def resource_type_code(self):
@@ -411,7 +508,9 @@ class Toolsetting(BaseModel):
     @resource_type_code.setter
     def resource_type_code(self, value):
         """Setter for resource_type_code property."""
-        self.logger.warn("Setting values on resource_type_code will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on resource_type_code will NOT update the remote Canvas instance."
+        )
         self._resource_type_code = value
 
     @property
@@ -422,14 +521,27 @@ class Toolsetting(BaseModel):
     @resource_url.setter
     def resource_url(self, value):
         """Setter for resource_url property."""
-        self.logger.warn("Setting values on resource_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on resource_url will NOT update the remote Canvas instance."
+        )
         self._resource_url = value
 
 
 class Originalityreport(BaseModel):
     """Originalityreport Model."""
 
-    def __init__(self, id=None, file_id=None, originality_score=None, originality_report_file_id=None, originality_report_url=None, tool_setting=None, error_report=None, submission_time=None, root_account_id=None):
+    def __init__(
+        self,
+        id=None,
+        file_id=None,
+        originality_score=None,
+        originality_report_file_id=None,
+        originality_report_url=None,
+        tool_setting=None,
+        error_report=None,
+        submission_time=None,
+        root_account_id=None,
+    ):
         """Init method for Originalityreport class."""
         self._id = id
         self._file_id = file_id
@@ -441,7 +553,7 @@ class Originalityreport(BaseModel):
         self._submission_time = submission_time
         self._root_account_id = root_account_id
 
-        self.logger = logging.getLogger('py3canvas.Originalityreport')
+        self.logger = logging.getLogger("py3canvas.Originalityreport")
 
     @property
     def id(self):
@@ -451,7 +563,9 @@ class Originalityreport(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -462,7 +576,9 @@ class Originalityreport(BaseModel):
     @file_id.setter
     def file_id(self, value):
         """Setter for file_id property."""
-        self.logger.warn("Setting values on file_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on file_id will NOT update the remote Canvas instance."
+        )
         self._file_id = value
 
     @property
@@ -473,7 +589,9 @@ class Originalityreport(BaseModel):
     @originality_score.setter
     def originality_score(self, value):
         """Setter for originality_score property."""
-        self.logger.warn("Setting values on originality_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on originality_score will NOT update the remote Canvas instance."
+        )
         self._originality_score = value
 
     @property
@@ -484,7 +602,9 @@ class Originalityreport(BaseModel):
     @originality_report_file_id.setter
     def originality_report_file_id(self, value):
         """Setter for originality_report_file_id property."""
-        self.logger.warn("Setting values on originality_report_file_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on originality_report_file_id will NOT update the remote Canvas instance."
+        )
         self._originality_report_file_id = value
 
     @property
@@ -495,7 +615,9 @@ class Originalityreport(BaseModel):
     @originality_report_url.setter
     def originality_report_url(self, value):
         """Setter for originality_report_url property."""
-        self.logger.warn("Setting values on originality_report_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on originality_report_url will NOT update the remote Canvas instance."
+        )
         self._originality_report_url = value
 
     @property
@@ -506,7 +628,9 @@ class Originalityreport(BaseModel):
     @tool_setting.setter
     def tool_setting(self, value):
         """Setter for tool_setting property."""
-        self.logger.warn("Setting values on tool_setting will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on tool_setting will NOT update the remote Canvas instance."
+        )
         self._tool_setting = value
 
     @property
@@ -517,7 +641,9 @@ class Originalityreport(BaseModel):
     @error_report.setter
     def error_report(self, value):
         """Setter for error_report property."""
-        self.logger.warn("Setting values on error_report will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on error_report will NOT update the remote Canvas instance."
+        )
         self._error_report = value
 
     @property
@@ -528,7 +654,9 @@ class Originalityreport(BaseModel):
     @submission_time.setter
     def submission_time(self, value):
         """Setter for submission_time property."""
-        self.logger.warn("Setting values on submission_time will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submission_time will NOT update the remote Canvas instance."
+        )
         self._submission_time = value
 
     @property
@@ -539,6 +667,7 @@ class Originalityreport(BaseModel):
     @root_account_id.setter
     def root_account_id(self, value):
         """Setter for root_account_id property."""
-        self.logger.warn("Setting values on root_account_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on root_account_id will NOT update the remote Canvas instance."
+        )
         self._root_account_id = value
-

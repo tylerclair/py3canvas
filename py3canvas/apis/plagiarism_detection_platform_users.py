@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class PlagiarismDetectionPlatformUsersAPI(BaseCanvasAPI):
     """PlagiarismDetectionPlatformUsers API Version 1.0."""
 
@@ -33,9 +32,18 @@ class PlagiarismDetectionPlatformUsersAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/lti/users/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/users/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/lti/users/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/users/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def get_all_users_in_group_lti(self, group_id):
         """
@@ -54,7 +62,15 @@ class PlagiarismDetectionPlatformUsersAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
-        self.logger.debug("GET /api/lti/groups/{group_id}/users with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/groups/{group_id}/users".format(**path), data=data, params=params, all_pages=True)
-
+        self.logger.debug(
+            "GET /api/lti/groups/{group_id}/users with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/groups/{group_id}/users".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )

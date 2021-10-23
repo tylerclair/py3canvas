@@ -20,4 +20,3 @@ class TestHistoryAPI(unittest.TestCase):
         user_id = None  # Change me!!
 
         r = self.client.list_recent_history_for_user(user_id)
-

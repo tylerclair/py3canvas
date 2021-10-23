@@ -26,7 +26,7 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         a user has an in-progress submission, only that submission is returned. When
         there isn't an in-progress quiz_submission, all completed submissions,
         including previous attempts, are returned.
-        
+
         <b>200 OK</b> response code is returned if the request was successful.
         """
         path = {}
@@ -39,13 +39,11 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # OPTIONAL - include
         """
@@ -55,16 +53,25 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
             self._validate_enum(include, ["submission", "quiz", "user"])
             params["include"] = include
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_quiz_submission(self, course_id, quiz_id, include=None):
         """
         Get the quiz submission.
 
         Get the submission for this quiz for the current user.
-        
+
         <b>200 OK</b> response code is returned if the request was successful.
         """
         path = {}
@@ -77,13 +84,11 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # OPTIONAL - include
         """
@@ -93,16 +98,25 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
             self._validate_enum(include, ["submission", "quiz", "user"])
             params["include"] = include
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submission with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submission".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submission with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submission".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_single_quiz_submission(self, course_id, id, quiz_id, include=None):
         """
         Get a single quiz submission.
 
         Get a single quiz submission.
-        
+
         <b>200 OK</b> response code is returned if the request was successful.
         """
         path = {}
@@ -115,13 +129,11 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # REQUIRED - PATH - id
         """
@@ -129,7 +141,6 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - include
         """
             Associations to include with the quiz submission.
@@ -138,19 +149,32 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
             self._validate_enum(include, ["submission", "quiz", "user"])
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}".format(**path), data=data, params=params, no_data=True)
-
-    def create_quiz_submission_start_quiz_taking_session(self, course_id, quiz_id, access_code=None, preview=None):
+    def create_quiz_submission_start_quiz_taking_session(
+        self, course_id, quiz_id, access_code=None, preview=None
+    ):
         """
         Create the quiz submission (start a quiz-taking session).
 
         Start taking a Quiz by creating a QuizSubmission which you can use to answer
         questions and submit your answers.
-        
+
         <b>Responses</b>
-        
+
         * <b>200 OK</b> if the request was successful
         * <b>400 Bad Request</b> if the quiz is locked
         * <b>403 Forbidden</b> if an invalid access code is specified
@@ -167,13 +191,11 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # OPTIONAL - access_code
         """
@@ -181,7 +203,6 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         if access_code is not None:
             data["access_code"] = access_code
-
 
         # OPTIONAL - preview
         """
@@ -191,20 +212,37 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         if preview is not None:
             data["preview"] = preview
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions".format(**path), data=data, params=params, no_data=True)
-
-    def update_student_question_scores_and_comments(self, course_id, id, quiz_id, quiz_submissions_attempt, quiz_submissions_fudge_points=None, quiz_submissions_questions=None):
+    def update_student_question_scores_and_comments(
+        self,
+        course_id,
+        id,
+        quiz_id,
+        quiz_submissions_attempt,
+        quiz_submissions_fudge_points=None,
+        quiz_submissions_questions=None,
+    ):
         """
         Update student question scores and comments.
 
         Update the amount of points a student has scored for questions they've
         answered, provide comments for the student about their answer(s), or simply
         fudge the total score by a specific amount of points.
-        
+
         <b>Responses</b>
-        
+
         * <b>200 OK</b> if the request was successful
         * <b>403 Forbidden</b> if you are not a teacher in this course
         * <b>400 Bad Request</b> if the attempt parameter is missing or invalid
@@ -220,20 +258,17 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # REQUIRED - quiz_submissions[attempt]
         """
@@ -242,14 +277,12 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         data["quiz_submissions[attempt]"] = quiz_submissions_attempt
 
-
         # OPTIONAL - quiz_submissions[fudge_points]
         """
             Amount of positive or negative points to fudge the total score by.
         """
         if quiz_submissions_fudge_points is not None:
             data["quiz_submissions[fudge_points]"] = quiz_submissions_fudge_points
-
 
         # OPTIONAL - quiz_submissions[questions]
         """
@@ -261,20 +294,33 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         if quiz_submissions_questions is not None:
             data["quiz_submissions[questions]"] = quiz_submissions_questions
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}".format(**path), data=data, params=params, no_data=True)
-
-    def complete_quiz_submission_turn_it_in(self, attempt, course_id, id, quiz_id, validation_token, access_code=None):
+    def complete_quiz_submission_turn_it_in(
+        self, attempt, course_id, id, quiz_id, validation_token, access_code=None
+    ):
         """
         Complete the quiz submission (turn it in).
 
         Complete the quiz submission by marking it as complete and grading it. When
         the quiz submission has been marked as complete, no further modifications
         will be allowed.
-        
+
         <b>Responses</b>
-        
+
         * <b>200 OK</b> if the request was successful
         * <b>403 Forbidden</b> if an invalid access code is specified
         * <b>403 Forbidden</b> if the Quiz's IP filter restriction does not pass
@@ -293,20 +339,17 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # REQUIRED - attempt
         """
@@ -316,14 +359,12 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         data["attempt"] = attempt
 
-
         # REQUIRED - validation_token
         """
             The unique validation token you received when this Quiz Submission was
         created.
         """
         data["validation_token"] = validation_token
-
 
         # OPTIONAL - access_code
         """
@@ -332,9 +373,20 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         if access_code is not None:
             data["access_code"] = access_code
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/complete with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/complete".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/complete with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/complete".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_current_quiz_submission_times(self, course_id, id, quiz_id):
         """
@@ -342,9 +394,9 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
 
         Get the current timing data for the quiz attempt, both the end_at timestamp
         and the time_left parameter.
-        
+
         <b>Responses</b>
-        
+
         * <b>200 OK</b> if the request was successful
         """
         path = {}
@@ -357,13 +409,11 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # REQUIRED - PATH - id
         """
@@ -371,15 +421,47 @@ class QuizSubmissionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/time with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/time".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/time with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/time".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Quizsubmission(BaseModel):
     """Quizsubmission Model."""
 
-    def __init__(self, id, quiz_id, user_id=None, submission_id=None, started_at=None, finished_at=None, end_at=None, attempt=None, extra_attempts=None, extra_time=None, manually_unlocked=None, time_spent=None, score=None, score_before_regrade=None, kept_score=None, fudge_points=None, has_seen_results=None, workflow_state=None, overdue_and_needs_submission=None):
+    def __init__(
+        self,
+        id,
+        quiz_id,
+        user_id=None,
+        submission_id=None,
+        started_at=None,
+        finished_at=None,
+        end_at=None,
+        attempt=None,
+        extra_attempts=None,
+        extra_time=None,
+        manually_unlocked=None,
+        time_spent=None,
+        score=None,
+        score_before_regrade=None,
+        kept_score=None,
+        fudge_points=None,
+        has_seen_results=None,
+        workflow_state=None,
+        overdue_and_needs_submission=None,
+    ):
         """Init method for Quizsubmission class."""
         self._id = id
         self._quiz_id = quiz_id
@@ -401,7 +483,7 @@ class Quizsubmission(BaseModel):
         self._workflow_state = workflow_state
         self._overdue_and_needs_submission = overdue_and_needs_submission
 
-        self.logger = logging.getLogger('py3canvas.Quizsubmission')
+        self.logger = logging.getLogger("py3canvas.Quizsubmission")
 
     @property
     def id(self):
@@ -411,7 +493,9 @@ class Quizsubmission(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -422,7 +506,9 @@ class Quizsubmission(BaseModel):
     @quiz_id.setter
     def quiz_id(self, value):
         """Setter for quiz_id property."""
-        self.logger.warn("Setting values on quiz_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on quiz_id will NOT update the remote Canvas instance."
+        )
         self._quiz_id = value
 
     @property
@@ -433,7 +519,9 @@ class Quizsubmission(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -444,7 +532,9 @@ class Quizsubmission(BaseModel):
     @submission_id.setter
     def submission_id(self, value):
         """Setter for submission_id property."""
-        self.logger.warn("Setting values on submission_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submission_id will NOT update the remote Canvas instance."
+        )
         self._submission_id = value
 
     @property
@@ -455,7 +545,9 @@ class Quizsubmission(BaseModel):
     @started_at.setter
     def started_at(self, value):
         """Setter for started_at property."""
-        self.logger.warn("Setting values on started_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on started_at will NOT update the remote Canvas instance."
+        )
         self._started_at = value
 
     @property
@@ -466,7 +558,9 @@ class Quizsubmission(BaseModel):
     @finished_at.setter
     def finished_at(self, value):
         """Setter for finished_at property."""
-        self.logger.warn("Setting values on finished_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on finished_at will NOT update the remote Canvas instance."
+        )
         self._finished_at = value
 
     @property
@@ -477,7 +571,9 @@ class Quizsubmission(BaseModel):
     @end_at.setter
     def end_at(self, value):
         """Setter for end_at property."""
-        self.logger.warn("Setting values on end_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on end_at will NOT update the remote Canvas instance."
+        )
         self._end_at = value
 
     @property
@@ -488,7 +584,9 @@ class Quizsubmission(BaseModel):
     @attempt.setter
     def attempt(self, value):
         """Setter for attempt property."""
-        self.logger.warn("Setting values on attempt will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on attempt will NOT update the remote Canvas instance."
+        )
         self._attempt = value
 
     @property
@@ -499,7 +597,9 @@ class Quizsubmission(BaseModel):
     @extra_attempts.setter
     def extra_attempts(self, value):
         """Setter for extra_attempts property."""
-        self.logger.warn("Setting values on extra_attempts will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on extra_attempts will NOT update the remote Canvas instance."
+        )
         self._extra_attempts = value
 
     @property
@@ -510,7 +610,9 @@ class Quizsubmission(BaseModel):
     @extra_time.setter
     def extra_time(self, value):
         """Setter for extra_time property."""
-        self.logger.warn("Setting values on extra_time will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on extra_time will NOT update the remote Canvas instance."
+        )
         self._extra_time = value
 
     @property
@@ -521,7 +623,9 @@ class Quizsubmission(BaseModel):
     @manually_unlocked.setter
     def manually_unlocked(self, value):
         """Setter for manually_unlocked property."""
-        self.logger.warn("Setting values on manually_unlocked will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on manually_unlocked will NOT update the remote Canvas instance."
+        )
         self._manually_unlocked = value
 
     @property
@@ -532,7 +636,9 @@ class Quizsubmission(BaseModel):
     @time_spent.setter
     def time_spent(self, value):
         """Setter for time_spent property."""
-        self.logger.warn("Setting values on time_spent will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on time_spent will NOT update the remote Canvas instance."
+        )
         self._time_spent = value
 
     @property
@@ -543,7 +649,9 @@ class Quizsubmission(BaseModel):
     @score.setter
     def score(self, value):
         """Setter for score property."""
-        self.logger.warn("Setting values on score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on score will NOT update the remote Canvas instance."
+        )
         self._score = value
 
     @property
@@ -554,7 +662,9 @@ class Quizsubmission(BaseModel):
     @score_before_regrade.setter
     def score_before_regrade(self, value):
         """Setter for score_before_regrade property."""
-        self.logger.warn("Setting values on score_before_regrade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on score_before_regrade will NOT update the remote Canvas instance."
+        )
         self._score_before_regrade = value
 
     @property
@@ -565,7 +675,9 @@ class Quizsubmission(BaseModel):
     @kept_score.setter
     def kept_score(self, value):
         """Setter for kept_score property."""
-        self.logger.warn("Setting values on kept_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on kept_score will NOT update the remote Canvas instance."
+        )
         self._kept_score = value
 
     @property
@@ -576,7 +688,9 @@ class Quizsubmission(BaseModel):
     @fudge_points.setter
     def fudge_points(self, value):
         """Setter for fudge_points property."""
-        self.logger.warn("Setting values on fudge_points will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on fudge_points will NOT update the remote Canvas instance."
+        )
         self._fudge_points = value
 
     @property
@@ -587,7 +701,9 @@ class Quizsubmission(BaseModel):
     @has_seen_results.setter
     def has_seen_results(self, value):
         """Setter for has_seen_results property."""
-        self.logger.warn("Setting values on has_seen_results will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on has_seen_results will NOT update the remote Canvas instance."
+        )
         self._has_seen_results = value
 
     @property
@@ -598,7 +714,9 @@ class Quizsubmission(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -609,6 +727,7 @@ class Quizsubmission(BaseModel):
     @overdue_and_needs_submission.setter
     def overdue_and_needs_submission(self, value):
         """Setter for overdue_and_needs_submission property."""
-        self.logger.warn("Setting values on overdue_and_needs_submission will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on overdue_and_needs_submission will NOT update the remote Canvas instance."
+        )
         self._overdue_and_needs_submission = value
-

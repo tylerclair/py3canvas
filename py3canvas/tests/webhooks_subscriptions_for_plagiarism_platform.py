@@ -5,14 +5,18 @@ This is a testing template for the generated WebhooksSubscriptionsForPlagiarismP
 import unittest
 import requests
 import secrets
-from py3canvas.apis.webhooks_subscriptions_for_plagiarism_platform import WebhooksSubscriptionsForPlagiarismPlatformAPI
+from py3canvas.apis.webhooks_subscriptions_for_plagiarism_platform import (
+    WebhooksSubscriptionsForPlagiarismPlatformAPI,
+)
 
 
 class TestWebhooksSubscriptionsForPlagiarismPlatformAPI(unittest.TestCase):
     """Tests for the WebhooksSubscriptionsForPlagiarismPlatformAPI."""
 
     def setUp(self):
-        self.client = WebhooksSubscriptionsForPlagiarismPlatformAPI(secrets.instance_address, secrets.access_token)
+        self.client = WebhooksSubscriptionsForPlagiarismPlatformAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_create_webhook_subscription(self):
         """Integration test for the WebhooksSubscriptionsForPlagiarismPlatformAPI.create_webhook_subscription method."""
@@ -40,4 +44,3 @@ class TestWebhooksSubscriptionsForPlagiarismPlatformAPI(unittest.TestCase):
         """Integration test for the WebhooksSubscriptionsForPlagiarismPlatformAPI.list_all_webhook_subscription_for_tool_proxy method."""
 
         r = self.client.list_all_webhook_subscription_for_tool_proxy()
-

@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class ServicesAPI(BaseCanvasAPI):
     """Services API Version 1.0."""
 
@@ -26,8 +25,18 @@ class ServicesAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/v1/services/kaltura with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/services/kaltura".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/services/kaltura with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/services/kaltura".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def start_kaltura_session(self):
         """
@@ -40,6 +49,15 @@ class ServicesAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("POST /api/v1/services/kaltura_session with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/services/kaltura_session".format(**path), data=data, params=params, no_data=True)
-
+        self.logger.debug(
+            "POST /api/v1/services/kaltura_session with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/services/kaltura_session".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )

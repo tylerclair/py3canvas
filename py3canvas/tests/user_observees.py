@@ -62,4 +62,3 @@ class TestUserObserveesAPI(unittest.TestCase):
         """Integration test for the UserObserveesAPI.create_observer_pairing_code method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

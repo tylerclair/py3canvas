@@ -24,7 +24,9 @@ class TestModulesAPI(unittest.TestCase):
         """Integration test for the ModulesAPI.list_modules method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_modules(course_id, include=None, search_term=None, student_id=None)
+        r = self.client.list_modules(
+            course_id, include=None, search_term=None, student_id=None
+        )
 
     def test_show_module(self):
         """Integration test for the ModulesAPI.show_module method."""
@@ -60,7 +62,9 @@ class TestModulesAPI(unittest.TestCase):
         course_id = None  # Change me!!
         module_id = None  # Change me!!
 
-        r = self.client.list_module_items(course_id, module_id, include=None, search_term=None, student_id=None)
+        r = self.client.list_module_items(
+            course_id, module_id, include=None, search_term=None, student_id=None
+        )
 
     def test_show_module_item(self):
         """Integration test for the ModulesAPI.show_module_item method."""
@@ -68,7 +72,9 @@ class TestModulesAPI(unittest.TestCase):
         module_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.show_module_item(course_id, id, module_id, include=None, student_id=None)
+        r = self.client.show_module_item(
+            course_id, id, module_id, include=None, student_id=None
+        )
 
     def test_create_module_item(self):
         """Integration test for the ModulesAPI.create_module_item method."""
@@ -102,10 +108,11 @@ class TestModulesAPI(unittest.TestCase):
         """Integration test for the ModulesAPI.get_module_item_sequence method."""
         course_id = None  # Change me!!
 
-        r = self.client.get_module_item_sequence(course_id, asset_id=None, asset_type=None)
+        r = self.client.get_module_item_sequence(
+            course_id, asset_id=None, asset_type=None
+        )
 
     def test_mark_module_item_read(self):
         """Integration test for the ModulesAPI.mark_module_item_read method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

@@ -16,7 +16,17 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         super(DiscussionTopicsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.DiscussionTopicsAPI")
 
-    def list_discussion_topics_courses(self, course_id, exclude_context_module_locked_topics=None, filter_by=None, include=None, only_announcements=None, order_by=None, scope=None, search_term=None):
+    def list_discussion_topics_courses(
+        self,
+        course_id,
+        exclude_context_module_locked_topics=None,
+        filter_by=None,
+        include=None,
+        only_announcements=None,
+        order_by=None,
+        scope=None,
+        search_term=None,
+    ):
         """
         List discussion topics.
 
@@ -31,7 +41,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
             ID
         """
         path["course_id"] = course_id
-
 
         # OPTIONAL - include
         """
@@ -48,9 +57,10 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         If "overrides" is passed, the overrides for the assignment will be included
         """
         if include is not None:
-            self._validate_enum(include, ["all_dates", "sections", "sections_user_count", "overrides"])
+            self._validate_enum(
+                include, ["all_dates", "sections", "sections_user_count", "overrides"]
+            )
             params["include"] = include
-
 
         # OPTIONAL - order_by
         """
@@ -59,7 +69,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if order_by is not None:
             self._validate_enum(order_by, ["position", "recent_activity", "title"])
             params["order_by"] = order_by
-
 
         # OPTIONAL - scope
         """
@@ -72,14 +81,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
             self._validate_enum(scope, ["locked", "unlocked", "pinned", "unpinned"])
             params["scope"] = scope
 
-
         # OPTIONAL - only_announcements
         """
             Return announcements instead of discussion topics. Defaults to false
         """
         if only_announcements is not None:
             params["only_announcements"] = only_announcements
-
 
         # OPTIONAL - filter_by
         """
@@ -89,7 +96,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
             self._validate_enum(filter_by, ["all", "unread"])
             params["filter_by"] = filter_by
 
-
         # OPTIONAL - search_term
         """
             The partial title of the discussion topics to match and return.
@@ -97,20 +103,40 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if search_term is not None:
             params["search_term"] = search_term
 
-
         # OPTIONAL - exclude_context_module_locked_topics
         """
             For students, exclude topics that are locked by module progression.
         Defaults to false.
         """
         if exclude_context_module_locked_topics is not None:
-            params["exclude_context_module_locked_topics"] = exclude_context_module_locked_topics
+            params[
+                "exclude_context_module_locked_topics"
+            ] = exclude_context_module_locked_topics
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/discussion_topics with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/discussion_topics".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/discussion_topics with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/discussion_topics".format(**path), data=data, params=params, all_pages=True)
-
-    def list_discussion_topics_groups(self, group_id, exclude_context_module_locked_topics=None, filter_by=None, include=None, only_announcements=None, order_by=None, scope=None, search_term=None):
+    def list_discussion_topics_groups(
+        self,
+        group_id,
+        exclude_context_module_locked_topics=None,
+        filter_by=None,
+        include=None,
+        only_announcements=None,
+        order_by=None,
+        scope=None,
+        search_term=None,
+    ):
         """
         List discussion topics.
 
@@ -125,7 +151,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
             ID
         """
         path["group_id"] = group_id
-
 
         # OPTIONAL - include
         """
@@ -142,9 +167,10 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         If "overrides" is passed, the overrides for the assignment will be included
         """
         if include is not None:
-            self._validate_enum(include, ["all_dates", "sections", "sections_user_count", "overrides"])
+            self._validate_enum(
+                include, ["all_dates", "sections", "sections_user_count", "overrides"]
+            )
             params["include"] = include
-
 
         # OPTIONAL - order_by
         """
@@ -153,7 +179,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if order_by is not None:
             self._validate_enum(order_by, ["position", "recent_activity", "title"])
             params["order_by"] = order_by
-
 
         # OPTIONAL - scope
         """
@@ -166,14 +191,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
             self._validate_enum(scope, ["locked", "unlocked", "pinned", "unpinned"])
             params["scope"] = scope
 
-
         # OPTIONAL - only_announcements
         """
             Return announcements instead of discussion topics. Defaults to false
         """
         if only_announcements is not None:
             params["only_announcements"] = only_announcements
-
 
         # OPTIONAL - filter_by
         """
@@ -183,7 +206,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
             self._validate_enum(filter_by, ["all", "unread"])
             params["filter_by"] = filter_by
 
-
         # OPTIONAL - search_term
         """
             The partial title of the discussion topics to match and return.
@@ -191,20 +213,52 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if search_term is not None:
             params["search_term"] = search_term
 
-
         # OPTIONAL - exclude_context_module_locked_topics
         """
             For students, exclude topics that are locked by module progression.
         Defaults to false.
         """
         if exclude_context_module_locked_topics is not None:
-            params["exclude_context_module_locked_topics"] = exclude_context_module_locked_topics
+            params[
+                "exclude_context_module_locked_topics"
+            ] = exclude_context_module_locked_topics
 
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/discussion_topics with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/discussion_topics".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/groups/{group_id}/discussion_topics with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/discussion_topics".format(**path), data=data, params=params, all_pages=True)
-
-    def create_new_discussion_topic_courses(self, course_id, allow_rating=None, assignment=None, attachment=None, delayed_post_at=None, discussion_type=None, group_category_id=None, is_announcement=None, lock_at=None, message=None, only_graders_can_rate=None, pinned=None, podcast_enabled=None, podcast_has_student_posts=None, position_after=None, published=None, require_initial_post=None, sort_by_rating=None, specific_sections=None, title=None):
+    def create_new_discussion_topic_courses(
+        self,
+        course_id,
+        allow_rating=None,
+        assignment=None,
+        attachment=None,
+        delayed_post_at=None,
+        discussion_type=None,
+        group_category_id=None,
+        is_announcement=None,
+        lock_at=None,
+        message=None,
+        only_graders_can_rate=None,
+        pinned=None,
+        podcast_enabled=None,
+        podcast_has_student_posts=None,
+        position_after=None,
+        published=None,
+        require_initial_post=None,
+        sort_by_rating=None,
+        specific_sections=None,
+        title=None,
+    ):
         """
         Create a new discussion topic.
 
@@ -220,7 +274,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - title
         """
             no description
@@ -228,14 +281,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if title is not None:
             data["title"] = title
 
-
         # OPTIONAL - message
         """
             no description
         """
         if message is not None:
             data["message"] = message
-
 
         # OPTIONAL - discussion_type
         """
@@ -245,7 +296,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
             self._validate_enum(discussion_type, ["side_comment", "threaded"])
             data["discussion_type"] = discussion_type
 
-
         # OPTIONAL - published
         """
             Whether this topic is published (true) or draft state (false). Only
@@ -254,7 +304,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if published is not None:
             data["published"] = published
 
-
         # OPTIONAL - delayed_post_at
         """
             If a timestamp is given, the topic will not be published until that time.
@@ -262,10 +311,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if delayed_post_at is not None:
             if issubclass(delayed_post_at.__class__, str):
                 delayed_post_at = self._validate_iso8601_string(delayed_post_at)
-            elif issubclass(delayed_post_at.__class__, date) or issubclass(delayed_post_at.__class__, datetime):
-                delayed_post_at = delayed_post_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(delayed_post_at.__class__, date) or issubclass(
+                delayed_post_at.__class__, datetime
+            ):
+                delayed_post_at = delayed_post_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["delayed_post_at"] = delayed_post_at
-
 
         # OPTIONAL - allow_rating
         """
@@ -273,7 +323,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if allow_rating is not None:
             data["allow_rating"] = allow_rating
-
 
         # OPTIONAL - lock_at
         """
@@ -284,10 +333,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if lock_at is not None:
             if issubclass(lock_at.__class__, str):
                 lock_at = self._validate_iso8601_string(lock_at)
-            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
-                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(lock_at.__class__, date) or issubclass(
+                lock_at.__class__, datetime
+            ):
+                lock_at = lock_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["lock_at"] = lock_at
-
 
         # OPTIONAL - podcast_enabled
         """
@@ -295,7 +345,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if podcast_enabled is not None:
             data["podcast_enabled"] = podcast_enabled
-
 
         # OPTIONAL - podcast_has_student_posts
         """
@@ -305,7 +354,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if podcast_has_student_posts is not None:
             data["podcast_has_student_posts"] = podcast_has_student_posts
 
-
         # OPTIONAL - require_initial_post
         """
             If true then a user may not respond to other replies until that user has
@@ -313,7 +361,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if require_initial_post is not None:
             data["require_initial_post"] = require_initial_post
-
 
         # OPTIONAL - assignment
         """
@@ -327,7 +374,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if assignment is not None:
             data["assignment"] = assignment
 
-
         # OPTIONAL - is_announcement
         """
             If true, this topic is an announcement. It will appear in the
@@ -337,14 +383,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if is_announcement is not None:
             data["is_announcement"] = is_announcement
 
-
         # OPTIONAL - pinned
         """
             If true, this topic will be listed in the "Pinned Discussion" section
         """
         if pinned is not None:
             data["pinned"] = pinned
-
 
         # OPTIONAL - position_after
         """
@@ -355,7 +399,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if position_after is not None:
             data["position_after"] = position_after
 
-
         # OPTIONAL - group_category_id
         """
             If present, the topic will become a group discussion assigned
@@ -364,14 +407,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if group_category_id is not None:
             data["group_category_id"] = group_category_id
 
-
         # OPTIONAL - only_graders_can_rate
         """
             If true, only graders will be allowed to rate entries.
         """
         if only_graders_can_rate is not None:
             data["only_graders_can_rate"] = only_graders_can_rate
-
 
         # OPTIONAL - sort_by_rating
         """
@@ -380,7 +421,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if sort_by_rating is not None:
             data["sort_by_rating"] = sort_by_rating
 
-
         # OPTIONAL - attachment
         """
             A multipart/form-data form-field-style attachment.
@@ -388,7 +428,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if attachment is not None:
             data["attachment"] = attachment
-
 
         # OPTIONAL - specific_sections
         """
@@ -401,11 +440,42 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if specific_sections is not None:
             data["specific_sections"] = specific_sections
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/discussion_topics with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/discussion_topics".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/discussion_topics with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/discussion_topics".format(**path), data=data, params=params, no_data=True)
-
-    def create_new_discussion_topic_groups(self, group_id, allow_rating=None, assignment=None, attachment=None, delayed_post_at=None, discussion_type=None, group_category_id=None, is_announcement=None, lock_at=None, message=None, only_graders_can_rate=None, pinned=None, podcast_enabled=None, podcast_has_student_posts=None, position_after=None, published=None, require_initial_post=None, sort_by_rating=None, specific_sections=None, title=None):
+    def create_new_discussion_topic_groups(
+        self,
+        group_id,
+        allow_rating=None,
+        assignment=None,
+        attachment=None,
+        delayed_post_at=None,
+        discussion_type=None,
+        group_category_id=None,
+        is_announcement=None,
+        lock_at=None,
+        message=None,
+        only_graders_can_rate=None,
+        pinned=None,
+        podcast_enabled=None,
+        podcast_has_student_posts=None,
+        position_after=None,
+        published=None,
+        require_initial_post=None,
+        sort_by_rating=None,
+        specific_sections=None,
+        title=None,
+    ):
         """
         Create a new discussion topic.
 
@@ -421,7 +491,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # OPTIONAL - title
         """
             no description
@@ -429,14 +498,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if title is not None:
             data["title"] = title
 
-
         # OPTIONAL - message
         """
             no description
         """
         if message is not None:
             data["message"] = message
-
 
         # OPTIONAL - discussion_type
         """
@@ -446,7 +513,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
             self._validate_enum(discussion_type, ["side_comment", "threaded"])
             data["discussion_type"] = discussion_type
 
-
         # OPTIONAL - published
         """
             Whether this topic is published (true) or draft state (false). Only
@@ -455,7 +521,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if published is not None:
             data["published"] = published
 
-
         # OPTIONAL - delayed_post_at
         """
             If a timestamp is given, the topic will not be published until that time.
@@ -463,10 +528,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if delayed_post_at is not None:
             if issubclass(delayed_post_at.__class__, str):
                 delayed_post_at = self._validate_iso8601_string(delayed_post_at)
-            elif issubclass(delayed_post_at.__class__, date) or issubclass(delayed_post_at.__class__, datetime):
-                delayed_post_at = delayed_post_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(delayed_post_at.__class__, date) or issubclass(
+                delayed_post_at.__class__, datetime
+            ):
+                delayed_post_at = delayed_post_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["delayed_post_at"] = delayed_post_at
-
 
         # OPTIONAL - allow_rating
         """
@@ -474,7 +540,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if allow_rating is not None:
             data["allow_rating"] = allow_rating
-
 
         # OPTIONAL - lock_at
         """
@@ -485,10 +550,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if lock_at is not None:
             if issubclass(lock_at.__class__, str):
                 lock_at = self._validate_iso8601_string(lock_at)
-            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
-                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(lock_at.__class__, date) or issubclass(
+                lock_at.__class__, datetime
+            ):
+                lock_at = lock_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["lock_at"] = lock_at
-
 
         # OPTIONAL - podcast_enabled
         """
@@ -496,7 +562,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if podcast_enabled is not None:
             data["podcast_enabled"] = podcast_enabled
-
 
         # OPTIONAL - podcast_has_student_posts
         """
@@ -506,7 +571,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if podcast_has_student_posts is not None:
             data["podcast_has_student_posts"] = podcast_has_student_posts
 
-
         # OPTIONAL - require_initial_post
         """
             If true then a user may not respond to other replies until that user has
@@ -514,7 +578,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if require_initial_post is not None:
             data["require_initial_post"] = require_initial_post
-
 
         # OPTIONAL - assignment
         """
@@ -528,7 +591,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if assignment is not None:
             data["assignment"] = assignment
 
-
         # OPTIONAL - is_announcement
         """
             If true, this topic is an announcement. It will appear in the
@@ -538,14 +600,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if is_announcement is not None:
             data["is_announcement"] = is_announcement
 
-
         # OPTIONAL - pinned
         """
             If true, this topic will be listed in the "Pinned Discussion" section
         """
         if pinned is not None:
             data["pinned"] = pinned
-
 
         # OPTIONAL - position_after
         """
@@ -556,7 +616,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if position_after is not None:
             data["position_after"] = position_after
 
-
         # OPTIONAL - group_category_id
         """
             If present, the topic will become a group discussion assigned
@@ -565,14 +624,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if group_category_id is not None:
             data["group_category_id"] = group_category_id
 
-
         # OPTIONAL - only_graders_can_rate
         """
             If true, only graders will be allowed to rate entries.
         """
         if only_graders_can_rate is not None:
             data["only_graders_can_rate"] = only_graders_can_rate
-
 
         # OPTIONAL - sort_by_rating
         """
@@ -581,7 +638,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if sort_by_rating is not None:
             data["sort_by_rating"] = sort_by_rating
 
-
         # OPTIONAL - attachment
         """
             A multipart/form-data form-field-style attachment.
@@ -589,7 +645,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if attachment is not None:
             data["attachment"] = attachment
-
 
         # OPTIONAL - specific_sections
         """
@@ -602,11 +657,42 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if specific_sections is not None:
             data["specific_sections"] = specific_sections
 
+        self.logger.debug(
+            "POST /api/v1/groups/{group_id}/discussion_topics with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/groups/{group_id}/discussion_topics".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/groups/{group_id}/discussion_topics with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/groups/{group_id}/discussion_topics".format(**path), data=data, params=params, no_data=True)
-
-    def update_topic_courses(self, course_id, topic_id, allow_rating=None, assignment=None, delayed_post_at=None, discussion_type=None, group_category_id=None, is_announcement=None, lock_at=None, message=None, only_graders_can_rate=None, pinned=None, podcast_enabled=None, podcast_has_student_posts=None, position_after=None, published=None, require_initial_post=None, sort_by_rating=None, specific_sections=None, title=None):
+    def update_topic_courses(
+        self,
+        course_id,
+        topic_id,
+        allow_rating=None,
+        assignment=None,
+        delayed_post_at=None,
+        discussion_type=None,
+        group_category_id=None,
+        is_announcement=None,
+        lock_at=None,
+        message=None,
+        only_graders_can_rate=None,
+        pinned=None,
+        podcast_enabled=None,
+        podcast_has_student_posts=None,
+        position_after=None,
+        published=None,
+        require_initial_post=None,
+        sort_by_rating=None,
+        specific_sections=None,
+        title=None,
+    ):
         """
         Update a topic.
 
@@ -622,13 +708,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - title
         """
@@ -637,14 +721,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if title is not None:
             data["title"] = title
 
-
         # OPTIONAL - message
         """
             no description
         """
         if message is not None:
             data["message"] = message
-
 
         # OPTIONAL - discussion_type
         """
@@ -654,7 +736,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
             self._validate_enum(discussion_type, ["side_comment", "threaded"])
             data["discussion_type"] = discussion_type
 
-
         # OPTIONAL - published
         """
             Whether this topic is published (true) or draft state (false). Only
@@ -663,7 +744,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if published is not None:
             data["published"] = published
 
-
         # OPTIONAL - delayed_post_at
         """
             If a timestamp is given, the topic will not be published until that time.
@@ -671,10 +751,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if delayed_post_at is not None:
             if issubclass(delayed_post_at.__class__, str):
                 delayed_post_at = self._validate_iso8601_string(delayed_post_at)
-            elif issubclass(delayed_post_at.__class__, date) or issubclass(delayed_post_at.__class__, datetime):
-                delayed_post_at = delayed_post_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(delayed_post_at.__class__, date) or issubclass(
+                delayed_post_at.__class__, datetime
+            ):
+                delayed_post_at = delayed_post_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["delayed_post_at"] = delayed_post_at
-
 
         # OPTIONAL - lock_at
         """
@@ -685,10 +766,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if lock_at is not None:
             if issubclass(lock_at.__class__, str):
                 lock_at = self._validate_iso8601_string(lock_at)
-            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
-                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(lock_at.__class__, date) or issubclass(
+                lock_at.__class__, datetime
+            ):
+                lock_at = lock_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["lock_at"] = lock_at
-
 
         # OPTIONAL - podcast_enabled
         """
@@ -696,7 +778,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if podcast_enabled is not None:
             data["podcast_enabled"] = podcast_enabled
-
 
         # OPTIONAL - podcast_has_student_posts
         """
@@ -706,7 +787,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if podcast_has_student_posts is not None:
             data["podcast_has_student_posts"] = podcast_has_student_posts
 
-
         # OPTIONAL - require_initial_post
         """
             If true then a user may not respond to other replies until that user has
@@ -714,7 +794,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if require_initial_post is not None:
             data["require_initial_post"] = require_initial_post
-
 
         # OPTIONAL - assignment
         """
@@ -728,7 +807,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if assignment is not None:
             data["assignment"] = assignment
 
-
         # OPTIONAL - is_announcement
         """
             If true, this topic is an announcement. It will appear in the
@@ -738,14 +816,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if is_announcement is not None:
             data["is_announcement"] = is_announcement
 
-
         # OPTIONAL - pinned
         """
             If true, this topic will be listed in the "Pinned Discussion" section
         """
         if pinned is not None:
             data["pinned"] = pinned
-
 
         # OPTIONAL - position_after
         """
@@ -756,7 +832,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if position_after is not None:
             data["position_after"] = position_after
 
-
         # OPTIONAL - group_category_id
         """
             If present, the topic will become a group discussion assigned
@@ -765,14 +840,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if group_category_id is not None:
             data["group_category_id"] = group_category_id
 
-
         # OPTIONAL - allow_rating
         """
             If true, users will be allowed to rate entries.
         """
         if allow_rating is not None:
             data["allow_rating"] = allow_rating
-
 
         # OPTIONAL - only_graders_can_rate
         """
@@ -781,14 +854,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if only_graders_can_rate is not None:
             data["only_graders_can_rate"] = only_graders_can_rate
 
-
         # OPTIONAL - sort_by_rating
         """
             If true, entries will be sorted by rating.
         """
         if sort_by_rating is not None:
             data["sort_by_rating"] = sort_by_rating
-
 
         # OPTIONAL - specific_sections
         """
@@ -801,11 +872,42 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if specific_sections is not None:
             data["specific_sections"] = specific_sections
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}".format(**path), data=data, params=params, no_data=True)
-
-    def update_topic_groups(self, group_id, topic_id, allow_rating=None, assignment=None, delayed_post_at=None, discussion_type=None, group_category_id=None, is_announcement=None, lock_at=None, message=None, only_graders_can_rate=None, pinned=None, podcast_enabled=None, podcast_has_student_posts=None, position_after=None, published=None, require_initial_post=None, sort_by_rating=None, specific_sections=None, title=None):
+    def update_topic_groups(
+        self,
+        group_id,
+        topic_id,
+        allow_rating=None,
+        assignment=None,
+        delayed_post_at=None,
+        discussion_type=None,
+        group_category_id=None,
+        is_announcement=None,
+        lock_at=None,
+        message=None,
+        only_graders_can_rate=None,
+        pinned=None,
+        podcast_enabled=None,
+        podcast_has_student_posts=None,
+        position_after=None,
+        published=None,
+        require_initial_post=None,
+        sort_by_rating=None,
+        specific_sections=None,
+        title=None,
+    ):
         """
         Update a topic.
 
@@ -821,13 +923,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - title
         """
@@ -836,14 +936,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if title is not None:
             data["title"] = title
 
-
         # OPTIONAL - message
         """
             no description
         """
         if message is not None:
             data["message"] = message
-
 
         # OPTIONAL - discussion_type
         """
@@ -853,7 +951,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
             self._validate_enum(discussion_type, ["side_comment", "threaded"])
             data["discussion_type"] = discussion_type
 
-
         # OPTIONAL - published
         """
             Whether this topic is published (true) or draft state (false). Only
@@ -862,7 +959,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if published is not None:
             data["published"] = published
 
-
         # OPTIONAL - delayed_post_at
         """
             If a timestamp is given, the topic will not be published until that time.
@@ -870,10 +966,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if delayed_post_at is not None:
             if issubclass(delayed_post_at.__class__, str):
                 delayed_post_at = self._validate_iso8601_string(delayed_post_at)
-            elif issubclass(delayed_post_at.__class__, date) or issubclass(delayed_post_at.__class__, datetime):
-                delayed_post_at = delayed_post_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(delayed_post_at.__class__, date) or issubclass(
+                delayed_post_at.__class__, datetime
+            ):
+                delayed_post_at = delayed_post_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["delayed_post_at"] = delayed_post_at
-
 
         # OPTIONAL - lock_at
         """
@@ -884,10 +981,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if lock_at is not None:
             if issubclass(lock_at.__class__, str):
                 lock_at = self._validate_iso8601_string(lock_at)
-            elif issubclass(lock_at.__class__, date) or issubclass(lock_at.__class__, datetime):
-                lock_at = lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(lock_at.__class__, date) or issubclass(
+                lock_at.__class__, datetime
+            ):
+                lock_at = lock_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["lock_at"] = lock_at
-
 
         # OPTIONAL - podcast_enabled
         """
@@ -895,7 +993,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if podcast_enabled is not None:
             data["podcast_enabled"] = podcast_enabled
-
 
         # OPTIONAL - podcast_has_student_posts
         """
@@ -905,7 +1002,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if podcast_has_student_posts is not None:
             data["podcast_has_student_posts"] = podcast_has_student_posts
 
-
         # OPTIONAL - require_initial_post
         """
             If true then a user may not respond to other replies until that user has
@@ -913,7 +1009,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if require_initial_post is not None:
             data["require_initial_post"] = require_initial_post
-
 
         # OPTIONAL - assignment
         """
@@ -927,7 +1022,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if assignment is not None:
             data["assignment"] = assignment
 
-
         # OPTIONAL - is_announcement
         """
             If true, this topic is an announcement. It will appear in the
@@ -937,14 +1031,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if is_announcement is not None:
             data["is_announcement"] = is_announcement
 
-
         # OPTIONAL - pinned
         """
             If true, this topic will be listed in the "Pinned Discussion" section
         """
         if pinned is not None:
             data["pinned"] = pinned
-
 
         # OPTIONAL - position_after
         """
@@ -955,7 +1047,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if position_after is not None:
             data["position_after"] = position_after
 
-
         # OPTIONAL - group_category_id
         """
             If present, the topic will become a group discussion assigned
@@ -964,14 +1055,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if group_category_id is not None:
             data["group_category_id"] = group_category_id
 
-
         # OPTIONAL - allow_rating
         """
             If true, users will be allowed to rate entries.
         """
         if allow_rating is not None:
             data["allow_rating"] = allow_rating
-
 
         # OPTIONAL - only_graders_can_rate
         """
@@ -980,14 +1069,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if only_graders_can_rate is not None:
             data["only_graders_can_rate"] = only_graders_can_rate
 
-
         # OPTIONAL - sort_by_rating
         """
             If true, entries will be sorted by rating.
         """
         if sort_by_rating is not None:
             data["sort_by_rating"] = sort_by_rating
-
 
         # OPTIONAL - specific_sections
         """
@@ -1000,9 +1087,18 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if specific_sections is not None:
             data["specific_sections"] = specific_sections
 
-
-        self.logger.debug("PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_topic_courses(self, course_id, topic_id):
         """
@@ -1021,16 +1117,24 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_topic_groups(self, group_id, topic_id):
         """
@@ -1049,16 +1153,24 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def reorder_pinned_topics_courses(self, course_id, order):
         """
@@ -1077,7 +1189,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - order
         """
             The ids of the pinned discussion topics in the desired order.
@@ -1085,9 +1196,18 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         data["order"] = order
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/discussion_topics/reorder with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/discussion_topics/reorder".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/discussion_topics/reorder with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/discussion_topics/reorder".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def reorder_pinned_topics_groups(self, group_id, order):
         """
@@ -1106,7 +1226,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - order
         """
             The ids of the pinned discussion topics in the desired order.
@@ -1114,16 +1233,25 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         data["order"] = order
 
-
-        self.logger.debug("POST /api/v1/groups/{group_id}/discussion_topics/reorder with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/groups/{group_id}/discussion_topics/reorder".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/groups/{group_id}/discussion_topics/reorder with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/groups/{group_id}/discussion_topics/reorder".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def update_entry_courses(self, course_id, id, topic_id, message=None):
         """
         Update an entry.
 
         Update an existing discussion entry.
-        
+
         The entry must have been created by the current user, or the current user
         must have admin rights to the discussion. If the edit is not allowed, a 401 will be returned.
         """
@@ -1137,20 +1265,17 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - message
         """
@@ -1159,16 +1284,27 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if message is not None:
             data["message"] = message
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def update_entry_groups(self, group_id, id, topic_id, message=None):
         """
         Update an entry.
 
         Update an existing discussion entry.
-        
+
         The entry must have been created by the current user, or the current user
         must have admin rights to the discussion. If the edit is not allowed, a 401 will be returned.
         """
@@ -1182,20 +1318,17 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - message
         """
@@ -1204,19 +1337,30 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if message is not None:
             data["message"] = message
 
-
-        self.logger.debug("PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_entry_courses(self, course_id, id, topic_id):
         """
         Delete an entry.
 
         Delete a discussion entry.
-        
+
         The entry must have been created by the current user, or the current user
         must have admin rights to the discussion. If the delete is not allowed, a 401 will be returned.
-        
+
         The discussion will be marked deleted, and the user_id and message will be cleared out.
         """
         path = {}
@@ -1229,13 +1373,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # REQUIRED - PATH - id
         """
@@ -1243,19 +1385,30 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_entry_groups(self, group_id, id, topic_id):
         """
         Delete an entry.
 
         Delete a discussion entry.
-        
+
         The entry must have been created by the current user, or the current user
         must have admin rights to the discussion. If the delete is not allowed, a 401 will be returned.
-        
+
         The discussion will be marked deleted, and the user_id and message will be cleared out.
         """
         path = {}
@@ -1268,13 +1421,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # REQUIRED - PATH - id
         """
@@ -1282,9 +1433,20 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_single_topic_courses(self, course_id, topic_id, include=None):
         """
@@ -1302,13 +1464,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - include
         """
@@ -1325,12 +1485,23 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         If "overrides" is passed, the overrides for the assignment will be included
         """
         if include is not None:
-            self._validate_enum(include, ["all_dates", "sections", "sections_user_count", "overrides"])
+            self._validate_enum(
+                include, ["all_dates", "sections", "sections_user_count", "overrides"]
+            )
             params["include"] = include
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_single_topic_groups(self, group_id, topic_id, include=None):
         """
@@ -1348,13 +1519,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - include
         """
@@ -1371,12 +1540,23 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         If "overrides" is passed, the overrides for the assignment will be included
         """
         if include is not None:
-            self._validate_enum(include, ["all_dates", "sections", "sections_user_count", "overrides"])
+            self._validate_enum(
+                include, ["all_dates", "sections", "sections_user_count", "overrides"]
+            )
             params["include"] = include
 
-
-        self.logger.debug("GET /api/v1/groups/{group_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/discussion_topics/{topic_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_full_topic_courses(self, course_id, topic_id):
         """
@@ -1384,15 +1564,15 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
 
         Return a cached structure of the discussion topic, containing all entries,
         their authors, and their message bodies.
-        
+
         May require (depending on the topic) that the user has posted in the topic.
         If it is required, and the user has not posted, will respond with a 403
         Forbidden status and the body 'require_initial_post'.
-        
+
         In some rare situations, this cached structure may not be available yet. In
         that case, the server will respond with a 503 error, and the caller should
         try again soon.
-        
+
         The response is an object containing the following keys:
         * "participants": A list of summary information on users who have posted to
           the discussion. Each value is an object containing their id, display_name,
@@ -1424,16 +1604,26 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/discussion_topics/{topic_id}/view with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/view".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/discussion_topics/{topic_id}/view with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/view".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_full_topic_groups(self, group_id, topic_id):
         """
@@ -1441,15 +1631,15 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
 
         Return a cached structure of the discussion topic, containing all entries,
         their authors, and their message bodies.
-        
+
         May require (depending on the topic) that the user has posted in the topic.
         If it is required, and the user has not posted, will respond with a 403
         Forbidden status and the body 'require_initial_post'.
-        
+
         In some rare situations, this cached structure may not be available yet. In
         that case, the server will respond with a 503 error, and the caller should
         try again soon.
-        
+
         The response is an object containing the following keys:
         * "participants": A list of summary information on users who have posted to
           the discussion. Each value is an object containing their id, display_name,
@@ -1481,16 +1671,26 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("GET /api/v1/groups/{group_id}/discussion_topics/{topic_id}/view with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/view".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/discussion_topics/{topic_id}/view with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/view".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def post_entry_courses(self, course_id, topic_id, attachment=None, message=None):
         """
@@ -1509,13 +1709,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - message
         """
@@ -1523,7 +1721,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if message is not None:
             data["message"] = message
-
 
         # OPTIONAL - attachment
         """
@@ -1534,9 +1731,20 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if attachment is not None:
             data["attachment"] = attachment
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def post_entry_groups(self, group_id, topic_id, attachment=None, message=None):
         """
@@ -1555,13 +1763,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - message
         """
@@ -1569,7 +1775,6 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         if message is not None:
             data["message"] = message
-
 
         # OPTIONAL - attachment
         """
@@ -1580,9 +1785,20 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if attachment is not None:
             data["attachment"] = attachment
 
-
-        self.logger.debug("POST /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def duplicate_discussion_topic_courses(self, course_id, topic_id):
         """
@@ -1600,16 +1816,26 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/discussion_topics/{topic_id}/duplicate with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/duplicate".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/discussion_topics/{topic_id}/duplicate with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/duplicate".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def duplicate_discussion_topic_groups(self, group_id, topic_id):
         """
@@ -1627,33 +1853,43 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("POST /api/v1/groups/{group_id}/discussion_topics/{topic_id}/duplicate with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/duplicate".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/groups/{group_id}/discussion_topics/{topic_id}/duplicate with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/duplicate".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def list_topic_entries_courses(self, course_id, topic_id):
         """
         List topic entries.
 
         Retrieve the (paginated) top-level entries in a discussion topic.
-        
+
         May require (depending on the topic) that the user has posted in the topic.
         If it is required, and the user has not posted, will respond with a 403
         Forbidden status and the body 'require_initial_post'.
-        
+
         Will include the 10 most recent replies, if any, for each entry returned.
-        
+
         If the topic is a root topic with children corresponding to groups of a
         group assignment, entries from those subtopics for which the user belongs
         to the corresponding group will be returned.
-        
+
         Ordering of returned entries is newest-first by posting timestamp (reply
         activity is ignored).
         """
@@ -1667,33 +1903,43 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_topic_entries_groups(self, group_id, topic_id):
         """
         List topic entries.
 
         Retrieve the (paginated) top-level entries in a discussion topic.
-        
+
         May require (depending on the topic) that the user has posted in the topic.
         If it is required, and the user has not posted, will respond with a 403
         Forbidden status and the body 'require_initial_post'.
-        
+
         Will include the 10 most recent replies, if any, for each entry returned.
-        
+
         If the topic is a root topic with children corresponding to groups of a
         group assignment, entries from those subtopics for which the user belongs
         to the corresponding group will be returned.
-        
+
         Ordering of returned entries is newest-first by posting timestamp (reply
         activity is ignored).
         """
@@ -1707,25 +1953,37 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries".format(**path), data=data, params=params, no_data=True)
-
-    def post_reply_courses(self, course_id, entry_id, topic_id, attachment=None, message=None):
+    def post_reply_courses(
+        self, course_id, entry_id, topic_id, attachment=None, message=None
+    ):
         """
         Post a reply.
 
         Add a reply to an entry in a discussion topic. Returns a json
         representation of the created reply (see documentation for 'replies'
         method) on success.
-        
+
         May require (depending on the topic) that the user has posted in the topic.
         If it is required, and the user has not posted, will respond with a 403
         Forbidden status and the body 'require_initial_post'.
@@ -1740,13 +1998,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # REQUIRED - PATH - entry_id
         """
@@ -1754,14 +2010,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["entry_id"] = entry_id
 
-
         # OPTIONAL - message
         """
             The body of the entry.
         """
         if message is not None:
             data["message"] = message
-
 
         # OPTIONAL - attachment
         """
@@ -1772,18 +2026,31 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if attachment is not None:
             data["attachment"] = attachment
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies".format(**path), data=data, params=params, no_data=True)
-
-    def post_reply_groups(self, entry_id, group_id, topic_id, attachment=None, message=None):
+    def post_reply_groups(
+        self, entry_id, group_id, topic_id, attachment=None, message=None
+    ):
         """
         Post a reply.
 
         Add a reply to an entry in a discussion topic. Returns a json
         representation of the created reply (see documentation for 'replies'
         method) on success.
-        
+
         May require (depending on the topic) that the user has posted in the topic.
         If it is required, and the user has not posted, will respond with a 403
         Forbidden status and the body 'require_initial_post'.
@@ -1798,13 +2065,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # REQUIRED - PATH - entry_id
         """
@@ -1812,14 +2077,12 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["entry_id"] = entry_id
 
-
         # OPTIONAL - message
         """
             The body of the entry.
         """
         if message is not None:
             data["message"] = message
-
 
         # OPTIONAL - attachment
         """
@@ -1830,9 +2093,20 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if attachment is not None:
             data["attachment"] = attachment
 
-
-        self.logger.debug("POST /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_entry_replies_courses(self, course_id, entry_id, topic_id):
         """
@@ -1840,11 +2114,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
 
         Retrieve the (paginated) replies to a top-level entry in a discussion
         topic.
-        
+
         May require (depending on the topic) that the user has posted in the topic.
         If it is required, and the user has not posted, will respond with a 403
         Forbidden status and the body 'require_initial_post'.
-        
+
         Ordering of returned entries is newest-first by creation timestamp.
         """
         path = {}
@@ -1857,13 +2131,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # REQUIRED - PATH - entry_id
         """
@@ -1871,9 +2143,20 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["entry_id"] = entry_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_entry_replies_groups(self, entry_id, group_id, topic_id):
         """
@@ -1881,11 +2164,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
 
         Retrieve the (paginated) replies to a top-level entry in a discussion
         topic.
-        
+
         May require (depending on the topic) that the user has posted in the topic.
         If it is required, and the user has not posted, will respond with a 403
         Forbidden status and the body 'require_initial_post'.
-        
+
         Ordering of returned entries is newest-first by creation timestamp.
         """
         path = {}
@@ -1898,13 +2181,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # REQUIRED - PATH - entry_id
         """
@@ -1912,16 +2193,27 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["entry_id"] = entry_id
 
-
-        self.logger.debug("GET /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/replies".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_entries_courses(self, course_id, topic_id, ids=None):
         """
         List entries.
 
         Retrieve a paginated list of discussion entries, given a list of ids.
-        
+
         May require (depending on the topic) that the user has posted in the topic.
         If it is required, and the user has not posted, will respond with a 403
         Forbidden status and the body 'require_initial_post'.
@@ -1936,13 +2228,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - ids
         """
@@ -1952,16 +2242,27 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if ids is not None:
             params["ids"] = ids
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entry_list with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entry_list".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entry_list with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entry_list".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_entries_groups(self, group_id, topic_id, ids=None):
         """
         List entries.
 
         Retrieve a paginated list of discussion entries, given a list of ids.
-        
+
         May require (depending on the topic) that the user has posted in the topic.
         If it is required, and the user has not posted, will respond with a 403
         Forbidden status and the body 'require_initial_post'.
@@ -1976,13 +2277,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - ids
         """
@@ -1992,18 +2291,29 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if ids is not None:
             params["ids"] = ids
 
-
-        self.logger.debug("GET /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entry_list with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entry_list".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entry_list with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entry_list".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def mark_topic_as_read_courses(self, course_id, topic_id):
         """
         Mark topic as read.
 
         Mark the initial text of the discussion topic as read.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2016,25 +2326,35 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id}/read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/read".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id}/read with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/read".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def mark_topic_as_read_groups(self, group_id, topic_id):
         """
         Mark topic as read.
 
         Mark the initial text of the discussion topic as read.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2047,25 +2367,35 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id}/read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/read".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id}/read with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/read".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def mark_topic_as_unread_courses(self, course_id, topic_id):
         """
         Mark topic as unread.
 
         Mark the initial text of the discussion topic as unread.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2078,25 +2408,35 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id}/read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/read".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id}/read with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/read".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def mark_topic_as_unread_groups(self, group_id, topic_id):
         """
         Mark topic as unread.
 
         Mark the initial text of the discussion topic as unread.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2109,25 +2449,37 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
+        self.logger.debug(
+            "DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id}/read with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/read".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id}/read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/read".format(**path), data=data, params=params, no_data=True)
-
-    def mark_all_entries_as_read_courses(self, course_id, topic_id, forced_read_state=None):
+    def mark_all_entries_as_read_courses(
+        self, course_id, topic_id, forced_read_state=None
+    ):
         """
         Mark all entries as read.
 
         Mark the discussion topic and all its entries as read.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2140,13 +2492,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - forced_read_state
         """
@@ -2156,18 +2506,31 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if forced_read_state is not None:
             data["forced_read_state"] = forced_read_state
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id}/read_all with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/read_all".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id}/read_all with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/read_all".format(**path), data=data, params=params, no_data=True)
-
-    def mark_all_entries_as_read_groups(self, group_id, topic_id, forced_read_state=None):
+    def mark_all_entries_as_read_groups(
+        self, group_id, topic_id, forced_read_state=None
+    ):
         """
         Mark all entries as read.
 
         Mark the discussion topic and all its entries as read.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2180,13 +2543,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - forced_read_state
         """
@@ -2196,18 +2557,31 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if forced_read_state is not None:
             data["forced_read_state"] = forced_read_state
 
+        self.logger.debug(
+            "PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id}/read_all with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/read_all".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id}/read_all with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/read_all".format(**path), data=data, params=params, no_data=True)
-
-    def mark_all_entries_as_unread_courses(self, course_id, topic_id, forced_read_state=None):
+    def mark_all_entries_as_unread_courses(
+        self, course_id, topic_id, forced_read_state=None
+    ):
         """
         Mark all entries as unread.
 
         Mark the discussion topic and all its entries as unread.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2220,13 +2594,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - forced_read_state
         """
@@ -2236,18 +2608,31 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if forced_read_state is not None:
             params["forced_read_state"] = forced_read_state
 
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id}/read_all with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/read_all".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id}/read_all with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/read_all".format(**path), data=data, params=params, no_data=True)
-
-    def mark_all_entries_as_unread_groups(self, group_id, topic_id, forced_read_state=None):
+    def mark_all_entries_as_unread_groups(
+        self, group_id, topic_id, forced_read_state=None
+    ):
         """
         Mark all entries as unread.
 
         Mark the discussion topic and all its entries as unread.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2260,13 +2645,11 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
-
 
         # OPTIONAL - forced_read_state
         """
@@ -2276,18 +2659,31 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if forced_read_state is not None:
             params["forced_read_state"] = forced_read_state
 
+        self.logger.debug(
+            "DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id}/read_all with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/read_all".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id}/read_all with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/read_all".format(**path), data=data, params=params, no_data=True)
-
-    def mark_entry_as_read_courses(self, course_id, entry_id, topic_id, forced_read_state=None):
+    def mark_entry_as_read_courses(
+        self, course_id, entry_id, topic_id, forced_read_state=None
+    ):
         """
         Mark entry as read.
 
         Mark a discussion entry as read.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2300,20 +2696,17 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
         # REQUIRED - PATH - entry_id
         """
             ID
         """
         path["entry_id"] = entry_id
-
 
         # OPTIONAL - forced_read_state
         """
@@ -2323,18 +2716,31 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if forced_read_state is not None:
             data["forced_read_state"] = forced_read_state
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/read with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/read".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/read".format(**path), data=data, params=params, no_data=True)
-
-    def mark_entry_as_read_groups(self, entry_id, group_id, topic_id, forced_read_state=None):
+    def mark_entry_as_read_groups(
+        self, entry_id, group_id, topic_id, forced_read_state=None
+    ):
         """
         Mark entry as read.
 
         Mark a discussion entry as read.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2347,20 +2753,17 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
         # REQUIRED - PATH - entry_id
         """
             ID
         """
         path["entry_id"] = entry_id
-
 
         # OPTIONAL - forced_read_state
         """
@@ -2370,18 +2773,31 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if forced_read_state is not None:
             data["forced_read_state"] = forced_read_state
 
+        self.logger.debug(
+            "PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/read with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/read".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/read".format(**path), data=data, params=params, no_data=True)
-
-    def mark_entry_as_unread_courses(self, course_id, entry_id, topic_id, forced_read_state=None):
+    def mark_entry_as_unread_courses(
+        self, course_id, entry_id, topic_id, forced_read_state=None
+    ):
         """
         Mark entry as unread.
 
         Mark a discussion entry as unread.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2394,20 +2810,17 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
         # REQUIRED - PATH - entry_id
         """
             ID
         """
         path["entry_id"] = entry_id
-
 
         # OPTIONAL - forced_read_state
         """
@@ -2417,18 +2830,31 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if forced_read_state is not None:
             params["forced_read_state"] = forced_read_state
 
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/read with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/read".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/read".format(**path), data=data, params=params, no_data=True)
-
-    def mark_entry_as_unread_groups(self, entry_id, group_id, topic_id, forced_read_state=None):
+    def mark_entry_as_unread_groups(
+        self, entry_id, group_id, topic_id, forced_read_state=None
+    ):
         """
         Mark entry as unread.
 
         Mark a discussion entry as unread.
-        
+
         No request fields are necessary.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2441,20 +2867,17 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
         # REQUIRED - PATH - entry_id
         """
             ID
         """
         path["entry_id"] = entry_id
-
 
         # OPTIONAL - forced_read_state
         """
@@ -2464,16 +2887,27 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if forced_read_state is not None:
             params["forced_read_state"] = forced_read_state
 
-
-        self.logger.debug("DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/read".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/read with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/read".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def rate_entry_courses(self, course_id, entry_id, topic_id, rating=None):
         """
         Rate entry.
 
         Rate a discussion entry.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2486,20 +2920,17 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
         # REQUIRED - PATH - entry_id
         """
             ID
         """
         path["entry_id"] = entry_id
-
 
         # OPTIONAL - rating
         """
@@ -2508,16 +2939,27 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if rating is not None:
             data["rating"] = rating
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/rating with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/rating".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/rating with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/entries/{entry_id}/rating".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def rate_entry_groups(self, entry_id, group_id, topic_id, rating=None):
         """
         Rate entry.
 
         Rate a discussion entry.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -2530,20 +2972,17 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
         # REQUIRED - PATH - entry_id
         """
             ID
         """
         path["entry_id"] = entry_id
-
 
         # OPTIONAL - rating
         """
@@ -2552,16 +2991,27 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         if rating is not None:
             data["rating"] = rating
 
-
-        self.logger.debug("POST /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/rating with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/rating".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/rating with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/entries/{entry_id}/rating".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def subscribe_to_topic_courses(self, course_id, topic_id):
         """
         Subscribe to a topic.
 
         Subscribe to a topic to receive notifications about new entries
-        
+
         On success, the response will be 204 No Content with an empty body
         """
         path = {}
@@ -2574,23 +3024,33 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id}/subscribed with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/subscribed".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/discussion_topics/{topic_id}/subscribed with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/subscribed".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def subscribe_to_topic_groups(self, group_id, topic_id):
         """
         Subscribe to a topic.
 
         Subscribe to a topic to receive notifications about new entries
-        
+
         On success, the response will be 204 No Content with an empty body
         """
         path = {}
@@ -2603,23 +3063,33 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id}/subscribed with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/subscribed".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/groups/{group_id}/discussion_topics/{topic_id}/subscribed with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/subscribed".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def unsubscribe_from_topic_courses(self, course_id, topic_id):
         """
         Unsubscribe from a topic.
 
         Unsubscribe from a topic to stop receiving notifications about new entries
-        
+
         On success, the response will be 204 No Content with an empty body
         """
         path = {}
@@ -2632,23 +3102,33 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id}/subscribed with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/subscribed".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/discussion_topics/{topic_id}/subscribed with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/discussion_topics/{topic_id}/subscribed".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def unsubscribe_from_topic_groups(self, group_id, topic_id):
         """
         Unsubscribe from a topic.
 
         Unsubscribe from a topic to stop receiving notifications about new entries
-        
+
         On success, the response will be 204 No Content with an empty body
         """
         path = {}
@@ -2661,16 +3141,26 @@ class DiscussionTopicsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - topic_id
         """
             ID
         """
         path["topic_id"] = topic_id
 
-
-        self.logger.debug("DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id}/subscribed with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/subscribed".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/groups/{group_id}/discussion_topics/{topic_id}/subscribed with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/groups/{group_id}/discussion_topics/{topic_id}/subscribed".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Fileattachment(BaseModel):
@@ -2684,7 +3174,7 @@ class Fileattachment(BaseModel):
         self._filename = filename
         self._display_name = display_name
 
-        self.logger = logging.getLogger('py3canvas.Fileattachment')
+        self.logger = logging.getLogger("py3canvas.Fileattachment")
 
     @property
     def content_type(self):
@@ -2694,7 +3184,9 @@ class Fileattachment(BaseModel):
     @content_type.setter
     def content_type(self, value):
         """Setter for content_type property."""
-        self.logger.warn("Setting values on content_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on content_type will NOT update the remote Canvas instance."
+        )
         self._content_type = value
 
     @property
@@ -2705,7 +3197,9 @@ class Fileattachment(BaseModel):
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
 
     @property
@@ -2716,7 +3210,9 @@ class Fileattachment(BaseModel):
     @filename.setter
     def filename(self, value):
         """Setter for filename property."""
-        self.logger.warn("Setting values on filename will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on filename will NOT update the remote Canvas instance."
+        )
         self._filename = value
 
     @property
@@ -2727,7 +3223,9 @@ class Fileattachment(BaseModel):
     @display_name.setter
     def display_name(self, value):
         """Setter for display_name property."""
-        self.logger.warn("Setting values on display_name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on display_name will NOT update the remote Canvas instance."
+        )
         self._display_name = value
 
 
@@ -2735,7 +3233,43 @@ class Discussiontopic(BaseModel):
     """Discussiontopic Model.
     A discussion topic"""
 
-    def __init__(self, id=None, title=None, message=None, html_url=None, posted_at=None, last_reply_at=None, require_initial_post=None, user_can_see_posts=None, discussion_subentry_count=None, read_state=None, unread_count=None, subscribed=None, subscription_hold=None, assignment_id=None, delayed_post_at=None, published=None, lock_at=None, locked=None, pinned=None, locked_for_user=None, lock_info=None, lock_explanation=None, user_name=None, topic_children=None, group_topic_children=None, root_topic_id=None, podcast_url=None, discussion_type=None, group_category_id=None, attachments=None, permissions=None, allow_rating=None, only_graders_can_rate=None, sort_by_rating=None):
+    def __init__(
+        self,
+        id=None,
+        title=None,
+        message=None,
+        html_url=None,
+        posted_at=None,
+        last_reply_at=None,
+        require_initial_post=None,
+        user_can_see_posts=None,
+        discussion_subentry_count=None,
+        read_state=None,
+        unread_count=None,
+        subscribed=None,
+        subscription_hold=None,
+        assignment_id=None,
+        delayed_post_at=None,
+        published=None,
+        lock_at=None,
+        locked=None,
+        pinned=None,
+        locked_for_user=None,
+        lock_info=None,
+        lock_explanation=None,
+        user_name=None,
+        topic_children=None,
+        group_topic_children=None,
+        root_topic_id=None,
+        podcast_url=None,
+        discussion_type=None,
+        group_category_id=None,
+        attachments=None,
+        permissions=None,
+        allow_rating=None,
+        only_graders_can_rate=None,
+        sort_by_rating=None,
+    ):
         """Init method for Discussiontopic class."""
         self._id = id
         self._title = title
@@ -2772,7 +3306,7 @@ class Discussiontopic(BaseModel):
         self._only_graders_can_rate = only_graders_can_rate
         self._sort_by_rating = sort_by_rating
 
-        self.logger = logging.getLogger('py3canvas.Discussiontopic')
+        self.logger = logging.getLogger("py3canvas.Discussiontopic")
 
     @property
     def id(self):
@@ -2782,7 +3316,9 @@ class Discussiontopic(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -2793,7 +3329,9 @@ class Discussiontopic(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -2804,7 +3342,9 @@ class Discussiontopic(BaseModel):
     @message.setter
     def message(self, value):
         """Setter for message property."""
-        self.logger.warn("Setting values on message will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on message will NOT update the remote Canvas instance."
+        )
         self._message = value
 
     @property
@@ -2815,7 +3355,9 @@ class Discussiontopic(BaseModel):
     @html_url.setter
     def html_url(self, value):
         """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on html_url will NOT update the remote Canvas instance."
+        )
         self._html_url = value
 
     @property
@@ -2826,7 +3368,9 @@ class Discussiontopic(BaseModel):
     @posted_at.setter
     def posted_at(self, value):
         """Setter for posted_at property."""
-        self.logger.warn("Setting values on posted_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on posted_at will NOT update the remote Canvas instance."
+        )
         self._posted_at = value
 
     @property
@@ -2837,7 +3381,9 @@ class Discussiontopic(BaseModel):
     @last_reply_at.setter
     def last_reply_at(self, value):
         """Setter for last_reply_at property."""
-        self.logger.warn("Setting values on last_reply_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on last_reply_at will NOT update the remote Canvas instance."
+        )
         self._last_reply_at = value
 
     @property
@@ -2848,7 +3394,9 @@ class Discussiontopic(BaseModel):
     @require_initial_post.setter
     def require_initial_post(self, value):
         """Setter for require_initial_post property."""
-        self.logger.warn("Setting values on require_initial_post will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on require_initial_post will NOT update the remote Canvas instance."
+        )
         self._require_initial_post = value
 
     @property
@@ -2859,7 +3407,9 @@ class Discussiontopic(BaseModel):
     @user_can_see_posts.setter
     def user_can_see_posts(self, value):
         """Setter for user_can_see_posts property."""
-        self.logger.warn("Setting values on user_can_see_posts will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_can_see_posts will NOT update the remote Canvas instance."
+        )
         self._user_can_see_posts = value
 
     @property
@@ -2870,7 +3420,9 @@ class Discussiontopic(BaseModel):
     @discussion_subentry_count.setter
     def discussion_subentry_count(self, value):
         """Setter for discussion_subentry_count property."""
-        self.logger.warn("Setting values on discussion_subentry_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on discussion_subentry_count will NOT update the remote Canvas instance."
+        )
         self._discussion_subentry_count = value
 
     @property
@@ -2881,7 +3433,9 @@ class Discussiontopic(BaseModel):
     @read_state.setter
     def read_state(self, value):
         """Setter for read_state property."""
-        self.logger.warn("Setting values on read_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on read_state will NOT update the remote Canvas instance."
+        )
         self._read_state = value
 
     @property
@@ -2892,7 +3446,9 @@ class Discussiontopic(BaseModel):
     @unread_count.setter
     def unread_count(self, value):
         """Setter for unread_count property."""
-        self.logger.warn("Setting values on unread_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unread_count will NOT update the remote Canvas instance."
+        )
         self._unread_count = value
 
     @property
@@ -2903,7 +3459,9 @@ class Discussiontopic(BaseModel):
     @subscribed.setter
     def subscribed(self, value):
         """Setter for subscribed property."""
-        self.logger.warn("Setting values on subscribed will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on subscribed will NOT update the remote Canvas instance."
+        )
         self._subscribed = value
 
     @property
@@ -2914,7 +3472,9 @@ class Discussiontopic(BaseModel):
     @subscription_hold.setter
     def subscription_hold(self, value):
         """Setter for subscription_hold property."""
-        self.logger.warn("Setting values on subscription_hold will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on subscription_hold will NOT update the remote Canvas instance."
+        )
         self._subscription_hold = value
 
     @property
@@ -2925,7 +3485,9 @@ class Discussiontopic(BaseModel):
     @assignment_id.setter
     def assignment_id(self, value):
         """Setter for assignment_id property."""
-        self.logger.warn("Setting values on assignment_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assignment_id will NOT update the remote Canvas instance."
+        )
         self._assignment_id = value
 
     @property
@@ -2936,7 +3498,9 @@ class Discussiontopic(BaseModel):
     @delayed_post_at.setter
     def delayed_post_at(self, value):
         """Setter for delayed_post_at property."""
-        self.logger.warn("Setting values on delayed_post_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on delayed_post_at will NOT update the remote Canvas instance."
+        )
         self._delayed_post_at = value
 
     @property
@@ -2947,7 +3511,9 @@ class Discussiontopic(BaseModel):
     @published.setter
     def published(self, value):
         """Setter for published property."""
-        self.logger.warn("Setting values on published will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on published will NOT update the remote Canvas instance."
+        )
         self._published = value
 
     @property
@@ -2958,7 +3524,9 @@ class Discussiontopic(BaseModel):
     @lock_at.setter
     def lock_at(self, value):
         """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_at will NOT update the remote Canvas instance."
+        )
         self._lock_at = value
 
     @property
@@ -2969,7 +3537,9 @@ class Discussiontopic(BaseModel):
     @locked.setter
     def locked(self, value):
         """Setter for locked property."""
-        self.logger.warn("Setting values on locked will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on locked will NOT update the remote Canvas instance."
+        )
         self._locked = value
 
     @property
@@ -2980,7 +3550,9 @@ class Discussiontopic(BaseModel):
     @pinned.setter
     def pinned(self, value):
         """Setter for pinned property."""
-        self.logger.warn("Setting values on pinned will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on pinned will NOT update the remote Canvas instance."
+        )
         self._pinned = value
 
     @property
@@ -2991,7 +3563,9 @@ class Discussiontopic(BaseModel):
     @locked_for_user.setter
     def locked_for_user(self, value):
         """Setter for locked_for_user property."""
-        self.logger.warn("Setting values on locked_for_user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on locked_for_user will NOT update the remote Canvas instance."
+        )
         self._locked_for_user = value
 
     @property
@@ -3002,7 +3576,9 @@ class Discussiontopic(BaseModel):
     @lock_info.setter
     def lock_info(self, value):
         """Setter for lock_info property."""
-        self.logger.warn("Setting values on lock_info will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_info will NOT update the remote Canvas instance."
+        )
         self._lock_info = value
 
     @property
@@ -3013,7 +3589,9 @@ class Discussiontopic(BaseModel):
     @lock_explanation.setter
     def lock_explanation(self, value):
         """Setter for lock_explanation property."""
-        self.logger.warn("Setting values on lock_explanation will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_explanation will NOT update the remote Canvas instance."
+        )
         self._lock_explanation = value
 
     @property
@@ -3024,7 +3602,9 @@ class Discussiontopic(BaseModel):
     @user_name.setter
     def user_name(self, value):
         """Setter for user_name property."""
-        self.logger.warn("Setting values on user_name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_name will NOT update the remote Canvas instance."
+        )
         self._user_name = value
 
     @property
@@ -3035,7 +3615,9 @@ class Discussiontopic(BaseModel):
     @topic_children.setter
     def topic_children(self, value):
         """Setter for topic_children property."""
-        self.logger.warn("Setting values on topic_children will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on topic_children will NOT update the remote Canvas instance."
+        )
         self._topic_children = value
 
     @property
@@ -3046,7 +3628,9 @@ class Discussiontopic(BaseModel):
     @group_topic_children.setter
     def group_topic_children(self, value):
         """Setter for group_topic_children property."""
-        self.logger.warn("Setting values on group_topic_children will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on group_topic_children will NOT update the remote Canvas instance."
+        )
         self._group_topic_children = value
 
     @property
@@ -3057,7 +3641,9 @@ class Discussiontopic(BaseModel):
     @root_topic_id.setter
     def root_topic_id(self, value):
         """Setter for root_topic_id property."""
-        self.logger.warn("Setting values on root_topic_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on root_topic_id will NOT update the remote Canvas instance."
+        )
         self._root_topic_id = value
 
     @property
@@ -3068,7 +3654,9 @@ class Discussiontopic(BaseModel):
     @podcast_url.setter
     def podcast_url(self, value):
         """Setter for podcast_url property."""
-        self.logger.warn("Setting values on podcast_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on podcast_url will NOT update the remote Canvas instance."
+        )
         self._podcast_url = value
 
     @property
@@ -3079,7 +3667,9 @@ class Discussiontopic(BaseModel):
     @discussion_type.setter
     def discussion_type(self, value):
         """Setter for discussion_type property."""
-        self.logger.warn("Setting values on discussion_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on discussion_type will NOT update the remote Canvas instance."
+        )
         self._discussion_type = value
 
     @property
@@ -3090,7 +3680,9 @@ class Discussiontopic(BaseModel):
     @group_category_id.setter
     def group_category_id(self, value):
         """Setter for group_category_id property."""
-        self.logger.warn("Setting values on group_category_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on group_category_id will NOT update the remote Canvas instance."
+        )
         self._group_category_id = value
 
     @property
@@ -3101,7 +3693,9 @@ class Discussiontopic(BaseModel):
     @attachments.setter
     def attachments(self, value):
         """Setter for attachments property."""
-        self.logger.warn("Setting values on attachments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on attachments will NOT update the remote Canvas instance."
+        )
         self._attachments = value
 
     @property
@@ -3112,7 +3706,9 @@ class Discussiontopic(BaseModel):
     @permissions.setter
     def permissions(self, value):
         """Setter for permissions property."""
-        self.logger.warn("Setting values on permissions will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on permissions will NOT update the remote Canvas instance."
+        )
         self._permissions = value
 
     @property
@@ -3123,7 +3719,9 @@ class Discussiontopic(BaseModel):
     @allow_rating.setter
     def allow_rating(self, value):
         """Setter for allow_rating property."""
-        self.logger.warn("Setting values on allow_rating will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on allow_rating will NOT update the remote Canvas instance."
+        )
         self._allow_rating = value
 
     @property
@@ -3134,7 +3732,9 @@ class Discussiontopic(BaseModel):
     @only_graders_can_rate.setter
     def only_graders_can_rate(self, value):
         """Setter for only_graders_can_rate property."""
-        self.logger.warn("Setting values on only_graders_can_rate will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on only_graders_can_rate will NOT update the remote Canvas instance."
+        )
         self._only_graders_can_rate = value
 
     @property
@@ -3145,6 +3745,7 @@ class Discussiontopic(BaseModel):
     @sort_by_rating.setter
     def sort_by_rating(self, value):
         """Setter for sort_by_rating property."""
-        self.logger.warn("Setting values on sort_by_rating will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sort_by_rating will NOT update the remote Canvas instance."
+        )
         self._sort_by_rating = value
-

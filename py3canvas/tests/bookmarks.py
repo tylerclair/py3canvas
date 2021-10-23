@@ -41,4 +41,3 @@ class TestBookmarksAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_bookmark(id)
-

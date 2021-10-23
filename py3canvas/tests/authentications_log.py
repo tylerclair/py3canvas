@@ -13,7 +13,9 @@ class TestAuthenticationsLogAPI(unittest.TestCase):
     """Tests for the AuthenticationsLogAPI."""
 
     def setUp(self):
-        self.client = AuthenticationsLogAPI(secrets.instance_address, secrets.access_token)
+        self.client = AuthenticationsLogAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_query_by_login(self):
         """Integration test for the AuthenticationsLogAPI.query_by_login method."""
@@ -32,4 +34,3 @@ class TestAuthenticationsLogAPI(unittest.TestCase):
         user_id = None  # Change me!!
 
         r = self.client.query_by_user(user_id, end_time=None, start_time=None)
-

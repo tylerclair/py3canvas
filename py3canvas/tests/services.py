@@ -23,4 +23,3 @@ class TestServicesAPI(unittest.TestCase):
         """Integration test for the ServicesAPI.start_kaltura_session method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

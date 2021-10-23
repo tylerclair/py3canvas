@@ -46,4 +46,3 @@ class TestPlannerOverrideAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_planner_override(id)
-

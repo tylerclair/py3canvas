@@ -32,9 +32,18 @@ class PollChoicesAPI(BaseCanvasAPI):
         """
         path["poll_id"] = poll_id
 
-
-        self.logger.debug("GET /api/v1/polls/{poll_id}/poll_choices with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/polls/{poll_id}/poll_choices".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/polls/{poll_id}/poll_choices with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/polls/{poll_id}/poll_choices".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_single_poll_choice(self, id, poll_id):
         """
@@ -52,18 +61,32 @@ class PollChoicesAPI(BaseCanvasAPI):
         """
         path["poll_id"] = poll_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
+        self.logger.debug(
+            "GET /api/v1/polls/{poll_id}/poll_choices/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/polls/{poll_id}/poll_choices/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/polls/{poll_id}/poll_choices/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/polls/{poll_id}/poll_choices/{id}".format(**path), data=data, params=params, no_data=True)
-
-    def create_single_poll_choice(self, poll_choices_text, poll_id, poll_choices_is_correct=None, poll_choices_position=None):
+    def create_single_poll_choice(
+        self,
+        poll_choices_text,
+        poll_id,
+        poll_choices_is_correct=None,
+        poll_choices_position=None,
+    ):
         """
         Create a single poll choice.
 
@@ -79,13 +102,11 @@ class PollChoicesAPI(BaseCanvasAPI):
         """
         path["poll_id"] = poll_id
 
-
         # REQUIRED - poll_choices[text]
         """
             The descriptive text of the poll choice.
         """
         data["poll_choices[text]"] = poll_choices_text
-
 
         # OPTIONAL - poll_choices[is_correct]
         """
@@ -94,7 +115,6 @@ class PollChoicesAPI(BaseCanvasAPI):
         if poll_choices_is_correct is not None:
             data["poll_choices[is_correct]"] = poll_choices_is_correct
 
-
         # OPTIONAL - poll_choices[position]
         """
             The order this poll choice should be returned in the context it's sibling poll choices.
@@ -102,11 +122,27 @@ class PollChoicesAPI(BaseCanvasAPI):
         if poll_choices_position is not None:
             data["poll_choices[position]"] = poll_choices_position
 
+        self.logger.debug(
+            "POST /api/v1/polls/{poll_id}/poll_choices with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/polls/{poll_id}/poll_choices".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/polls/{poll_id}/poll_choices with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/polls/{poll_id}/poll_choices".format(**path), data=data, params=params, no_data=True)
-
-    def update_single_poll_choice(self, id, poll_choices_text, poll_id, poll_choices_is_correct=None, poll_choices_position=None):
+    def update_single_poll_choice(
+        self,
+        id,
+        poll_choices_text,
+        poll_id,
+        poll_choices_is_correct=None,
+        poll_choices_position=None,
+    ):
         """
         Update a single poll choice.
 
@@ -122,20 +158,17 @@ class PollChoicesAPI(BaseCanvasAPI):
         """
         path["poll_id"] = poll_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
         # REQUIRED - poll_choices[text]
         """
             The descriptive text of the poll choice.
         """
         data["poll_choices[text]"] = poll_choices_text
-
 
         # OPTIONAL - poll_choices[is_correct]
         """
@@ -144,7 +177,6 @@ class PollChoicesAPI(BaseCanvasAPI):
         if poll_choices_is_correct is not None:
             data["poll_choices[is_correct]"] = poll_choices_is_correct
 
-
         # OPTIONAL - poll_choices[position]
         """
             The order this poll choice should be returned in the context it's sibling poll choices.
@@ -152,9 +184,18 @@ class PollChoicesAPI(BaseCanvasAPI):
         if poll_choices_position is not None:
             data["poll_choices[position]"] = poll_choices_position
 
-
-        self.logger.debug("PUT /api/v1/polls/{poll_id}/poll_choices/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/polls/{poll_id}/poll_choices/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/polls/{poll_id}/poll_choices/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/polls/{poll_id}/poll_choices/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_poll_choice(self, id, poll_id):
         """
@@ -172,16 +213,24 @@ class PollChoicesAPI(BaseCanvasAPI):
         """
         path["poll_id"] = poll_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/polls/{poll_id}/poll_choices/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/polls/{poll_id}/poll_choices/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/polls/{poll_id}/poll_choices/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/polls/{poll_id}/poll_choices/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Pollchoice(BaseModel):
@@ -195,7 +244,7 @@ class Pollchoice(BaseModel):
         self._text = text
         self._position = position
 
-        self.logger = logging.getLogger('py3canvas.Pollchoice')
+        self.logger = logging.getLogger("py3canvas.Pollchoice")
 
     @property
     def id(self):
@@ -205,7 +254,9 @@ class Pollchoice(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -216,7 +267,9 @@ class Pollchoice(BaseModel):
     @poll_id.setter
     def poll_id(self, value):
         """Setter for poll_id property."""
-        self.logger.warn("Setting values on poll_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on poll_id will NOT update the remote Canvas instance."
+        )
         self._poll_id = value
 
     @property
@@ -227,7 +280,9 @@ class Pollchoice(BaseModel):
     @is_correct.setter
     def is_correct(self, value):
         """Setter for is_correct property."""
-        self.logger.warn("Setting values on is_correct will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on is_correct will NOT update the remote Canvas instance."
+        )
         self._is_correct = value
 
     @property
@@ -238,7 +293,9 @@ class Pollchoice(BaseModel):
     @text.setter
     def text(self, value):
         """Setter for text property."""
-        self.logger.warn("Setting values on text will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on text will NOT update the remote Canvas instance."
+        )
         self._text = value
 
     @property
@@ -249,6 +306,7 @@ class Pollchoice(BaseModel):
     @position.setter
     def position(self, value):
         """Setter for position property."""
-        self.logger.warn("Setting values on position will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on position will NOT update the remote Canvas instance."
+        )
         self._position = value
-

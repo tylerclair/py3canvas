@@ -53,14 +53,18 @@ class TestRubricsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_rubric_accounts(account_id, id, include=None, style=None)
+        r = self.client.get_single_rubric_accounts(
+            account_id, id, include=None, style=None
+        )
 
     def test_get_single_rubric_courses(self):
         """Integration test for the RubricsAPI.get_single_rubric_courses method."""
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_rubric_courses(course_id, id, include=None, style=None)
+        r = self.client.get_single_rubric_courses(
+            course_id, id, include=None, style=None
+        )
 
     def test_create_single_rubric_assessment(self):
         """Integration test for the RubricsAPI.create_single_rubric_assessment method."""
@@ -78,7 +82,9 @@ class TestRubricsAPI(unittest.TestCase):
         rubric_association_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.delete_single_rubric_assessment(course_id, id, rubric_association_id)
+        r = self.client.delete_single_rubric_assessment(
+            course_id, id, rubric_association_id
+        )
 
     def test_create_rubricassociation(self):
         """Integration test for the RubricsAPI.create_rubricassociation method."""
@@ -96,4 +102,3 @@ class TestRubricsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_rubricassociation(course_id, id)
-

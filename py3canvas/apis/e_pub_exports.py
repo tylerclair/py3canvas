@@ -27,19 +27,29 @@ class EPubExportsAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/v1/epub_exports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/epub_exports".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/epub_exports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/epub_exports".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def create_epub_export(self, course_id):
         """
         Create ePub Export.
 
         Begin an ePub export for a course.
-        
+
         You can use the {api:ProgressController#show Progress API} to track the
         progress of the export. The export's progress is linked to with the
         _progress_url_ value.
-        
+
         When the export completes, use the {api:EpubExportsController#show Show content export} endpoint
         to retrieve a download URL for the exported content.
         """
@@ -53,9 +63,18 @@ class EPubExportsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/epub_exports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/epub_exports".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/epub_exports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/epub_exports".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_epub_export(self, course_id, id):
         """
@@ -73,16 +92,24 @@ class EPubExportsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/epub_exports/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/epub_exports/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/epub_exports/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/epub_exports/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Courseepubexport(BaseModel):
@@ -95,7 +122,7 @@ class Courseepubexport(BaseModel):
         self._name = name
         self._epub_export = epub_export
 
-        self.logger = logging.getLogger('py3canvas.Courseepubexport')
+        self.logger = logging.getLogger("py3canvas.Courseepubexport")
 
     @property
     def id(self):
@@ -105,7 +132,9 @@ class Courseepubexport(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -116,7 +145,9 @@ class Courseepubexport(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -127,14 +158,24 @@ class Courseepubexport(BaseModel):
     @epub_export.setter
     def epub_export(self, value):
         """Setter for epub_export property."""
-        self.logger.warn("Setting values on epub_export will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on epub_export will NOT update the remote Canvas instance."
+        )
         self._epub_export = value
 
 
 class Epubexport(BaseModel):
     """Epubexport Model."""
 
-    def __init__(self, id=None, created_at=None, attachment=None, progress_url=None, user_id=None, workflow_state=None):
+    def __init__(
+        self,
+        id=None,
+        created_at=None,
+        attachment=None,
+        progress_url=None,
+        user_id=None,
+        workflow_state=None,
+    ):
         """Init method for Epubexport class."""
         self._id = id
         self._created_at = created_at
@@ -143,7 +184,7 @@ class Epubexport(BaseModel):
         self._user_id = user_id
         self._workflow_state = workflow_state
 
-        self.logger = logging.getLogger('py3canvas.Epubexport')
+        self.logger = logging.getLogger("py3canvas.Epubexport")
 
     @property
     def id(self):
@@ -153,7 +194,9 @@ class Epubexport(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -164,7 +207,9 @@ class Epubexport(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -175,7 +220,9 @@ class Epubexport(BaseModel):
     @attachment.setter
     def attachment(self, value):
         """Setter for attachment property."""
-        self.logger.warn("Setting values on attachment will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on attachment will NOT update the remote Canvas instance."
+        )
         self._attachment = value
 
     @property
@@ -186,7 +233,9 @@ class Epubexport(BaseModel):
     @progress_url.setter
     def progress_url(self, value):
         """Setter for progress_url property."""
-        self.logger.warn("Setting values on progress_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on progress_url will NOT update the remote Canvas instance."
+        )
         self._progress_url = value
 
     @property
@@ -197,7 +246,9 @@ class Epubexport(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -208,6 +259,7 @@ class Epubexport(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
-

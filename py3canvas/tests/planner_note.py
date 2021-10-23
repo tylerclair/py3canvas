@@ -41,4 +41,3 @@ class TestPlannerNoteAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_planner_note(id)
-

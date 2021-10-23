@@ -35,14 +35,35 @@ class TestAssignmentsAPI(unittest.TestCase):
         """Integration test for the AssignmentsAPI.list_assignments_assignments method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_assignments_assignments(course_id, assignment_ids=None, bucket=None, include=None, needs_grading_count_by_section=None, order_by=None, override_assignment_dates=None, post_to_sis=None, search_term=None)
+        r = self.client.list_assignments_assignments(
+            course_id,
+            assignment_ids=None,
+            bucket=None,
+            include=None,
+            needs_grading_count_by_section=None,
+            order_by=None,
+            override_assignment_dates=None,
+            post_to_sis=None,
+            search_term=None,
+        )
 
     def test_list_assignments_assignment_groups(self):
         """Integration test for the AssignmentsAPI.list_assignments_assignment_groups method."""
         course_id = None  # Change me!!
         assignment_group_id = None  # Change me!!
 
-        r = self.client.list_assignments_assignment_groups(assignment_group_id, course_id, assignment_ids=None, bucket=None, include=None, needs_grading_count_by_section=None, order_by=None, override_assignment_dates=None, post_to_sis=None, search_term=None)
+        r = self.client.list_assignments_assignment_groups(
+            assignment_group_id,
+            course_id,
+            assignment_ids=None,
+            bucket=None,
+            include=None,
+            needs_grading_count_by_section=None,
+            order_by=None,
+            override_assignment_dates=None,
+            post_to_sis=None,
+            search_term=None,
+        )
 
     def test_list_assignments_for_user(self):
         """Integration test for the AssignmentsAPI.list_assignments_for_user method."""
@@ -61,7 +82,14 @@ class TestAssignmentsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_assignment(course_id, id, all_dates=None, include=None, needs_grading_count_by_section=None, override_assignment_dates=None)
+        r = self.client.get_single_assignment(
+            course_id,
+            id,
+            all_dates=None,
+            include=None,
+            needs_grading_count_by_section=None,
+            override_assignment_dates=None,
+        )
 
     def test_create_assignment(self):
         """Integration test for the AssignmentsAPI.create_assignment method."""
@@ -98,14 +126,18 @@ class TestAssignmentsAPI(unittest.TestCase):
         group_id = None  # Change me!!
         assignment_id = None  # Change me!!
 
-        r = self.client.redirect_to_assignment_override_for_group(assignment_id, group_id)
+        r = self.client.redirect_to_assignment_override_for_group(
+            assignment_id, group_id
+        )
 
     def test_redirect_to_assignment_override_for_section(self):
         """Integration test for the AssignmentsAPI.redirect_to_assignment_override_for_section method."""
         course_section_id = None  # Change me!!
         assignment_id = None  # Change me!!
 
-        r = self.client.redirect_to_assignment_override_for_section(assignment_id, course_section_id)
+        r = self.client.redirect_to_assignment_override_for_section(
+            assignment_id, course_section_id
+        )
 
     def test_create_assignment_override(self):
         """Integration test for the AssignmentsAPI.create_assignment_override method."""
@@ -131,7 +163,9 @@ class TestAssignmentsAPI(unittest.TestCase):
         assignment_overrides[id] = None  # Change me!!
         assignment_overrides[assignment_id] = None  # Change me!!
 
-        r = self.client.batch_retrieve_overrides_in_course(assignment_overrides_assignment_id, assignment_overrides_id, course_id)
+        r = self.client.batch_retrieve_overrides_in_course(
+            assignment_overrides_assignment_id, assignment_overrides_id, course_id
+        )
 
     def test_batch_create_overrides_in_course(self):
         """Integration test for the AssignmentsAPI.batch_create_overrides_in_course method."""
@@ -142,4 +176,3 @@ class TestAssignmentsAPI(unittest.TestCase):
         """Integration test for the AssignmentsAPI.batch_update_overrides_in_course method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

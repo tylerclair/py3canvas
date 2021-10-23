@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class SearchAPI(BaseCanvasAPI):
     """Search API Version 1.0."""
 
@@ -16,14 +15,23 @@ class SearchAPI(BaseCanvasAPI):
         super(SearchAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.SearchAPI")
 
-    def find_recipients_conversations(self, context=None, exclude=None, from_conversation_id=None, permissions=None, search=None, type=None, user_id=None):
+    def find_recipients_conversations(
+        self,
+        context=None,
+        exclude=None,
+        from_conversation_id=None,
+        permissions=None,
+        search=None,
+        type=None,
+        user_id=None,
+    ):
         """
         Find recipients.
 
         Find valid recipients (users, courses and groups) that the current user
         can send messages to. The /api/v1/search/recipients path is the preferred
         endpoint, /api/v1/conversations/find_recipients is deprecated.
-        
+
         Pagination is supported.
         """
         path = {}
@@ -39,14 +47,12 @@ class SearchAPI(BaseCanvasAPI):
         if search is not None:
             params["search"] = search
 
-
         # OPTIONAL - context
         """
             Limit the search to a particular course/group (e.g. "course_3" or "group_4").
         """
         if context is not None:
             params["context"] = context
-
 
         # OPTIONAL - exclude
         """
@@ -57,7 +63,6 @@ class SearchAPI(BaseCanvasAPI):
         if exclude is not None:
             params["exclude"] = exclude
 
-
         # OPTIONAL - type
         """
             Limit the search just to users or contexts (groups/courses).
@@ -66,7 +71,6 @@ class SearchAPI(BaseCanvasAPI):
             self._validate_enum(type, ["user", "context"])
             params["type"] = type
 
-
         # OPTIONAL - user_id
         """
             Search for a specific user id. This ignores the other above parameters,
@@ -74,7 +78,6 @@ class SearchAPI(BaseCanvasAPI):
         """
         if user_id is not None:
             params["user_id"] = user_id
-
 
         # OPTIONAL - from_conversation_id
         """
@@ -87,7 +90,6 @@ class SearchAPI(BaseCanvasAPI):
         if from_conversation_id is not None:
             params["from_conversation_id"] = from_conversation_id
 
-
         # OPTIONAL - permissions
         """
             Array of permission strings to be checked for each matched context (e.g.
@@ -98,18 +100,36 @@ class SearchAPI(BaseCanvasAPI):
         if permissions is not None:
             params["permissions"] = permissions
 
+        self.logger.debug(
+            "GET /api/v1/conversations/find_recipients with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/conversations/find_recipients".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/conversations/find_recipients with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/conversations/find_recipients".format(**path), data=data, params=params, no_data=True)
-
-    def find_recipients_search(self, context=None, exclude=None, from_conversation_id=None, permissions=None, search=None, type=None, user_id=None):
+    def find_recipients_search(
+        self,
+        context=None,
+        exclude=None,
+        from_conversation_id=None,
+        permissions=None,
+        search=None,
+        type=None,
+        user_id=None,
+    ):
         """
         Find recipients.
 
         Find valid recipients (users, courses and groups) that the current user
         can send messages to. The /api/v1/search/recipients path is the preferred
         endpoint, /api/v1/conversations/find_recipients is deprecated.
-        
+
         Pagination is supported.
         """
         path = {}
@@ -125,14 +145,12 @@ class SearchAPI(BaseCanvasAPI):
         if search is not None:
             params["search"] = search
 
-
         # OPTIONAL - context
         """
             Limit the search to a particular course/group (e.g. "course_3" or "group_4").
         """
         if context is not None:
             params["context"] = context
-
 
         # OPTIONAL - exclude
         """
@@ -143,7 +161,6 @@ class SearchAPI(BaseCanvasAPI):
         if exclude is not None:
             params["exclude"] = exclude
 
-
         # OPTIONAL - type
         """
             Limit the search just to users or contexts (groups/courses).
@@ -152,7 +169,6 @@ class SearchAPI(BaseCanvasAPI):
             self._validate_enum(type, ["user", "context"])
             params["type"] = type
 
-
         # OPTIONAL - user_id
         """
             Search for a specific user id. This ignores the other above parameters,
@@ -160,7 +176,6 @@ class SearchAPI(BaseCanvasAPI):
         """
         if user_id is not None:
             params["user_id"] = user_id
-
 
         # OPTIONAL - from_conversation_id
         """
@@ -173,7 +188,6 @@ class SearchAPI(BaseCanvasAPI):
         if from_conversation_id is not None:
             params["from_conversation_id"] = from_conversation_id
 
-
         # OPTIONAL - permissions
         """
             Array of permission strings to be checked for each matched context (e.g.
@@ -184,11 +198,22 @@ class SearchAPI(BaseCanvasAPI):
         if permissions is not None:
             params["permissions"] = permissions
 
+        self.logger.debug(
+            "GET /api/v1/search/recipients with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/search/recipients".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/search/recipients with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/search/recipients".format(**path), data=data, params=params, no_data=True)
-
-    def list_all_courses(self, open_enrollment_only=None, public_only=None, search=None):
+    def list_all_courses(
+        self, open_enrollment_only=None, public_only=None, search=None
+    ):
         """
         List all courses.
 
@@ -207,14 +232,12 @@ class SearchAPI(BaseCanvasAPI):
         if search is not None:
             params["search"] = search
 
-
         # OPTIONAL - public_only
         """
             Only return courses with public content. Defaults to false.
         """
         if public_only is not None:
             params["public_only"] = public_only
-
 
         # OPTIONAL - open_enrollment_only
         """
@@ -223,7 +246,15 @@ class SearchAPI(BaseCanvasAPI):
         if open_enrollment_only is not None:
             params["open_enrollment_only"] = open_enrollment_only
 
-
-        self.logger.debug("GET /api/v1/search/all_courses with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/search/all_courses".format(**path), data=data, params=params, no_data=True)
-
+        self.logger.debug(
+            "GET /api/v1/search/all_courses with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/search/all_courses".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )

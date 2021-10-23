@@ -32,7 +32,6 @@ class CourseAuditLogAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - start_time
         """
             The beginning of the time range from which you want events.
@@ -40,10 +39,11 @@ class CourseAuditLogAPI(BaseCanvasAPI):
         if start_time is not None:
             if issubclass(start_time.__class__, str):
                 start_time = self._validate_iso8601_string(start_time)
-            elif issubclass(start_time.__class__, date) or issubclass(start_time.__class__, datetime):
-                start_time = start_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(start_time.__class__, date) or issubclass(
+                start_time.__class__, datetime
+            ):
+                start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["start_time"] = start_time
-
 
         # OPTIONAL - end_time
         """
@@ -52,13 +52,24 @@ class CourseAuditLogAPI(BaseCanvasAPI):
         if end_time is not None:
             if issubclass(end_time.__class__, str):
                 end_time = self._validate_iso8601_string(end_time)
-            elif issubclass(end_time.__class__, date) or issubclass(end_time.__class__, datetime):
-                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(end_time.__class__, date) or issubclass(
+                end_time.__class__, datetime
+            ):
+                end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["end_time"] = end_time
 
-
-        self.logger.debug("GET /api/v1/audit/course/courses/{course_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/audit/course/courses/{course_id}".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/audit/course/courses/{course_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/audit/course/courses/{course_id}".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def query_by_account(self, account_id, end_time=None, start_time=None):
         """
@@ -76,7 +87,6 @@ class CourseAuditLogAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # OPTIONAL - start_time
         """
             The beginning of the time range from which you want events.
@@ -84,10 +94,11 @@ class CourseAuditLogAPI(BaseCanvasAPI):
         if start_time is not None:
             if issubclass(start_time.__class__, str):
                 start_time = self._validate_iso8601_string(start_time)
-            elif issubclass(start_time.__class__, date) or issubclass(start_time.__class__, datetime):
-                start_time = start_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(start_time.__class__, date) or issubclass(
+                start_time.__class__, datetime
+            ):
+                start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["start_time"] = start_time
-
 
         # OPTIONAL - end_time
         """
@@ -96,19 +107,38 @@ class CourseAuditLogAPI(BaseCanvasAPI):
         if end_time is not None:
             if issubclass(end_time.__class__, str):
                 end_time = self._validate_iso8601_string(end_time)
-            elif issubclass(end_time.__class__, date) or issubclass(end_time.__class__, datetime):
-                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(end_time.__class__, date) or issubclass(
+                end_time.__class__, datetime
+            ):
+                end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["end_time"] = end_time
 
-
-        self.logger.debug("GET /api/v1/audit/course/accounts/{account_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/audit/course/accounts/{account_id}".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/audit/course/accounts/{account_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/audit/course/accounts/{account_id}".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
 
 class Courseeventlink(BaseModel):
     """Courseeventlink Model."""
 
-    def __init__(self, course=None, user=None, page_view=None, copied_from=None, copied_to=None, sis_batch=None):
+    def __init__(
+        self,
+        course=None,
+        user=None,
+        page_view=None,
+        copied_from=None,
+        copied_to=None,
+        sis_batch=None,
+    ):
         """Init method for Courseeventlink class."""
         self._course = course
         self._user = user
@@ -117,7 +147,7 @@ class Courseeventlink(BaseModel):
         self._copied_to = copied_to
         self._sis_batch = sis_batch
 
-        self.logger = logging.getLogger('py3canvas.Courseeventlink')
+        self.logger = logging.getLogger("py3canvas.Courseeventlink")
 
     @property
     def course(self):
@@ -127,7 +157,9 @@ class Courseeventlink(BaseModel):
     @course.setter
     def course(self, value):
         """Setter for course property."""
-        self.logger.warn("Setting values on course will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course will NOT update the remote Canvas instance."
+        )
         self._course = value
 
     @property
@@ -138,7 +170,9 @@ class Courseeventlink(BaseModel):
     @user.setter
     def user(self, value):
         """Setter for user property."""
-        self.logger.warn("Setting values on user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user will NOT update the remote Canvas instance."
+        )
         self._user = value
 
     @property
@@ -149,7 +183,9 @@ class Courseeventlink(BaseModel):
     @page_view.setter
     def page_view(self, value):
         """Setter for page_view property."""
-        self.logger.warn("Setting values on page_view will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on page_view will NOT update the remote Canvas instance."
+        )
         self._page_view = value
 
     @property
@@ -160,7 +196,9 @@ class Courseeventlink(BaseModel):
     @copied_from.setter
     def copied_from(self, value):
         """Setter for copied_from property."""
-        self.logger.warn("Setting values on copied_from will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on copied_from will NOT update the remote Canvas instance."
+        )
         self._copied_from = value
 
     @property
@@ -171,7 +209,9 @@ class Courseeventlink(BaseModel):
     @copied_to.setter
     def copied_to(self, value):
         """Setter for copied_to property."""
-        self.logger.warn("Setting values on copied_to will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on copied_to will NOT update the remote Canvas instance."
+        )
         self._copied_to = value
 
     @property
@@ -182,14 +222,24 @@ class Courseeventlink(BaseModel):
     @sis_batch.setter
     def sis_batch(self, value):
         """Setter for sis_batch property."""
-        self.logger.warn("Setting values on sis_batch will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_batch will NOT update the remote Canvas instance."
+        )
         self._sis_batch = value
 
 
 class Courseevent(BaseModel):
     """Courseevent Model."""
 
-    def __init__(self, id=None, created_at=None, event_type=None, event_data=None, event_source=None, links=None):
+    def __init__(
+        self,
+        id=None,
+        created_at=None,
+        event_type=None,
+        event_data=None,
+        event_source=None,
+        links=None,
+    ):
         """Init method for Courseevent class."""
         self._id = id
         self._created_at = created_at
@@ -198,7 +248,7 @@ class Courseevent(BaseModel):
         self._event_source = event_source
         self._links = links
 
-        self.logger = logging.getLogger('py3canvas.Courseevent')
+        self.logger = logging.getLogger("py3canvas.Courseevent")
 
     @property
     def id(self):
@@ -208,7 +258,9 @@ class Courseevent(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -219,7 +271,9 @@ class Courseevent(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -230,7 +284,9 @@ class Courseevent(BaseModel):
     @event_type.setter
     def event_type(self, value):
         """Setter for event_type property."""
-        self.logger.warn("Setting values on event_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on event_type will NOT update the remote Canvas instance."
+        )
         self._event_type = value
 
     @property
@@ -241,7 +297,9 @@ class Courseevent(BaseModel):
     @event_data.setter
     def event_data(self, value):
         """Setter for event_data property."""
-        self.logger.warn("Setting values on event_data will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on event_data will NOT update the remote Canvas instance."
+        )
         self._event_data = value
 
     @property
@@ -252,7 +310,9 @@ class Courseevent(BaseModel):
     @event_source.setter
     def event_source(self, value):
         """Setter for event_source property."""
-        self.logger.warn("Setting values on event_source will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on event_source will NOT update the remote Canvas instance."
+        )
         self._event_source = value
 
     @property
@@ -263,7 +323,9 @@ class Courseevent(BaseModel):
     @links.setter
     def links(self, value):
         """Setter for links property."""
-        self.logger.warn("Setting values on links will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on links will NOT update the remote Canvas instance."
+        )
         self._links = value
 
 
@@ -271,7 +333,14 @@ class Createdeventdata(BaseModel):
     """Createdeventdata Model.
     The created event data object returns all the fields that were set in the format of the following example.  If a field does not exist it was not set. The value of each field changed is in the format of [:old_value, :new_value].  The created event type also includes a created_source field to specify what triggered the creation of the course."""
 
-    def __init__(self, name=None, start_at=None, conclude_at=None, is_public=None, created_source=None):
+    def __init__(
+        self,
+        name=None,
+        start_at=None,
+        conclude_at=None,
+        is_public=None,
+        created_source=None,
+    ):
         """Init method for Createdeventdata class."""
         self._name = name
         self._start_at = start_at
@@ -279,7 +348,7 @@ class Createdeventdata(BaseModel):
         self._is_public = is_public
         self._created_source = created_source
 
-        self.logger = logging.getLogger('py3canvas.Createdeventdata')
+        self.logger = logging.getLogger("py3canvas.Createdeventdata")
 
     @property
     def name(self):
@@ -289,7 +358,9 @@ class Createdeventdata(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -300,7 +371,9 @@ class Createdeventdata(BaseModel):
     @start_at.setter
     def start_at(self, value):
         """Setter for start_at property."""
-        self.logger.warn("Setting values on start_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on start_at will NOT update the remote Canvas instance."
+        )
         self._start_at = value
 
     @property
@@ -311,7 +384,9 @@ class Createdeventdata(BaseModel):
     @conclude_at.setter
     def conclude_at(self, value):
         """Setter for conclude_at property."""
-        self.logger.warn("Setting values on conclude_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on conclude_at will NOT update the remote Canvas instance."
+        )
         self._conclude_at = value
 
     @property
@@ -322,7 +397,9 @@ class Createdeventdata(BaseModel):
     @is_public.setter
     def is_public(self, value):
         """Setter for is_public property."""
-        self.logger.warn("Setting values on is_public will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on is_public will NOT update the remote Canvas instance."
+        )
         self._is_public = value
 
     @property
@@ -333,7 +410,9 @@ class Createdeventdata(BaseModel):
     @created_source.setter
     def created_source(self, value):
         """Setter for created_source property."""
-        self.logger.warn("Setting values on created_source will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_source will NOT update the remote Canvas instance."
+        )
         self._created_source = value
 
 
@@ -348,7 +427,7 @@ class Updatedeventdata(BaseModel):
         self._conclude_at = conclude_at
         self._is_public = is_public
 
-        self.logger = logging.getLogger('py3canvas.Updatedeventdata')
+        self.logger = logging.getLogger("py3canvas.Updatedeventdata")
 
     @property
     def name(self):
@@ -358,7 +437,9 @@ class Updatedeventdata(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -369,7 +450,9 @@ class Updatedeventdata(BaseModel):
     @start_at.setter
     def start_at(self, value):
         """Setter for start_at property."""
-        self.logger.warn("Setting values on start_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on start_at will NOT update the remote Canvas instance."
+        )
         self._start_at = value
 
     @property
@@ -380,7 +463,9 @@ class Updatedeventdata(BaseModel):
     @conclude_at.setter
     def conclude_at(self, value):
         """Setter for conclude_at property."""
-        self.logger.warn("Setting values on conclude_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on conclude_at will NOT update the remote Canvas instance."
+        )
         self._conclude_at = value
 
     @property
@@ -391,6 +476,7 @@ class Updatedeventdata(BaseModel):
     @is_public.setter
     def is_public(self, value):
         """Setter for is_public property."""
-        self.logger.warn("Setting values on is_public will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on is_public will NOT update the remote Canvas instance."
+        )
         self._is_public = value
-

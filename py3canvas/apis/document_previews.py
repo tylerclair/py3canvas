@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class DocumentPreviewsAPI(BaseCanvasAPI):
     """DocumentPreviews API Version 1.0."""
 
@@ -15,4 +14,3 @@ class DocumentPreviewsAPI(BaseCanvasAPI):
         """Init method for DocumentPreviewsAPI."""
         super(DocumentPreviewsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.DocumentPreviewsAPI")
-

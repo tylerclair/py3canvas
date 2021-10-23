@@ -40,25 +40,61 @@ class TestFilesAPI(unittest.TestCase):
         """Integration test for the FilesAPI.list_files_courses method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_files_courses(course_id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
+        r = self.client.list_files_courses(
+            course_id,
+            content_types=None,
+            exclude_content_types=None,
+            include=None,
+            only=None,
+            order=None,
+            search_term=None,
+            sort=None,
+        )
 
     def test_list_files_users(self):
         """Integration test for the FilesAPI.list_files_users method."""
         user_id = None  # Change me!!
 
-        r = self.client.list_files_users(user_id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
+        r = self.client.list_files_users(
+            user_id,
+            content_types=None,
+            exclude_content_types=None,
+            include=None,
+            only=None,
+            order=None,
+            search_term=None,
+            sort=None,
+        )
 
     def test_list_files_groups(self):
         """Integration test for the FilesAPI.list_files_groups method."""
         group_id = None  # Change me!!
 
-        r = self.client.list_files_groups(group_id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
+        r = self.client.list_files_groups(
+            group_id,
+            content_types=None,
+            exclude_content_types=None,
+            include=None,
+            only=None,
+            order=None,
+            search_term=None,
+            sort=None,
+        )
 
     def test_list_files_folders(self):
         """Integration test for the FilesAPI.list_files_folders method."""
         id = None  # Change me!!
 
-        r = self.client.list_files_folders(id, content_types=None, exclude_content_types=None, include=None, only=None, order=None, search_term=None, sort=None)
+        r = self.client.list_files_folders(
+            id,
+            content_types=None,
+            exclude_content_types=None,
+            include=None,
+            only=None,
+            order=None,
+            search_term=None,
+            sort=None,
+        )
 
     def test_get_public_inline_preview_url(self):
         """Integration test for the FilesAPI.get_public_inline_preview_url method."""
@@ -274,7 +310,9 @@ class TestFilesAPI(unittest.TestCase):
         course_id = None  # Change me!!
         file_ids = None  # Change me!!
 
-        r = self.client.remove_usage_rights_courses(course_id, file_ids, folder_ids=None)
+        r = self.client.remove_usage_rights_courses(
+            course_id, file_ids, folder_ids=None
+        )
 
     def test_remove_usage_rights_groups(self):
         """Integration test for the FilesAPI.remove_usage_rights_groups method."""
@@ -307,4 +345,3 @@ class TestFilesAPI(unittest.TestCase):
         user_id = None  # Change me!!
 
         r = self.client.list_licenses_users(user_id)
-

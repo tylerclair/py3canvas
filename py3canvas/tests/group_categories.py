@@ -75,10 +75,11 @@ class TestGroupCategoriesAPI(unittest.TestCase):
         """Integration test for the GroupCategoriesAPI.list_users_in_group_category method."""
         group_category_id = None  # Change me!!
 
-        r = self.client.list_users_in_group_category(group_category_id, search_term=None, unassigned=None)
+        r = self.client.list_users_in_group_category(
+            group_category_id, search_term=None, unassigned=None
+        )
 
     def test_assign_unassigned_members(self):
         """Integration test for the GroupCategoriesAPI.assign_unassigned_members method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

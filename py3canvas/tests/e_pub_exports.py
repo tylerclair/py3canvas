@@ -32,4 +32,3 @@ class TestEPubExportsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.show_epub_export(course_id, id)
-

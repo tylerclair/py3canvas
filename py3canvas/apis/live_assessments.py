@@ -32,16 +32,26 @@ class LiveAssessmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assessment_id
         """
             ID
         """
         path["assessment_id"] = assessment_id
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/live_assessments/{assessment_id}/results with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/live_assessments/{assessment_id}/results".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/live_assessments/{assessment_id}/results with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/live_assessments/{assessment_id}/results".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_live_assessment_results(self, assessment_id, course_id, user_id=None):
         """
@@ -59,13 +69,11 @@ class LiveAssessmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assessment_id
         """
             ID
         """
         path["assessment_id"] = assessment_id
-
 
         # OPTIONAL - user_id
         """
@@ -74,9 +82,20 @@ class LiveAssessmentsAPI(BaseCanvasAPI):
         if user_id is not None:
             params["user_id"] = user_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/live_assessments/{assessment_id}/results with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/live_assessments/{assessment_id}/results".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/live_assessments/{assessment_id}/results with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/live_assessments/{assessment_id}/results".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def create_or_find_live_assessment(self, course_id):
         """
@@ -95,9 +114,18 @@ class LiveAssessmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/live_assessments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/live_assessments".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/live_assessments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/live_assessments".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_live_assessments(self, course_id):
         """
@@ -115,9 +143,18 @@ class LiveAssessmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/live_assessments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/live_assessments".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/live_assessments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/live_assessments".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Result(BaseModel):
@@ -131,7 +168,7 @@ class Result(BaseModel):
         self._assessed_at = assessed_at
         self._links = links
 
-        self.logger = logging.getLogger('py3canvas.Result')
+        self.logger = logging.getLogger("py3canvas.Result")
 
     @property
     def id(self):
@@ -141,7 +178,9 @@ class Result(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -152,7 +191,9 @@ class Result(BaseModel):
     @passed.setter
     def passed(self, value):
         """Setter for passed property."""
-        self.logger.warn("Setting values on passed will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on passed will NOT update the remote Canvas instance."
+        )
         self._passed = value
 
     @property
@@ -163,7 +204,9 @@ class Result(BaseModel):
     @assessed_at.setter
     def assessed_at(self, value):
         """Setter for assessed_at property."""
-        self.logger.warn("Setting values on assessed_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assessed_at will NOT update the remote Canvas instance."
+        )
         self._assessed_at = value
 
     @property
@@ -174,7 +217,9 @@ class Result(BaseModel):
     @links.setter
     def links(self, value):
         """Setter for links property."""
-        self.logger.warn("Setting values on links will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on links will NOT update the remote Canvas instance."
+        )
         self._links = value
 
 
@@ -188,7 +233,7 @@ class Resultlinks(BaseModel):
         self._assessor = assessor
         self._assessment = assessment
 
-        self.logger = logging.getLogger('py3canvas.Resultlinks')
+        self.logger = logging.getLogger("py3canvas.Resultlinks")
 
     @property
     def user(self):
@@ -198,7 +243,9 @@ class Resultlinks(BaseModel):
     @user.setter
     def user(self, value):
         """Setter for user property."""
-        self.logger.warn("Setting values on user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user will NOT update the remote Canvas instance."
+        )
         self._user = value
 
     @property
@@ -209,7 +256,9 @@ class Resultlinks(BaseModel):
     @assessor.setter
     def assessor(self, value):
         """Setter for assessor property."""
-        self.logger.warn("Setting values on assessor will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assessor will NOT update the remote Canvas instance."
+        )
         self._assessor = value
 
     @property
@@ -220,7 +269,9 @@ class Resultlinks(BaseModel):
     @assessment.setter
     def assessment(self, value):
         """Setter for assessment property."""
-        self.logger.warn("Setting values on assessment will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assessment will NOT update the remote Canvas instance."
+        )
         self._assessment = value
 
 
@@ -234,7 +285,7 @@ class Assessment(BaseModel):
         self._key = key
         self._title = title
 
-        self.logger = logging.getLogger('py3canvas.Assessment')
+        self.logger = logging.getLogger("py3canvas.Assessment")
 
     @property
     def id(self):
@@ -244,7 +295,9 @@ class Assessment(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -255,7 +308,9 @@ class Assessment(BaseModel):
     @key.setter
     def key(self, value):
         """Setter for key property."""
-        self.logger.warn("Setting values on key will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on key will NOT update the remote Canvas instance."
+        )
         self._key = value
 
     @property
@@ -266,6 +321,7 @@ class Assessment(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
-

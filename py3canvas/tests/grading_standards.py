@@ -14,7 +14,9 @@ class TestGradingStandardsAPI(unittest.TestCase):
     """Tests for the GradingStandardsAPI."""
 
     def setUp(self):
-        self.client = GradingStandardsAPI(secrets.instance_address, secrets.access_token)
+        self.client = GradingStandardsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_create_new_grading_standard_accounts(self):
         """Integration test for the GradingStandardsAPI.create_new_grading_standard_accounts method."""
@@ -43,12 +45,15 @@ class TestGradingStandardsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         grading_standard_id = None  # Change me!!
 
-        r = self.client.get_single_grading_standard_in_context_courses(course_id, grading_standard_id)
+        r = self.client.get_single_grading_standard_in_context_courses(
+            course_id, grading_standard_id
+        )
 
     def test_get_single_grading_standard_in_context_accounts(self):
         """Integration test for the GradingStandardsAPI.get_single_grading_standard_in_context_accounts method."""
         account_id = None  # Change me!!
         grading_standard_id = None  # Change me!!
 
-        r = self.client.get_single_grading_standard_in_context_accounts(account_id, grading_standard_id)
-
+        r = self.client.get_single_grading_standard_in_context_accounts(
+            account_id, grading_standard_id
+        )

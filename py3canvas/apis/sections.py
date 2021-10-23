@@ -32,7 +32,6 @@ class SectionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - include
         """
             - "students": Associations to include with the group. Note: this is only
@@ -45,14 +44,42 @@ class SectionsAPI(BaseCanvasAPI):
         - "passback_status": Include the grade passback status.
         """
         if include is not None:
-            self._validate_enum(include, ["students", "avatar_url", "enrollments", "total_students", "passback_status"])
+            self._validate_enum(
+                include,
+                [
+                    "students",
+                    "avatar_url",
+                    "enrollments",
+                    "total_students",
+                    "passback_status",
+                ],
+            )
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/sections with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/sections".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/sections with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/sections".format(**path), data=data, params=params, all_pages=True)
-
-    def create_course_section(self, course_id, course_section_end_at=None, course_section_integration_id=None, course_section_name=None, course_section_restrict_enrollments_to_section_dates=None, course_section_sis_section_id=None, course_section_start_at=None, enable_sis_reactivation=None):
+    def create_course_section(
+        self,
+        course_id,
+        course_section_end_at=None,
+        course_section_integration_id=None,
+        course_section_name=None,
+        course_section_restrict_enrollments_to_section_dates=None,
+        course_section_sis_section_id=None,
+        course_section_start_at=None,
+        enable_sis_reactivation=None,
+    ):
         """
         Create course section.
 
@@ -68,14 +95,12 @@ class SectionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - course_section[name]
         """
             The name of the section
         """
         if course_section_name is not None:
             data["course_section[name]"] = course_section_name
-
 
         # OPTIONAL - course_section[sis_section_id]
         """
@@ -84,7 +109,6 @@ class SectionsAPI(BaseCanvasAPI):
         if course_section_sis_section_id is not None:
             data["course_section[sis_section_id]"] = course_section_sis_section_id
 
-
         # OPTIONAL - course_section[integration_id]
         """
             The integration_id of the section. Must have manage_sis permission to set. This is ignored if caller does not have permission to set.
@@ -92,18 +116,22 @@ class SectionsAPI(BaseCanvasAPI):
         if course_section_integration_id is not None:
             data["course_section[integration_id]"] = course_section_integration_id
 
-
         # OPTIONAL - course_section[start_at]
         """
             Section start date in ISO8601 format, e.g. 2011-01-01T01:00Z
         """
         if course_section_start_at is not None:
             if issubclass(course_section_start_at.__class__, str):
-                course_section_start_at = self._validate_iso8601_string(course_section_start_at)
-            elif issubclass(course_section_start_at.__class__, date) or issubclass(course_section_start_at.__class__, datetime):
-                course_section_start_at = course_section_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                course_section_start_at = self._validate_iso8601_string(
+                    course_section_start_at
+                )
+            elif issubclass(course_section_start_at.__class__, date) or issubclass(
+                course_section_start_at.__class__, datetime
+            ):
+                course_section_start_at = course_section_start_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["course_section[start_at]"] = course_section_start_at
-
 
         # OPTIONAL - course_section[end_at]
         """
@@ -111,19 +139,25 @@ class SectionsAPI(BaseCanvasAPI):
         """
         if course_section_end_at is not None:
             if issubclass(course_section_end_at.__class__, str):
-                course_section_end_at = self._validate_iso8601_string(course_section_end_at)
-            elif issubclass(course_section_end_at.__class__, date) or issubclass(course_section_end_at.__class__, datetime):
-                course_section_end_at = course_section_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                course_section_end_at = self._validate_iso8601_string(
+                    course_section_end_at
+                )
+            elif issubclass(course_section_end_at.__class__, date) or issubclass(
+                course_section_end_at.__class__, datetime
+            ):
+                course_section_end_at = course_section_end_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["course_section[end_at]"] = course_section_end_at
-
 
         # OPTIONAL - course_section[restrict_enrollments_to_section_dates]
         """
             Set to true to restrict user enrollments to the start and end dates of the section.
         """
         if course_section_restrict_enrollments_to_section_dates is not None:
-            data["course_section[restrict_enrollments_to_section_dates]"] = course_section_restrict_enrollments_to_section_dates
-
+            data[
+                "course_section[restrict_enrollments_to_section_dates]"
+            ] = course_section_restrict_enrollments_to_section_dates
 
         # OPTIONAL - enable_sis_reactivation
         """
@@ -132,9 +166,18 @@ class SectionsAPI(BaseCanvasAPI):
         if enable_sis_reactivation is not None:
             data["enable_sis_reactivation"] = enable_sis_reactivation
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/sections with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/sections".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/sections with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/sections".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def cross_list_section(self, id, new_course_id):
         """
@@ -153,16 +196,24 @@ class SectionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # REQUIRED - PATH - new_course_id
         """
             ID
         """
         path["new_course_id"] = new_course_id
 
-
-        self.logger.debug("POST /api/v1/sections/{id}/crosslist/{new_course_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/sections/{id}/crosslist/{new_course_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/sections/{id}/crosslist/{new_course_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/sections/{id}/crosslist/{new_course_id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def de_cross_list_section(self, id):
         """
@@ -180,11 +231,29 @@ class SectionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
+        self.logger.debug(
+            "DELETE /api/v1/sections/{id}/crosslist with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/sections/{id}/crosslist".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("DELETE /api/v1/sections/{id}/crosslist with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/sections/{id}/crosslist".format(**path), data=data, params=params, single_item=True)
-
-    def edit_section(self, id, course_section_end_at=None, course_section_integration_id=None, course_section_name=None, course_section_restrict_enrollments_to_section_dates=None, course_section_sis_section_id=None, course_section_start_at=None):
+    def edit_section(
+        self,
+        id,
+        course_section_end_at=None,
+        course_section_integration_id=None,
+        course_section_name=None,
+        course_section_restrict_enrollments_to_section_dates=None,
+        course_section_sis_section_id=None,
+        course_section_start_at=None,
+    ):
         """
         Edit a section.
 
@@ -200,14 +269,12 @@ class SectionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - course_section[name]
         """
             The name of the section
         """
         if course_section_name is not None:
             data["course_section[name]"] = course_section_name
-
 
         # OPTIONAL - course_section[sis_section_id]
         """
@@ -216,7 +283,6 @@ class SectionsAPI(BaseCanvasAPI):
         if course_section_sis_section_id is not None:
             data["course_section[sis_section_id]"] = course_section_sis_section_id
 
-
         # OPTIONAL - course_section[integration_id]
         """
             The integration_id of the section. Must have manage_sis permission to set.
@@ -224,18 +290,22 @@ class SectionsAPI(BaseCanvasAPI):
         if course_section_integration_id is not None:
             data["course_section[integration_id]"] = course_section_integration_id
 
-
         # OPTIONAL - course_section[start_at]
         """
             Section start date in ISO8601 format, e.g. 2011-01-01T01:00Z
         """
         if course_section_start_at is not None:
             if issubclass(course_section_start_at.__class__, str):
-                course_section_start_at = self._validate_iso8601_string(course_section_start_at)
-            elif issubclass(course_section_start_at.__class__, date) or issubclass(course_section_start_at.__class__, datetime):
-                course_section_start_at = course_section_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                course_section_start_at = self._validate_iso8601_string(
+                    course_section_start_at
+                )
+            elif issubclass(course_section_start_at.__class__, date) or issubclass(
+                course_section_start_at.__class__, datetime
+            ):
+                course_section_start_at = course_section_start_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["course_section[start_at]"] = course_section_start_at
-
 
         # OPTIONAL - course_section[end_at]
         """
@@ -243,22 +313,38 @@ class SectionsAPI(BaseCanvasAPI):
         """
         if course_section_end_at is not None:
             if issubclass(course_section_end_at.__class__, str):
-                course_section_end_at = self._validate_iso8601_string(course_section_end_at)
-            elif issubclass(course_section_end_at.__class__, date) or issubclass(course_section_end_at.__class__, datetime):
-                course_section_end_at = course_section_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                course_section_end_at = self._validate_iso8601_string(
+                    course_section_end_at
+                )
+            elif issubclass(course_section_end_at.__class__, date) or issubclass(
+                course_section_end_at.__class__, datetime
+            ):
+                course_section_end_at = course_section_end_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["course_section[end_at]"] = course_section_end_at
-
 
         # OPTIONAL - course_section[restrict_enrollments_to_section_dates]
         """
             Set to true to restrict user enrollments to the start and end dates of the section.
         """
         if course_section_restrict_enrollments_to_section_dates is not None:
-            data["course_section[restrict_enrollments_to_section_dates]"] = course_section_restrict_enrollments_to_section_dates
+            data[
+                "course_section[restrict_enrollments_to_section_dates]"
+            ] = course_section_restrict_enrollments_to_section_dates
 
-
-        self.logger.debug("PUT /api/v1/sections/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/sections/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/sections/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/sections/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def get_section_information_courses(self, course_id, id, include=None):
         """
@@ -276,13 +362,11 @@ class SectionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - include
         """
@@ -296,12 +380,30 @@ class SectionsAPI(BaseCanvasAPI):
         - "passback_status": Include the grade passback status.
         """
         if include is not None:
-            self._validate_enum(include, ["students", "avatar_url", "enrollments", "total_students", "passback_status"])
+            self._validate_enum(
+                include,
+                [
+                    "students",
+                    "avatar_url",
+                    "enrollments",
+                    "total_students",
+                    "passback_status",
+                ],
+            )
             params["include"] = include
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/sections/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/sections/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/sections/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/sections/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def get_section_information_sections(self, id, include=None):
         """
@@ -319,7 +421,6 @@ class SectionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - include
         """
             - "students": Associations to include with the group. Note: this is only
@@ -332,12 +433,30 @@ class SectionsAPI(BaseCanvasAPI):
         - "passback_status": Include the grade passback status.
         """
         if include is not None:
-            self._validate_enum(include, ["students", "avatar_url", "enrollments", "total_students", "passback_status"])
+            self._validate_enum(
+                include,
+                [
+                    "students",
+                    "avatar_url",
+                    "enrollments",
+                    "total_students",
+                    "passback_status",
+                ],
+            )
             params["include"] = include
 
-
-        self.logger.debug("GET /api/v1/sections/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/sections/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/sections/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/sections/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_section(self, id):
         """
@@ -355,15 +474,38 @@ class SectionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/sections/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/sections/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/sections/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/sections/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Section(BaseModel):
     """Section Model."""
 
-    def __init__(self, id=None, name=None, sis_section_id=None, integration_id=None, sis_import_id=None, course_id=None, sis_course_id=None, start_at=None, end_at=None, restrict_enrollments_to_section_dates=None, nonxlist_course_id=None, total_students=None):
+    def __init__(
+        self,
+        id=None,
+        name=None,
+        sis_section_id=None,
+        integration_id=None,
+        sis_import_id=None,
+        course_id=None,
+        sis_course_id=None,
+        start_at=None,
+        end_at=None,
+        restrict_enrollments_to_section_dates=None,
+        nonxlist_course_id=None,
+        total_students=None,
+    ):
         """Init method for Section class."""
         self._id = id
         self._name = name
@@ -374,11 +516,13 @@ class Section(BaseModel):
         self._sis_course_id = sis_course_id
         self._start_at = start_at
         self._end_at = end_at
-        self._restrict_enrollments_to_section_dates = restrict_enrollments_to_section_dates
+        self._restrict_enrollments_to_section_dates = (
+            restrict_enrollments_to_section_dates
+        )
         self._nonxlist_course_id = nonxlist_course_id
         self._total_students = total_students
 
-        self.logger = logging.getLogger('py3canvas.Section')
+        self.logger = logging.getLogger("py3canvas.Section")
 
     @property
     def id(self):
@@ -388,7 +532,9 @@ class Section(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -399,7 +545,9 @@ class Section(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -410,7 +558,9 @@ class Section(BaseModel):
     @sis_section_id.setter
     def sis_section_id(self, value):
         """Setter for sis_section_id property."""
-        self.logger.warn("Setting values on sis_section_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_section_id will NOT update the remote Canvas instance."
+        )
         self._sis_section_id = value
 
     @property
@@ -421,7 +571,9 @@ class Section(BaseModel):
     @integration_id.setter
     def integration_id(self, value):
         """Setter for integration_id property."""
-        self.logger.warn("Setting values on integration_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on integration_id will NOT update the remote Canvas instance."
+        )
         self._integration_id = value
 
     @property
@@ -432,7 +584,9 @@ class Section(BaseModel):
     @sis_import_id.setter
     def sis_import_id(self, value):
         """Setter for sis_import_id property."""
-        self.logger.warn("Setting values on sis_import_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_import_id will NOT update the remote Canvas instance."
+        )
         self._sis_import_id = value
 
     @property
@@ -443,7 +597,9 @@ class Section(BaseModel):
     @course_id.setter
     def course_id(self, value):
         """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_id will NOT update the remote Canvas instance."
+        )
         self._course_id = value
 
     @property
@@ -454,7 +610,9 @@ class Section(BaseModel):
     @sis_course_id.setter
     def sis_course_id(self, value):
         """Setter for sis_course_id property."""
-        self.logger.warn("Setting values on sis_course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_course_id will NOT update the remote Canvas instance."
+        )
         self._sis_course_id = value
 
     @property
@@ -465,7 +623,9 @@ class Section(BaseModel):
     @start_at.setter
     def start_at(self, value):
         """Setter for start_at property."""
-        self.logger.warn("Setting values on start_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on start_at will NOT update the remote Canvas instance."
+        )
         self._start_at = value
 
     @property
@@ -476,7 +636,9 @@ class Section(BaseModel):
     @end_at.setter
     def end_at(self, value):
         """Setter for end_at property."""
-        self.logger.warn("Setting values on end_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on end_at will NOT update the remote Canvas instance."
+        )
         self._end_at = value
 
     @property
@@ -487,7 +649,9 @@ class Section(BaseModel):
     @restrict_enrollments_to_section_dates.setter
     def restrict_enrollments_to_section_dates(self, value):
         """Setter for restrict_enrollments_to_section_dates property."""
-        self.logger.warn("Setting values on restrict_enrollments_to_section_dates will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on restrict_enrollments_to_section_dates will NOT update the remote Canvas instance."
+        )
         self._restrict_enrollments_to_section_dates = value
 
     @property
@@ -498,7 +662,9 @@ class Section(BaseModel):
     @nonxlist_course_id.setter
     def nonxlist_course_id(self, value):
         """Setter for nonxlist_course_id property."""
-        self.logger.warn("Setting values on nonxlist_course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on nonxlist_course_id will NOT update the remote Canvas instance."
+        )
         self._nonxlist_course_id = value
 
     @property
@@ -509,6 +675,7 @@ class Section(BaseModel):
     @total_students.setter
     def total_students(self, value):
         """Setter for total_students property."""
-        self.logger.warn("Setting values on total_students will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on total_students will NOT update the remote Canvas instance."
+        )
         self._total_students = value
-

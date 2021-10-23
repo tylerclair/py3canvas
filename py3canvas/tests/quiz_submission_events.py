@@ -13,7 +13,9 @@ class TestQuizSubmissionEventsAPI(unittest.TestCase):
     """Tests for the QuizSubmissionEventsAPI."""
 
     def setUp(self):
-        self.client = QuizSubmissionEventsAPI(secrets.instance_address, secrets.access_token)
+        self.client = QuizSubmissionEventsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_submit_captured_events(self):
         """Integration test for the QuizSubmissionEventsAPI.submit_captured_events method."""
@@ -27,4 +29,3 @@ class TestQuizSubmissionEventsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.retrieve_captured_events(course_id, id, quiz_id, attempt=None)
-

@@ -45,4 +45,3 @@ class TestCollaborationsAPI(unittest.TestCase):
         group_id = None  # Change me!!
 
         r = self.client.list_potential_members_groups(group_id)
-

@@ -60,4 +60,3 @@ class TestSectionsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_section(id)
-

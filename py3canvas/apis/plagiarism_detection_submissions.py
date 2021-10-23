@@ -32,16 +32,26 @@ class PlagiarismDetectionSubmissionsAPI(BaseCanvasAPI):
         """
         path["assignment_id"] = assignment_id
 
-
         # REQUIRED - PATH - submission_id
         """
             ID
         """
         path["submission_id"] = submission_id
 
-
-        self.logger.debug("GET /api/lti/assignments/{assignment_id}/submissions/{submission_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/assignments/{assignment_id}/submissions/{submission_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/lti/assignments/{assignment_id}/submissions/{submission_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/assignments/{assignment_id}/submissions/{submission_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_history_of_single_submission(self, assignment_id, submission_id):
         """
@@ -59,22 +69,46 @@ class PlagiarismDetectionSubmissionsAPI(BaseCanvasAPI):
         """
         path["assignment_id"] = assignment_id
 
-
         # REQUIRED - PATH - submission_id
         """
             ID
         """
         path["submission_id"] = submission_id
 
-
-        self.logger.debug("GET /api/lti/assignments/{assignment_id}/submissions/{submission_id}/history with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/assignments/{assignment_id}/submissions/{submission_id}/history".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/lti/assignments/{assignment_id}/submissions/{submission_id}/history with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/assignments/{assignment_id}/submissions/{submission_id}/history".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Submission(BaseModel):
     """Submission Model."""
 
-    def __init__(self, lti_course_id=None, course_id=None, assignment_id=None, attempt=None, body=None, submission_type=None, submitted_at=None, url=None, user_id=None, eula_agreement_timestamp=None, workflow_state=None, attachments=None):
+    def __init__(
+        self,
+        lti_course_id=None,
+        course_id=None,
+        assignment_id=None,
+        attempt=None,
+        body=None,
+        submission_type=None,
+        submitted_at=None,
+        url=None,
+        user_id=None,
+        eula_agreement_timestamp=None,
+        workflow_state=None,
+        attachments=None,
+    ):
         """Init method for Submission class."""
         self._lti_course_id = lti_course_id
         self._course_id = course_id
@@ -89,7 +123,7 @@ class Submission(BaseModel):
         self._workflow_state = workflow_state
         self._attachments = attachments
 
-        self.logger = logging.getLogger('py3canvas.Submission')
+        self.logger = logging.getLogger("py3canvas.Submission")
 
     @property
     def lti_course_id(self):
@@ -99,7 +133,9 @@ class Submission(BaseModel):
     @lti_course_id.setter
     def lti_course_id(self, value):
         """Setter for lti_course_id property."""
-        self.logger.warn("Setting values on lti_course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lti_course_id will NOT update the remote Canvas instance."
+        )
         self._lti_course_id = value
 
     @property
@@ -110,7 +146,9 @@ class Submission(BaseModel):
     @course_id.setter
     def course_id(self, value):
         """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_id will NOT update the remote Canvas instance."
+        )
         self._course_id = value
 
     @property
@@ -121,7 +159,9 @@ class Submission(BaseModel):
     @assignment_id.setter
     def assignment_id(self, value):
         """Setter for assignment_id property."""
-        self.logger.warn("Setting values on assignment_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assignment_id will NOT update the remote Canvas instance."
+        )
         self._assignment_id = value
 
     @property
@@ -132,7 +172,9 @@ class Submission(BaseModel):
     @attempt.setter
     def attempt(self, value):
         """Setter for attempt property."""
-        self.logger.warn("Setting values on attempt will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on attempt will NOT update the remote Canvas instance."
+        )
         self._attempt = value
 
     @property
@@ -143,7 +185,9 @@ class Submission(BaseModel):
     @body.setter
     def body(self, value):
         """Setter for body property."""
-        self.logger.warn("Setting values on body will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on body will NOT update the remote Canvas instance."
+        )
         self._body = value
 
     @property
@@ -154,7 +198,9 @@ class Submission(BaseModel):
     @submission_type.setter
     def submission_type(self, value):
         """Setter for submission_type property."""
-        self.logger.warn("Setting values on submission_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submission_type will NOT update the remote Canvas instance."
+        )
         self._submission_type = value
 
     @property
@@ -165,7 +211,9 @@ class Submission(BaseModel):
     @submitted_at.setter
     def submitted_at(self, value):
         """Setter for submitted_at property."""
-        self.logger.warn("Setting values on submitted_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submitted_at will NOT update the remote Canvas instance."
+        )
         self._submitted_at = value
 
     @property
@@ -176,7 +224,9 @@ class Submission(BaseModel):
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
 
     @property
@@ -187,7 +237,9 @@ class Submission(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -198,7 +250,9 @@ class Submission(BaseModel):
     @eula_agreement_timestamp.setter
     def eula_agreement_timestamp(self, value):
         """Setter for eula_agreement_timestamp property."""
-        self.logger.warn("Setting values on eula_agreement_timestamp will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on eula_agreement_timestamp will NOT update the remote Canvas instance."
+        )
         self._eula_agreement_timestamp = value
 
     @property
@@ -209,7 +263,9 @@ class Submission(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -220,14 +276,25 @@ class Submission(BaseModel):
     @attachments.setter
     def attachments(self, value):
         """Setter for attachments property."""
-        self.logger.warn("Setting values on attachments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on attachments will NOT update the remote Canvas instance."
+        )
         self._attachments = value
 
 
 class File(BaseModel):
     """File Model."""
 
-    def __init__(self, size=None, content_type=None, url=None, id=None, display_name=None, created_at=None, updated_at=None):
+    def __init__(
+        self,
+        size=None,
+        content_type=None,
+        url=None,
+        id=None,
+        display_name=None,
+        created_at=None,
+        updated_at=None,
+    ):
         """Init method for File class."""
         self._size = size
         self._content_type = content_type
@@ -237,7 +304,7 @@ class File(BaseModel):
         self._created_at = created_at
         self._updated_at = updated_at
 
-        self.logger = logging.getLogger('py3canvas.File')
+        self.logger = logging.getLogger("py3canvas.File")
 
     @property
     def size(self):
@@ -247,7 +314,9 @@ class File(BaseModel):
     @size.setter
     def size(self, value):
         """Setter for size property."""
-        self.logger.warn("Setting values on size will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on size will NOT update the remote Canvas instance."
+        )
         self._size = value
 
     @property
@@ -258,7 +327,9 @@ class File(BaseModel):
     @content_type.setter
     def content_type(self, value):
         """Setter for content_type property."""
-        self.logger.warn("Setting values on content_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on content_type will NOT update the remote Canvas instance."
+        )
         self._content_type = value
 
     @property
@@ -269,7 +340,9 @@ class File(BaseModel):
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
 
     @property
@@ -280,7 +353,9 @@ class File(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -291,7 +366,9 @@ class File(BaseModel):
     @display_name.setter
     def display_name(self, value):
         """Setter for display_name property."""
-        self.logger.warn("Setting values on display_name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on display_name will NOT update the remote Canvas instance."
+        )
         self._display_name = value
 
     @property
@@ -302,7 +379,9 @@ class File(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -313,6 +392,7 @@ class File(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
-

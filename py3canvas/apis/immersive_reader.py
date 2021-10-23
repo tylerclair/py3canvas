@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class ImmersiveReaderAPI(BaseCanvasAPI):
     """ImmersiveReader API Version 1.0."""
 
@@ -15,4 +14,3 @@ class ImmersiveReaderAPI(BaseCanvasAPI):
         """Init method for ImmersiveReaderAPI."""
         super(ImmersiveReaderAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.ImmersiveReaderAPI")
-

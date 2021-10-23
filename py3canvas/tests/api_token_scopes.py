@@ -20,4 +20,3 @@ class TestApiTokenScopesAPI(unittest.TestCase):
         account_id = None  # Change me!!
 
         r = self.client.list_scopes(account_id, group_by=None)
-

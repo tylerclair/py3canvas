@@ -15,10 +15,11 @@ class TestQuizSubmissionUserListAPI(unittest.TestCase):
     """Tests for the QuizSubmissionUserListAPI."""
 
     def setUp(self):
-        self.client = QuizSubmissionUserListAPI(secrets.instance_address, secrets.access_token)
+        self.client = QuizSubmissionUserListAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_send_message_to_unsubmitted_or_submitted_users_for_quiz(self):
         """Integration test for the QuizSubmissionUserListAPI.send_message_to_unsubmitted_or_submitted_users_for_quiz method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

@@ -14,7 +14,9 @@ class TestOriginalityReportsAPI(unittest.TestCase):
     """Tests for the OriginalityReportsAPI."""
 
     def setUp(self):
-        self.client = OriginalityReportsAPI(secrets.instance_address, secrets.access_token)
+        self.client = OriginalityReportsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_create_originality_report(self):
         """Integration test for the OriginalityReportsAPI.create_originality_report method."""
@@ -37,7 +39,9 @@ class TestOriginalityReportsAPI(unittest.TestCase):
         submission_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.show_originality_report_submissions(assignment_id, id, submission_id)
+        r = self.client.show_originality_report_submissions(
+            assignment_id, id, submission_id
+        )
 
     def test_show_originality_report_files(self):
         """Integration test for the OriginalityReportsAPI.show_originality_report_files method."""
@@ -45,4 +49,3 @@ class TestOriginalityReportsAPI(unittest.TestCase):
         file_id = None  # Change me!!
 
         r = self.client.show_originality_report_files(assignment_id, file_id)
-

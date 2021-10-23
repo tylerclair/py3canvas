@@ -25,13 +25,17 @@ class TestGroupsAPI(unittest.TestCase):
         """Integration test for the GroupsAPI.list_groups_available_in_context_accounts method."""
         account_id = None  # Change me!!
 
-        r = self.client.list_groups_available_in_context_accounts(account_id, include=None, only_own_groups=None)
+        r = self.client.list_groups_available_in_context_accounts(
+            account_id, include=None, only_own_groups=None
+        )
 
     def test_list_groups_available_in_context_courses(self):
         """Integration test for the GroupsAPI.list_groups_available_in_context_courses method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_groups_available_in_context_courses(course_id, include=None, only_own_groups=None)
+        r = self.client.list_groups_available_in_context_courses(
+            course_id, include=None, only_own_groups=None
+        )
 
     def test_get_single_group(self):
         """Integration test for the GroupsAPI.get_single_group method."""
@@ -69,7 +73,9 @@ class TestGroupsAPI(unittest.TestCase):
         """Integration test for the GroupsAPI.list_group_s_users method."""
         group_id = None  # Change me!!
 
-        r = self.client.list_group_s_users(group_id, exclude_inactive=None, include=None, search_term=None)
+        r = self.client.list_group_s_users(
+            group_id, exclude_inactive=None, include=None, search_term=None
+        )
 
     def test_upload_file(self):
         """Integration test for the GroupsAPI.upload_file method."""
@@ -147,4 +153,3 @@ class TestGroupsAPI(unittest.TestCase):
         user_id = None  # Change me!!
 
         r = self.client.leave_group_users(group_id, user_id)
-

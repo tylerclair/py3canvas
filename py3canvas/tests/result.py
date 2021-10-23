@@ -29,4 +29,3 @@ class TestResultAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.show_result(course_id, id, line_item_id)
-

@@ -12,7 +12,9 @@ class TestSubmissionCommentsAPI(unittest.TestCase):
     """Tests for the SubmissionCommentsAPI."""
 
     def setUp(self):
-        self.client = SubmissionCommentsAPI(secrets.instance_address, secrets.access_token)
+        self.client = SubmissionCommentsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_edit_submission_comment(self):
         """Integration test for the SubmissionCommentsAPI.edit_submission_comment method."""
@@ -32,4 +34,3 @@ class TestSubmissionCommentsAPI(unittest.TestCase):
         """Integration test for the SubmissionCommentsAPI.upload_file method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

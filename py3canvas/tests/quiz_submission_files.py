@@ -12,10 +12,11 @@ class TestQuizSubmissionFilesAPI(unittest.TestCase):
     """Tests for the QuizSubmissionFilesAPI."""
 
     def setUp(self):
-        self.client = QuizSubmissionFilesAPI(secrets.instance_address, secrets.access_token)
+        self.client = QuizSubmissionFilesAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_upload_file(self):
         """Integration test for the QuizSubmissionFilesAPI.upload_file method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

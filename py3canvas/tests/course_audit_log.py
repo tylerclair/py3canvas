@@ -29,4 +29,3 @@ class TestCourseAuditLogAPI(unittest.TestCase):
         account_id = None  # Change me!!
 
         r = self.client.query_by_account(account_id, end_time=None, start_time=None)
-

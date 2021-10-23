@@ -17,15 +17,32 @@ class TestSearchAPI(unittest.TestCase):
     def test_find_recipients_conversations(self):
         """Integration test for the SearchAPI.find_recipients_conversations method."""
 
-        r = self.client.find_recipients_conversations(context=None, exclude=None, from_conversation_id=None, permissions=None, search=None, type=None, user_id=None)
+        r = self.client.find_recipients_conversations(
+            context=None,
+            exclude=None,
+            from_conversation_id=None,
+            permissions=None,
+            search=None,
+            type=None,
+            user_id=None,
+        )
 
     def test_find_recipients_search(self):
         """Integration test for the SearchAPI.find_recipients_search method."""
 
-        r = self.client.find_recipients_search(context=None, exclude=None, from_conversation_id=None, permissions=None, search=None, type=None, user_id=None)
+        r = self.client.find_recipients_search(
+            context=None,
+            exclude=None,
+            from_conversation_id=None,
+            permissions=None,
+            search=None,
+            type=None,
+            user_id=None,
+        )
 
     def test_list_all_courses(self):
         """Integration test for the SearchAPI.list_all_courses method."""
 
-        r = self.client.list_all_courses(open_enrollment_only=None, public_only=None, search=None)
-
+        r = self.client.list_all_courses(
+            open_enrollment_only=None, public_only=None, search=None
+        )

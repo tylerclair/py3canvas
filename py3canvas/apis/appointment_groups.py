@@ -16,7 +16,13 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         super(AppointmentGroupsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.AppointmentGroupsAPI")
 
-    def list_appointment_groups(self, context_codes=None, include=None, include_past_appointments=None, scope=None):
+    def list_appointment_groups(
+        self,
+        context_codes=None,
+        include=None,
+        include_past_appointments=None,
+        scope=None,
+    ):
         """
         List appointment groups.
 
@@ -35,7 +41,6 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
             self._validate_enum(scope, ["reservable", "manageable"])
             params["scope"] = scope
 
-
         # OPTIONAL - context_codes
         """
             Array of context codes used to limit returned results.
@@ -43,14 +48,12 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         if context_codes is not None:
             params["context_codes"] = context_codes
 
-
         # OPTIONAL - include_past_appointments
         """
             Defaults to false. If true, includes past appointment groups
         """
         if include_past_appointments is not None:
             params["include_past_appointments"] = include_past_appointments
-
 
         # OPTIONAL - include
         """
@@ -64,14 +67,46 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         "all_context_codes":: all context codes associated with this appointment group
         """
         if include is not None:
-            self._validate_enum(include, ["appointments", "child_events", "participant_count", "reserved_times", "all_context_codes"])
+            self._validate_enum(
+                include,
+                [
+                    "appointments",
+                    "child_events",
+                    "participant_count",
+                    "reserved_times",
+                    "all_context_codes",
+                ],
+            )
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/appointment_groups with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/appointment_groups".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/appointment_groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/appointment_groups".format(**path), data=data, params=params, no_data=True)
-
-    def create_appointment_group(self, appointment_group_context_codes, appointment_group_title, appointment_group_description=None, appointment_group_location_address=None, appointment_group_location_name=None, appointment_group_max_appointments_per_participant=None, appointment_group_min_appointments_per_participant=None, appointment_group_new_appointments_X=None, appointment_group_participant_visibility=None, appointment_group_participants_per_appointment=None, appointment_group_publish=None, appointment_group_sub_context_codes=None):
+    def create_appointment_group(
+        self,
+        appointment_group_context_codes,
+        appointment_group_title,
+        appointment_group_description=None,
+        appointment_group_location_address=None,
+        appointment_group_location_name=None,
+        appointment_group_max_appointments_per_participant=None,
+        appointment_group_min_appointments_per_participant=None,
+        appointment_group_new_appointments_X=None,
+        appointment_group_participant_visibility=None,
+        appointment_group_participants_per_appointment=None,
+        appointment_group_publish=None,
+        appointment_group_sub_context_codes=None,
+    ):
         """
         Create an appointment group.
 
@@ -91,7 +126,6 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         """
         data["appointment_group[context_codes]"] = appointment_group_context_codes
 
-
         # OPTIONAL - appointment_group[sub_context_codes]
         """
             Array of sub context codes (course sections or a single group category)
@@ -100,15 +134,15 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         up in groups and the participant_type will be "Group" instead of "User".
         """
         if appointment_group_sub_context_codes is not None:
-            data["appointment_group[sub_context_codes]"] = appointment_group_sub_context_codes
-
+            data[
+                "appointment_group[sub_context_codes]"
+            ] = appointment_group_sub_context_codes
 
         # REQUIRED - appointment_group[title]
         """
             Short title for the appointment group.
         """
         data["appointment_group[title]"] = appointment_group_title
-
 
         # OPTIONAL - appointment_group[description]
         """
@@ -117,7 +151,6 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         if appointment_group_description is not None:
             data["appointment_group[description]"] = appointment_group_description
 
-
         # OPTIONAL - appointment_group[location_name]
         """
             Location name of the appointment group.
@@ -125,14 +158,14 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         if appointment_group_location_name is not None:
             data["appointment_group[location_name]"] = appointment_group_location_name
 
-
         # OPTIONAL - appointment_group[location_address]
         """
             Location address.
         """
         if appointment_group_location_address is not None:
-            data["appointment_group[location_address]"] = appointment_group_location_address
-
+            data[
+                "appointment_group[location_address]"
+            ] = appointment_group_location_address
 
         # OPTIONAL - appointment_group[publish]
         """
@@ -143,15 +176,15 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         if appointment_group_publish is not None:
             data["appointment_group[publish]"] = appointment_group_publish
 
-
         # OPTIONAL - appointment_group[participants_per_appointment]
         """
             Maximum number of participants that may register for each time slot.
         Defaults to null (no limit).
         """
         if appointment_group_participants_per_appointment is not None:
-            data["appointment_group[participants_per_appointment]"] = appointment_group_participants_per_appointment
-
+            data[
+                "appointment_group[participants_per_appointment]"
+            ] = appointment_group_participants_per_appointment
 
         # OPTIONAL - appointment_group[min_appointments_per_participant]
         """
@@ -159,16 +192,18 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         do not need to sign up for any time slots.
         """
         if appointment_group_min_appointments_per_participant is not None:
-            data["appointment_group[min_appointments_per_participant]"] = appointment_group_min_appointments_per_participant
-
+            data[
+                "appointment_group[min_appointments_per_participant]"
+            ] = appointment_group_min_appointments_per_participant
 
         # OPTIONAL - appointment_group[max_appointments_per_participant]
         """
             Maximum number of time slots a user may register for.
         """
         if appointment_group_max_appointments_per_participant is not None:
-            data["appointment_group[max_appointments_per_participant]"] = appointment_group_max_appointments_per_participant
-
+            data[
+                "appointment_group[max_appointments_per_participant]"
+            ] = appointment_group_max_appointments_per_participant
 
         # OPTIONAL - appointment_group[new_appointments][X]
         """
@@ -176,8 +211,9 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         appointment group. Refer to the example request.
         """
         if appointment_group_new_appointments_X is not None:
-            data["appointment_group[new_appointments][X]"] = appointment_group_new_appointments_X
-
+            data[
+                "appointment_group[new_appointments][X]"
+            ] = appointment_group_new_appointments_X
 
         # OPTIONAL - appointment_group[participant_visibility]
         """
@@ -187,12 +223,25 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
                       "private".
         """
         if appointment_group_participant_visibility is not None:
-            self._validate_enum(appointment_group_participant_visibility, ["private", "protected"])
-            data["appointment_group[participant_visibility]"] = appointment_group_participant_visibility
+            self._validate_enum(
+                appointment_group_participant_visibility, ["private", "protected"]
+            )
+            data[
+                "appointment_group[participant_visibility]"
+            ] = appointment_group_participant_visibility
 
-
-        self.logger.debug("POST /api/v1/appointment_groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/appointment_groups".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/appointment_groups with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/appointment_groups".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_single_appointment_group(self, id, include=None):
         """
@@ -210,7 +259,6 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - include
         """
             Array of additional information to include. See include[] argument of
@@ -221,14 +269,40 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         "all_context_codes":: all context codes associated with this appointment group
         """
         if include is not None:
-            self._validate_enum(include, ["child_events", "appointments", "all_context_codes"])
+            self._validate_enum(
+                include, ["child_events", "appointments", "all_context_codes"]
+            )
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/appointment_groups/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/appointment_groups/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/appointment_groups/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/appointment_groups/{id}".format(**path), data=data, params=params, no_data=True)
-
-    def update_appointment_group(self, appointment_group_context_codes, id, appointment_group_description=None, appointment_group_location_address=None, appointment_group_location_name=None, appointment_group_max_appointments_per_participant=None, appointment_group_min_appointments_per_participant=None, appointment_group_new_appointments_X=None, appointment_group_participant_visibility=None, appointment_group_participants_per_appointment=None, appointment_group_publish=None, appointment_group_sub_context_codes=None, appointment_group_title=None):
+    def update_appointment_group(
+        self,
+        appointment_group_context_codes,
+        id,
+        appointment_group_description=None,
+        appointment_group_location_address=None,
+        appointment_group_location_name=None,
+        appointment_group_max_appointments_per_participant=None,
+        appointment_group_min_appointments_per_participant=None,
+        appointment_group_new_appointments_X=None,
+        appointment_group_participant_visibility=None,
+        appointment_group_participants_per_appointment=None,
+        appointment_group_publish=None,
+        appointment_group_sub_context_codes=None,
+        appointment_group_title=None,
+    ):
         """
         Update an appointment group.
 
@@ -246,7 +320,6 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # REQUIRED - appointment_group[context_codes]
         """
             Array of context codes (courses, e.g. course_1) this group should be
@@ -254,7 +327,6 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         will be able to sign up for this appointment group.
         """
         data["appointment_group[context_codes]"] = appointment_group_context_codes
-
 
         # OPTIONAL - appointment_group[sub_context_codes]
         """
@@ -264,8 +336,9 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         up in groups and the participant_type will be "Group" instead of "User".
         """
         if appointment_group_sub_context_codes is not None:
-            data["appointment_group[sub_context_codes]"] = appointment_group_sub_context_codes
-
+            data[
+                "appointment_group[sub_context_codes]"
+            ] = appointment_group_sub_context_codes
 
         # OPTIONAL - appointment_group[title]
         """
@@ -274,14 +347,12 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         if appointment_group_title is not None:
             data["appointment_group[title]"] = appointment_group_title
 
-
         # OPTIONAL - appointment_group[description]
         """
             Longer text description of the appointment group.
         """
         if appointment_group_description is not None:
             data["appointment_group[description]"] = appointment_group_description
-
 
         # OPTIONAL - appointment_group[location_name]
         """
@@ -290,14 +361,14 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         if appointment_group_location_name is not None:
             data["appointment_group[location_name]"] = appointment_group_location_name
 
-
         # OPTIONAL - appointment_group[location_address]
         """
             Location address.
         """
         if appointment_group_location_address is not None:
-            data["appointment_group[location_address]"] = appointment_group_location_address
-
+            data[
+                "appointment_group[location_address]"
+            ] = appointment_group_location_address
 
         # OPTIONAL - appointment_group[publish]
         """
@@ -308,15 +379,15 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         if appointment_group_publish is not None:
             data["appointment_group[publish]"] = appointment_group_publish
 
-
         # OPTIONAL - appointment_group[participants_per_appointment]
         """
             Maximum number of participants that may register for each time slot.
         Defaults to null (no limit).
         """
         if appointment_group_participants_per_appointment is not None:
-            data["appointment_group[participants_per_appointment]"] = appointment_group_participants_per_appointment
-
+            data[
+                "appointment_group[participants_per_appointment]"
+            ] = appointment_group_participants_per_appointment
 
         # OPTIONAL - appointment_group[min_appointments_per_participant]
         """
@@ -324,16 +395,18 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         do not need to sign up for any time slots.
         """
         if appointment_group_min_appointments_per_participant is not None:
-            data["appointment_group[min_appointments_per_participant]"] = appointment_group_min_appointments_per_participant
-
+            data[
+                "appointment_group[min_appointments_per_participant]"
+            ] = appointment_group_min_appointments_per_participant
 
         # OPTIONAL - appointment_group[max_appointments_per_participant]
         """
             Maximum number of time slots a user may register for.
         """
         if appointment_group_max_appointments_per_participant is not None:
-            data["appointment_group[max_appointments_per_participant]"] = appointment_group_max_appointments_per_participant
-
+            data[
+                "appointment_group[max_appointments_per_participant]"
+            ] = appointment_group_max_appointments_per_participant
 
         # OPTIONAL - appointment_group[new_appointments][X]
         """
@@ -341,8 +414,9 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         appointment group. Refer to the example request.
         """
         if appointment_group_new_appointments_X is not None:
-            data["appointment_group[new_appointments][X]"] = appointment_group_new_appointments_X
-
+            data[
+                "appointment_group[new_appointments][X]"
+            ] = appointment_group_new_appointments_X
 
         # OPTIONAL - appointment_group[participant_visibility]
         """
@@ -351,12 +425,25 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         "protected":: participants can see who has signed up. Defaults to "private".
         """
         if appointment_group_participant_visibility is not None:
-            self._validate_enum(appointment_group_participant_visibility, ["private", "protected"])
-            data["appointment_group[participant_visibility]"] = appointment_group_participant_visibility
+            self._validate_enum(
+                appointment_group_participant_visibility, ["private", "protected"]
+            )
+            data[
+                "appointment_group[participant_visibility]"
+            ] = appointment_group_participant_visibility
 
-
-        self.logger.debug("PUT /api/v1/appointment_groups/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/appointment_groups/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/appointment_groups/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/appointment_groups/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_appointment_group(self, id, cancel_reason=None):
         """
@@ -375,7 +462,6 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - cancel_reason
         """
             Reason for deleting/canceling the appointment group.
@@ -383,9 +469,18 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         if cancel_reason is not None:
             params["cancel_reason"] = cancel_reason
 
-
-        self.logger.debug("DELETE /api/v1/appointment_groups/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/appointment_groups/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/appointment_groups/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/appointment_groups/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_user_participants(self, id, registration_status=None):
         """
@@ -405,18 +500,28 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - registration_status
         """
             Limits results to the a given participation status, defaults to "all"
         """
         if registration_status is not None:
-            self._validate_enum(registration_status, ["all", "registered", "registered"])
+            self._validate_enum(
+                registration_status, ["all", "registered", "registered"]
+            )
             params["registration_status"] = registration_status
 
-
-        self.logger.debug("GET /api/v1/appointment_groups/{id}/users with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/appointment_groups/{id}/users".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/appointment_groups/{id}/users with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/appointment_groups/{id}/users".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_student_group_participants(self, id, registration_status=None):
         """
@@ -436,18 +541,28 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - registration_status
         """
             Limits results to the a given participation status, defaults to "all"
         """
         if registration_status is not None:
-            self._validate_enum(registration_status, ["all", "registered", "registered"])
+            self._validate_enum(
+                registration_status, ["all", "registered", "registered"]
+            )
             params["registration_status"] = registration_status
 
-
-        self.logger.debug("GET /api/v1/appointment_groups/{id}/groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/appointment_groups/{id}/groups".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/appointment_groups/{id}/groups with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/appointment_groups/{id}/groups".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_next_appointment(self, appointment_group_ids=None):
         """
@@ -468,9 +583,18 @@ class AppointmentGroupsAPI(BaseCanvasAPI):
         if appointment_group_ids is not None:
             params["appointment_group_ids"] = appointment_group_ids
 
-
-        self.logger.debug("GET /api/v1/appointment_groups/next_appointment with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/appointment_groups/next_appointment".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/appointment_groups/next_appointment with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/appointment_groups/next_appointment".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
 
 class Appointment(BaseModel):
@@ -483,7 +607,7 @@ class Appointment(BaseModel):
         self._start_at = start_at
         self._end_at = end_at
 
-        self.logger = logging.getLogger('py3canvas.Appointment')
+        self.logger = logging.getLogger("py3canvas.Appointment")
 
     @property
     def id(self):
@@ -493,7 +617,9 @@ class Appointment(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -504,7 +630,9 @@ class Appointment(BaseModel):
     @start_at.setter
     def start_at(self, value):
         """Setter for start_at property."""
-        self.logger.warn("Setting values on start_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on start_at will NOT update the remote Canvas instance."
+        )
         self._start_at = value
 
     @property
@@ -515,14 +643,43 @@ class Appointment(BaseModel):
     @end_at.setter
     def end_at(self, value):
         """Setter for end_at property."""
-        self.logger.warn("Setting values on end_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on end_at will NOT update the remote Canvas instance."
+        )
         self._end_at = value
 
 
 class Appointmentgroup(BaseModel):
     """Appointmentgroup Model."""
 
-    def __init__(self, id=None, title=None, start_at=None, end_at=None, description=None, location_name=None, location_address=None, participant_count=None, reserved_times=None, context_codes=None, sub_context_codes=None, workflow_state=None, requiring_action=None, appointments_count=None, appointments=None, new_appointments=None, max_appointments_per_participant=None, min_appointments_per_participant=None, participants_per_appointment=None, participant_visibility=None, participant_type=None, url=None, html_url=None, created_at=None, updated_at=None):
+    def __init__(
+        self,
+        id=None,
+        title=None,
+        start_at=None,
+        end_at=None,
+        description=None,
+        location_name=None,
+        location_address=None,
+        participant_count=None,
+        reserved_times=None,
+        context_codes=None,
+        sub_context_codes=None,
+        workflow_state=None,
+        requiring_action=None,
+        appointments_count=None,
+        appointments=None,
+        new_appointments=None,
+        max_appointments_per_participant=None,
+        min_appointments_per_participant=None,
+        participants_per_appointment=None,
+        participant_visibility=None,
+        participant_type=None,
+        url=None,
+        html_url=None,
+        created_at=None,
+        updated_at=None,
+    ):
         """Init method for Appointmentgroup class."""
         self._id = id
         self._title = title
@@ -550,7 +707,7 @@ class Appointmentgroup(BaseModel):
         self._created_at = created_at
         self._updated_at = updated_at
 
-        self.logger = logging.getLogger('py3canvas.Appointmentgroup')
+        self.logger = logging.getLogger("py3canvas.Appointmentgroup")
 
     @property
     def id(self):
@@ -560,7 +717,9 @@ class Appointmentgroup(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -571,7 +730,9 @@ class Appointmentgroup(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -582,7 +743,9 @@ class Appointmentgroup(BaseModel):
     @start_at.setter
     def start_at(self, value):
         """Setter for start_at property."""
-        self.logger.warn("Setting values on start_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on start_at will NOT update the remote Canvas instance."
+        )
         self._start_at = value
 
     @property
@@ -593,7 +756,9 @@ class Appointmentgroup(BaseModel):
     @end_at.setter
     def end_at(self, value):
         """Setter for end_at property."""
-        self.logger.warn("Setting values on end_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on end_at will NOT update the remote Canvas instance."
+        )
         self._end_at = value
 
     @property
@@ -604,7 +769,9 @@ class Appointmentgroup(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -615,7 +782,9 @@ class Appointmentgroup(BaseModel):
     @location_name.setter
     def location_name(self, value):
         """Setter for location_name property."""
-        self.logger.warn("Setting values on location_name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on location_name will NOT update the remote Canvas instance."
+        )
         self._location_name = value
 
     @property
@@ -626,7 +795,9 @@ class Appointmentgroup(BaseModel):
     @location_address.setter
     def location_address(self, value):
         """Setter for location_address property."""
-        self.logger.warn("Setting values on location_address will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on location_address will NOT update the remote Canvas instance."
+        )
         self._location_address = value
 
     @property
@@ -637,7 +808,9 @@ class Appointmentgroup(BaseModel):
     @participant_count.setter
     def participant_count(self, value):
         """Setter for participant_count property."""
-        self.logger.warn("Setting values on participant_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on participant_count will NOT update the remote Canvas instance."
+        )
         self._participant_count = value
 
     @property
@@ -648,7 +821,9 @@ class Appointmentgroup(BaseModel):
     @reserved_times.setter
     def reserved_times(self, value):
         """Setter for reserved_times property."""
-        self.logger.warn("Setting values on reserved_times will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on reserved_times will NOT update the remote Canvas instance."
+        )
         self._reserved_times = value
 
     @property
@@ -659,7 +834,9 @@ class Appointmentgroup(BaseModel):
     @context_codes.setter
     def context_codes(self, value):
         """Setter for context_codes property."""
-        self.logger.warn("Setting values on context_codes will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_codes will NOT update the remote Canvas instance."
+        )
         self._context_codes = value
 
     @property
@@ -670,7 +847,9 @@ class Appointmentgroup(BaseModel):
     @sub_context_codes.setter
     def sub_context_codes(self, value):
         """Setter for sub_context_codes property."""
-        self.logger.warn("Setting values on sub_context_codes will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sub_context_codes will NOT update the remote Canvas instance."
+        )
         self._sub_context_codes = value
 
     @property
@@ -681,7 +860,9 @@ class Appointmentgroup(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -692,7 +873,9 @@ class Appointmentgroup(BaseModel):
     @requiring_action.setter
     def requiring_action(self, value):
         """Setter for requiring_action property."""
-        self.logger.warn("Setting values on requiring_action will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on requiring_action will NOT update the remote Canvas instance."
+        )
         self._requiring_action = value
 
     @property
@@ -703,7 +886,9 @@ class Appointmentgroup(BaseModel):
     @appointments_count.setter
     def appointments_count(self, value):
         """Setter for appointments_count property."""
-        self.logger.warn("Setting values on appointments_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on appointments_count will NOT update the remote Canvas instance."
+        )
         self._appointments_count = value
 
     @property
@@ -714,7 +899,9 @@ class Appointmentgroup(BaseModel):
     @appointments.setter
     def appointments(self, value):
         """Setter for appointments property."""
-        self.logger.warn("Setting values on appointments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on appointments will NOT update the remote Canvas instance."
+        )
         self._appointments = value
 
     @property
@@ -725,7 +912,9 @@ class Appointmentgroup(BaseModel):
     @new_appointments.setter
     def new_appointments(self, value):
         """Setter for new_appointments property."""
-        self.logger.warn("Setting values on new_appointments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on new_appointments will NOT update the remote Canvas instance."
+        )
         self._new_appointments = value
 
     @property
@@ -736,7 +925,9 @@ class Appointmentgroup(BaseModel):
     @max_appointments_per_participant.setter
     def max_appointments_per_participant(self, value):
         """Setter for max_appointments_per_participant property."""
-        self.logger.warn("Setting values on max_appointments_per_participant will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on max_appointments_per_participant will NOT update the remote Canvas instance."
+        )
         self._max_appointments_per_participant = value
 
     @property
@@ -747,7 +938,9 @@ class Appointmentgroup(BaseModel):
     @min_appointments_per_participant.setter
     def min_appointments_per_participant(self, value):
         """Setter for min_appointments_per_participant property."""
-        self.logger.warn("Setting values on min_appointments_per_participant will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on min_appointments_per_participant will NOT update the remote Canvas instance."
+        )
         self._min_appointments_per_participant = value
 
     @property
@@ -758,7 +951,9 @@ class Appointmentgroup(BaseModel):
     @participants_per_appointment.setter
     def participants_per_appointment(self, value):
         """Setter for participants_per_appointment property."""
-        self.logger.warn("Setting values on participants_per_appointment will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on participants_per_appointment will NOT update the remote Canvas instance."
+        )
         self._participants_per_appointment = value
 
     @property
@@ -769,7 +964,9 @@ class Appointmentgroup(BaseModel):
     @participant_visibility.setter
     def participant_visibility(self, value):
         """Setter for participant_visibility property."""
-        self.logger.warn("Setting values on participant_visibility will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on participant_visibility will NOT update the remote Canvas instance."
+        )
         self._participant_visibility = value
 
     @property
@@ -780,7 +977,9 @@ class Appointmentgroup(BaseModel):
     @participant_type.setter
     def participant_type(self, value):
         """Setter for participant_type property."""
-        self.logger.warn("Setting values on participant_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on participant_type will NOT update the remote Canvas instance."
+        )
         self._participant_type = value
 
     @property
@@ -791,7 +990,9 @@ class Appointmentgroup(BaseModel):
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
 
     @property
@@ -802,7 +1003,9 @@ class Appointmentgroup(BaseModel):
     @html_url.setter
     def html_url(self, value):
         """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on html_url will NOT update the remote Canvas instance."
+        )
         self._html_url = value
 
     @property
@@ -813,7 +1016,9 @@ class Appointmentgroup(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -824,6 +1029,7 @@ class Appointmentgroup(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
-

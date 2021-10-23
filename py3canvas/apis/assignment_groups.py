@@ -16,7 +16,16 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         super(AssignmentGroupsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.AssignmentGroupsAPI")
 
-    def list_assignment_groups(self, course_id, assignment_ids=None, exclude_assignment_submission_types=None, grading_period_id=None, include=None, override_assignment_dates=None, scope_assignments_to_student=None):
+    def list_assignment_groups(
+        self,
+        course_id,
+        assignment_ids=None,
+        exclude_assignment_submission_types=None,
+        grading_period_id=None,
+        include=None,
+        override_assignment_dates=None,
+        scope_assignments_to_student=None,
+    ):
         """
         List assignment groups.
 
@@ -33,7 +42,6 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - include
         """
             Associations to include with the group. "discussion_topic", "all_dates", "can_edit",
@@ -43,9 +51,21 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         If "observed_users" is passed along with "assignments" and "submission", submissions for observed users will also be included as an array.
         """
         if include is not None:
-            self._validate_enum(include, ["assignments", "discussion_topic", "all_dates", "assignment_visibility", "overrides", "submission", "observed_users", "can_edit", "score_statistics"])
+            self._validate_enum(
+                include,
+                [
+                    "assignments",
+                    "discussion_topic",
+                    "all_dates",
+                    "assignment_visibility",
+                    "overrides",
+                    "submission",
+                    "observed_users",
+                    "can_edit",
+                    "score_statistics",
+                ],
+            )
             params["include"] = include
-
 
         # OPTIONAL - assignment_ids
         """
@@ -55,16 +75,19 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         if assignment_ids is not None:
             params["assignment_ids"] = assignment_ids
 
-
         # OPTIONAL - exclude_assignment_submission_types
         """
             If "assignments" are included, those with the specified submission types
         will be excluded from the assignment groups.
         """
         if exclude_assignment_submission_types is not None:
-            self._validate_enum(exclude_assignment_submission_types, ["online_quiz", "discussion_topic", "wiki_page", "external_tool"])
-            params["exclude_assignment_submission_types"] = exclude_assignment_submission_types
-
+            self._validate_enum(
+                exclude_assignment_submission_types,
+                ["online_quiz", "discussion_topic", "wiki_page", "external_tool"],
+            )
+            params[
+                "exclude_assignment_submission_types"
+            ] = exclude_assignment_submission_types
 
         # OPTIONAL - override_assignment_dates
         """
@@ -73,7 +96,6 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         if override_assignment_dates is not None:
             params["override_assignment_dates"] = override_assignment_dates
 
-
         # OPTIONAL - grading_period_id
         """
             The id of the grading period in which assignment groups are being requested
@@ -81,7 +103,6 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         """
         if grading_period_id is not None:
             params["grading_period_id"] = grading_period_id
-
 
         # OPTIONAL - scope_assignments_to_student
         """
@@ -94,11 +115,27 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         if scope_assignments_to_student is not None:
             params["scope_assignments_to_student"] = scope_assignments_to_student
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignment_groups with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignment_groups".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignment_groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignment_groups".format(**path), data=data, params=params, all_pages=True)
-
-    def get_assignment_group(self, assignment_group_id, course_id, grading_period_id=None, include=None, override_assignment_dates=None):
+    def get_assignment_group(
+        self,
+        assignment_group_id,
+        course_id,
+        grading_period_id=None,
+        include=None,
+        override_assignment_dates=None,
+    ):
         """
         Get an Assignment Group.
 
@@ -114,13 +151,11 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_group_id
         """
             ID
         """
         path["assignment_group_id"] = assignment_group_id
-
 
         # OPTIONAL - include
         """
@@ -130,9 +165,17 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         course feature be turned on.
         """
         if include is not None:
-            self._validate_enum(include, ["assignments", "discussion_topic", "assignment_visibility", "submission", "score_statistics"])
+            self._validate_enum(
+                include,
+                [
+                    "assignments",
+                    "discussion_topic",
+                    "assignment_visibility",
+                    "submission",
+                    "score_statistics",
+                ],
+            )
             params["include"] = include
-
 
         # OPTIONAL - override_assignment_dates
         """
@@ -140,7 +183,6 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         """
         if override_assignment_dates is not None:
             params["override_assignment_dates"] = override_assignment_dates
-
 
         # OPTIONAL - grading_period_id
         """
@@ -150,11 +192,31 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         if grading_period_id is not None:
             params["grading_period_id"] = grading_period_id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignment_groups/{assignment_group_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignment_groups/{assignment_group_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignment_groups/{assignment_group_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignment_groups/{assignment_group_id}".format(**path), data=data, params=params, single_item=True)
-
-    def create_assignment_group(self, course_id, group_weight=None, integration_data=None, name=None, position=None, rules=None, sis_source_id=None):
+    def create_assignment_group(
+        self,
+        course_id,
+        group_weight=None,
+        integration_data=None,
+        name=None,
+        position=None,
+        rules=None,
+        sis_source_id=None,
+    ):
         """
         Create an Assignment Group.
 
@@ -170,14 +232,12 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - name
         """
             The assignment group's name
         """
         if name is not None:
             data["name"] = name
-
 
         # OPTIONAL - position
         """
@@ -186,14 +246,12 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         if position is not None:
             data["position"] = position
 
-
         # OPTIONAL - group_weight
         """
             The percent of the total grade that this assignment group represents
         """
         if group_weight is not None:
             data["group_weight"] = group_weight
-
 
         # OPTIONAL - sis_source_id
         """
@@ -202,14 +260,12 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         if sis_source_id is not None:
             data["sis_source_id"] = sis_source_id
 
-
         # OPTIONAL - integration_data
         """
             The integration data of the Assignment Group
         """
         if integration_data is not None:
             data["integration_data"] = integration_data
-
 
         # OPTIONAL - rules
         """
@@ -219,9 +275,18 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         if rules is not None:
             data["rules"] = rules
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/assignment_groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/assignment_groups".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/assignment_groups with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/assignment_groups".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def edit_assignment_group(self, assignment_group_id, course_id):
         """
@@ -240,18 +305,30 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_group_id
         """
             ID
         """
         path["assignment_group_id"] = assignment_group_id
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/assignment_groups/{assignment_group_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/assignment_groups/{assignment_group_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/assignment_groups/{assignment_group_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/assignment_groups/{assignment_group_id}".format(**path), data=data, params=params, single_item=True)
-
-    def destroy_assignment_group(self, assignment_group_id, course_id, move_assignments_to=None):
+    def destroy_assignment_group(
+        self, assignment_group_id, course_id, move_assignments_to=None
+    ):
         """
         Destroy an Assignment Group.
 
@@ -267,13 +344,11 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_group_id
         """
             ID
         """
         path["assignment_group_id"] = assignment_group_id
-
 
         # OPTIONAL - move_assignments_to
         """
@@ -285,9 +360,20 @@ class AssignmentGroupsAPI(BaseCanvasAPI):
         if move_assignments_to is not None:
             params["move_assignments_to"] = move_assignments_to
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/assignment_groups/{assignment_group_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/assignment_groups/{assignment_group_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/assignment_groups/{assignment_group_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/assignment_groups/{assignment_group_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Gradingrules(BaseModel):
@@ -299,7 +385,7 @@ class Gradingrules(BaseModel):
         self._drop_highest = drop_highest
         self._never_drop = never_drop
 
-        self.logger = logging.getLogger('py3canvas.Gradingrules')
+        self.logger = logging.getLogger("py3canvas.Gradingrules")
 
     @property
     def drop_lowest(self):
@@ -309,7 +395,9 @@ class Gradingrules(BaseModel):
     @drop_lowest.setter
     def drop_lowest(self, value):
         """Setter for drop_lowest property."""
-        self.logger.warn("Setting values on drop_lowest will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on drop_lowest will NOT update the remote Canvas instance."
+        )
         self._drop_lowest = value
 
     @property
@@ -320,7 +408,9 @@ class Gradingrules(BaseModel):
     @drop_highest.setter
     def drop_highest(self, value):
         """Setter for drop_highest property."""
-        self.logger.warn("Setting values on drop_highest will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on drop_highest will NOT update the remote Canvas instance."
+        )
         self._drop_highest = value
 
     @property
@@ -331,14 +421,26 @@ class Gradingrules(BaseModel):
     @never_drop.setter
     def never_drop(self, value):
         """Setter for never_drop property."""
-        self.logger.warn("Setting values on never_drop will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on never_drop will NOT update the remote Canvas instance."
+        )
         self._never_drop = value
 
 
 class Assignmentgroup(BaseModel):
     """Assignmentgroup Model."""
 
-    def __init__(self, id=None, name=None, position=None, group_weight=None, sis_source_id=None, integration_data=None, assignments=None, rules=None):
+    def __init__(
+        self,
+        id=None,
+        name=None,
+        position=None,
+        group_weight=None,
+        sis_source_id=None,
+        integration_data=None,
+        assignments=None,
+        rules=None,
+    ):
         """Init method for Assignmentgroup class."""
         self._id = id
         self._name = name
@@ -349,7 +451,7 @@ class Assignmentgroup(BaseModel):
         self._assignments = assignments
         self._rules = rules
 
-        self.logger = logging.getLogger('py3canvas.Assignmentgroup')
+        self.logger = logging.getLogger("py3canvas.Assignmentgroup")
 
     @property
     def id(self):
@@ -359,7 +461,9 @@ class Assignmentgroup(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -370,7 +474,9 @@ class Assignmentgroup(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -381,7 +487,9 @@ class Assignmentgroup(BaseModel):
     @position.setter
     def position(self, value):
         """Setter for position property."""
-        self.logger.warn("Setting values on position will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on position will NOT update the remote Canvas instance."
+        )
         self._position = value
 
     @property
@@ -392,7 +500,9 @@ class Assignmentgroup(BaseModel):
     @group_weight.setter
     def group_weight(self, value):
         """Setter for group_weight property."""
-        self.logger.warn("Setting values on group_weight will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on group_weight will NOT update the remote Canvas instance."
+        )
         self._group_weight = value
 
     @property
@@ -403,7 +513,9 @@ class Assignmentgroup(BaseModel):
     @sis_source_id.setter
     def sis_source_id(self, value):
         """Setter for sis_source_id property."""
-        self.logger.warn("Setting values on sis_source_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_source_id will NOT update the remote Canvas instance."
+        )
         self._sis_source_id = value
 
     @property
@@ -414,7 +526,9 @@ class Assignmentgroup(BaseModel):
     @integration_data.setter
     def integration_data(self, value):
         """Setter for integration_data property."""
-        self.logger.warn("Setting values on integration_data will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on integration_data will NOT update the remote Canvas instance."
+        )
         self._integration_data = value
 
     @property
@@ -425,7 +539,9 @@ class Assignmentgroup(BaseModel):
     @assignments.setter
     def assignments(self, value):
         """Setter for assignments property."""
-        self.logger.warn("Setting values on assignments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assignments will NOT update the remote Canvas instance."
+        )
         self._assignments = value
 
     @property
@@ -436,6 +552,7 @@ class Assignmentgroup(BaseModel):
     @rules.setter
     def rules(self, value):
         """Setter for rules property."""
-        self.logger.warn("Setting values on rules will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on rules will NOT update the remote Canvas instance."
+        )
         self._rules = value
-

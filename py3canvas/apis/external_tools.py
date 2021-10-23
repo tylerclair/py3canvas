@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class ExternalToolsAPI(BaseCanvasAPI):
     """ExternalTools API Version 1.0."""
 
@@ -16,7 +15,9 @@ class ExternalToolsAPI(BaseCanvasAPI):
         super(ExternalToolsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.ExternalToolsAPI")
 
-    def list_external_tools_courses(self, course_id, include_parents=None, search_term=None, selectable=None):
+    def list_external_tools_courses(
+        self, course_id, include_parents=None, search_term=None, selectable=None
+    ):
         """
         List external tools.
 
@@ -33,14 +34,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - search_term
         """
             The partial name of the tools to match and return.
         """
         if search_term is not None:
             params["search_term"] = search_term
-
 
         # OPTIONAL - selectable
         """
@@ -49,7 +48,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if selectable is not None:
             params["selectable"] = selectable
 
-
         # OPTIONAL - include_parents
         """
             If true, then include tools installed in all accounts above the current context
@@ -57,11 +55,22 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if include_parents is not None:
             params["include_parents"] = include_parents
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/external_tools with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/external_tools".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/external_tools".format(**path), data=data, params=params, no_data=True)
-
-    def list_external_tools_accounts(self, account_id, include_parents=None, search_term=None, selectable=None):
+    def list_external_tools_accounts(
+        self, account_id, include_parents=None, search_term=None, selectable=None
+    ):
         """
         List external tools.
 
@@ -78,14 +87,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # OPTIONAL - search_term
         """
             The partial name of the tools to match and return.
         """
         if search_term is not None:
             params["search_term"] = search_term
-
 
         # OPTIONAL - selectable
         """
@@ -94,7 +101,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if selectable is not None:
             params["selectable"] = selectable
 
-
         # OPTIONAL - include_parents
         """
             If true, then include tools installed in all accounts above the current context
@@ -102,11 +108,22 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if include_parents is not None:
             params["include_parents"] = include_parents
 
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/external_tools with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/external_tools".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/accounts/{account_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/external_tools".format(**path), data=data, params=params, no_data=True)
-
-    def list_external_tools_groups(self, group_id, include_parents=None, search_term=None, selectable=None):
+    def list_external_tools_groups(
+        self, group_id, include_parents=None, search_term=None, selectable=None
+    ):
         """
         List external tools.
 
@@ -123,14 +140,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # OPTIONAL - search_term
         """
             The partial name of the tools to match and return.
         """
         if search_term is not None:
             params["search_term"] = search_term
-
 
         # OPTIONAL - selectable
         """
@@ -139,7 +154,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if selectable is not None:
             params["selectable"] = selectable
 
-
         # OPTIONAL - include_parents
         """
             If true, then include tools installed in all accounts above the current context
@@ -147,16 +161,33 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if include_parents is not None:
             params["include_parents"] = include_parents
 
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/external_tools with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/external_tools".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/groups/{group_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/external_tools".format(**path), data=data, params=params, no_data=True)
-
-    def get_sessionless_launch_url_for_external_tool_courses(self, course_id, assignment_id=None, id=None, launch_type=None, module_item_id=None, url=None):
+    def get_sessionless_launch_url_for_external_tool_courses(
+        self,
+        course_id,
+        assignment_id=None,
+        id=None,
+        launch_type=None,
+        module_item_id=None,
+        url=None,
+    ):
         """
         Get a sessionless launch url for an external tool.
 
         Returns a sessionless launch url for an external tool.
-        
+
         NOTE: Either the id or url must be provided unless launch_type is assessment or module_item.
         """
         path = {}
@@ -169,14 +200,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - id
         """
             The external id of the tool to launch.
         """
         if id is not None:
             params["id"] = id
-
 
         # OPTIONAL - url
         """
@@ -185,7 +214,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if url is not None:
             params["url"] = url
 
-
         # OPTIONAL - assignment_id
         """
             The assignment id for an assignment launch. Required if launch_type is set to "assessment".
@@ -193,14 +221,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if assignment_id is not None:
             params["assignment_id"] = assignment_id
 
-
         # OPTIONAL - module_item_id
         """
             The assignment id for a module item launch. Required if launch_type is set to "module_item".
         """
         if module_item_id is not None:
             params["module_item_id"] = module_item_id
-
 
         # OPTIONAL - launch_type
         """
@@ -212,16 +238,35 @@ class ExternalToolsAPI(BaseCanvasAPI):
             self._validate_enum(launch_type, ["assessment", "module_item"])
             params["launch_type"] = launch_type
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/external_tools/sessionless_launch with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/external_tools/sessionless_launch".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/external_tools/sessionless_launch with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/external_tools/sessionless_launch".format(**path), data=data, params=params, no_data=True)
-
-    def get_sessionless_launch_url_for_external_tool_accounts(self, account_id, assignment_id=None, id=None, launch_type=None, module_item_id=None, url=None):
+    def get_sessionless_launch_url_for_external_tool_accounts(
+        self,
+        account_id,
+        assignment_id=None,
+        id=None,
+        launch_type=None,
+        module_item_id=None,
+        url=None,
+    ):
         """
         Get a sessionless launch url for an external tool.
 
         Returns a sessionless launch url for an external tool.
-        
+
         NOTE: Either the id or url must be provided unless launch_type is assessment or module_item.
         """
         path = {}
@@ -234,14 +279,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # OPTIONAL - id
         """
             The external id of the tool to launch.
         """
         if id is not None:
             params["id"] = id
-
 
         # OPTIONAL - url
         """
@@ -250,7 +293,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if url is not None:
             params["url"] = url
 
-
         # OPTIONAL - assignment_id
         """
             The assignment id for an assignment launch. Required if launch_type is set to "assessment".
@@ -258,14 +300,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if assignment_id is not None:
             params["assignment_id"] = assignment_id
 
-
         # OPTIONAL - module_item_id
         """
             The assignment id for a module item launch. Required if launch_type is set to "module_item".
         """
         if module_item_id is not None:
             params["module_item_id"] = module_item_id
-
 
         # OPTIONAL - launch_type
         """
@@ -277,9 +317,20 @@ class ExternalToolsAPI(BaseCanvasAPI):
             self._validate_enum(launch_type, ["assessment", "module_item"])
             params["launch_type"] = launch_type
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/external_tools/sessionless_launch with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/external_tools/sessionless_launch".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/external_tools/sessionless_launch with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/external_tools/sessionless_launch".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_single_external_tool_courses(self, course_id, external_tool_id):
         """
@@ -297,16 +348,26 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - external_tool_id
         """
             ID
         """
         path["external_tool_id"] = external_tool_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/external_tools/{external_tool_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_single_external_tool_accounts(self, account_id, external_tool_id):
         """
@@ -324,18 +385,94 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - external_tool_id
         """
             ID
         """
         path["external_tool_id"] = external_tool_id
 
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/external_tools/{external_tool_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/accounts/{account_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
-
-    def create_external_tool_courses(self, client_id, consumer_key, course_id, name, privacy_level, shared_secret, account_navigation_display_type=None, account_navigation_enabled=None, account_navigation_selection_height=None, account_navigation_selection_width=None, account_navigation_text=None, account_navigation_url=None, config_type=None, config_url=None, config_xml=None, course_home_sub_navigation_enabled=None, course_home_sub_navigation_icon_url=None, course_home_sub_navigation_text=None, course_home_sub_navigation_url=None, course_navigation_default=None, course_navigation_display_type=None, course_navigation_enabled=None, course_navigation_text=None, course_navigation_visibility=None, course_navigation_windowTarget=None, custom_fields_field_name=None, description=None, domain=None, editor_button_enabled=None, editor_button_icon_url=None, editor_button_message_type=None, editor_button_selection_height=None, editor_button_selection_width=None, editor_button_url=None, homework_submission_enabled=None, homework_submission_message_type=None, homework_submission_text=None, homework_submission_url=None, icon_url=None, is_rce_favorite=None, link_selection_enabled=None, link_selection_message_type=None, link_selection_text=None, link_selection_url=None, migration_selection_enabled=None, migration_selection_message_type=None, migration_selection_url=None, not_selectable=None, oauth_compliant=None, resource_selection_enabled=None, resource_selection_icon_url=None, resource_selection_selection_height=None, resource_selection_selection_width=None, resource_selection_url=None, text=None, tool_configuration_enabled=None, tool_configuration_message_type=None, tool_configuration_prefer_sis_email=None, tool_configuration_url=None, url=None, user_navigation_enabled=None, user_navigation_text=None, user_navigation_url=None, user_navigation_visibility=None):
+    def create_external_tool_courses(
+        self,
+        client_id,
+        consumer_key,
+        course_id,
+        name,
+        privacy_level,
+        shared_secret,
+        account_navigation_display_type=None,
+        account_navigation_enabled=None,
+        account_navigation_selection_height=None,
+        account_navigation_selection_width=None,
+        account_navigation_text=None,
+        account_navigation_url=None,
+        config_type=None,
+        config_url=None,
+        config_xml=None,
+        course_home_sub_navigation_enabled=None,
+        course_home_sub_navigation_icon_url=None,
+        course_home_sub_navigation_text=None,
+        course_home_sub_navigation_url=None,
+        course_navigation_default=None,
+        course_navigation_display_type=None,
+        course_navigation_enabled=None,
+        course_navigation_text=None,
+        course_navigation_visibility=None,
+        course_navigation_windowTarget=None,
+        custom_fields_field_name=None,
+        description=None,
+        domain=None,
+        editor_button_enabled=None,
+        editor_button_icon_url=None,
+        editor_button_message_type=None,
+        editor_button_selection_height=None,
+        editor_button_selection_width=None,
+        editor_button_url=None,
+        homework_submission_enabled=None,
+        homework_submission_message_type=None,
+        homework_submission_text=None,
+        homework_submission_url=None,
+        icon_url=None,
+        is_rce_favorite=None,
+        link_selection_enabled=None,
+        link_selection_message_type=None,
+        link_selection_text=None,
+        link_selection_url=None,
+        migration_selection_enabled=None,
+        migration_selection_message_type=None,
+        migration_selection_url=None,
+        not_selectable=None,
+        oauth_compliant=None,
+        resource_selection_enabled=None,
+        resource_selection_icon_url=None,
+        resource_selection_selection_height=None,
+        resource_selection_selection_width=None,
+        resource_selection_url=None,
+        text=None,
+        tool_configuration_enabled=None,
+        tool_configuration_message_type=None,
+        tool_configuration_prefer_sis_email=None,
+        tool_configuration_url=None,
+        url=None,
+        user_navigation_enabled=None,
+        user_navigation_text=None,
+        user_navigation_url=None,
+        user_navigation_visibility=None,
+    ):
         """
         Create an external tool.
 
@@ -354,7 +491,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - client_id
         """
             The client id is attached to the developer key.
@@ -362,13 +498,11 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         data["client_id"] = client_id
 
-
         # REQUIRED - name
         """
             The name of the tool
         """
         data["name"] = name
-
 
         # REQUIRED - privacy_level
         """
@@ -377,13 +511,11 @@ class ExternalToolsAPI(BaseCanvasAPI):
         self._validate_enum(privacy_level, ["anonymous", "name_only", "public"])
         data["privacy_level"] = privacy_level
 
-
         # REQUIRED - consumer_key
         """
             The consumer key for the external tool
         """
         data["consumer_key"] = consumer_key
-
 
         # REQUIRED - shared_secret
         """
@@ -391,14 +523,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         data["shared_secret"] = shared_secret
 
-
         # OPTIONAL - description
         """
             A description of the tool
         """
         if description is not None:
             data["description"] = description
-
 
         # OPTIONAL - url
         """
@@ -408,7 +538,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if url is not None:
             data["url"] = url
 
-
         # OPTIONAL - domain
         """
             The domain to match links against. Either "url" or "domain" should be
@@ -417,14 +546,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if domain is not None:
             data["domain"] = domain
 
-
         # OPTIONAL - icon_url
         """
             The url of the icon to show for this tool
         """
         if icon_url is not None:
             data["icon_url"] = icon_url
-
 
         # OPTIONAL - text
         """
@@ -433,7 +560,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if text is not None:
             data["text"] = text
 
-
         # OPTIONAL - custom_fields[field_name]
         """
             Custom fields that will be sent to the tool consumer; can be used
@@ -441,7 +567,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         if custom_fields_field_name is not None:
             data["custom_fields[field_name]"] = custom_fields_field_name
-
 
         # OPTIONAL - is_rce_favorite
         """
@@ -454,14 +579,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if is_rce_favorite is not None:
             data["is_rce_favorite"] = is_rce_favorite
 
-
         # OPTIONAL - account_navigation[url]
         """
             The url of the external tool for account navigation
         """
         if account_navigation_url is not None:
             data["account_navigation[url]"] = account_navigation_url
-
 
         # OPTIONAL - account_navigation[enabled]
         """
@@ -470,7 +593,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if account_navigation_enabled is not None:
             data["account_navigation[enabled]"] = account_navigation_enabled
 
-
         # OPTIONAL - account_navigation[text]
         """
             The text that will show on the left-tab in the account navigation
@@ -478,22 +600,23 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if account_navigation_text is not None:
             data["account_navigation[text]"] = account_navigation_text
 
-
         # OPTIONAL - account_navigation[selection_width]
         """
             The width of the dialog the tool is launched in
         """
         if account_navigation_selection_width is not None:
-            data["account_navigation[selection_width]"] = account_navigation_selection_width
-
+            data[
+                "account_navigation[selection_width]"
+            ] = account_navigation_selection_width
 
         # OPTIONAL - account_navigation[selection_height]
         """
             The height of the dialog the tool is launched in
         """
         if account_navigation_selection_height is not None:
-            data["account_navigation[selection_height]"] = account_navigation_selection_height
-
+            data[
+                "account_navigation[selection_height]"
+            ] = account_navigation_selection_height
 
         # OPTIONAL - account_navigation[display_type]
         """
@@ -503,14 +626,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if account_navigation_display_type is not None:
             data["account_navigation[display_type]"] = account_navigation_display_type
 
-
         # OPTIONAL - user_navigation[url]
         """
             The url of the external tool for user navigation
         """
         if user_navigation_url is not None:
             data["user_navigation[url]"] = user_navigation_url
-
 
         # OPTIONAL - user_navigation[enabled]
         """
@@ -519,14 +640,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if user_navigation_enabled is not None:
             data["user_navigation[enabled]"] = user_navigation_enabled
 
-
         # OPTIONAL - user_navigation[text]
         """
             The text that will show on the left-tab in the user navigation
         """
         if user_navigation_text is not None:
             data["user_navigation[text]"] = user_navigation_text
-
 
         # OPTIONAL - user_navigation[visibility]
         """
@@ -535,9 +654,10 @@ class ExternalToolsAPI(BaseCanvasAPI):
         and use the default behavior, which is "public".
         """
         if user_navigation_visibility is not None:
-            self._validate_enum(user_navigation_visibility, ["admins", "members", "public"])
+            self._validate_enum(
+                user_navigation_visibility, ["admins", "members", "public"]
+            )
             data["user_navigation[visibility]"] = user_navigation_visibility
-
 
         # OPTIONAL - course_home_sub_navigation[url]
         """
@@ -546,14 +666,14 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if course_home_sub_navigation_url is not None:
             data["course_home_sub_navigation[url]"] = course_home_sub_navigation_url
 
-
         # OPTIONAL - course_home_sub_navigation[enabled]
         """
             Set this to enable this feature
         """
         if course_home_sub_navigation_enabled is not None:
-            data["course_home_sub_navigation[enabled]"] = course_home_sub_navigation_enabled
-
+            data[
+                "course_home_sub_navigation[enabled]"
+            ] = course_home_sub_navigation_enabled
 
         # OPTIONAL - course_home_sub_navigation[text]
         """
@@ -562,14 +682,14 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if course_home_sub_navigation_text is not None:
             data["course_home_sub_navigation[text]"] = course_home_sub_navigation_text
 
-
         # OPTIONAL - course_home_sub_navigation[icon_url]
         """
             The url of the icon to show in the right-side course home navigation menu
         """
         if course_home_sub_navigation_icon_url is not None:
-            data["course_home_sub_navigation[icon_url]"] = course_home_sub_navigation_icon_url
-
+            data[
+                "course_home_sub_navigation[icon_url]"
+            ] = course_home_sub_navigation_icon_url
 
         # OPTIONAL - course_navigation[enabled]
         """
@@ -578,14 +698,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if course_navigation_enabled is not None:
             data["course_navigation[enabled]"] = course_navigation_enabled
 
-
         # OPTIONAL - course_navigation[text]
         """
             The text that will show on the left-tab in the course navigation
         """
         if course_navigation_text is not None:
             data["course_navigation[text]"] = course_navigation_text
-
 
         # OPTIONAL - course_navigation[visibility]
         """
@@ -594,9 +712,10 @@ class ExternalToolsAPI(BaseCanvasAPI):
         and use the default behavior, which is "public".
         """
         if course_navigation_visibility is not None:
-            self._validate_enum(course_navigation_visibility, ["admins", "members", "public"])
+            self._validate_enum(
+                course_navigation_visibility, ["admins", "members", "public"]
+            )
             data["course_navigation[visibility]"] = course_navigation_visibility
-
 
         # OPTIONAL - course_navigation[windowTarget]
         """
@@ -607,7 +726,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if course_navigation_windowTarget is not None:
             self._validate_enum(course_navigation_windowTarget, ["_blank", "_self"])
             data["course_navigation[windowTarget]"] = course_navigation_windowTarget
-
 
         # OPTIONAL - course_navigation[default]
         """
@@ -623,7 +741,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
             self._validate_enum(course_navigation_default, ["disabled", "enabled"])
             data["course_navigation[default]"] = course_navigation_default
 
-
         # OPTIONAL - course_navigation[display_type]
         """
             The layout type to use when launching the tool. Must be
@@ -632,14 +749,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if course_navigation_display_type is not None:
             data["course_navigation[display_type]"] = course_navigation_display_type
 
-
         # OPTIONAL - editor_button[url]
         """
             The url of the external tool
         """
         if editor_button_url is not None:
             data["editor_button[url]"] = editor_button_url
-
 
         # OPTIONAL - editor_button[enabled]
         """
@@ -648,14 +763,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if editor_button_enabled is not None:
             data["editor_button[enabled]"] = editor_button_enabled
 
-
         # OPTIONAL - editor_button[icon_url]
         """
             The url of the icon to show in the WYSIWYG editor
         """
         if editor_button_icon_url is not None:
             data["editor_button[icon_url]"] = editor_button_icon_url
-
 
         # OPTIONAL - editor_button[selection_width]
         """
@@ -664,14 +777,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if editor_button_selection_width is not None:
             data["editor_button[selection_width]"] = editor_button_selection_width
 
-
         # OPTIONAL - editor_button[selection_height]
         """
             The height of the dialog the tool is launched in
         """
         if editor_button_selection_height is not None:
             data["editor_button[selection_height]"] = editor_button_selection_height
-
 
         # OPTIONAL - editor_button[message_type]
         """
@@ -681,14 +792,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if editor_button_message_type is not None:
             data["editor_button[message_type]"] = editor_button_message_type
 
-
         # OPTIONAL - homework_submission[url]
         """
             The url of the external tool
         """
         if homework_submission_url is not None:
             data["homework_submission[url]"] = homework_submission_url
-
 
         # OPTIONAL - homework_submission[enabled]
         """
@@ -697,14 +806,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if homework_submission_enabled is not None:
             data["homework_submission[enabled]"] = homework_submission_enabled
 
-
         # OPTIONAL - homework_submission[text]
         """
             The text that will show on the homework submission tab
         """
         if homework_submission_text is not None:
             data["homework_submission[text]"] = homework_submission_text
-
 
         # OPTIONAL - homework_submission[message_type]
         """
@@ -714,14 +821,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if homework_submission_message_type is not None:
             data["homework_submission[message_type]"] = homework_submission_message_type
 
-
         # OPTIONAL - link_selection[url]
         """
             The url of the external tool
         """
         if link_selection_url is not None:
             data["link_selection[url]"] = link_selection_url
-
 
         # OPTIONAL - link_selection[enabled]
         """
@@ -730,14 +835,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if link_selection_enabled is not None:
             data["link_selection[enabled]"] = link_selection_enabled
 
-
         # OPTIONAL - link_selection[text]
         """
             The text that will show for the link selection text
         """
         if link_selection_text is not None:
             data["link_selection[text]"] = link_selection_text
-
 
         # OPTIONAL - link_selection[message_type]
         """
@@ -747,7 +850,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if link_selection_message_type is not None:
             data["link_selection[message_type]"] = link_selection_message_type
 
-
         # OPTIONAL - migration_selection[url]
         """
             The url of the external tool
@@ -755,14 +857,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if migration_selection_url is not None:
             data["migration_selection[url]"] = migration_selection_url
 
-
         # OPTIONAL - migration_selection[enabled]
         """
             Set this to enable this feature
         """
         if migration_selection_enabled is not None:
             data["migration_selection[enabled]"] = migration_selection_enabled
-
 
         # OPTIONAL - migration_selection[message_type]
         """
@@ -772,7 +872,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if migration_selection_message_type is not None:
             data["migration_selection[message_type]"] = migration_selection_message_type
 
-
         # OPTIONAL - tool_configuration[url]
         """
             The url of the external tool
@@ -780,14 +879,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if tool_configuration_url is not None:
             data["tool_configuration[url]"] = tool_configuration_url
 
-
         # OPTIONAL - tool_configuration[enabled]
         """
             Set this to enable this feature
         """
         if tool_configuration_enabled is not None:
             data["tool_configuration[enabled]"] = tool_configuration_enabled
-
 
         # OPTIONAL - tool_configuration[message_type]
         """
@@ -797,15 +894,15 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if tool_configuration_message_type is not None:
             data["tool_configuration[message_type]"] = tool_configuration_message_type
 
-
         # OPTIONAL - tool_configuration[prefer_sis_email]
         """
             Set this to default the lis_person_contact_email_primary to prefer
         provisioned sis_email; otherwise, omit
         """
         if tool_configuration_prefer_sis_email is not None:
-            data["tool_configuration[prefer_sis_email]"] = tool_configuration_prefer_sis_email
-
+            data[
+                "tool_configuration[prefer_sis_email]"
+            ] = tool_configuration_prefer_sis_email
 
         # OPTIONAL - resource_selection[url]
         """
@@ -813,7 +910,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         if resource_selection_url is not None:
             data["resource_selection[url]"] = resource_selection_url
-
 
         # OPTIONAL - resource_selection[enabled]
         """
@@ -824,7 +920,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if resource_selection_enabled is not None:
             data["resource_selection[enabled]"] = resource_selection_enabled
 
-
         # OPTIONAL - resource_selection[icon_url]
         """
             The url of the icon to show in the module external tool list
@@ -832,22 +927,23 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if resource_selection_icon_url is not None:
             data["resource_selection[icon_url]"] = resource_selection_icon_url
 
-
         # OPTIONAL - resource_selection[selection_width]
         """
             The width of the dialog the tool is launched in
         """
         if resource_selection_selection_width is not None:
-            data["resource_selection[selection_width]"] = resource_selection_selection_width
-
+            data[
+                "resource_selection[selection_width]"
+            ] = resource_selection_selection_width
 
         # OPTIONAL - resource_selection[selection_height]
         """
             The height of the dialog the tool is launched in
         """
         if resource_selection_selection_height is not None:
-            data["resource_selection[selection_height]"] = resource_selection_selection_height
-
+            data[
+                "resource_selection[selection_height]"
+            ] = resource_selection_selection_height
 
         # OPTIONAL - config_type
         """
@@ -860,7 +956,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if config_type is not None:
             data["config_type"] = config_type
 
-
         # OPTIONAL - config_xml
         """
             XML tool configuration, as specified in the CC xml specification. This is
@@ -868,7 +963,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         if config_xml is not None:
             data["config_xml"] = config_xml
-
 
         # OPTIONAL - config_url
         """
@@ -879,7 +973,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if config_url is not None:
             data["config_url"] = config_url
 
-
         # OPTIONAL - not_selectable
         """
             Default: false. If set to true, and if resource_selection is set to false,
@@ -889,7 +982,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if not_selectable is not None:
             data["not_selectable"] = not_selectable
 
-
         # OPTIONAL - oauth_compliant
         """
             Default: false, if set to true LTI query params will not be copied to the
@@ -898,11 +990,86 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if oauth_compliant is not None:
             data["oauth_compliant"] = oauth_compliant
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/external_tools with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/external_tools".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/external_tools".format(**path), data=data, params=params, no_data=True)
-
-    def create_external_tool_accounts(self, account_id, client_id, consumer_key, name, privacy_level, shared_secret, account_navigation_display_type=None, account_navigation_enabled=None, account_navigation_selection_height=None, account_navigation_selection_width=None, account_navigation_text=None, account_navigation_url=None, config_type=None, config_url=None, config_xml=None, course_home_sub_navigation_enabled=None, course_home_sub_navigation_icon_url=None, course_home_sub_navigation_text=None, course_home_sub_navigation_url=None, course_navigation_default=None, course_navigation_display_type=None, course_navigation_enabled=None, course_navigation_text=None, course_navigation_visibility=None, course_navigation_windowTarget=None, custom_fields_field_name=None, description=None, domain=None, editor_button_enabled=None, editor_button_icon_url=None, editor_button_message_type=None, editor_button_selection_height=None, editor_button_selection_width=None, editor_button_url=None, homework_submission_enabled=None, homework_submission_message_type=None, homework_submission_text=None, homework_submission_url=None, icon_url=None, is_rce_favorite=None, link_selection_enabled=None, link_selection_message_type=None, link_selection_text=None, link_selection_url=None, migration_selection_enabled=None, migration_selection_message_type=None, migration_selection_url=None, not_selectable=None, oauth_compliant=None, resource_selection_enabled=None, resource_selection_icon_url=None, resource_selection_selection_height=None, resource_selection_selection_width=None, resource_selection_url=None, text=None, tool_configuration_enabled=None, tool_configuration_message_type=None, tool_configuration_prefer_sis_email=None, tool_configuration_url=None, url=None, user_navigation_enabled=None, user_navigation_text=None, user_navigation_url=None, user_navigation_visibility=None):
+    def create_external_tool_accounts(
+        self,
+        account_id,
+        client_id,
+        consumer_key,
+        name,
+        privacy_level,
+        shared_secret,
+        account_navigation_display_type=None,
+        account_navigation_enabled=None,
+        account_navigation_selection_height=None,
+        account_navigation_selection_width=None,
+        account_navigation_text=None,
+        account_navigation_url=None,
+        config_type=None,
+        config_url=None,
+        config_xml=None,
+        course_home_sub_navigation_enabled=None,
+        course_home_sub_navigation_icon_url=None,
+        course_home_sub_navigation_text=None,
+        course_home_sub_navigation_url=None,
+        course_navigation_default=None,
+        course_navigation_display_type=None,
+        course_navigation_enabled=None,
+        course_navigation_text=None,
+        course_navigation_visibility=None,
+        course_navigation_windowTarget=None,
+        custom_fields_field_name=None,
+        description=None,
+        domain=None,
+        editor_button_enabled=None,
+        editor_button_icon_url=None,
+        editor_button_message_type=None,
+        editor_button_selection_height=None,
+        editor_button_selection_width=None,
+        editor_button_url=None,
+        homework_submission_enabled=None,
+        homework_submission_message_type=None,
+        homework_submission_text=None,
+        homework_submission_url=None,
+        icon_url=None,
+        is_rce_favorite=None,
+        link_selection_enabled=None,
+        link_selection_message_type=None,
+        link_selection_text=None,
+        link_selection_url=None,
+        migration_selection_enabled=None,
+        migration_selection_message_type=None,
+        migration_selection_url=None,
+        not_selectable=None,
+        oauth_compliant=None,
+        resource_selection_enabled=None,
+        resource_selection_icon_url=None,
+        resource_selection_selection_height=None,
+        resource_selection_selection_width=None,
+        resource_selection_url=None,
+        text=None,
+        tool_configuration_enabled=None,
+        tool_configuration_message_type=None,
+        tool_configuration_prefer_sis_email=None,
+        tool_configuration_url=None,
+        url=None,
+        user_navigation_enabled=None,
+        user_navigation_text=None,
+        user_navigation_url=None,
+        user_navigation_visibility=None,
+    ):
         """
         Create an external tool.
 
@@ -921,7 +1088,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - client_id
         """
             The client id is attached to the developer key.
@@ -929,13 +1095,11 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         data["client_id"] = client_id
 
-
         # REQUIRED - name
         """
             The name of the tool
         """
         data["name"] = name
-
 
         # REQUIRED - privacy_level
         """
@@ -944,13 +1108,11 @@ class ExternalToolsAPI(BaseCanvasAPI):
         self._validate_enum(privacy_level, ["anonymous", "name_only", "public"])
         data["privacy_level"] = privacy_level
 
-
         # REQUIRED - consumer_key
         """
             The consumer key for the external tool
         """
         data["consumer_key"] = consumer_key
-
 
         # REQUIRED - shared_secret
         """
@@ -958,14 +1120,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         data["shared_secret"] = shared_secret
 
-
         # OPTIONAL - description
         """
             A description of the tool
         """
         if description is not None:
             data["description"] = description
-
 
         # OPTIONAL - url
         """
@@ -975,7 +1135,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if url is not None:
             data["url"] = url
 
-
         # OPTIONAL - domain
         """
             The domain to match links against. Either "url" or "domain" should be
@@ -984,14 +1143,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if domain is not None:
             data["domain"] = domain
 
-
         # OPTIONAL - icon_url
         """
             The url of the icon to show for this tool
         """
         if icon_url is not None:
             data["icon_url"] = icon_url
-
 
         # OPTIONAL - text
         """
@@ -1000,7 +1157,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if text is not None:
             data["text"] = text
 
-
         # OPTIONAL - custom_fields[field_name]
         """
             Custom fields that will be sent to the tool consumer; can be used
@@ -1008,7 +1164,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         if custom_fields_field_name is not None:
             data["custom_fields[field_name]"] = custom_fields_field_name
-
 
         # OPTIONAL - is_rce_favorite
         """
@@ -1021,14 +1176,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if is_rce_favorite is not None:
             data["is_rce_favorite"] = is_rce_favorite
 
-
         # OPTIONAL - account_navigation[url]
         """
             The url of the external tool for account navigation
         """
         if account_navigation_url is not None:
             data["account_navigation[url]"] = account_navigation_url
-
 
         # OPTIONAL - account_navigation[enabled]
         """
@@ -1037,7 +1190,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if account_navigation_enabled is not None:
             data["account_navigation[enabled]"] = account_navigation_enabled
 
-
         # OPTIONAL - account_navigation[text]
         """
             The text that will show on the left-tab in the account navigation
@@ -1045,22 +1197,23 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if account_navigation_text is not None:
             data["account_navigation[text]"] = account_navigation_text
 
-
         # OPTIONAL - account_navigation[selection_width]
         """
             The width of the dialog the tool is launched in
         """
         if account_navigation_selection_width is not None:
-            data["account_navigation[selection_width]"] = account_navigation_selection_width
-
+            data[
+                "account_navigation[selection_width]"
+            ] = account_navigation_selection_width
 
         # OPTIONAL - account_navigation[selection_height]
         """
             The height of the dialog the tool is launched in
         """
         if account_navigation_selection_height is not None:
-            data["account_navigation[selection_height]"] = account_navigation_selection_height
-
+            data[
+                "account_navigation[selection_height]"
+            ] = account_navigation_selection_height
 
         # OPTIONAL - account_navigation[display_type]
         """
@@ -1070,14 +1223,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if account_navigation_display_type is not None:
             data["account_navigation[display_type]"] = account_navigation_display_type
 
-
         # OPTIONAL - user_navigation[url]
         """
             The url of the external tool for user navigation
         """
         if user_navigation_url is not None:
             data["user_navigation[url]"] = user_navigation_url
-
 
         # OPTIONAL - user_navigation[enabled]
         """
@@ -1086,14 +1237,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if user_navigation_enabled is not None:
             data["user_navigation[enabled]"] = user_navigation_enabled
 
-
         # OPTIONAL - user_navigation[text]
         """
             The text that will show on the left-tab in the user navigation
         """
         if user_navigation_text is not None:
             data["user_navigation[text]"] = user_navigation_text
-
 
         # OPTIONAL - user_navigation[visibility]
         """
@@ -1102,9 +1251,10 @@ class ExternalToolsAPI(BaseCanvasAPI):
         and use the default behavior, which is "public".
         """
         if user_navigation_visibility is not None:
-            self._validate_enum(user_navigation_visibility, ["admins", "members", "public"])
+            self._validate_enum(
+                user_navigation_visibility, ["admins", "members", "public"]
+            )
             data["user_navigation[visibility]"] = user_navigation_visibility
-
 
         # OPTIONAL - course_home_sub_navigation[url]
         """
@@ -1113,14 +1263,14 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if course_home_sub_navigation_url is not None:
             data["course_home_sub_navigation[url]"] = course_home_sub_navigation_url
 
-
         # OPTIONAL - course_home_sub_navigation[enabled]
         """
             Set this to enable this feature
         """
         if course_home_sub_navigation_enabled is not None:
-            data["course_home_sub_navigation[enabled]"] = course_home_sub_navigation_enabled
-
+            data[
+                "course_home_sub_navigation[enabled]"
+            ] = course_home_sub_navigation_enabled
 
         # OPTIONAL - course_home_sub_navigation[text]
         """
@@ -1129,14 +1279,14 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if course_home_sub_navigation_text is not None:
             data["course_home_sub_navigation[text]"] = course_home_sub_navigation_text
 
-
         # OPTIONAL - course_home_sub_navigation[icon_url]
         """
             The url of the icon to show in the right-side course home navigation menu
         """
         if course_home_sub_navigation_icon_url is not None:
-            data["course_home_sub_navigation[icon_url]"] = course_home_sub_navigation_icon_url
-
+            data[
+                "course_home_sub_navigation[icon_url]"
+            ] = course_home_sub_navigation_icon_url
 
         # OPTIONAL - course_navigation[enabled]
         """
@@ -1145,14 +1295,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if course_navigation_enabled is not None:
             data["course_navigation[enabled]"] = course_navigation_enabled
 
-
         # OPTIONAL - course_navigation[text]
         """
             The text that will show on the left-tab in the course navigation
         """
         if course_navigation_text is not None:
             data["course_navigation[text]"] = course_navigation_text
-
 
         # OPTIONAL - course_navigation[visibility]
         """
@@ -1161,9 +1309,10 @@ class ExternalToolsAPI(BaseCanvasAPI):
         and use the default behavior, which is "public".
         """
         if course_navigation_visibility is not None:
-            self._validate_enum(course_navigation_visibility, ["admins", "members", "public"])
+            self._validate_enum(
+                course_navigation_visibility, ["admins", "members", "public"]
+            )
             data["course_navigation[visibility]"] = course_navigation_visibility
-
 
         # OPTIONAL - course_navigation[windowTarget]
         """
@@ -1174,7 +1323,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if course_navigation_windowTarget is not None:
             self._validate_enum(course_navigation_windowTarget, ["_blank", "_self"])
             data["course_navigation[windowTarget]"] = course_navigation_windowTarget
-
 
         # OPTIONAL - course_navigation[default]
         """
@@ -1190,7 +1338,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
             self._validate_enum(course_navigation_default, ["disabled", "enabled"])
             data["course_navigation[default]"] = course_navigation_default
 
-
         # OPTIONAL - course_navigation[display_type]
         """
             The layout type to use when launching the tool. Must be
@@ -1199,14 +1346,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if course_navigation_display_type is not None:
             data["course_navigation[display_type]"] = course_navigation_display_type
 
-
         # OPTIONAL - editor_button[url]
         """
             The url of the external tool
         """
         if editor_button_url is not None:
             data["editor_button[url]"] = editor_button_url
-
 
         # OPTIONAL - editor_button[enabled]
         """
@@ -1215,14 +1360,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if editor_button_enabled is not None:
             data["editor_button[enabled]"] = editor_button_enabled
 
-
         # OPTIONAL - editor_button[icon_url]
         """
             The url of the icon to show in the WYSIWYG editor
         """
         if editor_button_icon_url is not None:
             data["editor_button[icon_url]"] = editor_button_icon_url
-
 
         # OPTIONAL - editor_button[selection_width]
         """
@@ -1231,14 +1374,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if editor_button_selection_width is not None:
             data["editor_button[selection_width]"] = editor_button_selection_width
 
-
         # OPTIONAL - editor_button[selection_height]
         """
             The height of the dialog the tool is launched in
         """
         if editor_button_selection_height is not None:
             data["editor_button[selection_height]"] = editor_button_selection_height
-
 
         # OPTIONAL - editor_button[message_type]
         """
@@ -1248,14 +1389,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if editor_button_message_type is not None:
             data["editor_button[message_type]"] = editor_button_message_type
 
-
         # OPTIONAL - homework_submission[url]
         """
             The url of the external tool
         """
         if homework_submission_url is not None:
             data["homework_submission[url]"] = homework_submission_url
-
 
         # OPTIONAL - homework_submission[enabled]
         """
@@ -1264,14 +1403,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if homework_submission_enabled is not None:
             data["homework_submission[enabled]"] = homework_submission_enabled
 
-
         # OPTIONAL - homework_submission[text]
         """
             The text that will show on the homework submission tab
         """
         if homework_submission_text is not None:
             data["homework_submission[text]"] = homework_submission_text
-
 
         # OPTIONAL - homework_submission[message_type]
         """
@@ -1281,14 +1418,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if homework_submission_message_type is not None:
             data["homework_submission[message_type]"] = homework_submission_message_type
 
-
         # OPTIONAL - link_selection[url]
         """
             The url of the external tool
         """
         if link_selection_url is not None:
             data["link_selection[url]"] = link_selection_url
-
 
         # OPTIONAL - link_selection[enabled]
         """
@@ -1297,14 +1432,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if link_selection_enabled is not None:
             data["link_selection[enabled]"] = link_selection_enabled
 
-
         # OPTIONAL - link_selection[text]
         """
             The text that will show for the link selection text
         """
         if link_selection_text is not None:
             data["link_selection[text]"] = link_selection_text
-
 
         # OPTIONAL - link_selection[message_type]
         """
@@ -1314,7 +1447,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if link_selection_message_type is not None:
             data["link_selection[message_type]"] = link_selection_message_type
 
-
         # OPTIONAL - migration_selection[url]
         """
             The url of the external tool
@@ -1322,14 +1454,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if migration_selection_url is not None:
             data["migration_selection[url]"] = migration_selection_url
 
-
         # OPTIONAL - migration_selection[enabled]
         """
             Set this to enable this feature
         """
         if migration_selection_enabled is not None:
             data["migration_selection[enabled]"] = migration_selection_enabled
-
 
         # OPTIONAL - migration_selection[message_type]
         """
@@ -1339,7 +1469,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if migration_selection_message_type is not None:
             data["migration_selection[message_type]"] = migration_selection_message_type
 
-
         # OPTIONAL - tool_configuration[url]
         """
             The url of the external tool
@@ -1347,14 +1476,12 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if tool_configuration_url is not None:
             data["tool_configuration[url]"] = tool_configuration_url
 
-
         # OPTIONAL - tool_configuration[enabled]
         """
             Set this to enable this feature
         """
         if tool_configuration_enabled is not None:
             data["tool_configuration[enabled]"] = tool_configuration_enabled
-
 
         # OPTIONAL - tool_configuration[message_type]
         """
@@ -1364,15 +1491,15 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if tool_configuration_message_type is not None:
             data["tool_configuration[message_type]"] = tool_configuration_message_type
 
-
         # OPTIONAL - tool_configuration[prefer_sis_email]
         """
             Set this to default the lis_person_contact_email_primary to prefer
         provisioned sis_email; otherwise, omit
         """
         if tool_configuration_prefer_sis_email is not None:
-            data["tool_configuration[prefer_sis_email]"] = tool_configuration_prefer_sis_email
-
+            data[
+                "tool_configuration[prefer_sis_email]"
+            ] = tool_configuration_prefer_sis_email
 
         # OPTIONAL - resource_selection[url]
         """
@@ -1380,7 +1507,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         if resource_selection_url is not None:
             data["resource_selection[url]"] = resource_selection_url
-
 
         # OPTIONAL - resource_selection[enabled]
         """
@@ -1391,7 +1517,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if resource_selection_enabled is not None:
             data["resource_selection[enabled]"] = resource_selection_enabled
 
-
         # OPTIONAL - resource_selection[icon_url]
         """
             The url of the icon to show in the module external tool list
@@ -1399,22 +1524,23 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if resource_selection_icon_url is not None:
             data["resource_selection[icon_url]"] = resource_selection_icon_url
 
-
         # OPTIONAL - resource_selection[selection_width]
         """
             The width of the dialog the tool is launched in
         """
         if resource_selection_selection_width is not None:
-            data["resource_selection[selection_width]"] = resource_selection_selection_width
-
+            data[
+                "resource_selection[selection_width]"
+            ] = resource_selection_selection_width
 
         # OPTIONAL - resource_selection[selection_height]
         """
             The height of the dialog the tool is launched in
         """
         if resource_selection_selection_height is not None:
-            data["resource_selection[selection_height]"] = resource_selection_selection_height
-
+            data[
+                "resource_selection[selection_height]"
+            ] = resource_selection_selection_height
 
         # OPTIONAL - config_type
         """
@@ -1427,7 +1553,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if config_type is not None:
             data["config_type"] = config_type
 
-
         # OPTIONAL - config_xml
         """
             XML tool configuration, as specified in the CC xml specification. This is
@@ -1435,7 +1560,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         if config_xml is not None:
             data["config_xml"] = config_xml
-
 
         # OPTIONAL - config_url
         """
@@ -1446,7 +1570,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if config_url is not None:
             data["config_url"] = config_url
 
-
         # OPTIONAL - not_selectable
         """
             Default: false. If set to true, and if resource_selection is set to false,
@@ -1456,7 +1579,6 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if not_selectable is not None:
             data["not_selectable"] = not_selectable
 
-
         # OPTIONAL - oauth_compliant
         """
             Default: false, if set to true LTI query params will not be copied to the
@@ -1465,9 +1587,18 @@ class ExternalToolsAPI(BaseCanvasAPI):
         if oauth_compliant is not None:
             data["oauth_compliant"] = oauth_compliant
 
-
-        self.logger.debug("POST /api/v1/accounts/{account_id}/external_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/external_tools".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/accounts/{account_id}/external_tools with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/accounts/{account_id}/external_tools".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def edit_external_tool_courses(self, course_id, external_tool_id):
         """
@@ -1485,16 +1616,26 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - external_tool_id
         """
             ID
         """
         path["external_tool_id"] = external_tool_id
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/external_tools/{external_tool_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def edit_external_tool_accounts(self, account_id, external_tool_id):
         """
@@ -1512,16 +1653,26 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - external_tool_id
         """
             ID
         """
         path["external_tool_id"] = external_tool_id
 
-
-        self.logger.debug("PUT /api/v1/accounts/{account_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/accounts/{account_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/accounts/{account_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/accounts/{account_id}/external_tools/{external_tool_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_external_tool_courses(self, course_id, external_tool_id):
         """
@@ -1539,16 +1690,26 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - external_tool_id
         """
             ID
         """
         path["external_tool_id"] = external_tool_id
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/external_tools/{external_tool_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_external_tool_accounts(self, account_id, external_tool_id):
         """
@@ -1566,16 +1727,26 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - external_tool_id
         """
             ID
         """
         path["external_tool_id"] = external_tool_id
 
-
-        self.logger.debug("DELETE /api/v1/accounts/{account_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/external_tools/{external_tool_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/accounts/{account_id}/external_tools/{external_tool_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/accounts/{account_id}/external_tools/{external_tool_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def add_tool_to_rce_favorites(self, account_id, id):
         """
@@ -1595,16 +1766,26 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("POST /api/v1/accounts/{account_id}/external_tools/rce_favorites/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/external_tools/rce_favorites/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/accounts/{account_id}/external_tools/rce_favorites/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/accounts/{account_id}/external_tools/rce_favorites/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def remove_tool_from_rce_favorites(self, account_id, id):
         """
@@ -1623,16 +1804,26 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/accounts/{account_id}/external_tools/rce_favorites/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/external_tools/rce_favorites/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/accounts/{account_id}/external_tools/rce_favorites/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/accounts/{account_id}/external_tools/rce_favorites/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_visible_course_navigation_tools(self, context_codes):
         """
@@ -1641,7 +1832,7 @@ class ExternalToolsAPI(BaseCanvasAPI):
         Get a list of external tools with the course_navigation placement that have not been hidden in
         course settings and whose visibility settings apply to the requesting user. These tools are the
         same that appear in the course navigation.
-        
+
         The response format is the same as for List external tools, but with additional context_id and
         context_name fields on each element in the array.
         """
@@ -1656,9 +1847,18 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         params["context_codes"] = context_codes
 
-
-        self.logger.debug("GET /api/v1/external_tools/visible_course_nav_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/external_tools/visible_course_nav_tools".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/external_tools/visible_course_nav_tools with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/external_tools/visible_course_nav_tools".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_visible_course_navigation_tools_for_single_course(self, course_id):
         """
@@ -1667,7 +1867,7 @@ class ExternalToolsAPI(BaseCanvasAPI):
         Get a list of external tools with the course_navigation placement that have not been hidden in
         course settings and whose visibility settings apply to the requesting user. These tools are the
         same that appear in the course navigation.
-        
+
         The response format is the same as Get visible course navigation tools.
         """
         path = {}
@@ -1680,7 +1880,17 @@ class ExternalToolsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/external_tools/visible_course_nav_tools with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/external_tools/visible_course_nav_tools".format(**path), data=data, params=params, no_data=True)
-
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/external_tools/visible_course_nav_tools with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/external_tools/visible_course_nav_tools".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )

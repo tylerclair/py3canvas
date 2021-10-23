@@ -32,7 +32,6 @@ class AuthenticationsLogAPI(BaseCanvasAPI):
         """
         path["login_id"] = login_id
 
-
         # OPTIONAL - start_time
         """
             The beginning of the time range from which you want events.
@@ -41,10 +40,11 @@ class AuthenticationsLogAPI(BaseCanvasAPI):
         if start_time is not None:
             if issubclass(start_time.__class__, str):
                 start_time = self._validate_iso8601_string(start_time)
-            elif issubclass(start_time.__class__, date) or issubclass(start_time.__class__, datetime):
-                start_time = start_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(start_time.__class__, date) or issubclass(
+                start_time.__class__, datetime
+            ):
+                start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["start_time"] = start_time
-
 
         # OPTIONAL - end_time
         """
@@ -53,13 +53,24 @@ class AuthenticationsLogAPI(BaseCanvasAPI):
         if end_time is not None:
             if issubclass(end_time.__class__, str):
                 end_time = self._validate_iso8601_string(end_time)
-            elif issubclass(end_time.__class__, date) or issubclass(end_time.__class__, datetime):
-                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(end_time.__class__, date) or issubclass(
+                end_time.__class__, datetime
+            ):
+                end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["end_time"] = end_time
 
-
-        self.logger.debug("GET /api/v1/audit/authentication/logins/{login_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/audit/authentication/logins/{login_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/audit/authentication/logins/{login_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/audit/authentication/logins/{login_id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def query_by_account(self, account_id, end_time=None, start_time=None):
         """
@@ -77,7 +88,6 @@ class AuthenticationsLogAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # OPTIONAL - start_time
         """
             The beginning of the time range from which you want events.
@@ -86,10 +96,11 @@ class AuthenticationsLogAPI(BaseCanvasAPI):
         if start_time is not None:
             if issubclass(start_time.__class__, str):
                 start_time = self._validate_iso8601_string(start_time)
-            elif issubclass(start_time.__class__, date) or issubclass(start_time.__class__, datetime):
-                start_time = start_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(start_time.__class__, date) or issubclass(
+                start_time.__class__, datetime
+            ):
+                start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["start_time"] = start_time
-
 
         # OPTIONAL - end_time
         """
@@ -98,13 +109,24 @@ class AuthenticationsLogAPI(BaseCanvasAPI):
         if end_time is not None:
             if issubclass(end_time.__class__, str):
                 end_time = self._validate_iso8601_string(end_time)
-            elif issubclass(end_time.__class__, date) or issubclass(end_time.__class__, datetime):
-                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(end_time.__class__, date) or issubclass(
+                end_time.__class__, datetime
+            ):
+                end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["end_time"] = end_time
 
-
-        self.logger.debug("GET /api/v1/audit/authentication/accounts/{account_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/audit/authentication/accounts/{account_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/audit/authentication/accounts/{account_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/audit/authentication/accounts/{account_id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def query_by_user(self, user_id, end_time=None, start_time=None):
         """
@@ -122,7 +144,6 @@ class AuthenticationsLogAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # OPTIONAL - start_time
         """
             The beginning of the time range from which you want events.
@@ -131,10 +152,11 @@ class AuthenticationsLogAPI(BaseCanvasAPI):
         if start_time is not None:
             if issubclass(start_time.__class__, str):
                 start_time = self._validate_iso8601_string(start_time)
-            elif issubclass(start_time.__class__, date) or issubclass(start_time.__class__, datetime):
-                start_time = start_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(start_time.__class__, date) or issubclass(
+                start_time.__class__, datetime
+            ):
+                start_time = start_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["start_time"] = start_time
-
 
         # OPTIONAL - end_time
         """
@@ -143,19 +165,37 @@ class AuthenticationsLogAPI(BaseCanvasAPI):
         if end_time is not None:
             if issubclass(end_time.__class__, str):
                 end_time = self._validate_iso8601_string(end_time)
-            elif issubclass(end_time.__class__, date) or issubclass(end_time.__class__, datetime):
-                end_time = end_time.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(end_time.__class__, date) or issubclass(
+                end_time.__class__, datetime
+            ):
+                end_time = end_time.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["end_time"] = end_time
 
-
-        self.logger.debug("GET /api/v1/audit/authentication/users/{user_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/audit/authentication/users/{user_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/audit/authentication/users/{user_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/audit/authentication/users/{user_id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Authenticationevent(BaseModel):
     """Authenticationevent Model."""
 
-    def __init__(self, created_at=None, event_type=None, pseudonym_id=None, account_id=None, user_id=None):
+    def __init__(
+        self,
+        created_at=None,
+        event_type=None,
+        pseudonym_id=None,
+        account_id=None,
+        user_id=None,
+    ):
         """Init method for Authenticationevent class."""
         self._created_at = created_at
         self._event_type = event_type
@@ -163,7 +203,7 @@ class Authenticationevent(BaseModel):
         self._account_id = account_id
         self._user_id = user_id
 
-        self.logger = logging.getLogger('py3canvas.Authenticationevent')
+        self.logger = logging.getLogger("py3canvas.Authenticationevent")
 
     @property
     def created_at(self):
@@ -173,7 +213,9 @@ class Authenticationevent(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -184,7 +226,9 @@ class Authenticationevent(BaseModel):
     @event_type.setter
     def event_type(self, value):
         """Setter for event_type property."""
-        self.logger.warn("Setting values on event_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on event_type will NOT update the remote Canvas instance."
+        )
         self._event_type = value
 
     @property
@@ -195,7 +239,9 @@ class Authenticationevent(BaseModel):
     @pseudonym_id.setter
     def pseudonym_id(self, value):
         """Setter for pseudonym_id property."""
-        self.logger.warn("Setting values on pseudonym_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on pseudonym_id will NOT update the remote Canvas instance."
+        )
         self._pseudonym_id = value
 
     @property
@@ -206,7 +252,9 @@ class Authenticationevent(BaseModel):
     @account_id.setter
     def account_id(self, value):
         """Setter for account_id property."""
-        self.logger.warn("Setting values on account_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on account_id will NOT update the remote Canvas instance."
+        )
         self._account_id = value
 
     @property
@@ -217,6 +265,7 @@ class Authenticationevent(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
-

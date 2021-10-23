@@ -30,5 +30,13 @@ class TestLatePolicyAPI(unittest.TestCase):
         """Integration test for the LatePolicyAPI.patch_late_policy method."""
         id = None  # Change me!!
 
-        r = self.client.patch_late_policy(id, late_policy_late_submission_deduction=None, late_policy_late_submission_deduction_enabled=None, late_policy_late_submission_interval=None, late_policy_late_submission_minimum_percent=None, late_policy_late_submission_minimum_percent_enabled=None, late_policy_missing_submission_deduction=None, late_policy_missing_submission_deduction_enabled=None)
-
+        r = self.client.patch_late_policy(
+            id,
+            late_policy_late_submission_deduction=None,
+            late_policy_late_submission_deduction_enabled=None,
+            late_policy_late_submission_interval=None,
+            late_policy_late_submission_minimum_percent=None,
+            late_policy_late_submission_minimum_percent_enabled=None,
+            late_policy_missing_submission_deduction=None,
+            late_policy_missing_submission_deduction_enabled=None,
+        )

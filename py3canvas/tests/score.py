@@ -19,4 +19,3 @@ class TestScoreAPI(unittest.TestCase):
         """Integration test for the ScoreAPI.create_score method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

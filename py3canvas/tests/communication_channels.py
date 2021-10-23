@@ -13,7 +13,9 @@ class TestCommunicationChannelsAPI(unittest.TestCase):
     """Tests for the CommunicationChannelsAPI."""
 
     def setUp(self):
-        self.client = CommunicationChannelsAPI(secrets.instance_address, secrets.access_token)
+        self.client = CommunicationChannelsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_list_user_communication_channels(self):
         """Integration test for the CommunicationChannelsAPI.list_user_communication_channels method."""
@@ -45,4 +47,3 @@ class TestCommunicationChannelsAPI(unittest.TestCase):
         """Integration test for the CommunicationChannelsAPI.delete_push_notification_endpoint method."""
 
         r = self.client.delete_push_notification_endpoint()
-

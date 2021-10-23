@@ -16,7 +16,14 @@ class ProficiencyRatingsAPI(BaseCanvasAPI):
         super(ProficiencyRatingsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.ProficiencyRatingsAPI")
 
-    def create_update_proficiency_ratings_accounts(self, account_id, ratings_color=None, ratings_description=None, ratings_mastery=None, ratings_points=None):
+    def create_update_proficiency_ratings_accounts(
+        self,
+        account_id,
+        ratings_color=None,
+        ratings_description=None,
+        ratings_mastery=None,
+        ratings_points=None,
+    ):
         """
         Create/update proficiency ratings.
 
@@ -33,14 +40,12 @@ class ProficiencyRatingsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # OPTIONAL - ratings[description]
         """
             The description of the rating level.
         """
         if ratings_description is not None:
             data["ratings[description]"] = ratings_description
-
 
         # OPTIONAL - ratings[points]
         """
@@ -49,14 +54,12 @@ class ProficiencyRatingsAPI(BaseCanvasAPI):
         if ratings_points is not None:
             data["ratings[points]"] = ratings_points
 
-
         # OPTIONAL - ratings[mastery]
         """
             Indicates the rating level where mastery is first achieved. Only one rating in a proficiency should be marked for mastery.
         """
         if ratings_mastery is not None:
             data["ratings[mastery]"] = ratings_mastery
-
 
         # OPTIONAL - ratings[color]
         """
@@ -65,11 +68,27 @@ class ProficiencyRatingsAPI(BaseCanvasAPI):
         if ratings_color is not None:
             data["ratings[color]"] = ratings_color
 
+        self.logger.debug(
+            "POST /api/v1/accounts/{account_id}/outcome_proficiency with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/accounts/{account_id}/outcome_proficiency".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/accounts/{account_id}/outcome_proficiency with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/outcome_proficiency".format(**path), data=data, params=params, single_item=True)
-
-    def create_update_proficiency_ratings_courses(self, course_id, ratings_color=None, ratings_description=None, ratings_mastery=None, ratings_points=None):
+    def create_update_proficiency_ratings_courses(
+        self,
+        course_id,
+        ratings_color=None,
+        ratings_description=None,
+        ratings_mastery=None,
+        ratings_points=None,
+    ):
         """
         Create/update proficiency ratings.
 
@@ -86,14 +105,12 @@ class ProficiencyRatingsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - ratings[description]
         """
             The description of the rating level.
         """
         if ratings_description is not None:
             data["ratings[description]"] = ratings_description
-
 
         # OPTIONAL - ratings[points]
         """
@@ -102,14 +119,12 @@ class ProficiencyRatingsAPI(BaseCanvasAPI):
         if ratings_points is not None:
             data["ratings[points]"] = ratings_points
 
-
         # OPTIONAL - ratings[mastery]
         """
             Indicates the rating level where mastery is first achieved. Only one rating in a proficiency should be marked for mastery.
         """
         if ratings_mastery is not None:
             data["ratings[mastery]"] = ratings_mastery
-
 
         # OPTIONAL - ratings[color]
         """
@@ -118,9 +133,18 @@ class ProficiencyRatingsAPI(BaseCanvasAPI):
         if ratings_color is not None:
             data["ratings[color]"] = ratings_color
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/outcome_proficiency with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/outcome_proficiency".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/outcome_proficiency with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/outcome_proficiency".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def get_proficiency_ratings_accounts(self, account_id):
         """
@@ -144,9 +168,18 @@ class ProficiencyRatingsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/outcome_proficiency with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/outcome_proficiency".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/outcome_proficiency with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/outcome_proficiency".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def get_proficiency_ratings_courses(self, course_id):
         """
@@ -170,9 +203,18 @@ class ProficiencyRatingsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/outcome_proficiency with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/outcome_proficiency".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/outcome_proficiency with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/outcome_proficiency".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Proficiencyrating(BaseModel):
@@ -185,7 +227,7 @@ class Proficiencyrating(BaseModel):
         self._mastery = mastery
         self._color = color
 
-        self.logger = logging.getLogger('py3canvas.Proficiencyrating')
+        self.logger = logging.getLogger("py3canvas.Proficiencyrating")
 
     @property
     def description(self):
@@ -195,7 +237,9 @@ class Proficiencyrating(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -206,7 +250,9 @@ class Proficiencyrating(BaseModel):
     @points.setter
     def points(self, value):
         """Setter for points property."""
-        self.logger.warn("Setting values on points will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on points will NOT update the remote Canvas instance."
+        )
         self._points = value
 
     @property
@@ -217,7 +263,9 @@ class Proficiencyrating(BaseModel):
     @mastery.setter
     def mastery(self, value):
         """Setter for mastery property."""
-        self.logger.warn("Setting values on mastery will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on mastery will NOT update the remote Canvas instance."
+        )
         self._mastery = value
 
     @property
@@ -228,7 +276,9 @@ class Proficiencyrating(BaseModel):
     @color.setter
     def color(self, value):
         """Setter for color property."""
-        self.logger.warn("Setting values on color will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on color will NOT update the remote Canvas instance."
+        )
         self._color = value
 
 
@@ -239,7 +289,7 @@ class Proficiency(BaseModel):
         """Init method for Proficiency class."""
         self._ratings = ratings
 
-        self.logger = logging.getLogger('py3canvas.Proficiency')
+        self.logger = logging.getLogger("py3canvas.Proficiency")
 
     @property
     def ratings(self):
@@ -249,6 +299,7 @@ class Proficiency(BaseModel):
     @ratings.setter
     def ratings(self, value):
         """Setter for ratings property."""
-        self.logger.warn("Setting values on ratings will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on ratings will NOT update the remote Canvas instance."
+        )
         self._ratings = value
-

@@ -23,7 +23,9 @@ class TestSisImportsAPI(unittest.TestCase):
         """Integration test for the SisImportsAPI.get_sis_import_list method."""
         account_id = None  # Change me!!
 
-        r = self.client.get_sis_import_list(account_id, created_before=None, created_since=None, workflow_state=None)
+        r = self.client.get_sis_import_list(
+            account_id, created_before=None, created_since=None, workflow_state=None
+        )
 
     def test_get_current_importing_sis_import(self):
         """Integration test for the SisImportsAPI.get_current_importing_sis_import method."""
@@ -57,4 +59,3 @@ class TestSisImportsAPI(unittest.TestCase):
         """Integration test for the SisImportsAPI.abort_all_pending_sis_imports method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

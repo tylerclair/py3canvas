@@ -21,7 +21,7 @@ class QuizSubmissionEventsAPI(BaseCanvasAPI):
         Submit captured events.
 
         Store a set of events which were captured during a quiz taking session.
-        
+
         On success, the response will be 204 No Content with an empty body.
         """
         path = {}
@@ -34,13 +34,11 @@ class QuizSubmissionEventsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # REQUIRED - PATH - id
         """
@@ -48,16 +46,26 @@ class QuizSubmissionEventsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # REQUIRED - quiz_submission_events
         """
             The submission events to be recorded
         """
         data["quiz_submission_events"] = quiz_submission_events
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def retrieve_captured_events(self, course_id, id, quiz_id, attempt=None):
         """
@@ -75,20 +83,17 @@ class QuizSubmissionEventsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - attempt
         """
@@ -98,9 +103,20 @@ class QuizSubmissionEventsAPI(BaseCanvasAPI):
         if attempt is not None:
             params["attempt"] = attempt
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/submissions/{id}/events".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Quizsubmissionevent(BaseModel):
@@ -113,7 +129,7 @@ class Quizsubmissionevent(BaseModel):
         self._event_type = event_type
         self._event_data = event_data
 
-        self.logger = logging.getLogger('py3canvas.Quizsubmissionevent')
+        self.logger = logging.getLogger("py3canvas.Quizsubmissionevent")
 
     @property
     def created_at(self):
@@ -123,7 +139,9 @@ class Quizsubmissionevent(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -134,7 +152,9 @@ class Quizsubmissionevent(BaseModel):
     @event_type.setter
     def event_type(self, value):
         """Setter for event_type property."""
-        self.logger.warn("Setting values on event_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on event_type will NOT update the remote Canvas instance."
+        )
         self._event_type = value
 
     @property
@@ -145,6 +165,7 @@ class Quizsubmissionevent(BaseModel):
     @event_data.setter
     def event_data(self, value):
         """Setter for event_data property."""
-        self.logger.warn("Setting values on event_data will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on event_data will NOT update the remote Canvas instance."
+        )
         self._event_data = value
-

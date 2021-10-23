@@ -18,4 +18,3 @@ class TestBrandConfigsAPI(unittest.TestCase):
         """Integration test for the BrandConfigsAPI.get_brand_config_variables_that_should_be_used_for_this_domain method."""
 
         r = self.client.get_brand_config_variables_that_should_be_used_for_this_domain()
-

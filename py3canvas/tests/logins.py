@@ -42,4 +42,3 @@ class TestLoginsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_user_login(id, user_id)
-

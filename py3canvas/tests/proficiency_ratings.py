@@ -14,7 +14,9 @@ class TestProficiencyRatingsAPI(unittest.TestCase):
     """Tests for the ProficiencyRatingsAPI."""
 
     def setUp(self):
-        self.client = ProficiencyRatingsAPI(secrets.instance_address, secrets.access_token)
+        self.client = ProficiencyRatingsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_create_update_proficiency_ratings_accounts(self):
         """Integration test for the ProficiencyRatingsAPI.create_update_proficiency_ratings_accounts method."""
@@ -37,4 +39,3 @@ class TestProficiencyRatingsAPI(unittest.TestCase):
         course_id = None  # Change me!!
 
         r = self.client.get_proficiency_ratings_courses(course_id)
-

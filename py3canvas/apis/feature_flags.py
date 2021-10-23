@@ -32,9 +32,18 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/features with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/features".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/features with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/features".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_features_accounts(self, account_id):
         """
@@ -52,9 +61,18 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/features with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/features".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/features with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/features".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_features_users(self, user_id):
         """
@@ -72,9 +90,18 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/features with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/features".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/features with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/features".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_enabled_features_courses(self, course_id):
         """
@@ -93,9 +120,18 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/features/enabled with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/features/enabled".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/features/enabled with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/features/enabled".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_enabled_features_accounts(self, account_id):
         """
@@ -114,9 +150,18 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/features/enabled with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/features/enabled".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/features/enabled with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/features/enabled".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_enabled_features_users(self, user_id):
         """
@@ -135,9 +180,18 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/features/enabled with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/features/enabled".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/features/enabled with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/features/enabled".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_environment_features(self):
         """
@@ -151,8 +205,18 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/v1/features/environment with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/features/environment".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/features/environment with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/features/environment".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_feature_flag_courses(self, course_id, feature):
         """
@@ -174,16 +238,24 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - feature
         """
             ID
         """
         path["feature"] = feature
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/features/flags/{feature}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/features/flags/{feature}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def get_feature_flag_accounts(self, account_id, feature):
         """
@@ -205,16 +277,24 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - feature
         """
             ID
         """
         path["feature"] = feature
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/features/flags/{feature}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/features/flags/{feature}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def get_feature_flag_users(self, feature, user_id):
         """
@@ -236,16 +316,24 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - feature
         """
             ID
         """
         path["feature"] = feature
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/features/flags/{feature}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/features/flags/{feature}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def set_feature_flag_courses(self, course_id, feature, state=None):
         """
@@ -264,13 +352,11 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - feature
         """
             ID
         """
         path["feature"] = feature
-
 
         # OPTIONAL - state
         """
@@ -283,9 +369,18 @@ class FeatureFlagsAPI(BaseCanvasAPI):
             self._validate_enum(state, ["off", "allowed", "on"])
             data["state"] = state
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/features/flags/{feature}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/features/flags/{feature}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def set_feature_flag_accounts(self, account_id, feature, state=None):
         """
@@ -304,13 +399,11 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - feature
         """
             ID
         """
         path["feature"] = feature
-
 
         # OPTIONAL - state
         """
@@ -323,9 +416,18 @@ class FeatureFlagsAPI(BaseCanvasAPI):
             self._validate_enum(state, ["off", "allowed", "on"])
             data["state"] = state
 
-
-        self.logger.debug("PUT /api/v1/accounts/{account_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/accounts/{account_id}/features/flags/{feature}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/accounts/{account_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/accounts/{account_id}/features/flags/{feature}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def set_feature_flag_users(self, feature, user_id, state=None):
         """
@@ -344,13 +446,11 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - feature
         """
             ID
         """
         path["feature"] = feature
-
 
         # OPTIONAL - state
         """
@@ -363,9 +463,18 @@ class FeatureFlagsAPI(BaseCanvasAPI):
             self._validate_enum(state, ["off", "allowed", "on"])
             data["state"] = state
 
-
-        self.logger.debug("PUT /api/v1/users/{user_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/users/{user_id}/features/flags/{feature}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/users/{user_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/users/{user_id}/features/flags/{feature}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def remove_feature_flag_courses(self, course_id, feature):
         """
@@ -386,16 +495,24 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - feature
         """
             ID
         """
         path["feature"] = feature
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/features/flags/{feature}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/features/flags/{feature}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def remove_feature_flag_accounts(self, account_id, feature):
         """
@@ -416,16 +533,24 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - feature
         """
             ID
         """
         path["feature"] = feature
 
-
-        self.logger.debug("DELETE /api/v1/accounts/{account_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/features/flags/{feature}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/accounts/{account_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/accounts/{account_id}/features/flags/{feature}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def remove_feature_flag_users(self, feature, user_id):
         """
@@ -446,22 +571,42 @@ class FeatureFlagsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - feature
         """
             ID
         """
         path["feature"] = feature
 
-
-        self.logger.debug("DELETE /api/v1/users/{user_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/users/{user_id}/features/flags/{feature}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/users/{user_id}/features/flags/{feature} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/users/{user_id}/features/flags/{feature}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Feature(BaseModel):
     """Feature Model."""
 
-    def __init__(self, feature=None, display_name=None, applies_to=None, enable_at=None, feature_flag=None, root_opt_in=None, beta=None, pending_enforcement=None, autoexpand=None, release_notes_url=None):
+    def __init__(
+        self,
+        feature=None,
+        display_name=None,
+        applies_to=None,
+        enable_at=None,
+        feature_flag=None,
+        root_opt_in=None,
+        beta=None,
+        pending_enforcement=None,
+        autoexpand=None,
+        release_notes_url=None,
+    ):
         """Init method for Feature class."""
         self._feature = feature
         self._display_name = display_name
@@ -474,7 +619,7 @@ class Feature(BaseModel):
         self._autoexpand = autoexpand
         self._release_notes_url = release_notes_url
 
-        self.logger = logging.getLogger('py3canvas.Feature')
+        self.logger = logging.getLogger("py3canvas.Feature")
 
     @property
     def feature(self):
@@ -484,7 +629,9 @@ class Feature(BaseModel):
     @feature.setter
     def feature(self, value):
         """Setter for feature property."""
-        self.logger.warn("Setting values on feature will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on feature will NOT update the remote Canvas instance."
+        )
         self._feature = value
 
     @property
@@ -495,22 +642,26 @@ class Feature(BaseModel):
     @display_name.setter
     def display_name(self, value):
         """Setter for display_name property."""
-        self.logger.warn("Setting values on display_name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on display_name will NOT update the remote Canvas instance."
+        )
         self._display_name = value
 
     @property
     def applies_to(self):
         """The type of object the feature applies to (RootAccount, Account, Course, or User):
- * RootAccount features may only be controlled by flags on root accounts.
- * Account features may be controlled by flags on accounts and their parent accounts.
- * Course features may be controlled by flags on courses and their parent accounts.
- * User features may be controlled by flags on users and site admin only."""
+        * RootAccount features may only be controlled by flags on root accounts.
+        * Account features may be controlled by flags on accounts and their parent accounts.
+        * Course features may be controlled by flags on courses and their parent accounts.
+        * User features may be controlled by flags on users and site admin only."""
         return self._applies_to
 
     @applies_to.setter
     def applies_to(self, value):
         """Setter for applies_to property."""
-        self.logger.warn("Setting values on applies_to will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on applies_to will NOT update the remote Canvas instance."
+        )
         self._applies_to = value
 
     @property
@@ -521,7 +672,9 @@ class Feature(BaseModel):
     @enable_at.setter
     def enable_at(self, value):
         """Setter for enable_at property."""
-        self.logger.warn("Setting values on enable_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on enable_at will NOT update the remote Canvas instance."
+        )
         self._enable_at = value
 
     @property
@@ -532,7 +685,9 @@ class Feature(BaseModel):
     @feature_flag.setter
     def feature_flag(self, value):
         """Setter for feature_flag property."""
-        self.logger.warn("Setting values on feature_flag will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on feature_flag will NOT update the remote Canvas instance."
+        )
         self._feature_flag = value
 
     @property
@@ -543,7 +698,9 @@ class Feature(BaseModel):
     @root_opt_in.setter
     def root_opt_in(self, value):
         """Setter for root_opt_in property."""
-        self.logger.warn("Setting values on root_opt_in will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on root_opt_in will NOT update the remote Canvas instance."
+        )
         self._root_opt_in = value
 
     @property
@@ -554,7 +711,9 @@ class Feature(BaseModel):
     @beta.setter
     def beta(self, value):
         """Setter for beta property."""
-        self.logger.warn("Setting values on beta will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on beta will NOT update the remote Canvas instance."
+        )
         self._beta = value
 
     @property
@@ -565,7 +724,9 @@ class Feature(BaseModel):
     @pending_enforcement.setter
     def pending_enforcement(self, value):
         """Setter for pending_enforcement property."""
-        self.logger.warn("Setting values on pending_enforcement will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on pending_enforcement will NOT update the remote Canvas instance."
+        )
         self._pending_enforcement = value
 
     @property
@@ -576,7 +737,9 @@ class Feature(BaseModel):
     @autoexpand.setter
     def autoexpand(self, value):
         """Setter for autoexpand property."""
-        self.logger.warn("Setting values on autoexpand will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on autoexpand will NOT update the remote Canvas instance."
+        )
         self._autoexpand = value
 
     @property
@@ -587,14 +750,18 @@ class Feature(BaseModel):
     @release_notes_url.setter
     def release_notes_url(self, value):
         """Setter for release_notes_url property."""
-        self.logger.warn("Setting values on release_notes_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on release_notes_url will NOT update the remote Canvas instance."
+        )
         self._release_notes_url = value
 
 
 class Featureflag(BaseModel):
     """Featureflag Model."""
 
-    def __init__(self, context_type=None, context_id=None, feature=None, state=None, locked=None):
+    def __init__(
+        self, context_type=None, context_id=None, feature=None, state=None, locked=None
+    ):
         """Init method for Featureflag class."""
         self._context_type = context_type
         self._context_id = context_id
@@ -602,7 +769,7 @@ class Featureflag(BaseModel):
         self._state = state
         self._locked = locked
 
-        self.logger = logging.getLogger('py3canvas.Featureflag')
+        self.logger = logging.getLogger("py3canvas.Featureflag")
 
     @property
     def context_type(self):
@@ -612,7 +779,9 @@ class Featureflag(BaseModel):
     @context_type.setter
     def context_type(self, value):
         """Setter for context_type property."""
-        self.logger.warn("Setting values on context_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_type will NOT update the remote Canvas instance."
+        )
         self._context_type = value
 
     @property
@@ -623,7 +792,9 @@ class Featureflag(BaseModel):
     @context_id.setter
     def context_id(self, value):
         """Setter for context_id property."""
-        self.logger.warn("Setting values on context_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_id will NOT update the remote Canvas instance."
+        )
         self._context_id = value
 
     @property
@@ -634,7 +805,9 @@ class Featureflag(BaseModel):
     @feature.setter
     def feature(self, value):
         """Setter for feature property."""
-        self.logger.warn("Setting values on feature will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on feature will NOT update the remote Canvas instance."
+        )
         self._feature = value
 
     @property
@@ -645,7 +818,9 @@ class Featureflag(BaseModel):
     @state.setter
     def state(self, value):
         """Setter for state property."""
-        self.logger.warn("Setting values on state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on state will NOT update the remote Canvas instance."
+        )
         self._state = value
 
     @property
@@ -656,6 +831,7 @@ class Featureflag(BaseModel):
     @locked.setter
     def locked(self, value):
         """Setter for locked property."""
-        self.logger.warn("Setting values on locked will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on locked will NOT update the remote Canvas instance."
+        )
         self._locked = value
-

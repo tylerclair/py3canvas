@@ -32,13 +32,11 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # REQUIRED - PATH - id
         """
@@ -46,16 +44,33 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def create_question_group(self, course_id, quiz_id, quiz_groups_assessment_question_bank_id=None, quiz_groups_name=None, quiz_groups_pick_count=None, quiz_groups_question_points=None):
+    def create_question_group(
+        self,
+        course_id,
+        quiz_id,
+        quiz_groups_assessment_question_bank_id=None,
+        quiz_groups_name=None,
+        quiz_groups_pick_count=None,
+        quiz_groups_question_points=None,
+    ):
         """
         Create a question group.
 
         Create a new question group for this quiz
-        
+
         <b>201 Created</b> response code is returned if the creation was successful.
         """
         path = {}
@@ -68,13 +83,11 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # OPTIONAL - quiz_groups[name]
         """
@@ -83,14 +96,12 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         if quiz_groups_name is not None:
             data["quiz_groups[name]"] = quiz_groups_name
 
-
         # OPTIONAL - quiz_groups[pick_count]
         """
             The number of questions to randomly select for this group.
         """
         if quiz_groups_pick_count is not None:
             data["quiz_groups[pick_count]"] = quiz_groups_pick_count
-
 
         # OPTIONAL - quiz_groups[question_points]
         """
@@ -99,19 +110,37 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         if quiz_groups_question_points is not None:
             data["quiz_groups[question_points]"] = quiz_groups_question_points
 
-
         # OPTIONAL - quiz_groups[assessment_question_bank_id]
         """
             The id of the assessment question bank to pull questions from.
         """
         if quiz_groups_assessment_question_bank_id is not None:
-            data["quiz_groups[assessment_question_bank_id]"] = quiz_groups_assessment_question_bank_id
+            data[
+                "quiz_groups[assessment_question_bank_id]"
+            ] = quiz_groups_assessment_question_bank_id
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/groups with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/groups".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/groups".format(**path), data=data, params=params, no_data=True)
-
-    def update_question_group(self, course_id, id, quiz_id, quiz_groups_name=None, quiz_groups_pick_count=None, quiz_groups_question_points=None):
+    def update_question_group(
+        self,
+        course_id,
+        id,
+        quiz_id,
+        quiz_groups_name=None,
+        quiz_groups_pick_count=None,
+        quiz_groups_question_points=None,
+    ):
         """
         Update a question group.
 
@@ -127,20 +156,17 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - quiz_groups[name]
         """
@@ -149,14 +175,12 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         if quiz_groups_name is not None:
             data["quiz_groups[name]"] = quiz_groups_name
 
-
         # OPTIONAL - quiz_groups[pick_count]
         """
             The number of questions to randomly select for this group.
         """
         if quiz_groups_pick_count is not None:
             data["quiz_groups[pick_count]"] = quiz_groups_pick_count
-
 
         # OPTIONAL - quiz_groups[question_points]
         """
@@ -165,16 +189,25 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         if quiz_groups_question_points is not None:
             data["quiz_groups[question_points]"] = quiz_groups_question_points
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_question_group(self, course_id, id, quiz_id):
         """
         Delete a question group.
 
         Delete a question group
-        
+
         <b>204 No Content<b> response code is returned if the deletion was successful.
         """
         path = {}
@@ -187,13 +220,11 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # REQUIRED - PATH - id
         """
@@ -201,16 +232,27 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id}".format(**path), data=data, params=params, no_data=True)
-
-    def reorder_question_groups(self, course_id, id, order_id, quiz_id, order_type=None):
+    def reorder_question_groups(
+        self, course_id, id, order_id, quiz_id, order_type=None
+    ):
         """
         Reorder question groups.
 
         Change the order of the quiz questions within the group
-        
+
         <b>204 No Content<b> response code is returned if the reorder was successful.
         """
         path = {}
@@ -223,13 +265,11 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # REQUIRED - PATH - id
         """
@@ -237,13 +277,11 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # REQUIRED - order[id]
         """
             The associated item's unique identifier
         """
         data["order[id]"] = order_id
-
 
         # OPTIONAL - order[type]
         """
@@ -253,15 +291,35 @@ class QuizQuestionGroupsAPI(BaseCanvasAPI):
             self._validate_enum(order_type, ["question"])
             data["order[type]"] = order_type
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id}/reorder with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id}/reorder".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id}/reorder with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/groups/{id}/reorder".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Quizgroup(BaseModel):
     """Quizgroup Model."""
 
-    def __init__(self, id, quiz_id, name=None, pick_count=None, question_points=None, assessment_question_bank_id=None, position=None):
+    def __init__(
+        self,
+        id,
+        quiz_id,
+        name=None,
+        pick_count=None,
+        question_points=None,
+        assessment_question_bank_id=None,
+        position=None,
+    ):
         """Init method for Quizgroup class."""
         self._id = id
         self._quiz_id = quiz_id
@@ -271,7 +329,7 @@ class Quizgroup(BaseModel):
         self._assessment_question_bank_id = assessment_question_bank_id
         self._position = position
 
-        self.logger = logging.getLogger('py3canvas.Quizgroup')
+        self.logger = logging.getLogger("py3canvas.Quizgroup")
 
     @property
     def id(self):
@@ -281,7 +339,9 @@ class Quizgroup(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -292,7 +352,9 @@ class Quizgroup(BaseModel):
     @quiz_id.setter
     def quiz_id(self, value):
         """Setter for quiz_id property."""
-        self.logger.warn("Setting values on quiz_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on quiz_id will NOT update the remote Canvas instance."
+        )
         self._quiz_id = value
 
     @property
@@ -303,7 +365,9 @@ class Quizgroup(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -314,7 +378,9 @@ class Quizgroup(BaseModel):
     @pick_count.setter
     def pick_count(self, value):
         """Setter for pick_count property."""
-        self.logger.warn("Setting values on pick_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on pick_count will NOT update the remote Canvas instance."
+        )
         self._pick_count = value
 
     @property
@@ -325,7 +391,9 @@ class Quizgroup(BaseModel):
     @question_points.setter
     def question_points(self, value):
         """Setter for question_points property."""
-        self.logger.warn("Setting values on question_points will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on question_points will NOT update the remote Canvas instance."
+        )
         self._question_points = value
 
     @property
@@ -336,7 +404,9 @@ class Quizgroup(BaseModel):
     @assessment_question_bank_id.setter
     def assessment_question_bank_id(self, value):
         """Setter for assessment_question_bank_id property."""
-        self.logger.warn("Setting values on assessment_question_bank_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assessment_question_bank_id will NOT update the remote Canvas instance."
+        )
         self._assessment_question_bank_id = value
 
     @property
@@ -347,6 +417,7 @@ class Quizgroup(BaseModel):
     @position.setter
     def position(self, value):
         """Setter for position property."""
-        self.logger.warn("Setting values on position will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on position will NOT update the remote Canvas instance."
+        )
         self._position = value
-

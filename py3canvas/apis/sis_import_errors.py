@@ -41,13 +41,11 @@ class SisImportErrorsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - failure
         """
@@ -56,9 +54,18 @@ class SisImportErrorsAPI(BaseCanvasAPI):
         if failure is not None:
             params["failure"] = failure
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/sis_imports/{id}/errors with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/sis_imports/{id}/errors".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/sis_imports/{id}/errors with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/sis_imports/{id}/errors".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def get_sis_import_error_list_sis_import_errors(self, account_id, failure=None):
         """
@@ -85,7 +92,6 @@ class SisImportErrorsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # OPTIONAL - failure
         """
             If set, only shows errors on a sis import that would cause a failure.
@@ -93,15 +99,26 @@ class SisImportErrorsAPI(BaseCanvasAPI):
         if failure is not None:
             params["failure"] = failure
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/sis_import_errors with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/sis_import_errors".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/sis_import_errors with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/sis_import_errors".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
 
 class Sisimporterror(BaseModel):
     """Sisimporterror Model."""
 
-    def __init__(self, sis_import_id=None, file=None, message=None, row_info=None, row=None):
+    def __init__(
+        self, sis_import_id=None, file=None, message=None, row_info=None, row=None
+    ):
         """Init method for Sisimporterror class."""
         self._sis_import_id = sis_import_id
         self._file = file
@@ -109,7 +126,7 @@ class Sisimporterror(BaseModel):
         self._row_info = row_info
         self._row = row
 
-        self.logger = logging.getLogger('py3canvas.Sisimporterror')
+        self.logger = logging.getLogger("py3canvas.Sisimporterror")
 
     @property
     def sis_import_id(self):
@@ -119,7 +136,9 @@ class Sisimporterror(BaseModel):
     @sis_import_id.setter
     def sis_import_id(self, value):
         """Setter for sis_import_id property."""
-        self.logger.warn("Setting values on sis_import_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_import_id will NOT update the remote Canvas instance."
+        )
         self._sis_import_id = value
 
     @property
@@ -130,7 +149,9 @@ class Sisimporterror(BaseModel):
     @file.setter
     def file(self, value):
         """Setter for file property."""
-        self.logger.warn("Setting values on file will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on file will NOT update the remote Canvas instance."
+        )
         self._file = value
 
     @property
@@ -141,7 +162,9 @@ class Sisimporterror(BaseModel):
     @message.setter
     def message(self, value):
         """Setter for message property."""
-        self.logger.warn("Setting values on message will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on message will NOT update the remote Canvas instance."
+        )
         self._message = value
 
     @property
@@ -152,7 +175,9 @@ class Sisimporterror(BaseModel):
     @row_info.setter
     def row_info(self, value):
         """Setter for row_info property."""
-        self.logger.warn("Setting values on row_info will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on row_info will NOT update the remote Canvas instance."
+        )
         self._row_info = value
 
     @property
@@ -163,6 +188,7 @@ class Sisimporterror(BaseModel):
     @row.setter
     def row(self, value):
         """Setter for row property."""
-        self.logger.warn("Setting values on row will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on row will NOT update the remote Canvas instance."
+        )
         self._row = value
-

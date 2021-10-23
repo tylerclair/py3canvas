@@ -39,4 +39,3 @@ class TestOutcomeImportsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.get_outcome_import_status_courses(course_id, id)
-

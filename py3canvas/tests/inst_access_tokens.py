@@ -13,10 +13,11 @@ class TestInstAccessTokensAPI(unittest.TestCase):
     """Tests for the InstAccessTokensAPI."""
 
     def setUp(self):
-        self.client = InstAccessTokensAPI(secrets.instance_address, secrets.access_token)
+        self.client = InstAccessTokensAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_create_instaccess_token(self):
         """Integration test for the InstAccessTokensAPI.create_instaccess_token method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

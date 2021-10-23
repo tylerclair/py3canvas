@@ -32,26 +32,60 @@ class TestSubmissionsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         assignment_id = None  # Change me!!
 
-        r = self.client.list_assignment_submissions_courses(assignment_id, course_id, grouped=None, include=None)
+        r = self.client.list_assignment_submissions_courses(
+            assignment_id, course_id, grouped=None, include=None
+        )
 
     def test_list_assignment_submissions_sections(self):
         """Integration test for the SubmissionsAPI.list_assignment_submissions_sections method."""
         section_id = None  # Change me!!
         assignment_id = None  # Change me!!
 
-        r = self.client.list_assignment_submissions_sections(assignment_id, section_id, grouped=None, include=None)
+        r = self.client.list_assignment_submissions_sections(
+            assignment_id, section_id, grouped=None, include=None
+        )
 
     def test_list_submissions_for_multiple_assignments_courses(self):
         """Integration test for the SubmissionsAPI.list_submissions_for_multiple_assignments_courses method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_submissions_for_multiple_assignments_courses(course_id, assignment_ids=None, enrollment_state=None, graded_since=None, grading_period_id=None, grouped=None, include=None, order=None, order_direction=None, post_to_sis=None, state_based_on_date=None, student_ids=None, submitted_since=None, workflow_state=None)
+        r = self.client.list_submissions_for_multiple_assignments_courses(
+            course_id,
+            assignment_ids=None,
+            enrollment_state=None,
+            graded_since=None,
+            grading_period_id=None,
+            grouped=None,
+            include=None,
+            order=None,
+            order_direction=None,
+            post_to_sis=None,
+            state_based_on_date=None,
+            student_ids=None,
+            submitted_since=None,
+            workflow_state=None,
+        )
 
     def test_list_submissions_for_multiple_assignments_sections(self):
         """Integration test for the SubmissionsAPI.list_submissions_for_multiple_assignments_sections method."""
         section_id = None  # Change me!!
 
-        r = self.client.list_submissions_for_multiple_assignments_sections(section_id, assignment_ids=None, enrollment_state=None, graded_since=None, grading_period_id=None, grouped=None, include=None, order=None, order_direction=None, post_to_sis=None, state_based_on_date=None, student_ids=None, submitted_since=None, workflow_state=None)
+        r = self.client.list_submissions_for_multiple_assignments_sections(
+            section_id,
+            assignment_ids=None,
+            enrollment_state=None,
+            graded_since=None,
+            grading_period_id=None,
+            grouped=None,
+            include=None,
+            order=None,
+            order_direction=None,
+            post_to_sis=None,
+            state_based_on_date=None,
+            student_ids=None,
+            submitted_since=None,
+            workflow_state=None,
+        )
 
     def test_get_single_submission_courses(self):
         """Integration test for the SubmissionsAPI.get_single_submission_courses method."""
@@ -59,7 +93,9 @@ class TestSubmissionsAPI(unittest.TestCase):
         assignment_id = None  # Change me!!
         user_id = None  # Change me!!
 
-        r = self.client.get_single_submission_courses(assignment_id, course_id, user_id, include=None)
+        r = self.client.get_single_submission_courses(
+            assignment_id, course_id, user_id, include=None
+        )
 
     def test_get_single_submission_sections(self):
         """Integration test for the SubmissionsAPI.get_single_submission_sections method."""
@@ -67,7 +103,9 @@ class TestSubmissionsAPI(unittest.TestCase):
         assignment_id = None  # Change me!!
         user_id = None  # Change me!!
 
-        r = self.client.get_single_submission_sections(assignment_id, section_id, user_id, include=None)
+        r = self.client.get_single_submission_sections(
+            assignment_id, section_id, user_id, include=None
+        )
 
     def test_upload_file_courses(self):
         """Integration test for the SubmissionsAPI.upload_file_courses method."""
@@ -100,7 +138,9 @@ class TestSubmissionsAPI(unittest.TestCase):
         """Integration test for the SubmissionsAPI.list_multiple_assignments_gradeable_students method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_multiple_assignments_gradeable_students(course_id, assignment_ids=None)
+        r = self.client.list_multiple_assignments_gradeable_students(
+            course_id, assignment_ids=None
+        )
 
     def test_grade_or_comment_on_multiple_submissions_courses_submissions(self):
         """Integration test for the SubmissionsAPI.grade_or_comment_on_multiple_submissions_courses_submissions method."""
@@ -138,7 +178,9 @@ class TestSubmissionsAPI(unittest.TestCase):
         assignment_id = None  # Change me!!
         user_id = None  # Change me!!
 
-        r = self.client.mark_submission_as_unread_courses(assignment_id, course_id, user_id)
+        r = self.client.mark_submission_as_unread_courses(
+            assignment_id, course_id, user_id
+        )
 
     def test_mark_submission_as_unread_sections(self):
         """Integration test for the SubmissionsAPI.mark_submission_as_unread_sections method."""
@@ -146,19 +188,24 @@ class TestSubmissionsAPI(unittest.TestCase):
         assignment_id = None  # Change me!!
         user_id = None  # Change me!!
 
-        r = self.client.mark_submission_as_unread_sections(assignment_id, section_id, user_id)
+        r = self.client.mark_submission_as_unread_sections(
+            assignment_id, section_id, user_id
+        )
 
     def test_submission_summary_courses(self):
         """Integration test for the SubmissionsAPI.submission_summary_courses method."""
         course_id = None  # Change me!!
         assignment_id = None  # Change me!!
 
-        r = self.client.submission_summary_courses(assignment_id, course_id, grouped=None)
+        r = self.client.submission_summary_courses(
+            assignment_id, course_id, grouped=None
+        )
 
     def test_submission_summary_sections(self):
         """Integration test for the SubmissionsAPI.submission_summary_sections method."""
         section_id = None  # Change me!!
         assignment_id = None  # Change me!!
 
-        r = self.client.submission_summary_sections(assignment_id, section_id, grouped=None)
-
+        r = self.client.submission_summary_sections(
+            assignment_id, section_id, grouped=None
+        )

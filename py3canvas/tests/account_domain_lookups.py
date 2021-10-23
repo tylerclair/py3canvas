@@ -12,10 +12,13 @@ class TestAccountDomainLookupsAPI(unittest.TestCase):
     """Tests for the AccountDomainLookupsAPI."""
 
     def setUp(self):
-        self.client = AccountDomainLookupsAPI(secrets.instance_address, secrets.access_token)
+        self.client = AccountDomainLookupsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_search_account_domains(self):
         """Integration test for the AccountDomainLookupsAPI.search_account_domains method."""
 
-        r = self.client.search_account_domains(domain=None, latitude=None, longitude=None, name=None)
-
+        r = self.client.search_account_domains(
+            domain=None, latitude=None, longitude=None, name=None
+        )

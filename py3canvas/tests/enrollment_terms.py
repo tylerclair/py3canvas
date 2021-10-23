@@ -37,7 +37,9 @@ class TestEnrollmentTermsAPI(unittest.TestCase):
         """Integration test for the EnrollmentTermsAPI.list_enrollment_terms method."""
         account_id = None  # Change me!!
 
-        r = self.client.list_enrollment_terms(account_id, include=None, workflow_state=None)
+        r = self.client.list_enrollment_terms(
+            account_id, include=None, workflow_state=None
+        )
 
     def test_retrieve_enrollment_term(self):
         """Integration test for the EnrollmentTermsAPI.retrieve_enrollment_term method."""
@@ -45,4 +47,3 @@ class TestEnrollmentTermsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.retrieve_enrollment_term(account_id, id)
-

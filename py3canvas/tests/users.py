@@ -26,7 +26,9 @@ class TestUsersAPI(unittest.TestCase):
         """Integration test for the UsersAPI.list_users_in_account method."""
         account_id = None  # Change me!!
 
-        r = self.client.list_users_in_account(account_id, enrollment_type=None, order=None, search_term=None, sort=None)
+        r = self.client.list_users_in_account(
+            account_id, enrollment_type=None, order=None, search_term=None, sort=None
+        )
 
     def test_list_activity_stream_self(self):
         """Integration test for the UsersAPI.list_activity_stream_self method."""
@@ -62,7 +64,9 @@ class TestUsersAPI(unittest.TestCase):
         """Integration test for the UsersAPI.list_missing_submissions method."""
         user_id = None  # Change me!!
 
-        r = self.client.list_missing_submissions(user_id, course_ids=None, filter=None, include=None)
+        r = self.client.list_missing_submissions(
+            user_id, course_ids=None, filter=None, include=None
+        )
 
     def test_hide_stream_item(self):
         """Integration test for the UsersAPI.hide_stream_item method."""
@@ -100,7 +104,15 @@ class TestUsersAPI(unittest.TestCase):
         """Integration test for the UsersAPI.update_user_settings method."""
         id = None  # Change me!!
 
-        r = self.client.update_user_settings(id, collapse_global_nav=None, comment_library_suggestions_enabled=None, elementary_dashboard_disabled=None, hide_dashcard_color_overlays=None, manual_mark_as_read=None, release_notes_badge_disabled=None)
+        r = self.client.update_user_settings(
+            id,
+            collapse_global_nav=None,
+            comment_library_suggestions_enabled=None,
+            elementary_dashboard_disabled=None,
+            hide_dashcard_color_overlays=None,
+            manual_mark_as_read=None,
+            release_notes_badge_disabled=None,
+        )
 
     def test_get_custom_colors(self):
         """Integration test for the UsersAPI.get_custom_colors method."""
@@ -160,7 +172,12 @@ class TestUsersAPI(unittest.TestCase):
         """Integration test for the UsersAPI.get_users_most_recently_graded_submissions method."""
         id = None  # Change me!!
 
-        r = self.client.get_users_most_recently_graded_submissions(id, include=None, only_current_enrollments=None, only_published_assignments=None)
+        r = self.client.get_users_most_recently_graded_submissions(
+            id,
+            include=None,
+            only_current_enrollments=None,
+            only_published_assignments=None,
+        )
 
     def test_get_user_profile(self):
         """Integration test for the UsersAPI.get_user_profile method."""
@@ -225,4 +242,3 @@ class TestUsersAPI(unittest.TestCase):
         """Integration test for the UsersAPI.clear_course_nicknames method."""
 
         r = self.client.clear_course_nicknames()
-

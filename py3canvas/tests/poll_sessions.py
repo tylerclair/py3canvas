@@ -68,4 +68,3 @@ class TestPollSessionsAPI(unittest.TestCase):
         """Integration test for the PollSessionsAPI.list_closed_poll_sessions method."""
 
         r = self.client.list_closed_poll_sessions()
-

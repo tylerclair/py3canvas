@@ -20,11 +20,14 @@ class TestSisImportErrorsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_sis_import_error_list_sis_imports(account_id, id, failure=None)
+        r = self.client.get_sis_import_error_list_sis_imports(
+            account_id, id, failure=None
+        )
 
     def test_get_sis_import_error_list_sis_import_errors(self):
         """Integration test for the SisImportErrorsAPI.get_sis_import_error_list_sis_import_errors method."""
         account_id = None  # Change me!!
 
-        r = self.client.get_sis_import_error_list_sis_import_errors(account_id, failure=None)
-
+        r = self.client.get_sis_import_error_list_sis_import_errors(
+            account_id, failure=None
+        )

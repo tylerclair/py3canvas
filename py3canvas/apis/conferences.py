@@ -21,7 +21,7 @@ class ConferencesAPI(BaseCanvasAPI):
         List conferences.
 
         Retrieve the paginated list of conferences for this context
-        
+
         This API returns a JSON object containing the list of conferences,
         the key for the list of conferences is "conferences"
         """
@@ -35,16 +35,25 @@ class ConferencesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/conferences with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/conferences".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/conferences with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/conferences".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_conferences_groups(self, group_id):
         """
         List conferences.
 
         Retrieve the paginated list of conferences for this context
-        
+
         This API returns a JSON object containing the list of conferences,
         the key for the list of conferences is "conferences"
         """
@@ -58,9 +67,18 @@ class ConferencesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
-        self.logger.debug("GET /api/v1/groups/{group_id}/conferences with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/conferences".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/conferences with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/conferences".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_conferences_for_current_user(self, state=None):
         """
@@ -68,7 +86,7 @@ class ConferencesAPI(BaseCanvasAPI):
 
         Retrieve the paginated list of conferences for all courses and groups
         the current user belongs to
-        
+
         This API returns a JSON object containing the list of conferences.
         The key for the list of conferences is "conferences".
         """
@@ -85,15 +103,31 @@ class ConferencesAPI(BaseCanvasAPI):
         if state is not None:
             params["state"] = state
 
-
-        self.logger.debug("GET /api/v1/conferences with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/conferences".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/conferences with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/conferences".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
 
 class Conferencerecording(BaseModel):
     """Conferencerecording Model."""
 
-    def __init__(self, duration_minutes=None, title=None, updated_at=None, created_at=None, playback_url=None):
+    def __init__(
+        self,
+        duration_minutes=None,
+        title=None,
+        updated_at=None,
+        created_at=None,
+        playback_url=None,
+    ):
         """Init method for Conferencerecording class."""
         self._duration_minutes = duration_minutes
         self._title = title
@@ -101,7 +135,7 @@ class Conferencerecording(BaseModel):
         self._created_at = created_at
         self._playback_url = playback_url
 
-        self.logger = logging.getLogger('py3canvas.Conferencerecording')
+        self.logger = logging.getLogger("py3canvas.Conferencerecording")
 
     @property
     def duration_minutes(self):
@@ -111,7 +145,9 @@ class Conferencerecording(BaseModel):
     @duration_minutes.setter
     def duration_minutes(self, value):
         """Setter for duration_minutes property."""
-        self.logger.warn("Setting values on duration_minutes will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on duration_minutes will NOT update the remote Canvas instance."
+        )
         self._duration_minutes = value
 
     @property
@@ -122,7 +158,9 @@ class Conferencerecording(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -133,7 +171,9 @@ class Conferencerecording(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
 
     @property
@@ -144,7 +184,9 @@ class Conferencerecording(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -155,14 +197,35 @@ class Conferencerecording(BaseModel):
     @playback_url.setter
     def playback_url(self, value):
         """Setter for playback_url property."""
-        self.logger.warn("Setting values on playback_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on playback_url will NOT update the remote Canvas instance."
+        )
         self._playback_url = value
 
 
 class Conference(BaseModel):
     """Conference Model."""
 
-    def __init__(self, id=None, conference_type=None, conference_key=None, description=None, duration=None, ended_at=None, started_at=None, title=None, users=None, has_advanced_settings=None, long_running=None, user_settings=None, recordings=None, url=None, join_url=None, context_type=None, context_id=None):
+    def __init__(
+        self,
+        id=None,
+        conference_type=None,
+        conference_key=None,
+        description=None,
+        duration=None,
+        ended_at=None,
+        started_at=None,
+        title=None,
+        users=None,
+        has_advanced_settings=None,
+        long_running=None,
+        user_settings=None,
+        recordings=None,
+        url=None,
+        join_url=None,
+        context_type=None,
+        context_id=None,
+    ):
         """Init method for Conference class."""
         self._id = id
         self._conference_type = conference_type
@@ -182,7 +245,7 @@ class Conference(BaseModel):
         self._context_type = context_type
         self._context_id = context_id
 
-        self.logger = logging.getLogger('py3canvas.Conference')
+        self.logger = logging.getLogger("py3canvas.Conference")
 
     @property
     def id(self):
@@ -192,7 +255,9 @@ class Conference(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -203,7 +268,9 @@ class Conference(BaseModel):
     @conference_type.setter
     def conference_type(self, value):
         """Setter for conference_type property."""
-        self.logger.warn("Setting values on conference_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on conference_type will NOT update the remote Canvas instance."
+        )
         self._conference_type = value
 
     @property
@@ -214,7 +281,9 @@ class Conference(BaseModel):
     @conference_key.setter
     def conference_key(self, value):
         """Setter for conference_key property."""
-        self.logger.warn("Setting values on conference_key will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on conference_key will NOT update the remote Canvas instance."
+        )
         self._conference_key = value
 
     @property
@@ -225,7 +294,9 @@ class Conference(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -236,7 +307,9 @@ class Conference(BaseModel):
     @duration.setter
     def duration(self, value):
         """Setter for duration property."""
-        self.logger.warn("Setting values on duration will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on duration will NOT update the remote Canvas instance."
+        )
         self._duration = value
 
     @property
@@ -247,7 +320,9 @@ class Conference(BaseModel):
     @ended_at.setter
     def ended_at(self, value):
         """Setter for ended_at property."""
-        self.logger.warn("Setting values on ended_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on ended_at will NOT update the remote Canvas instance."
+        )
         self._ended_at = value
 
     @property
@@ -258,7 +333,9 @@ class Conference(BaseModel):
     @started_at.setter
     def started_at(self, value):
         """Setter for started_at property."""
-        self.logger.warn("Setting values on started_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on started_at will NOT update the remote Canvas instance."
+        )
         self._started_at = value
 
     @property
@@ -269,7 +346,9 @@ class Conference(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -280,7 +359,9 @@ class Conference(BaseModel):
     @users.setter
     def users(self, value):
         """Setter for users property."""
-        self.logger.warn("Setting values on users will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on users will NOT update the remote Canvas instance."
+        )
         self._users = value
 
     @property
@@ -291,7 +372,9 @@ class Conference(BaseModel):
     @has_advanced_settings.setter
     def has_advanced_settings(self, value):
         """Setter for has_advanced_settings property."""
-        self.logger.warn("Setting values on has_advanced_settings will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on has_advanced_settings will NOT update the remote Canvas instance."
+        )
         self._has_advanced_settings = value
 
     @property
@@ -302,7 +385,9 @@ class Conference(BaseModel):
     @long_running.setter
     def long_running(self, value):
         """Setter for long_running property."""
-        self.logger.warn("Setting values on long_running will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on long_running will NOT update the remote Canvas instance."
+        )
         self._long_running = value
 
     @property
@@ -313,7 +398,9 @@ class Conference(BaseModel):
     @user_settings.setter
     def user_settings(self, value):
         """Setter for user_settings property."""
-        self.logger.warn("Setting values on user_settings will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_settings will NOT update the remote Canvas instance."
+        )
         self._user_settings = value
 
     @property
@@ -324,7 +411,9 @@ class Conference(BaseModel):
     @recordings.setter
     def recordings(self, value):
         """Setter for recordings property."""
-        self.logger.warn("Setting values on recordings will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on recordings will NOT update the remote Canvas instance."
+        )
         self._recordings = value
 
     @property
@@ -335,7 +424,9 @@ class Conference(BaseModel):
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
 
     @property
@@ -346,7 +437,9 @@ class Conference(BaseModel):
     @join_url.setter
     def join_url(self, value):
         """Setter for join_url property."""
-        self.logger.warn("Setting values on join_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on join_url will NOT update the remote Canvas instance."
+        )
         self._join_url = value
 
     @property
@@ -357,7 +450,9 @@ class Conference(BaseModel):
     @context_type.setter
     def context_type(self, value):
         """Setter for context_type property."""
-        self.logger.warn("Setting values on context_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_type will NOT update the remote Canvas instance."
+        )
         self._context_type = value
 
     @property
@@ -368,6 +463,7 @@ class Conference(BaseModel):
     @context_id.setter
     def context_id(self, value):
         """Setter for context_id property."""
-        self.logger.warn("Setting values on context_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_id will NOT update the remote Canvas instance."
+        )
         self._context_id = value
-

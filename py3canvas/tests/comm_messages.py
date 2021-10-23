@@ -19,5 +19,6 @@ class TestCommMessagesAPI(unittest.TestCase):
         """Integration test for the CommMessagesAPI.list_of_commmessages_for_user method."""
         user_id = None  # Change me!!
 
-        r = self.client.list_of_commmessages_for_user(user_id, end_time=None, start_time=None)
-
+        r = self.client.list_of_commmessages_for_user(
+            user_id, end_time=None, start_time=None
+        )

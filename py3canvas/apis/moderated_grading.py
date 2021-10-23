@@ -32,18 +32,30 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignments/{assignment_id}/moderated_students with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/moderated_students".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{assignment_id}/moderated_students with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/moderated_students".format(**path), data=data, params=params, all_pages=True)
-
-    def select_students_for_moderation(self, assignment_id, course_id, student_ids=None):
+    def select_students_for_moderation(
+        self, assignment_id, course_id, student_ids=None
+    ):
         """
         Select students for moderation.
 
@@ -59,13 +71,11 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # OPTIONAL - student_ids
         """
@@ -74,9 +84,20 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         if student_ids is not None:
             data["student_ids"] = student_ids
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/assignments/{assignment_id}/moderated_students with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments/{assignment_id}/moderated_students".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/assignments/{assignment_id}/moderated_students with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/moderated_students".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def bulk_select_provisional_grades(self, assignment_id, course_id):
         """
@@ -95,18 +116,30 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/bulk_select with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/bulk_select".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/bulk_select with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/bulk_select".format(**path), data=data, params=params, no_data=True)
-
-    def show_provisional_grade_status_for_student(self, assignment_id, course_id, student_id=None):
+    def show_provisional_grade_status_for_student(
+        self, assignment_id, course_id, student_id=None
+    ):
         """
         Show provisional grade status for a student.
 
@@ -122,13 +155,11 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # OPTIONAL - student_id
         """
@@ -137,9 +168,20 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         if student_id is not None:
             params["student_id"] = student_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/status with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/status".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/status with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/status".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def select_provisional_grade(self, assignment_id, course_id, provisional_grade_id):
         """
@@ -158,13 +200,11 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # REQUIRED - PATH - provisional_grade_id
         """
@@ -172,9 +212,20 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         """
         path["provisional_grade_id"] = provisional_grade_id
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/{provisional_grade_id}/select with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/{provisional_grade_id}/select".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/{provisional_grade_id}/select with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/{provisional_grade_id}/select".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def publish_provisional_grades_for_assignment(self, assignment_id, course_id):
         """
@@ -183,9 +234,9 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         Publish the selected provisional grade for all submissions to an assignment.
         Use the "Select provisional grade" endpoint to choose which provisional grade to publish
         for a particular submission.
-        
+
         Students not in the moderation set will have their one and only provisional grade published.
-        
+
         WARNING: This is irreversible. This will overwrite existing grades in the gradebook.
         """
         path = {}
@@ -198,18 +249,30 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/publish with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/publish".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/publish with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments/{assignment_id}/provisional_grades/publish".format(**path), data=data, params=params, no_data=True)
-
-    def show_provisional_grade_status_for_student(self, assignment_id, course_id, anonymous_id=None):
+    def show_provisional_grade_status_for_student(
+        self, assignment_id, course_id, anonymous_id=None
+    ):
         """
         Show provisional grade status for a student.
 
@@ -225,13 +288,11 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # OPTIONAL - anonymous_id
         """
@@ -240,15 +301,35 @@ class ModeratedGradingAPI(BaseCanvasAPI):
         if anonymous_id is not None:
             params["anonymous_id"] = anonymous_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{assignment_id}/anonymous_provisional_grades/status with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/anonymous_provisional_grades/status".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignments/{assignment_id}/anonymous_provisional_grades/status with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/anonymous_provisional_grades/status".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Provisionalgrade(BaseModel):
     """Provisionalgrade Model."""
 
-    def __init__(self, provisional_grade_id=None, score=None, grade=None, grade_matches_current_submission=None, graded_at=None, final=None, speedgrader_url=None):
+    def __init__(
+        self,
+        provisional_grade_id=None,
+        score=None,
+        grade=None,
+        grade_matches_current_submission=None,
+        graded_at=None,
+        final=None,
+        speedgrader_url=None,
+    ):
         """Init method for Provisionalgrade class."""
         self._provisional_grade_id = provisional_grade_id
         self._score = score
@@ -258,7 +339,7 @@ class Provisionalgrade(BaseModel):
         self._final = final
         self._speedgrader_url = speedgrader_url
 
-        self.logger = logging.getLogger('py3canvas.Provisionalgrade')
+        self.logger = logging.getLogger("py3canvas.Provisionalgrade")
 
     @property
     def provisional_grade_id(self):
@@ -268,7 +349,9 @@ class Provisionalgrade(BaseModel):
     @provisional_grade_id.setter
     def provisional_grade_id(self, value):
         """Setter for provisional_grade_id property."""
-        self.logger.warn("Setting values on provisional_grade_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on provisional_grade_id will NOT update the remote Canvas instance."
+        )
         self._provisional_grade_id = value
 
     @property
@@ -279,7 +362,9 @@ class Provisionalgrade(BaseModel):
     @score.setter
     def score(self, value):
         """Setter for score property."""
-        self.logger.warn("Setting values on score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on score will NOT update the remote Canvas instance."
+        )
         self._score = value
 
     @property
@@ -290,7 +375,9 @@ class Provisionalgrade(BaseModel):
     @grade.setter
     def grade(self, value):
         """Setter for grade property."""
-        self.logger.warn("Setting values on grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on grade will NOT update the remote Canvas instance."
+        )
         self._grade = value
 
     @property
@@ -301,7 +388,9 @@ class Provisionalgrade(BaseModel):
     @grade_matches_current_submission.setter
     def grade_matches_current_submission(self, value):
         """Setter for grade_matches_current_submission property."""
-        self.logger.warn("Setting values on grade_matches_current_submission will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on grade_matches_current_submission will NOT update the remote Canvas instance."
+        )
         self._grade_matches_current_submission = value
 
     @property
@@ -312,7 +401,9 @@ class Provisionalgrade(BaseModel):
     @graded_at.setter
     def graded_at(self, value):
         """Setter for graded_at property."""
-        self.logger.warn("Setting values on graded_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on graded_at will NOT update the remote Canvas instance."
+        )
         self._graded_at = value
 
     @property
@@ -323,7 +414,9 @@ class Provisionalgrade(BaseModel):
     @final.setter
     def final(self, value):
         """Setter for final property."""
-        self.logger.warn("Setting values on final will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on final will NOT update the remote Canvas instance."
+        )
         self._final = value
 
     @property
@@ -334,6 +427,7 @@ class Provisionalgrade(BaseModel):
     @speedgrader_url.setter
     def speedgrader_url(self, value):
         """Setter for speedgrader_url property."""
-        self.logger.warn("Setting values on speedgrader_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on speedgrader_url will NOT update the remote Canvas instance."
+        )
         self._speedgrader_url = value
-

@@ -20,7 +20,9 @@ class TestGradeChangeLogAPI(unittest.TestCase):
         """Integration test for the GradeChangeLogAPI.query_by_assignment method."""
         assignment_id = None  # Change me!!
 
-        r = self.client.query_by_assignment(assignment_id, end_time=None, start_time=None)
+        r = self.client.query_by_assignment(
+            assignment_id, end_time=None, start_time=None
+        )
 
     def test_query_by_course(self):
         """Integration test for the GradeChangeLogAPI.query_by_course method."""
@@ -43,5 +45,11 @@ class TestGradeChangeLogAPI(unittest.TestCase):
     def test_advanced_query(self):
         """Integration test for the GradeChangeLogAPI.advanced_query method."""
 
-        r = self.client.advanced_query(assignment_id=None, course_id=None, end_time=None, grader_id=None, start_time=None, student_id=None)
-
+        r = self.client.advanced_query(
+            assignment_id=None,
+            course_id=None,
+            end_time=None,
+            grader_id=None,
+            start_time=None,
+            student_id=None,
+        )

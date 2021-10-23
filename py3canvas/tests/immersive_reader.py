@@ -13,4 +13,3 @@ class TestImmersiveReaderAPI(unittest.TestCase):
 
     def setUp(self):
         self.client = ImmersiveReaderAPI(secrets.instance_address, secrets.access_token)
-

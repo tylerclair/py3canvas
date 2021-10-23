@@ -16,7 +16,14 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         super(OutcomeResultsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.OutcomeResultsAPI")
 
-    def get_outcome_results(self, course_id, include=None, include_hidden=None, outcome_ids=None, user_ids=None):
+    def get_outcome_results(
+        self,
+        course_id,
+        include=None,
+        include_hidden=None,
+        outcome_ids=None,
+        user_ids=None,
+    ):
         """
         Get outcome results.
 
@@ -32,7 +39,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - user_ids
         """
             If specified, only the users whose ids are given will be included in the
@@ -43,7 +49,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         if user_ids is not None:
             params["user_ids"] = user_ids
 
-
         # OPTIONAL - outcome_ids
         """
             If specified, only the outcomes whose ids are given will be included in the
@@ -52,7 +57,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         """
         if outcome_ids is not None:
             params["outcome_ids"] = outcome_ids
-
 
         # OPTIONAL - include
         """
@@ -66,7 +70,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         if include is not None:
             params["include"] = include
 
-
         # OPTIONAL - include_hidden
         """
             If true, results that are hidden from the learning mastery gradebook and student rollup
@@ -75,11 +78,32 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         if include_hidden is not None:
             params["include_hidden"] = include_hidden
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/outcome_results with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/outcome_results".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/outcome_results with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/outcome_results".format(**path), data=data, params=params, no_data=True)
-
-    def get_outcome_result_rollups(self, course_id, aggregate=None, aggregate_stat=None, exclude=None, include=None, outcome_ids=None, sort_by=None, sort_order=None, sort_outcome_id=None, user_ids=None):
+    def get_outcome_result_rollups(
+        self,
+        course_id,
+        aggregate=None,
+        aggregate_stat=None,
+        exclude=None,
+        include=None,
+        outcome_ids=None,
+        sort_by=None,
+        sort_order=None,
+        sort_outcome_id=None,
+        user_ids=None,
+    ):
         """
         Get outcome result rollups.
 
@@ -96,7 +120,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - aggregate
         """
             If specified, instead of returning one rollup for each user, all the user
@@ -106,7 +129,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         if aggregate is not None:
             self._validate_enum(aggregate, ["course"])
             params["aggregate"] = aggregate
-
 
         # OPTIONAL - aggregate_stat
         """
@@ -118,7 +140,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
             self._validate_enum(aggregate_stat, ["mean", "median"])
             params["aggregate_stat"] = aggregate_stat
 
-
         # OPTIONAL - user_ids
         """
             If specified, only the users whose ids are given will be included in the
@@ -127,7 +148,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         """
         if user_ids is not None:
             params["user_ids"] = user_ids
-
 
         # OPTIONAL - outcome_ids
         """
@@ -138,7 +158,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         if outcome_ids is not None:
             params["outcome_ids"] = outcome_ids
 
-
         # OPTIONAL - include
         """
             [String, "courses"|"outcomes"|"outcomes.alignments"|"outcome_groups"|"outcome_links"|"outcome_paths"|"users"]
@@ -146,7 +165,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         """
         if include is not None:
             params["include"] = include
-
 
         # OPTIONAL - exclude
         """
@@ -156,7 +174,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         if exclude is not None:
             self._validate_enum(exclude, ["missing_user_rollups"])
             params["exclude"] = exclude
-
 
         # OPTIONAL - sort_by
         """
@@ -169,7 +186,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
             self._validate_enum(sort_by, ["student", "outcome"])
             params["sort_by"] = sort_by
 
-
         # OPTIONAL - sort_outcome_id
         """
             If outcome sorting requested, then this determines which outcome to use
@@ -177,7 +193,6 @@ class OutcomeResultsAPI(BaseCanvasAPI):
         """
         if sort_outcome_id is not None:
             params["sort_outcome_id"] = sort_outcome_id
-
 
         # OPTIONAL - sort_order
         """
@@ -188,16 +203,32 @@ class OutcomeResultsAPI(BaseCanvasAPI):
             self._validate_enum(sort_order, ["asc", "desc"])
             params["sort_order"] = sort_order
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/outcome_rollups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/outcome_rollups".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/outcome_rollups with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/outcome_rollups".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Outcomeresult(BaseModel):
     """Outcomeresult Model.
     A student's result for an outcome"""
 
-    def __init__(self, id=None, score=None, submitted_or_assessed_at=None, links=None, percent=None):
+    def __init__(
+        self,
+        id=None,
+        score=None,
+        submitted_or_assessed_at=None,
+        links=None,
+        percent=None,
+    ):
         """Init method for Outcomeresult class."""
         self._id = id
         self._score = score
@@ -205,7 +236,7 @@ class Outcomeresult(BaseModel):
         self._links = links
         self._percent = percent
 
-        self.logger = logging.getLogger('py3canvas.Outcomeresult')
+        self.logger = logging.getLogger("py3canvas.Outcomeresult")
 
     @property
     def id(self):
@@ -215,7 +246,9 @@ class Outcomeresult(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -226,7 +259,9 @@ class Outcomeresult(BaseModel):
     @score.setter
     def score(self, value):
         """Setter for score property."""
-        self.logger.warn("Setting values on score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on score will NOT update the remote Canvas instance."
+        )
         self._score = value
 
     @property
@@ -237,7 +272,9 @@ class Outcomeresult(BaseModel):
     @submitted_or_assessed_at.setter
     def submitted_or_assessed_at(self, value):
         """Setter for submitted_or_assessed_at property."""
-        self.logger.warn("Setting values on submitted_or_assessed_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submitted_or_assessed_at will NOT update the remote Canvas instance."
+        )
         self._submitted_or_assessed_at = value
 
     @property
@@ -248,7 +285,9 @@ class Outcomeresult(BaseModel):
     @links.setter
     def links(self, value):
         """Setter for links property."""
-        self.logger.warn("Setting values on links will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on links will NOT update the remote Canvas instance."
+        )
         self._links = value
 
     @property
@@ -259,7 +298,9 @@ class Outcomeresult(BaseModel):
     @percent.setter
     def percent(self, value):
         """Setter for percent property."""
-        self.logger.warn("Setting values on percent will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on percent will NOT update the remote Canvas instance."
+        )
         self._percent = value
 
 
@@ -270,7 +311,7 @@ class Outcomerollupscorelinks(BaseModel):
         """Init method for Outcomerollupscorelinks class."""
         self._outcome = outcome
 
-        self.logger = logging.getLogger('py3canvas.Outcomerollupscorelinks')
+        self.logger = logging.getLogger("py3canvas.Outcomerollupscorelinks")
 
     @property
     def outcome(self):
@@ -280,7 +321,9 @@ class Outcomerollupscorelinks(BaseModel):
     @outcome.setter
     def outcome(self, value):
         """Setter for outcome property."""
-        self.logger.warn("Setting values on outcome will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on outcome will NOT update the remote Canvas instance."
+        )
         self._outcome = value
 
 
@@ -293,7 +336,7 @@ class Outcomerollupscore(BaseModel):
         self._count = count
         self._links = links
 
-        self.logger = logging.getLogger('py3canvas.Outcomerollupscore')
+        self.logger = logging.getLogger("py3canvas.Outcomerollupscore")
 
     @property
     def score(self):
@@ -303,7 +346,9 @@ class Outcomerollupscore(BaseModel):
     @score.setter
     def score(self, value):
         """Setter for score property."""
-        self.logger.warn("Setting values on score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on score will NOT update the remote Canvas instance."
+        )
         self._score = value
 
     @property
@@ -314,7 +359,9 @@ class Outcomerollupscore(BaseModel):
     @count.setter
     def count(self, value):
         """Setter for count property."""
-        self.logger.warn("Setting values on count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on count will NOT update the remote Canvas instance."
+        )
         self._count = value
 
     @property
@@ -325,7 +372,9 @@ class Outcomerollupscore(BaseModel):
     @links.setter
     def links(self, value):
         """Setter for links property."""
-        self.logger.warn("Setting values on links will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on links will NOT update the remote Canvas instance."
+        )
         self._links = value
 
 
@@ -338,7 +387,7 @@ class Outcomerolluplinks(BaseModel):
         self._user = user
         self._section = section
 
-        self.logger = logging.getLogger('py3canvas.Outcomerolluplinks')
+        self.logger = logging.getLogger("py3canvas.Outcomerolluplinks")
 
     @property
     def course(self):
@@ -348,7 +397,9 @@ class Outcomerolluplinks(BaseModel):
     @course.setter
     def course(self, value):
         """Setter for course property."""
-        self.logger.warn("Setting values on course will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course will NOT update the remote Canvas instance."
+        )
         self._course = value
 
     @property
@@ -359,7 +410,9 @@ class Outcomerolluplinks(BaseModel):
     @user.setter
     def user(self, value):
         """Setter for user property."""
-        self.logger.warn("Setting values on user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user will NOT update the remote Canvas instance."
+        )
         self._user = value
 
     @property
@@ -370,7 +423,9 @@ class Outcomerolluplinks(BaseModel):
     @section.setter
     def section(self, value):
         """Setter for section property."""
-        self.logger.warn("Setting values on section will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on section will NOT update the remote Canvas instance."
+        )
         self._section = value
 
 
@@ -383,7 +438,7 @@ class Outcomerollup(BaseModel):
         self._name = name
         self._links = links
 
-        self.logger = logging.getLogger('py3canvas.Outcomerollup')
+        self.logger = logging.getLogger("py3canvas.Outcomerollup")
 
     @property
     def scores(self):
@@ -393,7 +448,9 @@ class Outcomerollup(BaseModel):
     @scores.setter
     def scores(self, value):
         """Setter for scores property."""
-        self.logger.warn("Setting values on scores will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on scores will NOT update the remote Canvas instance."
+        )
         self._scores = value
 
     @property
@@ -404,7 +461,9 @@ class Outcomerollup(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -415,7 +474,9 @@ class Outcomerollup(BaseModel):
     @links.setter
     def links(self, value):
         """Setter for links property."""
-        self.logger.warn("Setting values on links will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on links will NOT update the remote Canvas instance."
+        )
         self._links = value
 
 
@@ -429,7 +490,7 @@ class Outcomealignment(BaseModel):
         self._name = name
         self._html_url = html_url
 
-        self.logger = logging.getLogger('py3canvas.Outcomealignment')
+        self.logger = logging.getLogger("py3canvas.Outcomealignment")
 
     @property
     def id(self):
@@ -439,7 +500,9 @@ class Outcomealignment(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -450,7 +513,9 @@ class Outcomealignment(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -461,7 +526,9 @@ class Outcomealignment(BaseModel):
     @html_url.setter
     def html_url(self, value):
         """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on html_url will NOT update the remote Canvas instance."
+        )
         self._html_url = value
 
 
@@ -474,7 +541,7 @@ class Outcomepath(BaseModel):
         self._id = id
         self._parts = parts
 
-        self.logger = logging.getLogger('py3canvas.Outcomepath')
+        self.logger = logging.getLogger("py3canvas.Outcomepath")
 
     @property
     def id(self):
@@ -484,7 +551,9 @@ class Outcomepath(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -495,7 +564,9 @@ class Outcomepath(BaseModel):
     @parts.setter
     def parts(self, value):
         """Setter for parts property."""
-        self.logger.warn("Setting values on parts will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on parts will NOT update the remote Canvas instance."
+        )
         self._parts = value
 
 
@@ -507,7 +578,7 @@ class Outcomepathpart(BaseModel):
         """Init method for Outcomepathpart class."""
         self._name = name
 
-        self.logger = logging.getLogger('py3canvas.Outcomepathpart')
+        self.logger = logging.getLogger("py3canvas.Outcomepathpart")
 
     @property
     def name(self):
@@ -517,6 +588,7 @@ class Outcomepathpart(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
-

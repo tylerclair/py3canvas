@@ -16,7 +16,9 @@ class TestAuthenticationProvidersAPI(unittest.TestCase):
     """Tests for the AuthenticationProvidersAPI."""
 
     def setUp(self):
-        self.client = AuthenticationProvidersAPI(secrets.instance_address, secrets.access_token)
+        self.client = AuthenticationProvidersAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_list_authentication_providers(self):
         """Integration test for the AuthenticationProvidersAPI.list_authentication_providers method."""
@@ -58,4 +60,3 @@ class TestAuthenticationProvidersAPI(unittest.TestCase):
         """Integration test for the AuthenticationProvidersAPI.update_account_auth_settings method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

@@ -14,12 +14,16 @@ class TestAppointmentGroupsAPI(unittest.TestCase):
     """Tests for the AppointmentGroupsAPI."""
 
     def setUp(self):
-        self.client = AppointmentGroupsAPI(secrets.instance_address, secrets.access_token)
+        self.client = AppointmentGroupsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_list_appointment_groups(self):
         """Integration test for the AppointmentGroupsAPI.list_appointment_groups method."""
 
-        r = self.client.list_appointment_groups(context_codes=None, include=None, include_past_appointments=None, scope=None)
+        r = self.client.list_appointment_groups(
+            context_codes=None, include=None, include_past_appointments=None, scope=None
+        )
 
     def test_create_appointment_group(self):
         """Integration test for the AppointmentGroupsAPI.create_appointment_group method."""
@@ -59,4 +63,3 @@ class TestAppointmentGroupsAPI(unittest.TestCase):
         """Integration test for the AppointmentGroupsAPI.get_next_appointment method."""
 
         r = self.client.get_next_appointment(appointment_group_ids=None)
-

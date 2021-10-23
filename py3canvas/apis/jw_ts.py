@@ -21,7 +21,7 @@ class JwTsAPI(BaseCanvasAPI):
         Create JWT.
 
         Create a unique jwt for using with other canvas services
-        
+
         Generates a different JWT each time it's called, each one expires
         after a short window (1 hour)
         """
@@ -36,16 +36,25 @@ class JwTsAPI(BaseCanvasAPI):
         if workflows is not None:
             data["workflows"] = workflows
 
-
-        self.logger.debug("POST /api/v1/jwts with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/jwts".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/jwts with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/jwts".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def refresh_jwt(self, jwt):
         """
         Refresh JWT.
 
         Refresh a JWT for use with other canvas services
-        
+
         Generates a different JWT each time it's called, each one expires
         after a short window (1 hour).
         """
@@ -60,9 +69,18 @@ class JwTsAPI(BaseCanvasAPI):
         """
         data["jwt"] = jwt
 
-
-        self.logger.debug("POST /api/v1/jwts/refresh with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/jwts/refresh".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/jwts/refresh with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/jwts/refresh".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Jwt(BaseModel):
@@ -72,7 +90,7 @@ class Jwt(BaseModel):
         """Init method for Jwt class."""
         self._token = token
 
-        self.logger = logging.getLogger('py3canvas.Jwt')
+        self.logger = logging.getLogger("py3canvas.Jwt")
 
     @property
     def token(self):
@@ -82,6 +100,7 @@ class Jwt(BaseModel):
     @token.setter
     def token(self, value):
         """Setter for token property."""
-        self.logger.warn("Setting values on token will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on token will NOT update the remote Canvas instance."
+        )
         self._token = value
-

@@ -21,10 +21,10 @@ class UserObserveesAPI(BaseCanvasAPI):
         List observees.
 
         A paginated list of the users that the given user is observing.
-        
+
         *Note:* all users are allowed to list their own observees. Administrators can list
         other users' observees.
-        
+
         The returned observees will include an attribute "observation_link_root_account_ids", a list
         of ids for the root accounts the observer and observee are linked on. The observer will only be able to
         observe in courses associated with these root accounts.
@@ -39,7 +39,6 @@ class UserObserveesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # OPTIONAL - include
         """
             - "avatar_url": Optionally include avatar_url.
@@ -48,19 +47,28 @@ class UserObserveesAPI(BaseCanvasAPI):
             self._validate_enum(include, ["avatar_url"])
             params["include"] = include
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/observees with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/observees".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/observees with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/observees".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_observers(self, user_id, include=None):
         """
         List observers.
 
         A paginated list of the observers of a given user.
-        
+
         *Note:* all users are allowed to list their own observers. Administrators can list
         other users' observers.
-        
+
         The returned observers will include an attribute "observation_link_root_account_ids", a list
         of ids for the root accounts the observer and observee are linked on. The observer will only be able to
         observe in courses associated with these root accounts.
@@ -75,7 +83,6 @@ class UserObserveesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # OPTIONAL - include
         """
             - "avatar_url": Optionally include avatar_url.
@@ -84,16 +91,33 @@ class UserObserveesAPI(BaseCanvasAPI):
             self._validate_enum(include, ["avatar_url"])
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/observers with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/observers".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/users/{user_id}/observers with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/observers".format(**path), data=data, params=params, all_pages=True)
-
-    def add_observee_with_credentials(self, user_id, access_token=None, observee_password=None, observee_unique_id=None, pairing_code=None, root_account_id=None):
+    def add_observee_with_credentials(
+        self,
+        user_id,
+        access_token=None,
+        observee_password=None,
+        observee_unique_id=None,
+        pairing_code=None,
+        root_account_id=None,
+    ):
         """
         Add an observee with credentials.
 
         Register the given user to observe another user, given the observee's credentials.
-        
+
         *Note:* all users are allowed to add their own observees, given the observee's
         credentials or access token are provided. Administrators can add observees given credentials, access token or
         the {api:UserObserveesController#update observee's id}.
@@ -108,14 +132,12 @@ class UserObserveesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # OPTIONAL - observee[unique_id]
         """
             The login id for the user to observe.  Required if access_token is omitted.
         """
         if observee_unique_id is not None:
             data["observee[unique_id]"] = observee_unique_id
-
 
         # OPTIONAL - observee[password]
         """
@@ -124,7 +146,6 @@ class UserObserveesAPI(BaseCanvasAPI):
         if observee_password is not None:
             data["observee[password]"] = observee_password
 
-
         # OPTIONAL - access_token
         """
             The access token for the user to observe.  Required if <tt>observee[unique_id]</tt> or <tt>observee[password]</tt> are omitted.
@@ -132,14 +153,12 @@ class UserObserveesAPI(BaseCanvasAPI):
         if access_token is not None:
             data["access_token"] = access_token
 
-
         # OPTIONAL - pairing_code
         """
             A generated pairing code for the user to observe. Required if the Observer pairing code feature flag is enabled
         """
         if pairing_code is not None:
             data["pairing_code"] = pairing_code
-
 
         # OPTIONAL - root_account_id
         """
@@ -151,16 +170,25 @@ class UserObserveesAPI(BaseCanvasAPI):
         if root_account_id is not None:
             data["root_account_id"] = root_account_id
 
-
-        self.logger.debug("POST /api/v1/users/{user_id}/observees with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/users/{user_id}/observees".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/users/{user_id}/observees with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/users/{user_id}/observees".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_observee(self, observee_id, user_id):
         """
         Show an observee.
 
         Gets information about an observed user.
-        
+
         *Note:* all users are allowed to view their own observees.
         """
         path = {}
@@ -173,23 +201,31 @@ class UserObserveesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - observee_id
         """
             ID
         """
         path["observee_id"] = observee_id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/observees/{observee_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/observees/{observee_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/observees/{observee_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/observees/{observee_id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_observer(self, observer_id, user_id):
         """
         Show an observer.
 
         Gets information about an observer.
-        
+
         *Note:* all users are allowed to view their own observers.
         """
         path = {}
@@ -202,16 +238,24 @@ class UserObserveesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - observer_id
         """
             ID
         """
         path["observer_id"] = observer_id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/observers/{observer_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/observers/{observer_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/observers/{observer_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/observers/{observer_id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def add_observee(self, observee_id, user_id, root_account_id=None):
         """
@@ -229,13 +273,11 @@ class UserObserveesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - observee_id
         """
             ID
         """
         path["observee_id"] = observee_id
-
 
         # OPTIONAL - root_account_id
         """
@@ -246,9 +288,18 @@ class UserObserveesAPI(BaseCanvasAPI):
         if root_account_id is not None:
             data["root_account_id"] = root_account_id
 
-
-        self.logger.debug("PUT /api/v1/users/{user_id}/observees/{observee_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/users/{user_id}/observees/{observee_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/users/{user_id}/observees/{observee_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/users/{user_id}/observees/{observee_id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def remove_observee(self, observee_id, user_id, root_account_id=None):
         """
@@ -266,13 +317,11 @@ class UserObserveesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - observee_id
         """
             ID
         """
         path["observee_id"] = observee_id
-
 
         # OPTIONAL - root_account_id
         """
@@ -281,9 +330,18 @@ class UserObserveesAPI(BaseCanvasAPI):
         if root_account_id is not None:
             params["root_account_id"] = root_account_id
 
-
-        self.logger.debug("DELETE /api/v1/users/{user_id}/observees/{observee_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/users/{user_id}/observees/{observee_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/users/{user_id}/observees/{observee_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/users/{user_id}/observees/{observee_id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def create_observer_pairing_code(self, user_id):
         """
@@ -302,9 +360,18 @@ class UserObserveesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
-        self.logger.debug("POST /api/v1/users/{user_id}/observer_pairing_codes with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/users/{user_id}/observer_pairing_codes".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/users/{user_id}/observer_pairing_codes with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/users/{user_id}/observer_pairing_codes".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Pairingcode(BaseModel):
@@ -318,7 +385,7 @@ class Pairingcode(BaseModel):
         self._expires_at = expires_at
         self._workflow_state = workflow_state
 
-        self.logger = logging.getLogger('py3canvas.Pairingcode')
+        self.logger = logging.getLogger("py3canvas.Pairingcode")
 
     @property
     def user_id(self):
@@ -328,7 +395,9 @@ class Pairingcode(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -339,7 +408,9 @@ class Pairingcode(BaseModel):
     @code.setter
     def code(self, value):
         """Setter for code property."""
-        self.logger.warn("Setting values on code will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on code will NOT update the remote Canvas instance."
+        )
         self._code = value
 
     @property
@@ -350,7 +421,9 @@ class Pairingcode(BaseModel):
     @expires_at.setter
     def expires_at(self, value):
         """Setter for expires_at property."""
-        self.logger.warn("Setting values on expires_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on expires_at will NOT update the remote Canvas instance."
+        )
         self._expires_at = value
 
     @property
@@ -361,6 +434,7 @@ class Pairingcode(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
-

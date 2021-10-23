@@ -24,4 +24,3 @@ class TestImageSearchAPI(unittest.TestCase):
         """Integration test for the ImageSearchAPI.confirm_image_selection method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

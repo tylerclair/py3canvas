@@ -21,7 +21,7 @@ class QuizIpFiltersAPI(BaseCanvasAPI):
         Get available quiz IP filters.
 
         Get a list of available IP filters for this Quiz.
-        
+
         <b>200 OK</b> response code is returned if the request was successful.
         """
         path = {}
@@ -34,16 +34,24 @@ class QuizIpFiltersAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/ip_filters with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/ip_filters".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/ip_filters with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/ip_filters".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Quizipfilter(BaseModel):
@@ -55,7 +63,7 @@ class Quizipfilter(BaseModel):
         self._account = account
         self._filter = filter
 
-        self.logger = logging.getLogger('py3canvas.Quizipfilter')
+        self.logger = logging.getLogger("py3canvas.Quizipfilter")
 
     @property
     def name(self):
@@ -65,7 +73,9 @@ class Quizipfilter(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -76,7 +86,9 @@ class Quizipfilter(BaseModel):
     @account.setter
     def account(self, value):
         """Setter for account property."""
-        self.logger.warn("Setting values on account will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on account will NOT update the remote Canvas instance."
+        )
         self._account = value
 
     @property
@@ -87,6 +99,7 @@ class Quizipfilter(BaseModel):
     @filter.setter
     def filter(self, value):
         """Setter for filter property."""
-        self.logger.warn("Setting values on filter will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on filter will NOT update the remote Canvas instance."
+        )
         self._filter = value
-

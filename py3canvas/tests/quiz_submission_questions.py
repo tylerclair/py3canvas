@@ -13,13 +13,17 @@ class TestQuizSubmissionQuestionsAPI(unittest.TestCase):
     """Tests for the QuizSubmissionQuestionsAPI."""
 
     def setUp(self):
-        self.client = QuizSubmissionQuestionsAPI(secrets.instance_address, secrets.access_token)
+        self.client = QuizSubmissionQuestionsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_get_all_quiz_submission_questions(self):
         """Integration test for the QuizSubmissionQuestionsAPI.get_all_quiz_submission_questions method."""
         quiz_submission_id = None  # Change me!!
 
-        r = self.client.get_all_quiz_submission_questions(quiz_submission_id, include=None)
+        r = self.client.get_all_quiz_submission_questions(
+            quiz_submission_id, include=None
+        )
 
     def test_answering_questions(self):
         """Integration test for the QuizSubmissionQuestionsAPI.answering_questions method."""
@@ -32,7 +36,9 @@ class TestQuizSubmissionQuestionsAPI(unittest.TestCase):
         id = None  # Change me!!
         answer = None  # Change me!!
 
-        r = self.client.get_formatted_student_numerical_answer(answer, id, quiz_submission_id)
+        r = self.client.get_formatted_student_numerical_answer(
+            answer, id, quiz_submission_id
+        )
 
     def test_flagging_question(self):
         """Integration test for the QuizSubmissionQuestionsAPI.flagging_question method."""
@@ -43,4 +49,3 @@ class TestQuizSubmissionQuestionsAPI(unittest.TestCase):
         """Integration test for the QuizSubmissionQuestionsAPI.unflagging_question method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

@@ -49,4 +49,3 @@ class TestAccountReportsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_report(account_id, id, report)
-

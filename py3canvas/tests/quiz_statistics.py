@@ -25,5 +25,6 @@ class TestQuizStatisticsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         quiz_id = None  # Change me!!
 
-        r = self.client.fetching_latest_quiz_statistics(course_id, quiz_id, all_versions=None)
-
+        r = self.client.fetching_latest_quiz_statistics(
+            course_id, quiz_id, all_versions=None
+        )

@@ -36,7 +36,9 @@ class TestLineItemsAPI(unittest.TestCase):
         """Integration test for the LineItemsAPI.list_line_items method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_line_items(course_id, limit=None, resource_id=None, resource_link_id=None, tag=None)
+        r = self.client.list_line_items(
+            course_id, limit=None, resource_id=None, resource_link_id=None, tag=None
+        )
 
     def test_delete_line_item(self):
         """Integration test for the LineItemsAPI.delete_line_item method."""
@@ -44,4 +46,3 @@ class TestLineItemsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_line_item(course_id, id)
-

@@ -52,4 +52,3 @@ class TestRolesAPI(unittest.TestCase):
         """Integration test for the RolesAPI.update_role method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

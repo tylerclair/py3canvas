@@ -32,7 +32,6 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - include
         """
             - "items": Return module items inline if possible.
@@ -51,7 +50,6 @@ class ModulesAPI(BaseCanvasAPI):
             self._validate_enum(include, ["items", "content_details"])
             params["include"] = include
 
-
         # OPTIONAL - search_term
         """
             The partial name of the modules (and module items, if 'items' is
@@ -60,7 +58,6 @@ class ModulesAPI(BaseCanvasAPI):
         if search_term is not None:
             params["search_term"] = search_term
 
-
         # OPTIONAL - student_id
         """
             Returns module completion information for the student with this id.
@@ -68,9 +65,18 @@ class ModulesAPI(BaseCanvasAPI):
         if student_id is not None:
             params["student_id"] = student_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/modules with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/modules".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/modules with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/modules".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def show_module(self, course_id, id, include=None, student_id=None):
         """
@@ -88,13 +94,11 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - include
         """
@@ -114,7 +118,6 @@ class ModulesAPI(BaseCanvasAPI):
             self._validate_enum(include, ["items", "content_details"])
             params["include"] = include
 
-
         # OPTIONAL - student_id
         """
             Returns module completion information for the student with this id.
@@ -122,11 +125,29 @@ class ModulesAPI(BaseCanvasAPI):
         if student_id is not None:
             params["student_id"] = student_id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/modules/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/modules/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/modules/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/modules/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def create_module(self, course_id, module_name, module_position=None, module_prerequisite_module_ids=None, module_publish_final_grade=None, module_require_sequential_progress=None, module_unlock_at=None):
+    def create_module(
+        self,
+        course_id,
+        module_name,
+        module_position=None,
+        module_prerequisite_module_ids=None,
+        module_publish_final_grade=None,
+        module_require_sequential_progress=None,
+        module_unlock_at=None,
+    ):
         """
         Create a module.
 
@@ -142,13 +163,11 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - module[name]
         """
             The name of the module
         """
         data["module[name]"] = module_name
-
 
         # OPTIONAL - module[unlock_at]
         """
@@ -157,10 +176,11 @@ class ModulesAPI(BaseCanvasAPI):
         if module_unlock_at is not None:
             if issubclass(module_unlock_at.__class__, str):
                 module_unlock_at = self._validate_iso8601_string(module_unlock_at)
-            elif issubclass(module_unlock_at.__class__, date) or issubclass(module_unlock_at.__class__, datetime):
-                module_unlock_at = module_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(module_unlock_at.__class__, date) or issubclass(
+                module_unlock_at.__class__, datetime
+            ):
+                module_unlock_at = module_unlock_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["module[unlock_at]"] = module_unlock_at
-
 
         # OPTIONAL - module[position]
         """
@@ -169,14 +189,14 @@ class ModulesAPI(BaseCanvasAPI):
         if module_position is not None:
             data["module[position]"] = module_position
 
-
         # OPTIONAL - module[require_sequential_progress]
         """
             Whether module items must be unlocked in order
         """
         if module_require_sequential_progress is not None:
-            data["module[require_sequential_progress]"] = module_require_sequential_progress
-
+            data[
+                "module[require_sequential_progress]"
+            ] = module_require_sequential_progress
 
         # OPTIONAL - module[prerequisite_module_ids]
         """
@@ -187,7 +207,6 @@ class ModulesAPI(BaseCanvasAPI):
         if module_prerequisite_module_ids is not None:
             data["module[prerequisite_module_ids]"] = module_prerequisite_module_ids
 
-
         # OPTIONAL - module[publish_final_grade]
         """
             Whether to publish the student's final grade for the course upon
@@ -196,11 +215,31 @@ class ModulesAPI(BaseCanvasAPI):
         if module_publish_final_grade is not None:
             data["module[publish_final_grade]"] = module_publish_final_grade
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/modules with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/modules".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/modules with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/modules".format(**path), data=data, params=params, single_item=True)
-
-    def update_module(self, course_id, id, module_name=None, module_position=None, module_prerequisite_module_ids=None, module_publish_final_grade=None, module_published=None, module_require_sequential_progress=None, module_unlock_at=None):
+    def update_module(
+        self,
+        course_id,
+        id,
+        module_name=None,
+        module_position=None,
+        module_prerequisite_module_ids=None,
+        module_publish_final_grade=None,
+        module_published=None,
+        module_require_sequential_progress=None,
+        module_unlock_at=None,
+    ):
         """
         Update a module.
 
@@ -216,13 +255,11 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - module[name]
         """
@@ -231,7 +268,6 @@ class ModulesAPI(BaseCanvasAPI):
         if module_name is not None:
             data["module[name]"] = module_name
 
-
         # OPTIONAL - module[unlock_at]
         """
             The date the module will unlock
@@ -239,10 +275,11 @@ class ModulesAPI(BaseCanvasAPI):
         if module_unlock_at is not None:
             if issubclass(module_unlock_at.__class__, str):
                 module_unlock_at = self._validate_iso8601_string(module_unlock_at)
-            elif issubclass(module_unlock_at.__class__, date) or issubclass(module_unlock_at.__class__, datetime):
-                module_unlock_at = module_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(module_unlock_at.__class__, date) or issubclass(
+                module_unlock_at.__class__, datetime
+            ):
+                module_unlock_at = module_unlock_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["module[unlock_at]"] = module_unlock_at
-
 
         # OPTIONAL - module[position]
         """
@@ -251,14 +288,14 @@ class ModulesAPI(BaseCanvasAPI):
         if module_position is not None:
             data["module[position]"] = module_position
 
-
         # OPTIONAL - module[require_sequential_progress]
         """
             Whether module items must be unlocked in order
         """
         if module_require_sequential_progress is not None:
-            data["module[require_sequential_progress]"] = module_require_sequential_progress
-
+            data[
+                "module[require_sequential_progress]"
+            ] = module_require_sequential_progress
 
         # OPTIONAL - module[prerequisite_module_ids]
         """
@@ -269,7 +306,6 @@ class ModulesAPI(BaseCanvasAPI):
         if module_prerequisite_module_ids is not None:
             data["module[prerequisite_module_ids]"] = module_prerequisite_module_ids
 
-
         # OPTIONAL - module[publish_final_grade]
         """
             Whether to publish the student's final grade for the course upon
@@ -278,7 +314,6 @@ class ModulesAPI(BaseCanvasAPI):
         if module_publish_final_grade is not None:
             data["module[publish_final_grade]"] = module_publish_final_grade
 
-
         # OPTIONAL - module[published]
         """
             Whether the module is published and visible to students
@@ -286,9 +321,18 @@ class ModulesAPI(BaseCanvasAPI):
         if module_published is not None:
             data["module[published]"] = module_published
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/modules/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/modules/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/modules/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/modules/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_module(self, course_id, id):
         """
@@ -306,16 +350,24 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/modules/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/modules/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/modules/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/modules/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def re_lock_module_progressions(self, course_id, id):
         """
@@ -323,7 +375,7 @@ class ModulesAPI(BaseCanvasAPI):
 
         Resets module progressions to their default locked state and
         recalculates them based on the current requirements.
-        
+
         Adding progression requirements to an active course will not lock students
         out of modules they have already unlocked unless this action is called.
         """
@@ -337,18 +389,28 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/modules/{id}/relock with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/modules/{id}/relock".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/modules/{id}/relock with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/modules/{id}/relock".format(**path), data=data, params=params, single_item=True)
-
-    def list_module_items(self, course_id, module_id, include=None, search_term=None, student_id=None):
+    def list_module_items(
+        self, course_id, module_id, include=None, search_term=None, student_id=None
+    ):
         """
         List module items.
 
@@ -364,13 +426,11 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - module_id
         """
             ID
         """
         path["module_id"] = module_id
-
 
         # OPTIONAL - include
         """
@@ -383,14 +443,12 @@ class ModulesAPI(BaseCanvasAPI):
             self._validate_enum(include, ["content_details"])
             params["include"] = include
 
-
         # OPTIONAL - search_term
         """
             The partial title of the items to match and return.
         """
         if search_term is not None:
             params["search_term"] = search_term
-
 
         # OPTIONAL - student_id
         """
@@ -399,9 +457,18 @@ class ModulesAPI(BaseCanvasAPI):
         if student_id is not None:
             params["student_id"] = student_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/modules/{module_id}/items with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/modules/{module_id}/items".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/modules/{module_id}/items with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/modules/{module_id}/items".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def show_module_item(self, course_id, id, module_id, include=None, student_id=None):
         """
@@ -419,20 +486,17 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - module_id
         """
             ID
         """
         path["module_id"] = module_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - include
         """
@@ -445,7 +509,6 @@ class ModulesAPI(BaseCanvasAPI):
             self._validate_enum(include, ["content_details"])
             params["include"] = include
 
-
         # OPTIONAL - student_id
         """
             Returns module completion information for the student with this id.
@@ -453,11 +516,34 @@ class ModulesAPI(BaseCanvasAPI):
         if student_id is not None:
             params["student_id"] = student_id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/modules/{module_id}/items/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/modules/{module_id}/items/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def create_module_item(self, course_id, module_id, module_item_content_id, module_item_type, module_item_completion_requirement_min_score=None, module_item_completion_requirement_type=None, module_item_external_url=None, module_item_indent=None, module_item_new_tab=None, module_item_page_url=None, module_item_position=None, module_item_title=None):
+    def create_module_item(
+        self,
+        course_id,
+        module_id,
+        module_item_content_id,
+        module_item_type,
+        module_item_completion_requirement_min_score=None,
+        module_item_completion_requirement_type=None,
+        module_item_external_url=None,
+        module_item_indent=None,
+        module_item_new_tab=None,
+        module_item_page_url=None,
+        module_item_position=None,
+        module_item_title=None,
+    ):
         """
         Create a module item.
 
@@ -473,13 +559,11 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - module_id
         """
             ID
         """
         path["module_id"] = module_id
-
 
         # OPTIONAL - module_item[title]
         """
@@ -488,14 +572,24 @@ class ModulesAPI(BaseCanvasAPI):
         if module_item_title is not None:
             data["module_item[title]"] = module_item_title
 
-
         # REQUIRED - module_item[type]
         """
             The type of content linked to the item
         """
-        self._validate_enum(module_item_type, ["File", "Page", "Discussion", "Assignment", "Quiz", "SubHeader", "ExternalUrl", "ExternalTool"])
+        self._validate_enum(
+            module_item_type,
+            [
+                "File",
+                "Page",
+                "Discussion",
+                "Assignment",
+                "Quiz",
+                "SubHeader",
+                "ExternalUrl",
+                "ExternalTool",
+            ],
+        )
         data["module_item[type]"] = module_item_type
-
 
         # REQUIRED - module_item[content_id]
         """
@@ -504,7 +598,6 @@ class ModulesAPI(BaseCanvasAPI):
         """
         data["module_item[content_id]"] = module_item_content_id
 
-
         # OPTIONAL - module_item[position]
         """
             The position of this item in the module (1-based).
@@ -512,14 +605,12 @@ class ModulesAPI(BaseCanvasAPI):
         if module_item_position is not None:
             data["module_item[position]"] = module_item_position
 
-
         # OPTIONAL - module_item[indent]
         """
             0-based indent level; module items may be indented to show a hierarchy
         """
         if module_item_indent is not None:
             data["module_item[indent]"] = module_item_indent
-
 
         # OPTIONAL - module_item[page_url]
         """
@@ -529,7 +620,6 @@ class ModulesAPI(BaseCanvasAPI):
         if module_item_page_url is not None:
             data["module_item[page_url]"] = module_item_page_url
 
-
         # OPTIONAL - module_item[external_url]
         """
             External url that the item points to. [Required for 'ExternalUrl' and
@@ -538,7 +628,6 @@ class ModulesAPI(BaseCanvasAPI):
         if module_item_external_url is not None:
             data["module_item[external_url]"] = module_item_external_url
 
-
         # OPTIONAL - module_item[new_tab]
         """
             Whether the external tool opens in a new tab. Only applies to
@@ -546,7 +635,6 @@ class ModulesAPI(BaseCanvasAPI):
         """
         if module_item_new_tab is not None:
             data["module_item[new_tab]"] = module_item_new_tab
-
 
         # OPTIONAL - module_item[completion_requirement][type]
         """
@@ -558,9 +646,13 @@ class ModulesAPI(BaseCanvasAPI):
         Inapplicable types will be ignored
         """
         if module_item_completion_requirement_type is not None:
-            self._validate_enum(module_item_completion_requirement_type, ["must_view", "must_contribute", "must_submit", "must_mark_done"])
-            data["module_item[completion_requirement][type]"] = module_item_completion_requirement_type
-
+            self._validate_enum(
+                module_item_completion_requirement_type,
+                ["must_view", "must_contribute", "must_submit", "must_mark_done"],
+            )
+            data[
+                "module_item[completion_requirement][type]"
+            ] = module_item_completion_requirement_type
 
         # OPTIONAL - module_item[completion_requirement][min_score]
         """
@@ -568,13 +660,38 @@ class ModulesAPI(BaseCanvasAPI):
         type 'min_score'.
         """
         if module_item_completion_requirement_min_score is not None:
-            data["module_item[completion_requirement][min_score]"] = module_item_completion_requirement_min_score
+            data[
+                "module_item[completion_requirement][min_score]"
+            ] = module_item_completion_requirement_min_score
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/modules/{module_id}/items with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/modules/{module_id}/items".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/modules/{module_id}/items with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/modules/{module_id}/items".format(**path), data=data, params=params, single_item=True)
-
-    def update_module_item(self, course_id, id, module_id, module_item_completion_requirement_min_score=None, module_item_completion_requirement_type=None, module_item_external_url=None, module_item_indent=None, module_item_module_id=None, module_item_new_tab=None, module_item_position=None, module_item_published=None, module_item_title=None):
+    def update_module_item(
+        self,
+        course_id,
+        id,
+        module_id,
+        module_item_completion_requirement_min_score=None,
+        module_item_completion_requirement_type=None,
+        module_item_external_url=None,
+        module_item_indent=None,
+        module_item_module_id=None,
+        module_item_new_tab=None,
+        module_item_position=None,
+        module_item_published=None,
+        module_item_title=None,
+    ):
         """
         Update a module item.
 
@@ -590,20 +707,17 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - module_id
         """
             ID
         """
         path["module_id"] = module_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - module_item[title]
         """
@@ -612,14 +726,12 @@ class ModulesAPI(BaseCanvasAPI):
         if module_item_title is not None:
             data["module_item[title]"] = module_item_title
 
-
         # OPTIONAL - module_item[position]
         """
             The position of this item in the module (1-based)
         """
         if module_item_position is not None:
             data["module_item[position]"] = module_item_position
-
 
         # OPTIONAL - module_item[indent]
         """
@@ -628,14 +740,12 @@ class ModulesAPI(BaseCanvasAPI):
         if module_item_indent is not None:
             data["module_item[indent]"] = module_item_indent
 
-
         # OPTIONAL - module_item[external_url]
         """
             External url that the item points to. Only applies to 'ExternalUrl' type.
         """
         if module_item_external_url is not None:
             data["module_item[external_url]"] = module_item_external_url
-
 
         # OPTIONAL - module_item[new_tab]
         """
@@ -644,7 +754,6 @@ class ModulesAPI(BaseCanvasAPI):
         """
         if module_item_new_tab is not None:
             data["module_item[new_tab]"] = module_item_new_tab
-
 
         # OPTIONAL - module_item[completion_requirement][type]
         """
@@ -656,9 +765,13 @@ class ModulesAPI(BaseCanvasAPI):
         Inapplicable types will be ignored
         """
         if module_item_completion_requirement_type is not None:
-            self._validate_enum(module_item_completion_requirement_type, ["must_view", "must_contribute", "must_submit", "must_mark_done"])
-            data["module_item[completion_requirement][type]"] = module_item_completion_requirement_type
-
+            self._validate_enum(
+                module_item_completion_requirement_type,
+                ["must_view", "must_contribute", "must_submit", "must_mark_done"],
+            )
+            data[
+                "module_item[completion_requirement][type]"
+            ] = module_item_completion_requirement_type
 
         # OPTIONAL - module_item[completion_requirement][min_score]
         """
@@ -666,8 +779,9 @@ class ModulesAPI(BaseCanvasAPI):
         type 'min_score'.
         """
         if module_item_completion_requirement_min_score is not None:
-            data["module_item[completion_requirement][min_score]"] = module_item_completion_requirement_min_score
-
+            data[
+                "module_item[completion_requirement][min_score]"
+            ] = module_item_completion_requirement_min_score
 
         # OPTIONAL - module_item[published]
         """
@@ -675,7 +789,6 @@ class ModulesAPI(BaseCanvasAPI):
         """
         if module_item_published is not None:
             data["module_item[published]"] = module_item_published
-
 
         # OPTIONAL - module_item[module_id]
         """
@@ -685,11 +798,22 @@ class ModulesAPI(BaseCanvasAPI):
         if module_item_module_id is not None:
             data["module_item[module_id]"] = module_item_module_id
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/modules/{module_id}/items/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/modules/{module_id}/items/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def select_mastery_path(self, course_id, id, module_id, assignment_set_id=None, student_id=None):
+    def select_mastery_path(
+        self, course_id, id, module_id, assignment_set_id=None, student_id=None
+    ):
         """
         Select a mastery path.
 
@@ -708,20 +832,17 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - module_id
         """
             ID
         """
         path["module_id"] = module_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - assignment_set_id
         """
@@ -731,7 +852,6 @@ class ModulesAPI(BaseCanvasAPI):
         if assignment_set_id is not None:
             data["assignment_set_id"] = assignment_set_id
 
-
         # OPTIONAL - student_id
         """
             Which student the selection applies to.  If not specified, current user is
@@ -740,9 +860,20 @@ class ModulesAPI(BaseCanvasAPI):
         if student_id is not None:
             data["student_id"] = student_id
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/modules/{module_id}/items/{id}/select_mastery_path with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}/select_mastery_path".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/modules/{module_id}/items/{id}/select_mastery_path with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}/select_mastery_path".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_module_item(self, course_id, id, module_id):
         """
@@ -760,13 +891,11 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - module_id
         """
             ID
         """
         path["module_id"] = module_id
-
 
         # REQUIRED - PATH - id
         """
@@ -774,9 +903,18 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/modules/{module_id}/items/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/modules/{module_id}/items/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def mark_module_item_as_done_not_done(self, course_id, id, module_id):
         """
@@ -795,13 +933,11 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - module_id
         """
             ID
         """
         path["module_id"] = module_id
-
 
         # REQUIRED - PATH - id
         """
@@ -809,9 +945,20 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/modules/{module_id}/items/{id}/done with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}/done".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/modules/{module_id}/items/{id}/done with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}/done".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_module_item_sequence(self, course_id, asset_id=None, asset_type=None):
         """
@@ -830,7 +977,6 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - asset_type
         """
             The type of asset to find module sequence information for. Use the ModuleItem if it is known
@@ -838,9 +984,19 @@ class ModulesAPI(BaseCanvasAPI):
         appears more than once in the module sequence.
         """
         if asset_type is not None:
-            self._validate_enum(asset_type, ["ModuleItem", "File", "Page", "Discussion", "Assignment", "Quiz", "ExternalTool"])
+            self._validate_enum(
+                asset_type,
+                [
+                    "ModuleItem",
+                    "File",
+                    "Page",
+                    "Discussion",
+                    "Assignment",
+                    "Quiz",
+                    "ExternalTool",
+                ],
+            )
             params["asset_type"] = asset_type
-
 
         # OPTIONAL - asset_id
         """
@@ -849,9 +1005,18 @@ class ModulesAPI(BaseCanvasAPI):
         if asset_id is not None:
             params["asset_id"] = asset_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/module_item_sequence with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/module_item_sequence".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/module_item_sequence with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/module_item_sequence".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def mark_module_item_read(self, course_id, id, module_id):
         """
@@ -860,7 +1025,7 @@ class ModulesAPI(BaseCanvasAPI):
         Fulfills "must view" requirement for a module item. It is generally not necessary to do this explicitly,
         but it is provided for applications that need to access external content directly (bypassing the html_url
         redirect that normally allows Canvas to fulfill "must view" requirements).
-        
+
         This endpoint cannot be used to complete requirements on locked or unpublished module items.
         """
         path = {}
@@ -873,13 +1038,11 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - module_id
         """
             ID
         """
         path["module_id"] = module_id
-
 
         # REQUIRED - PATH - id
         """
@@ -887,15 +1050,42 @@ class ModulesAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/modules/{module_id}/items/{id}/mark_read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}/mark_read".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/modules/{module_id}/items/{id}/mark_read with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/modules/{module_id}/items/{id}/mark_read".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Module(BaseModel):
     """Module Model."""
 
-    def __init__(self, id=None, workflow_state=None, position=None, name=None, unlock_at=None, require_sequential_progress=None, prerequisite_module_ids=None, items_count=None, items_url=None, items=None, state=None, completed_at=None, publish_final_grade=None, published=None):
+    def __init__(
+        self,
+        id=None,
+        workflow_state=None,
+        position=None,
+        name=None,
+        unlock_at=None,
+        require_sequential_progress=None,
+        prerequisite_module_ids=None,
+        items_count=None,
+        items_url=None,
+        items=None,
+        state=None,
+        completed_at=None,
+        publish_final_grade=None,
+        published=None,
+    ):
         """Init method for Module class."""
         self._id = id
         self._workflow_state = workflow_state
@@ -912,7 +1102,7 @@ class Module(BaseModel):
         self._publish_final_grade = publish_final_grade
         self._published = published
 
-        self.logger = logging.getLogger('py3canvas.Module')
+        self.logger = logging.getLogger("py3canvas.Module")
 
     @property
     def id(self):
@@ -922,7 +1112,9 @@ class Module(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -933,7 +1125,9 @@ class Module(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -944,7 +1138,9 @@ class Module(BaseModel):
     @position.setter
     def position(self, value):
         """Setter for position property."""
-        self.logger.warn("Setting values on position will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on position will NOT update the remote Canvas instance."
+        )
         self._position = value
 
     @property
@@ -955,7 +1151,9 @@ class Module(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -966,7 +1164,9 @@ class Module(BaseModel):
     @unlock_at.setter
     def unlock_at(self, value):
         """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unlock_at will NOT update the remote Canvas instance."
+        )
         self._unlock_at = value
 
     @property
@@ -977,7 +1177,9 @@ class Module(BaseModel):
     @require_sequential_progress.setter
     def require_sequential_progress(self, value):
         """Setter for require_sequential_progress property."""
-        self.logger.warn("Setting values on require_sequential_progress will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on require_sequential_progress will NOT update the remote Canvas instance."
+        )
         self._require_sequential_progress = value
 
     @property
@@ -988,7 +1190,9 @@ class Module(BaseModel):
     @prerequisite_module_ids.setter
     def prerequisite_module_ids(self, value):
         """Setter for prerequisite_module_ids property."""
-        self.logger.warn("Setting values on prerequisite_module_ids will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on prerequisite_module_ids will NOT update the remote Canvas instance."
+        )
         self._prerequisite_module_ids = value
 
     @property
@@ -999,7 +1203,9 @@ class Module(BaseModel):
     @items_count.setter
     def items_count(self, value):
         """Setter for items_count property."""
-        self.logger.warn("Setting values on items_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on items_count will NOT update the remote Canvas instance."
+        )
         self._items_count = value
 
     @property
@@ -1010,7 +1216,9 @@ class Module(BaseModel):
     @items_url.setter
     def items_url(self, value):
         """Setter for items_url property."""
-        self.logger.warn("Setting values on items_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on items_url will NOT update the remote Canvas instance."
+        )
         self._items_url = value
 
     @property
@@ -1021,7 +1229,9 @@ class Module(BaseModel):
     @items.setter
     def items(self, value):
         """Setter for items property."""
-        self.logger.warn("Setting values on items will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on items will NOT update the remote Canvas instance."
+        )
         self._items = value
 
     @property
@@ -1032,7 +1242,9 @@ class Module(BaseModel):
     @state.setter
     def state(self, value):
         """Setter for state property."""
-        self.logger.warn("Setting values on state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on state will NOT update the remote Canvas instance."
+        )
         self._state = value
 
     @property
@@ -1043,7 +1255,9 @@ class Module(BaseModel):
     @completed_at.setter
     def completed_at(self, value):
         """Setter for completed_at property."""
-        self.logger.warn("Setting values on completed_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on completed_at will NOT update the remote Canvas instance."
+        )
         self._completed_at = value
 
     @property
@@ -1054,7 +1268,9 @@ class Module(BaseModel):
     @publish_final_grade.setter
     def publish_final_grade(self, value):
         """Setter for publish_final_grade property."""
-        self.logger.warn("Setting values on publish_final_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on publish_final_grade will NOT update the remote Canvas instance."
+        )
         self._publish_final_grade = value
 
     @property
@@ -1065,7 +1281,9 @@ class Module(BaseModel):
     @published.setter
     def published(self, value):
         """Setter for published property."""
-        self.logger.warn("Setting values on published will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on published will NOT update the remote Canvas instance."
+        )
         self._published = value
 
 
@@ -1078,7 +1296,7 @@ class Completionrequirement(BaseModel):
         self._min_score = min_score
         self._completed = completed
 
-        self.logger = logging.getLogger('py3canvas.Completionrequirement')
+        self.logger = logging.getLogger("py3canvas.Completionrequirement")
 
     @property
     def type(self):
@@ -1088,7 +1306,9 @@ class Completionrequirement(BaseModel):
     @type.setter
     def type(self, value):
         """Setter for type property."""
-        self.logger.warn("Setting values on type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on type will NOT update the remote Canvas instance."
+        )
         self._type = value
 
     @property
@@ -1099,7 +1319,9 @@ class Completionrequirement(BaseModel):
     @min_score.setter
     def min_score(self, value):
         """Setter for min_score property."""
-        self.logger.warn("Setting values on min_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on min_score will NOT update the remote Canvas instance."
+        )
         self._min_score = value
 
     @property
@@ -1110,14 +1332,25 @@ class Completionrequirement(BaseModel):
     @completed.setter
     def completed(self, value):
         """Setter for completed property."""
-        self.logger.warn("Setting values on completed will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on completed will NOT update the remote Canvas instance."
+        )
         self._completed = value
 
 
 class Contentdetails(BaseModel):
     """Contentdetails Model."""
 
-    def __init__(self, points_possible=None, due_at=None, unlock_at=None, lock_at=None, locked_for_user=None, lock_explanation=None, lock_info=None):
+    def __init__(
+        self,
+        points_possible=None,
+        due_at=None,
+        unlock_at=None,
+        lock_at=None,
+        locked_for_user=None,
+        lock_explanation=None,
+        lock_info=None,
+    ):
         """Init method for Contentdetails class."""
         self._points_possible = points_possible
         self._due_at = due_at
@@ -1127,7 +1360,7 @@ class Contentdetails(BaseModel):
         self._lock_explanation = lock_explanation
         self._lock_info = lock_info
 
-        self.logger = logging.getLogger('py3canvas.Contentdetails')
+        self.logger = logging.getLogger("py3canvas.Contentdetails")
 
     @property
     def points_possible(self):
@@ -1137,7 +1370,9 @@ class Contentdetails(BaseModel):
     @points_possible.setter
     def points_possible(self, value):
         """Setter for points_possible property."""
-        self.logger.warn("Setting values on points_possible will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on points_possible will NOT update the remote Canvas instance."
+        )
         self._points_possible = value
 
     @property
@@ -1148,7 +1383,9 @@ class Contentdetails(BaseModel):
     @due_at.setter
     def due_at(self, value):
         """Setter for due_at property."""
-        self.logger.warn("Setting values on due_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on due_at will NOT update the remote Canvas instance."
+        )
         self._due_at = value
 
     @property
@@ -1159,7 +1396,9 @@ class Contentdetails(BaseModel):
     @unlock_at.setter
     def unlock_at(self, value):
         """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unlock_at will NOT update the remote Canvas instance."
+        )
         self._unlock_at = value
 
     @property
@@ -1170,7 +1409,9 @@ class Contentdetails(BaseModel):
     @lock_at.setter
     def lock_at(self, value):
         """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_at will NOT update the remote Canvas instance."
+        )
         self._lock_at = value
 
     @property
@@ -1181,7 +1422,9 @@ class Contentdetails(BaseModel):
     @locked_for_user.setter
     def locked_for_user(self, value):
         """Setter for locked_for_user property."""
-        self.logger.warn("Setting values on locked_for_user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on locked_for_user will NOT update the remote Canvas instance."
+        )
         self._locked_for_user = value
 
     @property
@@ -1192,7 +1435,9 @@ class Contentdetails(BaseModel):
     @lock_explanation.setter
     def lock_explanation(self, value):
         """Setter for lock_explanation property."""
-        self.logger.warn("Setting values on lock_explanation will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_explanation will NOT update the remote Canvas instance."
+        )
         self._lock_explanation = value
 
     @property
@@ -1203,14 +1448,33 @@ class Contentdetails(BaseModel):
     @lock_info.setter
     def lock_info(self, value):
         """Setter for lock_info property."""
-        self.logger.warn("Setting values on lock_info will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_info will NOT update the remote Canvas instance."
+        )
         self._lock_info = value
 
 
 class Moduleitem(BaseModel):
     """Moduleitem Model."""
 
-    def __init__(self, id=None, module_id=None, position=None, title=None, indent=None, type=None, content_id=None, html_url=None, url=None, page_url=None, external_url=None, new_tab=None, completion_requirement=None, content_details=None, published=None):
+    def __init__(
+        self,
+        id=None,
+        module_id=None,
+        position=None,
+        title=None,
+        indent=None,
+        type=None,
+        content_id=None,
+        html_url=None,
+        url=None,
+        page_url=None,
+        external_url=None,
+        new_tab=None,
+        completion_requirement=None,
+        content_details=None,
+        published=None,
+    ):
         """Init method for Moduleitem class."""
         self._id = id
         self._module_id = module_id
@@ -1228,7 +1492,7 @@ class Moduleitem(BaseModel):
         self._content_details = content_details
         self._published = published
 
-        self.logger = logging.getLogger('py3canvas.Moduleitem')
+        self.logger = logging.getLogger("py3canvas.Moduleitem")
 
     @property
     def id(self):
@@ -1238,7 +1502,9 @@ class Moduleitem(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -1249,7 +1515,9 @@ class Moduleitem(BaseModel):
     @module_id.setter
     def module_id(self, value):
         """Setter for module_id property."""
-        self.logger.warn("Setting values on module_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on module_id will NOT update the remote Canvas instance."
+        )
         self._module_id = value
 
     @property
@@ -1260,7 +1528,9 @@ class Moduleitem(BaseModel):
     @position.setter
     def position(self, value):
         """Setter for position property."""
-        self.logger.warn("Setting values on position will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on position will NOT update the remote Canvas instance."
+        )
         self._position = value
 
     @property
@@ -1271,7 +1541,9 @@ class Moduleitem(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -1282,7 +1554,9 @@ class Moduleitem(BaseModel):
     @indent.setter
     def indent(self, value):
         """Setter for indent property."""
-        self.logger.warn("Setting values on indent will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on indent will NOT update the remote Canvas instance."
+        )
         self._indent = value
 
     @property
@@ -1293,7 +1567,9 @@ class Moduleitem(BaseModel):
     @type.setter
     def type(self, value):
         """Setter for type property."""
-        self.logger.warn("Setting values on type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on type will NOT update the remote Canvas instance."
+        )
         self._type = value
 
     @property
@@ -1304,7 +1580,9 @@ class Moduleitem(BaseModel):
     @content_id.setter
     def content_id(self, value):
         """Setter for content_id property."""
-        self.logger.warn("Setting values on content_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on content_id will NOT update the remote Canvas instance."
+        )
         self._content_id = value
 
     @property
@@ -1315,7 +1593,9 @@ class Moduleitem(BaseModel):
     @html_url.setter
     def html_url(self, value):
         """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on html_url will NOT update the remote Canvas instance."
+        )
         self._html_url = value
 
     @property
@@ -1326,7 +1606,9 @@ class Moduleitem(BaseModel):
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
 
     @property
@@ -1337,7 +1619,9 @@ class Moduleitem(BaseModel):
     @page_url.setter
     def page_url(self, value):
         """Setter for page_url property."""
-        self.logger.warn("Setting values on page_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on page_url will NOT update the remote Canvas instance."
+        )
         self._page_url = value
 
     @property
@@ -1348,7 +1632,9 @@ class Moduleitem(BaseModel):
     @external_url.setter
     def external_url(self, value):
         """Setter for external_url property."""
-        self.logger.warn("Setting values on external_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on external_url will NOT update the remote Canvas instance."
+        )
         self._external_url = value
 
     @property
@@ -1359,7 +1645,9 @@ class Moduleitem(BaseModel):
     @new_tab.setter
     def new_tab(self, value):
         """Setter for new_tab property."""
-        self.logger.warn("Setting values on new_tab will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on new_tab will NOT update the remote Canvas instance."
+        )
         self._new_tab = value
 
     @property
@@ -1370,7 +1658,9 @@ class Moduleitem(BaseModel):
     @completion_requirement.setter
     def completion_requirement(self, value):
         """Setter for completion_requirement property."""
-        self.logger.warn("Setting values on completion_requirement will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on completion_requirement will NOT update the remote Canvas instance."
+        )
         self._completion_requirement = value
 
     @property
@@ -1381,7 +1671,9 @@ class Moduleitem(BaseModel):
     @content_details.setter
     def content_details(self, value):
         """Setter for content_details property."""
-        self.logger.warn("Setting values on content_details will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on content_details will NOT update the remote Canvas instance."
+        )
         self._content_details = value
 
     @property
@@ -1392,7 +1684,9 @@ class Moduleitem(BaseModel):
     @published.setter
     def published(self, value):
         """Setter for published property."""
-        self.logger.warn("Setting values on published will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on published will NOT update the remote Canvas instance."
+        )
         self._published = value
 
 
@@ -1406,7 +1700,7 @@ class Moduleitemsequencenode(BaseModel):
         self._next = next
         self._mastery_path = mastery_path
 
-        self.logger = logging.getLogger('py3canvas.Moduleitemsequencenode')
+        self.logger = logging.getLogger("py3canvas.Moduleitemsequencenode")
 
     @property
     def prev(self):
@@ -1416,7 +1710,9 @@ class Moduleitemsequencenode(BaseModel):
     @prev.setter
     def prev(self, value):
         """Setter for prev property."""
-        self.logger.warn("Setting values on prev will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on prev will NOT update the remote Canvas instance."
+        )
         self._prev = value
 
     @property
@@ -1427,7 +1723,9 @@ class Moduleitemsequencenode(BaseModel):
     @current.setter
     def current(self, value):
         """Setter for current property."""
-        self.logger.warn("Setting values on current will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current will NOT update the remote Canvas instance."
+        )
         self._current = value
 
     @property
@@ -1438,7 +1736,9 @@ class Moduleitemsequencenode(BaseModel):
     @next.setter
     def next(self, value):
         """Setter for next property."""
-        self.logger.warn("Setting values on next will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on next will NOT update the remote Canvas instance."
+        )
         self._next = value
 
     @property
@@ -1449,7 +1749,9 @@ class Moduleitemsequencenode(BaseModel):
     @mastery_path.setter
     def mastery_path(self, value):
         """Setter for mastery_path property."""
-        self.logger.warn("Setting values on mastery_path will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on mastery_path will NOT update the remote Canvas instance."
+        )
         self._mastery_path = value
 
 
@@ -1461,7 +1763,7 @@ class Moduleitemsequence(BaseModel):
         self._items = items
         self._modules = modules
 
-        self.logger = logging.getLogger('py3canvas.Moduleitemsequence')
+        self.logger = logging.getLogger("py3canvas.Moduleitemsequence")
 
     @property
     def items(self):
@@ -1471,7 +1773,9 @@ class Moduleitemsequence(BaseModel):
     @items.setter
     def items(self, value):
         """Setter for items property."""
-        self.logger.warn("Setting values on items will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on items will NOT update the remote Canvas instance."
+        )
         self._items = value
 
     @property
@@ -1482,6 +1786,7 @@ class Moduleitemsequence(BaseModel):
     @modules.setter
     def modules(self, value):
         """Setter for modules property."""
-        self.logger.warn("Setting values on modules will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on modules will NOT update the remote Canvas instance."
+        )
         self._modules = value
-

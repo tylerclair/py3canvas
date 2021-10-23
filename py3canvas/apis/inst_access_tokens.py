@@ -21,7 +21,7 @@ class InstAccessTokensAPI(BaseCanvasAPI):
         Create InstAccess token.
 
         Create a unique, encrypted InstAccess token.
-        
+
         Generates a different InstAccess token each time it's called, each one expires
         after a short window (1 hour).
         """
@@ -29,8 +29,18 @@ class InstAccessTokensAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("POST /api/v1/inst_access_tokens with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/inst_access_tokens".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/inst_access_tokens with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/inst_access_tokens".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Instaccesstoken(BaseModel):
@@ -40,7 +50,7 @@ class Instaccesstoken(BaseModel):
         """Init method for Instaccesstoken class."""
         self._token = token
 
-        self.logger = logging.getLogger('py3canvas.Instaccesstoken')
+        self.logger = logging.getLogger("py3canvas.Instaccesstoken")
 
     @property
     def token(self):
@@ -50,6 +60,7 @@ class Instaccesstoken(BaseModel):
     @token.setter
     def token(self, value):
         """Setter for token property."""
-        self.logger.warn("Setting values on token will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on token will NOT update the remote Canvas instance."
+        )
         self._token = value
-

@@ -32,21 +32,21 @@ class ContentSharesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - receiver_ids
         """
             IDs of users to share the content with.
         """
         data["receiver_ids"] = receiver_ids
 
-
         # REQUIRED - content_type
         """
             Type of content you are sharing.
         """
-        self._validate_enum(content_type, ["assignment", "discussion_topic", "page", "quiz", "module", "module_item"])
+        self._validate_enum(
+            content_type,
+            ["assignment", "discussion_topic", "page", "quiz", "module", "module_item"],
+        )
         data["content_type"] = content_type
-
 
         # REQUIRED - content_id
         """
@@ -54,9 +54,18 @@ class ContentSharesAPI(BaseCanvasAPI):
         """
         data["content_id"] = content_id
 
-
-        self.logger.debug("POST /api/v1/users/{user_id}/content_shares with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/users/{user_id}/content_shares".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/users/{user_id}/content_shares with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/users/{user_id}/content_shares".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def list_content_shares_sent(self, user_id):
         """
@@ -76,9 +85,18 @@ class ContentSharesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/content_shares/sent with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/content_shares/sent".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/content_shares/sent with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/content_shares/sent".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_content_shares_received(self, user_id):
         """
@@ -98,9 +116,18 @@ class ContentSharesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/content_shares/received with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/content_shares/received".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/content_shares/received with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/content_shares/received".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def get_unread_shares_count(self, user_id):
         """
@@ -120,9 +147,18 @@ class ContentSharesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/content_shares/unread_count with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/content_shares/unread_count".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/content_shares/unread_count with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/content_shares/unread_count".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def get_content_share(self, id, user_id):
         """
@@ -140,16 +176,24 @@ class ContentSharesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/content_shares/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/content_shares/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/content_shares/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/content_shares/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def remove_content_share(self, id, user_id):
         """
@@ -168,16 +212,24 @@ class ContentSharesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/users/{user_id}/content_shares/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/users/{user_id}/content_shares/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/users/{user_id}/content_shares/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/users/{user_id}/content_shares/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def add_users_to_content_share(self, id, user_id, receiver_ids=None):
         """
@@ -195,13 +247,11 @@ class ContentSharesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - receiver_ids
         """
@@ -210,9 +260,18 @@ class ContentSharesAPI(BaseCanvasAPI):
         if receiver_ids is not None:
             data["receiver_ids"] = receiver_ids
 
-
-        self.logger.debug("POST /api/v1/users/{user_id}/content_shares/{id}/add_users with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/users/{user_id}/content_shares/{id}/add_users".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/users/{user_id}/content_shares/{id}/add_users with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/users/{user_id}/content_shares/{id}/add_users".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def update_content_share(self, id, user_id, read_state=None):
         """
@@ -230,13 +289,11 @@ class ContentSharesAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - read_state
         """
@@ -246,16 +303,38 @@ class ContentSharesAPI(BaseCanvasAPI):
             self._validate_enum(read_state, ["read", "unread"])
             data["read_state"] = read_state
 
-
-        self.logger.debug("PUT /api/v1/users/{user_id}/content_shares/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/users/{user_id}/content_shares/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/users/{user_id}/content_shares/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/users/{user_id}/content_shares/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Contentshare(BaseModel):
     """Contentshare Model.
     Content shared between users"""
 
-    def __init__(self, id=None, name=None, content_type=None, created_at=None, updated_at=None, user_id=None, sender=None, receivers=None, source_course=None, read_state=None, content_export=None):
+    def __init__(
+        self,
+        id=None,
+        name=None,
+        content_type=None,
+        created_at=None,
+        updated_at=None,
+        user_id=None,
+        sender=None,
+        receivers=None,
+        source_course=None,
+        read_state=None,
+        content_export=None,
+    ):
         """Init method for Contentshare class."""
         self._id = id
         self._name = name
@@ -269,7 +348,7 @@ class Contentshare(BaseModel):
         self._read_state = read_state
         self._content_export = content_export
 
-        self.logger = logging.getLogger('py3canvas.Contentshare')
+        self.logger = logging.getLogger("py3canvas.Contentshare")
 
     @property
     def id(self):
@@ -279,7 +358,9 @@ class Contentshare(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -290,7 +371,9 @@ class Contentshare(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -301,7 +384,9 @@ class Contentshare(BaseModel):
     @content_type.setter
     def content_type(self, value):
         """Setter for content_type property."""
-        self.logger.warn("Setting values on content_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on content_type will NOT update the remote Canvas instance."
+        )
         self._content_type = value
 
     @property
@@ -312,7 +397,9 @@ class Contentshare(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -323,7 +410,9 @@ class Contentshare(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
 
     @property
@@ -334,7 +423,9 @@ class Contentshare(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -345,7 +436,9 @@ class Contentshare(BaseModel):
     @sender.setter
     def sender(self, value):
         """Setter for sender property."""
-        self.logger.warn("Setting values on sender will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sender will NOT update the remote Canvas instance."
+        )
         self._sender = value
 
     @property
@@ -356,7 +449,9 @@ class Contentshare(BaseModel):
     @receivers.setter
     def receivers(self, value):
         """Setter for receivers property."""
-        self.logger.warn("Setting values on receivers will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on receivers will NOT update the remote Canvas instance."
+        )
         self._receivers = value
 
     @property
@@ -367,7 +462,9 @@ class Contentshare(BaseModel):
     @source_course.setter
     def source_course(self, value):
         """Setter for source_course property."""
-        self.logger.warn("Setting values on source_course will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on source_course will NOT update the remote Canvas instance."
+        )
         self._source_course = value
 
     @property
@@ -378,7 +475,9 @@ class Contentshare(BaseModel):
     @read_state.setter
     def read_state(self, value):
         """Setter for read_state property."""
-        self.logger.warn("Setting values on read_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on read_state will NOT update the remote Canvas instance."
+        )
         self._read_state = value
 
     @property
@@ -389,6 +488,7 @@ class Contentshare(BaseModel):
     @content_export.setter
     def content_export(self, value):
         """Setter for content_export property."""
-        self.logger.warn("Setting values on content_export will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on content_export will NOT update the remote Canvas instance."
+        )
         self._content_export = value
-

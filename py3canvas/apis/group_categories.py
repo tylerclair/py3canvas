@@ -32,9 +32,18 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/group_categories with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/group_categories".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/group_categories with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/group_categories".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_group_categories_for_context_courses(self, course_id):
         """
@@ -52,9 +61,18 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/group_categories with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/group_categories".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/group_categories with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/group_categories".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def get_single_group_category(self, group_category_id):
         """
@@ -73,11 +91,30 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["group_category_id"] = group_category_id
 
+        self.logger.debug(
+            "GET /api/v1/group_categories/{group_category_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/group_categories/{group_category_id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/group_categories/{group_category_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/group_categories/{group_category_id}".format(**path), data=data, params=params, single_item=True)
-
-    def create_group_category_accounts(self, account_id, name, auto_leader=None, create_group_count=None, group_limit=None, self_signup=None, sis_group_category_id=None, split_group_count=None):
+    def create_group_category_accounts(
+        self,
+        account_id,
+        name,
+        auto_leader=None,
+        create_group_count=None,
+        group_limit=None,
+        self_signup=None,
+        sis_group_category_id=None,
+        split_group_count=None,
+    ):
         """
         Create a Group Category.
 
@@ -93,13 +130,11 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - name
         """
             Name of the group category
         """
         data["name"] = name
-
 
         # OPTIONAL - self_signup
         """
@@ -113,7 +148,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
             self._validate_enum(self_signup, ["enabled", "restricted"])
             data["self_signup"] = self_signup
 
-
         # OPTIONAL - auto_leader
         """
             Assigns group leaders automatically when generating and allocating students to groups
@@ -125,7 +159,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
             self._validate_enum(auto_leader, ["first", "random"])
             data["auto_leader"] = auto_leader
 
-
         # OPTIONAL - group_limit
         """
             Limit the maximum number of users in each group (Course Only). Requires
@@ -134,7 +167,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if group_limit is not None:
             data["group_limit"] = group_limit
 
-
         # OPTIONAL - sis_group_category_id
         """
             The unique SIS identifier.
@@ -142,14 +174,12 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if sis_group_category_id is not None:
             data["sis_group_category_id"] = sis_group_category_id
 
-
         # OPTIONAL - create_group_count
         """
             Create this number of groups (Course Only).
         """
         if create_group_count is not None:
             data["create_group_count"] = create_group_count
-
 
         # OPTIONAL - split_group_count
         """
@@ -163,11 +193,30 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if split_group_count is not None:
             data["split_group_count"] = split_group_count
 
+        self.logger.debug(
+            "POST /api/v1/accounts/{account_id}/group_categories with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/accounts/{account_id}/group_categories".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/accounts/{account_id}/group_categories with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/group_categories".format(**path), data=data, params=params, single_item=True)
-
-    def create_group_category_courses(self, course_id, name, auto_leader=None, create_group_count=None, group_limit=None, self_signup=None, sis_group_category_id=None, split_group_count=None):
+    def create_group_category_courses(
+        self,
+        course_id,
+        name,
+        auto_leader=None,
+        create_group_count=None,
+        group_limit=None,
+        self_signup=None,
+        sis_group_category_id=None,
+        split_group_count=None,
+    ):
         """
         Create a Group Category.
 
@@ -183,13 +232,11 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - name
         """
             Name of the group category
         """
         data["name"] = name
-
 
         # OPTIONAL - self_signup
         """
@@ -203,7 +250,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
             self._validate_enum(self_signup, ["enabled", "restricted"])
             data["self_signup"] = self_signup
 
-
         # OPTIONAL - auto_leader
         """
             Assigns group leaders automatically when generating and allocating students to groups
@@ -215,7 +261,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
             self._validate_enum(auto_leader, ["first", "random"])
             data["auto_leader"] = auto_leader
 
-
         # OPTIONAL - group_limit
         """
             Limit the maximum number of users in each group (Course Only). Requires
@@ -224,7 +269,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if group_limit is not None:
             data["group_limit"] = group_limit
 
-
         # OPTIONAL - sis_group_category_id
         """
             The unique SIS identifier.
@@ -232,14 +276,12 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if sis_group_category_id is not None:
             data["sis_group_category_id"] = sis_group_category_id
 
-
         # OPTIONAL - create_group_count
         """
             Create this number of groups (Course Only).
         """
         if create_group_count is not None:
             data["create_group_count"] = create_group_count
-
 
         # OPTIONAL - split_group_count
         """
@@ -253,16 +295,25 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if split_group_count is not None:
             data["split_group_count"] = split_group_count
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/group_categories with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/group_categories".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/group_categories with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/group_categories".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def import_category_groups(self, group_category_id, attachment=None):
         """
         Import category groups.
 
         Create Groups in a Group Category through a CSV import
-        
+
         For more information on the format that's expected here, please see the
         "Group Category CSV" section in the API docs.
         """
@@ -275,7 +326,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
             ID
         """
         path["group_category_id"] = group_category_id
-
 
         # OPTIONAL - attachment
         """
@@ -302,11 +352,30 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if attachment is not None:
             data["attachment"] = attachment
 
+        self.logger.debug(
+            "POST /api/v1/group_categories/{group_category_id}/import with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/group_categories/{group_category_id}/import".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/group_categories/{group_category_id}/import with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/group_categories/{group_category_id}/import".format(**path), data=data, params=params, single_item=True)
-
-    def update_group_category(self, group_category_id, auto_leader=None, create_group_count=None, group_limit=None, name=None, self_signup=None, sis_group_category_id=None, split_group_count=None):
+    def update_group_category(
+        self,
+        group_category_id,
+        auto_leader=None,
+        create_group_count=None,
+        group_limit=None,
+        name=None,
+        self_signup=None,
+        sis_group_category_id=None,
+        split_group_count=None,
+    ):
         """
         Update a Group Category.
 
@@ -322,14 +391,12 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["group_category_id"] = group_category_id
 
-
         # OPTIONAL - name
         """
             Name of the group category
         """
         if name is not None:
             data["name"] = name
-
 
         # OPTIONAL - self_signup
         """
@@ -343,7 +410,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
             self._validate_enum(self_signup, ["enabled", "restricted"])
             data["self_signup"] = self_signup
 
-
         # OPTIONAL - auto_leader
         """
             Assigns group leaders automatically when generating and allocating students to groups
@@ -355,7 +421,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
             self._validate_enum(auto_leader, ["first", "random"])
             data["auto_leader"] = auto_leader
 
-
         # OPTIONAL - group_limit
         """
             Limit the maximum number of users in each group (Course Only). Requires
@@ -364,7 +429,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if group_limit is not None:
             data["group_limit"] = group_limit
 
-
         # OPTIONAL - sis_group_category_id
         """
             The unique SIS identifier.
@@ -372,14 +436,12 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if sis_group_category_id is not None:
             data["sis_group_category_id"] = sis_group_category_id
 
-
         # OPTIONAL - create_group_count
         """
             Create this number of groups (Course Only).
         """
         if create_group_count is not None:
             data["create_group_count"] = create_group_count
-
 
         # OPTIONAL - split_group_count
         """
@@ -393,9 +455,18 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if split_group_count is not None:
             data["split_group_count"] = split_group_count
 
-
-        self.logger.debug("PUT /api/v1/group_categories/{group_category_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/group_categories/{group_category_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/group_categories/{group_category_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/group_categories/{group_category_id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_group_category(self, group_category_id):
         """
@@ -414,9 +485,18 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["group_category_id"] = group_category_id
 
-
-        self.logger.debug("DELETE /api/v1/group_categories/{group_category_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/group_categories/{group_category_id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/group_categories/{group_category_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/group_categories/{group_category_id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_groups_in_group_category(self, group_category_id):
         """
@@ -434,9 +514,18 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["group_category_id"] = group_category_id
 
-
-        self.logger.debug("GET /api/v1/group_categories/{group_category_id}/groups with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/group_categories/{group_category_id}/groups".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/group_categories/{group_category_id}/groups with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/group_categories/{group_category_id}/groups".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def export_groups_in_and_users_in_category(self, group_category_id):
         """
@@ -454,11 +543,22 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["group_category_id"] = group_category_id
 
+        self.logger.debug(
+            "GET /api/v1/group_categories/{group_category_id}/export with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/group_categories/{group_category_id}/export".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/group_categories/{group_category_id}/export with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/group_categories/{group_category_id}/export".format(**path), data=data, params=params, no_data=True)
-
-    def list_users_in_group_category(self, group_category_id, search_term=None, unassigned=None):
+    def list_users_in_group_category(
+        self, group_category_id, search_term=None, unassigned=None
+    ):
         """
         List users in group category.
 
@@ -474,7 +574,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["group_category_id"] = group_category_id
 
-
         # OPTIONAL - search_term
         """
             The partial name or full ID of the users to match and return in the results
@@ -482,7 +581,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         if search_term is not None:
             params["search_term"] = search_term
-
 
         # OPTIONAL - unassigned
         """
@@ -492,9 +590,18 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if unassigned is not None:
             params["unassigned"] = unassigned
 
-
-        self.logger.debug("GET /api/v1/group_categories/{group_category_id}/users with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/group_categories/{group_category_id}/users".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/group_categories/{group_category_id}/users with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/group_categories/{group_category_id}/users".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def assign_unassigned_members(self, group_category_id, sync=None):
         """
@@ -513,7 +620,6 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         """
         path["group_category_id"] = group_category_id
 
-
         # OPTIONAL - sync
         """
             The assigning is done asynchronously by default. If you would like to
@@ -523,15 +629,39 @@ class GroupCategoriesAPI(BaseCanvasAPI):
         if sync is not None:
             data["sync"] = sync
 
-
-        self.logger.debug("POST /api/v1/group_categories/{group_category_id}/assign_unassigned_members with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/group_categories/{group_category_id}/assign_unassigned_members".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/group_categories/{group_category_id}/assign_unassigned_members with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/group_categories/{group_category_id}/assign_unassigned_members".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Groupcategory(BaseModel):
     """Groupcategory Model."""
 
-    def __init__(self, id=None, name=None, role=None, self_signup=None, auto_leader=None, context_type=None, account_id=None, group_limit=None, sis_group_category_id=None, sis_import_id=None, progress=None):
+    def __init__(
+        self,
+        id=None,
+        name=None,
+        role=None,
+        self_signup=None,
+        auto_leader=None,
+        context_type=None,
+        account_id=None,
+        group_limit=None,
+        sis_group_category_id=None,
+        sis_import_id=None,
+        progress=None,
+    ):
         """Init method for Groupcategory class."""
         self._id = id
         self._name = name
@@ -545,7 +675,7 @@ class Groupcategory(BaseModel):
         self._sis_import_id = sis_import_id
         self._progress = progress
 
-        self.logger = logging.getLogger('py3canvas.Groupcategory')
+        self.logger = logging.getLogger("py3canvas.Groupcategory")
 
     @property
     def id(self):
@@ -555,7 +685,9 @@ class Groupcategory(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -566,7 +698,9 @@ class Groupcategory(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -577,7 +711,9 @@ class Groupcategory(BaseModel):
     @role.setter
     def role(self, value):
         """Setter for role property."""
-        self.logger.warn("Setting values on role will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on role will NOT update the remote Canvas instance."
+        )
         self._role = value
 
     @property
@@ -588,7 +724,9 @@ class Groupcategory(BaseModel):
     @self_signup.setter
     def self_signup(self, value):
         """Setter for self_signup property."""
-        self.logger.warn("Setting values on self_signup will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on self_signup will NOT update the remote Canvas instance."
+        )
         self._self_signup = value
 
     @property
@@ -599,7 +737,9 @@ class Groupcategory(BaseModel):
     @auto_leader.setter
     def auto_leader(self, value):
         """Setter for auto_leader property."""
-        self.logger.warn("Setting values on auto_leader will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on auto_leader will NOT update the remote Canvas instance."
+        )
         self._auto_leader = value
 
     @property
@@ -610,7 +750,9 @@ class Groupcategory(BaseModel):
     @context_type.setter
     def context_type(self, value):
         """Setter for context_type property."""
-        self.logger.warn("Setting values on context_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_type will NOT update the remote Canvas instance."
+        )
         self._context_type = value
 
     @property
@@ -621,7 +763,9 @@ class Groupcategory(BaseModel):
     @account_id.setter
     def account_id(self, value):
         """Setter for account_id property."""
-        self.logger.warn("Setting values on account_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on account_id will NOT update the remote Canvas instance."
+        )
         self._account_id = value
 
     @property
@@ -632,7 +776,9 @@ class Groupcategory(BaseModel):
     @group_limit.setter
     def group_limit(self, value):
         """Setter for group_limit property."""
-        self.logger.warn("Setting values on group_limit will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on group_limit will NOT update the remote Canvas instance."
+        )
         self._group_limit = value
 
     @property
@@ -643,7 +789,9 @@ class Groupcategory(BaseModel):
     @sis_group_category_id.setter
     def sis_group_category_id(self, value):
         """Setter for sis_group_category_id property."""
-        self.logger.warn("Setting values on sis_group_category_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_group_category_id will NOT update the remote Canvas instance."
+        )
         self._sis_group_category_id = value
 
     @property
@@ -654,7 +802,9 @@ class Groupcategory(BaseModel):
     @sis_import_id.setter
     def sis_import_id(self, value):
         """Setter for sis_import_id property."""
-        self.logger.warn("Setting values on sis_import_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_import_id will NOT update the remote Canvas instance."
+        )
         self._sis_import_id = value
 
     @property
@@ -665,6 +815,7 @@ class Groupcategory(BaseModel):
     @progress.setter
     def progress(self, value):
         """Setter for progress property."""
-        self.logger.warn("Setting values on progress will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on progress will NOT update the remote Canvas instance."
+        )
         self._progress = value
-

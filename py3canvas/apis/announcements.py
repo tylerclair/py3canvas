@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class AnnouncementsAPI(BaseCanvasAPI):
     """Announcements API Version 1.0."""
 
@@ -16,7 +15,15 @@ class AnnouncementsAPI(BaseCanvasAPI):
         super(AnnouncementsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.AnnouncementsAPI")
 
-    def list_announcements(self, context_codes, active_only=None, end_date=None, include=None, latest_only=None, start_date=None):
+    def list_announcements(
+        self,
+        context_codes,
+        active_only=None,
+        end_date=None,
+        include=None,
+        latest_only=None,
+        start_date=None,
+    ):
         """
         List announcements.
 
@@ -36,7 +43,6 @@ class AnnouncementsAPI(BaseCanvasAPI):
         """
         params["context_codes"] = context_codes
 
-
         # OPTIONAL - start_date
         """
             Only return announcements posted since the start_date (inclusive).
@@ -44,7 +50,6 @@ class AnnouncementsAPI(BaseCanvasAPI):
         """
         if start_date is not None:
             params["start_date"] = start_date
-
 
         # OPTIONAL - end_date
         """
@@ -54,7 +59,6 @@ class AnnouncementsAPI(BaseCanvasAPI):
         """
         if end_date is not None:
             params["end_date"] = end_date
-
 
         # OPTIONAL - active_only
         """
@@ -67,7 +71,6 @@ class AnnouncementsAPI(BaseCanvasAPI):
         if active_only is not None:
             params["active_only"] = active_only
 
-
         # OPTIONAL - latest_only
         """
             Only return the latest announcement for each associated context.
@@ -77,7 +80,6 @@ class AnnouncementsAPI(BaseCanvasAPI):
         """
         if latest_only is not None:
             params["latest_only"] = latest_only
-
 
         # OPTIONAL - include
         """
@@ -96,7 +98,15 @@ class AnnouncementsAPI(BaseCanvasAPI):
         if include is not None:
             params["include"] = include
 
-
-        self.logger.debug("GET /api/v1/announcements with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/announcements".format(**path), data=data, params=params, all_pages=True)
-
+        self.logger.debug(
+            "GET /api/v1/announcements with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/announcements".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )

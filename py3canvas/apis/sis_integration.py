@@ -16,14 +16,21 @@ class SisIntegrationAPI(BaseCanvasAPI):
         super(SisIntegrationAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.SisIntegrationAPI")
 
-    def retrieve_assignments_enabled_for_grade_export_to_sis_accounts(self, account_id, course_id=None, ends_after=None, include=None, starts_before=None):
+    def retrieve_assignments_enabled_for_grade_export_to_sis_accounts(
+        self,
+        account_id,
+        course_id=None,
+        ends_after=None,
+        include=None,
+        starts_before=None,
+    ):
         """
         Retrieve assignments enabled for grade export to SIS.
 
         Retrieve a list of published assignments flagged as "post_to_sis".
         See the Assignments API for more details on assignments.
         Assignment group and section information are included for convenience.
-        
+
         Each section includes course information for the origin course and the
         cross-listed course, if applicable. The `origin_course` is the course to
         which the section belongs or the course from which the section was
@@ -31,18 +38,18 @@ class SisIntegrationAPI(BaseCanvasAPI):
         performing integration work. The `xlist_course` is provided for consistency
         and is only present when the section has been cross-listed.
         See Sections API and Courses Api for me details.
-        
+
         The `override` is only provided if the Differentiated Assignments course
         feature is turned on and the assignment has an override for that section.
         When there is an override for the assignment the override object's
         keys/values can be merged with the top level assignment object to create a
         view of the assignment object specific to that section.
         See Assignments api for more information on assignment overrides.
-        
+
         restricts to courses that start before this date (if they have a start date)
         restricts to courses that end after this date (if they have an end date)
         information to include.
-        
+
           "student_overrides":: returns individual student override information
         """
         path = {}
@@ -55,14 +62,12 @@ class SisIntegrationAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # OPTIONAL - course_id
         """
             The ID of the course to query.
         """
         if course_id is not None:
             params["course_id"] = course_id
-
 
         # OPTIONAL - starts_before
         """
@@ -71,10 +76,11 @@ class SisIntegrationAPI(BaseCanvasAPI):
         if starts_before is not None:
             if issubclass(starts_before.__class__, str):
                 starts_before = self._validate_iso8601_string(starts_before)
-            elif issubclass(starts_before.__class__, date) or issubclass(starts_before.__class__, datetime):
-                starts_before = starts_before.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(starts_before.__class__, date) or issubclass(
+                starts_before.__class__, datetime
+            ):
+                starts_before = starts_before.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["starts_before"] = starts_before
-
 
         # OPTIONAL - ends_after
         """
@@ -83,10 +89,11 @@ class SisIntegrationAPI(BaseCanvasAPI):
         if ends_after is not None:
             if issubclass(ends_after.__class__, str):
                 ends_after = self._validate_iso8601_string(ends_after)
-            elif issubclass(ends_after.__class__, date) or issubclass(ends_after.__class__, datetime):
-                ends_after = ends_after.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(ends_after.__class__, date) or issubclass(
+                ends_after.__class__, datetime
+            ):
+                ends_after = ends_after.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["ends_after"] = ends_after
-
 
         # OPTIONAL - include
         """
@@ -96,18 +103,34 @@ class SisIntegrationAPI(BaseCanvasAPI):
             self._validate_enum(include, ["student_overrides"])
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/sis/accounts/{account_id}/assignments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/sis/accounts/{account_id}/assignments".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/sis/accounts/{account_id}/assignments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/sis/accounts/{account_id}/assignments".format(**path), data=data, params=params, no_data=True)
-
-    def retrieve_assignments_enabled_for_grade_export_to_sis_courses(self, course_id, account_id=None, ends_after=None, include=None, starts_before=None):
+    def retrieve_assignments_enabled_for_grade_export_to_sis_courses(
+        self,
+        course_id,
+        account_id=None,
+        ends_after=None,
+        include=None,
+        starts_before=None,
+    ):
         """
         Retrieve assignments enabled for grade export to SIS.
 
         Retrieve a list of published assignments flagged as "post_to_sis".
         See the Assignments API for more details on assignments.
         Assignment group and section information are included for convenience.
-        
+
         Each section includes course information for the origin course and the
         cross-listed course, if applicable. The `origin_course` is the course to
         which the section belongs or the course from which the section was
@@ -115,18 +138,18 @@ class SisIntegrationAPI(BaseCanvasAPI):
         performing integration work. The `xlist_course` is provided for consistency
         and is only present when the section has been cross-listed.
         See Sections API and Courses Api for me details.
-        
+
         The `override` is only provided if the Differentiated Assignments course
         feature is turned on and the assignment has an override for that section.
         When there is an override for the assignment the override object's
         keys/values can be merged with the top level assignment object to create a
         view of the assignment object specific to that section.
         See Assignments api for more information on assignment overrides.
-        
+
         restricts to courses that start before this date (if they have a start date)
         restricts to courses that end after this date (if they have an end date)
         information to include.
-        
+
           "student_overrides":: returns individual student override information
         """
         path = {}
@@ -140,13 +163,11 @@ class SisIntegrationAPI(BaseCanvasAPI):
         if account_id is not None:
             params["account_id"] = account_id
 
-
         # REQUIRED - PATH - course_id
         """
             The ID of the course to query.
         """
         path["course_id"] = course_id
-
 
         # OPTIONAL - starts_before
         """
@@ -155,10 +176,11 @@ class SisIntegrationAPI(BaseCanvasAPI):
         if starts_before is not None:
             if issubclass(starts_before.__class__, str):
                 starts_before = self._validate_iso8601_string(starts_before)
-            elif issubclass(starts_before.__class__, date) or issubclass(starts_before.__class__, datetime):
-                starts_before = starts_before.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(starts_before.__class__, date) or issubclass(
+                starts_before.__class__, datetime
+            ):
+                starts_before = starts_before.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["starts_before"] = starts_before
-
 
         # OPTIONAL - ends_after
         """
@@ -167,10 +189,11 @@ class SisIntegrationAPI(BaseCanvasAPI):
         if ends_after is not None:
             if issubclass(ends_after.__class__, str):
                 ends_after = self._validate_iso8601_string(ends_after)
-            elif issubclass(ends_after.__class__, date) or issubclass(ends_after.__class__, datetime):
-                ends_after = ends_after.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(ends_after.__class__, date) or issubclass(
+                ends_after.__class__, datetime
+            ):
+                ends_after = ends_after.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["ends_after"] = ends_after
-
 
         # OPTIONAL - include
         """
@@ -180,22 +203,33 @@ class SisIntegrationAPI(BaseCanvasAPI):
             self._validate_enum(include, ["student_overrides"])
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/sis/courses/{course_id}/assignments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/sis/courses/{course_id}/assignments".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/sis/courses/{course_id}/assignments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/sis/courses/{course_id}/assignments".format(**path), data=data, params=params, no_data=True)
-
-    def disable_assignments_currently_enabled_for_grade_export_to_sis(self, course_id, grading_period_id=None):
+    def disable_assignments_currently_enabled_for_grade_export_to_sis(
+        self, course_id, grading_period_id=None
+    ):
         """
         Disable assignments currently enabled for grade export to SIS.
 
         Disable all assignments flagged as "post_to_sis", with the option of making it
         specific to a grading period, in a course.
-        
+
         On success, the response will be 204 No Content with an empty body.
-        
+
         On failure, the response will be 400 Bad Request with a body of a specific
         message.
-        
+
         For disabling assignments in a specific grading period
         """
         path = {}
@@ -208,7 +242,6 @@ class SisIntegrationAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - grading_period_id
         """
             The ID of the grading period.
@@ -216,16 +249,42 @@ class SisIntegrationAPI(BaseCanvasAPI):
         if grading_period_id is not None:
             data["grading_period_id"] = grading_period_id
 
-
-        self.logger.debug("PUT /api/sis/courses/{course_id}/disable_post_to_sis with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/sis/courses/{course_id}/disable_post_to_sis".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/sis/courses/{course_id}/disable_post_to_sis with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/sis/courses/{course_id}/disable_post_to_sis".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Sisassignment(BaseModel):
     """Sisassignment Model.
     Assignments that have post_to_sis enabled with other objects for convenience"""
 
-    def __init__(self, id=None, course_id=None, name=None, created_at=None, due_at=None, unlock_at=None, lock_at=None, points_possible=None, submission_types=None, integration_id=None, integration_data=None, include_in_final_grade=None, assignment_group=None, sections=None, user_overrides=None):
+    def __init__(
+        self,
+        id=None,
+        course_id=None,
+        name=None,
+        created_at=None,
+        due_at=None,
+        unlock_at=None,
+        lock_at=None,
+        points_possible=None,
+        submission_types=None,
+        integration_id=None,
+        integration_data=None,
+        include_in_final_grade=None,
+        assignment_group=None,
+        sections=None,
+        user_overrides=None,
+    ):
         """Init method for Sisassignment class."""
         self._id = id
         self._course_id = course_id
@@ -243,7 +302,7 @@ class Sisassignment(BaseModel):
         self._sections = sections
         self._user_overrides = user_overrides
 
-        self.logger = logging.getLogger('py3canvas.Sisassignment')
+        self.logger = logging.getLogger("py3canvas.Sisassignment")
 
     @property
     def id(self):
@@ -253,7 +312,9 @@ class Sisassignment(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -264,7 +325,9 @@ class Sisassignment(BaseModel):
     @course_id.setter
     def course_id(self, value):
         """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_id will NOT update the remote Canvas instance."
+        )
         self._course_id = value
 
     @property
@@ -275,7 +338,9 @@ class Sisassignment(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -286,7 +351,9 @@ class Sisassignment(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -297,7 +364,9 @@ class Sisassignment(BaseModel):
     @due_at.setter
     def due_at(self, value):
         """Setter for due_at property."""
-        self.logger.warn("Setting values on due_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on due_at will NOT update the remote Canvas instance."
+        )
         self._due_at = value
 
     @property
@@ -308,7 +377,9 @@ class Sisassignment(BaseModel):
     @unlock_at.setter
     def unlock_at(self, value):
         """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unlock_at will NOT update the remote Canvas instance."
+        )
         self._unlock_at = value
 
     @property
@@ -319,7 +390,9 @@ class Sisassignment(BaseModel):
     @lock_at.setter
     def lock_at(self, value):
         """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_at will NOT update the remote Canvas instance."
+        )
         self._lock_at = value
 
     @property
@@ -330,7 +403,9 @@ class Sisassignment(BaseModel):
     @points_possible.setter
     def points_possible(self, value):
         """Setter for points_possible property."""
-        self.logger.warn("Setting values on points_possible will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on points_possible will NOT update the remote Canvas instance."
+        )
         self._points_possible = value
 
     @property
@@ -341,7 +416,9 @@ class Sisassignment(BaseModel):
     @submission_types.setter
     def submission_types(self, value):
         """Setter for submission_types property."""
-        self.logger.warn("Setting values on submission_types will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submission_types will NOT update the remote Canvas instance."
+        )
         self._submission_types = value
 
     @property
@@ -352,7 +429,9 @@ class Sisassignment(BaseModel):
     @integration_id.setter
     def integration_id(self, value):
         """Setter for integration_id property."""
-        self.logger.warn("Setting values on integration_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on integration_id will NOT update the remote Canvas instance."
+        )
         self._integration_id = value
 
     @property
@@ -363,7 +442,9 @@ class Sisassignment(BaseModel):
     @integration_data.setter
     def integration_data(self, value):
         """Setter for integration_data property."""
-        self.logger.warn("Setting values on integration_data will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on integration_data will NOT update the remote Canvas instance."
+        )
         self._integration_data = value
 
     @property
@@ -374,7 +455,9 @@ class Sisassignment(BaseModel):
     @include_in_final_grade.setter
     def include_in_final_grade(self, value):
         """Setter for include_in_final_grade property."""
-        self.logger.warn("Setting values on include_in_final_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on include_in_final_grade will NOT update the remote Canvas instance."
+        )
         self._include_in_final_grade = value
 
     @property
@@ -385,7 +468,9 @@ class Sisassignment(BaseModel):
     @assignment_group.setter
     def assignment_group(self, value):
         """Setter for assignment_group property."""
-        self.logger.warn("Setting values on assignment_group will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assignment_group will NOT update the remote Canvas instance."
+        )
         self._assignment_group = value
 
     @property
@@ -396,7 +481,9 @@ class Sisassignment(BaseModel):
     @sections.setter
     def sections(self, value):
         """Setter for sections property."""
-        self.logger.warn("Setting values on sections will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sections will NOT update the remote Canvas instance."
+        )
         self._sections = value
 
     @property
@@ -407,7 +494,9 @@ class Sisassignment(BaseModel):
     @user_overrides.setter
     def user_overrides(self, value):
         """Setter for user_overrides property."""
-        self.logger.warn("Setting values on user_overrides will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_overrides will NOT update the remote Canvas instance."
+        )
         self._user_overrides = value
 
 
@@ -415,7 +504,14 @@ class Assignmentgroupattributes(BaseModel):
     """Assignmentgroupattributes Model.
     Some of the attributes of an Assignment Group. See Assignments API for more details"""
 
-    def __init__(self, id=None, name=None, group_weight=None, sis_source_id=None, integration_data=None):
+    def __init__(
+        self,
+        id=None,
+        name=None,
+        group_weight=None,
+        sis_source_id=None,
+        integration_data=None,
+    ):
         """Init method for Assignmentgroupattributes class."""
         self._id = id
         self._name = name
@@ -423,7 +519,7 @@ class Assignmentgroupattributes(BaseModel):
         self._sis_source_id = sis_source_id
         self._integration_data = integration_data
 
-        self.logger = logging.getLogger('py3canvas.Assignmentgroupattributes')
+        self.logger = logging.getLogger("py3canvas.Assignmentgroupattributes")
 
     @property
     def id(self):
@@ -433,7 +529,9 @@ class Assignmentgroupattributes(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -444,7 +542,9 @@ class Assignmentgroupattributes(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -455,7 +555,9 @@ class Assignmentgroupattributes(BaseModel):
     @group_weight.setter
     def group_weight(self, value):
         """Setter for group_weight property."""
-        self.logger.warn("Setting values on group_weight will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on group_weight will NOT update the remote Canvas instance."
+        )
         self._group_weight = value
 
     @property
@@ -466,7 +568,9 @@ class Assignmentgroupattributes(BaseModel):
     @sis_source_id.setter
     def sis_source_id(self, value):
         """Setter for sis_source_id property."""
-        self.logger.warn("Setting values on sis_source_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_source_id will NOT update the remote Canvas instance."
+        )
         self._sis_source_id = value
 
     @property
@@ -477,7 +581,9 @@ class Assignmentgroupattributes(BaseModel):
     @integration_data.setter
     def integration_data(self, value):
         """Setter for integration_data property."""
-        self.logger.warn("Setting values on integration_data will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on integration_data will NOT update the remote Canvas instance."
+        )
         self._integration_data = value
 
 
@@ -485,7 +591,16 @@ class Sectionattributes(BaseModel):
     """Sectionattributes Model.
     Some of the attributes of a section. For more details see Sections API."""
 
-    def __init__(self, id=None, name=None, sis_id=None, integration_id=None, origin_course=None, xlist_course=None, override=None):
+    def __init__(
+        self,
+        id=None,
+        name=None,
+        sis_id=None,
+        integration_id=None,
+        origin_course=None,
+        xlist_course=None,
+        override=None,
+    ):
         """Init method for Sectionattributes class."""
         self._id = id
         self._name = name
@@ -495,7 +610,7 @@ class Sectionattributes(BaseModel):
         self._xlist_course = xlist_course
         self._override = override
 
-        self.logger = logging.getLogger('py3canvas.Sectionattributes')
+        self.logger = logging.getLogger("py3canvas.Sectionattributes")
 
     @property
     def id(self):
@@ -505,7 +620,9 @@ class Sectionattributes(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -516,7 +633,9 @@ class Sectionattributes(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -527,7 +646,9 @@ class Sectionattributes(BaseModel):
     @sis_id.setter
     def sis_id(self, value):
         """Setter for sis_id property."""
-        self.logger.warn("Setting values on sis_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_id will NOT update the remote Canvas instance."
+        )
         self._sis_id = value
 
     @property
@@ -538,7 +659,9 @@ class Sectionattributes(BaseModel):
     @integration_id.setter
     def integration_id(self, value):
         """Setter for integration_id property."""
-        self.logger.warn("Setting values on integration_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on integration_id will NOT update the remote Canvas instance."
+        )
         self._integration_id = value
 
     @property
@@ -549,7 +672,9 @@ class Sectionattributes(BaseModel):
     @origin_course.setter
     def origin_course(self, value):
         """Setter for origin_course property."""
-        self.logger.warn("Setting values on origin_course will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on origin_course will NOT update the remote Canvas instance."
+        )
         self._origin_course = value
 
     @property
@@ -560,7 +685,9 @@ class Sectionattributes(BaseModel):
     @xlist_course.setter
     def xlist_course(self, value):
         """Setter for xlist_course property."""
-        self.logger.warn("Setting values on xlist_course will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on xlist_course will NOT update the remote Canvas instance."
+        )
         self._xlist_course = value
 
     @property
@@ -571,7 +698,9 @@ class Sectionattributes(BaseModel):
     @override.setter
     def override(self, value):
         """Setter for override property."""
-        self.logger.warn("Setting values on override will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on override will NOT update the remote Canvas instance."
+        )
         self._override = value
 
 
@@ -586,7 +715,7 @@ class Courseattributes(BaseModel):
         self._sis_id = sis_id
         self._integration_id = integration_id
 
-        self.logger = logging.getLogger('py3canvas.Courseattributes')
+        self.logger = logging.getLogger("py3canvas.Courseattributes")
 
     @property
     def id(self):
@@ -596,7 +725,9 @@ class Courseattributes(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -607,7 +738,9 @@ class Courseattributes(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -618,7 +751,9 @@ class Courseattributes(BaseModel):
     @sis_id.setter
     def sis_id(self, value):
         """Setter for sis_id property."""
-        self.logger.warn("Setting values on sis_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_id will NOT update the remote Canvas instance."
+        )
         self._sis_id = value
 
     @property
@@ -629,7 +764,9 @@ class Courseattributes(BaseModel):
     @integration_id.setter
     def integration_id(self, value):
         """Setter for integration_id property."""
-        self.logger.warn("Setting values on integration_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on integration_id will NOT update the remote Canvas instance."
+        )
         self._integration_id = value
 
 
@@ -644,7 +781,7 @@ class Sectionassignmentoverrideattributes(BaseModel):
         self._unlock_at = unlock_at
         self._lock_at = lock_at
 
-        self.logger = logging.getLogger('py3canvas.Sectionassignmentoverrideattributes')
+        self.logger = logging.getLogger("py3canvas.Sectionassignmentoverrideattributes")
 
     @property
     def override_title(self):
@@ -654,7 +791,9 @@ class Sectionassignmentoverrideattributes(BaseModel):
     @override_title.setter
     def override_title(self, value):
         """Setter for override_title property."""
-        self.logger.warn("Setting values on override_title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on override_title will NOT update the remote Canvas instance."
+        )
         self._override_title = value
 
     @property
@@ -665,7 +804,9 @@ class Sectionassignmentoverrideattributes(BaseModel):
     @due_at.setter
     def due_at(self, value):
         """Setter for due_at property."""
-        self.logger.warn("Setting values on due_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on due_at will NOT update the remote Canvas instance."
+        )
         self._due_at = value
 
     @property
@@ -676,7 +817,9 @@ class Sectionassignmentoverrideattributes(BaseModel):
     @unlock_at.setter
     def unlock_at(self, value):
         """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unlock_at will NOT update the remote Canvas instance."
+        )
         self._unlock_at = value
 
     @property
@@ -687,7 +830,9 @@ class Sectionassignmentoverrideattributes(BaseModel):
     @lock_at.setter
     def lock_at(self, value):
         """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_at will NOT update the remote Canvas instance."
+        )
         self._lock_at = value
 
 
@@ -695,7 +840,15 @@ class Userassignmentoverrideattributes(BaseModel):
     """Userassignmentoverrideattributes Model.
     Attributes of assignment overrides that apply to users.  See Assignments API for more details"""
 
-    def __init__(self, id=None, title=None, due_at=None, unlock_at=None, lock_at=None, students=None):
+    def __init__(
+        self,
+        id=None,
+        title=None,
+        due_at=None,
+        unlock_at=None,
+        lock_at=None,
+        students=None,
+    ):
         """Init method for Userassignmentoverrideattributes class."""
         self._id = id
         self._title = title
@@ -704,7 +857,7 @@ class Userassignmentoverrideattributes(BaseModel):
         self._lock_at = lock_at
         self._students = students
 
-        self.logger = logging.getLogger('py3canvas.Userassignmentoverrideattributes')
+        self.logger = logging.getLogger("py3canvas.Userassignmentoverrideattributes")
 
     @property
     def id(self):
@@ -714,7 +867,9 @@ class Userassignmentoverrideattributes(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -725,7 +880,9 @@ class Userassignmentoverrideattributes(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -736,7 +893,9 @@ class Userassignmentoverrideattributes(BaseModel):
     @due_at.setter
     def due_at(self, value):
         """Setter for due_at property."""
-        self.logger.warn("Setting values on due_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on due_at will NOT update the remote Canvas instance."
+        )
         self._due_at = value
 
     @property
@@ -747,7 +906,9 @@ class Userassignmentoverrideattributes(BaseModel):
     @unlock_at.setter
     def unlock_at(self, value):
         """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unlock_at will NOT update the remote Canvas instance."
+        )
         self._unlock_at = value
 
     @property
@@ -758,7 +919,9 @@ class Userassignmentoverrideattributes(BaseModel):
     @lock_at.setter
     def lock_at(self, value):
         """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_at will NOT update the remote Canvas instance."
+        )
         self._lock_at = value
 
     @property
@@ -769,7 +932,9 @@ class Userassignmentoverrideattributes(BaseModel):
     @students.setter
     def students(self, value):
         """Setter for students property."""
-        self.logger.warn("Setting values on students will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on students will NOT update the remote Canvas instance."
+        )
         self._students = value
 
 
@@ -782,7 +947,7 @@ class Studentattributes(BaseModel):
         self._user_id = user_id
         self._sis_user_id = sis_user_id
 
-        self.logger = logging.getLogger('py3canvas.Studentattributes')
+        self.logger = logging.getLogger("py3canvas.Studentattributes")
 
     @property
     def user_id(self):
@@ -792,7 +957,9 @@ class Studentattributes(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -803,6 +970,7 @@ class Studentattributes(BaseModel):
     @sis_user_id.setter
     def sis_user_id(self, value):
         """Setter for sis_user_id property."""
-        self.logger.warn("Setting values on sis_user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_user_id will NOT update the remote Canvas instance."
+        )
         self._sis_user_id = value
-

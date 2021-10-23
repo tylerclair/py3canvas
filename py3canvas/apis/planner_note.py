@@ -21,15 +21,25 @@ class PlannerNoteAPI(BaseCanvasAPI):
         List planner notes.
 
         Retrieve the list of planner notes
-        
+
         Retrieve planner note for a user
         """
         path = {}
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/v1/planner_notes with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/planner_notes".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/planner_notes with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/planner_notes".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def show_plannernote(self, id):
         """
@@ -47,9 +57,18 @@ class PlannerNoteAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/planner_notes/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/planner_notes/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def update_plannernote(self, id):
         """
@@ -67,9 +86,18 @@ class PlannerNoteAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("PUT /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/planner_notes/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/planner_notes/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def create_planner_note(self):
         """
@@ -81,8 +109,18 @@ class PlannerNoteAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("POST /api/v1/planner_notes with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/planner_notes".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/planner_notes with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/planner_notes".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_planner_note(self, id):
         """
@@ -100,16 +138,34 @@ class PlannerNoteAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/planner_notes/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/planner_notes/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Plannernote(BaseModel):
     """Plannernote Model.
     A planner note"""
 
-    def __init__(self, id=None, title=None, description=None, user_id=None, workflow_state=None, course_id=None, todo_date=None):
+    def __init__(
+        self,
+        id=None,
+        title=None,
+        description=None,
+        user_id=None,
+        workflow_state=None,
+        course_id=None,
+        todo_date=None,
+    ):
         """Init method for Plannernote class."""
         self._id = id
         self._title = title
@@ -119,7 +175,7 @@ class Plannernote(BaseModel):
         self._course_id = course_id
         self._todo_date = todo_date
 
-        self.logger = logging.getLogger('py3canvas.Plannernote')
+        self.logger = logging.getLogger("py3canvas.Plannernote")
 
     @property
     def id(self):
@@ -129,7 +185,9 @@ class Plannernote(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -140,7 +198,9 @@ class Plannernote(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -151,7 +211,9 @@ class Plannernote(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -162,7 +224,9 @@ class Plannernote(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -173,7 +237,9 @@ class Plannernote(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -184,7 +250,9 @@ class Plannernote(BaseModel):
     @course_id.setter
     def course_id(self, value):
         """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_id will NOT update the remote Canvas instance."
+        )
         self._course_id = value
 
     @property
@@ -195,6 +263,7 @@ class Plannernote(BaseModel):
     @todo_date.setter
     def todo_date(self, value):
         """Setter for todo_date property."""
-        self.logger.warn("Setting values on todo_date will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on todo_date will NOT update the remote Canvas instance."
+        )
         self._todo_date = value
-

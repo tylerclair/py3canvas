@@ -26,8 +26,18 @@ class PollsAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/v1/polls with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/polls".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/polls with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/polls".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_single_poll(self, id):
         """
@@ -45,9 +55,18 @@ class PollsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/polls/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/polls/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/polls/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/polls/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def create_single_poll(self, polls_question, polls_description=None):
         """
@@ -65,7 +84,6 @@ class PollsAPI(BaseCanvasAPI):
         """
         data["polls[question]"] = polls_question
 
-
         # OPTIONAL - polls[description]
         """
             A brief description or instructions for the poll.
@@ -73,9 +91,18 @@ class PollsAPI(BaseCanvasAPI):
         if polls_description is not None:
             data["polls[description]"] = polls_description
 
-
-        self.logger.debug("POST /api/v1/polls with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/polls".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/polls with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/polls".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def update_single_poll(self, id, polls_question, polls_description=None):
         """
@@ -93,13 +120,11 @@ class PollsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # REQUIRED - polls[question]
         """
             The title of the poll.
         """
         data["polls[question]"] = polls_question
-
 
         # OPTIONAL - polls[description]
         """
@@ -108,9 +133,18 @@ class PollsAPI(BaseCanvasAPI):
         if polls_description is not None:
             data["polls[description]"] = polls_description
 
-
-        self.logger.debug("PUT /api/v1/polls/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/polls/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/polls/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/polls/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_poll(self, id):
         """
@@ -128,15 +162,32 @@ class PollsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/polls/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/polls/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/polls/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/polls/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Poll(BaseModel):
     """Poll Model."""
 
-    def __init__(self, id, question, description=None, created_at=None, user_id=None, total_results=None):
+    def __init__(
+        self,
+        id,
+        question,
+        description=None,
+        created_at=None,
+        user_id=None,
+        total_results=None,
+    ):
         """Init method for Poll class."""
         self._id = id
         self._question = question
@@ -145,7 +196,7 @@ class Poll(BaseModel):
         self._user_id = user_id
         self._total_results = total_results
 
-        self.logger = logging.getLogger('py3canvas.Poll')
+        self.logger = logging.getLogger("py3canvas.Poll")
 
     @property
     def id(self):
@@ -155,7 +206,9 @@ class Poll(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -166,7 +219,9 @@ class Poll(BaseModel):
     @question.setter
     def question(self, value):
         """Setter for question property."""
-        self.logger.warn("Setting values on question will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on question will NOT update the remote Canvas instance."
+        )
         self._question = value
 
     @property
@@ -177,7 +232,9 @@ class Poll(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -188,7 +245,9 @@ class Poll(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -199,7 +258,9 @@ class Poll(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -210,6 +271,7 @@ class Poll(BaseModel):
     @total_results.setter
     def total_results(self, value):
         """Setter for total_results property."""
-        self.logger.warn("Setting values on total_results will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on total_results will NOT update the remote Canvas instance."
+        )
         self._total_results = value
-

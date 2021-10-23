@@ -32,9 +32,18 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/grading_periods with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/grading_periods".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/grading_periods with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/grading_periods".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_grading_periods_courses(self, course_id):
         """
@@ -52,9 +61,18 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/grading_periods with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_periods".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/grading_periods with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/grading_periods".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_single_grading_period(self, course_id, id):
         """
@@ -72,18 +90,33 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/grading_periods/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_periods/{id}".format(**path), data=data, params=params, no_data=True)
-
-    def update_single_grading_period(self, course_id, grading_periods_end_date, grading_periods_start_date, id, grading_periods_weight=None):
+    def update_single_grading_period(
+        self,
+        course_id,
+        grading_periods_end_date,
+        grading_periods_start_date,
+        id,
+        grading_periods_weight=None,
+    ):
         """
         Update a single grading period.
 
@@ -99,13 +132,11 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # REQUIRED - grading_periods[start_date]
         """
@@ -113,13 +144,11 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         """
         data["grading_periods[start_date]"] = grading_periods_start_date
 
-
         # REQUIRED - grading_periods[end_date]
         """
             no description
         """
         data["grading_periods[end_date]"] = grading_periods_end_date
-
 
         # OPTIONAL - grading_periods[weight]
         """
@@ -128,9 +157,18 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         if grading_periods_weight is not None:
             data["grading_periods[weight]"] = grading_periods_weight
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/grading_periods/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/grading_periods/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_grading_period_courses(self, course_id, id):
         """
@@ -149,16 +187,24 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/grading_periods/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/grading_periods/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_grading_period_accounts(self, account_id, id):
         """
@@ -177,22 +223,39 @@ class GradingPeriodsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/accounts/{account_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/grading_periods/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/accounts/{account_id}/grading_periods/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/accounts/{account_id}/grading_periods/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Gradingperiod(BaseModel):
     """Gradingperiod Model."""
 
-    def __init__(self, id, start_date, end_date, title=None, close_date=None, weight=None, is_closed=None):
+    def __init__(
+        self,
+        id,
+        start_date,
+        end_date,
+        title=None,
+        close_date=None,
+        weight=None,
+        is_closed=None,
+    ):
         """Init method for Gradingperiod class."""
         self._id = id
         self._title = title
@@ -202,7 +265,7 @@ class Gradingperiod(BaseModel):
         self._weight = weight
         self._is_closed = is_closed
 
-        self.logger = logging.getLogger('py3canvas.Gradingperiod')
+        self.logger = logging.getLogger("py3canvas.Gradingperiod")
 
     @property
     def id(self):
@@ -212,7 +275,9 @@ class Gradingperiod(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -223,7 +288,9 @@ class Gradingperiod(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -234,7 +301,9 @@ class Gradingperiod(BaseModel):
     @start_date.setter
     def start_date(self, value):
         """Setter for start_date property."""
-        self.logger.warn("Setting values on start_date will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on start_date will NOT update the remote Canvas instance."
+        )
         self._start_date = value
 
     @property
@@ -245,7 +314,9 @@ class Gradingperiod(BaseModel):
     @end_date.setter
     def end_date(self, value):
         """Setter for end_date property."""
-        self.logger.warn("Setting values on end_date will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on end_date will NOT update the remote Canvas instance."
+        )
         self._end_date = value
 
     @property
@@ -256,7 +327,9 @@ class Gradingperiod(BaseModel):
     @close_date.setter
     def close_date(self, value):
         """Setter for close_date property."""
-        self.logger.warn("Setting values on close_date will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on close_date will NOT update the remote Canvas instance."
+        )
         self._close_date = value
 
     @property
@@ -267,7 +340,9 @@ class Gradingperiod(BaseModel):
     @weight.setter
     def weight(self, value):
         """Setter for weight property."""
-        self.logger.warn("Setting values on weight will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on weight will NOT update the remote Canvas instance."
+        )
         self._weight = value
 
     @property
@@ -278,6 +353,7 @@ class Gradingperiod(BaseModel):
     @is_closed.setter
     def is_closed(self, value):
         """Setter for is_closed property."""
-        self.logger.warn("Setting values on is_closed will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on is_closed will NOT update the remote Canvas instance."
+        )
         self._is_closed = value
-

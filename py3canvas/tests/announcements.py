@@ -18,5 +18,11 @@ class TestAnnouncementsAPI(unittest.TestCase):
         """Integration test for the AnnouncementsAPI.list_announcements method."""
         context_codes = None  # Change me!!
 
-        r = self.client.list_announcements(context_codes, active_only=None, end_date=None, include=None, latest_only=None, start_date=None)
-
+        r = self.client.list_announcements(
+            context_codes,
+            active_only=None,
+            end_date=None,
+            include=None,
+            latest_only=None,
+            start_date=None,
+        )

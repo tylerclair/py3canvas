@@ -32,4 +32,3 @@ class TestConferencesAPI(unittest.TestCase):
         """Integration test for the ConferencesAPI.list_conferences_for_current_user method."""
 
         r = self.client.list_conferences_for_current_user(state=None)
-

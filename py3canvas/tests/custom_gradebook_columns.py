@@ -14,7 +14,9 @@ class TestCustomGradebookColumnsAPI(unittest.TestCase):
     """Tests for the CustomGradebookColumnsAPI."""
 
     def setUp(self):
-        self.client = CustomGradebookColumnsAPI(secrets.instance_address, secrets.access_token)
+        self.client = CustomGradebookColumnsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_list_custom_gradebook_columns(self):
         """Integration test for the CustomGradebookColumnsAPI.list_custom_gradebook_columns method."""
@@ -60,4 +62,3 @@ class TestCustomGradebookColumnsAPI(unittest.TestCase):
         """Integration test for the CustomGradebookColumnsAPI.bulk_update_column_data method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

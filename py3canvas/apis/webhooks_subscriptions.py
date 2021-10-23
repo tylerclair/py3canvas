@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class WebhooksSubscriptionsAPI(BaseCanvasAPI):
     """WebhooksSubscriptions API Version 1.0."""
 
@@ -16,7 +15,15 @@ class WebhooksSubscriptionsAPI(BaseCanvasAPI):
         super(WebhooksSubscriptionsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.WebhooksSubscriptionsAPI")
 
-    def create_webhook_subscription(self, submission_ContextId, subscription_ContextType, subscription_EventTypes, subscription_Format, subscription_TransportMetadata, subscription_TransportType):
+    def create_webhook_subscription(
+        self,
+        submission_ContextId,
+        subscription_ContextType,
+        subscription_EventTypes,
+        subscription_Format,
+        subscription_TransportMetadata,
+        subscription_TransportType,
+    ):
         """
         Create a Webhook Subscription.
 
@@ -33,14 +40,12 @@ class WebhooksSubscriptionsAPI(BaseCanvasAPI):
         """
         data["submission[ContextId]"] = submission_ContextId
 
-
         # REQUIRED - subscription[ContextType]
         """
             The type of context for the subscription. Must be 'assignment',
         'account', or 'course'.
         """
         data["subscription[ContextType]"] = subscription_ContextType
-
 
         # REQUIRED - subscription[EventTypes]
         """
@@ -49,13 +54,11 @@ class WebhooksSubscriptionsAPI(BaseCanvasAPI):
         """
         data["subscription[EventTypes]"] = subscription_EventTypes
 
-
         # REQUIRED - subscription[Format]
         """
             Format to deliver the live events. Must be 'live-event' or 'caliper'.
         """
         data["subscription[Format]"] = subscription_Format
-
 
         # REQUIRED - subscription[TransportMetadata]
         """
@@ -63,22 +66,30 @@ class WebhooksSubscriptionsAPI(BaseCanvasAPI):
         """
         data["subscription[TransportMetadata]"] = subscription_TransportMetadata
 
-
         # REQUIRED - subscription[TransportType]
         """
             Must be either 'sqs' or 'https'.
         """
         data["subscription[TransportType]"] = subscription_TransportType
 
-
-        self.logger.debug("POST /api/lti/subscriptions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/lti/subscriptions".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/lti/subscriptions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/lti/subscriptions".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_webhook_subscription(self, id):
         """
         Delete a Webhook Subscription.
 
-        
+
         """
         path = {}
         data = {}
@@ -90,15 +101,24 @@ class WebhooksSubscriptionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/lti/subscriptions/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/lti/subscriptions/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/lti/subscriptions/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/lti/subscriptions/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def show_single_webhook_subscription(self, id):
         """
         Show a single Webhook Subscription.
 
-        
+
         """
         path = {}
         data = {}
@@ -110,9 +130,18 @@ class WebhooksSubscriptionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/lti/subscriptions/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/subscriptions/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/lti/subscriptions/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/subscriptions/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def update_webhook_subscription(self, id):
         """
@@ -130,9 +159,18 @@ class WebhooksSubscriptionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("PUT /api/lti/subscriptions/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/lti/subscriptions/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/lti/subscriptions/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/lti/subscriptions/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_all_webhook_subscription_for_tool_proxy(self):
         """
@@ -141,7 +179,7 @@ class WebhooksSubscriptionsAPI(BaseCanvasAPI):
         This endpoint returns a paginated list with a default limit of 100 items per result set.
         You can retrieve the next result set by setting a 'StartKey' header in your next request
         with the value of the 'EndKey' header in the response.
-        
+
         Example use of a 'StartKey' header object:
           { "Id":"71d6dfba-0547-477d-b41d-db8cb528c6d1","DeveloperKey":"10000000000001" }
         """
@@ -149,6 +187,15 @@ class WebhooksSubscriptionsAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/lti/subscriptions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/subscriptions".format(**path), data=data, params=params, no_data=True)
-
+        self.logger.debug(
+            "GET /api/lti/subscriptions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/subscriptions".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )

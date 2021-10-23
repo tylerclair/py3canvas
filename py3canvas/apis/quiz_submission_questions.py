@@ -21,7 +21,7 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         Get all quiz submission questions.
 
         Get a list of all the question records for this quiz submission.
-        
+
         <b>200 OK</b> response code is returned if the request was successful.
         """
         path = {}
@@ -34,7 +34,6 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         """
         path["quiz_submission_id"] = quiz_submission_id
 
-
         # OPTIONAL - include
         """
             Associations to include with the quiz submission question.
@@ -43,11 +42,27 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
             self._validate_enum(include, ["quiz_question"])
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/quiz_submissions/{quiz_submission_id}/questions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/quiz_submissions/{quiz_submission_id}/questions".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/quiz_submissions/{quiz_submission_id}/questions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/quiz_submissions/{quiz_submission_id}/questions".format(**path), data=data, params=params, no_data=True)
-
-    def answering_questions(self, attempt, quiz_submission_id, validation_token, access_code=None, quiz_questions=None):
+    def answering_questions(
+        self,
+        attempt,
+        quiz_submission_id,
+        validation_token,
+        access_code=None,
+        quiz_questions=None,
+    ):
         """
         Answering questions.
 
@@ -63,7 +78,6 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         """
         path["quiz_submission_id"] = quiz_submission_id
 
-
         # REQUIRED - attempt
         """
             The attempt number of the quiz submission being taken. Note that this
@@ -72,7 +86,6 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         """
         data["attempt"] = attempt
 
-
         # REQUIRED - validation_token
         """
             The unique validation token you received when the Quiz Submission was
@@ -80,14 +93,12 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         """
         data["validation_token"] = validation_token
 
-
         # OPTIONAL - access_code
         """
             Access code for the Quiz, if any.
         """
         if access_code is not None:
             data["access_code"] = access_code
-
 
         # OPTIONAL - quiz_questions
         """
@@ -99,9 +110,18 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         if quiz_questions is not None:
             data["quiz_questions"] = quiz_questions
 
-
-        self.logger.debug("POST /api/v1/quiz_submissions/{quiz_submission_id}/questions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/quiz_submissions/{quiz_submission_id}/questions".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "POST /api/v1/quiz_submissions/{quiz_submission_id}/questions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/quiz_submissions/{quiz_submission_id}/questions".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def get_formatted_student_numerical_answer(self, answer, id, quiz_submission_id):
         """
@@ -120,13 +140,11 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         """
         path["quiz_submission_id"] = quiz_submission_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # REQUIRED - answer
         """
@@ -134,11 +152,24 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         """
         params["answer"] = answer
 
+        self.logger.debug(
+            "GET /api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/formatted_answer with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/formatted_answer".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/formatted_answer with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/formatted_answer".format(**path), data=data, params=params, no_data=True)
-
-    def flagging_question(self, attempt, id, quiz_submission_id, validation_token, access_code=None):
+    def flagging_question(
+        self, attempt, id, quiz_submission_id, validation_token, access_code=None
+    ):
         """
         Flagging a question.
 
@@ -155,13 +186,11 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         """
         path["quiz_submission_id"] = quiz_submission_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # REQUIRED - attempt
         """
@@ -171,14 +200,12 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         """
         data["attempt"] = attempt
 
-
         # REQUIRED - validation_token
         """
             The unique validation token you received when the Quiz Submission was
         created.
         """
         data["validation_token"] = validation_token
-
 
         # OPTIONAL - access_code
         """
@@ -187,11 +214,24 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         if access_code is not None:
             data["access_code"] = access_code
 
+        self.logger.debug(
+            "PUT /api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/flag with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/flag".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("PUT /api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/flag with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/flag".format(**path), data=data, params=params, no_data=True)
-
-    def unflagging_question(self, attempt, id, quiz_submission_id, validation_token, access_code=None):
+    def unflagging_question(
+        self, attempt, id, quiz_submission_id, validation_token, access_code=None
+    ):
         """
         Unflagging a question.
 
@@ -208,13 +248,11 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         """
         path["quiz_submission_id"] = quiz_submission_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # REQUIRED - attempt
         """
@@ -224,14 +262,12 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         """
         data["attempt"] = attempt
 
-
         # REQUIRED - validation_token
         """
             The unique validation token you received when the Quiz Submission was
         created.
         """
         data["validation_token"] = validation_token
-
 
         # OPTIONAL - access_code
         """
@@ -240,9 +276,20 @@ class QuizSubmissionQuestionsAPI(BaseCanvasAPI):
         if access_code is not None:
             data["access_code"] = access_code
 
-
-        self.logger.debug("PUT /api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/unflag with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/unflag".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/unflag with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/quiz_submissions/{quiz_submission_id}/questions/{id}/unflag".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Quizsubmissionquestion(BaseModel):
@@ -255,7 +302,7 @@ class Quizsubmissionquestion(BaseModel):
         self._answer = answer
         self._answers = answers
 
-        self.logger = logging.getLogger('py3canvas.Quizsubmissionquestion')
+        self.logger = logging.getLogger("py3canvas.Quizsubmissionquestion")
 
     @property
     def id(self):
@@ -265,7 +312,9 @@ class Quizsubmissionquestion(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -276,7 +325,9 @@ class Quizsubmissionquestion(BaseModel):
     @flagged.setter
     def flagged(self, value):
         """Setter for flagged property."""
-        self.logger.warn("Setting values on flagged will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on flagged will NOT update the remote Canvas instance."
+        )
         self._flagged = value
 
     @property
@@ -287,7 +338,9 @@ class Quizsubmissionquestion(BaseModel):
     @answer.setter
     def answer(self, value):
         """Setter for answer property."""
-        self.logger.warn("Setting values on answer will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on answer will NOT update the remote Canvas instance."
+        )
         self._answer = value
 
     @property
@@ -298,6 +351,7 @@ class Quizsubmissionquestion(BaseModel):
     @answers.setter
     def answers(self, value):
         """Setter for answers property."""
-        self.logger.warn("Setting values on answers will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on answers will NOT update the remote Canvas instance."
+        )
         self._answers = value
-

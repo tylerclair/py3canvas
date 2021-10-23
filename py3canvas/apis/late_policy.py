@@ -32,11 +32,30 @@ class LatePolicyAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{id}/late_policy with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{id}/late_policy".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{id}/late_policy with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{id}/late_policy".format(**path), data=data, params=params, no_data=True)
-
-    def create_late_policy(self, id, late_policy_late_submission_deduction=None, late_policy_late_submission_deduction_enabled=None, late_policy_late_submission_interval=None, late_policy_late_submission_minimum_percent=None, late_policy_late_submission_minimum_percent_enabled=None, late_policy_missing_submission_deduction=None, late_policy_missing_submission_deduction_enabled=None):
+    def create_late_policy(
+        self,
+        id,
+        late_policy_late_submission_deduction=None,
+        late_policy_late_submission_deduction_enabled=None,
+        late_policy_late_submission_interval=None,
+        late_policy_late_submission_minimum_percent=None,
+        late_policy_late_submission_minimum_percent_enabled=None,
+        late_policy_missing_submission_deduction=None,
+        late_policy_missing_submission_deduction_enabled=None,
+    ):
         """
         Create a late policy.
 
@@ -54,67 +73,93 @@ class LatePolicyAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - late_policy[missing_submission_deduction_enabled]
         """
             Whether to enable the missing submission deduction late policy.
         """
         if late_policy_missing_submission_deduction_enabled is not None:
-            data["late_policy[missing_submission_deduction_enabled]"] = late_policy_missing_submission_deduction_enabled
-
+            data[
+                "late_policy[missing_submission_deduction_enabled]"
+            ] = late_policy_missing_submission_deduction_enabled
 
         # OPTIONAL - late_policy[missing_submission_deduction]
         """
             How many percentage points to deduct from a missing submission.
         """
         if late_policy_missing_submission_deduction is not None:
-            data["late_policy[missing_submission_deduction]"] = late_policy_missing_submission_deduction
-
+            data[
+                "late_policy[missing_submission_deduction]"
+            ] = late_policy_missing_submission_deduction
 
         # OPTIONAL - late_policy[late_submission_deduction_enabled]
         """
             Whether to enable the late submission deduction late policy.
         """
         if late_policy_late_submission_deduction_enabled is not None:
-            data["late_policy[late_submission_deduction_enabled]"] = late_policy_late_submission_deduction_enabled
-
+            data[
+                "late_policy[late_submission_deduction_enabled]"
+            ] = late_policy_late_submission_deduction_enabled
 
         # OPTIONAL - late_policy[late_submission_deduction]
         """
             How many percentage points to deduct per the late submission interval.
         """
         if late_policy_late_submission_deduction is not None:
-            data["late_policy[late_submission_deduction]"] = late_policy_late_submission_deduction
-
+            data[
+                "late_policy[late_submission_deduction]"
+            ] = late_policy_late_submission_deduction
 
         # OPTIONAL - late_policy[late_submission_interval]
         """
             The interval for late policies.
         """
         if late_policy_late_submission_interval is not None:
-            data["late_policy[late_submission_interval]"] = late_policy_late_submission_interval
-
+            data[
+                "late_policy[late_submission_interval]"
+            ] = late_policy_late_submission_interval
 
         # OPTIONAL - late_policy[late_submission_minimum_percent_enabled]
         """
             Whether to enable the late submission minimum percent for a late policy.
         """
         if late_policy_late_submission_minimum_percent_enabled is not None:
-            data["late_policy[late_submission_minimum_percent_enabled]"] = late_policy_late_submission_minimum_percent_enabled
-
+            data[
+                "late_policy[late_submission_minimum_percent_enabled]"
+            ] = late_policy_late_submission_minimum_percent_enabled
 
         # OPTIONAL - late_policy[late_submission_minimum_percent]
         """
             The minimum grade a submissions can have in percentage points.
         """
         if late_policy_late_submission_minimum_percent is not None:
-            data["late_policy[late_submission_minimum_percent]"] = late_policy_late_submission_minimum_percent
+            data[
+                "late_policy[late_submission_minimum_percent]"
+            ] = late_policy_late_submission_minimum_percent
 
+        self.logger.debug(
+            "POST /api/v1/courses/{id}/late_policy with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{id}/late_policy".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{id}/late_policy with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{id}/late_policy".format(**path), data=data, params=params, no_data=True)
-
-    def patch_late_policy(self, id, late_policy_late_submission_deduction=None, late_policy_late_submission_deduction_enabled=None, late_policy_late_submission_interval=None, late_policy_late_submission_minimum_percent=None, late_policy_late_submission_minimum_percent_enabled=None, late_policy_missing_submission_deduction=None, late_policy_missing_submission_deduction_enabled=None):
+    def patch_late_policy(
+        self,
+        id,
+        late_policy_late_submission_deduction=None,
+        late_policy_late_submission_deduction_enabled=None,
+        late_policy_late_submission_interval=None,
+        late_policy_late_submission_minimum_percent=None,
+        late_policy_late_submission_minimum_percent_enabled=None,
+        late_policy_missing_submission_deduction=None,
+        late_policy_missing_submission_deduction_enabled=None,
+    ):
         """
         Patch a late policy.
 
@@ -130,85 +175,125 @@ class LatePolicyAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - late_policy[missing_submission_deduction_enabled]
         """
             Whether to enable the missing submission deduction late policy.
         """
         if late_policy_missing_submission_deduction_enabled is not None:
-            data["late_policy[missing_submission_deduction_enabled]"] = late_policy_missing_submission_deduction_enabled
-
+            data[
+                "late_policy[missing_submission_deduction_enabled]"
+            ] = late_policy_missing_submission_deduction_enabled
 
         # OPTIONAL - late_policy[missing_submission_deduction]
         """
             How many percentage points to deduct from a missing submission.
         """
         if late_policy_missing_submission_deduction is not None:
-            data["late_policy[missing_submission_deduction]"] = late_policy_missing_submission_deduction
-
+            data[
+                "late_policy[missing_submission_deduction]"
+            ] = late_policy_missing_submission_deduction
 
         # OPTIONAL - late_policy[late_submission_deduction_enabled]
         """
             Whether to enable the late submission deduction late policy.
         """
         if late_policy_late_submission_deduction_enabled is not None:
-            data["late_policy[late_submission_deduction_enabled]"] = late_policy_late_submission_deduction_enabled
-
+            data[
+                "late_policy[late_submission_deduction_enabled]"
+            ] = late_policy_late_submission_deduction_enabled
 
         # OPTIONAL - late_policy[late_submission_deduction]
         """
             How many percentage points to deduct per the late submission interval.
         """
         if late_policy_late_submission_deduction is not None:
-            data["late_policy[late_submission_deduction]"] = late_policy_late_submission_deduction
-
+            data[
+                "late_policy[late_submission_deduction]"
+            ] = late_policy_late_submission_deduction
 
         # OPTIONAL - late_policy[late_submission_interval]
         """
             The interval for late policies.
         """
         if late_policy_late_submission_interval is not None:
-            data["late_policy[late_submission_interval]"] = late_policy_late_submission_interval
-
+            data[
+                "late_policy[late_submission_interval]"
+            ] = late_policy_late_submission_interval
 
         # OPTIONAL - late_policy[late_submission_minimum_percent_enabled]
         """
             Whether to enable the late submission minimum percent for a late policy.
         """
         if late_policy_late_submission_minimum_percent_enabled is not None:
-            data["late_policy[late_submission_minimum_percent_enabled]"] = late_policy_late_submission_minimum_percent_enabled
-
+            data[
+                "late_policy[late_submission_minimum_percent_enabled]"
+            ] = late_policy_late_submission_minimum_percent_enabled
 
         # OPTIONAL - late_policy[late_submission_minimum_percent]
         """
             The minimum grade a submissions can have in percentage points.
         """
         if late_policy_late_submission_minimum_percent is not None:
-            data["late_policy[late_submission_minimum_percent]"] = late_policy_late_submission_minimum_percent
+            data[
+                "late_policy[late_submission_minimum_percent]"
+            ] = late_policy_late_submission_minimum_percent
 
-
-        self.logger.debug("PATCH /api/v1/courses/{id}/late_policy with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PATCH", "/api/v1/courses/{id}/late_policy".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PATCH /api/v1/courses/{id}/late_policy with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PATCH",
+            "/api/v1/courses/{id}/late_policy".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Latepolicy(BaseModel):
     """Latepolicy Model."""
 
-    def __init__(self, c, o, u, r, s, e, _, i, d, missing_submission_deduction_enabled=False, missing_submission_deduction=0, late_submission_deduction_enabled=False, late_submission_deduction=0, late_submission_interval=day, late_submission_minimum_percent_enabled=False, late_submission_minimum_percent=0, created_at=None, updated_at=None):
+    def __init__(
+        self,
+        c,
+        o,
+        u,
+        r,
+        s,
+        e,
+        _,
+        i,
+        d,
+        missing_submission_deduction_enabled=False,
+        missing_submission_deduction=0,
+        late_submission_deduction_enabled=False,
+        late_submission_deduction=0,
+        late_submission_interval=day,
+        late_submission_minimum_percent_enabled=False,
+        late_submission_minimum_percent=0,
+        created_at=None,
+        updated_at=None,
+    ):
         """Init method for Latepolicy class."""
         self._id = id
         self._course_id = course_id
-        self._missing_submission_deduction_enabled = missing_submission_deduction_enabled
+        self._missing_submission_deduction_enabled = (
+            missing_submission_deduction_enabled
+        )
         self._missing_submission_deduction = missing_submission_deduction
         self._late_submission_deduction_enabled = late_submission_deduction_enabled
         self._late_submission_deduction = late_submission_deduction
         self._late_submission_interval = late_submission_interval
-        self._late_submission_minimum_percent_enabled = late_submission_minimum_percent_enabled
+        self._late_submission_minimum_percent_enabled = (
+            late_submission_minimum_percent_enabled
+        )
         self._late_submission_minimum_percent = late_submission_minimum_percent
         self._created_at = created_at
         self._updated_at = updated_at
 
-        self.logger = logging.getLogger('py3canvas.Latepolicy')
+        self.logger = logging.getLogger("py3canvas.Latepolicy")
 
     @property
     def id(self):
@@ -218,7 +303,9 @@ class Latepolicy(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -229,7 +316,9 @@ class Latepolicy(BaseModel):
     @course_id.setter
     def course_id(self, value):
         """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_id will NOT update the remote Canvas instance."
+        )
         self._course_id = value
 
     @property
@@ -240,7 +329,9 @@ class Latepolicy(BaseModel):
     @missing_submission_deduction_enabled.setter
     def missing_submission_deduction_enabled(self, value):
         """Setter for missing_submission_deduction_enabled property."""
-        self.logger.warn("Setting values on missing_submission_deduction_enabled will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on missing_submission_deduction_enabled will NOT update the remote Canvas instance."
+        )
         self._missing_submission_deduction_enabled = value
 
     @property
@@ -251,7 +342,9 @@ class Latepolicy(BaseModel):
     @missing_submission_deduction.setter
     def missing_submission_deduction(self, value):
         """Setter for missing_submission_deduction property."""
-        self.logger.warn("Setting values on missing_submission_deduction will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on missing_submission_deduction will NOT update the remote Canvas instance."
+        )
         self._missing_submission_deduction = value
 
     @property
@@ -262,7 +355,9 @@ class Latepolicy(BaseModel):
     @late_submission_deduction_enabled.setter
     def late_submission_deduction_enabled(self, value):
         """Setter for late_submission_deduction_enabled property."""
-        self.logger.warn("Setting values on late_submission_deduction_enabled will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on late_submission_deduction_enabled will NOT update the remote Canvas instance."
+        )
         self._late_submission_deduction_enabled = value
 
     @property
@@ -273,7 +368,9 @@ class Latepolicy(BaseModel):
     @late_submission_deduction.setter
     def late_submission_deduction(self, value):
         """Setter for late_submission_deduction property."""
-        self.logger.warn("Setting values on late_submission_deduction will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on late_submission_deduction will NOT update the remote Canvas instance."
+        )
         self._late_submission_deduction = value
 
     @property
@@ -284,7 +381,9 @@ class Latepolicy(BaseModel):
     @late_submission_interval.setter
     def late_submission_interval(self, value):
         """Setter for late_submission_interval property."""
-        self.logger.warn("Setting values on late_submission_interval will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on late_submission_interval will NOT update the remote Canvas instance."
+        )
         self._late_submission_interval = value
 
     @property
@@ -295,7 +394,9 @@ class Latepolicy(BaseModel):
     @late_submission_minimum_percent_enabled.setter
     def late_submission_minimum_percent_enabled(self, value):
         """Setter for late_submission_minimum_percent_enabled property."""
-        self.logger.warn("Setting values on late_submission_minimum_percent_enabled will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on late_submission_minimum_percent_enabled will NOT update the remote Canvas instance."
+        )
         self._late_submission_minimum_percent_enabled = value
 
     @property
@@ -306,7 +407,9 @@ class Latepolicy(BaseModel):
     @late_submission_minimum_percent.setter
     def late_submission_minimum_percent(self, value):
         """Setter for late_submission_minimum_percent property."""
-        self.logger.warn("Setting values on late_submission_minimum_percent will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on late_submission_minimum_percent will NOT update the remote Canvas instance."
+        )
         self._late_submission_minimum_percent = value
 
     @property
@@ -317,7 +420,9 @@ class Latepolicy(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -328,6 +433,7 @@ class Latepolicy(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
-

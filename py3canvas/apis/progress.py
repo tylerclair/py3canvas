@@ -32,9 +32,18 @@ class ProgressAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/progress/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/progress/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/progress/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/progress/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def query_progress(self, course_id, id):
         """
@@ -52,22 +61,44 @@ class ProgressAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/lti/courses/{course_id}/progress/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/courses/{course_id}/progress/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/lti/courses/{course_id}/progress/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/courses/{course_id}/progress/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Progress(BaseModel):
     """Progress Model."""
 
-    def __init__(self, id=None, context_id=None, context_type=None, user_id=None, tag=None, completion=None, workflow_state=None, created_at=None, updated_at=None, message=None, results=None, url=None):
+    def __init__(
+        self,
+        id=None,
+        context_id=None,
+        context_type=None,
+        user_id=None,
+        tag=None,
+        completion=None,
+        workflow_state=None,
+        created_at=None,
+        updated_at=None,
+        message=None,
+        results=None,
+        url=None,
+    ):
         """Init method for Progress class."""
         self._id = id
         self._context_id = context_id
@@ -82,7 +113,7 @@ class Progress(BaseModel):
         self._results = results
         self._url = url
 
-        self.logger = logging.getLogger('py3canvas.Progress')
+        self.logger = logging.getLogger("py3canvas.Progress")
 
     @property
     def id(self):
@@ -92,7 +123,9 @@ class Progress(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -103,7 +136,9 @@ class Progress(BaseModel):
     @context_id.setter
     def context_id(self, value):
         """Setter for context_id property."""
-        self.logger.warn("Setting values on context_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_id will NOT update the remote Canvas instance."
+        )
         self._context_id = value
 
     @property
@@ -114,7 +149,9 @@ class Progress(BaseModel):
     @context_type.setter
     def context_type(self, value):
         """Setter for context_type property."""
-        self.logger.warn("Setting values on context_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_type will NOT update the remote Canvas instance."
+        )
         self._context_type = value
 
     @property
@@ -125,7 +162,9 @@ class Progress(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -136,7 +175,9 @@ class Progress(BaseModel):
     @tag.setter
     def tag(self, value):
         """Setter for tag property."""
-        self.logger.warn("Setting values on tag will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on tag will NOT update the remote Canvas instance."
+        )
         self._tag = value
 
     @property
@@ -147,7 +188,9 @@ class Progress(BaseModel):
     @completion.setter
     def completion(self, value):
         """Setter for completion property."""
-        self.logger.warn("Setting values on completion will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on completion will NOT update the remote Canvas instance."
+        )
         self._completion = value
 
     @property
@@ -158,7 +201,9 @@ class Progress(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -169,7 +214,9 @@ class Progress(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -180,7 +227,9 @@ class Progress(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
 
     @property
@@ -191,7 +240,9 @@ class Progress(BaseModel):
     @message.setter
     def message(self, value):
         """Setter for message property."""
-        self.logger.warn("Setting values on message will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on message will NOT update the remote Canvas instance."
+        )
         self._message = value
 
     @property
@@ -202,7 +253,9 @@ class Progress(BaseModel):
     @results.setter
     def results(self, value):
         """Setter for results property."""
-        self.logger.warn("Setting values on results will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on results will NOT update the remote Canvas instance."
+        )
         self._results = value
 
     @property
@@ -213,6 +266,7 @@ class Progress(BaseModel):
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
-

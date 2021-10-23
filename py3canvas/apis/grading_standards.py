@@ -16,12 +16,14 @@ class GradingStandardsAPI(BaseCanvasAPI):
         super(GradingStandardsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.GradingStandardsAPI")
 
-    def create_new_grading_standard_accounts(self, account_id, grading_scheme_entry_name, grading_scheme_entry_value, title):
+    def create_new_grading_standard_accounts(
+        self, account_id, grading_scheme_entry_name, grading_scheme_entry_value, title
+    ):
         """
         Create a new grading standard.
 
         Create a new grading standard
-        
+
         If grading_scheme_entry arguments are omitted, then a default grading scheme
         will be set. The default scheme is as follows:
              "A" : 94,
@@ -47,13 +49,11 @@ class GradingStandardsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - title
         """
             The title for the Grading Standard.
         """
         data["title"] = title
-
 
         # REQUIRED - grading_scheme_entry[name]
         """
@@ -61,7 +61,6 @@ class GradingStandardsAPI(BaseCanvasAPI):
         e.g. A-
         """
         data["grading_scheme_entry[name]"] = grading_scheme_entry_name
-
 
         # REQUIRED - grading_scheme_entry[value]
         """
@@ -73,16 +72,27 @@ class GradingStandardsAPI(BaseCanvasAPI):
         """
         data["grading_scheme_entry[value]"] = grading_scheme_entry_value
 
+        self.logger.debug(
+            "POST /api/v1/accounts/{account_id}/grading_standards with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/accounts/{account_id}/grading_standards".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/accounts/{account_id}/grading_standards with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/grading_standards".format(**path), data=data, params=params, single_item=True)
-
-    def create_new_grading_standard_courses(self, course_id, grading_scheme_entry_name, grading_scheme_entry_value, title):
+    def create_new_grading_standard_courses(
+        self, course_id, grading_scheme_entry_name, grading_scheme_entry_value, title
+    ):
         """
         Create a new grading standard.
 
         Create a new grading standard
-        
+
         If grading_scheme_entry arguments are omitted, then a default grading scheme
         will be set. The default scheme is as follows:
              "A" : 94,
@@ -108,13 +118,11 @@ class GradingStandardsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - title
         """
             The title for the Grading Standard.
         """
         data["title"] = title
-
 
         # REQUIRED - grading_scheme_entry[name]
         """
@@ -122,7 +130,6 @@ class GradingStandardsAPI(BaseCanvasAPI):
         e.g. A-
         """
         data["grading_scheme_entry[name]"] = grading_scheme_entry_name
-
 
         # REQUIRED - grading_scheme_entry[value]
         """
@@ -134,9 +141,18 @@ class GradingStandardsAPI(BaseCanvasAPI):
         """
         data["grading_scheme_entry[value]"] = grading_scheme_entry_value
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/grading_standards with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/grading_standards".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/grading_standards with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/grading_standards".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def list_grading_standards_available_in_context_courses(self, course_id):
         """
@@ -154,9 +170,18 @@ class GradingStandardsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/grading_standards with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_standards".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/grading_standards with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/grading_standards".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_grading_standards_available_in_context_accounts(self, account_id):
         """
@@ -174,11 +199,22 @@ class GradingStandardsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/grading_standards with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/grading_standards".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/accounts/{account_id}/grading_standards with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/grading_standards".format(**path), data=data, params=params, all_pages=True)
-
-    def get_single_grading_standard_in_context_courses(self, course_id, grading_standard_id):
+    def get_single_grading_standard_in_context_courses(
+        self, course_id, grading_standard_id
+    ):
         """
         Get a single grading standard in a context.
 
@@ -194,18 +230,30 @@ class GradingStandardsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - grading_standard_id
         """
             ID
         """
         path["grading_standard_id"] = grading_standard_id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/grading_standards/{grading_standard_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/grading_standards/{grading_standard_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/grading_standards/{grading_standard_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/grading_standards/{grading_standard_id}".format(**path), data=data, params=params, single_item=True)
-
-    def get_single_grading_standard_in_context_accounts(self, account_id, grading_standard_id):
+    def get_single_grading_standard_in_context_accounts(
+        self, account_id, grading_standard_id
+    ):
         """
         Get a single grading standard in a context.
 
@@ -221,16 +269,26 @@ class GradingStandardsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - grading_standard_id
         """
             ID
         """
         path["grading_standard_id"] = grading_standard_id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/grading_standards/{grading_standard_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/grading_standards/{grading_standard_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/grading_standards/{grading_standard_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/grading_standards/{grading_standard_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Gradingschemeentry(BaseModel):
@@ -241,7 +299,7 @@ class Gradingschemeentry(BaseModel):
         self._name = name
         self._value = value
 
-        self.logger = logging.getLogger('py3canvas.Gradingschemeentry')
+        self.logger = logging.getLogger("py3canvas.Gradingschemeentry")
 
     @property
     def name(self):
@@ -251,7 +309,9 @@ class Gradingschemeentry(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -262,14 +322,23 @@ class Gradingschemeentry(BaseModel):
     @value.setter
     def value(self, value):
         """Setter for value property."""
-        self.logger.warn("Setting values on value will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on value will NOT update the remote Canvas instance."
+        )
         self._value = value
 
 
 class Gradingstandard(BaseModel):
     """Gradingstandard Model."""
 
-    def __init__(self, title=None, id=None, context_type=None, context_id=None, grading_scheme=None):
+    def __init__(
+        self,
+        title=None,
+        id=None,
+        context_type=None,
+        context_id=None,
+        grading_scheme=None,
+    ):
         """Init method for Gradingstandard class."""
         self._title = title
         self._id = id
@@ -277,7 +346,7 @@ class Gradingstandard(BaseModel):
         self._context_id = context_id
         self._grading_scheme = grading_scheme
 
-        self.logger = logging.getLogger('py3canvas.Gradingstandard')
+        self.logger = logging.getLogger("py3canvas.Gradingstandard")
 
     @property
     def title(self):
@@ -287,7 +356,9 @@ class Gradingstandard(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -298,7 +369,9 @@ class Gradingstandard(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -309,7 +382,9 @@ class Gradingstandard(BaseModel):
     @context_type.setter
     def context_type(self, value):
         """Setter for context_type property."""
-        self.logger.warn("Setting values on context_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_type will NOT update the remote Canvas instance."
+        )
         self._context_type = value
 
     @property
@@ -320,7 +395,9 @@ class Gradingstandard(BaseModel):
     @context_id.setter
     def context_id(self, value):
         """Setter for context_id property."""
-        self.logger.warn("Setting values on context_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_id will NOT update the remote Canvas instance."
+        )
         self._context_id = value
 
     @property
@@ -331,6 +408,7 @@ class Gradingstandard(BaseModel):
     @grading_scheme.setter
     def grading_scheme(self, value):
         """Setter for grading_scheme property."""
-        self.logger.warn("Setting values on grading_scheme will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on grading_scheme will NOT update the remote Canvas instance."
+        )
         self._grading_scheme = value
-

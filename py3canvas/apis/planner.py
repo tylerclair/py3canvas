@@ -16,14 +16,16 @@ class PlannerAPI(BaseCanvasAPI):
         super(PlannerAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.PlannerAPI")
 
-    def list_planner_items_planner(self, context_codes=None, end_date=None, filter=None, start_date=None):
+    def list_planner_items_planner(
+        self, context_codes=None, end_date=None, filter=None, start_date=None
+    ):
         """
         List planner items.
 
         Retrieve the paginated list of objects to be shown on the planner for the
         current user with the associated planner override to override an item's
         visibility if set.
-        
+
         Planner items for a student may also be retrieved by a linked observer. Use
         the path that accepts a user_id and supply the student's id.
         """
@@ -39,7 +41,6 @@ class PlannerAPI(BaseCanvasAPI):
         if start_date is not None:
             params["start_date"] = start_date
 
-
         # OPTIONAL - end_date
         """
             Only return items up to the given date.
@@ -47,7 +48,6 @@ class PlannerAPI(BaseCanvasAPI):
         """
         if end_date is not None:
             params["end_date"] = end_date
-
 
         # OPTIONAL - context_codes
         """
@@ -60,7 +60,6 @@ class PlannerAPI(BaseCanvasAPI):
         if context_codes is not None:
             params["context_codes"] = context_codes
 
-
         # OPTIONAL - filter
         """
             Only return items that have new or unread activity
@@ -69,18 +68,29 @@ class PlannerAPI(BaseCanvasAPI):
             self._validate_enum(filter, ["new_activity"])
             params["filter"] = filter
 
+        self.logger.debug(
+            "GET /api/v1/planner/items with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/planner/items".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/planner/items with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/planner/items".format(**path), data=data, params=params, no_data=True)
-
-    def list_planner_items_users(self, user_id, context_codes=None, end_date=None, filter=None, start_date=None):
+    def list_planner_items_users(
+        self, user_id, context_codes=None, end_date=None, filter=None, start_date=None
+    ):
         """
         List planner items.
 
         Retrieve the paginated list of objects to be shown on the planner for the
         current user with the associated planner override to override an item's
         visibility if set.
-        
+
         Planner items for a student may also be retrieved by a linked observer. Use
         the path that accepts a user_id and supply the student's id.
         """
@@ -94,7 +104,6 @@ class PlannerAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # OPTIONAL - start_date
         """
             Only return items starting from the given date.
@@ -103,7 +112,6 @@ class PlannerAPI(BaseCanvasAPI):
         if start_date is not None:
             params["start_date"] = start_date
 
-
         # OPTIONAL - end_date
         """
             Only return items up to the given date.
@@ -111,7 +119,6 @@ class PlannerAPI(BaseCanvasAPI):
         """
         if end_date is not None:
             params["end_date"] = end_date
-
 
         # OPTIONAL - context_codes
         """
@@ -124,7 +131,6 @@ class PlannerAPI(BaseCanvasAPI):
         if context_codes is not None:
             params["context_codes"] = context_codes
 
-
         # OPTIONAL - filter
         """
             Only return items that have new or unread activity
@@ -133,16 +139,25 @@ class PlannerAPI(BaseCanvasAPI):
             self._validate_enum(filter, ["new_activity"])
             params["filter"] = filter
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/planner/items with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/planner/items".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/planner/items with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/planner/items".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_planner_notes(self, context_codes=None, end_date=None, start_date=None):
         """
         List planner notes.
 
         Retrieve the paginated list of planner notes
-        
+
         Retrieve planner note for a user
         """
         path = {}
@@ -158,10 +173,11 @@ class PlannerAPI(BaseCanvasAPI):
         if start_date is not None:
             if issubclass(start_date.__class__, str):
                 start_date = self._validate_iso8601_string(start_date)
-            elif issubclass(start_date.__class__, date) or issubclass(start_date.__class__, datetime):
-                start_date = start_date.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(start_date.__class__, date) or issubclass(
+                start_date.__class__, datetime
+            ):
+                start_date = start_date.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["start_date"] = start_date
-
 
         # OPTIONAL - end_date
         """
@@ -174,10 +190,11 @@ class PlannerAPI(BaseCanvasAPI):
         if end_date is not None:
             if issubclass(end_date.__class__, str):
                 end_date = self._validate_iso8601_string(end_date)
-            elif issubclass(end_date.__class__, date) or issubclass(end_date.__class__, datetime):
-                end_date = end_date.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(end_date.__class__, date) or issubclass(
+                end_date.__class__, datetime
+            ):
+                end_date = end_date.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             params["end_date"] = end_date
-
 
         # OPTIONAL - context_codes
         """
@@ -191,9 +208,18 @@ class PlannerAPI(BaseCanvasAPI):
         if context_codes is not None:
             params["context_codes"] = context_codes
 
-
-        self.logger.debug("GET /api/v1/planner_notes with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/planner_notes".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/planner_notes with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/planner_notes".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def show_planner_note(self, id):
         """
@@ -211,11 +237,22 @@ class PlannerAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
+        self.logger.debug(
+            "GET /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/planner_notes/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/planner_notes/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def update_planner_note(self, id, course_id=None, details=None, title=None, todo_date=None):
+    def update_planner_note(
+        self, id, course_id=None, details=None, title=None, todo_date=None
+    ):
         """
         Update a planner note.
 
@@ -231,14 +268,12 @@ class PlannerAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - title
         """
             The title of the planner note.
         """
         if title is not None:
             data["title"] = title
-
 
         # OPTIONAL - details
         """
@@ -247,7 +282,6 @@ class PlannerAPI(BaseCanvasAPI):
         if details is not None:
             data["details"] = details
 
-
         # OPTIONAL - todo_date
         """
             The date where this planner note should appear in the planner.
@@ -255,7 +289,6 @@ class PlannerAPI(BaseCanvasAPI):
         """
         if todo_date is not None:
             data["todo_date"] = todo_date
-
 
         # OPTIONAL - course_id
         """
@@ -266,11 +299,28 @@ class PlannerAPI(BaseCanvasAPI):
         if course_id is not None:
             data["course_id"] = course_id
 
+        self.logger.debug(
+            "PUT /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/planner_notes/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("PUT /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/planner_notes/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def create_planner_note(self, course_id=None, details=None, linked_object_id=None, linked_object_type=None, title=None, todo_date=None):
+    def create_planner_note(
+        self,
+        course_id=None,
+        details=None,
+        linked_object_id=None,
+        linked_object_type=None,
+        title=None,
+        todo_date=None,
+    ):
         """
         Create a planner note.
 
@@ -287,14 +337,12 @@ class PlannerAPI(BaseCanvasAPI):
         if title is not None:
             data["title"] = title
 
-
         # OPTIONAL - details
         """
             Text of the planner note.
         """
         if details is not None:
             data["details"] = details
-
 
         # OPTIONAL - todo_date
         """
@@ -304,7 +352,6 @@ class PlannerAPI(BaseCanvasAPI):
         if todo_date is not None:
             data["todo_date"] = todo_date
 
-
         # OPTIONAL - course_id
         """
             The ID of the course to associate with the planner note. The caller must be able to view the course in order to
@@ -312,7 +359,6 @@ class PlannerAPI(BaseCanvasAPI):
         """
         if course_id is not None:
             data["course_id"] = course_id
-
 
         # OPTIONAL - linked_object_type
         """
@@ -322,7 +368,6 @@ class PlannerAPI(BaseCanvasAPI):
         """
         if linked_object_type is not None:
             data["linked_object_type"] = linked_object_type
-
 
         # OPTIONAL - linked_object_id
         """
@@ -334,9 +379,18 @@ class PlannerAPI(BaseCanvasAPI):
         if linked_object_id is not None:
             data["linked_object_id"] = linked_object_id
 
-
-        self.logger.debug("POST /api/v1/planner_notes with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/planner_notes".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/planner_notes with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/planner_notes".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_planner_note(self, id):
         """
@@ -354,9 +408,18 @@ class PlannerAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/planner_notes/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/planner_notes/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/planner_notes/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def list_planner_overrides(self):
         """
@@ -368,8 +431,18 @@ class PlannerAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/v1/planner/overrides with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/planner/overrides".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/planner/overrides with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/planner/overrides".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def show_planner_override(self, id):
         """
@@ -387,9 +460,18 @@ class PlannerAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/planner/overrides/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/planner/overrides/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/planner/overrides/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/planner/overrides/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def update_planner_override(self, id, dismissed=None, marked_complete=None):
         """
@@ -407,14 +489,12 @@ class PlannerAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - marked_complete
         """
             determines whether the planner item is marked as completed
         """
         if marked_complete is not None:
             data["marked_complete"] = marked_complete
-
 
         # OPTIONAL - dismissed
         """
@@ -423,11 +503,22 @@ class PlannerAPI(BaseCanvasAPI):
         if dismissed is not None:
             data["dismissed"] = dismissed
 
+        self.logger.debug(
+            "PUT /api/v1/planner/overrides/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/planner/overrides/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("PUT /api/v1/planner/overrides/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/planner/overrides/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def create_planner_override(self, plannable_id, plannable_type, dismissed=None, marked_complete=None):
+    def create_planner_override(
+        self, plannable_id, plannable_type, dismissed=None, marked_complete=None
+    ):
         """
         Create a planner override.
 
@@ -441,16 +532,24 @@ class PlannerAPI(BaseCanvasAPI):
         """
             Type of the item that you are overriding in the planner
         """
-        self._validate_enum(plannable_type, ["announcement", "assignment", "discussion_topic", "quiz", "wiki_page", "planner_note"])
+        self._validate_enum(
+            plannable_type,
+            [
+                "announcement",
+                "assignment",
+                "discussion_topic",
+                "quiz",
+                "wiki_page",
+                "planner_note",
+            ],
+        )
         data["plannable_type"] = plannable_type
-
 
         # REQUIRED - plannable_id
         """
             ID of the item that you are overriding in the planner
         """
         data["plannable_id"] = plannable_id
-
 
         # OPTIONAL - marked_complete
         """
@@ -459,7 +558,6 @@ class PlannerAPI(BaseCanvasAPI):
         if marked_complete is not None:
             data["marked_complete"] = marked_complete
 
-
         # OPTIONAL - dismissed
         """
             If this is true, the item will not show in the opportunities list
@@ -467,9 +565,18 @@ class PlannerAPI(BaseCanvasAPI):
         if dismissed is not None:
             data["dismissed"] = dismissed
 
-
-        self.logger.debug("POST /api/v1/planner/overrides with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/planner/overrides".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/planner/overrides with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/planner/overrides".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_planner_override(self, id):
         """
@@ -487,16 +594,38 @@ class PlannerAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/planner/overrides/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/planner/overrides/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/planner/overrides/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/planner/overrides/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Plannernote(BaseModel):
     """Plannernote Model.
     A planner note"""
 
-    def __init__(self, id=None, title=None, description=None, user_id=None, workflow_state=None, course_id=None, todo_date=None, linked_object_type=None, linked_object_id=None, linked_object_html_url=None, linked_object_url=None):
+    def __init__(
+        self,
+        id=None,
+        title=None,
+        description=None,
+        user_id=None,
+        workflow_state=None,
+        course_id=None,
+        todo_date=None,
+        linked_object_type=None,
+        linked_object_id=None,
+        linked_object_html_url=None,
+        linked_object_url=None,
+    ):
         """Init method for Plannernote class."""
         self._id = id
         self._title = title
@@ -510,7 +639,7 @@ class Plannernote(BaseModel):
         self._linked_object_html_url = linked_object_html_url
         self._linked_object_url = linked_object_url
 
-        self.logger = logging.getLogger('py3canvas.Plannernote')
+        self.logger = logging.getLogger("py3canvas.Plannernote")
 
     @property
     def id(self):
@@ -520,7 +649,9 @@ class Plannernote(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -531,7 +662,9 @@ class Plannernote(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -542,7 +675,9 @@ class Plannernote(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -553,7 +688,9 @@ class Plannernote(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -564,7 +701,9 @@ class Plannernote(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -575,7 +714,9 @@ class Plannernote(BaseModel):
     @course_id.setter
     def course_id(self, value):
         """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_id will NOT update the remote Canvas instance."
+        )
         self._course_id = value
 
     @property
@@ -586,7 +727,9 @@ class Plannernote(BaseModel):
     @todo_date.setter
     def todo_date(self, value):
         """Setter for todo_date property."""
-        self.logger.warn("Setting values on todo_date will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on todo_date will NOT update the remote Canvas instance."
+        )
         self._todo_date = value
 
     @property
@@ -597,7 +740,9 @@ class Plannernote(BaseModel):
     @linked_object_type.setter
     def linked_object_type(self, value):
         """Setter for linked_object_type property."""
-        self.logger.warn("Setting values on linked_object_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on linked_object_type will NOT update the remote Canvas instance."
+        )
         self._linked_object_type = value
 
     @property
@@ -608,7 +753,9 @@ class Plannernote(BaseModel):
     @linked_object_id.setter
     def linked_object_id(self, value):
         """Setter for linked_object_id property."""
-        self.logger.warn("Setting values on linked_object_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on linked_object_id will NOT update the remote Canvas instance."
+        )
         self._linked_object_id = value
 
     @property
@@ -619,7 +766,9 @@ class Plannernote(BaseModel):
     @linked_object_html_url.setter
     def linked_object_html_url(self, value):
         """Setter for linked_object_html_url property."""
-        self.logger.warn("Setting values on linked_object_html_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on linked_object_html_url will NOT update the remote Canvas instance."
+        )
         self._linked_object_html_url = value
 
     @property
@@ -630,7 +779,9 @@ class Plannernote(BaseModel):
     @linked_object_url.setter
     def linked_object_url(self, value):
         """Setter for linked_object_url property."""
-        self.logger.warn("Setting values on linked_object_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on linked_object_url will NOT update the remote Canvas instance."
+        )
         self._linked_object_url = value
 
 
@@ -638,7 +789,20 @@ class Planneroverride(BaseModel):
     """Planneroverride Model.
     User-controlled setting for whether an item should be displayed on the planner or not"""
 
-    def __init__(self, id=None, plannable_type=None, plannable_id=None, user_id=None, assignment_id=None, workflow_state=None, marked_complete=None, dismissed=None, created_at=None, updated_at=None, deleted_at=None):
+    def __init__(
+        self,
+        id=None,
+        plannable_type=None,
+        plannable_id=None,
+        user_id=None,
+        assignment_id=None,
+        workflow_state=None,
+        marked_complete=None,
+        dismissed=None,
+        created_at=None,
+        updated_at=None,
+        deleted_at=None,
+    ):
         """Init method for Planneroverride class."""
         self._id = id
         self._plannable_type = plannable_type
@@ -652,7 +816,7 @@ class Planneroverride(BaseModel):
         self._updated_at = updated_at
         self._deleted_at = deleted_at
 
-        self.logger = logging.getLogger('py3canvas.Planneroverride')
+        self.logger = logging.getLogger("py3canvas.Planneroverride")
 
     @property
     def id(self):
@@ -662,7 +826,9 @@ class Planneroverride(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -673,7 +839,9 @@ class Planneroverride(BaseModel):
     @plannable_type.setter
     def plannable_type(self, value):
         """Setter for plannable_type property."""
-        self.logger.warn("Setting values on plannable_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on plannable_type will NOT update the remote Canvas instance."
+        )
         self._plannable_type = value
 
     @property
@@ -684,7 +852,9 @@ class Planneroverride(BaseModel):
     @plannable_id.setter
     def plannable_id(self, value):
         """Setter for plannable_id property."""
-        self.logger.warn("Setting values on plannable_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on plannable_id will NOT update the remote Canvas instance."
+        )
         self._plannable_id = value
 
     @property
@@ -695,7 +865,9 @@ class Planneroverride(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -706,7 +878,9 @@ class Planneroverride(BaseModel):
     @assignment_id.setter
     def assignment_id(self, value):
         """Setter for assignment_id property."""
-        self.logger.warn("Setting values on assignment_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assignment_id will NOT update the remote Canvas instance."
+        )
         self._assignment_id = value
 
     @property
@@ -717,7 +891,9 @@ class Planneroverride(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -728,7 +904,9 @@ class Planneroverride(BaseModel):
     @marked_complete.setter
     def marked_complete(self, value):
         """Setter for marked_complete property."""
-        self.logger.warn("Setting values on marked_complete will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on marked_complete will NOT update the remote Canvas instance."
+        )
         self._marked_complete = value
 
     @property
@@ -739,7 +917,9 @@ class Planneroverride(BaseModel):
     @dismissed.setter
     def dismissed(self, value):
         """Setter for dismissed property."""
-        self.logger.warn("Setting values on dismissed will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on dismissed will NOT update the remote Canvas instance."
+        )
         self._dismissed = value
 
     @property
@@ -750,7 +930,9 @@ class Planneroverride(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -761,7 +943,9 @@ class Planneroverride(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
 
     @property
@@ -772,6 +956,7 @@ class Planneroverride(BaseModel):
     @deleted_at.setter
     def deleted_at(self, value):
         """Setter for deleted_at property."""
-        self.logger.warn("Setting values on deleted_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on deleted_at will NOT update the remote Canvas instance."
+        )
         self._deleted_at = value
-

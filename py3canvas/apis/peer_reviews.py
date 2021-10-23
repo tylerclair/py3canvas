@@ -16,7 +16,9 @@ class PeerReviewsAPI(BaseCanvasAPI):
         super(PeerReviewsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.PeerReviewsAPI")
 
-    def get_all_peer_reviews_courses_peer_reviews(self, assignment_id, course_id, include=None):
+    def get_all_peer_reviews_courses_peer_reviews(
+        self, assignment_id, course_id, include=None
+    ):
         """
         Get all Peer Reviews.
 
@@ -32,13 +34,11 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # OPTIONAL - include
         """
@@ -48,11 +48,24 @@ class PeerReviewsAPI(BaseCanvasAPI):
             self._validate_enum(include, ["submission_comments", "user"])
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignments/{assignment_id}/peer_reviews with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/peer_reviews".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{assignment_id}/peer_reviews with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/peer_reviews".format(**path), data=data, params=params, all_pages=True)
-
-    def get_all_peer_reviews_sections_peer_reviews(self, assignment_id, section_id, include=None):
+    def get_all_peer_reviews_sections_peer_reviews(
+        self, assignment_id, section_id, include=None
+    ):
         """
         Get all Peer Reviews.
 
@@ -68,13 +81,11 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["section_id"] = section_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # OPTIONAL - include
         """
@@ -84,11 +95,24 @@ class PeerReviewsAPI(BaseCanvasAPI):
             self._validate_enum(include, ["submission_comments", "user"])
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/sections/{section_id}/assignments/{assignment_id}/peer_reviews with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/sections/{section_id}/assignments/{assignment_id}/peer_reviews".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/sections/{section_id}/assignments/{assignment_id}/peer_reviews with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/sections/{section_id}/assignments/{assignment_id}/peer_reviews".format(**path), data=data, params=params, all_pages=True)
-
-    def get_all_peer_reviews_courses_submissions(self, assignment_id, course_id, submission_id, include=None):
+    def get_all_peer_reviews_courses_submissions(
+        self, assignment_id, course_id, submission_id, include=None
+    ):
         """
         Get all Peer Reviews.
 
@@ -104,20 +128,17 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
 
-
         # REQUIRED - PATH - submission_id
         """
             ID
         """
         path["submission_id"] = submission_id
-
 
         # OPTIONAL - include
         """
@@ -127,11 +148,24 @@ class PeerReviewsAPI(BaseCanvasAPI):
             self._validate_enum(include, ["submission_comments", "user"])
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(**path), data=data, params=params, all_pages=True)
-
-    def get_all_peer_reviews_sections_submissions(self, assignment_id, section_id, submission_id, include=None):
+    def get_all_peer_reviews_sections_submissions(
+        self, assignment_id, section_id, submission_id, include=None
+    ):
         """
         Get all Peer Reviews.
 
@@ -147,20 +181,17 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["section_id"] = section_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
 
-
         # REQUIRED - PATH - submission_id
         """
             ID
         """
         path["submission_id"] = submission_id
-
 
         # OPTIONAL - include
         """
@@ -170,11 +201,24 @@ class PeerReviewsAPI(BaseCanvasAPI):
             self._validate_enum(include, ["submission_comments", "user"])
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(**path), data=data, params=params, all_pages=True)
-
-    def create_peer_review_courses(self, assignment_id, course_id, submission_id, user_id):
+    def create_peer_review_courses(
+        self, assignment_id, course_id, submission_id, user_id
+    ):
         """
         Create Peer Review.
 
@@ -190,13 +234,11 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # REQUIRED - PATH - submission_id
         """
@@ -204,18 +246,30 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["submission_id"] = submission_id
 
-
         # REQUIRED - user_id
         """
             user_id to assign as reviewer on this assignment
         """
         data["user_id"] = user_id
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(**path), data=data, params=params, single_item=True)
-
-    def create_peer_review_sections(self, assignment_id, section_id, submission_id, user_id):
+    def create_peer_review_sections(
+        self, assignment_id, section_id, submission_id, user_id
+    ):
         """
         Create Peer Review.
 
@@ -231,13 +285,11 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["section_id"] = section_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # REQUIRED - PATH - submission_id
         """
@@ -245,18 +297,30 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["submission_id"] = submission_id
 
-
         # REQUIRED - user_id
         """
             user_id to assign as reviewer on this assignment
         """
         data["user_id"] = user_id
 
+        self.logger.debug(
+            "POST /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(**path), data=data, params=params, single_item=True)
-
-    def delete_peer_review_courses(self, assignment_id, course_id, submission_id, user_id):
+    def delete_peer_review_courses(
+        self, assignment_id, course_id, submission_id, user_id
+    ):
         """
         Delete Peer Review.
 
@@ -272,13 +336,11 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # REQUIRED - PATH - submission_id
         """
@@ -286,18 +348,30 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["submission_id"] = submission_id
 
-
         # REQUIRED - user_id
         """
             user_id to delete as reviewer on this assignment
         """
         params["user_id"] = user_id
 
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(**path), data=data, params=params, single_item=True)
-
-    def delete_peer_review_sections(self, assignment_id, section_id, submission_id, user_id):
+    def delete_peer_review_sections(
+        self, assignment_id, section_id, submission_id, user_id
+    ):
         """
         Delete Peer Review.
 
@@ -313,13 +387,11 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["section_id"] = section_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # REQUIRED - PATH - submission_id
         """
@@ -327,22 +399,43 @@ class PeerReviewsAPI(BaseCanvasAPI):
         """
         path["submission_id"] = submission_id
 
-
         # REQUIRED - user_id
         """
             user_id to delete as reviewer on this assignment
         """
         params["user_id"] = user_id
 
-
-        self.logger.debug("DELETE /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/sections/{section_id}/assignments/{assignment_id}/submissions/{submission_id}/peer_reviews".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Peerreview(BaseModel):
     """Peerreview Model."""
 
-    def __init__(self, assessor_id=None, asset_id=None, asset_type=None, id=None, user_id=None, workflow_state=None, user=None, assessor=None, submission_comments=None):
+    def __init__(
+        self,
+        assessor_id=None,
+        asset_id=None,
+        asset_type=None,
+        id=None,
+        user_id=None,
+        workflow_state=None,
+        user=None,
+        assessor=None,
+        submission_comments=None,
+    ):
         """Init method for Peerreview class."""
         self._assessor_id = assessor_id
         self._asset_id = asset_id
@@ -354,7 +447,7 @@ class Peerreview(BaseModel):
         self._assessor = assessor
         self._submission_comments = submission_comments
 
-        self.logger = logging.getLogger('py3canvas.Peerreview')
+        self.logger = logging.getLogger("py3canvas.Peerreview")
 
     @property
     def assessor_id(self):
@@ -364,7 +457,9 @@ class Peerreview(BaseModel):
     @assessor_id.setter
     def assessor_id(self, value):
         """Setter for assessor_id property."""
-        self.logger.warn("Setting values on assessor_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assessor_id will NOT update the remote Canvas instance."
+        )
         self._assessor_id = value
 
     @property
@@ -375,7 +470,9 @@ class Peerreview(BaseModel):
     @asset_id.setter
     def asset_id(self, value):
         """Setter for asset_id property."""
-        self.logger.warn("Setting values on asset_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on asset_id will NOT update the remote Canvas instance."
+        )
         self._asset_id = value
 
     @property
@@ -386,7 +483,9 @@ class Peerreview(BaseModel):
     @asset_type.setter
     def asset_type(self, value):
         """Setter for asset_type property."""
-        self.logger.warn("Setting values on asset_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on asset_type will NOT update the remote Canvas instance."
+        )
         self._asset_type = value
 
     @property
@@ -397,7 +496,9 @@ class Peerreview(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -408,7 +509,9 @@ class Peerreview(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -419,7 +522,9 @@ class Peerreview(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -430,7 +535,9 @@ class Peerreview(BaseModel):
     @user.setter
     def user(self, value):
         """Setter for user property."""
-        self.logger.warn("Setting values on user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user will NOT update the remote Canvas instance."
+        )
         self._user = value
 
     @property
@@ -441,7 +548,9 @@ class Peerreview(BaseModel):
     @assessor.setter
     def assessor(self, value):
         """Setter for assessor property."""
-        self.logger.warn("Setting values on assessor will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assessor will NOT update the remote Canvas instance."
+        )
         self._assessor = value
 
     @property
@@ -452,6 +561,7 @@ class Peerreview(BaseModel):
     @submission_comments.setter
     def submission_comments(self, value):
         """Setter for submission_comments property."""
-        self.logger.warn("Setting values on submission_comments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submission_comments will NOT update the remote Canvas instance."
+        )
         self._submission_comments = value
-

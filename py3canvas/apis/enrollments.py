@@ -16,7 +16,22 @@ class EnrollmentsAPI(BaseCanvasAPI):
         super(EnrollmentsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.EnrollmentsAPI")
 
-    def list_enrollments_courses(self, course_id, created_for_sis_id=None, enrollment_term_id=None, grading_period_id=None, include=None, role=None, sis_account_id=None, sis_course_id=None, sis_section_id=None, sis_user_id=None, state=None, type=None, user_id=None):
+    def list_enrollments_courses(
+        self,
+        course_id,
+        created_for_sis_id=None,
+        enrollment_term_id=None,
+        grading_period_id=None,
+        include=None,
+        role=None,
+        sis_account_id=None,
+        sis_course_id=None,
+        sis_section_id=None,
+        sis_user_id=None,
+        state=None,
+        type=None,
+        user_id=None,
+    ):
         """
         List enrollments.
 
@@ -24,11 +39,11 @@ class EnrollmentsAPI(BaseCanvasAPI):
         the enrollments in a course, (2) all of the enrollments in a section or (3)
         all of a user's enrollments. This includes student, teacher, TA, and
         observer enrollments.
-        
+
         If a user has multiple enrollments in a context (e.g. as a teacher
         and a student or in multiple course sections), each enrollment will be
         listed separately.
-        
+
         note: Currently, only a root level admin user can return other users' enrollments. A
         user can, however, return his/her own enrollments.
         """
@@ -42,7 +57,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - type
         """
             A list of enrollment types to return. Accepted values are
@@ -53,7 +67,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if type is not None:
             params["type"] = type
 
-
         # OPTIONAL - role
         """
             A list of enrollment roles to return. Accepted values include course-level
@@ -63,7 +76,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if role is not None:
             params["role"] = role
 
-
         # OPTIONAL - state
         """
             Filter by enrollment state. If omitted, 'active' and 'invited' enrollments
@@ -72,9 +84,22 @@ class EnrollmentsAPI(BaseCanvasAPI):
         enrollments endpoint): +current_and_invited+, +current_and_future+, +current_and_concluded+
         """
         if state is not None:
-            self._validate_enum(state, ["active", "invited", "creation_pending", "deleted", "rejected", "completed", "inactive", "current_and_invited", "current_and_future", "current_and_concluded"])
+            self._validate_enum(
+                state,
+                [
+                    "active",
+                    "invited",
+                    "creation_pending",
+                    "deleted",
+                    "rejected",
+                    "completed",
+                    "inactive",
+                    "current_and_invited",
+                    "current_and_future",
+                    "current_and_concluded",
+                ],
+            )
             params["state"] = state
-
 
         # OPTIONAL - include
         """
@@ -85,9 +110,19 @@ class EnrollmentsAPI(BaseCanvasAPI):
         in the "grades" hash for student enrollments.
         """
         if include is not None:
-            self._validate_enum(include, ["avatar_url", "group_ids", "locked", "observed_users", "can_be_removed", "uuid", "current_points"])
+            self._validate_enum(
+                include,
+                [
+                    "avatar_url",
+                    "group_ids",
+                    "locked",
+                    "observed_users",
+                    "can_be_removed",
+                    "uuid",
+                    "current_points",
+                ],
+            )
             params["include"] = include
-
 
         # OPTIONAL - user_id
         """
@@ -100,7 +135,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if user_id is not None:
             params["user_id"] = user_id
 
-
         # OPTIONAL - grading_period_id
         """
             Return grades for the given grading_period.  If this parameter is not
@@ -108,7 +142,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if grading_period_id is not None:
             params["grading_period_id"] = grading_period_id
-
 
         # OPTIONAL - enrollment_term_id
         """
@@ -119,7 +152,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_term_id is not None:
             params["enrollment_term_id"] = enrollment_term_id
 
-
         # OPTIONAL - sis_account_id
         """
             Returns only enrollments for the specified SIS account ID(s). Does not
@@ -127,7 +159,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if sis_account_id is not None:
             params["sis_account_id"] = sis_account_id
-
 
         # OPTIONAL - sis_course_id
         """
@@ -137,7 +168,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if sis_course_id is not None:
             params["sis_course_id"] = sis_course_id
 
-
         # OPTIONAL - sis_section_id
         """
             Returns only section enrollments matching the specified SIS section ID(s).
@@ -146,7 +176,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if sis_section_id is not None:
             params["sis_section_id"] = sis_section_id
 
-
         # OPTIONAL - sis_user_id
         """
             Returns only enrollments for the specified SIS user ID(s). May pass in
@@ -154,7 +183,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if sis_user_id is not None:
             params["sis_user_id"] = sis_user_id
-
 
         # OPTIONAL - created_for_sis_id
         """
@@ -167,11 +195,35 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if created_for_sis_id is not None:
             params["created_for_sis_id"] = created_for_sis_id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/enrollments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/enrollments".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/enrollments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/enrollments".format(**path), data=data, params=params, all_pages=True)
-
-    def list_enrollments_sections(self, section_id, created_for_sis_id=None, enrollment_term_id=None, grading_period_id=None, include=None, role=None, sis_account_id=None, sis_course_id=None, sis_section_id=None, sis_user_id=None, state=None, type=None, user_id=None):
+    def list_enrollments_sections(
+        self,
+        section_id,
+        created_for_sis_id=None,
+        enrollment_term_id=None,
+        grading_period_id=None,
+        include=None,
+        role=None,
+        sis_account_id=None,
+        sis_course_id=None,
+        sis_section_id=None,
+        sis_user_id=None,
+        state=None,
+        type=None,
+        user_id=None,
+    ):
         """
         List enrollments.
 
@@ -179,11 +231,11 @@ class EnrollmentsAPI(BaseCanvasAPI):
         the enrollments in a course, (2) all of the enrollments in a section or (3)
         all of a user's enrollments. This includes student, teacher, TA, and
         observer enrollments.
-        
+
         If a user has multiple enrollments in a context (e.g. as a teacher
         and a student or in multiple course sections), each enrollment will be
         listed separately.
-        
+
         note: Currently, only a root level admin user can return other users' enrollments. A
         user can, however, return his/her own enrollments.
         """
@@ -197,7 +249,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["section_id"] = section_id
 
-
         # OPTIONAL - type
         """
             A list of enrollment types to return. Accepted values are
@@ -208,7 +259,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if type is not None:
             params["type"] = type
 
-
         # OPTIONAL - role
         """
             A list of enrollment roles to return. Accepted values include course-level
@@ -218,7 +268,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if role is not None:
             params["role"] = role
 
-
         # OPTIONAL - state
         """
             Filter by enrollment state. If omitted, 'active' and 'invited' enrollments
@@ -227,9 +276,22 @@ class EnrollmentsAPI(BaseCanvasAPI):
         enrollments endpoint): +current_and_invited+, +current_and_future+, +current_and_concluded+
         """
         if state is not None:
-            self._validate_enum(state, ["active", "invited", "creation_pending", "deleted", "rejected", "completed", "inactive", "current_and_invited", "current_and_future", "current_and_concluded"])
+            self._validate_enum(
+                state,
+                [
+                    "active",
+                    "invited",
+                    "creation_pending",
+                    "deleted",
+                    "rejected",
+                    "completed",
+                    "inactive",
+                    "current_and_invited",
+                    "current_and_future",
+                    "current_and_concluded",
+                ],
+            )
             params["state"] = state
-
 
         # OPTIONAL - include
         """
@@ -240,9 +302,19 @@ class EnrollmentsAPI(BaseCanvasAPI):
         in the "grades" hash for student enrollments.
         """
         if include is not None:
-            self._validate_enum(include, ["avatar_url", "group_ids", "locked", "observed_users", "can_be_removed", "uuid", "current_points"])
+            self._validate_enum(
+                include,
+                [
+                    "avatar_url",
+                    "group_ids",
+                    "locked",
+                    "observed_users",
+                    "can_be_removed",
+                    "uuid",
+                    "current_points",
+                ],
+            )
             params["include"] = include
-
 
         # OPTIONAL - user_id
         """
@@ -255,7 +327,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if user_id is not None:
             params["user_id"] = user_id
 
-
         # OPTIONAL - grading_period_id
         """
             Return grades for the given grading_period.  If this parameter is not
@@ -263,7 +334,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if grading_period_id is not None:
             params["grading_period_id"] = grading_period_id
-
 
         # OPTIONAL - enrollment_term_id
         """
@@ -274,7 +344,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_term_id is not None:
             params["enrollment_term_id"] = enrollment_term_id
 
-
         # OPTIONAL - sis_account_id
         """
             Returns only enrollments for the specified SIS account ID(s). Does not
@@ -282,7 +351,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if sis_account_id is not None:
             params["sis_account_id"] = sis_account_id
-
 
         # OPTIONAL - sis_course_id
         """
@@ -292,7 +360,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if sis_course_id is not None:
             params["sis_course_id"] = sis_course_id
 
-
         # OPTIONAL - sis_section_id
         """
             Returns only section enrollments matching the specified SIS section ID(s).
@@ -301,7 +368,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if sis_section_id is not None:
             params["sis_section_id"] = sis_section_id
 
-
         # OPTIONAL - sis_user_id
         """
             Returns only enrollments for the specified SIS user ID(s). May pass in
@@ -309,7 +375,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if sis_user_id is not None:
             params["sis_user_id"] = sis_user_id
-
 
         # OPTIONAL - created_for_sis_id
         """
@@ -322,11 +387,34 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if created_for_sis_id is not None:
             params["created_for_sis_id"] = created_for_sis_id
 
+        self.logger.debug(
+            "GET /api/v1/sections/{section_id}/enrollments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/sections/{section_id}/enrollments".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/sections/{section_id}/enrollments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/sections/{section_id}/enrollments".format(**path), data=data, params=params, all_pages=True)
-
-    def list_enrollments_users(self, user_id, created_for_sis_id=None, enrollment_term_id=None, grading_period_id=None, include=None, role=None, sis_account_id=None, sis_course_id=None, sis_section_id=None, sis_user_id=None, state=None, type=None):
+    def list_enrollments_users(
+        self,
+        user_id,
+        created_for_sis_id=None,
+        enrollment_term_id=None,
+        grading_period_id=None,
+        include=None,
+        role=None,
+        sis_account_id=None,
+        sis_course_id=None,
+        sis_section_id=None,
+        sis_user_id=None,
+        state=None,
+        type=None,
+    ):
         """
         List enrollments.
 
@@ -334,11 +422,11 @@ class EnrollmentsAPI(BaseCanvasAPI):
         the enrollments in a course, (2) all of the enrollments in a section or (3)
         all of a user's enrollments. This includes student, teacher, TA, and
         observer enrollments.
-        
+
         If a user has multiple enrollments in a context (e.g. as a teacher
         and a student or in multiple course sections), each enrollment will be
         listed separately.
-        
+
         note: Currently, only a root level admin user can return other users' enrollments. A
         user can, however, return his/her own enrollments.
         """
@@ -356,7 +444,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if type is not None:
             params["type"] = type
 
-
         # OPTIONAL - role
         """
             A list of enrollment roles to return. Accepted values include course-level
@@ -366,7 +453,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if role is not None:
             params["role"] = role
 
-
         # OPTIONAL - state
         """
             Filter by enrollment state. If omitted, 'active' and 'invited' enrollments
@@ -375,9 +461,22 @@ class EnrollmentsAPI(BaseCanvasAPI):
         enrollments endpoint): +current_and_invited+, +current_and_future+, +current_and_concluded+
         """
         if state is not None:
-            self._validate_enum(state, ["active", "invited", "creation_pending", "deleted", "rejected", "completed", "inactive", "current_and_invited", "current_and_future", "current_and_concluded"])
+            self._validate_enum(
+                state,
+                [
+                    "active",
+                    "invited",
+                    "creation_pending",
+                    "deleted",
+                    "rejected",
+                    "completed",
+                    "inactive",
+                    "current_and_invited",
+                    "current_and_future",
+                    "current_and_concluded",
+                ],
+            )
             params["state"] = state
-
 
         # OPTIONAL - include
         """
@@ -388,9 +487,19 @@ class EnrollmentsAPI(BaseCanvasAPI):
         in the "grades" hash for student enrollments.
         """
         if include is not None:
-            self._validate_enum(include, ["avatar_url", "group_ids", "locked", "observed_users", "can_be_removed", "uuid", "current_points"])
+            self._validate_enum(
+                include,
+                [
+                    "avatar_url",
+                    "group_ids",
+                    "locked",
+                    "observed_users",
+                    "can_be_removed",
+                    "uuid",
+                    "current_points",
+                ],
+            )
             params["include"] = include
-
 
         # REQUIRED - PATH - user_id
         """
@@ -402,7 +511,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # OPTIONAL - grading_period_id
         """
             Return grades for the given grading_period.  If this parameter is not
@@ -410,7 +518,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if grading_period_id is not None:
             params["grading_period_id"] = grading_period_id
-
 
         # OPTIONAL - enrollment_term_id
         """
@@ -421,7 +528,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_term_id is not None:
             params["enrollment_term_id"] = enrollment_term_id
 
-
         # OPTIONAL - sis_account_id
         """
             Returns only enrollments for the specified SIS account ID(s). Does not
@@ -429,7 +535,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if sis_account_id is not None:
             params["sis_account_id"] = sis_account_id
-
 
         # OPTIONAL - sis_course_id
         """
@@ -439,7 +544,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if sis_course_id is not None:
             params["sis_course_id"] = sis_course_id
 
-
         # OPTIONAL - sis_section_id
         """
             Returns only section enrollments matching the specified SIS section ID(s).
@@ -448,7 +552,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if sis_section_id is not None:
             params["sis_section_id"] = sis_section_id
 
-
         # OPTIONAL - sis_user_id
         """
             Returns only enrollments for the specified SIS user ID(s). May pass in
@@ -456,7 +559,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if sis_user_id is not None:
             params["sis_user_id"] = sis_user_id
-
 
         # OPTIONAL - created_for_sis_id
         """
@@ -469,9 +571,18 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if created_for_sis_id is not None:
             params["created_for_sis_id"] = created_for_sis_id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/enrollments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/enrollments".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/enrollments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/enrollments".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def enrollment_by_id(self, account_id, id):
         """
@@ -489,18 +600,42 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - id
         """
             The ID of the enrollment object
         """
         path["id"] = id
 
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/enrollments/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/enrollments/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/accounts/{account_id}/enrollments/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/enrollments/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def enroll_user_courses(self, course_id, enrollment_type, enrollment_user_id, enrollment_associated_user_id=None, enrollment_course_section_id=None, enrollment_end_at=None, enrollment_enrollment_state=None, enrollment_limit_privileges_to_course_section=None, enrollment_notify=None, enrollment_role=None, enrollment_role_id=None, enrollment_self_enrolled=None, enrollment_self_enrollment_code=None, enrollment_start_at=None):
+    def enroll_user_courses(
+        self,
+        course_id,
+        enrollment_type,
+        enrollment_user_id,
+        enrollment_associated_user_id=None,
+        enrollment_course_section_id=None,
+        enrollment_end_at=None,
+        enrollment_enrollment_state=None,
+        enrollment_limit_privileges_to_course_section=None,
+        enrollment_notify=None,
+        enrollment_role=None,
+        enrollment_role_id=None,
+        enrollment_self_enrolled=None,
+        enrollment_self_enrollment_code=None,
+        enrollment_start_at=None,
+    ):
         """
         Enroll a user.
 
@@ -516,7 +651,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - enrollment[start_at]
         """
             The start time of the enrollment, in ISO8601 format. e.g. 2012-04-18T23:08:51Z
@@ -524,10 +658,13 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_start_at is not None:
             if issubclass(enrollment_start_at.__class__, str):
                 enrollment_start_at = self._validate_iso8601_string(enrollment_start_at)
-            elif issubclass(enrollment_start_at.__class__, date) or issubclass(enrollment_start_at.__class__, datetime):
-                enrollment_start_at = enrollment_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(enrollment_start_at.__class__, date) or issubclass(
+                enrollment_start_at.__class__, datetime
+            ):
+                enrollment_start_at = enrollment_start_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["enrollment[start_at]"] = enrollment_start_at
-
 
         # OPTIONAL - enrollment[end_at]
         """
@@ -536,10 +673,13 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_end_at is not None:
             if issubclass(enrollment_end_at.__class__, str):
                 enrollment_end_at = self._validate_iso8601_string(enrollment_end_at)
-            elif issubclass(enrollment_end_at.__class__, date) or issubclass(enrollment_end_at.__class__, datetime):
-                enrollment_end_at = enrollment_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(enrollment_end_at.__class__, date) or issubclass(
+                enrollment_end_at.__class__, datetime
+            ):
+                enrollment_end_at = enrollment_end_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["enrollment[end_at]"] = enrollment_end_at
-
 
         # REQUIRED - enrollment[user_id]
         """
@@ -547,16 +687,23 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         data["enrollment[user_id]"] = enrollment_user_id
 
-
         # REQUIRED - enrollment[type]
         """
             Enroll the user as a student, teacher, TA, observer, or designer. If no
         value is given, the type will be inferred by enrollment[role] if supplied,
         otherwise 'StudentEnrollment' will be used.
         """
-        self._validate_enum(enrollment_type, ["StudentEnrollment", "TeacherEnrollment", "TaEnrollment", "ObserverEnrollment", "DesignerEnrollment"])
+        self._validate_enum(
+            enrollment_type,
+            [
+                "StudentEnrollment",
+                "TeacherEnrollment",
+                "TaEnrollment",
+                "ObserverEnrollment",
+                "DesignerEnrollment",
+            ],
+        )
         data["enrollment[type]"] = enrollment_type
-
 
         # OPTIONAL - enrollment[role]
         """
@@ -565,14 +712,12 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_role is not None:
             data["enrollment[role]"] = enrollment_role
 
-
         # OPTIONAL - enrollment[role_id]
         """
             Assigns a custom course-level role to the user.
         """
         if enrollment_role_id is not None:
             data["enrollment[role_id]"] = enrollment_role_id
-
 
         # OPTIONAL - enrollment[enrollment_state]
         """
@@ -585,9 +730,10 @@ class EnrollmentsAPI(BaseCanvasAPI):
         their enrollment is activated.
         """
         if enrollment_enrollment_state is not None:
-            self._validate_enum(enrollment_enrollment_state, ["active", "invited", "inactive"])
+            self._validate_enum(
+                enrollment_enrollment_state, ["active", "invited", "inactive"]
+            )
             data["enrollment[enrollment_state]"] = enrollment_enrollment_state
-
 
         # OPTIONAL - enrollment[course_section_id]
         """
@@ -597,7 +743,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if enrollment_course_section_id is not None:
             data["enrollment[course_section_id]"] = enrollment_course_section_id
-
 
         # OPTIONAL - enrollment[limit_privileges_to_course_section]
         """
@@ -610,8 +755,9 @@ class EnrollmentsAPI(BaseCanvasAPI):
           multiple sections in the same course.
         """
         if enrollment_limit_privileges_to_course_section is not None:
-            data["enrollment[limit_privileges_to_course_section]"] = enrollment_limit_privileges_to_course_section
-
+            data[
+                "enrollment[limit_privileges_to_course_section]"
+            ] = enrollment_limit_privileges_to_course_section
 
         # OPTIONAL - enrollment[notify]
         """
@@ -620,7 +766,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if enrollment_notify is not None:
             data["enrollment[notify]"] = enrollment_notify
-
 
         # OPTIONAL - enrollment[self_enrollment_code]
         """
@@ -634,7 +779,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_self_enrollment_code is not None:
             data["enrollment[self_enrollment_code]"] = enrollment_self_enrollment_code
 
-
         # OPTIONAL - enrollment[self_enrolled]
         """
             If true, marks the enrollment as a self-enrollment, which gives
@@ -642,7 +786,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if enrollment_self_enrolled is not None:
             data["enrollment[self_enrolled]"] = enrollment_self_enrolled
-
 
         # OPTIONAL - enrollment[associated_user_id]
         """
@@ -654,11 +797,36 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_associated_user_id is not None:
             data["enrollment[associated_user_id]"] = enrollment_associated_user_id
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/enrollments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/enrollments".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/enrollments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/enrollments".format(**path), data=data, params=params, single_item=True)
-
-    def enroll_user_sections(self, enrollment_type, enrollment_user_id, section_id, enrollment_associated_user_id=None, enrollment_course_section_id=None, enrollment_end_at=None, enrollment_enrollment_state=None, enrollment_limit_privileges_to_course_section=None, enrollment_notify=None, enrollment_role=None, enrollment_role_id=None, enrollment_self_enrolled=None, enrollment_self_enrollment_code=None, enrollment_start_at=None):
+    def enroll_user_sections(
+        self,
+        enrollment_type,
+        enrollment_user_id,
+        section_id,
+        enrollment_associated_user_id=None,
+        enrollment_course_section_id=None,
+        enrollment_end_at=None,
+        enrollment_enrollment_state=None,
+        enrollment_limit_privileges_to_course_section=None,
+        enrollment_notify=None,
+        enrollment_role=None,
+        enrollment_role_id=None,
+        enrollment_self_enrolled=None,
+        enrollment_self_enrollment_code=None,
+        enrollment_start_at=None,
+    ):
         """
         Enroll a user.
 
@@ -674,7 +842,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["section_id"] = section_id
 
-
         # OPTIONAL - enrollment[start_at]
         """
             The start time of the enrollment, in ISO8601 format. e.g. 2012-04-18T23:08:51Z
@@ -682,10 +849,13 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_start_at is not None:
             if issubclass(enrollment_start_at.__class__, str):
                 enrollment_start_at = self._validate_iso8601_string(enrollment_start_at)
-            elif issubclass(enrollment_start_at.__class__, date) or issubclass(enrollment_start_at.__class__, datetime):
-                enrollment_start_at = enrollment_start_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(enrollment_start_at.__class__, date) or issubclass(
+                enrollment_start_at.__class__, datetime
+            ):
+                enrollment_start_at = enrollment_start_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["enrollment[start_at]"] = enrollment_start_at
-
 
         # OPTIONAL - enrollment[end_at]
         """
@@ -694,10 +864,13 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_end_at is not None:
             if issubclass(enrollment_end_at.__class__, str):
                 enrollment_end_at = self._validate_iso8601_string(enrollment_end_at)
-            elif issubclass(enrollment_end_at.__class__, date) or issubclass(enrollment_end_at.__class__, datetime):
-                enrollment_end_at = enrollment_end_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(enrollment_end_at.__class__, date) or issubclass(
+                enrollment_end_at.__class__, datetime
+            ):
+                enrollment_end_at = enrollment_end_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["enrollment[end_at]"] = enrollment_end_at
-
 
         # REQUIRED - enrollment[user_id]
         """
@@ -705,16 +878,23 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         data["enrollment[user_id]"] = enrollment_user_id
 
-
         # REQUIRED - enrollment[type]
         """
             Enroll the user as a student, teacher, TA, observer, or designer. If no
         value is given, the type will be inferred by enrollment[role] if supplied,
         otherwise 'StudentEnrollment' will be used.
         """
-        self._validate_enum(enrollment_type, ["StudentEnrollment", "TeacherEnrollment", "TaEnrollment", "ObserverEnrollment", "DesignerEnrollment"])
+        self._validate_enum(
+            enrollment_type,
+            [
+                "StudentEnrollment",
+                "TeacherEnrollment",
+                "TaEnrollment",
+                "ObserverEnrollment",
+                "DesignerEnrollment",
+            ],
+        )
         data["enrollment[type]"] = enrollment_type
-
 
         # OPTIONAL - enrollment[role]
         """
@@ -723,14 +903,12 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_role is not None:
             data["enrollment[role]"] = enrollment_role
 
-
         # OPTIONAL - enrollment[role_id]
         """
             Assigns a custom course-level role to the user.
         """
         if enrollment_role_id is not None:
             data["enrollment[role_id]"] = enrollment_role_id
-
 
         # OPTIONAL - enrollment[enrollment_state]
         """
@@ -743,9 +921,10 @@ class EnrollmentsAPI(BaseCanvasAPI):
         their enrollment is activated.
         """
         if enrollment_enrollment_state is not None:
-            self._validate_enum(enrollment_enrollment_state, ["active", "invited", "inactive"])
+            self._validate_enum(
+                enrollment_enrollment_state, ["active", "invited", "inactive"]
+            )
             data["enrollment[enrollment_state]"] = enrollment_enrollment_state
-
 
         # OPTIONAL - enrollment[course_section_id]
         """
@@ -755,7 +934,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if enrollment_course_section_id is not None:
             data["enrollment[course_section_id]"] = enrollment_course_section_id
-
 
         # OPTIONAL - enrollment[limit_privileges_to_course_section]
         """
@@ -768,8 +946,9 @@ class EnrollmentsAPI(BaseCanvasAPI):
           multiple sections in the same course.
         """
         if enrollment_limit_privileges_to_course_section is not None:
-            data["enrollment[limit_privileges_to_course_section]"] = enrollment_limit_privileges_to_course_section
-
+            data[
+                "enrollment[limit_privileges_to_course_section]"
+            ] = enrollment_limit_privileges_to_course_section
 
         # OPTIONAL - enrollment[notify]
         """
@@ -778,7 +957,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if enrollment_notify is not None:
             data["enrollment[notify]"] = enrollment_notify
-
 
         # OPTIONAL - enrollment[self_enrollment_code]
         """
@@ -792,7 +970,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_self_enrollment_code is not None:
             data["enrollment[self_enrollment_code]"] = enrollment_self_enrollment_code
 
-
         # OPTIONAL - enrollment[self_enrolled]
         """
             If true, marks the enrollment as a self-enrollment, which gives
@@ -800,7 +977,6 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         if enrollment_self_enrolled is not None:
             data["enrollment[self_enrolled]"] = enrollment_self_enrolled
-
 
         # OPTIONAL - enrollment[associated_user_id]
         """
@@ -812,9 +988,18 @@ class EnrollmentsAPI(BaseCanvasAPI):
         if enrollment_associated_user_id is not None:
             data["enrollment[associated_user_id]"] = enrollment_associated_user_id
 
-
-        self.logger.debug("POST /api/v1/sections/{section_id}/enrollments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/sections/{section_id}/enrollments".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/sections/{section_id}/enrollments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/sections/{section_id}/enrollments".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def conclude_deactivate_or_delete_enrollment(self, course_id, id, task=None):
         """
@@ -833,13 +1018,11 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - task
         """
@@ -848,12 +1031,23 @@ class EnrollmentsAPI(BaseCanvasAPI):
         ("inactivate" and "deactivate" are equivalent tasks)
         """
         if task is not None:
-            self._validate_enum(task, ["conclude", "delete", "inactivate", "deactivate"])
+            self._validate_enum(
+                task, ["conclude", "delete", "inactivate", "deactivate"]
+            )
             params["task"] = task
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/enrollments/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/enrollments/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/enrollments/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/enrollments/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def accept_course_invitation(self, course_id, id):
         """
@@ -871,16 +1065,24 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/enrollments/{id}/accept with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/enrollments/{id}/accept".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/enrollments/{id}/accept with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/enrollments/{id}/accept".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def reject_course_invitation(self, course_id, id):
         """
@@ -898,16 +1100,24 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/enrollments/{id}/reject with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/enrollments/{id}/reject".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/enrollments/{id}/reject with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/enrollments/{id}/reject".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def re_activate_enrollment(self, course_id, id):
         """
@@ -925,22 +1135,32 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/enrollments/{id}/reactivate with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/enrollments/{id}/reactivate".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/enrollments/{id}/reactivate with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/enrollments/{id}/reactivate".format(**path), data=data, params=params, single_item=True)
-
-    def adds_last_attended_date_to_student_enrollment_in_course(self, course_id, user_id):
+    def adds_last_attended_date_to_student_enrollment_in_course(
+        self, course_id, user_id
+    ):
         """
         Adds last attended date to student enrollment in course.
 
-        
+
         """
         path = {}
         data = {}
@@ -952,22 +1172,43 @@ class EnrollmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - user_id
         """
             ID
         """
         path["user_id"] = user_id
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/users/{user_id}/last_attended with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/users/{user_id}/last_attended".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/users/{user_id}/last_attended with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/users/{user_id}/last_attended".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Grade(BaseModel):
     """Grade Model."""
 
-    def __init__(self, html_url=None, current_grade=None, final_grade=None, current_score=None, final_score=None, current_points=None, unposted_current_grade=None, unposted_final_grade=None, unposted_current_score=None, unposted_final_score=None, unposted_current_points=None):
+    def __init__(
+        self,
+        html_url=None,
+        current_grade=None,
+        final_grade=None,
+        current_score=None,
+        final_score=None,
+        current_points=None,
+        unposted_current_grade=None,
+        unposted_final_grade=None,
+        unposted_current_score=None,
+        unposted_final_score=None,
+        unposted_current_points=None,
+    ):
         """Init method for Grade class."""
         self._html_url = html_url
         self._current_grade = current_grade
@@ -981,7 +1222,7 @@ class Grade(BaseModel):
         self._unposted_final_score = unposted_final_score
         self._unposted_current_points = unposted_current_points
 
-        self.logger = logging.getLogger('py3canvas.Grade')
+        self.logger = logging.getLogger("py3canvas.Grade")
 
     @property
     def html_url(self):
@@ -991,7 +1232,9 @@ class Grade(BaseModel):
     @html_url.setter
     def html_url(self, value):
         """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on html_url will NOT update the remote Canvas instance."
+        )
         self._html_url = value
 
     @property
@@ -1002,7 +1245,9 @@ class Grade(BaseModel):
     @current_grade.setter
     def current_grade(self, value):
         """Setter for current_grade property."""
-        self.logger.warn("Setting values on current_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_grade will NOT update the remote Canvas instance."
+        )
         self._current_grade = value
 
     @property
@@ -1013,7 +1258,9 @@ class Grade(BaseModel):
     @final_grade.setter
     def final_grade(self, value):
         """Setter for final_grade property."""
-        self.logger.warn("Setting values on final_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on final_grade will NOT update the remote Canvas instance."
+        )
         self._final_grade = value
 
     @property
@@ -1024,7 +1271,9 @@ class Grade(BaseModel):
     @current_score.setter
     def current_score(self, value):
         """Setter for current_score property."""
-        self.logger.warn("Setting values on current_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_score will NOT update the remote Canvas instance."
+        )
         self._current_score = value
 
     @property
@@ -1035,7 +1284,9 @@ class Grade(BaseModel):
     @final_score.setter
     def final_score(self, value):
         """Setter for final_score property."""
-        self.logger.warn("Setting values on final_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on final_score will NOT update the remote Canvas instance."
+        )
         self._final_score = value
 
     @property
@@ -1046,7 +1297,9 @@ class Grade(BaseModel):
     @current_points.setter
     def current_points(self, value):
         """Setter for current_points property."""
-        self.logger.warn("Setting values on current_points will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_points will NOT update the remote Canvas instance."
+        )
         self._current_points = value
 
     @property
@@ -1057,7 +1310,9 @@ class Grade(BaseModel):
     @unposted_current_grade.setter
     def unposted_current_grade(self, value):
         """Setter for unposted_current_grade property."""
-        self.logger.warn("Setting values on unposted_current_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unposted_current_grade will NOT update the remote Canvas instance."
+        )
         self._unposted_current_grade = value
 
     @property
@@ -1068,7 +1323,9 @@ class Grade(BaseModel):
     @unposted_final_grade.setter
     def unposted_final_grade(self, value):
         """Setter for unposted_final_grade property."""
-        self.logger.warn("Setting values on unposted_final_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unposted_final_grade will NOT update the remote Canvas instance."
+        )
         self._unposted_final_grade = value
 
     @property
@@ -1079,7 +1336,9 @@ class Grade(BaseModel):
     @unposted_current_score.setter
     def unposted_current_score(self, value):
         """Setter for unposted_current_score property."""
-        self.logger.warn("Setting values on unposted_current_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unposted_current_score will NOT update the remote Canvas instance."
+        )
         self._unposted_current_score = value
 
     @property
@@ -1090,7 +1349,9 @@ class Grade(BaseModel):
     @unposted_final_score.setter
     def unposted_final_score(self, value):
         """Setter for unposted_final_score property."""
-        self.logger.warn("Setting values on unposted_final_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unposted_final_score will NOT update the remote Canvas instance."
+        )
         self._unposted_final_score = value
 
     @property
@@ -1101,14 +1362,62 @@ class Grade(BaseModel):
     @unposted_current_points.setter
     def unposted_current_points(self, value):
         """Setter for unposted_current_points property."""
-        self.logger.warn("Setting values on unposted_current_points will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unposted_current_points will NOT update the remote Canvas instance."
+        )
         self._unposted_current_points = value
 
 
 class Enrollment(BaseModel):
     """Enrollment Model."""
 
-    def __init__(self, id=None, course_id=None, sis_course_id=None, course_integration_id=None, course_section_id=None, section_integration_id=None, sis_account_id=None, sis_section_id=None, sis_user_id=None, enrollment_state=None, limit_privileges_to_course_section=None, sis_import_id=None, root_account_id=None, type=None, user_id=None, associated_user_id=None, role=None, role_id=None, created_at=None, updated_at=None, start_at=None, end_at=None, last_activity_at=None, last_attended_at=None, total_activity_time=None, html_url=None, grades=None, user=None, override_grade=None, override_score=None, unposted_current_grade=None, unposted_final_grade=None, unposted_current_score=None, unposted_final_score=None, has_grading_periods=None, totals_for_all_grading_periods_option=None, current_grading_period_title=None, current_grading_period_id=None, current_period_override_grade=None, current_period_override_score=None, current_period_unposted_current_score=None, current_period_unposted_final_score=None, current_period_unposted_current_grade=None, current_period_unposted_final_grade=None):
+    def __init__(
+        self,
+        id=None,
+        course_id=None,
+        sis_course_id=None,
+        course_integration_id=None,
+        course_section_id=None,
+        section_integration_id=None,
+        sis_account_id=None,
+        sis_section_id=None,
+        sis_user_id=None,
+        enrollment_state=None,
+        limit_privileges_to_course_section=None,
+        sis_import_id=None,
+        root_account_id=None,
+        type=None,
+        user_id=None,
+        associated_user_id=None,
+        role=None,
+        role_id=None,
+        created_at=None,
+        updated_at=None,
+        start_at=None,
+        end_at=None,
+        last_activity_at=None,
+        last_attended_at=None,
+        total_activity_time=None,
+        html_url=None,
+        grades=None,
+        user=None,
+        override_grade=None,
+        override_score=None,
+        unposted_current_grade=None,
+        unposted_final_grade=None,
+        unposted_current_score=None,
+        unposted_final_score=None,
+        has_grading_periods=None,
+        totals_for_all_grading_periods_option=None,
+        current_grading_period_title=None,
+        current_grading_period_id=None,
+        current_period_override_grade=None,
+        current_period_override_score=None,
+        current_period_unposted_current_score=None,
+        current_period_unposted_final_score=None,
+        current_period_unposted_current_grade=None,
+        current_period_unposted_final_grade=None,
+    ):
         """Init method for Enrollment class."""
         self._id = id
         self._course_id = course_id
@@ -1145,17 +1454,23 @@ class Enrollment(BaseModel):
         self._unposted_current_score = unposted_current_score
         self._unposted_final_score = unposted_final_score
         self._has_grading_periods = has_grading_periods
-        self._totals_for_all_grading_periods_option = totals_for_all_grading_periods_option
+        self._totals_for_all_grading_periods_option = (
+            totals_for_all_grading_periods_option
+        )
         self._current_grading_period_title = current_grading_period_title
         self._current_grading_period_id = current_grading_period_id
         self._current_period_override_grade = current_period_override_grade
         self._current_period_override_score = current_period_override_score
-        self._current_period_unposted_current_score = current_period_unposted_current_score
+        self._current_period_unposted_current_score = (
+            current_period_unposted_current_score
+        )
         self._current_period_unposted_final_score = current_period_unposted_final_score
-        self._current_period_unposted_current_grade = current_period_unposted_current_grade
+        self._current_period_unposted_current_grade = (
+            current_period_unposted_current_grade
+        )
         self._current_period_unposted_final_grade = current_period_unposted_final_grade
 
-        self.logger = logging.getLogger('py3canvas.Enrollment')
+        self.logger = logging.getLogger("py3canvas.Enrollment")
 
     @property
     def id(self):
@@ -1165,7 +1480,9 @@ class Enrollment(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -1176,7 +1493,9 @@ class Enrollment(BaseModel):
     @course_id.setter
     def course_id(self, value):
         """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_id will NOT update the remote Canvas instance."
+        )
         self._course_id = value
 
     @property
@@ -1187,7 +1506,9 @@ class Enrollment(BaseModel):
     @sis_course_id.setter
     def sis_course_id(self, value):
         """Setter for sis_course_id property."""
-        self.logger.warn("Setting values on sis_course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_course_id will NOT update the remote Canvas instance."
+        )
         self._sis_course_id = value
 
     @property
@@ -1198,7 +1519,9 @@ class Enrollment(BaseModel):
     @course_integration_id.setter
     def course_integration_id(self, value):
         """Setter for course_integration_id property."""
-        self.logger.warn("Setting values on course_integration_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_integration_id will NOT update the remote Canvas instance."
+        )
         self._course_integration_id = value
 
     @property
@@ -1209,7 +1532,9 @@ class Enrollment(BaseModel):
     @course_section_id.setter
     def course_section_id(self, value):
         """Setter for course_section_id property."""
-        self.logger.warn("Setting values on course_section_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_section_id will NOT update the remote Canvas instance."
+        )
         self._course_section_id = value
 
     @property
@@ -1220,7 +1545,9 @@ class Enrollment(BaseModel):
     @section_integration_id.setter
     def section_integration_id(self, value):
         """Setter for section_integration_id property."""
-        self.logger.warn("Setting values on section_integration_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on section_integration_id will NOT update the remote Canvas instance."
+        )
         self._section_integration_id = value
 
     @property
@@ -1231,7 +1558,9 @@ class Enrollment(BaseModel):
     @sis_account_id.setter
     def sis_account_id(self, value):
         """Setter for sis_account_id property."""
-        self.logger.warn("Setting values on sis_account_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_account_id will NOT update the remote Canvas instance."
+        )
         self._sis_account_id = value
 
     @property
@@ -1242,7 +1571,9 @@ class Enrollment(BaseModel):
     @sis_section_id.setter
     def sis_section_id(self, value):
         """Setter for sis_section_id property."""
-        self.logger.warn("Setting values on sis_section_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_section_id will NOT update the remote Canvas instance."
+        )
         self._sis_section_id = value
 
     @property
@@ -1253,7 +1584,9 @@ class Enrollment(BaseModel):
     @sis_user_id.setter
     def sis_user_id(self, value):
         """Setter for sis_user_id property."""
-        self.logger.warn("Setting values on sis_user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_user_id will NOT update the remote Canvas instance."
+        )
         self._sis_user_id = value
 
     @property
@@ -1264,7 +1597,9 @@ class Enrollment(BaseModel):
     @enrollment_state.setter
     def enrollment_state(self, value):
         """Setter for enrollment_state property."""
-        self.logger.warn("Setting values on enrollment_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on enrollment_state will NOT update the remote Canvas instance."
+        )
         self._enrollment_state = value
 
     @property
@@ -1275,7 +1610,9 @@ class Enrollment(BaseModel):
     @limit_privileges_to_course_section.setter
     def limit_privileges_to_course_section(self, value):
         """Setter for limit_privileges_to_course_section property."""
-        self.logger.warn("Setting values on limit_privileges_to_course_section will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on limit_privileges_to_course_section will NOT update the remote Canvas instance."
+        )
         self._limit_privileges_to_course_section = value
 
     @property
@@ -1286,7 +1623,9 @@ class Enrollment(BaseModel):
     @sis_import_id.setter
     def sis_import_id(self, value):
         """Setter for sis_import_id property."""
-        self.logger.warn("Setting values on sis_import_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_import_id will NOT update the remote Canvas instance."
+        )
         self._sis_import_id = value
 
     @property
@@ -1297,7 +1636,9 @@ class Enrollment(BaseModel):
     @root_account_id.setter
     def root_account_id(self, value):
         """Setter for root_account_id property."""
-        self.logger.warn("Setting values on root_account_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on root_account_id will NOT update the remote Canvas instance."
+        )
         self._root_account_id = value
 
     @property
@@ -1308,7 +1649,9 @@ class Enrollment(BaseModel):
     @type.setter
     def type(self, value):
         """Setter for type property."""
-        self.logger.warn("Setting values on type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on type will NOT update the remote Canvas instance."
+        )
         self._type = value
 
     @property
@@ -1319,7 +1662,9 @@ class Enrollment(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -1330,7 +1675,9 @@ class Enrollment(BaseModel):
     @associated_user_id.setter
     def associated_user_id(self, value):
         """Setter for associated_user_id property."""
-        self.logger.warn("Setting values on associated_user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on associated_user_id will NOT update the remote Canvas instance."
+        )
         self._associated_user_id = value
 
     @property
@@ -1341,7 +1688,9 @@ class Enrollment(BaseModel):
     @role.setter
     def role(self, value):
         """Setter for role property."""
-        self.logger.warn("Setting values on role will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on role will NOT update the remote Canvas instance."
+        )
         self._role = value
 
     @property
@@ -1352,7 +1701,9 @@ class Enrollment(BaseModel):
     @role_id.setter
     def role_id(self, value):
         """Setter for role_id property."""
-        self.logger.warn("Setting values on role_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on role_id will NOT update the remote Canvas instance."
+        )
         self._role_id = value
 
     @property
@@ -1363,7 +1714,9 @@ class Enrollment(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -1374,7 +1727,9 @@ class Enrollment(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
 
     @property
@@ -1385,7 +1740,9 @@ class Enrollment(BaseModel):
     @start_at.setter
     def start_at(self, value):
         """Setter for start_at property."""
-        self.logger.warn("Setting values on start_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on start_at will NOT update the remote Canvas instance."
+        )
         self._start_at = value
 
     @property
@@ -1396,7 +1753,9 @@ class Enrollment(BaseModel):
     @end_at.setter
     def end_at(self, value):
         """Setter for end_at property."""
-        self.logger.warn("Setting values on end_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on end_at will NOT update the remote Canvas instance."
+        )
         self._end_at = value
 
     @property
@@ -1407,7 +1766,9 @@ class Enrollment(BaseModel):
     @last_activity_at.setter
     def last_activity_at(self, value):
         """Setter for last_activity_at property."""
-        self.logger.warn("Setting values on last_activity_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on last_activity_at will NOT update the remote Canvas instance."
+        )
         self._last_activity_at = value
 
     @property
@@ -1418,7 +1779,9 @@ class Enrollment(BaseModel):
     @last_attended_at.setter
     def last_attended_at(self, value):
         """Setter for last_attended_at property."""
-        self.logger.warn("Setting values on last_attended_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on last_attended_at will NOT update the remote Canvas instance."
+        )
         self._last_attended_at = value
 
     @property
@@ -1429,7 +1792,9 @@ class Enrollment(BaseModel):
     @total_activity_time.setter
     def total_activity_time(self, value):
         """Setter for total_activity_time property."""
-        self.logger.warn("Setting values on total_activity_time will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on total_activity_time will NOT update the remote Canvas instance."
+        )
         self._total_activity_time = value
 
     @property
@@ -1440,7 +1805,9 @@ class Enrollment(BaseModel):
     @html_url.setter
     def html_url(self, value):
         """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on html_url will NOT update the remote Canvas instance."
+        )
         self._html_url = value
 
     @property
@@ -1451,7 +1818,9 @@ class Enrollment(BaseModel):
     @grades.setter
     def grades(self, value):
         """Setter for grades property."""
-        self.logger.warn("Setting values on grades will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on grades will NOT update the remote Canvas instance."
+        )
         self._grades = value
 
     @property
@@ -1462,7 +1831,9 @@ class Enrollment(BaseModel):
     @user.setter
     def user(self, value):
         """Setter for user property."""
-        self.logger.warn("Setting values on user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user will NOT update the remote Canvas instance."
+        )
         self._user = value
 
     @property
@@ -1473,7 +1844,9 @@ class Enrollment(BaseModel):
     @override_grade.setter
     def override_grade(self, value):
         """Setter for override_grade property."""
-        self.logger.warn("Setting values on override_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on override_grade will NOT update the remote Canvas instance."
+        )
         self._override_grade = value
 
     @property
@@ -1484,7 +1857,9 @@ class Enrollment(BaseModel):
     @override_score.setter
     def override_score(self, value):
         """Setter for override_score property."""
-        self.logger.warn("Setting values on override_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on override_score will NOT update the remote Canvas instance."
+        )
         self._override_score = value
 
     @property
@@ -1495,7 +1870,9 @@ class Enrollment(BaseModel):
     @unposted_current_grade.setter
     def unposted_current_grade(self, value):
         """Setter for unposted_current_grade property."""
-        self.logger.warn("Setting values on unposted_current_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unposted_current_grade will NOT update the remote Canvas instance."
+        )
         self._unposted_current_grade = value
 
     @property
@@ -1506,7 +1883,9 @@ class Enrollment(BaseModel):
     @unposted_final_grade.setter
     def unposted_final_grade(self, value):
         """Setter for unposted_final_grade property."""
-        self.logger.warn("Setting values on unposted_final_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unposted_final_grade will NOT update the remote Canvas instance."
+        )
         self._unposted_final_grade = value
 
     @property
@@ -1517,7 +1896,9 @@ class Enrollment(BaseModel):
     @unposted_current_score.setter
     def unposted_current_score(self, value):
         """Setter for unposted_current_score property."""
-        self.logger.warn("Setting values on unposted_current_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unposted_current_score will NOT update the remote Canvas instance."
+        )
         self._unposted_current_score = value
 
     @property
@@ -1528,7 +1909,9 @@ class Enrollment(BaseModel):
     @unposted_final_score.setter
     def unposted_final_score(self, value):
         """Setter for unposted_final_score property."""
-        self.logger.warn("Setting values on unposted_final_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unposted_final_score will NOT update the remote Canvas instance."
+        )
         self._unposted_final_score = value
 
     @property
@@ -1539,7 +1922,9 @@ class Enrollment(BaseModel):
     @has_grading_periods.setter
     def has_grading_periods(self, value):
         """Setter for has_grading_periods property."""
-        self.logger.warn("Setting values on has_grading_periods will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on has_grading_periods will NOT update the remote Canvas instance."
+        )
         self._has_grading_periods = value
 
     @property
@@ -1550,7 +1935,9 @@ class Enrollment(BaseModel):
     @totals_for_all_grading_periods_option.setter
     def totals_for_all_grading_periods_option(self, value):
         """Setter for totals_for_all_grading_periods_option property."""
-        self.logger.warn("Setting values on totals_for_all_grading_periods_option will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on totals_for_all_grading_periods_option will NOT update the remote Canvas instance."
+        )
         self._totals_for_all_grading_periods_option = value
 
     @property
@@ -1561,7 +1948,9 @@ class Enrollment(BaseModel):
     @current_grading_period_title.setter
     def current_grading_period_title(self, value):
         """Setter for current_grading_period_title property."""
-        self.logger.warn("Setting values on current_grading_period_title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_grading_period_title will NOT update the remote Canvas instance."
+        )
         self._current_grading_period_title = value
 
     @property
@@ -1572,7 +1961,9 @@ class Enrollment(BaseModel):
     @current_grading_period_id.setter
     def current_grading_period_id(self, value):
         """Setter for current_grading_period_id property."""
-        self.logger.warn("Setting values on current_grading_period_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_grading_period_id will NOT update the remote Canvas instance."
+        )
         self._current_grading_period_id = value
 
     @property
@@ -1583,7 +1974,9 @@ class Enrollment(BaseModel):
     @current_period_override_grade.setter
     def current_period_override_grade(self, value):
         """Setter for current_period_override_grade property."""
-        self.logger.warn("Setting values on current_period_override_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_period_override_grade will NOT update the remote Canvas instance."
+        )
         self._current_period_override_grade = value
 
     @property
@@ -1594,7 +1987,9 @@ class Enrollment(BaseModel):
     @current_period_override_score.setter
     def current_period_override_score(self, value):
         """Setter for current_period_override_score property."""
-        self.logger.warn("Setting values on current_period_override_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_period_override_score will NOT update the remote Canvas instance."
+        )
         self._current_period_override_score = value
 
     @property
@@ -1605,7 +2000,9 @@ class Enrollment(BaseModel):
     @current_period_unposted_current_score.setter
     def current_period_unposted_current_score(self, value):
         """Setter for current_period_unposted_current_score property."""
-        self.logger.warn("Setting values on current_period_unposted_current_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_period_unposted_current_score will NOT update the remote Canvas instance."
+        )
         self._current_period_unposted_current_score = value
 
     @property
@@ -1616,7 +2013,9 @@ class Enrollment(BaseModel):
     @current_period_unposted_final_score.setter
     def current_period_unposted_final_score(self, value):
         """Setter for current_period_unposted_final_score property."""
-        self.logger.warn("Setting values on current_period_unposted_final_score will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_period_unposted_final_score will NOT update the remote Canvas instance."
+        )
         self._current_period_unposted_final_score = value
 
     @property
@@ -1627,7 +2026,9 @@ class Enrollment(BaseModel):
     @current_period_unposted_current_grade.setter
     def current_period_unposted_current_grade(self, value):
         """Setter for current_period_unposted_current_grade property."""
-        self.logger.warn("Setting values on current_period_unposted_current_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_period_unposted_current_grade will NOT update the remote Canvas instance."
+        )
         self._current_period_unposted_current_grade = value
 
     @property
@@ -1638,6 +2039,7 @@ class Enrollment(BaseModel):
     @current_period_unposted_final_grade.setter
     def current_period_unposted_final_grade(self, value):
         """Setter for current_period_unposted_final_grade property."""
-        self.logger.warn("Setting values on current_period_unposted_final_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_period_unposted_final_grade will NOT update the remote Canvas instance."
+        )
         self._current_period_unposted_final_grade = value
-

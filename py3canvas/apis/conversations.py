@@ -16,7 +16,15 @@ class ConversationsAPI(BaseCanvasAPI):
         super(ConversationsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.ConversationsAPI")
 
-    def list_conversations(self, filter=None, filter_mode=None, include=None, include_all_conversation_ids=None, interleave_submissions=None, scope=None):
+    def list_conversations(
+        self,
+        filter=None,
+        filter_mode=None,
+        include=None,
+        include_all_conversation_ids=None,
+        interleave_submissions=None,
+        scope=None,
+    ):
         """
         List conversations.
 
@@ -38,7 +46,6 @@ class ConversationsAPI(BaseCanvasAPI):
             self._validate_enum(scope, ["unread", "starred", "archived"])
             params["scope"] = scope
 
-
         # OPTIONAL - filter
         """
             When set, only return conversations for the specified courses, groups
@@ -48,7 +55,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         if filter is not None:
             params["filter"] = filter
-
 
         # OPTIONAL - filter_mode
         """
@@ -60,7 +66,6 @@ class ConversationsAPI(BaseCanvasAPI):
             self._validate_enum(filter_mode, ["and", "or", "default or"])
             params["filter_mode"] = filter_mode
 
-
         # OPTIONAL - interleave_submissions
         """
             (Obsolete) Submissions are no
@@ -68,7 +73,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         if interleave_submissions is not None:
             params["interleave_submissions"] = interleave_submissions
-
 
         # OPTIONAL - include_all_conversation_ids
         """
@@ -81,7 +85,6 @@ class ConversationsAPI(BaseCanvasAPI):
         if include_all_conversation_ids is not None:
             params["include_all_conversation_ids"] = include_all_conversation_ids
 
-
         # OPTIONAL - include
         """
             "participant_avatars":: Optionally include an "avatar_url" key for each user participanting in the conversation
@@ -90,11 +93,36 @@ class ConversationsAPI(BaseCanvasAPI):
             self._validate_enum(include, ["participant_avatars"])
             params["include"] = include
 
+        self.logger.debug(
+            "GET /api/v1/conversations with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/conversations".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/conversations with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/conversations".format(**path), data=data, params=params, all_pages=True)
-
-    def create_conversation(self, body, recipients, attachment_ids=None, context_code=None, filter=None, filter_mode=None, force_new=None, group_conversation=None, media_comment_id=None, media_comment_type=None, mode=None, scope=None, subject=None, user_note=None):
+    def create_conversation(
+        self,
+        body,
+        recipients,
+        attachment_ids=None,
+        context_code=None,
+        filter=None,
+        filter_mode=None,
+        force_new=None,
+        group_conversation=None,
+        media_comment_id=None,
+        media_comment_type=None,
+        mode=None,
+        scope=None,
+        subject=None,
+        user_note=None,
+    ):
         """
         Create a conversation.
 
@@ -116,7 +144,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         data["recipients"] = recipients
 
-
         # OPTIONAL - subject
         """
             The subject of the conversation. This is ignored when reusing a
@@ -125,13 +152,11 @@ class ConversationsAPI(BaseCanvasAPI):
         if subject is not None:
             data["subject"] = subject
 
-
         # REQUIRED - body
         """
             The message to be sent
         """
         data["body"] = body
-
 
         # OPTIONAL - force_new
         """
@@ -139,7 +164,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         if force_new is not None:
             data["force_new"] = force_new
-
 
         # OPTIONAL - group_conversation
         """
@@ -151,7 +175,6 @@ class ConversationsAPI(BaseCanvasAPI):
         if group_conversation is not None:
             data["group_conversation"] = group_conversation
 
-
         # OPTIONAL - attachment_ids
         """
             An array of attachments ids. These must be files that have been previously
@@ -159,7 +182,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         if attachment_ids is not None:
             data["attachment_ids"] = attachment_ids
-
 
         # OPTIONAL - media_comment_id
         """
@@ -169,7 +191,6 @@ class ConversationsAPI(BaseCanvasAPI):
         if media_comment_id is not None:
             data["media_comment_id"] = media_comment_id
 
-
         # OPTIONAL - media_comment_type
         """
             Type of the associated media file
@@ -177,7 +198,6 @@ class ConversationsAPI(BaseCanvasAPI):
         if media_comment_type is not None:
             self._validate_enum(media_comment_type, ["audio", "video"])
             data["media_comment_type"] = media_comment_type
-
 
         # OPTIONAL - user_note
         """
@@ -187,7 +207,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         if user_note is not None:
             data["user_note"] = user_note
-
 
         # OPTIONAL - mode
         """
@@ -201,7 +220,6 @@ class ConversationsAPI(BaseCanvasAPI):
             self._validate_enum(mode, ["sync", "async"])
             data["mode"] = mode
 
-
         # OPTIONAL - scope
         """
             Used when generating "visible" in the API response. See the explanation
@@ -211,7 +229,6 @@ class ConversationsAPI(BaseCanvasAPI):
             self._validate_enum(scope, ["unread", "starred", "archived"])
             data["scope"] = scope
 
-
         # OPTIONAL - filter
         """
             Used when generating "visible" in the API response. See the explanation
@@ -219,7 +236,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         if filter is not None:
             data["filter"] = filter
-
 
         # OPTIONAL - filter_mode
         """
@@ -230,7 +246,6 @@ class ConversationsAPI(BaseCanvasAPI):
             self._validate_enum(filter_mode, ["and", "or", "default or"])
             data["filter_mode"] = filter_mode
 
-
         # OPTIONAL - context_code
         """
             The course or group that is the context for this conversation. Same format
@@ -239,9 +254,18 @@ class ConversationsAPI(BaseCanvasAPI):
         if context_code is not None:
             data["context_code"] = context_code
 
-
-        self.logger.debug("POST /api/v1/conversations with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/conversations".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/conversations with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/conversations".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_running_batches(self):
         """
@@ -255,10 +279,28 @@ class ConversationsAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/v1/conversations/batches with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/conversations/batches".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/conversations/batches with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/conversations/batches".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-    def get_single_conversation(self, id, auto_mark_as_read=None, filter=None, filter_mode=None, interleave_submissions=None, scope=None):
+    def get_single_conversation(
+        self,
+        id,
+        auto_mark_as_read=None,
+        filter=None,
+        filter_mode=None,
+        interleave_submissions=None,
+        scope=None,
+    ):
         """
         Get a single conversation.
 
@@ -276,7 +318,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - interleave_submissions
         """
             (Obsolete) Submissions are no
@@ -284,7 +325,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         if interleave_submissions is not None:
             params["interleave_submissions"] = interleave_submissions
-
 
         # OPTIONAL - scope
         """
@@ -295,7 +335,6 @@ class ConversationsAPI(BaseCanvasAPI):
             self._validate_enum(scope, ["unread", "starred", "archived"])
             params["scope"] = scope
 
-
         # OPTIONAL - filter
         """
             Used when generating "visible" in the API response. See the explanation
@@ -303,7 +342,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         if filter is not None:
             params["filter"] = filter
-
 
         # OPTIONAL - filter_mode
         """
@@ -313,7 +351,6 @@ class ConversationsAPI(BaseCanvasAPI):
         if filter_mode is not None:
             self._validate_enum(filter_mode, ["and", "or", "default or"])
             params["filter_mode"] = filter_mode
-
 
         # OPTIONAL - auto_mark_as_read
         """
@@ -325,11 +362,29 @@ class ConversationsAPI(BaseCanvasAPI):
         if auto_mark_as_read is not None:
             params["auto_mark_as_read"] = auto_mark_as_read
 
+        self.logger.debug(
+            "GET /api/v1/conversations/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/conversations/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/conversations/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/conversations/{id}".format(**path), data=data, params=params, no_data=True)
-
-    def edit_conversation(self, id, conversation_starred=None, conversation_subscribed=None, conversation_workflow_state=None, filter=None, filter_mode=None, scope=None):
+    def edit_conversation(
+        self,
+        id,
+        conversation_starred=None,
+        conversation_subscribed=None,
+        conversation_workflow_state=None,
+        filter=None,
+        filter_mode=None,
+        scope=None,
+    ):
         """
         Edit a conversation.
 
@@ -345,15 +400,15 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # OPTIONAL - conversation[workflow_state]
         """
             Change the state of this conversation
         """
         if conversation_workflow_state is not None:
-            self._validate_enum(conversation_workflow_state, ["read", "unread", "archived"])
+            self._validate_enum(
+                conversation_workflow_state, ["read", "unread", "archived"]
+            )
             data["conversation[workflow_state]"] = conversation_workflow_state
-
 
         # OPTIONAL - conversation[subscribed]
         """
@@ -365,14 +420,12 @@ class ConversationsAPI(BaseCanvasAPI):
         if conversation_subscribed is not None:
             data["conversation[subscribed]"] = conversation_subscribed
 
-
         # OPTIONAL - conversation[starred]
         """
             Toggle the starred state of the current user's view of the conversation.
         """
         if conversation_starred is not None:
             data["conversation[starred]"] = conversation_starred
-
 
         # OPTIONAL - scope
         """
@@ -383,7 +436,6 @@ class ConversationsAPI(BaseCanvasAPI):
             self._validate_enum(scope, ["unread", "starred", "archived"])
             data["scope"] = scope
 
-
         # OPTIONAL - filter
         """
             Used when generating "visible" in the API response. See the explanation
@@ -391,7 +443,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         if filter is not None:
             data["filter"] = filter
-
 
         # OPTIONAL - filter_mode
         """
@@ -402,9 +453,18 @@ class ConversationsAPI(BaseCanvasAPI):
             self._validate_enum(filter_mode, ["and", "or", "default or"])
             data["filter_mode"] = filter_mode
 
-
-        self.logger.debug("PUT /api/v1/conversations/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/conversations/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/conversations/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/conversations/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def mark_all_as_read(self):
         """
@@ -416,8 +476,18 @@ class ConversationsAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("POST /api/v1/conversations/mark_all_as_read with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/conversations/mark_all_as_read".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/conversations/mark_all_as_read with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/conversations/mark_all_as_read".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_conversation(self, id):
         """
@@ -425,7 +495,7 @@ class ConversationsAPI(BaseCanvasAPI):
 
         Delete this conversation and its messages. Note that this only deletes
         this user's view of the conversation.
-        
+
         Response includes same fields as UPDATE action
         """
         path = {}
@@ -438,9 +508,18 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/conversations/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/conversations/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/conversations/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/conversations/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def add_recipients(self, id, recipients):
         """
@@ -460,7 +539,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # REQUIRED - recipients
         """
             An array of recipient ids. These may be user ids or course/group ids
@@ -469,22 +547,41 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         data["recipients"] = recipients
 
+        self.logger.debug(
+            "POST /api/v1/conversations/{id}/add_recipients with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/conversations/{id}/add_recipients".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/conversations/{id}/add_recipients with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/conversations/{id}/add_recipients".format(**path), data=data, params=params, no_data=True)
-
-    def add_message(self, body, id, attachment_ids=None, included_messages=None, media_comment_id=None, media_comment_type=None, recipients=None, user_note=None):
+    def add_message(
+        self,
+        body,
+        id,
+        attachment_ids=None,
+        included_messages=None,
+        media_comment_id=None,
+        media_comment_type=None,
+        recipients=None,
+        user_note=None,
+    ):
         """
         Add a message.
 
         Add a message to an existing conversation. Response is similar to the
         GET/show action, except that only includes the
         latest message (i.e. what we just sent)
-        
+
         An array of user ids. Defaults to all of the current conversation
         recipients. To explicitly send a message to no other recipients,
         this array should consist of the logged-in user id.
-        
+
         An array of message ids from this conversation to send to recipients
         of the new message. Recipients who already had a copy of included
         messages will not be affected.
@@ -499,13 +596,11 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # REQUIRED - body
         """
             The message to be sent.
         """
         data["body"] = body
-
 
         # OPTIONAL - attachment_ids
         """
@@ -515,7 +610,6 @@ class ConversationsAPI(BaseCanvasAPI):
         if attachment_ids is not None:
             data["attachment_ids"] = attachment_ids
 
-
         # OPTIONAL - media_comment_id
         """
             Media comment id of an audio of video file to be associated with this
@@ -523,7 +617,6 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         if media_comment_id is not None:
             data["media_comment_id"] = media_comment_id
-
 
         # OPTIONAL - media_comment_type
         """
@@ -533,7 +626,6 @@ class ConversationsAPI(BaseCanvasAPI):
             self._validate_enum(media_comment_type, ["audio", "video"])
             data["media_comment_type"] = media_comment_type
 
-
         # OPTIONAL - recipients
         """
             no description
@@ -541,14 +633,12 @@ class ConversationsAPI(BaseCanvasAPI):
         if recipients is not None:
             data["recipients"] = recipients
 
-
         # OPTIONAL - included_messages
         """
             no description
         """
         if included_messages is not None:
             data["included_messages"] = included_messages
-
 
         # OPTIONAL - user_note
         """
@@ -559,9 +649,18 @@ class ConversationsAPI(BaseCanvasAPI):
         if user_note is not None:
             data["user_note"] = user_note
 
-
-        self.logger.debug("POST /api/v1/conversations/{id}/add_message with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/conversations/{id}/add_message".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/conversations/{id}/add_message with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/conversations/{id}/add_message".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_message(self, id, remove):
         """
@@ -581,16 +680,24 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
         # REQUIRED - remove
         """
             Array of message ids to be deleted
         """
         data["remove"] = remove
 
-
-        self.logger.debug("POST /api/v1/conversations/{id}/remove_messages with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/conversations/{id}/remove_messages".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/conversations/{id}/remove_messages with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/conversations/{id}/remove_messages".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def batch_update_conversations(self, conversation_ids, event):
         """
@@ -609,17 +716,28 @@ class ConversationsAPI(BaseCanvasAPI):
         """
         data["conversation_ids"] = conversation_ids
 
-
         # REQUIRED - event
         """
             The action to take on each conversation.
         """
-        self._validate_enum(event, ["mark_as_read", "mark_as_unread", "star", "unstar", "archive", "destroy"])
+        self._validate_enum(
+            event,
+            ["mark_as_read", "mark_as_unread", "star", "unstar", "archive", "destroy"],
+        )
         data["event"] = event
 
-
-        self.logger.debug("PUT /api/v1/conversations with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/conversations".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/conversations with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/conversations".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def find_recipients(self):
         """
@@ -631,8 +749,18 @@ class ConversationsAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/v1/conversations/find_recipients with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/conversations/find_recipients".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/conversations/find_recipients with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/conversations/find_recipients".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def unread_count(self):
         """
@@ -644,14 +772,42 @@ class ConversationsAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/v1/conversations/unread_count with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/conversations/unread_count".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/conversations/unread_count with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/conversations/unread_count".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Conversation(BaseModel):
     """Conversation Model."""
 
-    def __init__(self, id=None, subject=None, workflow_state=None, last_message=None, start_at=None, message_count=None, subscribed=None, private=None, starred=None, properties=None, audience=None, audience_contexts=None, avatar_url=None, participants=None, visible=None, context_name=None):
+    def __init__(
+        self,
+        id=None,
+        subject=None,
+        workflow_state=None,
+        last_message=None,
+        start_at=None,
+        message_count=None,
+        subscribed=None,
+        private=None,
+        starred=None,
+        properties=None,
+        audience=None,
+        audience_contexts=None,
+        avatar_url=None,
+        participants=None,
+        visible=None,
+        context_name=None,
+    ):
         """Init method for Conversation class."""
         self._id = id
         self._subject = subject
@@ -670,7 +826,7 @@ class Conversation(BaseModel):
         self._visible = visible
         self._context_name = context_name
 
-        self.logger = logging.getLogger('py3canvas.Conversation')
+        self.logger = logging.getLogger("py3canvas.Conversation")
 
     @property
     def id(self):
@@ -680,7 +836,9 @@ class Conversation(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -691,7 +849,9 @@ class Conversation(BaseModel):
     @subject.setter
     def subject(self, value):
         """Setter for subject property."""
-        self.logger.warn("Setting values on subject will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on subject will NOT update the remote Canvas instance."
+        )
         self._subject = value
 
     @property
@@ -702,7 +862,9 @@ class Conversation(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -713,7 +875,9 @@ class Conversation(BaseModel):
     @last_message.setter
     def last_message(self, value):
         """Setter for last_message property."""
-        self.logger.warn("Setting values on last_message will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on last_message will NOT update the remote Canvas instance."
+        )
         self._last_message = value
 
     @property
@@ -724,7 +888,9 @@ class Conversation(BaseModel):
     @start_at.setter
     def start_at(self, value):
         """Setter for start_at property."""
-        self.logger.warn("Setting values on start_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on start_at will NOT update the remote Canvas instance."
+        )
         self._start_at = value
 
     @property
@@ -735,7 +901,9 @@ class Conversation(BaseModel):
     @message_count.setter
     def message_count(self, value):
         """Setter for message_count property."""
-        self.logger.warn("Setting values on message_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on message_count will NOT update the remote Canvas instance."
+        )
         self._message_count = value
 
     @property
@@ -746,7 +914,9 @@ class Conversation(BaseModel):
     @subscribed.setter
     def subscribed(self, value):
         """Setter for subscribed property."""
-        self.logger.warn("Setting values on subscribed will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on subscribed will NOT update the remote Canvas instance."
+        )
         self._subscribed = value
 
     @property
@@ -757,7 +927,9 @@ class Conversation(BaseModel):
     @private.setter
     def private(self, value):
         """Setter for private property."""
-        self.logger.warn("Setting values on private will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on private will NOT update the remote Canvas instance."
+        )
         self._private = value
 
     @property
@@ -768,7 +940,9 @@ class Conversation(BaseModel):
     @starred.setter
     def starred(self, value):
         """Setter for starred property."""
-        self.logger.warn("Setting values on starred will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on starred will NOT update the remote Canvas instance."
+        )
         self._starred = value
 
     @property
@@ -779,7 +953,9 @@ class Conversation(BaseModel):
     @properties.setter
     def properties(self, value):
         """Setter for properties property."""
-        self.logger.warn("Setting values on properties will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on properties will NOT update the remote Canvas instance."
+        )
         self._properties = value
 
     @property
@@ -790,7 +966,9 @@ class Conversation(BaseModel):
     @audience.setter
     def audience(self, value):
         """Setter for audience property."""
-        self.logger.warn("Setting values on audience will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on audience will NOT update the remote Canvas instance."
+        )
         self._audience = value
 
     @property
@@ -801,7 +979,9 @@ class Conversation(BaseModel):
     @audience_contexts.setter
     def audience_contexts(self, value):
         """Setter for audience_contexts property."""
-        self.logger.warn("Setting values on audience_contexts will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on audience_contexts will NOT update the remote Canvas instance."
+        )
         self._audience_contexts = value
 
     @property
@@ -812,7 +992,9 @@ class Conversation(BaseModel):
     @avatar_url.setter
     def avatar_url(self, value):
         """Setter for avatar_url property."""
-        self.logger.warn("Setting values on avatar_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on avatar_url will NOT update the remote Canvas instance."
+        )
         self._avatar_url = value
 
     @property
@@ -823,7 +1005,9 @@ class Conversation(BaseModel):
     @participants.setter
     def participants(self, value):
         """Setter for participants property."""
-        self.logger.warn("Setting values on participants will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on participants will NOT update the remote Canvas instance."
+        )
         self._participants = value
 
     @property
@@ -834,7 +1018,9 @@ class Conversation(BaseModel):
     @visible.setter
     def visible(self, value):
         """Setter for visible property."""
-        self.logger.warn("Setting values on visible will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on visible will NOT update the remote Canvas instance."
+        )
         self._visible = value
 
     @property
@@ -845,7 +1031,9 @@ class Conversation(BaseModel):
     @context_name.setter
     def context_name(self, value):
         """Setter for context_name property."""
-        self.logger.warn("Setting values on context_name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_name will NOT update the remote Canvas instance."
+        )
         self._context_name = value
 
 
@@ -859,7 +1047,7 @@ class Conversationparticipant(BaseModel):
         self._full_name = full_name
         self._avatar_url = avatar_url
 
-        self.logger = logging.getLogger('py3canvas.Conversationparticipant')
+        self.logger = logging.getLogger("py3canvas.Conversationparticipant")
 
     @property
     def id(self):
@@ -869,7 +1057,9 @@ class Conversationparticipant(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -880,7 +1070,9 @@ class Conversationparticipant(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -891,7 +1083,9 @@ class Conversationparticipant(BaseModel):
     @full_name.setter
     def full_name(self, value):
         """Setter for full_name property."""
-        self.logger.warn("Setting values on full_name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on full_name will NOT update the remote Canvas instance."
+        )
         self._full_name = value
 
     @property
@@ -902,6 +1096,7 @@ class Conversationparticipant(BaseModel):
     @avatar_url.setter
     def avatar_url(self, value):
         """Setter for avatar_url property."""
-        self.logger.warn("Setting values on avatar_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on avatar_url will NOT update the remote Canvas instance."
+        )
         self._avatar_url = value
-

@@ -16,7 +16,9 @@ class QuizSubmissionUserListAPI(BaseCanvasAPI):
         super(QuizSubmissionUserListAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.QuizSubmissionUserListAPI")
 
-    def send_message_to_unsubmitted_or_submitted_users_for_quiz(self, course_id, id, conversations=None):
+    def send_message_to_unsubmitted_or_submitted_users_for_quiz(
+        self, course_id, id, conversations=None
+    ):
         """
         Send a message to unsubmitted or submitted users for the quiz.
 
@@ -48,13 +50,11 @@ class QuizSubmissionUserListAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - conversations
         """
@@ -63,9 +63,20 @@ class QuizSubmissionUserListAPI(BaseCanvasAPI):
         if conversations is not None:
             data["conversations"] = conversations
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{id}/submission_users/message with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{id}/submission_users/message".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes/{id}/submission_users/message with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes/{id}/submission_users/message".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Quizsubmissionuserlist(BaseModel):
@@ -74,7 +85,7 @@ class Quizsubmissionuserlist(BaseModel):
     def __init__(self):
         """Init method for Quizsubmissionuserlist class."""
 
-        self.logger = logging.getLogger('py3canvas.Quizsubmissionuserlist')
+        self.logger = logging.getLogger("py3canvas.Quizsubmissionuserlist")
 
 
 class Quizsubmissionuserlistmeta(BaseModel):
@@ -83,7 +94,7 @@ class Quizsubmissionuserlistmeta(BaseModel):
     def __init__(self):
         """Init method for Quizsubmissionuserlistmeta class."""
 
-        self.logger = logging.getLogger('py3canvas.Quizsubmissionuserlistmeta')
+        self.logger = logging.getLogger("py3canvas.Quizsubmissionuserlistmeta")
 
 
 class Jsonapipagination(BaseModel):
@@ -92,5 +103,4 @@ class Jsonapipagination(BaseModel):
     def __init__(self):
         """Init method for Jsonapipagination class."""
 
-        self.logger = logging.getLogger('py3canvas.Jsonapipagination')
-
+        self.logger = logging.getLogger("py3canvas.Jsonapipagination")

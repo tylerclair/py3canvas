@@ -19,18 +19,24 @@ class TestPlannerAPI(unittest.TestCase):
     def test_list_planner_items_planner(self):
         """Integration test for the PlannerAPI.list_planner_items_planner method."""
 
-        r = self.client.list_planner_items_planner(context_codes=None, end_date=None, filter=None, start_date=None)
+        r = self.client.list_planner_items_planner(
+            context_codes=None, end_date=None, filter=None, start_date=None
+        )
 
     def test_list_planner_items_users(self):
         """Integration test for the PlannerAPI.list_planner_items_users method."""
         user_id = None  # Change me!!
 
-        r = self.client.list_planner_items_users(user_id, context_codes=None, end_date=None, filter=None, start_date=None)
+        r = self.client.list_planner_items_users(
+            user_id, context_codes=None, end_date=None, filter=None, start_date=None
+        )
 
     def test_list_planner_notes(self):
         """Integration test for the PlannerAPI.list_planner_notes method."""
 
-        r = self.client.list_planner_notes(context_codes=None, end_date=None, start_date=None)
+        r = self.client.list_planner_notes(
+            context_codes=None, end_date=None, start_date=None
+        )
 
     def test_show_planner_note(self):
         """Integration test for the PlannerAPI.show_planner_note method."""
@@ -80,4 +86,3 @@ class TestPlannerAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_planner_override(id)
-

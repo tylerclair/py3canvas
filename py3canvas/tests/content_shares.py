@@ -61,4 +61,3 @@ class TestContentSharesAPI(unittest.TestCase):
         """Integration test for the ContentSharesAPI.update_content_share method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

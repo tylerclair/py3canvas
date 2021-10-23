@@ -14,7 +14,9 @@ class PlagiarismDetectionPlatformAssignmentsAPI(BaseCanvasAPI):
     def __init__(self, *args, **kwargs):
         """Init method for PlagiarismDetectionPlatformAssignmentsAPI."""
         super(PlagiarismDetectionPlatformAssignmentsAPI, self).__init__(*args, **kwargs)
-        self.logger = logging.getLogger("py3canvas.PlagiarismDetectionPlatformAssignmentsAPI")
+        self.logger = logging.getLogger(
+            "py3canvas.PlagiarismDetectionPlatformAssignmentsAPI"
+        )
 
     def get_single_assignment_lti(self, assignment_id, user_id=None):
         """
@@ -33,7 +35,6 @@ class PlagiarismDetectionPlatformAssignmentsAPI(BaseCanvasAPI):
         """
         path["assignment_id"] = assignment_id
 
-
         # OPTIONAL - user_id
         """
             The id of the user. Can be a Canvas or LTI id for the user.
@@ -41,16 +42,35 @@ class PlagiarismDetectionPlatformAssignmentsAPI(BaseCanvasAPI):
         if user_id is not None:
             params["user_id"] = user_id
 
-
-        self.logger.debug("GET /api/lti/assignments/{assignment_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/assignments/{assignment_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/lti/assignments/{assignment_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/assignments/{assignment_id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Ltiassignment(BaseModel):
     """Ltiassignment Model.
     A Canvas assignment"""
 
-    def __init__(self, id=None, name=None, description=None, points_possible=None, due_at=None, lti_id=None, course_id=None, lti_course_id=None):
+    def __init__(
+        self,
+        id=None,
+        name=None,
+        description=None,
+        points_possible=None,
+        due_at=None,
+        lti_id=None,
+        course_id=None,
+        lti_course_id=None,
+    ):
         """Init method for Ltiassignment class."""
         self._id = id
         self._name = name
@@ -61,7 +81,7 @@ class Ltiassignment(BaseModel):
         self._course_id = course_id
         self._lti_course_id = lti_course_id
 
-        self.logger = logging.getLogger('py3canvas.Ltiassignment')
+        self.logger = logging.getLogger("py3canvas.Ltiassignment")
 
     @property
     def id(self):
@@ -71,7 +91,9 @@ class Ltiassignment(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -82,7 +104,9 @@ class Ltiassignment(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -93,7 +117,9 @@ class Ltiassignment(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -104,7 +130,9 @@ class Ltiassignment(BaseModel):
     @points_possible.setter
     def points_possible(self, value):
         """Setter for points_possible property."""
-        self.logger.warn("Setting values on points_possible will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on points_possible will NOT update the remote Canvas instance."
+        )
         self._points_possible = value
 
     @property
@@ -115,7 +143,9 @@ class Ltiassignment(BaseModel):
     @due_at.setter
     def due_at(self, value):
         """Setter for due_at property."""
-        self.logger.warn("Setting values on due_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on due_at will NOT update the remote Canvas instance."
+        )
         self._due_at = value
 
     @property
@@ -126,7 +156,9 @@ class Ltiassignment(BaseModel):
     @lti_id.setter
     def lti_id(self, value):
         """Setter for lti_id property."""
-        self.logger.warn("Setting values on lti_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lti_id will NOT update the remote Canvas instance."
+        )
         self._lti_id = value
 
     @property
@@ -137,7 +169,9 @@ class Ltiassignment(BaseModel):
     @course_id.setter
     def course_id(self, value):
         """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_id will NOT update the remote Canvas instance."
+        )
         self._course_id = value
 
     @property
@@ -148,6 +182,7 @@ class Ltiassignment(BaseModel):
     @lti_course_id.setter
     def lti_course_id(self, value):
         """Setter for lti_course_id property."""
-        self.logger.warn("Setting values on lti_course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lti_course_id will NOT update the remote Canvas instance."
+        )
         self._lti_course_id = value
-

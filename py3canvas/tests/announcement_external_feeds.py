@@ -13,7 +13,9 @@ class TestAnnouncementExternalFeedsAPI(unittest.TestCase):
     """Tests for the AnnouncementExternalFeedsAPI."""
 
     def setUp(self):
-        self.client = AnnouncementExternalFeedsAPI(secrets.instance_address, secrets.access_token)
+        self.client = AnnouncementExternalFeedsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_list_external_feeds_courses(self):
         """Integration test for the AnnouncementExternalFeedsAPI.list_external_feeds_courses method."""
@@ -50,4 +52,3 @@ class TestAnnouncementExternalFeedsAPI(unittest.TestCase):
         external_feed_id = None  # Change me!!
 
         r = self.client.delete_external_feed_groups(external_feed_id, group_id)
-

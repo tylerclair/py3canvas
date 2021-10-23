@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
     """ContentSecurityPolicySettings API Version 1.0."""
 
@@ -32,9 +31,18 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/csp_settings with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/csp_settings".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/csp_settings with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/csp_settings".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def get_current_settings_for_account_or_course_accounts(self, account_id):
         """
@@ -52,9 +60,18 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/csp_settings with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/csp_settings".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/csp_settings with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/csp_settings".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def enable_disable_or_clear_explicit_csp_setting_courses(self, course_id, status):
         """
@@ -62,7 +79,7 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
 
         Either explicitly sets CSP to be on or off for courses and sub-accounts,
         or clear the explicit settings to default to those set by a parent account
-        
+
         Note: If "inherited" and "settings_locked" are both true for this account or course,
         then the CSP setting cannot be modified.
         """
@@ -76,7 +93,6 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - status
         """
             If set to "enabled" for an account, CSP will be enabled for all its courses and sub-accounts (that
@@ -89,9 +105,18 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         self._validate_enum(status, ["enabled", "disabled", "inherited"])
         data["status"] = status
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/csp_settings with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/csp_settings".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/csp_settings with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/csp_settings".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def enable_disable_or_clear_explicit_csp_setting_accounts(self, account_id, status):
         """
@@ -99,7 +124,7 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
 
         Either explicitly sets CSP to be on or off for courses and sub-accounts,
         or clear the explicit settings to default to those set by a parent account
-        
+
         Note: If "inherited" and "settings_locked" are both true for this account or course,
         then the CSP setting cannot be modified.
         """
@@ -113,7 +138,6 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - status
         """
             If set to "enabled" for an account, CSP will be enabled for all its courses and sub-accounts (that
@@ -126,11 +150,22 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         self._validate_enum(status, ["enabled", "disabled", "inherited"])
         data["status"] = status
 
+        self.logger.debug(
+            "PUT /api/v1/accounts/{account_id}/csp_settings with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/accounts/{account_id}/csp_settings".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("PUT /api/v1/accounts/{account_id}/csp_settings with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/accounts/{account_id}/csp_settings".format(**path), data=data, params=params, no_data=True)
-
-    def lock_or_unlock_current_csp_settings_for_sub_accounts_and_courses(self, account_id, settings_locked):
+    def lock_or_unlock_current_csp_settings_for_sub_accounts_and_courses(
+        self, account_id, settings_locked
+    ):
         """
         Lock or unlock current CSP settings for sub-accounts and courses.
 
@@ -146,16 +181,24 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - settings_locked
         """
             Whether sub-accounts and courses will be prevented from overriding settings inherited from this account.
         """
         data["settings_locked"] = settings_locked
 
-
-        self.logger.debug("PUT /api/v1/accounts/{account_id}/csp_settings/lock with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/accounts/{account_id}/csp_settings/lock".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/accounts/{account_id}/csp_settings/lock with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/accounts/{account_id}/csp_settings/lock".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def add_allowed_domain_to_account(self, account_id, domain):
         """
@@ -174,16 +217,24 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - domain
         """
             no description
         """
         data["domain"] = domain
 
-
-        self.logger.debug("POST /api/v1/accounts/{account_id}/csp_settings/domains with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/csp_settings/domains".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/accounts/{account_id}/csp_settings/domains with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/accounts/{account_id}/csp_settings/domains".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def add_multiple_allowed_domains_to_account(self, account_id, domains):
         """
@@ -202,16 +253,26 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - domains
         """
             no description
         """
         data["domains"] = domains
 
-
-        self.logger.debug("POST /api/v1/accounts/{account_id}/csp_settings/domains/batch_create with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/csp_settings/domains/batch_create".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/accounts/{account_id}/csp_settings/domains/batch_create with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/accounts/{account_id}/csp_settings/domains/batch_create".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def retrieve_reported_csp_violations_for_account(self, account_id):
         """
@@ -229,9 +290,18 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/csp_log with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/csp_log".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/csp_log with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/csp_log".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def remove_domain_from_account(self, account_id, domain):
         """
@@ -249,14 +319,21 @@ class ContentSecurityPolicySettingsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - domain
         """
             no description
         """
         params["domain"] = domain
 
-
-        self.logger.debug("DELETE /api/v1/accounts/{account_id}/csp_settings/domains with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/csp_settings/domains".format(**path), data=data, params=params, no_data=True)
-
+        self.logger.debug(
+            "DELETE /api/v1/accounts/{account_id}/csp_settings/domains with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/accounts/{account_id}/csp_settings/domains".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )

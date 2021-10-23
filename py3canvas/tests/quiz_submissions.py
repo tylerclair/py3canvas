@@ -59,4 +59,3 @@ class TestQuizSubmissionsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.get_current_quiz_submission_times(course_id, id, quiz_id)
-

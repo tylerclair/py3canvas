@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class LoginsAPI(BaseCanvasAPI):
     """Logins API Version 1.0."""
 
@@ -32,9 +31,18 @@ class LoginsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/logins with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/logins".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/logins with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/logins".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def list_user_logins_users(self, user_id):
         """
@@ -52,11 +60,29 @@ class LoginsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/logins with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/logins".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/users/{user_id}/logins with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/logins".format(**path), data=data, params=params, no_data=True)
-
-    def create_user_login(self, account_id, login_unique_id, user_id, login_authentication_provider_id=None, login_integration_id=None, login_password=None, login_sis_user_id=None):
+    def create_user_login(
+        self,
+        account_id,
+        login_unique_id,
+        user_id,
+        login_authentication_provider_id=None,
+        login_integration_id=None,
+        login_password=None,
+        login_sis_user_id=None,
+    ):
         """
         Create a user login.
 
@@ -72,13 +98,11 @@ class LoginsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - user[id]
         """
             The ID of the user to create the login for.
         """
         data["user[id]"] = user_id
-
 
         # REQUIRED - login[unique_id]
         """
@@ -86,14 +110,12 @@ class LoginsAPI(BaseCanvasAPI):
         """
         data["login[unique_id]"] = login_unique_id
 
-
         # OPTIONAL - login[password]
         """
             The new login's password.
         """
         if login_password is not None:
             data["login[password]"] = login_password
-
 
         # OPTIONAL - login[sis_user_id]
         """
@@ -103,7 +125,6 @@ class LoginsAPI(BaseCanvasAPI):
         if login_sis_user_id is not None:
             data["login[sis_user_id]"] = login_sis_user_id
 
-
         # OPTIONAL - login[integration_id]
         """
             Integration ID for the login. To set this parameter, the caller must be able to
@@ -112,7 +133,6 @@ class LoginsAPI(BaseCanvasAPI):
         """
         if login_integration_id is not None:
             data["login[integration_id]"] = login_integration_id
-
 
         # OPTIONAL - login[authentication_provider_id]
         """
@@ -127,11 +147,30 @@ class LoginsAPI(BaseCanvasAPI):
         if login_authentication_provider_id is not None:
             data["login[authentication_provider_id]"] = login_authentication_provider_id
 
+        self.logger.debug(
+            "POST /api/v1/accounts/{account_id}/logins with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/accounts/{account_id}/logins".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("POST /api/v1/accounts/{account_id}/logins with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/logins".format(**path), data=data, params=params, no_data=True)
-
-    def edit_user_login(self, account_id, id, login_authentication_provider_id=None, login_integration_id=None, login_password=None, login_sis_user_id=None, login_unique_id=None, login_workflow_state=None):
+    def edit_user_login(
+        self,
+        account_id,
+        id,
+        login_authentication_provider_id=None,
+        login_integration_id=None,
+        login_password=None,
+        login_sis_user_id=None,
+        login_unique_id=None,
+        login_workflow_state=None,
+    ):
         """
         Edit a user login.
 
@@ -147,13 +186,11 @@ class LoginsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - login[unique_id]
         """
@@ -161,7 +198,6 @@ class LoginsAPI(BaseCanvasAPI):
         """
         if login_unique_id is not None:
             data["login[unique_id]"] = login_unique_id
-
 
         # OPTIONAL - login[password]
         """
@@ -171,7 +207,6 @@ class LoginsAPI(BaseCanvasAPI):
         if login_password is not None:
             data["login[password]"] = login_password
 
-
         # OPTIONAL - login[sis_user_id]
         """
             SIS ID for the login. To set this parameter, the caller must be able to
@@ -179,7 +214,6 @@ class LoginsAPI(BaseCanvasAPI):
         """
         if login_sis_user_id is not None:
             data["login[sis_user_id]"] = login_sis_user_id
-
 
         # OPTIONAL - login[integration_id]
         """
@@ -189,7 +223,6 @@ class LoginsAPI(BaseCanvasAPI):
         """
         if login_integration_id is not None:
             data["login[integration_id]"] = login_integration_id
-
 
         # OPTIONAL - login[authentication_provider_id]
         """
@@ -204,7 +237,6 @@ class LoginsAPI(BaseCanvasAPI):
         if login_authentication_provider_id is not None:
             data["login[authentication_provider_id]"] = login_authentication_provider_id
 
-
         # OPTIONAL - login[workflow_state]
         """
             Used to suspend or re-activate a login.
@@ -213,9 +245,18 @@ class LoginsAPI(BaseCanvasAPI):
             self._validate_enum(login_workflow_state, ["active", "suspended"])
             data["login[workflow_state]"] = login_workflow_state
 
-
-        self.logger.debug("PUT /api/v1/accounts/{account_id}/logins/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/accounts/{account_id}/logins/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "PUT /api/v1/accounts/{account_id}/logins/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/accounts/{account_id}/logins/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def delete_user_login(self, id, user_id):
         """
@@ -233,14 +274,21 @@ class LoginsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/users/{user_id}/logins/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/users/{user_id}/logins/{id}".format(**path), data=data, params=params, no_data=True)
-
+        self.logger.debug(
+            "DELETE /api/v1/users/{user_id}/logins/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/users/{user_id}/logins/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )

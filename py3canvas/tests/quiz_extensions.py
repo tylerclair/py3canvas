@@ -19,4 +19,3 @@ class TestQuizExtensionsAPI(unittest.TestCase):
         """Integration test for the QuizExtensionsAPI.set_extensions_for_student_quiz_submissions method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

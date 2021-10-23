@@ -12,7 +12,9 @@ class TestWebhooksSubscriptionsAPI(unittest.TestCase):
     """Tests for the WebhooksSubscriptionsAPI."""
 
     def setUp(self):
-        self.client = WebhooksSubscriptionsAPI(secrets.instance_address, secrets.access_token)
+        self.client = WebhooksSubscriptionsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_create_webhook_subscription(self):
         """Integration test for the WebhooksSubscriptionsAPI.create_webhook_subscription method."""
@@ -40,4 +42,3 @@ class TestWebhooksSubscriptionsAPI(unittest.TestCase):
         """Integration test for the WebhooksSubscriptionsAPI.list_all_webhook_subscription_for_tool_proxy method."""
 
         r = self.client.list_all_webhook_subscription_for_tool_proxy()
-

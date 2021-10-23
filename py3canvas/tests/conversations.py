@@ -19,7 +19,14 @@ class TestConversationsAPI(unittest.TestCase):
     def test_list_conversations(self):
         """Integration test for the ConversationsAPI.list_conversations method."""
 
-        r = self.client.list_conversations(filter=None, filter_mode=None, include=None, include_all_conversation_ids=None, interleave_submissions=None, scope=None)
+        r = self.client.list_conversations(
+            filter=None,
+            filter_mode=None,
+            include=None,
+            include_all_conversation_ids=None,
+            interleave_submissions=None,
+            scope=None,
+        )
 
     def test_create_conversation(self):
         """Integration test for the ConversationsAPI.create_conversation method."""
@@ -35,7 +42,14 @@ class TestConversationsAPI(unittest.TestCase):
         """Integration test for the ConversationsAPI.get_single_conversation method."""
         id = None  # Change me!!
 
-        r = self.client.get_single_conversation(id, auto_mark_as_read=None, filter=None, filter_mode=None, interleave_submissions=None, scope=None)
+        r = self.client.get_single_conversation(
+            id,
+            auto_mark_as_read=None,
+            filter=None,
+            filter_mode=None,
+            interleave_submissions=None,
+            scope=None,
+        )
 
     def test_edit_conversation(self):
         """Integration test for the ConversationsAPI.edit_conversation method."""
@@ -82,4 +96,3 @@ class TestConversationsAPI(unittest.TestCase):
         """Integration test for the ConversationsAPI.unread_count method."""
 
         r = self.client.unread_count()
-

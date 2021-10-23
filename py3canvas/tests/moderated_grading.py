@@ -13,7 +13,9 @@ class TestModeratedGradingAPI(unittest.TestCase):
     """Tests for the ModeratedGradingAPI."""
 
     def setUp(self):
-        self.client = ModeratedGradingAPI(secrets.instance_address, secrets.access_token)
+        self.client = ModeratedGradingAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_list_students_selected_for_moderation(self):
         """Integration test for the ModeratedGradingAPI.list_students_selected_for_moderation method."""
@@ -37,7 +39,9 @@ class TestModeratedGradingAPI(unittest.TestCase):
         course_id = None  # Change me!!
         assignment_id = None  # Change me!!
 
-        r = self.client.show_provisional_grade_status_for_student(assignment_id, course_id, student_id=None)
+        r = self.client.show_provisional_grade_status_for_student(
+            assignment_id, course_id, student_id=None
+        )
 
     def test_select_provisional_grade(self):
         """Integration test for the ModeratedGradingAPI.select_provisional_grade method."""
@@ -54,5 +58,6 @@ class TestModeratedGradingAPI(unittest.TestCase):
         course_id = None  # Change me!!
         assignment_id = None  # Change me!!
 
-        r = self.client.show_provisional_grade_status_for_student(assignment_id, course_id, anonymous_id=None)
-
+        r = self.client.show_provisional_grade_status_for_student(
+            assignment_id, course_id, anonymous_id=None
+        )

@@ -13,7 +13,9 @@ class TestSharedBrandConfigsAPI(unittest.TestCase):
     """Tests for the SharedBrandConfigsAPI."""
 
     def setUp(self):
-        self.client = SharedBrandConfigsAPI(secrets.instance_address, secrets.access_token)
+        self.client = SharedBrandConfigsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_share_brandconfig_theme(self):
         """Integration test for the SharedBrandConfigsAPI.share_brandconfig_theme method."""
@@ -30,4 +32,3 @@ class TestSharedBrandConfigsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.un_share_brandconfig_theme(id)
-

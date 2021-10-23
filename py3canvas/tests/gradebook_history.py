@@ -16,7 +16,9 @@ class TestGradebookHistoryAPI(unittest.TestCase):
     """Tests for the GradebookHistoryAPI."""
 
     def setUp(self):
-        self.client = GradebookHistoryAPI(secrets.instance_address, secrets.access_token)
+        self.client = GradebookHistoryAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_days_in_gradebook_history_for_this_course(self):
         """Integration test for the GradebookHistoryAPI.days_in_gradebook_history_for_this_course method."""
@@ -29,7 +31,9 @@ class TestGradebookHistoryAPI(unittest.TestCase):
         course_id = None  # Change me!!
         date = None  # Change me!!
 
-        r = self.client.details_for_given_date_in_gradebook_history_for_this_course(course_id, date)
+        r = self.client.details_for_given_date_in_gradebook_history_for_this_course(
+            course_id, date
+        )
 
     def test_lists_submissions(self):
         """Integration test for the GradebookHistoryAPI.lists_submissions method."""
@@ -44,5 +48,6 @@ class TestGradebookHistoryAPI(unittest.TestCase):
         """Integration test for the GradebookHistoryAPI.list_uncollated_submission_versions method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_uncollated_submission_versions(course_id, ascending=None, assignment_id=None, user_id=None)
-
+        r = self.client.list_uncollated_submission_versions(
+            course_id, ascending=None, assignment_id=None, user_id=None
+        )

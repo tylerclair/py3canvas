@@ -73,7 +73,28 @@ class TestAccountsAPI(unittest.TestCase):
         """Integration test for the AccountsAPI.list_active_courses_in_account method."""
         account_id = None  # Change me!!
 
-        r = self.client.list_active_courses_in_account(account_id, blueprint=None, blueprint_associated=None, by_subaccounts=None, by_teachers=None, completed=None, ends_after=None, enrollment_term_id=None, enrollment_type=None, hide_enrollmentless_courses=None, homeroom=None, include=None, order=None, published=None, search_by=None, search_term=None, sort=None, starts_before=None, state=None, with_enrollments=None)
+        r = self.client.list_active_courses_in_account(
+            account_id,
+            blueprint=None,
+            blueprint_associated=None,
+            by_subaccounts=None,
+            by_teachers=None,
+            completed=None,
+            ends_after=None,
+            enrollment_term_id=None,
+            enrollment_type=None,
+            hide_enrollmentless_courses=None,
+            homeroom=None,
+            include=None,
+            order=None,
+            published=None,
+            search_by=None,
+            search_term=None,
+            sort=None,
+            starts_before=None,
+            state=None,
+            with_enrollments=None,
+        )
 
     def test_update_account(self):
         """Integration test for the AccountsAPI.update_account method."""
@@ -98,4 +119,3 @@ class TestAccountsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_sub_account(account_id, id)
-

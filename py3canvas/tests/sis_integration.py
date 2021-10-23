@@ -25,16 +25,27 @@ class TestSisIntegrationAPI(unittest.TestCase):
         """Integration test for the SisIntegrationAPI.retrieve_assignments_enabled_for_grade_export_to_sis_accounts method."""
         account_id = None  # Change me!!
 
-        r = self.client.retrieve_assignments_enabled_for_grade_export_to_sis_accounts(account_id, course_id=None, ends_after=None, include=None, starts_before=None)
+        r = self.client.retrieve_assignments_enabled_for_grade_export_to_sis_accounts(
+            account_id,
+            course_id=None,
+            ends_after=None,
+            include=None,
+            starts_before=None,
+        )
 
     def test_retrieve_assignments_enabled_for_grade_export_to_sis_courses(self):
         """Integration test for the SisIntegrationAPI.retrieve_assignments_enabled_for_grade_export_to_sis_courses method."""
         course_id = None  # Change me!!
 
-        r = self.client.retrieve_assignments_enabled_for_grade_export_to_sis_courses(course_id, account_id=None, ends_after=None, include=None, starts_before=None)
+        r = self.client.retrieve_assignments_enabled_for_grade_export_to_sis_courses(
+            course_id,
+            account_id=None,
+            ends_after=None,
+            include=None,
+            starts_before=None,
+        )
 
     def test_disable_assignments_currently_enabled_for_grade_export_to_sis(self):
         """Integration test for the SisIntegrationAPI.disable_assignments_currently_enabled_for_grade_export_to_sis method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

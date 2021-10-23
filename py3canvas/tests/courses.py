@@ -21,13 +21,23 @@ class TestCoursesAPI(unittest.TestCase):
     def test_list_your_courses(self):
         """Integration test for the CoursesAPI.list_your_courses method."""
 
-        r = self.client.list_your_courses(enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, exclude_blueprint_courses=None, include=None, state=None)
+        r = self.client.list_your_courses(
+            enrollment_role=None,
+            enrollment_role_id=None,
+            enrollment_state=None,
+            enrollment_type=None,
+            exclude_blueprint_courses=None,
+            include=None,
+            state=None,
+        )
 
     def test_list_courses_for_user(self):
         """Integration test for the CoursesAPI.list_courses_for_user method."""
         user_id = None  # Change me!!
 
-        r = self.client.list_courses_for_user(user_id, enrollment_state=None, homeroom=None, include=None, state=None)
+        r = self.client.list_courses_for_user(
+            user_id, enrollment_state=None, homeroom=None, include=None, state=None
+        )
 
     def test_get_user_progress(self):
         """Integration test for the CoursesAPI.get_user_progress method."""
@@ -56,13 +66,35 @@ class TestCoursesAPI(unittest.TestCase):
         """Integration test for the CoursesAPI.list_users_in_course_users method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_users_in_course_users(course_id, enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, include=None, search_term=None, sort=None, user_id=None, user_ids=None)
+        r = self.client.list_users_in_course_users(
+            course_id,
+            enrollment_role=None,
+            enrollment_role_id=None,
+            enrollment_state=None,
+            enrollment_type=None,
+            include=None,
+            search_term=None,
+            sort=None,
+            user_id=None,
+            user_ids=None,
+        )
 
     def test_list_users_in_course_search_users(self):
         """Integration test for the CoursesAPI.list_users_in_course_search_users method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_users_in_course_search_users(course_id, enrollment_role=None, enrollment_role_id=None, enrollment_state=None, enrollment_type=None, include=None, search_term=None, sort=None, user_id=None, user_ids=None)
+        r = self.client.list_users_in_course_search_users(
+            course_id,
+            enrollment_role=None,
+            enrollment_role_id=None,
+            enrollment_state=None,
+            enrollment_type=None,
+            include=None,
+            search_term=None,
+            sort=None,
+            user_id=None,
+            user_ids=None,
+        )
 
     def test_list_recently_logged_in_students(self):
         """Integration test for the CoursesAPI.list_recently_logged_in_students method."""
@@ -142,7 +174,9 @@ class TestCoursesAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_single_course_accounts(account_id, id, include=None, teacher_limit=None)
+        r = self.client.get_single_course_accounts(
+            account_id, id, include=None, teacher_limit=None
+        )
 
     def test_update_course(self):
         """Integration test for the CoursesAPI.update_course method."""
@@ -188,4 +222,3 @@ class TestCoursesAPI(unittest.TestCase):
         """Integration test for the CoursesAPI.copy_course_content method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

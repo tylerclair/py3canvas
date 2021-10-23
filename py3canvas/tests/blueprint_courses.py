@@ -18,7 +18,9 @@ class TestBlueprintCoursesAPI(unittest.TestCase):
     """Tests for the BlueprintCoursesAPI."""
 
     def setUp(self):
-        self.client = BlueprintCoursesAPI(secrets.instance_address, secrets.access_token)
+        self.client = BlueprintCoursesAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_get_blueprint_information(self):
         """Integration test for the BlueprintCoursesAPI.get_blueprint_information method."""
@@ -107,4 +109,3 @@ class TestBlueprintCoursesAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.get_import_details(course_id, id, subscription_id)
-

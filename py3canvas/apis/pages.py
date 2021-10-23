@@ -32,9 +32,18 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/front_page with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/front_page".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/front_page with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/front_page".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_front_page_groups(self, group_id):
         """
@@ -52,9 +61,18 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
-        self.logger.debug("GET /api/v1/groups/{group_id}/front_page with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/front_page".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/front_page with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/front_page".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def duplicate_page(self, course_id, url):
         """
@@ -72,18 +90,34 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/pages/{url}/duplicate with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/pages/{url}/duplicate".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/pages/{url}/duplicate with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/pages/{url}/duplicate".format(**path), data=data, params=params, single_item=True)
-
-    def update_create_front_page_courses(self, course_id, wiki_page_body=None, wiki_page_editing_roles=None, wiki_page_notify_of_update=None, wiki_page_published=None, wiki_page_title=None):
+    def update_create_front_page_courses(
+        self,
+        course_id,
+        wiki_page_body=None,
+        wiki_page_editing_roles=None,
+        wiki_page_notify_of_update=None,
+        wiki_page_published=None,
+        wiki_page_title=None,
+    ):
         """
         Update/create front page.
 
@@ -99,7 +133,6 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - wiki_page[title]
         """
             The title for the new page. NOTE: changing a page's title will change its
@@ -108,14 +141,12 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_title is not None:
             data["wiki_page[title]"] = wiki_page_title
 
-
         # OPTIONAL - wiki_page[body]
         """
             The content for the new page.
         """
         if wiki_page_body is not None:
             data["wiki_page[body]"] = wiki_page_body
-
 
         # OPTIONAL - wiki_page[editing_roles]
         """
@@ -128,9 +159,10 @@ class PagesAPI(BaseCanvasAPI):
         "public":: Allows editing by any user.
         """
         if wiki_page_editing_roles is not None:
-            self._validate_enum(wiki_page_editing_roles, ["teachers", "students", "members", "public"])
+            self._validate_enum(
+                wiki_page_editing_roles, ["teachers", "students", "members", "public"]
+            )
             data["wiki_page[editing_roles]"] = wiki_page_editing_roles
-
 
         # OPTIONAL - wiki_page[notify_of_update]
         """
@@ -139,7 +171,6 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_notify_of_update is not None:
             data["wiki_page[notify_of_update]"] = wiki_page_notify_of_update
 
-
         # OPTIONAL - wiki_page[published]
         """
             Whether the page is published (true) or draft state (false).
@@ -147,11 +178,28 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_published is not None:
             data["wiki_page[published]"] = wiki_page_published
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/front_page with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/front_page".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/front_page with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/front_page".format(**path), data=data, params=params, single_item=True)
-
-    def update_create_front_page_groups(self, group_id, wiki_page_body=None, wiki_page_editing_roles=None, wiki_page_notify_of_update=None, wiki_page_published=None, wiki_page_title=None):
+    def update_create_front_page_groups(
+        self,
+        group_id,
+        wiki_page_body=None,
+        wiki_page_editing_roles=None,
+        wiki_page_notify_of_update=None,
+        wiki_page_published=None,
+        wiki_page_title=None,
+    ):
         """
         Update/create front page.
 
@@ -167,7 +215,6 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # OPTIONAL - wiki_page[title]
         """
             The title for the new page. NOTE: changing a page's title will change its
@@ -176,14 +223,12 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_title is not None:
             data["wiki_page[title]"] = wiki_page_title
 
-
         # OPTIONAL - wiki_page[body]
         """
             The content for the new page.
         """
         if wiki_page_body is not None:
             data["wiki_page[body]"] = wiki_page_body
-
 
         # OPTIONAL - wiki_page[editing_roles]
         """
@@ -196,9 +241,10 @@ class PagesAPI(BaseCanvasAPI):
         "public":: Allows editing by any user.
         """
         if wiki_page_editing_roles is not None:
-            self._validate_enum(wiki_page_editing_roles, ["teachers", "students", "members", "public"])
+            self._validate_enum(
+                wiki_page_editing_roles, ["teachers", "students", "members", "public"]
+            )
             data["wiki_page[editing_roles]"] = wiki_page_editing_roles
-
 
         # OPTIONAL - wiki_page[notify_of_update]
         """
@@ -207,7 +253,6 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_notify_of_update is not None:
             data["wiki_page[notify_of_update]"] = wiki_page_notify_of_update
 
-
         # OPTIONAL - wiki_page[published]
         """
             Whether the page is published (true) or draft state (false).
@@ -215,11 +260,22 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_published is not None:
             data["wiki_page[published]"] = wiki_page_published
 
+        self.logger.debug(
+            "PUT /api/v1/groups/{group_id}/front_page with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/groups/{group_id}/front_page".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("PUT /api/v1/groups/{group_id}/front_page with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/groups/{group_id}/front_page".format(**path), data=data, params=params, single_item=True)
-
-    def list_pages_courses(self, course_id, order=None, published=None, search_term=None, sort=None):
+    def list_pages_courses(
+        self, course_id, order=None, published=None, search_term=None, sort=None
+    ):
         """
         List pages.
 
@@ -235,7 +291,6 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - sort
         """
             Sort results by this field.
@@ -243,7 +298,6 @@ class PagesAPI(BaseCanvasAPI):
         if sort is not None:
             self._validate_enum(sort, ["title", "created_at", "updated_at"])
             params["sort"] = sort
-
 
         # OPTIONAL - order
         """
@@ -253,14 +307,12 @@ class PagesAPI(BaseCanvasAPI):
             self._validate_enum(order, ["asc", "desc"])
             params["order"] = order
 
-
         # OPTIONAL - search_term
         """
             The partial title of the pages to match and return.
         """
         if search_term is not None:
             params["search_term"] = search_term
-
 
         # OPTIONAL - published
         """
@@ -270,11 +322,22 @@ class PagesAPI(BaseCanvasAPI):
         if published is not None:
             params["published"] = published
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/pages with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/pages".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/pages with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/pages".format(**path), data=data, params=params, all_pages=True)
-
-    def list_pages_groups(self, group_id, order=None, published=None, search_term=None, sort=None):
+    def list_pages_groups(
+        self, group_id, order=None, published=None, search_term=None, sort=None
+    ):
         """
         List pages.
 
@@ -290,7 +353,6 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # OPTIONAL - sort
         """
             Sort results by this field.
@@ -298,7 +360,6 @@ class PagesAPI(BaseCanvasAPI):
         if sort is not None:
             self._validate_enum(sort, ["title", "created_at", "updated_at"])
             params["sort"] = sort
-
 
         # OPTIONAL - order
         """
@@ -308,14 +369,12 @@ class PagesAPI(BaseCanvasAPI):
             self._validate_enum(order, ["asc", "desc"])
             params["order"] = order
 
-
         # OPTIONAL - search_term
         """
             The partial title of the pages to match and return.
         """
         if search_term is not None:
             params["search_term"] = search_term
-
 
         # OPTIONAL - published
         """
@@ -325,11 +384,29 @@ class PagesAPI(BaseCanvasAPI):
         if published is not None:
             params["published"] = published
 
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/pages with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/pages".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/groups/{group_id}/pages with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/pages".format(**path), data=data, params=params, all_pages=True)
-
-    def create_page_courses(self, course_id, wiki_page_title, wiki_page_body=None, wiki_page_editing_roles=None, wiki_page_front_page=None, wiki_page_notify_of_update=None, wiki_page_published=None):
+    def create_page_courses(
+        self,
+        course_id,
+        wiki_page_title,
+        wiki_page_body=None,
+        wiki_page_editing_roles=None,
+        wiki_page_front_page=None,
+        wiki_page_notify_of_update=None,
+        wiki_page_published=None,
+    ):
         """
         Create page.
 
@@ -345,13 +422,11 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - wiki_page[title]
         """
             The title for the new page.
         """
         data["wiki_page[title]"] = wiki_page_title
-
 
         # OPTIONAL - wiki_page[body]
         """
@@ -359,7 +434,6 @@ class PagesAPI(BaseCanvasAPI):
         """
         if wiki_page_body is not None:
             data["wiki_page[body]"] = wiki_page_body
-
 
         # OPTIONAL - wiki_page[editing_roles]
         """
@@ -372,9 +446,10 @@ class PagesAPI(BaseCanvasAPI):
         "public":: Allows editing by any user.
         """
         if wiki_page_editing_roles is not None:
-            self._validate_enum(wiki_page_editing_roles, ["teachers", "students", "members", "public"])
+            self._validate_enum(
+                wiki_page_editing_roles, ["teachers", "students", "members", "public"]
+            )
             data["wiki_page[editing_roles]"] = wiki_page_editing_roles
-
 
         # OPTIONAL - wiki_page[notify_of_update]
         """
@@ -383,14 +458,12 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_notify_of_update is not None:
             data["wiki_page[notify_of_update]"] = wiki_page_notify_of_update
 
-
         # OPTIONAL - wiki_page[published]
         """
             Whether the page is published (true) or draft state (false).
         """
         if wiki_page_published is not None:
             data["wiki_page[published]"] = wiki_page_published
-
 
         # OPTIONAL - wiki_page[front_page]
         """
@@ -399,11 +472,29 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_front_page is not None:
             data["wiki_page[front_page]"] = wiki_page_front_page
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/pages with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/pages".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/pages with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/pages".format(**path), data=data, params=params, single_item=True)
-
-    def create_page_groups(self, group_id, wiki_page_title, wiki_page_body=None, wiki_page_editing_roles=None, wiki_page_front_page=None, wiki_page_notify_of_update=None, wiki_page_published=None):
+    def create_page_groups(
+        self,
+        group_id,
+        wiki_page_title,
+        wiki_page_body=None,
+        wiki_page_editing_roles=None,
+        wiki_page_front_page=None,
+        wiki_page_notify_of_update=None,
+        wiki_page_published=None,
+    ):
         """
         Create page.
 
@@ -419,13 +510,11 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - wiki_page[title]
         """
             The title for the new page.
         """
         data["wiki_page[title]"] = wiki_page_title
-
 
         # OPTIONAL - wiki_page[body]
         """
@@ -433,7 +522,6 @@ class PagesAPI(BaseCanvasAPI):
         """
         if wiki_page_body is not None:
             data["wiki_page[body]"] = wiki_page_body
-
 
         # OPTIONAL - wiki_page[editing_roles]
         """
@@ -446,9 +534,10 @@ class PagesAPI(BaseCanvasAPI):
         "public":: Allows editing by any user.
         """
         if wiki_page_editing_roles is not None:
-            self._validate_enum(wiki_page_editing_roles, ["teachers", "students", "members", "public"])
+            self._validate_enum(
+                wiki_page_editing_roles, ["teachers", "students", "members", "public"]
+            )
             data["wiki_page[editing_roles]"] = wiki_page_editing_roles
-
 
         # OPTIONAL - wiki_page[notify_of_update]
         """
@@ -457,14 +546,12 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_notify_of_update is not None:
             data["wiki_page[notify_of_update]"] = wiki_page_notify_of_update
 
-
         # OPTIONAL - wiki_page[published]
         """
             Whether the page is published (true) or draft state (false).
         """
         if wiki_page_published is not None:
             data["wiki_page[published]"] = wiki_page_published
-
 
         # OPTIONAL - wiki_page[front_page]
         """
@@ -473,9 +560,18 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_front_page is not None:
             data["wiki_page[front_page]"] = wiki_page_front_page
 
-
-        self.logger.debug("POST /api/v1/groups/{group_id}/pages with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/groups/{group_id}/pages".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/groups/{group_id}/pages with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/groups/{group_id}/pages".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_page_courses(self, course_id, url):
         """
@@ -493,16 +589,24 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/pages/{url} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/pages/{url}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/pages/{url} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/pages/{url}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_page_groups(self, group_id, url):
         """
@@ -520,18 +624,36 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
 
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/pages/{url} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/pages/{url}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/groups/{group_id}/pages/{url} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/pages/{url}".format(**path), data=data, params=params, single_item=True)
-
-    def update_create_page_courses(self, course_id, url, wiki_page_body=None, wiki_page_editing_roles=None, wiki_page_front_page=None, wiki_page_notify_of_update=None, wiki_page_published=None, wiki_page_title=None):
+    def update_create_page_courses(
+        self,
+        course_id,
+        url,
+        wiki_page_body=None,
+        wiki_page_editing_roles=None,
+        wiki_page_front_page=None,
+        wiki_page_notify_of_update=None,
+        wiki_page_published=None,
+        wiki_page_title=None,
+    ):
         """
         Update/create page.
 
@@ -547,13 +669,11 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
-
 
         # OPTIONAL - wiki_page[title]
         """
@@ -563,14 +683,12 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_title is not None:
             data["wiki_page[title]"] = wiki_page_title
 
-
         # OPTIONAL - wiki_page[body]
         """
             The content for the new page.
         """
         if wiki_page_body is not None:
             data["wiki_page[body]"] = wiki_page_body
-
 
         # OPTIONAL - wiki_page[editing_roles]
         """
@@ -583,9 +701,10 @@ class PagesAPI(BaseCanvasAPI):
         "public":: Allows editing by any user.
         """
         if wiki_page_editing_roles is not None:
-            self._validate_enum(wiki_page_editing_roles, ["teachers", "students", "members", "public"])
+            self._validate_enum(
+                wiki_page_editing_roles, ["teachers", "students", "members", "public"]
+            )
             data["wiki_page[editing_roles]"] = wiki_page_editing_roles
-
 
         # OPTIONAL - wiki_page[notify_of_update]
         """
@@ -594,14 +713,12 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_notify_of_update is not None:
             data["wiki_page[notify_of_update]"] = wiki_page_notify_of_update
 
-
         # OPTIONAL - wiki_page[published]
         """
             Whether the page is published (true) or draft state (false).
         """
         if wiki_page_published is not None:
             data["wiki_page[published]"] = wiki_page_published
-
 
         # OPTIONAL - wiki_page[front_page]
         """
@@ -610,11 +727,30 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_front_page is not None:
             data["wiki_page[front_page]"] = wiki_page_front_page
 
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/pages/{url} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/pages/{url}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("PUT /api/v1/courses/{course_id}/pages/{url} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/pages/{url}".format(**path), data=data, params=params, single_item=True)
-
-    def update_create_page_groups(self, group_id, url, wiki_page_body=None, wiki_page_editing_roles=None, wiki_page_front_page=None, wiki_page_notify_of_update=None, wiki_page_published=None, wiki_page_title=None):
+    def update_create_page_groups(
+        self,
+        group_id,
+        url,
+        wiki_page_body=None,
+        wiki_page_editing_roles=None,
+        wiki_page_front_page=None,
+        wiki_page_notify_of_update=None,
+        wiki_page_published=None,
+        wiki_page_title=None,
+    ):
         """
         Update/create page.
 
@@ -630,13 +766,11 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
-
 
         # OPTIONAL - wiki_page[title]
         """
@@ -646,14 +780,12 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_title is not None:
             data["wiki_page[title]"] = wiki_page_title
 
-
         # OPTIONAL - wiki_page[body]
         """
             The content for the new page.
         """
         if wiki_page_body is not None:
             data["wiki_page[body]"] = wiki_page_body
-
 
         # OPTIONAL - wiki_page[editing_roles]
         """
@@ -666,9 +798,10 @@ class PagesAPI(BaseCanvasAPI):
         "public":: Allows editing by any user.
         """
         if wiki_page_editing_roles is not None:
-            self._validate_enum(wiki_page_editing_roles, ["teachers", "students", "members", "public"])
+            self._validate_enum(
+                wiki_page_editing_roles, ["teachers", "students", "members", "public"]
+            )
             data["wiki_page[editing_roles]"] = wiki_page_editing_roles
-
 
         # OPTIONAL - wiki_page[notify_of_update]
         """
@@ -677,14 +810,12 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_notify_of_update is not None:
             data["wiki_page[notify_of_update]"] = wiki_page_notify_of_update
 
-
         # OPTIONAL - wiki_page[published]
         """
             Whether the page is published (true) or draft state (false).
         """
         if wiki_page_published is not None:
             data["wiki_page[published]"] = wiki_page_published
-
 
         # OPTIONAL - wiki_page[front_page]
         """
@@ -693,9 +824,18 @@ class PagesAPI(BaseCanvasAPI):
         if wiki_page_front_page is not None:
             data["wiki_page[front_page]"] = wiki_page_front_page
 
-
-        self.logger.debug("PUT /api/v1/groups/{group_id}/pages/{url} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/groups/{group_id}/pages/{url}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/groups/{group_id}/pages/{url} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/groups/{group_id}/pages/{url}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_page_courses(self, course_id, url):
         """
@@ -713,16 +853,24 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/pages/{url} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/pages/{url}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/pages/{url} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/pages/{url}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_page_groups(self, group_id, url):
         """
@@ -740,16 +888,24 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
 
-
-        self.logger.debug("DELETE /api/v1/groups/{group_id}/pages/{url} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/groups/{group_id}/pages/{url}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/groups/{group_id}/pages/{url} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/groups/{group_id}/pages/{url}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def list_revisions_courses(self, course_id, url):
         """
@@ -767,16 +923,24 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/pages/{url}/revisions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/pages/{url}/revisions".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/pages/{url}/revisions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/pages/{url}/revisions".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_revisions_groups(self, group_id, url):
         """
@@ -794,16 +958,24 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
 
-
-        self.logger.debug("GET /api/v1/groups/{group_id}/pages/{url}/revisions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/pages/{url}/revisions".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/pages/{url}/revisions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/pages/{url}/revisions".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def show_revision_courses_latest(self, course_id, url, summary=None):
         """
@@ -822,13 +994,11 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
-
 
         # OPTIONAL - summary
         """
@@ -837,9 +1007,18 @@ class PagesAPI(BaseCanvasAPI):
         if summary is not None:
             params["summary"] = summary
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/pages/{url}/revisions/latest with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/pages/{url}/revisions/latest".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/pages/{url}/revisions/latest with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/pages/{url}/revisions/latest".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_revision_groups_latest(self, group_id, url, summary=None):
         """
@@ -858,13 +1037,11 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
-
 
         # OPTIONAL - summary
         """
@@ -873,11 +1050,22 @@ class PagesAPI(BaseCanvasAPI):
         if summary is not None:
             params["summary"] = summary
 
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/pages/{url}/revisions/latest with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/pages/{url}/revisions/latest".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/groups/{group_id}/pages/{url}/revisions/latest with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/pages/{url}/revisions/latest".format(**path), data=data, params=params, single_item=True)
-
-    def show_revision_courses_revision_id(self, course_id, revision_id, url, summary=None):
+    def show_revision_courses_revision_id(
+        self, course_id, revision_id, url, summary=None
+    ):
         """
         Show revision.
 
@@ -894,20 +1082,17 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
 
-
         # REQUIRED - PATH - revision_id
         """
             ID
         """
         path["revision_id"] = revision_id
-
 
         # OPTIONAL - summary
         """
@@ -916,11 +1101,24 @@ class PagesAPI(BaseCanvasAPI):
         if summary is not None:
             params["summary"] = summary
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/pages/{url}/revisions/{revision_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/pages/{url}/revisions/{revision_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/pages/{url}/revisions/{revision_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/pages/{url}/revisions/{revision_id}".format(**path), data=data, params=params, single_item=True)
-
-    def show_revision_groups_revision_id(self, group_id, revision_id, url, summary=None):
+    def show_revision_groups_revision_id(
+        self, group_id, revision_id, url, summary=None
+    ):
         """
         Show revision.
 
@@ -937,20 +1135,17 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
 
-
         # REQUIRED - PATH - revision_id
         """
             ID
         """
         path["revision_id"] = revision_id
-
 
         # OPTIONAL - summary
         """
@@ -959,9 +1154,20 @@ class PagesAPI(BaseCanvasAPI):
         if summary is not None:
             params["summary"] = summary
 
-
-        self.logger.debug("GET /api/v1/groups/{group_id}/pages/{url}/revisions/{revision_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/pages/{url}/revisions/{revision_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/pages/{url}/revisions/{revision_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/pages/{url}/revisions/{revision_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def revert_to_revision_courses(self, course_id, revision_id, url):
         """
@@ -979,13 +1185,11 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
-
 
         # REQUIRED - PATH - revision_id
         """
@@ -995,9 +1199,20 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["revision_id"] = revision_id
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/pages/{url}/revisions/{revision_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/pages/{url}/revisions/{revision_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/pages/{url}/revisions/{revision_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/pages/{url}/revisions/{revision_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def revert_to_revision_groups(self, group_id, revision_id, url):
         """
@@ -1015,13 +1230,11 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - url
         """
             ID
         """
         path["url"] = url
-
 
         # REQUIRED - PATH - revision_id
         """
@@ -1031,15 +1244,41 @@ class PagesAPI(BaseCanvasAPI):
         """
         path["revision_id"] = revision_id
 
-
-        self.logger.debug("POST /api/v1/groups/{group_id}/pages/{url}/revisions/{revision_id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/groups/{group_id}/pages/{url}/revisions/{revision_id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/groups/{group_id}/pages/{url}/revisions/{revision_id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/groups/{group_id}/pages/{url}/revisions/{revision_id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Page(BaseModel):
     """Page Model."""
 
-    def __init__(self, url=None, title=None, created_at=None, updated_at=None, hide_from_students=None, editing_roles=None, last_edited_by=None, body=None, published=None, front_page=None, locked_for_user=None, lock_info=None, lock_explanation=None):
+    def __init__(
+        self,
+        url=None,
+        title=None,
+        created_at=None,
+        updated_at=None,
+        hide_from_students=None,
+        editing_roles=None,
+        last_edited_by=None,
+        body=None,
+        published=None,
+        front_page=None,
+        locked_for_user=None,
+        lock_info=None,
+        lock_explanation=None,
+    ):
         """Init method for Page class."""
         self._url = url
         self._title = title
@@ -1055,7 +1294,7 @@ class Page(BaseModel):
         self._lock_info = lock_info
         self._lock_explanation = lock_explanation
 
-        self.logger = logging.getLogger('py3canvas.Page')
+        self.logger = logging.getLogger("py3canvas.Page")
 
     @property
     def url(self):
@@ -1065,7 +1304,9 @@ class Page(BaseModel):
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
 
     @property
@@ -1076,7 +1317,9 @@ class Page(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -1087,7 +1330,9 @@ class Page(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -1098,7 +1343,9 @@ class Page(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
 
     @property
@@ -1109,7 +1356,9 @@ class Page(BaseModel):
     @hide_from_students.setter
     def hide_from_students(self, value):
         """Setter for hide_from_students property."""
-        self.logger.warn("Setting values on hide_from_students will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on hide_from_students will NOT update the remote Canvas instance."
+        )
         self._hide_from_students = value
 
     @property
@@ -1120,7 +1369,9 @@ class Page(BaseModel):
     @editing_roles.setter
     def editing_roles(self, value):
         """Setter for editing_roles property."""
-        self.logger.warn("Setting values on editing_roles will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on editing_roles will NOT update the remote Canvas instance."
+        )
         self._editing_roles = value
 
     @property
@@ -1131,7 +1382,9 @@ class Page(BaseModel):
     @last_edited_by.setter
     def last_edited_by(self, value):
         """Setter for last_edited_by property."""
-        self.logger.warn("Setting values on last_edited_by will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on last_edited_by will NOT update the remote Canvas instance."
+        )
         self._last_edited_by = value
 
     @property
@@ -1142,7 +1395,9 @@ class Page(BaseModel):
     @body.setter
     def body(self, value):
         """Setter for body property."""
-        self.logger.warn("Setting values on body will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on body will NOT update the remote Canvas instance."
+        )
         self._body = value
 
     @property
@@ -1153,7 +1408,9 @@ class Page(BaseModel):
     @published.setter
     def published(self, value):
         """Setter for published property."""
-        self.logger.warn("Setting values on published will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on published will NOT update the remote Canvas instance."
+        )
         self._published = value
 
     @property
@@ -1164,7 +1421,9 @@ class Page(BaseModel):
     @front_page.setter
     def front_page(self, value):
         """Setter for front_page property."""
-        self.logger.warn("Setting values on front_page will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on front_page will NOT update the remote Canvas instance."
+        )
         self._front_page = value
 
     @property
@@ -1175,7 +1434,9 @@ class Page(BaseModel):
     @locked_for_user.setter
     def locked_for_user(self, value):
         """Setter for locked_for_user property."""
-        self.logger.warn("Setting values on locked_for_user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on locked_for_user will NOT update the remote Canvas instance."
+        )
         self._locked_for_user = value
 
     @property
@@ -1186,7 +1447,9 @@ class Page(BaseModel):
     @lock_info.setter
     def lock_info(self, value):
         """Setter for lock_info property."""
-        self.logger.warn("Setting values on lock_info will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_info will NOT update the remote Canvas instance."
+        )
         self._lock_info = value
 
     @property
@@ -1197,14 +1460,25 @@ class Page(BaseModel):
     @lock_explanation.setter
     def lock_explanation(self, value):
         """Setter for lock_explanation property."""
-        self.logger.warn("Setting values on lock_explanation will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_explanation will NOT update the remote Canvas instance."
+        )
         self._lock_explanation = value
 
 
 class Pagerevision(BaseModel):
     """Pagerevision Model."""
 
-    def __init__(self, revision_id=None, updated_at=None, latest=None, edited_by=None, url=None, title=None, body=None):
+    def __init__(
+        self,
+        revision_id=None,
+        updated_at=None,
+        latest=None,
+        edited_by=None,
+        url=None,
+        title=None,
+        body=None,
+    ):
         """Init method for Pagerevision class."""
         self._revision_id = revision_id
         self._updated_at = updated_at
@@ -1214,7 +1488,7 @@ class Pagerevision(BaseModel):
         self._title = title
         self._body = body
 
-        self.logger = logging.getLogger('py3canvas.Pagerevision')
+        self.logger = logging.getLogger("py3canvas.Pagerevision")
 
     @property
     def revision_id(self):
@@ -1224,7 +1498,9 @@ class Pagerevision(BaseModel):
     @revision_id.setter
     def revision_id(self, value):
         """Setter for revision_id property."""
-        self.logger.warn("Setting values on revision_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on revision_id will NOT update the remote Canvas instance."
+        )
         self._revision_id = value
 
     @property
@@ -1235,7 +1511,9 @@ class Pagerevision(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
 
     @property
@@ -1246,7 +1524,9 @@ class Pagerevision(BaseModel):
     @latest.setter
     def latest(self, value):
         """Setter for latest property."""
-        self.logger.warn("Setting values on latest will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on latest will NOT update the remote Canvas instance."
+        )
         self._latest = value
 
     @property
@@ -1257,7 +1537,9 @@ class Pagerevision(BaseModel):
     @edited_by.setter
     def edited_by(self, value):
         """Setter for edited_by property."""
-        self.logger.warn("Setting values on edited_by will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on edited_by will NOT update the remote Canvas instance."
+        )
         self._edited_by = value
 
     @property
@@ -1268,7 +1550,9 @@ class Pagerevision(BaseModel):
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
 
     @property
@@ -1279,7 +1563,9 @@ class Pagerevision(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -1290,6 +1576,7 @@ class Pagerevision(BaseModel):
     @body.setter
     def body(self, value):
         """Setter for body property."""
-        self.logger.warn("Setting values on body will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on body will NOT update the remote Canvas instance."
+        )
         self._body = value
-

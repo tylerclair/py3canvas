@@ -24,4 +24,3 @@ class TestJwTsAPI(unittest.TestCase):
         """Integration test for the JwTsAPI.refresh_jwt method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

@@ -31,5 +31,6 @@ class TestOutcomesAPI(unittest.TestCase):
         """Integration test for the OutcomesAPI.get_aligned_assignments_for_outcome_in_course_for_particular_student method."""
         course_id = None  # Change me!!
 
-        r = self.client.get_aligned_assignments_for_outcome_in_course_for_particular_student(course_id, student_id=None)
-
+        r = self.client.get_aligned_assignments_for_outcome_in_course_for_particular_student(
+            course_id, student_id=None
+        )

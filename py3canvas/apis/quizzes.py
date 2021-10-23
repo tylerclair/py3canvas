@@ -32,7 +32,6 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - search_term
         """
             The partial title of the quizzes to match and return.
@@ -40,9 +39,18 @@ class QuizzesAPI(BaseCanvasAPI):
         if search_term is not None:
             params["search_term"] = search_term
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def get_single_quiz(self, course_id, id):
         """
@@ -60,18 +68,52 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def create_quiz(self, course_id, quiz_title, quiz_access_code=None, quiz_allowed_attempts=None, quiz_assignment_group_id=None, quiz_cant_go_back=None, quiz_description=None, quiz_due_at=None, quiz_hide_correct_answers_at=None, quiz_hide_results=None, quiz_ip_filter=None, quiz_lock_at=None, quiz_one_question_at_a_time=None, quiz_one_time_results=None, quiz_only_visible_to_overrides=None, quiz_published=None, quiz_quiz_type=None, quiz_scoring_policy=None, quiz_show_correct_answers=None, quiz_show_correct_answers_at=None, quiz_show_correct_answers_last_attempt=None, quiz_shuffle_answers=None, quiz_time_limit=None, quiz_unlock_at=None):
+    def create_quiz(
+        self,
+        course_id,
+        quiz_title,
+        quiz_access_code=None,
+        quiz_allowed_attempts=None,
+        quiz_assignment_group_id=None,
+        quiz_cant_go_back=None,
+        quiz_description=None,
+        quiz_due_at=None,
+        quiz_hide_correct_answers_at=None,
+        quiz_hide_results=None,
+        quiz_ip_filter=None,
+        quiz_lock_at=None,
+        quiz_one_question_at_a_time=None,
+        quiz_one_time_results=None,
+        quiz_only_visible_to_overrides=None,
+        quiz_published=None,
+        quiz_quiz_type=None,
+        quiz_scoring_policy=None,
+        quiz_show_correct_answers=None,
+        quiz_show_correct_answers_at=None,
+        quiz_show_correct_answers_last_attempt=None,
+        quiz_shuffle_answers=None,
+        quiz_time_limit=None,
+        quiz_unlock_at=None,
+    ):
         """
         Create a quiz.
 
@@ -87,13 +129,11 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - quiz[title]
         """
             The quiz title.
         """
         data["quiz[title]"] = quiz_title
-
 
         # OPTIONAL - quiz[description]
         """
@@ -102,15 +142,16 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_description is not None:
             data["quiz[description]"] = quiz_description
 
-
         # OPTIONAL - quiz[quiz_type]
         """
             The type of quiz.
         """
         if quiz_quiz_type is not None:
-            self._validate_enum(quiz_quiz_type, ["practice_quiz", "assignment", "graded_survey", "survey"])
+            self._validate_enum(
+                quiz_quiz_type,
+                ["practice_quiz", "assignment", "graded_survey", "survey"],
+            )
             data["quiz[quiz_type]"] = quiz_quiz_type
-
 
         # OPTIONAL - quiz[assignment_group_id]
         """
@@ -121,7 +162,6 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_assignment_group_id is not None:
             data["quiz[assignment_group_id]"] = quiz_assignment_group_id
 
-
         # OPTIONAL - quiz[time_limit]
         """
             Time limit to take this quiz, in minutes. Set to null for no time limit.
@@ -130,7 +170,6 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_time_limit is not None:
             data["quiz[time_limit]"] = quiz_time_limit
 
-
         # OPTIONAL - quiz[shuffle_answers]
         """
             If true, quiz answers for multiple choice questions will be randomized for
@@ -138,7 +177,6 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         if quiz_shuffle_answers is not None:
             data["quiz[shuffle_answers]"] = quiz_shuffle_answers
-
 
         # OPTIONAL - quiz[hide_results]
         """
@@ -149,9 +187,10 @@ class QuizzesAPI(BaseCanvasAPI):
         last attempt. (Only valid if allowed_attempts > 1). Defaults to null.
         """
         if quiz_hide_results is not None:
-            self._validate_enum(quiz_hide_results, ["always", "until_after_last_attempt"])
+            self._validate_enum(
+                quiz_hide_results, ["always", "until_after_last_attempt"]
+            )
             data["quiz[hide_results]"] = quiz_hide_results
-
 
         # OPTIONAL - quiz[show_correct_answers]
         """
@@ -162,7 +201,6 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_show_correct_answers is not None:
             data["quiz[show_correct_answers]"] = quiz_show_correct_answers
 
-
         # OPTIONAL - quiz[show_correct_answers_last_attempt]
         """
             Only valid if show_correct_answers=true and allowed_attempts > 1
@@ -171,8 +209,9 @@ class QuizzesAPI(BaseCanvasAPI):
         Defaults to false.
         """
         if quiz_show_correct_answers_last_attempt is not None:
-            data["quiz[show_correct_answers_last_attempt]"] = quiz_show_correct_answers_last_attempt
-
+            data[
+                "quiz[show_correct_answers_last_attempt]"
+            ] = quiz_show_correct_answers_last_attempt
 
         # OPTIONAL - quiz[show_correct_answers_at]
         """
@@ -183,11 +222,16 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         if quiz_show_correct_answers_at is not None:
             if issubclass(quiz_show_correct_answers_at.__class__, str):
-                quiz_show_correct_answers_at = self._validate_iso8601_string(quiz_show_correct_answers_at)
-            elif issubclass(quiz_show_correct_answers_at.__class__, date) or issubclass(quiz_show_correct_answers_at.__class__, datetime):
-                quiz_show_correct_answers_at = quiz_show_correct_answers_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                quiz_show_correct_answers_at = self._validate_iso8601_string(
+                    quiz_show_correct_answers_at
+                )
+            elif issubclass(quiz_show_correct_answers_at.__class__, date) or issubclass(
+                quiz_show_correct_answers_at.__class__, datetime
+            ):
+                quiz_show_correct_answers_at = quiz_show_correct_answers_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["quiz[show_correct_answers_at]"] = quiz_show_correct_answers_at
-
 
         # OPTIONAL - quiz[hide_correct_answers_at]
         """
@@ -197,11 +241,16 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         if quiz_hide_correct_answers_at is not None:
             if issubclass(quiz_hide_correct_answers_at.__class__, str):
-                quiz_hide_correct_answers_at = self._validate_iso8601_string(quiz_hide_correct_answers_at)
-            elif issubclass(quiz_hide_correct_answers_at.__class__, date) or issubclass(quiz_hide_correct_answers_at.__class__, datetime):
-                quiz_hide_correct_answers_at = quiz_hide_correct_answers_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                quiz_hide_correct_answers_at = self._validate_iso8601_string(
+                    quiz_hide_correct_answers_at
+                )
+            elif issubclass(quiz_hide_correct_answers_at.__class__, date) or issubclass(
+                quiz_hide_correct_answers_at.__class__, datetime
+            ):
+                quiz_hide_correct_answers_at = quiz_hide_correct_answers_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["quiz[hide_correct_answers_at]"] = quiz_hide_correct_answers_at
-
 
         # OPTIONAL - quiz[allowed_attempts]
         """
@@ -211,7 +260,6 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         if quiz_allowed_attempts is not None:
             data["quiz[allowed_attempts]"] = quiz_allowed_attempts
-
 
         # OPTIONAL - quiz[scoring_policy]
         """
@@ -223,7 +271,6 @@ class QuizzesAPI(BaseCanvasAPI):
             self._validate_enum(quiz_scoring_policy, ["keep_highest", "keep_latest"])
             data["quiz[scoring_policy]"] = quiz_scoring_policy
 
-
         # OPTIONAL - quiz[one_question_at_a_time]
         """
             If true, shows quiz to student one question at a time.
@@ -231,7 +278,6 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         if quiz_one_question_at_a_time is not None:
             data["quiz[one_question_at_a_time]"] = quiz_one_question_at_a_time
-
 
         # OPTIONAL - quiz[cant_go_back]
         """
@@ -242,7 +288,6 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_cant_go_back is not None:
             data["quiz[cant_go_back]"] = quiz_cant_go_back
 
-
         # OPTIONAL - quiz[access_code]
         """
             Restricts access to the quiz with a password.
@@ -251,7 +296,6 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         if quiz_access_code is not None:
             data["quiz[access_code]"] = quiz_access_code
-
 
         # OPTIONAL - quiz[ip_filter]
         """
@@ -269,7 +313,6 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_ip_filter is not None:
             data["quiz[ip_filter]"] = quiz_ip_filter
 
-
         # OPTIONAL - quiz[due_at]
         """
             The day/time the quiz is due.
@@ -278,10 +321,11 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_due_at is not None:
             if issubclass(quiz_due_at.__class__, str):
                 quiz_due_at = self._validate_iso8601_string(quiz_due_at)
-            elif issubclass(quiz_due_at.__class__, date) or issubclass(quiz_due_at.__class__, datetime):
-                quiz_due_at = quiz_due_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(quiz_due_at.__class__, date) or issubclass(
+                quiz_due_at.__class__, datetime
+            ):
+                quiz_due_at = quiz_due_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["quiz[due_at]"] = quiz_due_at
-
 
         # OPTIONAL - quiz[lock_at]
         """
@@ -291,10 +335,11 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_lock_at is not None:
             if issubclass(quiz_lock_at.__class__, str):
                 quiz_lock_at = self._validate_iso8601_string(quiz_lock_at)
-            elif issubclass(quiz_lock_at.__class__, date) or issubclass(quiz_lock_at.__class__, datetime):
-                quiz_lock_at = quiz_lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(quiz_lock_at.__class__, date) or issubclass(
+                quiz_lock_at.__class__, datetime
+            ):
+                quiz_lock_at = quiz_lock_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["quiz[lock_at]"] = quiz_lock_at
-
 
         # OPTIONAL - quiz[unlock_at]
         """
@@ -304,10 +349,11 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_unlock_at is not None:
             if issubclass(quiz_unlock_at.__class__, str):
                 quiz_unlock_at = self._validate_iso8601_string(quiz_unlock_at)
-            elif issubclass(quiz_unlock_at.__class__, date) or issubclass(quiz_unlock_at.__class__, datetime):
-                quiz_unlock_at = quiz_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(quiz_unlock_at.__class__, date) or issubclass(
+                quiz_unlock_at.__class__, datetime
+            ):
+                quiz_unlock_at = quiz_unlock_at.strftime("%Y-%m-%dT%H:%M:%S+00:00")
             data["quiz[unlock_at]"] = quiz_unlock_at
-
 
         # OPTIONAL - quiz[published]
         """
@@ -319,7 +365,6 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_published is not None:
             data["quiz[published]"] = quiz_published
 
-
         # OPTIONAL - quiz[one_time_results]
         """
             Whether students should be prevented from viewing their quiz results past
@@ -330,7 +375,6 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_one_time_results is not None:
             data["quiz[one_time_results]"] = quiz_one_time_results
 
-
         # OPTIONAL - quiz[only_visible_to_overrides]
         """
             Whether this quiz is only visible to overrides (Only useful if
@@ -340,16 +384,25 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_only_visible_to_overrides is not None:
             data["quiz[only_visible_to_overrides]"] = quiz_only_visible_to_overrides
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def edit_quiz(self, course_id, id, quiz_notify_of_update=None):
         """
         Edit a quiz.
 
         Modify an existing quiz. See the documentation for quiz creation.
-        
+
         Additional arguments:
         """
         path = {}
@@ -362,13 +415,11 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - quiz[notify_of_update]
         """
@@ -378,15 +429,24 @@ class QuizzesAPI(BaseCanvasAPI):
         if quiz_notify_of_update is not None:
             data["quiz[notify_of_update]"] = quiz_notify_of_update
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/quizzes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/quizzes/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/quizzes/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/quizzes/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_quiz(self, course_id, id):
         """
         Delete a quiz.
 
-        
+
         """
         path = {}
         data = {}
@@ -398,23 +458,31 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/quizzes/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/quizzes/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/quizzes/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/quizzes/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def reorder_quiz_items(self, course_id, id, order_id, order_type=None):
         """
         Reorder quiz items.
 
         Change order of the quiz questions or groups within the quiz
-        
+
         <b>204 No Content</b> response code is returned if the reorder was successful.
         """
         path = {}
@@ -427,20 +495,17 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
         # REQUIRED - order[id]
         """
             The associated item's unique identifier
         """
         data["order[id]"] = order_id
-
 
         # OPTIONAL - order[type]
         """
@@ -450,9 +515,18 @@ class QuizzesAPI(BaseCanvasAPI):
             self._validate_enum(order_type, ["question", "group"])
             data["order[type]"] = order_type
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{id}/reorder with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{id}/reorder".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes/{id}/reorder with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes/{id}/reorder".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def validate_quiz_access_code(self, access_code, course_id, id):
         """
@@ -470,13 +544,11 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # REQUIRED - access_code
         """
@@ -484,15 +556,66 @@ class QuizzesAPI(BaseCanvasAPI):
         """
         data["access_code"] = access_code
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{id}/validate_access_code with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{id}/validate_access_code".format(**path), data=data, params=params)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes/{id}/validate_access_code with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes/{id}/validate_access_code".format(
+                **path
+            ),
+            data=data,
+            params=params,
+        )
 
 
 class Quiz(BaseModel):
     """Quiz Model."""
 
-    def __init__(self, id=None, title=None, html_url=None, mobile_url=None, preview_url=None, description=None, quiz_type=None, assignment_group_id=None, time_limit=None, shuffle_answers=None, hide_results=None, show_correct_answers=None, show_correct_answers_last_attempt=None, show_correct_answers_at=None, hide_correct_answers_at=None, one_time_results=None, scoring_policy=None, allowed_attempts=None, one_question_at_a_time=None, question_count=None, points_possible=None, cant_go_back=None, access_code=None, ip_filter=None, due_at=None, lock_at=None, unlock_at=None, published=None, unpublishable=None, locked_for_user=None, lock_info=None, lock_explanation=None, speedgrader_url=None, quiz_extensions_url=None, permissions=None, all_dates=None, version_number=None, question_types=None, anonymous_submissions=None):
+    def __init__(
+        self,
+        id=None,
+        title=None,
+        html_url=None,
+        mobile_url=None,
+        preview_url=None,
+        description=None,
+        quiz_type=None,
+        assignment_group_id=None,
+        time_limit=None,
+        shuffle_answers=None,
+        hide_results=None,
+        show_correct_answers=None,
+        show_correct_answers_last_attempt=None,
+        show_correct_answers_at=None,
+        hide_correct_answers_at=None,
+        one_time_results=None,
+        scoring_policy=None,
+        allowed_attempts=None,
+        one_question_at_a_time=None,
+        question_count=None,
+        points_possible=None,
+        cant_go_back=None,
+        access_code=None,
+        ip_filter=None,
+        due_at=None,
+        lock_at=None,
+        unlock_at=None,
+        published=None,
+        unpublishable=None,
+        locked_for_user=None,
+        lock_info=None,
+        lock_explanation=None,
+        speedgrader_url=None,
+        quiz_extensions_url=None,
+        permissions=None,
+        all_dates=None,
+        version_number=None,
+        question_types=None,
+        anonymous_submissions=None,
+    ):
         """Init method for Quiz class."""
         self._id = id
         self._title = title
@@ -534,7 +657,7 @@ class Quiz(BaseModel):
         self._question_types = question_types
         self._anonymous_submissions = anonymous_submissions
 
-        self.logger = logging.getLogger('py3canvas.Quiz')
+        self.logger = logging.getLogger("py3canvas.Quiz")
 
     @property
     def id(self):
@@ -544,7 +667,9 @@ class Quiz(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -555,7 +680,9 @@ class Quiz(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -566,7 +693,9 @@ class Quiz(BaseModel):
     @html_url.setter
     def html_url(self, value):
         """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on html_url will NOT update the remote Canvas instance."
+        )
         self._html_url = value
 
     @property
@@ -577,7 +706,9 @@ class Quiz(BaseModel):
     @mobile_url.setter
     def mobile_url(self, value):
         """Setter for mobile_url property."""
-        self.logger.warn("Setting values on mobile_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on mobile_url will NOT update the remote Canvas instance."
+        )
         self._mobile_url = value
 
     @property
@@ -588,7 +719,9 @@ class Quiz(BaseModel):
     @preview_url.setter
     def preview_url(self, value):
         """Setter for preview_url property."""
-        self.logger.warn("Setting values on preview_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on preview_url will NOT update the remote Canvas instance."
+        )
         self._preview_url = value
 
     @property
@@ -599,7 +732,9 @@ class Quiz(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -610,7 +745,9 @@ class Quiz(BaseModel):
     @quiz_type.setter
     def quiz_type(self, value):
         """Setter for quiz_type property."""
-        self.logger.warn("Setting values on quiz_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on quiz_type will NOT update the remote Canvas instance."
+        )
         self._quiz_type = value
 
     @property
@@ -621,7 +758,9 @@ class Quiz(BaseModel):
     @assignment_group_id.setter
     def assignment_group_id(self, value):
         """Setter for assignment_group_id property."""
-        self.logger.warn("Setting values on assignment_group_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assignment_group_id will NOT update the remote Canvas instance."
+        )
         self._assignment_group_id = value
 
     @property
@@ -632,7 +771,9 @@ class Quiz(BaseModel):
     @time_limit.setter
     def time_limit(self, value):
         """Setter for time_limit property."""
-        self.logger.warn("Setting values on time_limit will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on time_limit will NOT update the remote Canvas instance."
+        )
         self._time_limit = value
 
     @property
@@ -643,7 +784,9 @@ class Quiz(BaseModel):
     @shuffle_answers.setter
     def shuffle_answers(self, value):
         """Setter for shuffle_answers property."""
-        self.logger.warn("Setting values on shuffle_answers will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on shuffle_answers will NOT update the remote Canvas instance."
+        )
         self._shuffle_answers = value
 
     @property
@@ -654,7 +797,9 @@ class Quiz(BaseModel):
     @hide_results.setter
     def hide_results(self, value):
         """Setter for hide_results property."""
-        self.logger.warn("Setting values on hide_results will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on hide_results will NOT update the remote Canvas instance."
+        )
         self._hide_results = value
 
     @property
@@ -665,7 +810,9 @@ class Quiz(BaseModel):
     @show_correct_answers.setter
     def show_correct_answers(self, value):
         """Setter for show_correct_answers property."""
-        self.logger.warn("Setting values on show_correct_answers will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on show_correct_answers will NOT update the remote Canvas instance."
+        )
         self._show_correct_answers = value
 
     @property
@@ -676,7 +823,9 @@ class Quiz(BaseModel):
     @show_correct_answers_last_attempt.setter
     def show_correct_answers_last_attempt(self, value):
         """Setter for show_correct_answers_last_attempt property."""
-        self.logger.warn("Setting values on show_correct_answers_last_attempt will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on show_correct_answers_last_attempt will NOT update the remote Canvas instance."
+        )
         self._show_correct_answers_last_attempt = value
 
     @property
@@ -687,7 +836,9 @@ class Quiz(BaseModel):
     @show_correct_answers_at.setter
     def show_correct_answers_at(self, value):
         """Setter for show_correct_answers_at property."""
-        self.logger.warn("Setting values on show_correct_answers_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on show_correct_answers_at will NOT update the remote Canvas instance."
+        )
         self._show_correct_answers_at = value
 
     @property
@@ -698,7 +849,9 @@ class Quiz(BaseModel):
     @hide_correct_answers_at.setter
     def hide_correct_answers_at(self, value):
         """Setter for hide_correct_answers_at property."""
-        self.logger.warn("Setting values on hide_correct_answers_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on hide_correct_answers_at will NOT update the remote Canvas instance."
+        )
         self._hide_correct_answers_at = value
 
     @property
@@ -709,7 +862,9 @@ class Quiz(BaseModel):
     @one_time_results.setter
     def one_time_results(self, value):
         """Setter for one_time_results property."""
-        self.logger.warn("Setting values on one_time_results will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on one_time_results will NOT update the remote Canvas instance."
+        )
         self._one_time_results = value
 
     @property
@@ -720,7 +875,9 @@ class Quiz(BaseModel):
     @scoring_policy.setter
     def scoring_policy(self, value):
         """Setter for scoring_policy property."""
-        self.logger.warn("Setting values on scoring_policy will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on scoring_policy will NOT update the remote Canvas instance."
+        )
         self._scoring_policy = value
 
     @property
@@ -731,7 +888,9 @@ class Quiz(BaseModel):
     @allowed_attempts.setter
     def allowed_attempts(self, value):
         """Setter for allowed_attempts property."""
-        self.logger.warn("Setting values on allowed_attempts will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on allowed_attempts will NOT update the remote Canvas instance."
+        )
         self._allowed_attempts = value
 
     @property
@@ -742,7 +901,9 @@ class Quiz(BaseModel):
     @one_question_at_a_time.setter
     def one_question_at_a_time(self, value):
         """Setter for one_question_at_a_time property."""
-        self.logger.warn("Setting values on one_question_at_a_time will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on one_question_at_a_time will NOT update the remote Canvas instance."
+        )
         self._one_question_at_a_time = value
 
     @property
@@ -753,7 +914,9 @@ class Quiz(BaseModel):
     @question_count.setter
     def question_count(self, value):
         """Setter for question_count property."""
-        self.logger.warn("Setting values on question_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on question_count will NOT update the remote Canvas instance."
+        )
         self._question_count = value
 
     @property
@@ -764,7 +927,9 @@ class Quiz(BaseModel):
     @points_possible.setter
     def points_possible(self, value):
         """Setter for points_possible property."""
-        self.logger.warn("Setting values on points_possible will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on points_possible will NOT update the remote Canvas instance."
+        )
         self._points_possible = value
 
     @property
@@ -775,7 +940,9 @@ class Quiz(BaseModel):
     @cant_go_back.setter
     def cant_go_back(self, value):
         """Setter for cant_go_back property."""
-        self.logger.warn("Setting values on cant_go_back will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on cant_go_back will NOT update the remote Canvas instance."
+        )
         self._cant_go_back = value
 
     @property
@@ -786,7 +953,9 @@ class Quiz(BaseModel):
     @access_code.setter
     def access_code(self, value):
         """Setter for access_code property."""
-        self.logger.warn("Setting values on access_code will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on access_code will NOT update the remote Canvas instance."
+        )
         self._access_code = value
 
     @property
@@ -797,7 +966,9 @@ class Quiz(BaseModel):
     @ip_filter.setter
     def ip_filter(self, value):
         """Setter for ip_filter property."""
-        self.logger.warn("Setting values on ip_filter will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on ip_filter will NOT update the remote Canvas instance."
+        )
         self._ip_filter = value
 
     @property
@@ -808,7 +979,9 @@ class Quiz(BaseModel):
     @due_at.setter
     def due_at(self, value):
         """Setter for due_at property."""
-        self.logger.warn("Setting values on due_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on due_at will NOT update the remote Canvas instance."
+        )
         self._due_at = value
 
     @property
@@ -819,7 +992,9 @@ class Quiz(BaseModel):
     @lock_at.setter
     def lock_at(self, value):
         """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_at will NOT update the remote Canvas instance."
+        )
         self._lock_at = value
 
     @property
@@ -830,7 +1005,9 @@ class Quiz(BaseModel):
     @unlock_at.setter
     def unlock_at(self, value):
         """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unlock_at will NOT update the remote Canvas instance."
+        )
         self._unlock_at = value
 
     @property
@@ -841,7 +1018,9 @@ class Quiz(BaseModel):
     @published.setter
     def published(self, value):
         """Setter for published property."""
-        self.logger.warn("Setting values on published will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on published will NOT update the remote Canvas instance."
+        )
         self._published = value
 
     @property
@@ -852,7 +1031,9 @@ class Quiz(BaseModel):
     @unpublishable.setter
     def unpublishable(self, value):
         """Setter for unpublishable property."""
-        self.logger.warn("Setting values on unpublishable will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unpublishable will NOT update the remote Canvas instance."
+        )
         self._unpublishable = value
 
     @property
@@ -863,7 +1044,9 @@ class Quiz(BaseModel):
     @locked_for_user.setter
     def locked_for_user(self, value):
         """Setter for locked_for_user property."""
-        self.logger.warn("Setting values on locked_for_user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on locked_for_user will NOT update the remote Canvas instance."
+        )
         self._locked_for_user = value
 
     @property
@@ -874,7 +1057,9 @@ class Quiz(BaseModel):
     @lock_info.setter
     def lock_info(self, value):
         """Setter for lock_info property."""
-        self.logger.warn("Setting values on lock_info will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_info will NOT update the remote Canvas instance."
+        )
         self._lock_info = value
 
     @property
@@ -885,7 +1070,9 @@ class Quiz(BaseModel):
     @lock_explanation.setter
     def lock_explanation(self, value):
         """Setter for lock_explanation property."""
-        self.logger.warn("Setting values on lock_explanation will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_explanation will NOT update the remote Canvas instance."
+        )
         self._lock_explanation = value
 
     @property
@@ -896,7 +1083,9 @@ class Quiz(BaseModel):
     @speedgrader_url.setter
     def speedgrader_url(self, value):
         """Setter for speedgrader_url property."""
-        self.logger.warn("Setting values on speedgrader_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on speedgrader_url will NOT update the remote Canvas instance."
+        )
         self._speedgrader_url = value
 
     @property
@@ -907,7 +1096,9 @@ class Quiz(BaseModel):
     @quiz_extensions_url.setter
     def quiz_extensions_url(self, value):
         """Setter for quiz_extensions_url property."""
-        self.logger.warn("Setting values on quiz_extensions_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on quiz_extensions_url will NOT update the remote Canvas instance."
+        )
         self._quiz_extensions_url = value
 
     @property
@@ -918,7 +1109,9 @@ class Quiz(BaseModel):
     @permissions.setter
     def permissions(self, value):
         """Setter for permissions property."""
-        self.logger.warn("Setting values on permissions will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on permissions will NOT update the remote Canvas instance."
+        )
         self._permissions = value
 
     @property
@@ -929,7 +1122,9 @@ class Quiz(BaseModel):
     @all_dates.setter
     def all_dates(self, value):
         """Setter for all_dates property."""
-        self.logger.warn("Setting values on all_dates will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on all_dates will NOT update the remote Canvas instance."
+        )
         self._all_dates = value
 
     @property
@@ -940,7 +1135,9 @@ class Quiz(BaseModel):
     @version_number.setter
     def version_number(self, value):
         """Setter for version_number property."""
-        self.logger.warn("Setting values on version_number will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on version_number will NOT update the remote Canvas instance."
+        )
         self._version_number = value
 
     @property
@@ -951,7 +1148,9 @@ class Quiz(BaseModel):
     @question_types.setter
     def question_types(self, value):
         """Setter for question_types property."""
-        self.logger.warn("Setting values on question_types will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on question_types will NOT update the remote Canvas instance."
+        )
         self._question_types = value
 
     @property
@@ -962,7 +1161,9 @@ class Quiz(BaseModel):
     @anonymous_submissions.setter
     def anonymous_submissions(self, value):
         """Setter for anonymous_submissions property."""
-        self.logger.warn("Setting values on anonymous_submissions will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on anonymous_submissions will NOT update the remote Canvas instance."
+        )
         self._anonymous_submissions = value
 
 
@@ -970,7 +1171,16 @@ class Quizpermissions(BaseModel):
     """Quizpermissions Model.
     Permissions the user has for the quiz"""
 
-    def __init__(self, read=None, submit=None, create=None, manage=None, read_statistics=None, review_grades=None, update=None):
+    def __init__(
+        self,
+        read=None,
+        submit=None,
+        create=None,
+        manage=None,
+        read_statistics=None,
+        review_grades=None,
+        update=None,
+    ):
         """Init method for Quizpermissions class."""
         self._read = read
         self._submit = submit
@@ -980,7 +1190,7 @@ class Quizpermissions(BaseModel):
         self._review_grades = review_grades
         self._update = update
 
-        self.logger = logging.getLogger('py3canvas.Quizpermissions')
+        self.logger = logging.getLogger("py3canvas.Quizpermissions")
 
     @property
     def read(self):
@@ -990,7 +1200,9 @@ class Quizpermissions(BaseModel):
     @read.setter
     def read(self, value):
         """Setter for read property."""
-        self.logger.warn("Setting values on read will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on read will NOT update the remote Canvas instance."
+        )
         self._read = value
 
     @property
@@ -1001,7 +1213,9 @@ class Quizpermissions(BaseModel):
     @submit.setter
     def submit(self, value):
         """Setter for submit property."""
-        self.logger.warn("Setting values on submit will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submit will NOT update the remote Canvas instance."
+        )
         self._submit = value
 
     @property
@@ -1012,7 +1226,9 @@ class Quizpermissions(BaseModel):
     @create.setter
     def create(self, value):
         """Setter for create property."""
-        self.logger.warn("Setting values on create will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on create will NOT update the remote Canvas instance."
+        )
         self._create = value
 
     @property
@@ -1023,7 +1239,9 @@ class Quizpermissions(BaseModel):
     @manage.setter
     def manage(self, value):
         """Setter for manage property."""
-        self.logger.warn("Setting values on manage will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on manage will NOT update the remote Canvas instance."
+        )
         self._manage = value
 
     @property
@@ -1034,7 +1252,9 @@ class Quizpermissions(BaseModel):
     @read_statistics.setter
     def read_statistics(self, value):
         """Setter for read_statistics property."""
-        self.logger.warn("Setting values on read_statistics will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on read_statistics will NOT update the remote Canvas instance."
+        )
         self._read_statistics = value
 
     @property
@@ -1045,7 +1265,9 @@ class Quizpermissions(BaseModel):
     @review_grades.setter
     def review_grades(self, value):
         """Setter for review_grades property."""
-        self.logger.warn("Setting values on review_grades will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on review_grades will NOT update the remote Canvas instance."
+        )
         self._review_grades = value
 
     @property
@@ -1056,6 +1278,7 @@ class Quizpermissions(BaseModel):
     @update.setter
     def update(self, value):
         """Setter for update property."""
-        self.logger.warn("Setting values on update will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on update will NOT update the remote Canvas instance."
+        )
         self._update = value
-

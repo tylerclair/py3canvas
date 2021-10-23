@@ -16,12 +16,14 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         super(OutcomeImportsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.OutcomeImportsAPI")
 
-    def import_outcomes_accounts(self, account_id, attachment=None, extension=None, import_type=None):
+    def import_outcomes_accounts(
+        self, account_id, attachment=None, extension=None, import_type=None
+    ):
         """
         Import Outcomes.
 
         Import outcomes into Canvas.
-        
+
         For more information on the format that's expected here, please see the
         "Outcomes CSV" section in the API docs.
         """
@@ -35,7 +37,6 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # OPTIONAL - import_type
         """
             Choose the data format for reading outcome data. With a standard Canvas
@@ -44,7 +45,6 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         """
         if import_type is not None:
             data["import_type"] = import_type
-
 
         # OPTIONAL - attachment
         """
@@ -77,7 +77,6 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         if attachment is not None:
             data["attachment"] = attachment
 
-
         # OPTIONAL - extension
         """
             Recommended for raw post request style imports. This field will be used to
@@ -89,16 +88,27 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         if extension is not None:
             data["extension"] = extension
 
+        self.logger.debug(
+            "POST /api/v1/accounts/{account_id}/outcome_imports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/accounts/{account_id}/outcome_imports".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/accounts/{account_id}/outcome_imports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/outcome_imports".format(**path), data=data, params=params, single_item=True)
-
-    def import_outcomes_courses(self, course_id, attachment=None, extension=None, import_type=None):
+    def import_outcomes_courses(
+        self, course_id, attachment=None, extension=None, import_type=None
+    ):
         """
         Import Outcomes.
 
         Import outcomes into Canvas.
-        
+
         For more information on the format that's expected here, please see the
         "Outcomes CSV" section in the API docs.
         """
@@ -112,7 +122,6 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # OPTIONAL - import_type
         """
             Choose the data format for reading outcome data. With a standard Canvas
@@ -121,7 +130,6 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         """
         if import_type is not None:
             data["import_type"] = import_type
-
 
         # OPTIONAL - attachment
         """
@@ -154,7 +162,6 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         if attachment is not None:
             data["attachment"] = attachment
 
-
         # OPTIONAL - extension
         """
             Recommended for raw post request style imports. This field will be used to
@@ -166,9 +173,18 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         if extension is not None:
             data["extension"] = extension
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/outcome_imports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/outcome_imports".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/outcome_imports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/outcome_imports".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def get_outcome_import_status_accounts(self, account_id, id):
         """
@@ -193,16 +209,24 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/outcome_imports/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/outcome_imports/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/outcome_imports/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/outcome_imports/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def get_outcome_import_status_courses(self, course_id, id):
         """
@@ -227,16 +251,24 @@ class OutcomeImportsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/outcome_imports/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/outcome_imports/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/outcome_imports/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/outcome_imports/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Outcomeimportdata(BaseModel):
@@ -246,7 +278,7 @@ class Outcomeimportdata(BaseModel):
         """Init method for Outcomeimportdata class."""
         self._import_type = import_type
 
-        self.logger = logging.getLogger('py3canvas.Outcomeimportdata')
+        self.logger = logging.getLogger("py3canvas.Outcomeimportdata")
 
     @property
     def import_type(self):
@@ -256,14 +288,27 @@ class Outcomeimportdata(BaseModel):
     @import_type.setter
     def import_type(self, value):
         """Setter for import_type property."""
-        self.logger.warn("Setting values on import_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on import_type will NOT update the remote Canvas instance."
+        )
         self._import_type = value
 
 
 class Outcomeimport(BaseModel):
     """Outcomeimport Model."""
 
-    def __init__(self, id=None, created_at=None, ended_at=None, updated_at=None, workflow_state=None, data=None, progress=None, user=None, processing_errors=None):
+    def __init__(
+        self,
+        id=None,
+        created_at=None,
+        ended_at=None,
+        updated_at=None,
+        workflow_state=None,
+        data=None,
+        progress=None,
+        user=None,
+        processing_errors=None,
+    ):
         """Init method for Outcomeimport class."""
         self._id = id
         self._created_at = created_at
@@ -275,7 +320,7 @@ class Outcomeimport(BaseModel):
         self._user = user
         self._processing_errors = processing_errors
 
-        self.logger = logging.getLogger('py3canvas.Outcomeimport')
+        self.logger = logging.getLogger("py3canvas.Outcomeimport")
 
     @property
     def id(self):
@@ -285,7 +330,9 @@ class Outcomeimport(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -296,7 +343,9 @@ class Outcomeimport(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -307,7 +356,9 @@ class Outcomeimport(BaseModel):
     @ended_at.setter
     def ended_at(self, value):
         """Setter for ended_at property."""
-        self.logger.warn("Setting values on ended_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on ended_at will NOT update the remote Canvas instance."
+        )
         self._ended_at = value
 
     @property
@@ -318,22 +369,26 @@ class Outcomeimport(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
 
     @property
     def workflow_state(self):
         """The current state of the outcome import.
- - 'created': The outcome import has been created.
- - 'importing': The outcome import is currently processing.
- - 'succeeded': The outcome import has completed successfully.
- - 'failed': The outcome import failed."""
+        - 'created': The outcome import has been created.
+        - 'importing': The outcome import is currently processing.
+        - 'succeeded': The outcome import has completed successfully.
+        - 'failed': The outcome import failed."""
         return self._workflow_state
 
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
 
     @property
@@ -344,7 +399,9 @@ class Outcomeimport(BaseModel):
     @data.setter
     def data(self, value):
         """Setter for data property."""
-        self.logger.warn("Setting values on data will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on data will NOT update the remote Canvas instance."
+        )
         self._data = value
 
     @property
@@ -355,7 +412,9 @@ class Outcomeimport(BaseModel):
     @progress.setter
     def progress(self, value):
         """Setter for progress property."""
-        self.logger.warn("Setting values on progress will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on progress will NOT update the remote Canvas instance."
+        )
         self._progress = value
 
     @property
@@ -366,7 +425,9 @@ class Outcomeimport(BaseModel):
     @user.setter
     def user(self, value):
         """Setter for user property."""
-        self.logger.warn("Setting values on user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user will NOT update the remote Canvas instance."
+        )
         self._user = value
 
     @property
@@ -377,6 +438,7 @@ class Outcomeimport(BaseModel):
     @processing_errors.setter
     def processing_errors(self, value):
         """Setter for processing_errors property."""
-        self.logger.warn("Setting values on processing_errors will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on processing_errors will NOT update the remote Canvas instance."
+        )
         self._processing_errors = value
-

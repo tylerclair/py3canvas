@@ -33,9 +33,18 @@ class ContentExportsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/content_exports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/content_exports".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/content_exports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/content_exports".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_content_exports_groups(self, group_id):
         """
@@ -54,9 +63,18 @@ class ContentExportsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
-        self.logger.debug("GET /api/v1/groups/{group_id}/content_exports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/content_exports".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/content_exports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/content_exports".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_content_exports_users(self, user_id):
         """
@@ -75,9 +93,18 @@ class ContentExportsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/content_exports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/content_exports".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/content_exports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/content_exports".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def show_content_export_courses(self, course_id, id):
         """
@@ -95,16 +122,24 @@ class ContentExportsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/content_exports/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/content_exports/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/content_exports/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/content_exports/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_content_export_groups(self, group_id, id):
         """
@@ -122,16 +157,24 @@ class ContentExportsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/groups/{group_id}/content_exports/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/content_exports/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/content_exports/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/content_exports/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_content_export_users(self, id, user_id):
         """
@@ -149,27 +192,37 @@ class ContentExportsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/content_exports/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/content_exports/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/users/{user_id}/content_exports/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/content_exports/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def export_content_courses(self, course_id, export_type, select=None, skip_notifications=None):
+    def export_content_courses(
+        self, course_id, export_type, select=None, skip_notifications=None
+    ):
         """
         Export content.
 
         Begin a content export job for a course, group, or user.
-        
+
         You can use the {api:ProgressController#show Progress API} to track the
         progress of the export. The migration's progress is linked to with the
         _progress_url_ value.
-        
+
         When the export completes, use the {api:ContentExportsApiController#show Show content export} endpoint
         to retrieve a download URL for the exported content.
         """
@@ -183,7 +236,6 @@ class ContentExportsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - export_type
         """
             "common_cartridge":: Export the contents of the course in the Common Cartridge (.imscc) format
@@ -193,14 +245,12 @@ class ContentExportsAPI(BaseCanvasAPI):
         self._validate_enum(export_type, ["common_cartridge", "qti", "zip"])
         data["export_type"] = export_type
 
-
         # OPTIONAL - skip_notifications
         """
             Don't send the notifications about the export to the user. Default: false
         """
         if skip_notifications is not None:
             data["skip_notifications"] = skip_notifications
-
 
         # OPTIONAL - select
         """
@@ -217,23 +267,50 @@ class ContentExportsAPI(BaseCanvasAPI):
         "quizzes":: Also supported for qti export_type.
         """
         if select is not None:
-            self._validate_enum(select, ["folders", "files", "attachments", "quizzes", "assignments", "announcements", "calendar_events", "discussion_topics", "modules", "module_items", "pages", "rubrics"])
+            self._validate_enum(
+                select,
+                [
+                    "folders",
+                    "files",
+                    "attachments",
+                    "quizzes",
+                    "assignments",
+                    "announcements",
+                    "calendar_events",
+                    "discussion_topics",
+                    "modules",
+                    "module_items",
+                    "pages",
+                    "rubrics",
+                ],
+            )
             data["select"] = select
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/content_exports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/content_exports".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/content_exports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/content_exports".format(**path), data=data, params=params, single_item=True)
-
-    def export_content_groups(self, export_type, group_id, select=None, skip_notifications=None):
+    def export_content_groups(
+        self, export_type, group_id, select=None, skip_notifications=None
+    ):
         """
         Export content.
 
         Begin a content export job for a course, group, or user.
-        
+
         You can use the {api:ProgressController#show Progress API} to track the
         progress of the export. The migration's progress is linked to with the
         _progress_url_ value.
-        
+
         When the export completes, use the {api:ContentExportsApiController#show Show content export} endpoint
         to retrieve a download URL for the exported content.
         """
@@ -247,7 +324,6 @@ class ContentExportsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - export_type
         """
             "common_cartridge":: Export the contents of the course in the Common Cartridge (.imscc) format
@@ -257,14 +333,12 @@ class ContentExportsAPI(BaseCanvasAPI):
         self._validate_enum(export_type, ["common_cartridge", "qti", "zip"])
         data["export_type"] = export_type
 
-
         # OPTIONAL - skip_notifications
         """
             Don't send the notifications about the export to the user. Default: false
         """
         if skip_notifications is not None:
             data["skip_notifications"] = skip_notifications
-
 
         # OPTIONAL - select
         """
@@ -281,23 +355,50 @@ class ContentExportsAPI(BaseCanvasAPI):
         "quizzes":: Also supported for qti export_type.
         """
         if select is not None:
-            self._validate_enum(select, ["folders", "files", "attachments", "quizzes", "assignments", "announcements", "calendar_events", "discussion_topics", "modules", "module_items", "pages", "rubrics"])
+            self._validate_enum(
+                select,
+                [
+                    "folders",
+                    "files",
+                    "attachments",
+                    "quizzes",
+                    "assignments",
+                    "announcements",
+                    "calendar_events",
+                    "discussion_topics",
+                    "modules",
+                    "module_items",
+                    "pages",
+                    "rubrics",
+                ],
+            )
             data["select"] = select
 
+        self.logger.debug(
+            "POST /api/v1/groups/{group_id}/content_exports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/groups/{group_id}/content_exports".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/groups/{group_id}/content_exports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/groups/{group_id}/content_exports".format(**path), data=data, params=params, single_item=True)
-
-    def export_content_users(self, export_type, user_id, select=None, skip_notifications=None):
+    def export_content_users(
+        self, export_type, user_id, select=None, skip_notifications=None
+    ):
         """
         Export content.
 
         Begin a content export job for a course, group, or user.
-        
+
         You can use the {api:ProgressController#show Progress API} to track the
         progress of the export. The migration's progress is linked to with the
         _progress_url_ value.
-        
+
         When the export completes, use the {api:ContentExportsApiController#show Show content export} endpoint
         to retrieve a download URL for the exported content.
         """
@@ -311,7 +412,6 @@ class ContentExportsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - export_type
         """
             "common_cartridge":: Export the contents of the course in the Common Cartridge (.imscc) format
@@ -321,14 +421,12 @@ class ContentExportsAPI(BaseCanvasAPI):
         self._validate_enum(export_type, ["common_cartridge", "qti", "zip"])
         data["export_type"] = export_type
 
-
         # OPTIONAL - skip_notifications
         """
             Don't send the notifications about the export to the user. Default: false
         """
         if skip_notifications is not None:
             data["skip_notifications"] = skip_notifications
-
 
         # OPTIONAL - select
         """
@@ -345,18 +443,52 @@ class ContentExportsAPI(BaseCanvasAPI):
         "quizzes":: Also supported for qti export_type.
         """
         if select is not None:
-            self._validate_enum(select, ["folders", "files", "attachments", "quizzes", "assignments", "announcements", "calendar_events", "discussion_topics", "modules", "module_items", "pages", "rubrics"])
+            self._validate_enum(
+                select,
+                [
+                    "folders",
+                    "files",
+                    "attachments",
+                    "quizzes",
+                    "assignments",
+                    "announcements",
+                    "calendar_events",
+                    "discussion_topics",
+                    "modules",
+                    "module_items",
+                    "pages",
+                    "rubrics",
+                ],
+            )
             data["select"] = select
 
-
-        self.logger.debug("POST /api/v1/users/{user_id}/content_exports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/users/{user_id}/content_exports".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/users/{user_id}/content_exports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/users/{user_id}/content_exports".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Contentexport(BaseModel):
     """Contentexport Model."""
 
-    def __init__(self, id=None, created_at=None, export_type=None, attachment=None, progress_url=None, user_id=None, workflow_state=None):
+    def __init__(
+        self,
+        id=None,
+        created_at=None,
+        export_type=None,
+        attachment=None,
+        progress_url=None,
+        user_id=None,
+        workflow_state=None,
+    ):
         """Init method for Contentexport class."""
         self._id = id
         self._created_at = created_at
@@ -366,7 +498,7 @@ class Contentexport(BaseModel):
         self._user_id = user_id
         self._workflow_state = workflow_state
 
-        self.logger = logging.getLogger('py3canvas.Contentexport')
+        self.logger = logging.getLogger("py3canvas.Contentexport")
 
     @property
     def id(self):
@@ -376,7 +508,9 @@ class Contentexport(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -387,7 +521,9 @@ class Contentexport(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -398,7 +534,9 @@ class Contentexport(BaseModel):
     @export_type.setter
     def export_type(self, value):
         """Setter for export_type property."""
-        self.logger.warn("Setting values on export_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on export_type will NOT update the remote Canvas instance."
+        )
         self._export_type = value
 
     @property
@@ -409,7 +547,9 @@ class Contentexport(BaseModel):
     @attachment.setter
     def attachment(self, value):
         """Setter for attachment property."""
-        self.logger.warn("Setting values on attachment will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on attachment will NOT update the remote Canvas instance."
+        )
         self._attachment = value
 
     @property
@@ -420,7 +560,9 @@ class Contentexport(BaseModel):
     @progress_url.setter
     def progress_url(self, value):
         """Setter for progress_url property."""
-        self.logger.warn("Setting values on progress_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on progress_url will NOT update the remote Canvas instance."
+        )
         self._progress_url = value
 
     @property
@@ -431,7 +573,9 @@ class Contentexport(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -442,6 +586,7 @@ class Contentexport(BaseModel):
     @workflow_state.setter
     def workflow_state(self, value):
         """Setter for workflow_state property."""
-        self.logger.warn("Setting values on workflow_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on workflow_state will NOT update the remote Canvas instance."
+        )
         self._workflow_state = value
-

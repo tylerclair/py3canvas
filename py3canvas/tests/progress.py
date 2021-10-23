@@ -27,4 +27,3 @@ class TestProgressAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.query_progress(course_id, id)
-

@@ -32,18 +32,37 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
 
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/assignments/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/assignments/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/assignments/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/assignments/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def list_assignments_assignments(self, course_id, assignment_ids=None, bucket=None, include=None, needs_grading_count_by_section=None, order_by=None, override_assignment_dates=None, post_to_sis=None, search_term=None):
+    def list_assignments_assignments(
+        self,
+        course_id,
+        assignment_ids=None,
+        bucket=None,
+        include=None,
+        needs_grading_count_by_section=None,
+        order_by=None,
+        override_assignment_dates=None,
+        post_to_sis=None,
+        search_term=None,
+    ):
         """
         List assignments.
 
@@ -58,7 +77,6 @@ class AssignmentsAPI(BaseCanvasAPI):
             ID
         """
         path["course_id"] = course_id
-
 
         # OPTIONAL - include
         """
@@ -72,9 +90,19 @@ class AssignmentsAPI(BaseCanvasAPI):
         score_statistics:: An object containing min, max, and mean score on this assignment. This will not be included for students if there are less than 5 graded assignments or if disabled by the instructor. Only valid if 'submission' is also included.
         """
         if include is not None:
-            self._validate_enum(include, ["submission", "assignment_visibility", "all_dates", "overrides", "observed_users", "can_edit", "score_statistics"])
+            self._validate_enum(
+                include,
+                [
+                    "submission",
+                    "assignment_visibility",
+                    "all_dates",
+                    "overrides",
+                    "observed_users",
+                    "can_edit",
+                    "score_statistics",
+                ],
+            )
             params["include"] = include
-
 
         # OPTIONAL - search_term
         """
@@ -83,14 +111,12 @@ class AssignmentsAPI(BaseCanvasAPI):
         if search_term is not None:
             params["search_term"] = search_term
 
-
         # OPTIONAL - override_assignment_dates
         """
             Apply assignment overrides for each assignment, defaults to true.
         """
         if override_assignment_dates is not None:
             params["override_assignment_dates"] = override_assignment_dates
-
 
         # OPTIONAL - needs_grading_count_by_section
         """
@@ -99,15 +125,24 @@ class AssignmentsAPI(BaseCanvasAPI):
         if needs_grading_count_by_section is not None:
             params["needs_grading_count_by_section"] = needs_grading_count_by_section
 
-
         # OPTIONAL - bucket
         """
             If included, only return certain assignments depending on due date and submission status.
         """
         if bucket is not None:
-            self._validate_enum(bucket, ["past", "overdue", "undated", "ungraded", "unsubmitted", "upcoming", "future"])
+            self._validate_enum(
+                bucket,
+                [
+                    "past",
+                    "overdue",
+                    "undated",
+                    "ungraded",
+                    "unsubmitted",
+                    "upcoming",
+                    "future",
+                ],
+            )
             params["bucket"] = bucket
-
 
         # OPTIONAL - assignment_ids
         """
@@ -115,7 +150,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_ids is not None:
             params["assignment_ids"] = assignment_ids
-
 
         # OPTIONAL - order_by
         """
@@ -125,7 +159,6 @@ class AssignmentsAPI(BaseCanvasAPI):
             self._validate_enum(order_by, ["position", "name", "due_at"])
             params["order_by"] = order_by
 
-
         # OPTIONAL - post_to_sis
         """
             Return only assignments that have post_to_sis set or not set.
@@ -133,11 +166,32 @@ class AssignmentsAPI(BaseCanvasAPI):
         if post_to_sis is not None:
             params["post_to_sis"] = post_to_sis
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignments".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments".format(**path), data=data, params=params, all_pages=True)
-
-    def list_assignments_assignment_groups(self, assignment_group_id, course_id, assignment_ids=None, bucket=None, include=None, needs_grading_count_by_section=None, order_by=None, override_assignment_dates=None, post_to_sis=None, search_term=None):
+    def list_assignments_assignment_groups(
+        self,
+        assignment_group_id,
+        course_id,
+        assignment_ids=None,
+        bucket=None,
+        include=None,
+        needs_grading_count_by_section=None,
+        order_by=None,
+        override_assignment_dates=None,
+        post_to_sis=None,
+        search_term=None,
+    ):
         """
         List assignments.
 
@@ -152,7 +206,6 @@ class AssignmentsAPI(BaseCanvasAPI):
             ID
         """
         path["course_id"] = course_id
-
 
         # REQUIRED - PATH - assignment_group_id
         """
@@ -160,7 +213,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["assignment_group_id"] = assignment_group_id
 
-
         # OPTIONAL - include
         """
             Optional information to include with each assignment:
@@ -173,9 +225,19 @@ class AssignmentsAPI(BaseCanvasAPI):
         score_statistics:: An object containing min, max, and mean score on this assignment. This will not be included for students if there are less than 5 graded assignments or if disabled by the instructor. Only valid if 'submission' is also included.
         """
         if include is not None:
-            self._validate_enum(include, ["submission", "assignment_visibility", "all_dates", "overrides", "observed_users", "can_edit", "score_statistics"])
+            self._validate_enum(
+                include,
+                [
+                    "submission",
+                    "assignment_visibility",
+                    "all_dates",
+                    "overrides",
+                    "observed_users",
+                    "can_edit",
+                    "score_statistics",
+                ],
+            )
             params["include"] = include
-
 
         # OPTIONAL - search_term
         """
@@ -184,14 +246,12 @@ class AssignmentsAPI(BaseCanvasAPI):
         if search_term is not None:
             params["search_term"] = search_term
 
-
         # OPTIONAL - override_assignment_dates
         """
             Apply assignment overrides for each assignment, defaults to true.
         """
         if override_assignment_dates is not None:
             params["override_assignment_dates"] = override_assignment_dates
-
 
         # OPTIONAL - needs_grading_count_by_section
         """
@@ -200,15 +260,24 @@ class AssignmentsAPI(BaseCanvasAPI):
         if needs_grading_count_by_section is not None:
             params["needs_grading_count_by_section"] = needs_grading_count_by_section
 
-
         # OPTIONAL - bucket
         """
             If included, only return certain assignments depending on due date and submission status.
         """
         if bucket is not None:
-            self._validate_enum(bucket, ["past", "overdue", "undated", "ungraded", "unsubmitted", "upcoming", "future"])
+            self._validate_enum(
+                bucket,
+                [
+                    "past",
+                    "overdue",
+                    "undated",
+                    "ungraded",
+                    "unsubmitted",
+                    "upcoming",
+                    "future",
+                ],
+            )
             params["bucket"] = bucket
-
 
         # OPTIONAL - assignment_ids
         """
@@ -216,7 +285,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_ids is not None:
             params["assignment_ids"] = assignment_ids
-
 
         # OPTIONAL - order_by
         """
@@ -226,7 +294,6 @@ class AssignmentsAPI(BaseCanvasAPI):
             self._validate_enum(order_by, ["position", "name", "due_at"])
             params["order_by"] = order_by
 
-
         # OPTIONAL - post_to_sis
         """
             Return only assignments that have post_to_sis set or not set.
@@ -234,9 +301,20 @@ class AssignmentsAPI(BaseCanvasAPI):
         if post_to_sis is not None:
             params["post_to_sis"] = post_to_sis
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignment_groups/{assignment_group_id}/assignments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignment_groups/{assignment_group_id}/assignments".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignment_groups/{assignment_group_id}/assignments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignment_groups/{assignment_group_id}/assignments".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def list_assignments_for_user(self, course_id, user_id):
         """
@@ -255,16 +333,24 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["user_id"] = user_id
 
-
         # REQUIRED - PATH - course_id
         """
             ID
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("GET /api/v1/users/{user_id}/courses/{course_id}/assignments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/users/{user_id}/courses/{course_id}/assignments".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/users/{user_id}/courses/{course_id}/assignments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/users/{user_id}/courses/{course_id}/assignments".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def duplicate_assignnment(self, assignment_id, course_id, result_type=None):
         """
@@ -282,13 +368,11 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # OPTIONAL - result_type
         """
@@ -303,11 +387,30 @@ class AssignmentsAPI(BaseCanvasAPI):
             self._validate_enum(result_type, ["Quiz"])
             data["result_type"] = result_type
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/assignments/{assignment_id}/duplicate with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/duplicate".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/assignments/{assignment_id}/duplicate with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments/{assignment_id}/duplicate".format(**path), data=data, params=params, single_item=True)
-
-    def get_single_assignment(self, course_id, id, all_dates=None, include=None, needs_grading_count_by_section=None, override_assignment_dates=None):
+    def get_single_assignment(
+        self,
+        course_id,
+        id,
+        all_dates=None,
+        include=None,
+        needs_grading_count_by_section=None,
+        override_assignment_dates=None,
+    ):
         """
         Get a single assignment.
 
@@ -323,13 +426,11 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - include
         """
@@ -339,9 +440,18 @@ class AssignmentsAPI(BaseCanvasAPI):
         For "score_statistics" to be included, the "submission" option must also be set.
         """
         if include is not None:
-            self._validate_enum(include, ["submission", "assignment_visibility", "overrides", "observed_users", "can_edit", "score_statistics"])
+            self._validate_enum(
+                include,
+                [
+                    "submission",
+                    "assignment_visibility",
+                    "overrides",
+                    "observed_users",
+                    "can_edit",
+                    "score_statistics",
+                ],
+            )
             params["include"] = include
-
 
         # OPTIONAL - override_assignment_dates
         """
@@ -350,14 +460,12 @@ class AssignmentsAPI(BaseCanvasAPI):
         if override_assignment_dates is not None:
             params["override_assignment_dates"] = override_assignment_dates
 
-
         # OPTIONAL - needs_grading_count_by_section
         """
             Split up "needs_grading_count" by sections into the "needs_grading_count_by_section" key, defaults to false
         """
         if needs_grading_count_by_section is not None:
             params["needs_grading_count_by_section"] = needs_grading_count_by_section
-
 
         # OPTIONAL - all_dates
         """
@@ -366,11 +474,60 @@ class AssignmentsAPI(BaseCanvasAPI):
         if all_dates is not None:
             params["all_dates"] = all_dates
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignments/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignments/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def create_assignment(self, assignment_name, course_id, assignment_allowed_attempts=None, assignment_allowed_extensions=None, assignment_annotatable_attachment_id=None, assignment_anonymous_grading=None, assignment_assignment_group_id=None, assignment_assignment_overrides=None, assignment_automatic_peer_reviews=None, assignment_description=None, assignment_due_at=None, assignment_external_tool_tag_attributes=None, assignment_final_grader_id=None, assignment_grade_group_students_individually=None, assignment_grader_comments_visible_to_graders=None, assignment_grader_count=None, assignment_graders_anonymous_to_graders=None, assignment_graders_names_visible_to_final_grader=None, assignment_grading_standard_id=None, assignment_grading_type=None, assignment_group_category_id=None, assignment_integration_data=None, assignment_integration_id=None, assignment_lock_at=None, assignment_moderated_grading=None, assignment_notify_of_update=None, assignment_omit_from_final_grade=None, assignment_only_visible_to_overrides=None, assignment_peer_reviews=None, assignment_points_possible=None, assignment_position=None, assignment_published=None, assignment_quiz_lti=None, assignment_submission_types=None, assignment_turnitin_enabled=None, assignment_turnitin_settings=None, assignment_unlock_at=None, assignment_vericite_enabled=None):
+    def create_assignment(
+        self,
+        assignment_name,
+        course_id,
+        assignment_allowed_attempts=None,
+        assignment_allowed_extensions=None,
+        assignment_annotatable_attachment_id=None,
+        assignment_anonymous_grading=None,
+        assignment_assignment_group_id=None,
+        assignment_assignment_overrides=None,
+        assignment_automatic_peer_reviews=None,
+        assignment_description=None,
+        assignment_due_at=None,
+        assignment_external_tool_tag_attributes=None,
+        assignment_final_grader_id=None,
+        assignment_grade_group_students_individually=None,
+        assignment_grader_comments_visible_to_graders=None,
+        assignment_grader_count=None,
+        assignment_graders_anonymous_to_graders=None,
+        assignment_graders_names_visible_to_final_grader=None,
+        assignment_grading_standard_id=None,
+        assignment_grading_type=None,
+        assignment_group_category_id=None,
+        assignment_integration_data=None,
+        assignment_integration_id=None,
+        assignment_lock_at=None,
+        assignment_moderated_grading=None,
+        assignment_notify_of_update=None,
+        assignment_omit_from_final_grade=None,
+        assignment_only_visible_to_overrides=None,
+        assignment_peer_reviews=None,
+        assignment_points_possible=None,
+        assignment_position=None,
+        assignment_published=None,
+        assignment_quiz_lti=None,
+        assignment_submission_types=None,
+        assignment_turnitin_enabled=None,
+        assignment_turnitin_settings=None,
+        assignment_unlock_at=None,
+        assignment_vericite_enabled=None,
+    ):
         """
         Create an assignment.
 
@@ -387,13 +544,11 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - assignment[name]
         """
             The assignment name.
         """
         data["assignment[name]"] = assignment_name
-
 
         # OPTIONAL - assignment[position]
         """
@@ -402,7 +557,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_position is not None:
             data["assignment[position]"] = assignment_position
-
 
         # OPTIONAL - assignment[submission_types]
         """
@@ -427,9 +581,22 @@ class AssignmentsAPI(BaseCanvasAPI):
           "student_annotation"
         """
         if assignment_submission_types is not None:
-            self._validate_enum(assignment_submission_types, ["online_quiz", "none", "on_paper", "discussion_topic", "external_tool", "online_upload", "online_text_entry", "online_url", "media_recording", "student_annotation"])
+            self._validate_enum(
+                assignment_submission_types,
+                [
+                    "online_quiz",
+                    "none",
+                    "on_paper",
+                    "discussion_topic",
+                    "external_tool",
+                    "online_upload",
+                    "online_text_entry",
+                    "online_url",
+                    "media_recording",
+                    "student_annotation",
+                ],
+            )
             data["assignment[submission_types]"] = assignment_submission_types
-
 
         # OPTIONAL - assignment[allowed_extensions]
         """
@@ -441,7 +608,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_allowed_extensions is not None:
             data["assignment[allowed_extensions]"] = assignment_allowed_extensions
 
-
         # OPTIONAL - assignment[turnitin_enabled]
         """
             Only applies when the Turnitin plugin is enabled for a course and
@@ -451,7 +617,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_turnitin_enabled is not None:
             data["assignment[turnitin_enabled]"] = assignment_turnitin_enabled
-
 
         # OPTIONAL - assignment[vericite_enabled]
         """
@@ -463,7 +628,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_vericite_enabled is not None:
             data["assignment[vericite_enabled]"] = assignment_vericite_enabled
 
-
         # OPTIONAL - assignment[turnitin_settings]
         """
             Settings to send along to turnitin. See Assignment object definition for
@@ -472,7 +636,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_turnitin_settings is not None:
             data["assignment[turnitin_settings]"] = assignment_turnitin_settings
 
-
         # OPTIONAL - assignment[integration_data]
         """
             Data used for SIS integrations. Requires admin-level token with the "Manage SIS" permission. JSON string required.
@@ -480,14 +643,12 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_integration_data is not None:
             data["assignment[integration_data]"] = assignment_integration_data
 
-
         # OPTIONAL - assignment[integration_id]
         """
             Unique ID from third party integrations
         """
         if assignment_integration_id is not None:
             data["assignment[integration_id]"] = assignment_integration_id
-
 
         # OPTIONAL - assignment[peer_reviews]
         """
@@ -498,7 +659,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_peer_reviews is not None:
             data["assignment[peer_reviews]"] = assignment_peer_reviews
 
-
         # OPTIONAL - assignment[automatic_peer_reviews]
         """
             Whether peer reviews will be assigned automatically by Canvas or if
@@ -506,8 +666,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         are not enabled.
         """
         if assignment_automatic_peer_reviews is not None:
-            data["assignment[automatic_peer_reviews]"] = assignment_automatic_peer_reviews
-
+            data[
+                "assignment[automatic_peer_reviews]"
+            ] = assignment_automatic_peer_reviews
 
         # OPTIONAL - assignment[notify_of_update]
         """
@@ -517,7 +678,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_notify_of_update is not None:
             data["assignment[notify_of_update]"] = assignment_notify_of_update
 
-
         # OPTIONAL - assignment[group_category_id]
         """
             If present, the assignment will become a group assignment assigned
@@ -525,7 +685,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_group_category_id is not None:
             data["assignment[group_category_id]"] = assignment_group_category_id
-
 
         # OPTIONAL - assignment[grade_group_students_individually]
         """
@@ -535,8 +694,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         assign scores to each member of the group.
         """
         if assignment_grade_group_students_individually is not None:
-            data["assignment[grade_group_students_individually]"] = assignment_grade_group_students_individually
-
+            data[
+                "assignment[grade_group_students_individually]"
+            ] = assignment_grade_group_students_individually
 
         # OPTIONAL - assignment[external_tool_tag_attributes]
         """
@@ -544,8 +704,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         See Assignment object definition for format.
         """
         if assignment_external_tool_tag_attributes is not None:
-            data["assignment[external_tool_tag_attributes]"] = assignment_external_tool_tag_attributes
-
+            data[
+                "assignment[external_tool_tag_attributes]"
+            ] = assignment_external_tool_tag_attributes
 
         # OPTIONAL - assignment[points_possible]
         """
@@ -554,16 +715,24 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_points_possible is not None:
             data["assignment[points_possible]"] = assignment_points_possible
 
-
         # OPTIONAL - assignment[grading_type]
         """
             The strategy used for grading the assignment.
         The assignment defaults to "points" if this field is omitted.
         """
         if assignment_grading_type is not None:
-            self._validate_enum(assignment_grading_type, ["pass_fail", "percent", "letter_grade", "gpa_scale", "points", "not_graded"])
+            self._validate_enum(
+                assignment_grading_type,
+                [
+                    "pass_fail",
+                    "percent",
+                    "letter_grade",
+                    "gpa_scale",
+                    "points",
+                    "not_graded",
+                ],
+            )
             data["assignment[grading_type]"] = assignment_grading_type
-
 
         # OPTIONAL - assignment[due_at]
         """
@@ -573,10 +742,13 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_due_at is not None:
             if issubclass(assignment_due_at.__class__, str):
                 assignment_due_at = self._validate_iso8601_string(assignment_due_at)
-            elif issubclass(assignment_due_at.__class__, date) or issubclass(assignment_due_at.__class__, datetime):
-                assignment_due_at = assignment_due_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(assignment_due_at.__class__, date) or issubclass(
+                assignment_due_at.__class__, datetime
+            ):
+                assignment_due_at = assignment_due_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment[due_at]"] = assignment_due_at
-
 
         # OPTIONAL - assignment[lock_at]
         """
@@ -586,10 +758,13 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_lock_at is not None:
             if issubclass(assignment_lock_at.__class__, str):
                 assignment_lock_at = self._validate_iso8601_string(assignment_lock_at)
-            elif issubclass(assignment_lock_at.__class__, date) or issubclass(assignment_lock_at.__class__, datetime):
-                assignment_lock_at = assignment_lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(assignment_lock_at.__class__, date) or issubclass(
+                assignment_lock_at.__class__, datetime
+            ):
+                assignment_lock_at = assignment_lock_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment[lock_at]"] = assignment_lock_at
-
 
         # OPTIONAL - assignment[unlock_at]
         """
@@ -598,11 +773,16 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_unlock_at is not None:
             if issubclass(assignment_unlock_at.__class__, str):
-                assignment_unlock_at = self._validate_iso8601_string(assignment_unlock_at)
-            elif issubclass(assignment_unlock_at.__class__, date) or issubclass(assignment_unlock_at.__class__, datetime):
-                assignment_unlock_at = assignment_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                assignment_unlock_at = self._validate_iso8601_string(
+                    assignment_unlock_at
+                )
+            elif issubclass(assignment_unlock_at.__class__, date) or issubclass(
+                assignment_unlock_at.__class__, datetime
+            ):
+                assignment_unlock_at = assignment_unlock_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment[unlock_at]"] = assignment_unlock_at
-
 
         # OPTIONAL - assignment[description]
         """
@@ -610,7 +790,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_description is not None:
             data["assignment[description]"] = assignment_description
-
 
         # OPTIONAL - assignment[assignment_group_id]
         """
@@ -620,7 +799,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_assignment_group_id is not None:
             data["assignment[assignment_group_id]"] = assignment_assignment_group_id
 
-
         # OPTIONAL - assignment[assignment_overrides]
         """
             List of overrides for the assignment.
@@ -628,15 +806,15 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_assignment_overrides is not None:
             data["assignment[assignment_overrides]"] = assignment_assignment_overrides
 
-
         # OPTIONAL - assignment[only_visible_to_overrides]
         """
             Whether this assignment is only visible to overrides
         (Only useful if 'differentiated assignments' account setting is on)
         """
         if assignment_only_visible_to_overrides is not None:
-            data["assignment[only_visible_to_overrides]"] = assignment_only_visible_to_overrides
-
+            data[
+                "assignment[only_visible_to_overrides]"
+            ] = assignment_only_visible_to_overrides
 
         # OPTIONAL - assignment[published]
         """
@@ -647,7 +825,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_published is not None:
             data["assignment[published]"] = assignment_published
 
-
         # OPTIONAL - assignment[grading_standard_id]
         """
             The grading standard id to set for the course.  If no value is provided for this argument the current grading_standard will be un-set from this course.
@@ -656,14 +833,12 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_grading_standard_id is not None:
             data["assignment[grading_standard_id]"] = assignment_grading_standard_id
 
-
         # OPTIONAL - assignment[omit_from_final_grade]
         """
             Whether this assignment is counted towards a student's final grade.
         """
         if assignment_omit_from_final_grade is not None:
             data["assignment[omit_from_final_grade]"] = assignment_omit_from_final_grade
-
 
         # OPTIONAL - assignment[quiz_lti]
         """
@@ -675,14 +850,12 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_quiz_lti is not None:
             data["assignment[quiz_lti]"] = assignment_quiz_lti
 
-
         # OPTIONAL - assignment[moderated_grading]
         """
             Whether this assignment is moderated.
         """
         if assignment_moderated_grading is not None:
             data["assignment[moderated_grading]"] = assignment_moderated_grading
-
 
         # OPTIONAL - assignment[grader_count]
         """
@@ -696,7 +869,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_grader_count is not None:
             data["assignment[grader_count]"] = assignment_grader_count
 
-
         # OPTIONAL - assignment[final_grader_id]
         """
             The user ID of the grader responsible for choosing final grades for this
@@ -705,15 +877,15 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_final_grader_id is not None:
             data["assignment[final_grader_id]"] = assignment_final_grader_id
 
-
         # OPTIONAL - assignment[grader_comments_visible_to_graders]
         """
             Boolean indicating if provisional graders' comments are visible to other
         provisional graders. Only relevant for moderated assignments.
         """
         if assignment_grader_comments_visible_to_graders is not None:
-            data["assignment[grader_comments_visible_to_graders]"] = assignment_grader_comments_visible_to_graders
-
+            data[
+                "assignment[grader_comments_visible_to_graders]"
+            ] = assignment_grader_comments_visible_to_graders
 
         # OPTIONAL - assignment[graders_anonymous_to_graders]
         """
@@ -721,8 +893,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         other provisional graders. Only relevant for moderated assignments.
         """
         if assignment_graders_anonymous_to_graders is not None:
-            data["assignment[graders_anonymous_to_graders]"] = assignment_graders_anonymous_to_graders
-
+            data[
+                "assignment[graders_anonymous_to_graders]"
+            ] = assignment_graders_anonymous_to_graders
 
         # OPTIONAL - assignment[graders_names_visible_to_final_grader]
         """
@@ -730,8 +903,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         the final grader. Only relevant for moderated assignments.
         """
         if assignment_graders_names_visible_to_final_grader is not None:
-            data["assignment[graders_names_visible_to_final_grader]"] = assignment_graders_names_visible_to_final_grader
-
+            data[
+                "assignment[graders_names_visible_to_final_grader]"
+            ] = assignment_graders_names_visible_to_final_grader
 
         # OPTIONAL - assignment[anonymous_grading]
         """
@@ -741,14 +915,12 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_anonymous_grading is not None:
             data["assignment[anonymous_grading]"] = assignment_anonymous_grading
 
-
         # OPTIONAL - assignment[allowed_attempts]
         """
             The number of submission attempts allowed for this assignment. Set to -1 for unlimited attempts.
         """
         if assignment_allowed_attempts is not None:
             data["assignment[allowed_attempts]"] = assignment_allowed_attempts
-
 
         # OPTIONAL - assignment[annotatable_attachment_id]
         """
@@ -757,13 +929,66 @@ class AssignmentsAPI(BaseCanvasAPI):
         Only applies when submission_types includes "student_annotation".
         """
         if assignment_annotatable_attachment_id is not None:
-            data["assignment[annotatable_attachment_id]"] = assignment_annotatable_attachment_id
+            data[
+                "assignment[annotatable_attachment_id]"
+            ] = assignment_annotatable_attachment_id
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/assignments with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/assignments".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/assignments with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments".format(**path), data=data, params=params, single_item=True)
-
-    def edit_assignment(self, course_id, id, assignment_allowed_attempts=None, assignment_allowed_extensions=None, assignment_annotatable_attachment_id=None, assignment_anonymous_grading=None, assignment_assignment_group_id=None, assignment_assignment_overrides=None, assignment_automatic_peer_reviews=None, assignment_description=None, assignment_due_at=None, assignment_external_tool_tag_attributes=None, assignment_final_grader_id=None, assignment_grade_group_students_individually=None, assignment_grader_comments_visible_to_graders=None, assignment_grader_count=None, assignment_graders_anonymous_to_graders=None, assignment_graders_names_visible_to_final_grader=None, assignment_grading_standard_id=None, assignment_grading_type=None, assignment_group_category_id=None, assignment_integration_data=None, assignment_integration_id=None, assignment_lock_at=None, assignment_moderated_grading=None, assignment_name=None, assignment_notify_of_update=None, assignment_omit_from_final_grade=None, assignment_only_visible_to_overrides=None, assignment_peer_reviews=None, assignment_points_possible=None, assignment_position=None, assignment_published=None, assignment_sis_assignment_id=None, assignment_submission_types=None, assignment_submission_types=None, assignment_turnitin_enabled=None, assignment_turnitin_settings=None, assignment_unlock_at=None, assignment_vericite_enabled=None):
+    def edit_assignment(
+        self,
+        course_id,
+        id,
+        assignment_allowed_attempts=None,
+        assignment_allowed_extensions=None,
+        assignment_annotatable_attachment_id=None,
+        assignment_anonymous_grading=None,
+        assignment_assignment_group_id=None,
+        assignment_assignment_overrides=None,
+        assignment_automatic_peer_reviews=None,
+        assignment_description=None,
+        assignment_due_at=None,
+        assignment_external_tool_tag_attributes=None,
+        assignment_final_grader_id=None,
+        assignment_grade_group_students_individually=None,
+        assignment_grader_comments_visible_to_graders=None,
+        assignment_grader_count=None,
+        assignment_graders_anonymous_to_graders=None,
+        assignment_graders_names_visible_to_final_grader=None,
+        assignment_grading_standard_id=None,
+        assignment_grading_type=None,
+        assignment_group_category_id=None,
+        assignment_integration_data=None,
+        assignment_integration_id=None,
+        assignment_lock_at=None,
+        assignment_moderated_grading=None,
+        assignment_name=None,
+        assignment_notify_of_update=None,
+        assignment_omit_from_final_grade=None,
+        assignment_only_visible_to_overrides=None,
+        assignment_peer_reviews=None,
+        assignment_points_possible=None,
+        assignment_position=None,
+        assignment_published=None,
+        assignment_sis_assignment_id=None,
+        assignment_submission_types=None,
+        assignment_submission_types=None,
+        assignment_turnitin_enabled=None,
+        assignment_turnitin_settings=None,
+        assignment_unlock_at=None,
+        assignment_vericite_enabled=None,
+    ):
         """
         Edit an assignment.
 
@@ -779,13 +1004,11 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - assignment[name]
         """
@@ -794,7 +1017,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_name is not None:
             data["assignment[name]"] = assignment_name
 
-
         # OPTIONAL - assignment[position]
         """
             The position of this assignment in the group when displaying
@@ -802,7 +1024,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_position is not None:
             data["assignment[position]"] = assignment_position
-
 
         # OPTIONAL - assignment[submission_types]
         """
@@ -829,9 +1050,22 @@ class AssignmentsAPI(BaseCanvasAPI):
           "student_annotation"
         """
         if assignment_submission_types is not None:
-            self._validate_enum(assignment_submission_types, ["online_quiz", "none", "on_paper", "discussion_topic", "external_tool", "online_upload", "online_text_entry", "online_url", "media_recording", "student_annotation"])
+            self._validate_enum(
+                assignment_submission_types,
+                [
+                    "online_quiz",
+                    "none",
+                    "on_paper",
+                    "discussion_topic",
+                    "external_tool",
+                    "online_upload",
+                    "online_text_entry",
+                    "online_url",
+                    "media_recording",
+                    "student_annotation",
+                ],
+            )
             data["assignment[submission_types]"] = assignment_submission_types
-
 
         # OPTIONAL - assignment[allowed_extensions]
         """
@@ -843,7 +1077,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_allowed_extensions is not None:
             data["assignment[allowed_extensions]"] = assignment_allowed_extensions
 
-
         # OPTIONAL - assignment[turnitin_enabled]
         """
             Only applies when the Turnitin plugin is enabled for a course and
@@ -853,7 +1086,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_turnitin_enabled is not None:
             data["assignment[turnitin_enabled]"] = assignment_turnitin_enabled
-
 
         # OPTIONAL - assignment[vericite_enabled]
         """
@@ -865,7 +1097,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_vericite_enabled is not None:
             data["assignment[vericite_enabled]"] = assignment_vericite_enabled
 
-
         # OPTIONAL - assignment[turnitin_settings]
         """
             Settings to send along to turnitin. See Assignment object definition for
@@ -874,14 +1105,12 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_turnitin_settings is not None:
             data["assignment[turnitin_settings]"] = assignment_turnitin_settings
 
-
         # OPTIONAL - assignment[sis_assignment_id]
         """
             The sis id of the Assignment
         """
         if assignment_sis_assignment_id is not None:
             data["assignment[sis_assignment_id]"] = assignment_sis_assignment_id
-
 
         # OPTIONAL - assignment[integration_data]
         """
@@ -890,14 +1119,12 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_integration_data is not None:
             data["assignment[integration_data]"] = assignment_integration_data
 
-
         # OPTIONAL - assignment[integration_id]
         """
             Unique ID from third party integrations
         """
         if assignment_integration_id is not None:
             data["assignment[integration_id]"] = assignment_integration_id
-
 
         # OPTIONAL - assignment[peer_reviews]
         """
@@ -908,7 +1135,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_peer_reviews is not None:
             data["assignment[peer_reviews]"] = assignment_peer_reviews
 
-
         # OPTIONAL - assignment[automatic_peer_reviews]
         """
             Whether peer reviews will be assigned automatically by Canvas or if
@@ -916,8 +1142,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         are not enabled.
         """
         if assignment_automatic_peer_reviews is not None:
-            data["assignment[automatic_peer_reviews]"] = assignment_automatic_peer_reviews
-
+            data[
+                "assignment[automatic_peer_reviews]"
+            ] = assignment_automatic_peer_reviews
 
         # OPTIONAL - assignment[notify_of_update]
         """
@@ -927,7 +1154,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_notify_of_update is not None:
             data["assignment[notify_of_update]"] = assignment_notify_of_update
 
-
         # OPTIONAL - assignment[group_category_id]
         """
             If present, the assignment will become a group assignment assigned
@@ -935,7 +1161,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_group_category_id is not None:
             data["assignment[group_category_id]"] = assignment_group_category_id
-
 
         # OPTIONAL - assignment[grade_group_students_individually]
         """
@@ -945,8 +1170,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         assign scores to each member of the group.
         """
         if assignment_grade_group_students_individually is not None:
-            data["assignment[grade_group_students_individually]"] = assignment_grade_group_students_individually
-
+            data[
+                "assignment[grade_group_students_individually]"
+            ] = assignment_grade_group_students_individually
 
         # OPTIONAL - assignment[external_tool_tag_attributes]
         """
@@ -954,8 +1180,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         See Assignment object definition for format.
         """
         if assignment_external_tool_tag_attributes is not None:
-            data["assignment[external_tool_tag_attributes]"] = assignment_external_tool_tag_attributes
-
+            data[
+                "assignment[external_tool_tag_attributes]"
+            ] = assignment_external_tool_tag_attributes
 
         # OPTIONAL - assignment[points_possible]
         """
@@ -964,16 +1191,24 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_points_possible is not None:
             data["assignment[points_possible]"] = assignment_points_possible
 
-
         # OPTIONAL - assignment[grading_type]
         """
             The strategy used for grading the assignment.
         The assignment defaults to "points" if this field is omitted.
         """
         if assignment_grading_type is not None:
-            self._validate_enum(assignment_grading_type, ["pass_fail", "percent", "letter_grade", "gpa_scale", "points", "not_graded"])
+            self._validate_enum(
+                assignment_grading_type,
+                [
+                    "pass_fail",
+                    "percent",
+                    "letter_grade",
+                    "gpa_scale",
+                    "points",
+                    "not_graded",
+                ],
+            )
             data["assignment[grading_type]"] = assignment_grading_type
-
 
         # OPTIONAL - assignment[due_at]
         """
@@ -983,10 +1218,13 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_due_at is not None:
             if issubclass(assignment_due_at.__class__, str):
                 assignment_due_at = self._validate_iso8601_string(assignment_due_at)
-            elif issubclass(assignment_due_at.__class__, date) or issubclass(assignment_due_at.__class__, datetime):
-                assignment_due_at = assignment_due_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(assignment_due_at.__class__, date) or issubclass(
+                assignment_due_at.__class__, datetime
+            ):
+                assignment_due_at = assignment_due_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment[due_at]"] = assignment_due_at
-
 
         # OPTIONAL - assignment[lock_at]
         """
@@ -996,10 +1234,13 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_lock_at is not None:
             if issubclass(assignment_lock_at.__class__, str):
                 assignment_lock_at = self._validate_iso8601_string(assignment_lock_at)
-            elif issubclass(assignment_lock_at.__class__, date) or issubclass(assignment_lock_at.__class__, datetime):
-                assignment_lock_at = assignment_lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+            elif issubclass(assignment_lock_at.__class__, date) or issubclass(
+                assignment_lock_at.__class__, datetime
+            ):
+                assignment_lock_at = assignment_lock_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment[lock_at]"] = assignment_lock_at
-
 
         # OPTIONAL - assignment[unlock_at]
         """
@@ -1008,11 +1249,16 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_unlock_at is not None:
             if issubclass(assignment_unlock_at.__class__, str):
-                assignment_unlock_at = self._validate_iso8601_string(assignment_unlock_at)
-            elif issubclass(assignment_unlock_at.__class__, date) or issubclass(assignment_unlock_at.__class__, datetime):
-                assignment_unlock_at = assignment_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                assignment_unlock_at = self._validate_iso8601_string(
+                    assignment_unlock_at
+                )
+            elif issubclass(assignment_unlock_at.__class__, date) or issubclass(
+                assignment_unlock_at.__class__, datetime
+            ):
+                assignment_unlock_at = assignment_unlock_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment[unlock_at]"] = assignment_unlock_at
-
 
         # OPTIONAL - assignment[description]
         """
@@ -1021,7 +1267,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_description is not None:
             data["assignment[description]"] = assignment_description
 
-
         # OPTIONAL - assignment[assignment_group_id]
         """
             The assignment group id to put the assignment in.
@@ -1029,7 +1274,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_assignment_group_id is not None:
             data["assignment[assignment_group_id]"] = assignment_assignment_group_id
-
 
         # OPTIONAL - assignment[assignment_overrides]
         """
@@ -1042,15 +1286,15 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_assignment_overrides is not None:
             data["assignment[assignment_overrides]"] = assignment_assignment_overrides
 
-
         # OPTIONAL - assignment[only_visible_to_overrides]
         """
             Whether this assignment is only visible to overrides
         (Only useful if 'differentiated assignments' account setting is on)
         """
         if assignment_only_visible_to_overrides is not None:
-            data["assignment[only_visible_to_overrides]"] = assignment_only_visible_to_overrides
-
+            data[
+                "assignment[only_visible_to_overrides]"
+            ] = assignment_only_visible_to_overrides
 
         # OPTIONAL - assignment[published]
         """
@@ -1061,7 +1305,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_published is not None:
             data["assignment[published]"] = assignment_published
 
-
         # OPTIONAL - assignment[grading_standard_id]
         """
             The grading standard id to set for the course.  If no value is provided for this argument the current grading_standard will be un-set from this course.
@@ -1070,7 +1313,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_grading_standard_id is not None:
             data["assignment[grading_standard_id]"] = assignment_grading_standard_id
 
-
         # OPTIONAL - assignment[omit_from_final_grade]
         """
             Whether this assignment is counted towards a student's final grade.
@@ -1078,14 +1320,12 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_omit_from_final_grade is not None:
             data["assignment[omit_from_final_grade]"] = assignment_omit_from_final_grade
 
-
         # OPTIONAL - assignment[moderated_grading]
         """
             Whether this assignment is moderated.
         """
         if assignment_moderated_grading is not None:
             data["assignment[moderated_grading]"] = assignment_moderated_grading
-
 
         # OPTIONAL - assignment[grader_count]
         """
@@ -1099,7 +1339,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_grader_count is not None:
             data["assignment[grader_count]"] = assignment_grader_count
 
-
         # OPTIONAL - assignment[final_grader_id]
         """
             The user ID of the grader responsible for choosing final grades for this
@@ -1108,15 +1347,15 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_final_grader_id is not None:
             data["assignment[final_grader_id]"] = assignment_final_grader_id
 
-
         # OPTIONAL - assignment[grader_comments_visible_to_graders]
         """
             Boolean indicating if provisional graders' comments are visible to other
         provisional graders. Only relevant for moderated assignments.
         """
         if assignment_grader_comments_visible_to_graders is not None:
-            data["assignment[grader_comments_visible_to_graders]"] = assignment_grader_comments_visible_to_graders
-
+            data[
+                "assignment[grader_comments_visible_to_graders]"
+            ] = assignment_grader_comments_visible_to_graders
 
         # OPTIONAL - assignment[graders_anonymous_to_graders]
         """
@@ -1124,8 +1363,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         other provisional graders. Only relevant for moderated assignments.
         """
         if assignment_graders_anonymous_to_graders is not None:
-            data["assignment[graders_anonymous_to_graders]"] = assignment_graders_anonymous_to_graders
-
+            data[
+                "assignment[graders_anonymous_to_graders]"
+            ] = assignment_graders_anonymous_to_graders
 
         # OPTIONAL - assignment[graders_names_visible_to_final_grader]
         """
@@ -1133,8 +1373,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         the final grader. Only relevant for moderated assignments.
         """
         if assignment_graders_names_visible_to_final_grader is not None:
-            data["assignment[graders_names_visible_to_final_grader]"] = assignment_graders_names_visible_to_final_grader
-
+            data[
+                "assignment[graders_names_visible_to_final_grader]"
+            ] = assignment_graders_names_visible_to_final_grader
 
         # OPTIONAL - assignment[anonymous_grading]
         """
@@ -1144,7 +1385,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_anonymous_grading is not None:
             data["assignment[anonymous_grading]"] = assignment_anonymous_grading
 
-
         # OPTIONAL - assignment[allowed_attempts]
         """
             The number of submission attempts allowed for this assignment. Set to -1 or null for
@@ -1153,7 +1393,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_allowed_attempts is not None:
             data["assignment[allowed_attempts]"] = assignment_allowed_attempts
 
-
         # OPTIONAL - assignment[annotatable_attachment_id]
         """
             The Attachment ID of the document being annotated.
@@ -1161,8 +1400,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         Only applies when submission_types includes "student_annotation".
         """
         if assignment_annotatable_attachment_id is not None:
-            data["assignment[annotatable_attachment_id]"] = assignment_annotatable_attachment_id
-
+            data[
+                "assignment[annotatable_attachment_id]"
+            ] = assignment_annotatable_attachment_id
 
         # OPTIONAL - assignment[submission_types]
         """
@@ -1171,28 +1411,37 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_submission_types is not None:
             data["assignment[submission_types]"] = assignment_submission_types
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/assignments/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/assignments/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/assignments/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/assignments/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def bulk_update_assignment_dates(self, course_id):
         """
         Bulk update assignment dates.
 
         Update due dates and availability dates for multiple assignments in a course.
-        
+
         Accepts a JSON array of objects containing two keys each: +id+, the assignment id,
         and +all_dates+, an array of +AssignmentDate+ structures containing the base and/or override
         dates for the assignment, as returned from the {api:AssignmentsApiController#index List assignments}
         endpoint with +include[]=all_dates+.
-        
+
         This endpoint cannot create or destroy assignment overrides; any existing assignment overrides
         that are not referenced in the arguments will be left alone. If an override is given, any dates
         that are not supplied with it will be defaulted. To clear a date, specify null explicitly.
-        
+
         All referenced assignments will be validated before any are saved. A list of errors will
         be returned if any provided dates are invalid, and no changes will be saved.
-        
+
         The bulk update is performed in a background job, use the {api:ProgressController#show Progress API}
         to check its status.
         """
@@ -1206,9 +1455,18 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/assignments/bulk_update with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/assignments/bulk_update".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/assignments/bulk_update with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/assignments/bulk_update".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def list_assignment_overrides(self, assignment_id, course_id):
         """
@@ -1227,16 +1485,26 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/overrides".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/overrides".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def get_single_assignment_override(self, assignment_id, course_id, id):
         """
@@ -1254,13 +1522,11 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # REQUIRED - PATH - id
         """
@@ -1268,9 +1534,20 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def redirect_to_assignment_override_for_group(self, assignment_id, group_id):
         """
@@ -1289,18 +1566,30 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["group_id"] = group_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
 
+        self.logger.debug(
+            "GET /api/v1/groups/{group_id}/assignments/{assignment_id}/override with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/groups/{group_id}/assignments/{assignment_id}/override".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/groups/{group_id}/assignments/{assignment_id}/override with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/groups/{group_id}/assignments/{assignment_id}/override".format(**path), data=data, params=params, no_data=True)
-
-    def redirect_to_assignment_override_for_section(self, assignment_id, course_section_id):
+    def redirect_to_assignment_override_for_section(
+        self, assignment_id, course_section_id
+    ):
         """
         Redirect to the assignment override for a section.
 
@@ -1317,18 +1606,39 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_section_id"] = course_section_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
 
+        self.logger.debug(
+            "GET /api/v1/sections/{course_section_id}/assignments/{assignment_id}/override with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/sections/{course_section_id}/assignments/{assignment_id}/override".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/sections/{course_section_id}/assignments/{assignment_id}/override with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/sections/{course_section_id}/assignments/{assignment_id}/override".format(**path), data=data, params=params, no_data=True)
-
-    def create_assignment_override(self, assignment_id, course_id, assignment_override_course_section_id=None, assignment_override_due_at=None, assignment_override_group_id=None, assignment_override_lock_at=None, assignment_override_student_ids=None, assignment_override_title=None, assignment_override_unlock_at=None):
+    def create_assignment_override(
+        self,
+        assignment_id,
+        course_id,
+        assignment_override_course_section_id=None,
+        assignment_override_due_at=None,
+        assignment_override_group_id=None,
+        assignment_override_lock_at=None,
+        assignment_override_student_ids=None,
+        assignment_override_title=None,
+        assignment_override_unlock_at=None,
+    ):
         """
         Create an assignment override.
 
@@ -1347,13 +1657,11 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # OPTIONAL - assignment_override[student_ids]
         """
@@ -1365,7 +1673,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_override_student_ids is not None:
             data["assignment_override[student_ids]"] = assignment_override_student_ids
 
-
         # OPTIONAL - assignment_override[title]
         """
             The title of the adhoc
@@ -1375,7 +1682,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_override_title is not None:
             data["assignment_override[title]"] = assignment_override_title
-
 
         # OPTIONAL - assignment_override[group_id]
         """
@@ -1392,7 +1698,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_override_group_id is not None:
             data["assignment_override[group_id]"] = assignment_override_group_id
 
-
         # OPTIONAL - assignment_override[course_section_id]
         """
             The ID
@@ -1401,8 +1706,9 @@ class AssignmentsAPI(BaseCanvasAPI):
         override.
         """
         if assignment_override_course_section_id is not None:
-            data["assignment_override[course_section_id]"] = assignment_override_course_section_id
-
+            data[
+                "assignment_override[course_section_id]"
+            ] = assignment_override_course_section_id
 
         # OPTIONAL - assignment_override[due_at]
         """
@@ -1414,11 +1720,16 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_override_due_at is not None:
             if issubclass(assignment_override_due_at.__class__, str):
-                assignment_override_due_at = self._validate_iso8601_string(assignment_override_due_at)
-            elif issubclass(assignment_override_due_at.__class__, date) or issubclass(assignment_override_due_at.__class__, datetime):
-                assignment_override_due_at = assignment_override_due_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                assignment_override_due_at = self._validate_iso8601_string(
+                    assignment_override_due_at
+                )
+            elif issubclass(assignment_override_due_at.__class__, date) or issubclass(
+                assignment_override_due_at.__class__, datetime
+            ):
+                assignment_override_due_at = assignment_override_due_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment_override[due_at]"] = assignment_override_due_at
-
 
         # OPTIONAL - assignment_override[unlock_at]
         """
@@ -1430,11 +1741,16 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_override_unlock_at is not None:
             if issubclass(assignment_override_unlock_at.__class__, str):
-                assignment_override_unlock_at = self._validate_iso8601_string(assignment_override_unlock_at)
-            elif issubclass(assignment_override_unlock_at.__class__, date) or issubclass(assignment_override_unlock_at.__class__, datetime):
-                assignment_override_unlock_at = assignment_override_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                assignment_override_unlock_at = self._validate_iso8601_string(
+                    assignment_override_unlock_at
+                )
+            elif issubclass(
+                assignment_override_unlock_at.__class__, date
+            ) or issubclass(assignment_override_unlock_at.__class__, datetime):
+                assignment_override_unlock_at = assignment_override_unlock_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment_override[unlock_at]"] = assignment_override_unlock_at
-
 
         # OPTIONAL - assignment_override[lock_at]
         """
@@ -1446,16 +1762,43 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_override_lock_at is not None:
             if issubclass(assignment_override_lock_at.__class__, str):
-                assignment_override_lock_at = self._validate_iso8601_string(assignment_override_lock_at)
-            elif issubclass(assignment_override_lock_at.__class__, date) or issubclass(assignment_override_lock_at.__class__, datetime):
-                assignment_override_lock_at = assignment_override_lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                assignment_override_lock_at = self._validate_iso8601_string(
+                    assignment_override_lock_at
+                )
+            elif issubclass(assignment_override_lock_at.__class__, date) or issubclass(
+                assignment_override_lock_at.__class__, datetime
+            ):
+                assignment_override_lock_at = assignment_override_lock_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment_override[lock_at]"] = assignment_override_lock_at
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/overrides".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments/{assignment_id}/overrides".format(**path), data=data, params=params, single_item=True)
-
-    def update_assignment_override(self, assignment_id, course_id, id, assignment_override_due_at=None, assignment_override_lock_at=None, assignment_override_student_ids=None, assignment_override_title=None, assignment_override_unlock_at=None):
+    def update_assignment_override(
+        self,
+        assignment_id,
+        course_id,
+        id,
+        assignment_override_due_at=None,
+        assignment_override_lock_at=None,
+        assignment_override_student_ids=None,
+        assignment_override_title=None,
+        assignment_override_unlock_at=None,
+    ):
         """
         Update an assignment override.
 
@@ -1475,20 +1818,17 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
 
-
         # REQUIRED - PATH - id
         """
             ID
         """
         path["id"] = id
-
 
         # OPTIONAL - assignment_override[student_ids]
         """
@@ -1501,7 +1841,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         if assignment_override_student_ids is not None:
             data["assignment_override[student_ids]"] = assignment_override_student_ids
 
-
         # OPTIONAL - assignment_override[title]
         """
             The title of an adhoc
@@ -1509,7 +1848,6 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_override_title is not None:
             data["assignment_override[title]"] = assignment_override_title
-
 
         # OPTIONAL - assignment_override[due_at]
         """
@@ -1521,11 +1859,16 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_override_due_at is not None:
             if issubclass(assignment_override_due_at.__class__, str):
-                assignment_override_due_at = self._validate_iso8601_string(assignment_override_due_at)
-            elif issubclass(assignment_override_due_at.__class__, date) or issubclass(assignment_override_due_at.__class__, datetime):
-                assignment_override_due_at = assignment_override_due_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                assignment_override_due_at = self._validate_iso8601_string(
+                    assignment_override_due_at
+                )
+            elif issubclass(assignment_override_due_at.__class__, date) or issubclass(
+                assignment_override_due_at.__class__, datetime
+            ):
+                assignment_override_due_at = assignment_override_due_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment_override[due_at]"] = assignment_override_due_at
-
 
         # OPTIONAL - assignment_override[unlock_at]
         """
@@ -1537,11 +1880,16 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_override_unlock_at is not None:
             if issubclass(assignment_override_unlock_at.__class__, str):
-                assignment_override_unlock_at = self._validate_iso8601_string(assignment_override_unlock_at)
-            elif issubclass(assignment_override_unlock_at.__class__, date) or issubclass(assignment_override_unlock_at.__class__, datetime):
-                assignment_override_unlock_at = assignment_override_unlock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                assignment_override_unlock_at = self._validate_iso8601_string(
+                    assignment_override_unlock_at
+                )
+            elif issubclass(
+                assignment_override_unlock_at.__class__, date
+            ) or issubclass(assignment_override_unlock_at.__class__, datetime):
+                assignment_override_unlock_at = assignment_override_unlock_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment_override[unlock_at]"] = assignment_override_unlock_at
-
 
         # OPTIONAL - assignment_override[lock_at]
         """
@@ -1553,14 +1901,31 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         if assignment_override_lock_at is not None:
             if issubclass(assignment_override_lock_at.__class__, str):
-                assignment_override_lock_at = self._validate_iso8601_string(assignment_override_lock_at)
-            elif issubclass(assignment_override_lock_at.__class__, date) or issubclass(assignment_override_lock_at.__class__, datetime):
-                assignment_override_lock_at = assignment_override_lock_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')
+                assignment_override_lock_at = self._validate_iso8601_string(
+                    assignment_override_lock_at
+                )
+            elif issubclass(assignment_override_lock_at.__class__, date) or issubclass(
+                assignment_override_lock_at.__class__, datetime
+            ):
+                assignment_override_lock_at = assignment_override_lock_at.strftime(
+                    "%Y-%m-%dT%H:%M:%S+00:00"
+                )
             data["assignment_override[lock_at]"] = assignment_override_lock_at
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_assignment_override(self, assignment_id, course_id, id):
         """
@@ -1578,13 +1943,11 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - assignment_id
         """
             ID
         """
         path["assignment_id"] = assignment_id
-
 
         # REQUIRED - PATH - id
         """
@@ -1592,11 +1955,24 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/assignments/{assignment_id}/overrides/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def batch_retrieve_overrides_in_course(self, assignment_overrides_assignment_id, assignment_overrides_id, course_id):
+    def batch_retrieve_overrides_in_course(
+        self, assignment_overrides_assignment_id, assignment_overrides_id, course_id
+    ):
         """
         Batch retrieve overrides in a course.
 
@@ -1614,23 +1990,32 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - assignment_overrides[id]
         """
             Ids of overrides to retrieve
         """
         params["assignment_overrides[id]"] = assignment_overrides_id
 
-
         # REQUIRED - assignment_overrides[assignment_id]
         """
             Ids of assignments for each override
         """
-        params["assignment_overrides[assignment_id]"] = assignment_overrides_assignment_id
+        params[
+            "assignment_overrides[assignment_id]"
+        ] = assignment_overrides_assignment_id
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/assignments/overrides with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/assignments/overrides".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/assignments/overrides with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/assignments/overrides".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def batch_create_overrides_in_course(self, assignment_overrides, course_id):
         """
@@ -1638,12 +2023,12 @@ class AssignmentsAPI(BaseCanvasAPI):
 
         Creates the specified overrides for each assignment.  Handles creation in a
         transaction, so all records are created or none are.
-        
+
         One of student_ids, group_id, or course_section_id must be present. At most
         one should be present; if multiple are present only the most specific
         (student_ids first, then group_id, then course_section_id) is used and any
         others are ignored.
-        
+
         Errors are reported in an errors attribute, an array of errors corresponding
         to inputs.  Global errors will be reported as a single element errors array
         """
@@ -1656,7 +2041,6 @@ class AssignmentsAPI(BaseCanvasAPI):
             ID
         """
         path["course_id"] = course_id
-
 
         # REQUIRED - assignment_overrides
         """
@@ -1666,9 +2050,18 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         data["assignment_overrides"] = assignment_overrides
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/assignments/overrides with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/assignments/overrides".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/assignments/overrides with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/assignments/overrides".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def batch_update_overrides_in_course(self, assignment_overrides, course_id):
         """
@@ -1678,13 +2071,13 @@ class AssignmentsAPI(BaseCanvasAPI):
         in a transaction, so either all updates are applied or none.
         See {api:AssignmentOverridesController#update Update an assignment override} for
         available attributes.
-        
+
         All current overridden values must be supplied if they are to be retained;
         e.g. if due_at was overridden, but this PUT omits a value for due_at,
         due_at will no longer be overridden. If the override is adhoc and
         student_ids is not supplied, the target override set is unchanged. Target
         override sets cannot be changed for group or section overrides.
-        
+
         Errors are reported in an errors attribute, an array of errors corresponding
         to inputs.  Global errors will be reported as a single element errors array
         """
@@ -1698,16 +2091,24 @@ class AssignmentsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - assignment_overrides
         """
             Attributes for the updated overrides.
         """
         data["assignment_overrides"] = assignment_overrides
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/assignments/overrides with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/assignments/overrides".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/assignments/overrides with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/assignments/overrides".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
 
 class Externaltooltagattributes(BaseModel):
@@ -1719,7 +2120,7 @@ class Externaltooltagattributes(BaseModel):
         self._new_tab = new_tab
         self._resource_link_id = resource_link_id
 
-        self.logger = logging.getLogger('py3canvas.Externaltooltagattributes')
+        self.logger = logging.getLogger("py3canvas.Externaltooltagattributes")
 
     @property
     def url(self):
@@ -1729,7 +2130,9 @@ class Externaltooltagattributes(BaseModel):
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
 
     @property
@@ -1740,7 +2143,9 @@ class Externaltooltagattributes(BaseModel):
     @new_tab.setter
     def new_tab(self, value):
         """Setter for new_tab property."""
-        self.logger.warn("Setting values on new_tab will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on new_tab will NOT update the remote Canvas instance."
+        )
         self._new_tab = value
 
     @property
@@ -1751,14 +2156,23 @@ class Externaltooltagattributes(BaseModel):
     @resource_link_id.setter
     def resource_link_id(self, value):
         """Setter for resource_link_id property."""
-        self.logger.warn("Setting values on resource_link_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on resource_link_id will NOT update the remote Canvas instance."
+        )
         self._resource_link_id = value
 
 
 class Lockinfo(BaseModel):
     """Lockinfo Model."""
 
-    def __init__(self, asset_string=None, unlock_at=None, lock_at=None, context_module=None, manually_locked=None):
+    def __init__(
+        self,
+        asset_string=None,
+        unlock_at=None,
+        lock_at=None,
+        context_module=None,
+        manually_locked=None,
+    ):
         """Init method for Lockinfo class."""
         self._asset_string = asset_string
         self._unlock_at = unlock_at
@@ -1766,7 +2180,7 @@ class Lockinfo(BaseModel):
         self._context_module = context_module
         self._manually_locked = manually_locked
 
-        self.logger = logging.getLogger('py3canvas.Lockinfo')
+        self.logger = logging.getLogger("py3canvas.Lockinfo")
 
     @property
     def asset_string(self):
@@ -1776,7 +2190,9 @@ class Lockinfo(BaseModel):
     @asset_string.setter
     def asset_string(self, value):
         """Setter for asset_string property."""
-        self.logger.warn("Setting values on asset_string will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on asset_string will NOT update the remote Canvas instance."
+        )
         self._asset_string = value
 
     @property
@@ -1787,7 +2203,9 @@ class Lockinfo(BaseModel):
     @unlock_at.setter
     def unlock_at(self, value):
         """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unlock_at will NOT update the remote Canvas instance."
+        )
         self._unlock_at = value
 
     @property
@@ -1798,7 +2216,9 @@ class Lockinfo(BaseModel):
     @lock_at.setter
     def lock_at(self, value):
         """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_at will NOT update the remote Canvas instance."
+        )
         self._lock_at = value
 
     @property
@@ -1809,7 +2229,9 @@ class Lockinfo(BaseModel):
     @context_module.setter
     def context_module(self, value):
         """Setter for context_module property."""
-        self.logger.warn("Setting values on context_module will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on context_module will NOT update the remote Canvas instance."
+        )
         self._context_module = value
 
     @property
@@ -1820,7 +2242,9 @@ class Lockinfo(BaseModel):
     @manually_locked.setter
     def manually_locked(self, value):
         """Setter for manually_locked property."""
-        self.logger.warn("Setting values on manually_locked will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on manually_locked will NOT update the remote Canvas instance."
+        )
         self._manually_locked = value
 
 
@@ -1834,7 +2258,7 @@ class Rubricrating(BaseModel):
         self._description = description
         self._long_description = long_description
 
-        self.logger = logging.getLogger('py3canvas.Rubricrating')
+        self.logger = logging.getLogger("py3canvas.Rubricrating")
 
     @property
     def points(self):
@@ -1844,7 +2268,9 @@ class Rubricrating(BaseModel):
     @points.setter
     def points(self, value):
         """Setter for points property."""
-        self.logger.warn("Setting values on points will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on points will NOT update the remote Canvas instance."
+        )
         self._points = value
 
     @property
@@ -1855,7 +2281,9 @@ class Rubricrating(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -1866,7 +2294,9 @@ class Rubricrating(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -1877,14 +2307,27 @@ class Rubricrating(BaseModel):
     @long_description.setter
     def long_description(self, value):
         """Setter for long_description property."""
-        self.logger.warn("Setting values on long_description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on long_description will NOT update the remote Canvas instance."
+        )
         self._long_description = value
 
 
 class Rubriccriteria(BaseModel):
     """Rubriccriteria Model."""
 
-    def __init__(self, points=None, id=None, learning_outcome_id=None, vendor_guid=None, description=None, long_description=None, criterion_use_range=None, ratings=None, ignore_for_scoring=None):
+    def __init__(
+        self,
+        points=None,
+        id=None,
+        learning_outcome_id=None,
+        vendor_guid=None,
+        description=None,
+        long_description=None,
+        criterion_use_range=None,
+        ratings=None,
+        ignore_for_scoring=None,
+    ):
         """Init method for Rubriccriteria class."""
         self._points = points
         self._id = id
@@ -1896,7 +2339,7 @@ class Rubriccriteria(BaseModel):
         self._ratings = ratings
         self._ignore_for_scoring = ignore_for_scoring
 
-        self.logger = logging.getLogger('py3canvas.Rubriccriteria')
+        self.logger = logging.getLogger("py3canvas.Rubriccriteria")
 
     @property
     def points(self):
@@ -1906,7 +2349,9 @@ class Rubriccriteria(BaseModel):
     @points.setter
     def points(self, value):
         """Setter for points property."""
-        self.logger.warn("Setting values on points will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on points will NOT update the remote Canvas instance."
+        )
         self._points = value
 
     @property
@@ -1917,7 +2362,9 @@ class Rubriccriteria(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -1928,7 +2375,9 @@ class Rubriccriteria(BaseModel):
     @learning_outcome_id.setter
     def learning_outcome_id(self, value):
         """Setter for learning_outcome_id property."""
-        self.logger.warn("Setting values on learning_outcome_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on learning_outcome_id will NOT update the remote Canvas instance."
+        )
         self._learning_outcome_id = value
 
     @property
@@ -1939,7 +2388,9 @@ class Rubriccriteria(BaseModel):
     @vendor_guid.setter
     def vendor_guid(self, value):
         """Setter for vendor_guid property."""
-        self.logger.warn("Setting values on vendor_guid will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on vendor_guid will NOT update the remote Canvas instance."
+        )
         self._vendor_guid = value
 
     @property
@@ -1950,7 +2401,9 @@ class Rubriccriteria(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -1961,7 +2414,9 @@ class Rubriccriteria(BaseModel):
     @long_description.setter
     def long_description(self, value):
         """Setter for long_description property."""
-        self.logger.warn("Setting values on long_description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on long_description will NOT update the remote Canvas instance."
+        )
         self._long_description = value
 
     @property
@@ -1972,7 +2427,9 @@ class Rubriccriteria(BaseModel):
     @criterion_use_range.setter
     def criterion_use_range(self, value):
         """Setter for criterion_use_range property."""
-        self.logger.warn("Setting values on criterion_use_range will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on criterion_use_range will NOT update the remote Canvas instance."
+        )
         self._criterion_use_range = value
 
     @property
@@ -1983,7 +2440,9 @@ class Rubriccriteria(BaseModel):
     @ratings.setter
     def ratings(self, value):
         """Setter for ratings property."""
-        self.logger.warn("Setting values on ratings will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on ratings will NOT update the remote Canvas instance."
+        )
         self._ratings = value
 
     @property
@@ -1994,7 +2453,9 @@ class Rubriccriteria(BaseModel):
     @ignore_for_scoring.setter
     def ignore_for_scoring(self, value):
         """Setter for ignore_for_scoring property."""
-        self.logger.warn("Setting values on ignore_for_scoring will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on ignore_for_scoring will NOT update the remote Canvas instance."
+        )
         self._ignore_for_scoring = value
 
 
@@ -2002,7 +2463,9 @@ class Assignmentdate(BaseModel):
     """Assignmentdate Model.
     Object representing a due date for an assignment or quiz. If the due date came from an assignment override, it will have an 'id' field."""
 
-    def __init__(self, id=None, base=None, title=None, due_at=None, unlock_at=None, lock_at=None):
+    def __init__(
+        self, id=None, base=None, title=None, due_at=None, unlock_at=None, lock_at=None
+    ):
         """Init method for Assignmentdate class."""
         self._id = id
         self._base = base
@@ -2011,7 +2474,7 @@ class Assignmentdate(BaseModel):
         self._unlock_at = unlock_at
         self._lock_at = lock_at
 
-        self.logger = logging.getLogger('py3canvas.Assignmentdate')
+        self.logger = logging.getLogger("py3canvas.Assignmentdate")
 
     @property
     def id(self):
@@ -2021,7 +2484,9 @@ class Assignmentdate(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -2032,7 +2497,9 @@ class Assignmentdate(BaseModel):
     @base.setter
     def base(self, value):
         """Setter for base property."""
-        self.logger.warn("Setting values on base will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on base will NOT update the remote Canvas instance."
+        )
         self._base = value
 
     @property
@@ -2043,7 +2510,9 @@ class Assignmentdate(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -2054,7 +2523,9 @@ class Assignmentdate(BaseModel):
     @due_at.setter
     def due_at(self, value):
         """Setter for due_at property."""
-        self.logger.warn("Setting values on due_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on due_at will NOT update the remote Canvas instance."
+        )
         self._due_at = value
 
     @property
@@ -2065,7 +2536,9 @@ class Assignmentdate(BaseModel):
     @unlock_at.setter
     def unlock_at(self, value):
         """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unlock_at will NOT update the remote Canvas instance."
+        )
         self._unlock_at = value
 
     @property
@@ -2076,14 +2549,26 @@ class Assignmentdate(BaseModel):
     @lock_at.setter
     def lock_at(self, value):
         """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_at will NOT update the remote Canvas instance."
+        )
         self._lock_at = value
 
 
 class Turnitinsettings(BaseModel):
     """Turnitinsettings Model."""
 
-    def __init__(self, originality_report_visibility=None, s_paper_check=None, internet_check=None, journal_check=None, exclude_biblio=None, exclude_quoted=None, exclude_small_matches_type=None, exclude_small_matches_value=None):
+    def __init__(
+        self,
+        originality_report_visibility=None,
+        s_paper_check=None,
+        internet_check=None,
+        journal_check=None,
+        exclude_biblio=None,
+        exclude_quoted=None,
+        exclude_small_matches_type=None,
+        exclude_small_matches_value=None,
+    ):
         """Init method for Turnitinsettings class."""
         self._originality_report_visibility = originality_report_visibility
         self._s_paper_check = s_paper_check
@@ -2094,7 +2579,7 @@ class Turnitinsettings(BaseModel):
         self._exclude_small_matches_type = exclude_small_matches_type
         self._exclude_small_matches_value = exclude_small_matches_value
 
-        self.logger = logging.getLogger('py3canvas.Turnitinsettings')
+        self.logger = logging.getLogger("py3canvas.Turnitinsettings")
 
     @property
     def originality_report_visibility(self):
@@ -2104,7 +2589,9 @@ class Turnitinsettings(BaseModel):
     @originality_report_visibility.setter
     def originality_report_visibility(self, value):
         """Setter for originality_report_visibility property."""
-        self.logger.warn("Setting values on originality_report_visibility will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on originality_report_visibility will NOT update the remote Canvas instance."
+        )
         self._originality_report_visibility = value
 
     @property
@@ -2115,7 +2602,9 @@ class Turnitinsettings(BaseModel):
     @s_paper_check.setter
     def s_paper_check(self, value):
         """Setter for s_paper_check property."""
-        self.logger.warn("Setting values on s_paper_check will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on s_paper_check will NOT update the remote Canvas instance."
+        )
         self._s_paper_check = value
 
     @property
@@ -2126,7 +2615,9 @@ class Turnitinsettings(BaseModel):
     @internet_check.setter
     def internet_check(self, value):
         """Setter for internet_check property."""
-        self.logger.warn("Setting values on internet_check will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on internet_check will NOT update the remote Canvas instance."
+        )
         self._internet_check = value
 
     @property
@@ -2137,7 +2628,9 @@ class Turnitinsettings(BaseModel):
     @journal_check.setter
     def journal_check(self, value):
         """Setter for journal_check property."""
-        self.logger.warn("Setting values on journal_check will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on journal_check will NOT update the remote Canvas instance."
+        )
         self._journal_check = value
 
     @property
@@ -2148,7 +2641,9 @@ class Turnitinsettings(BaseModel):
     @exclude_biblio.setter
     def exclude_biblio(self, value):
         """Setter for exclude_biblio property."""
-        self.logger.warn("Setting values on exclude_biblio will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on exclude_biblio will NOT update the remote Canvas instance."
+        )
         self._exclude_biblio = value
 
     @property
@@ -2159,7 +2654,9 @@ class Turnitinsettings(BaseModel):
     @exclude_quoted.setter
     def exclude_quoted(self, value):
         """Setter for exclude_quoted property."""
-        self.logger.warn("Setting values on exclude_quoted will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on exclude_quoted will NOT update the remote Canvas instance."
+        )
         self._exclude_quoted = value
 
     @property
@@ -2170,7 +2667,9 @@ class Turnitinsettings(BaseModel):
     @exclude_small_matches_type.setter
     def exclude_small_matches_type(self, value):
         """Setter for exclude_small_matches_type property."""
-        self.logger.warn("Setting values on exclude_small_matches_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on exclude_small_matches_type will NOT update the remote Canvas instance."
+        )
         self._exclude_small_matches_type = value
 
     @property
@@ -2181,7 +2680,9 @@ class Turnitinsettings(BaseModel):
     @exclude_small_matches_value.setter
     def exclude_small_matches_value(self, value):
         """Setter for exclude_small_matches_value property."""
-        self.logger.warn("Setting values on exclude_small_matches_value will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on exclude_small_matches_value will NOT update the remote Canvas instance."
+        )
         self._exclude_small_matches_value = value
 
 
@@ -2194,7 +2695,7 @@ class Needsgradingcount(BaseModel):
         self._section_id = section_id
         self._needs_grading_count = needs_grading_count
 
-        self.logger = logging.getLogger('py3canvas.Needsgradingcount')
+        self.logger = logging.getLogger("py3canvas.Needsgradingcount")
 
     @property
     def section_id(self):
@@ -2204,7 +2705,9 @@ class Needsgradingcount(BaseModel):
     @section_id.setter
     def section_id(self, value):
         """Setter for section_id property."""
-        self.logger.warn("Setting values on section_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on section_id will NOT update the remote Canvas instance."
+        )
         self._section_id = value
 
     @property
@@ -2215,7 +2718,9 @@ class Needsgradingcount(BaseModel):
     @needs_grading_count.setter
     def needs_grading_count(self, value):
         """Setter for needs_grading_count property."""
-        self.logger.warn("Setting values on needs_grading_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on needs_grading_count will NOT update the remote Canvas instance."
+        )
         self._needs_grading_count = value
 
 
@@ -2229,7 +2734,7 @@ class Scorestatistic(BaseModel):
         self._max = max
         self._mean = mean
 
-        self.logger = logging.getLogger('py3canvas.Scorestatistic')
+        self.logger = logging.getLogger("py3canvas.Scorestatistic")
 
     @property
     def min(self):
@@ -2239,7 +2744,9 @@ class Scorestatistic(BaseModel):
     @min.setter
     def min(self, value):
         """Setter for min property."""
-        self.logger.warn("Setting values on min will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on min will NOT update the remote Canvas instance."
+        )
         self._min = value
 
     @property
@@ -2250,7 +2757,9 @@ class Scorestatistic(BaseModel):
     @max.setter
     def max(self, value):
         """Setter for max property."""
-        self.logger.warn("Setting values on max will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on max will NOT update the remote Canvas instance."
+        )
         self._max = value
 
     @property
@@ -2261,14 +2770,87 @@ class Scorestatistic(BaseModel):
     @mean.setter
     def mean(self, value):
         """Setter for mean property."""
-        self.logger.warn("Setting values on mean will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on mean will NOT update the remote Canvas instance."
+        )
         self._mean = value
 
 
 class Assignment(BaseModel):
     """Assignment Model."""
 
-    def __init__(self, id=None, name=None, description=None, created_at=None, updated_at=None, due_at=None, lock_at=None, unlock_at=None, has_overrides=None, all_dates=None, course_id=None, html_url=None, submissions_download_url=None, assignment_group_id=None, due_date_required=None, allowed_extensions=None, max_name_length=None, turnitin_enabled=None, vericite_enabled=None, turnitin_settings=None, grade_group_students_individually=None, external_tool_tag_attributes=None, peer_reviews=None, automatic_peer_reviews=None, peer_review_count=None, peer_reviews_assign_at=None, intra_group_peer_reviews=None, group_category_id=None, needs_grading_count=None, needs_grading_count_by_section=None, position=None, post_to_sis=None, integration_id=None, integration_data=None, points_possible=None, submission_types=None, has_submitted_submissions=None, grading_type=None, grading_standard_id=None, published=None, unpublishable=None, only_visible_to_overrides=None, locked_for_user=None, lock_info=None, lock_explanation=None, quiz_id=None, anonymous_submissions=None, discussion_topic=None, freeze_on_copy=None, frozen=None, frozen_attributes=None, submission=None, use_rubric_for_grading=None, rubric_settings=None, rubric=None, assignment_visibility=None, overrides=None, omit_from_final_grade=None, moderated_grading=None, grader_count=None, final_grader_id=None, grader_comments_visible_to_graders=None, graders_anonymous_to_graders=None, grader_names_visible_to_final_grader=None, anonymous_grading=None, allowed_attempts=None, post_manually=None, score_statistics=None, can_submit=None):
+    def __init__(
+        self,
+        id=None,
+        name=None,
+        description=None,
+        created_at=None,
+        updated_at=None,
+        due_at=None,
+        lock_at=None,
+        unlock_at=None,
+        has_overrides=None,
+        all_dates=None,
+        course_id=None,
+        html_url=None,
+        submissions_download_url=None,
+        assignment_group_id=None,
+        due_date_required=None,
+        allowed_extensions=None,
+        max_name_length=None,
+        turnitin_enabled=None,
+        vericite_enabled=None,
+        turnitin_settings=None,
+        grade_group_students_individually=None,
+        external_tool_tag_attributes=None,
+        peer_reviews=None,
+        automatic_peer_reviews=None,
+        peer_review_count=None,
+        peer_reviews_assign_at=None,
+        intra_group_peer_reviews=None,
+        group_category_id=None,
+        needs_grading_count=None,
+        needs_grading_count_by_section=None,
+        position=None,
+        post_to_sis=None,
+        integration_id=None,
+        integration_data=None,
+        points_possible=None,
+        submission_types=None,
+        has_submitted_submissions=None,
+        grading_type=None,
+        grading_standard_id=None,
+        published=None,
+        unpublishable=None,
+        only_visible_to_overrides=None,
+        locked_for_user=None,
+        lock_info=None,
+        lock_explanation=None,
+        quiz_id=None,
+        anonymous_submissions=None,
+        discussion_topic=None,
+        freeze_on_copy=None,
+        frozen=None,
+        frozen_attributes=None,
+        submission=None,
+        use_rubric_for_grading=None,
+        rubric_settings=None,
+        rubric=None,
+        assignment_visibility=None,
+        overrides=None,
+        omit_from_final_grade=None,
+        moderated_grading=None,
+        grader_count=None,
+        final_grader_id=None,
+        grader_comments_visible_to_graders=None,
+        graders_anonymous_to_graders=None,
+        grader_names_visible_to_final_grader=None,
+        anonymous_grading=None,
+        allowed_attempts=None,
+        post_manually=None,
+        score_statistics=None,
+        can_submit=None,
+    ):
         """Init method for Assignment class."""
         self._id = id
         self._name = name
@@ -2333,14 +2915,16 @@ class Assignment(BaseModel):
         self._final_grader_id = final_grader_id
         self._grader_comments_visible_to_graders = grader_comments_visible_to_graders
         self._graders_anonymous_to_graders = graders_anonymous_to_graders
-        self._grader_names_visible_to_final_grader = grader_names_visible_to_final_grader
+        self._grader_names_visible_to_final_grader = (
+            grader_names_visible_to_final_grader
+        )
         self._anonymous_grading = anonymous_grading
         self._allowed_attempts = allowed_attempts
         self._post_manually = post_manually
         self._score_statistics = score_statistics
         self._can_submit = can_submit
 
-        self.logger = logging.getLogger('py3canvas.Assignment')
+        self.logger = logging.getLogger("py3canvas.Assignment")
 
     @property
     def id(self):
@@ -2350,7 +2934,9 @@ class Assignment(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -2361,7 +2947,9 @@ class Assignment(BaseModel):
     @name.setter
     def name(self, value):
         """Setter for name property."""
-        self.logger.warn("Setting values on name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on name will NOT update the remote Canvas instance."
+        )
         self._name = value
 
     @property
@@ -2372,7 +2960,9 @@ class Assignment(BaseModel):
     @description.setter
     def description(self, value):
         """Setter for description property."""
-        self.logger.warn("Setting values on description will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on description will NOT update the remote Canvas instance."
+        )
         self._description = value
 
     @property
@@ -2383,7 +2973,9 @@ class Assignment(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -2394,7 +2986,9 @@ class Assignment(BaseModel):
     @updated_at.setter
     def updated_at(self, value):
         """Setter for updated_at property."""
-        self.logger.warn("Setting values on updated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on updated_at will NOT update the remote Canvas instance."
+        )
         self._updated_at = value
 
     @property
@@ -2405,7 +2999,9 @@ class Assignment(BaseModel):
     @due_at.setter
     def due_at(self, value):
         """Setter for due_at property."""
-        self.logger.warn("Setting values on due_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on due_at will NOT update the remote Canvas instance."
+        )
         self._due_at = value
 
     @property
@@ -2416,7 +3012,9 @@ class Assignment(BaseModel):
     @lock_at.setter
     def lock_at(self, value):
         """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_at will NOT update the remote Canvas instance."
+        )
         self._lock_at = value
 
     @property
@@ -2427,7 +3025,9 @@ class Assignment(BaseModel):
     @unlock_at.setter
     def unlock_at(self, value):
         """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unlock_at will NOT update the remote Canvas instance."
+        )
         self._unlock_at = value
 
     @property
@@ -2438,7 +3038,9 @@ class Assignment(BaseModel):
     @has_overrides.setter
     def has_overrides(self, value):
         """Setter for has_overrides property."""
-        self.logger.warn("Setting values on has_overrides will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on has_overrides will NOT update the remote Canvas instance."
+        )
         self._has_overrides = value
 
     @property
@@ -2449,7 +3051,9 @@ class Assignment(BaseModel):
     @all_dates.setter
     def all_dates(self, value):
         """Setter for all_dates property."""
-        self.logger.warn("Setting values on all_dates will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on all_dates will NOT update the remote Canvas instance."
+        )
         self._all_dates = value
 
     @property
@@ -2460,7 +3064,9 @@ class Assignment(BaseModel):
     @course_id.setter
     def course_id(self, value):
         """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_id will NOT update the remote Canvas instance."
+        )
         self._course_id = value
 
     @property
@@ -2471,7 +3077,9 @@ class Assignment(BaseModel):
     @html_url.setter
     def html_url(self, value):
         """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on html_url will NOT update the remote Canvas instance."
+        )
         self._html_url = value
 
     @property
@@ -2482,7 +3090,9 @@ class Assignment(BaseModel):
     @submissions_download_url.setter
     def submissions_download_url(self, value):
         """Setter for submissions_download_url property."""
-        self.logger.warn("Setting values on submissions_download_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submissions_download_url will NOT update the remote Canvas instance."
+        )
         self._submissions_download_url = value
 
     @property
@@ -2493,7 +3103,9 @@ class Assignment(BaseModel):
     @assignment_group_id.setter
     def assignment_group_id(self, value):
         """Setter for assignment_group_id property."""
-        self.logger.warn("Setting values on assignment_group_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assignment_group_id will NOT update the remote Canvas instance."
+        )
         self._assignment_group_id = value
 
     @property
@@ -2504,7 +3116,9 @@ class Assignment(BaseModel):
     @due_date_required.setter
     def due_date_required(self, value):
         """Setter for due_date_required property."""
-        self.logger.warn("Setting values on due_date_required will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on due_date_required will NOT update the remote Canvas instance."
+        )
         self._due_date_required = value
 
     @property
@@ -2515,7 +3129,9 @@ class Assignment(BaseModel):
     @allowed_extensions.setter
     def allowed_extensions(self, value):
         """Setter for allowed_extensions property."""
-        self.logger.warn("Setting values on allowed_extensions will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on allowed_extensions will NOT update the remote Canvas instance."
+        )
         self._allowed_extensions = value
 
     @property
@@ -2526,7 +3142,9 @@ class Assignment(BaseModel):
     @max_name_length.setter
     def max_name_length(self, value):
         """Setter for max_name_length property."""
-        self.logger.warn("Setting values on max_name_length will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on max_name_length will NOT update the remote Canvas instance."
+        )
         self._max_name_length = value
 
     @property
@@ -2537,7 +3155,9 @@ class Assignment(BaseModel):
     @turnitin_enabled.setter
     def turnitin_enabled(self, value):
         """Setter for turnitin_enabled property."""
-        self.logger.warn("Setting values on turnitin_enabled will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on turnitin_enabled will NOT update the remote Canvas instance."
+        )
         self._turnitin_enabled = value
 
     @property
@@ -2548,7 +3168,9 @@ class Assignment(BaseModel):
     @vericite_enabled.setter
     def vericite_enabled(self, value):
         """Setter for vericite_enabled property."""
-        self.logger.warn("Setting values on vericite_enabled will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on vericite_enabled will NOT update the remote Canvas instance."
+        )
         self._vericite_enabled = value
 
     @property
@@ -2559,7 +3181,9 @@ class Assignment(BaseModel):
     @turnitin_settings.setter
     def turnitin_settings(self, value):
         """Setter for turnitin_settings property."""
-        self.logger.warn("Setting values on turnitin_settings will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on turnitin_settings will NOT update the remote Canvas instance."
+        )
         self._turnitin_settings = value
 
     @property
@@ -2570,7 +3194,9 @@ class Assignment(BaseModel):
     @grade_group_students_individually.setter
     def grade_group_students_individually(self, value):
         """Setter for grade_group_students_individually property."""
-        self.logger.warn("Setting values on grade_group_students_individually will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on grade_group_students_individually will NOT update the remote Canvas instance."
+        )
         self._grade_group_students_individually = value
 
     @property
@@ -2581,7 +3207,9 @@ class Assignment(BaseModel):
     @external_tool_tag_attributes.setter
     def external_tool_tag_attributes(self, value):
         """Setter for external_tool_tag_attributes property."""
-        self.logger.warn("Setting values on external_tool_tag_attributes will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on external_tool_tag_attributes will NOT update the remote Canvas instance."
+        )
         self._external_tool_tag_attributes = value
 
     @property
@@ -2592,7 +3220,9 @@ class Assignment(BaseModel):
     @peer_reviews.setter
     def peer_reviews(self, value):
         """Setter for peer_reviews property."""
-        self.logger.warn("Setting values on peer_reviews will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on peer_reviews will NOT update the remote Canvas instance."
+        )
         self._peer_reviews = value
 
     @property
@@ -2603,7 +3233,9 @@ class Assignment(BaseModel):
     @automatic_peer_reviews.setter
     def automatic_peer_reviews(self, value):
         """Setter for automatic_peer_reviews property."""
-        self.logger.warn("Setting values on automatic_peer_reviews will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on automatic_peer_reviews will NOT update the remote Canvas instance."
+        )
         self._automatic_peer_reviews = value
 
     @property
@@ -2614,7 +3246,9 @@ class Assignment(BaseModel):
     @peer_review_count.setter
     def peer_review_count(self, value):
         """Setter for peer_review_count property."""
-        self.logger.warn("Setting values on peer_review_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on peer_review_count will NOT update the remote Canvas instance."
+        )
         self._peer_review_count = value
 
     @property
@@ -2625,7 +3259,9 @@ class Assignment(BaseModel):
     @peer_reviews_assign_at.setter
     def peer_reviews_assign_at(self, value):
         """Setter for peer_reviews_assign_at property."""
-        self.logger.warn("Setting values on peer_reviews_assign_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on peer_reviews_assign_at will NOT update the remote Canvas instance."
+        )
         self._peer_reviews_assign_at = value
 
     @property
@@ -2636,7 +3272,9 @@ class Assignment(BaseModel):
     @intra_group_peer_reviews.setter
     def intra_group_peer_reviews(self, value):
         """Setter for intra_group_peer_reviews property."""
-        self.logger.warn("Setting values on intra_group_peer_reviews will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on intra_group_peer_reviews will NOT update the remote Canvas instance."
+        )
         self._intra_group_peer_reviews = value
 
     @property
@@ -2647,7 +3285,9 @@ class Assignment(BaseModel):
     @group_category_id.setter
     def group_category_id(self, value):
         """Setter for group_category_id property."""
-        self.logger.warn("Setting values on group_category_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on group_category_id will NOT update the remote Canvas instance."
+        )
         self._group_category_id = value
 
     @property
@@ -2658,7 +3298,9 @@ class Assignment(BaseModel):
     @needs_grading_count.setter
     def needs_grading_count(self, value):
         """Setter for needs_grading_count property."""
-        self.logger.warn("Setting values on needs_grading_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on needs_grading_count will NOT update the remote Canvas instance."
+        )
         self._needs_grading_count = value
 
     @property
@@ -2669,7 +3311,9 @@ class Assignment(BaseModel):
     @needs_grading_count_by_section.setter
     def needs_grading_count_by_section(self, value):
         """Setter for needs_grading_count_by_section property."""
-        self.logger.warn("Setting values on needs_grading_count_by_section will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on needs_grading_count_by_section will NOT update the remote Canvas instance."
+        )
         self._needs_grading_count_by_section = value
 
     @property
@@ -2680,7 +3324,9 @@ class Assignment(BaseModel):
     @position.setter
     def position(self, value):
         """Setter for position property."""
-        self.logger.warn("Setting values on position will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on position will NOT update the remote Canvas instance."
+        )
         self._position = value
 
     @property
@@ -2691,7 +3337,9 @@ class Assignment(BaseModel):
     @post_to_sis.setter
     def post_to_sis(self, value):
         """Setter for post_to_sis property."""
-        self.logger.warn("Setting values on post_to_sis will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on post_to_sis will NOT update the remote Canvas instance."
+        )
         self._post_to_sis = value
 
     @property
@@ -2702,7 +3350,9 @@ class Assignment(BaseModel):
     @integration_id.setter
     def integration_id(self, value):
         """Setter for integration_id property."""
-        self.logger.warn("Setting values on integration_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on integration_id will NOT update the remote Canvas instance."
+        )
         self._integration_id = value
 
     @property
@@ -2713,7 +3363,9 @@ class Assignment(BaseModel):
     @integration_data.setter
     def integration_data(self, value):
         """Setter for integration_data property."""
-        self.logger.warn("Setting values on integration_data will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on integration_data will NOT update the remote Canvas instance."
+        )
         self._integration_data = value
 
     @property
@@ -2724,7 +3376,9 @@ class Assignment(BaseModel):
     @points_possible.setter
     def points_possible(self, value):
         """Setter for points_possible property."""
-        self.logger.warn("Setting values on points_possible will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on points_possible will NOT update the remote Canvas instance."
+        )
         self._points_possible = value
 
     @property
@@ -2735,7 +3389,9 @@ class Assignment(BaseModel):
     @submission_types.setter
     def submission_types(self, value):
         """Setter for submission_types property."""
-        self.logger.warn("Setting values on submission_types will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submission_types will NOT update the remote Canvas instance."
+        )
         self._submission_types = value
 
     @property
@@ -2746,7 +3402,9 @@ class Assignment(BaseModel):
     @has_submitted_submissions.setter
     def has_submitted_submissions(self, value):
         """Setter for has_submitted_submissions property."""
-        self.logger.warn("Setting values on has_submitted_submissions will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on has_submitted_submissions will NOT update the remote Canvas instance."
+        )
         self._has_submitted_submissions = value
 
     @property
@@ -2757,7 +3415,9 @@ class Assignment(BaseModel):
     @grading_type.setter
     def grading_type(self, value):
         """Setter for grading_type property."""
-        self.logger.warn("Setting values on grading_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on grading_type will NOT update the remote Canvas instance."
+        )
         self._grading_type = value
 
     @property
@@ -2768,7 +3428,9 @@ class Assignment(BaseModel):
     @grading_standard_id.setter
     def grading_standard_id(self, value):
         """Setter for grading_standard_id property."""
-        self.logger.warn("Setting values on grading_standard_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on grading_standard_id will NOT update the remote Canvas instance."
+        )
         self._grading_standard_id = value
 
     @property
@@ -2779,7 +3441,9 @@ class Assignment(BaseModel):
     @published.setter
     def published(self, value):
         """Setter for published property."""
-        self.logger.warn("Setting values on published will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on published will NOT update the remote Canvas instance."
+        )
         self._published = value
 
     @property
@@ -2790,7 +3454,9 @@ class Assignment(BaseModel):
     @unpublishable.setter
     def unpublishable(self, value):
         """Setter for unpublishable property."""
-        self.logger.warn("Setting values on unpublishable will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unpublishable will NOT update the remote Canvas instance."
+        )
         self._unpublishable = value
 
     @property
@@ -2801,7 +3467,9 @@ class Assignment(BaseModel):
     @only_visible_to_overrides.setter
     def only_visible_to_overrides(self, value):
         """Setter for only_visible_to_overrides property."""
-        self.logger.warn("Setting values on only_visible_to_overrides will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on only_visible_to_overrides will NOT update the remote Canvas instance."
+        )
         self._only_visible_to_overrides = value
 
     @property
@@ -2812,7 +3480,9 @@ class Assignment(BaseModel):
     @locked_for_user.setter
     def locked_for_user(self, value):
         """Setter for locked_for_user property."""
-        self.logger.warn("Setting values on locked_for_user will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on locked_for_user will NOT update the remote Canvas instance."
+        )
         self._locked_for_user = value
 
     @property
@@ -2823,7 +3493,9 @@ class Assignment(BaseModel):
     @lock_info.setter
     def lock_info(self, value):
         """Setter for lock_info property."""
-        self.logger.warn("Setting values on lock_info will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_info will NOT update the remote Canvas instance."
+        )
         self._lock_info = value
 
     @property
@@ -2834,7 +3506,9 @@ class Assignment(BaseModel):
     @lock_explanation.setter
     def lock_explanation(self, value):
         """Setter for lock_explanation property."""
-        self.logger.warn("Setting values on lock_explanation will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_explanation will NOT update the remote Canvas instance."
+        )
         self._lock_explanation = value
 
     @property
@@ -2845,7 +3519,9 @@ class Assignment(BaseModel):
     @quiz_id.setter
     def quiz_id(self, value):
         """Setter for quiz_id property."""
-        self.logger.warn("Setting values on quiz_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on quiz_id will NOT update the remote Canvas instance."
+        )
         self._quiz_id = value
 
     @property
@@ -2856,7 +3532,9 @@ class Assignment(BaseModel):
     @anonymous_submissions.setter
     def anonymous_submissions(self, value):
         """Setter for anonymous_submissions property."""
-        self.logger.warn("Setting values on anonymous_submissions will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on anonymous_submissions will NOT update the remote Canvas instance."
+        )
         self._anonymous_submissions = value
 
     @property
@@ -2867,7 +3545,9 @@ class Assignment(BaseModel):
     @discussion_topic.setter
     def discussion_topic(self, value):
         """Setter for discussion_topic property."""
-        self.logger.warn("Setting values on discussion_topic will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on discussion_topic will NOT update the remote Canvas instance."
+        )
         self._discussion_topic = value
 
     @property
@@ -2878,7 +3558,9 @@ class Assignment(BaseModel):
     @freeze_on_copy.setter
     def freeze_on_copy(self, value):
         """Setter for freeze_on_copy property."""
-        self.logger.warn("Setting values on freeze_on_copy will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on freeze_on_copy will NOT update the remote Canvas instance."
+        )
         self._freeze_on_copy = value
 
     @property
@@ -2889,7 +3571,9 @@ class Assignment(BaseModel):
     @frozen.setter
     def frozen(self, value):
         """Setter for frozen property."""
-        self.logger.warn("Setting values on frozen will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on frozen will NOT update the remote Canvas instance."
+        )
         self._frozen = value
 
     @property
@@ -2900,7 +3584,9 @@ class Assignment(BaseModel):
     @frozen_attributes.setter
     def frozen_attributes(self, value):
         """Setter for frozen_attributes property."""
-        self.logger.warn("Setting values on frozen_attributes will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on frozen_attributes will NOT update the remote Canvas instance."
+        )
         self._frozen_attributes = value
 
     @property
@@ -2911,7 +3597,9 @@ class Assignment(BaseModel):
     @submission.setter
     def submission(self, value):
         """Setter for submission property."""
-        self.logger.warn("Setting values on submission will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submission will NOT update the remote Canvas instance."
+        )
         self._submission = value
 
     @property
@@ -2922,7 +3610,9 @@ class Assignment(BaseModel):
     @use_rubric_for_grading.setter
     def use_rubric_for_grading(self, value):
         """Setter for use_rubric_for_grading property."""
-        self.logger.warn("Setting values on use_rubric_for_grading will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on use_rubric_for_grading will NOT update the remote Canvas instance."
+        )
         self._use_rubric_for_grading = value
 
     @property
@@ -2933,7 +3623,9 @@ class Assignment(BaseModel):
     @rubric_settings.setter
     def rubric_settings(self, value):
         """Setter for rubric_settings property."""
-        self.logger.warn("Setting values on rubric_settings will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on rubric_settings will NOT update the remote Canvas instance."
+        )
         self._rubric_settings = value
 
     @property
@@ -2944,7 +3636,9 @@ class Assignment(BaseModel):
     @rubric.setter
     def rubric(self, value):
         """Setter for rubric property."""
-        self.logger.warn("Setting values on rubric will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on rubric will NOT update the remote Canvas instance."
+        )
         self._rubric = value
 
     @property
@@ -2955,7 +3649,9 @@ class Assignment(BaseModel):
     @assignment_visibility.setter
     def assignment_visibility(self, value):
         """Setter for assignment_visibility property."""
-        self.logger.warn("Setting values on assignment_visibility will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assignment_visibility will NOT update the remote Canvas instance."
+        )
         self._assignment_visibility = value
 
     @property
@@ -2966,7 +3662,9 @@ class Assignment(BaseModel):
     @overrides.setter
     def overrides(self, value):
         """Setter for overrides property."""
-        self.logger.warn("Setting values on overrides will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on overrides will NOT update the remote Canvas instance."
+        )
         self._overrides = value
 
     @property
@@ -2977,7 +3675,9 @@ class Assignment(BaseModel):
     @omit_from_final_grade.setter
     def omit_from_final_grade(self, value):
         """Setter for omit_from_final_grade property."""
-        self.logger.warn("Setting values on omit_from_final_grade will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on omit_from_final_grade will NOT update the remote Canvas instance."
+        )
         self._omit_from_final_grade = value
 
     @property
@@ -2988,7 +3688,9 @@ class Assignment(BaseModel):
     @moderated_grading.setter
     def moderated_grading(self, value):
         """Setter for moderated_grading property."""
-        self.logger.warn("Setting values on moderated_grading will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on moderated_grading will NOT update the remote Canvas instance."
+        )
         self._moderated_grading = value
 
     @property
@@ -2999,7 +3701,9 @@ class Assignment(BaseModel):
     @grader_count.setter
     def grader_count(self, value):
         """Setter for grader_count property."""
-        self.logger.warn("Setting values on grader_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on grader_count will NOT update the remote Canvas instance."
+        )
         self._grader_count = value
 
     @property
@@ -3010,7 +3714,9 @@ class Assignment(BaseModel):
     @final_grader_id.setter
     def final_grader_id(self, value):
         """Setter for final_grader_id property."""
-        self.logger.warn("Setting values on final_grader_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on final_grader_id will NOT update the remote Canvas instance."
+        )
         self._final_grader_id = value
 
     @property
@@ -3021,7 +3727,9 @@ class Assignment(BaseModel):
     @grader_comments_visible_to_graders.setter
     def grader_comments_visible_to_graders(self, value):
         """Setter for grader_comments_visible_to_graders property."""
-        self.logger.warn("Setting values on grader_comments_visible_to_graders will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on grader_comments_visible_to_graders will NOT update the remote Canvas instance."
+        )
         self._grader_comments_visible_to_graders = value
 
     @property
@@ -3032,7 +3740,9 @@ class Assignment(BaseModel):
     @graders_anonymous_to_graders.setter
     def graders_anonymous_to_graders(self, value):
         """Setter for graders_anonymous_to_graders property."""
-        self.logger.warn("Setting values on graders_anonymous_to_graders will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on graders_anonymous_to_graders will NOT update the remote Canvas instance."
+        )
         self._graders_anonymous_to_graders = value
 
     @property
@@ -3043,7 +3753,9 @@ class Assignment(BaseModel):
     @grader_names_visible_to_final_grader.setter
     def grader_names_visible_to_final_grader(self, value):
         """Setter for grader_names_visible_to_final_grader property."""
-        self.logger.warn("Setting values on grader_names_visible_to_final_grader will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on grader_names_visible_to_final_grader will NOT update the remote Canvas instance."
+        )
         self._grader_names_visible_to_final_grader = value
 
     @property
@@ -3054,7 +3766,9 @@ class Assignment(BaseModel):
     @anonymous_grading.setter
     def anonymous_grading(self, value):
         """Setter for anonymous_grading property."""
-        self.logger.warn("Setting values on anonymous_grading will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on anonymous_grading will NOT update the remote Canvas instance."
+        )
         self._anonymous_grading = value
 
     @property
@@ -3065,7 +3779,9 @@ class Assignment(BaseModel):
     @allowed_attempts.setter
     def allowed_attempts(self, value):
         """Setter for allowed_attempts property."""
-        self.logger.warn("Setting values on allowed_attempts will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on allowed_attempts will NOT update the remote Canvas instance."
+        )
         self._allowed_attempts = value
 
     @property
@@ -3076,7 +3792,9 @@ class Assignment(BaseModel):
     @post_manually.setter
     def post_manually(self, value):
         """Setter for post_manually property."""
-        self.logger.warn("Setting values on post_manually will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on post_manually will NOT update the remote Canvas instance."
+        )
         self._post_manually = value
 
     @property
@@ -3087,7 +3805,9 @@ class Assignment(BaseModel):
     @score_statistics.setter
     def score_statistics(self, value):
         """Setter for score_statistics property."""
-        self.logger.warn("Setting values on score_statistics will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on score_statistics will NOT update the remote Canvas instance."
+        )
         self._score_statistics = value
 
     @property
@@ -3098,14 +3818,29 @@ class Assignment(BaseModel):
     @can_submit.setter
     def can_submit(self, value):
         """Setter for can_submit property."""
-        self.logger.warn("Setting values on can_submit will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on can_submit will NOT update the remote Canvas instance."
+        )
         self._can_submit = value
 
 
 class Assignmentoverride(BaseModel):
     """Assignmentoverride Model."""
 
-    def __init__(self, id=None, assignment_id=None, student_ids=None, group_id=None, course_section_id=None, title=None, due_at=None, all_day=None, all_day_date=None, unlock_at=None, lock_at=None):
+    def __init__(
+        self,
+        id=None,
+        assignment_id=None,
+        student_ids=None,
+        group_id=None,
+        course_section_id=None,
+        title=None,
+        due_at=None,
+        all_day=None,
+        all_day_date=None,
+        unlock_at=None,
+        lock_at=None,
+    ):
         """Init method for Assignmentoverride class."""
         self._id = id
         self._assignment_id = assignment_id
@@ -3119,7 +3854,7 @@ class Assignmentoverride(BaseModel):
         self._unlock_at = unlock_at
         self._lock_at = lock_at
 
-        self.logger = logging.getLogger('py3canvas.Assignmentoverride')
+        self.logger = logging.getLogger("py3canvas.Assignmentoverride")
 
     @property
     def id(self):
@@ -3129,7 +3864,9 @@ class Assignmentoverride(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -3140,7 +3877,9 @@ class Assignmentoverride(BaseModel):
     @assignment_id.setter
     def assignment_id(self, value):
         """Setter for assignment_id property."""
-        self.logger.warn("Setting values on assignment_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on assignment_id will NOT update the remote Canvas instance."
+        )
         self._assignment_id = value
 
     @property
@@ -3151,7 +3890,9 @@ class Assignmentoverride(BaseModel):
     @student_ids.setter
     def student_ids(self, value):
         """Setter for student_ids property."""
-        self.logger.warn("Setting values on student_ids will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on student_ids will NOT update the remote Canvas instance."
+        )
         self._student_ids = value
 
     @property
@@ -3162,7 +3903,9 @@ class Assignmentoverride(BaseModel):
     @group_id.setter
     def group_id(self, value):
         """Setter for group_id property."""
-        self.logger.warn("Setting values on group_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on group_id will NOT update the remote Canvas instance."
+        )
         self._group_id = value
 
     @property
@@ -3173,7 +3916,9 @@ class Assignmentoverride(BaseModel):
     @course_section_id.setter
     def course_section_id(self, value):
         """Setter for course_section_id property."""
-        self.logger.warn("Setting values on course_section_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_section_id will NOT update the remote Canvas instance."
+        )
         self._course_section_id = value
 
     @property
@@ -3184,7 +3929,9 @@ class Assignmentoverride(BaseModel):
     @title.setter
     def title(self, value):
         """Setter for title property."""
-        self.logger.warn("Setting values on title will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on title will NOT update the remote Canvas instance."
+        )
         self._title = value
 
     @property
@@ -3195,7 +3942,9 @@ class Assignmentoverride(BaseModel):
     @due_at.setter
     def due_at(self, value):
         """Setter for due_at property."""
-        self.logger.warn("Setting values on due_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on due_at will NOT update the remote Canvas instance."
+        )
         self._due_at = value
 
     @property
@@ -3206,7 +3955,9 @@ class Assignmentoverride(BaseModel):
     @all_day.setter
     def all_day(self, value):
         """Setter for all_day property."""
-        self.logger.warn("Setting values on all_day will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on all_day will NOT update the remote Canvas instance."
+        )
         self._all_day = value
 
     @property
@@ -3217,7 +3968,9 @@ class Assignmentoverride(BaseModel):
     @all_day_date.setter
     def all_day_date(self, value):
         """Setter for all_day_date property."""
-        self.logger.warn("Setting values on all_day_date will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on all_day_date will NOT update the remote Canvas instance."
+        )
         self._all_day_date = value
 
     @property
@@ -3228,7 +3981,9 @@ class Assignmentoverride(BaseModel):
     @unlock_at.setter
     def unlock_at(self, value):
         """Setter for unlock_at property."""
-        self.logger.warn("Setting values on unlock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unlock_at will NOT update the remote Canvas instance."
+        )
         self._unlock_at = value
 
     @property
@@ -3239,6 +3994,7 @@ class Assignmentoverride(BaseModel):
     @lock_at.setter
     def lock_at(self, value):
         """Setter for lock_at property."""
-        self.logger.warn("Setting values on lock_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on lock_at will NOT update the remote Canvas instance."
+        )
         self._lock_at = value
-

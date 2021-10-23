@@ -16,12 +16,22 @@ class QuizExtensionsAPI(BaseCanvasAPI):
         super(QuizExtensionsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.QuizExtensionsAPI")
 
-    def set_extensions_for_student_quiz_submissions(self, course_id, quiz_extensions_user_id, quiz_id, quiz_extensions_extend_from_end_at=None, quiz_extensions_extend_from_now=None, quiz_extensions_extra_attempts=None, quiz_extensions_extra_time=None, quiz_extensions_manually_unlocked=None):
+    def set_extensions_for_student_quiz_submissions(
+        self,
+        course_id,
+        quiz_extensions_user_id,
+        quiz_id,
+        quiz_extensions_extend_from_end_at=None,
+        quiz_extensions_extend_from_now=None,
+        quiz_extensions_extra_attempts=None,
+        quiz_extensions_extra_time=None,
+        quiz_extensions_manually_unlocked=None,
+    ):
         """
         Set extensions for student quiz submissions.
 
         <b>Responses</b>
-        
+
         * <b>200 OK</b> if the request was successful
         * <b>403 Forbidden</b> if you are not allowed to extend quizzes for this course
         """
@@ -35,20 +45,17 @@ class QuizExtensionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
 
-
         # REQUIRED - quiz_extensions[user_id]
         """
             The ID of the user we want to add quiz extensions for.
         """
         data["quiz_extensions[user_id]"] = quiz_extensions_user_id
-
 
         # OPTIONAL - quiz_extensions[extra_attempts]
         """
@@ -57,7 +64,6 @@ class QuizExtensionsAPI(BaseCanvasAPI):
         """
         if quiz_extensions_extra_attempts is not None:
             data["quiz_extensions[extra_attempts]"] = quiz_extensions_extra_attempts
-
 
         # OPTIONAL - quiz_extensions[extra_time]
         """
@@ -68,15 +74,15 @@ class QuizExtensionsAPI(BaseCanvasAPI):
         if quiz_extensions_extra_time is not None:
             data["quiz_extensions[extra_time]"] = quiz_extensions_extra_time
 
-
         # OPTIONAL - quiz_extensions[manually_unlocked]
         """
             Allow the student to take the quiz even if it's locked for
         everyone else.
         """
         if quiz_extensions_manually_unlocked is not None:
-            data["quiz_extensions[manually_unlocked]"] = quiz_extensions_manually_unlocked
-
+            data[
+                "quiz_extensions[manually_unlocked]"
+            ] = quiz_extensions_manually_unlocked
 
         # OPTIONAL - quiz_extensions[extend_from_now]
         """
@@ -87,7 +93,6 @@ class QuizExtensionsAPI(BaseCanvasAPI):
         if quiz_extensions_extend_from_now is not None:
             data["quiz_extensions[extend_from_now]"] = quiz_extensions_extend_from_now
 
-
         # OPTIONAL - quiz_extensions[extend_from_end_at]
         """
             The number of minutes to extend the quiz beyond the quiz's current
@@ -95,17 +100,36 @@ class QuizExtensionsAPI(BaseCanvasAPI):
         limited to 1440 minutes (24 hours)
         """
         if quiz_extensions_extend_from_end_at is not None:
-            data["quiz_extensions[extend_from_end_at]"] = quiz_extensions_extend_from_end_at
+            data[
+                "quiz_extensions[extend_from_end_at]"
+            ] = quiz_extensions_extend_from_end_at
 
-
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/extensions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/extensions".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/extensions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/extensions".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Quizextension(BaseModel):
     """Quizextension Model."""
 
-    def __init__(self, quiz_id, user_id, extra_attempts=None, extra_time=None, manually_unlocked=None, end_at=None):
+    def __init__(
+        self,
+        quiz_id,
+        user_id,
+        extra_attempts=None,
+        extra_time=None,
+        manually_unlocked=None,
+        end_at=None,
+    ):
         """Init method for Quizextension class."""
         self._quiz_id = quiz_id
         self._user_id = user_id
@@ -114,7 +138,7 @@ class Quizextension(BaseModel):
         self._manually_unlocked = manually_unlocked
         self._end_at = end_at
 
-        self.logger = logging.getLogger('py3canvas.Quizextension')
+        self.logger = logging.getLogger("py3canvas.Quizextension")
 
     @property
     def quiz_id(self):
@@ -124,7 +148,9 @@ class Quizextension(BaseModel):
     @quiz_id.setter
     def quiz_id(self, value):
         """Setter for quiz_id property."""
-        self.logger.warn("Setting values on quiz_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on quiz_id will NOT update the remote Canvas instance."
+        )
         self._quiz_id = value
 
     @property
@@ -135,7 +161,9 @@ class Quizextension(BaseModel):
     @user_id.setter
     def user_id(self, value):
         """Setter for user_id property."""
-        self.logger.warn("Setting values on user_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on user_id will NOT update the remote Canvas instance."
+        )
         self._user_id = value
 
     @property
@@ -146,7 +174,9 @@ class Quizextension(BaseModel):
     @extra_attempts.setter
     def extra_attempts(self, value):
         """Setter for extra_attempts property."""
-        self.logger.warn("Setting values on extra_attempts will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on extra_attempts will NOT update the remote Canvas instance."
+        )
         self._extra_attempts = value
 
     @property
@@ -157,7 +187,9 @@ class Quizextension(BaseModel):
     @extra_time.setter
     def extra_time(self, value):
         """Setter for extra_time property."""
-        self.logger.warn("Setting values on extra_time will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on extra_time will NOT update the remote Canvas instance."
+        )
         self._extra_time = value
 
     @property
@@ -168,7 +200,9 @@ class Quizextension(BaseModel):
     @manually_unlocked.setter
     def manually_unlocked(self, value):
         """Setter for manually_unlocked property."""
-        self.logger.warn("Setting values on manually_unlocked will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on manually_unlocked will NOT update the remote Canvas instance."
+        )
         self._manually_unlocked = value
 
     @property
@@ -179,6 +213,7 @@ class Quizextension(BaseModel):
     @end_at.setter
     def end_at(self, value):
         """Setter for end_at property."""
-        self.logger.warn("Setting values on end_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on end_at will NOT update the remote Canvas instance."
+        )
         self._end_at = value
-

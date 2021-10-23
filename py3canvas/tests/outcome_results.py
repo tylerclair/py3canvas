@@ -26,11 +26,27 @@ class TestOutcomeResultsAPI(unittest.TestCase):
         """Integration test for the OutcomeResultsAPI.get_outcome_results method."""
         course_id = None  # Change me!!
 
-        r = self.client.get_outcome_results(course_id, include=None, include_hidden=None, outcome_ids=None, user_ids=None)
+        r = self.client.get_outcome_results(
+            course_id,
+            include=None,
+            include_hidden=None,
+            outcome_ids=None,
+            user_ids=None,
+        )
 
     def test_get_outcome_result_rollups(self):
         """Integration test for the OutcomeResultsAPI.get_outcome_result_rollups method."""
         course_id = None  # Change me!!
 
-        r = self.client.get_outcome_result_rollups(course_id, aggregate=None, aggregate_stat=None, exclude=None, include=None, outcome_ids=None, sort_by=None, sort_order=None, sort_outcome_id=None, user_ids=None)
-
+        r = self.client.get_outcome_result_rollups(
+            course_id,
+            aggregate=None,
+            aggregate_stat=None,
+            exclude=None,
+            include=None,
+            outcome_ids=None,
+            sort_by=None,
+            sort_order=None,
+            sort_outcome_id=None,
+            user_ids=None,
+        )

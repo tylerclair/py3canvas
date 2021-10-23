@@ -113,4 +113,3 @@ class TestFeatureFlagsAPI(unittest.TestCase):
         feature = None  # Change me!!
 
         r = self.client.remove_feature_flag_users(feature, user_id)
-

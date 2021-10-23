@@ -44,4 +44,3 @@ class TestPollChoicesAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_poll_choice(id, poll_id)
-

@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class ImageSearchAPI(BaseCanvasAPI):
     """ImageSearch API Version 1.0."""
 
@@ -32,9 +31,18 @@ class ImageSearchAPI(BaseCanvasAPI):
         """
         params["query"] = query
 
-
-        self.logger.debug("GET /api/v1/image_search with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/image_search".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/image_search with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/image_search".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
     def confirm_image_selection(self, id):
         """
@@ -52,7 +60,15 @@ class ImageSearchAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("POST /api/v1/image_selection/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/image_selection/{id}".format(**path), data=data, params=params, no_data=True)
-
+        self.logger.debug(
+            "POST /api/v1/image_selection/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/image_selection/{id}".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )

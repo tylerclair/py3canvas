@@ -19,4 +19,3 @@ class TestPublicJwkAPI(unittest.TestCase):
         """Integration test for the PublicJwkAPI.update_public_jwk method."""
         # This method utilises the PUT request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

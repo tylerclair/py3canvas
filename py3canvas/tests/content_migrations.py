@@ -15,7 +15,9 @@ class TestContentMigrationsAPI(unittest.TestCase):
     """Tests for the ContentMigrationsAPI."""
 
     def setUp(self):
-        self.client = ContentMigrationsAPI(secrets.instance_address, secrets.access_token)
+        self.client = ContentMigrationsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_list_migration_issues_accounts(self):
         """Integration test for the ContentMigrationsAPI.list_migration_issues_accounts method."""
@@ -51,7 +53,9 @@ class TestContentMigrationsAPI(unittest.TestCase):
         content_migration_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.get_migration_issue_accounts(account_id, content_migration_id, id)
+        r = self.client.get_migration_issue_accounts(
+            account_id, content_migration_id, id
+        )
 
     def test_get_migration_issue_courses(self):
         """Integration test for the ContentMigrationsAPI.get_migration_issue_courses method."""
@@ -218,14 +222,18 @@ class TestContentMigrationsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.list_items_for_selective_import_accounts(account_id, id, type=None)
+        r = self.client.list_items_for_selective_import_accounts(
+            account_id, id, type=None
+        )
 
     def test_list_items_for_selective_import_courses(self):
         """Integration test for the ContentMigrationsAPI.list_items_for_selective_import_courses method."""
         course_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.list_items_for_selective_import_courses(course_id, id, type=None)
+        r = self.client.list_items_for_selective_import_courses(
+            course_id, id, type=None
+        )
 
     def test_list_items_for_selective_import_groups(self):
         """Integration test for the ContentMigrationsAPI.list_items_for_selective_import_groups method."""
@@ -240,4 +248,3 @@ class TestContentMigrationsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.list_items_for_selective_import_users(id, user_id, type=None)
-

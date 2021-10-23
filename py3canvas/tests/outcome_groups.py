@@ -49,13 +49,17 @@ class TestOutcomeGroupsAPI(unittest.TestCase):
         """Integration test for the OutcomeGroupsAPI.get_all_outcome_links_for_context_accounts method."""
         account_id = None  # Change me!!
 
-        r = self.client.get_all_outcome_links_for_context_accounts(account_id, outcome_group_style=None, outcome_style=None)
+        r = self.client.get_all_outcome_links_for_context_accounts(
+            account_id, outcome_group_style=None, outcome_style=None
+        )
 
     def test_get_all_outcome_links_for_context_courses(self):
         """Integration test for the OutcomeGroupsAPI.get_all_outcome_links_for_context_courses method."""
         course_id = None  # Change me!!
 
-        r = self.client.get_all_outcome_links_for_context_courses(course_id, outcome_group_style=None, outcome_style=None)
+        r = self.client.get_all_outcome_links_for_context_courses(
+            course_id, outcome_group_style=None, outcome_style=None
+        )
 
     def test_show_outcome_group_global(self):
         """Integration test for the OutcomeGroupsAPI.show_outcome_group_global method."""
@@ -123,7 +127,9 @@ class TestOutcomeGroupsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         id = None  # Change me!!
 
-        r = self.client.list_linked_outcomes_accounts(account_id, id, outcome_style=None)
+        r = self.client.list_linked_outcomes_accounts(
+            account_id, id, outcome_style=None
+        )
 
     def test_list_linked_outcomes_courses(self):
         """Integration test for the OutcomeGroupsAPI.list_linked_outcomes_courses method."""
@@ -234,4 +240,3 @@ class TestOutcomeGroupsAPI(unittest.TestCase):
         """Integration test for the OutcomeGroupsAPI.import_outcome_group_courses method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

@@ -36,16 +36,26 @@ class ResultAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - line_item_id
         """
             ID
         """
         path["line_item_id"] = line_item_id
 
-
-        self.logger.debug("GET /api/lti/courses/{course_id}/line_items/{line_item_id}/results with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/courses/{course_id}/line_items/{line_item_id}/results".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/lti/courses/{course_id}/line_items/{line_item_id}/results with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/courses/{course_id}/line_items/{line_item_id}/results".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def show_result(self, course_id, id, line_item_id):
         """
@@ -63,13 +73,11 @@ class ResultAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - line_item_id
         """
             ID
         """
         path["line_item_id"] = line_item_id
-
 
         # REQUIRED - PATH - id
         """
@@ -77,15 +85,34 @@ class ResultAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/lti/courses/{course_id}/line_items/{line_item_id}/results/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/lti/courses/{course_id}/line_items/{line_item_id}/results/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/lti/courses/{course_id}/line_items/{line_item_id}/results/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/lti/courses/{course_id}/line_items/{line_item_id}/results/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Result(BaseModel):
     """Result Model."""
 
-    def __init__(self, id=None, userId=None, resultScore=None, resultMaximum=None, comment=None, scoreOf=None):
+    def __init__(
+        self,
+        id=None,
+        userId=None,
+        resultScore=None,
+        resultMaximum=None,
+        comment=None,
+        scoreOf=None,
+    ):
         """Init method for Result class."""
         self._id = id
         self._userId = userId
@@ -94,7 +121,7 @@ class Result(BaseModel):
         self._comment = comment
         self._scoreOf = scoreOf
 
-        self.logger = logging.getLogger('py3canvas.Result')
+        self.logger = logging.getLogger("py3canvas.Result")
 
     @property
     def id(self):
@@ -104,7 +131,9 @@ class Result(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -115,7 +144,9 @@ class Result(BaseModel):
     @userId.setter
     def userId(self, value):
         """Setter for userId property."""
-        self.logger.warn("Setting values on userId will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on userId will NOT update the remote Canvas instance."
+        )
         self._userId = value
 
     @property
@@ -126,7 +157,9 @@ class Result(BaseModel):
     @resultScore.setter
     def resultScore(self, value):
         """Setter for resultScore property."""
-        self.logger.warn("Setting values on resultScore will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on resultScore will NOT update the remote Canvas instance."
+        )
         self._resultScore = value
 
     @property
@@ -137,7 +170,9 @@ class Result(BaseModel):
     @resultMaximum.setter
     def resultMaximum(self, value):
         """Setter for resultMaximum property."""
-        self.logger.warn("Setting values on resultMaximum will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on resultMaximum will NOT update the remote Canvas instance."
+        )
         self._resultMaximum = value
 
     @property
@@ -148,7 +183,9 @@ class Result(BaseModel):
     @comment.setter
     def comment(self, value):
         """Setter for comment property."""
-        self.logger.warn("Setting values on comment will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on comment will NOT update the remote Canvas instance."
+        )
         self._comment = value
 
     @property
@@ -159,6 +196,7 @@ class Result(BaseModel):
     @scoreOf.setter
     def scoreOf(self, value):
         """Setter for scoreOf property."""
-        self.logger.warn("Setting values on scoreOf will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on scoreOf will NOT update the remote Canvas instance."
+        )
         self._scoreOf = value
-

@@ -56,4 +56,3 @@ class TestFavoritesAPI(unittest.TestCase):
         """Integration test for the FavoritesAPI.reset_group_favorites method."""
 
         r = self.client.reset_group_favorites()
-

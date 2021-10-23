@@ -47,13 +47,17 @@ class TestPagesAPI(unittest.TestCase):
         """Integration test for the PagesAPI.list_pages_courses method."""
         course_id = None  # Change me!!
 
-        r = self.client.list_pages_courses(course_id, order=None, published=None, search_term=None, sort=None)
+        r = self.client.list_pages_courses(
+            course_id, order=None, published=None, search_term=None, sort=None
+        )
 
     def test_list_pages_groups(self):
         """Integration test for the PagesAPI.list_pages_groups method."""
         group_id = None  # Change me!!
 
-        r = self.client.list_pages_groups(group_id, order=None, published=None, search_term=None, sort=None)
+        r = self.client.list_pages_groups(
+            group_id, order=None, published=None, search_term=None, sort=None
+        )
 
     def test_create_page_courses(self):
         """Integration test for the PagesAPI.create_page_courses method."""
@@ -137,7 +141,9 @@ class TestPagesAPI(unittest.TestCase):
         url = None  # Change me!!
         revision_id = None  # Change me!!
 
-        r = self.client.show_revision_courses_revision_id(course_id, revision_id, url, summary=None)
+        r = self.client.show_revision_courses_revision_id(
+            course_id, revision_id, url, summary=None
+        )
 
     def test_show_revision_groups_revision_id(self):
         """Integration test for the PagesAPI.show_revision_groups_revision_id method."""
@@ -145,7 +151,9 @@ class TestPagesAPI(unittest.TestCase):
         url = None  # Change me!!
         revision_id = None  # Change me!!
 
-        r = self.client.show_revision_groups_revision_id(group_id, revision_id, url, summary=None)
+        r = self.client.show_revision_groups_revision_id(
+            group_id, revision_id, url, summary=None
+        )
 
     def test_revert_to_revision_courses(self):
         """Integration test for the PagesAPI.revert_to_revision_courses method."""
@@ -156,4 +164,3 @@ class TestPagesAPI(unittest.TestCase):
         """Integration test for the PagesAPI.revert_to_revision_groups method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

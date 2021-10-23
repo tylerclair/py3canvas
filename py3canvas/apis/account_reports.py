@@ -32,11 +32,27 @@ class AccountReportsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/reports with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/reports".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
-        self.logger.debug("GET /api/v1/accounts/{account_id}/reports with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/reports".format(**path), data=data, params=params, no_data=True)
-
-    def start_report(self, account_id, report, parameters=None, parameters_course_id=None, parameters_users=None):
+    def start_report(
+        self,
+        account_id,
+        report,
+        parameters=None,
+        parameters_course_id=None,
+        parameters_users=None,
+    ):
         """
         Start a Report.
 
@@ -56,13 +72,11 @@ class AccountReportsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - report
         """
             ID
         """
         path["report"] = report
-
 
         # OPTIONAL - parameters
         """
@@ -74,7 +88,6 @@ class AccountReportsAPI(BaseCanvasAPI):
         if parameters is not None:
             data["parameters"] = parameters
 
-
         # OPTIONAL - parameters[course_id]
         """
             The id of the course to report on.
@@ -83,7 +96,6 @@ class AccountReportsAPI(BaseCanvasAPI):
         """
         if parameters_course_id is not None:
             data["parameters[course_id]"] = parameters_course_id
-
 
         # OPTIONAL - parameters[users]
         """
@@ -94,9 +106,18 @@ class AccountReportsAPI(BaseCanvasAPI):
         if parameters_users is not None:
             data["parameters[users]"] = parameters_users
 
-
-        self.logger.debug("POST /api/v1/accounts/{account_id}/reports/{report} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/accounts/{account_id}/reports/{report}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "POST /api/v1/accounts/{account_id}/reports/{report} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/accounts/{account_id}/reports/{report}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def index_of_reports(self, account_id, report):
         """
@@ -114,16 +135,24 @@ class AccountReportsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - report
         """
             ID
         """
         path["report"] = report
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/reports/{report} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/reports/{report}".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/reports/{report} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/reports/{report}".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def status_of_report(self, account_id, id, report):
         """
@@ -141,13 +170,11 @@ class AccountReportsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - report
         """
             ID
         """
         path["report"] = report
-
 
         # REQUIRED - PATH - id
         """
@@ -155,9 +182,18 @@ class AccountReportsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("GET /api/v1/accounts/{account_id}/reports/{report}/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/accounts/{account_id}/reports/{report}/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "GET /api/v1/accounts/{account_id}/reports/{report}/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/accounts/{account_id}/reports/{report}/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_report(self, account_id, id, report):
         """
@@ -175,13 +211,11 @@ class AccountReportsAPI(BaseCanvasAPI):
         """
         path["account_id"] = account_id
 
-
         # REQUIRED - PATH - report
         """
             ID
         """
         path["report"] = report
-
 
         # REQUIRED - PATH - id
         """
@@ -189,15 +223,37 @@ class AccountReportsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/accounts/{account_id}/reports/{report}/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/accounts/{account_id}/reports/{report}/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "DELETE /api/v1/accounts/{account_id}/reports/{report}/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/accounts/{account_id}/reports/{report}/{id}".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
 
 class Report(BaseModel):
     """Report Model."""
 
-    def __init__(self, id=None, report=None, file_url=None, attachment=None, status=None, created_at=None, started_at=None, ended_at=None, parameters=None, progress=None, current_line=None):
+    def __init__(
+        self,
+        id=None,
+        report=None,
+        file_url=None,
+        attachment=None,
+        status=None,
+        created_at=None,
+        started_at=None,
+        ended_at=None,
+        parameters=None,
+        progress=None,
+        current_line=None,
+    ):
         """Init method for Report class."""
         self._id = id
         self._report = report
@@ -211,7 +267,7 @@ class Report(BaseModel):
         self._progress = progress
         self._current_line = current_line
 
-        self.logger = logging.getLogger('py3canvas.Report')
+        self.logger = logging.getLogger("py3canvas.Report")
 
     @property
     def id(self):
@@ -221,7 +277,9 @@ class Report(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -232,7 +290,9 @@ class Report(BaseModel):
     @report.setter
     def report(self, value):
         """Setter for report property."""
-        self.logger.warn("Setting values on report will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on report will NOT update the remote Canvas instance."
+        )
         self._report = value
 
     @property
@@ -243,7 +303,9 @@ class Report(BaseModel):
     @file_url.setter
     def file_url(self, value):
         """Setter for file_url property."""
-        self.logger.warn("Setting values on file_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on file_url will NOT update the remote Canvas instance."
+        )
         self._file_url = value
 
     @property
@@ -254,7 +316,9 @@ class Report(BaseModel):
     @attachment.setter
     def attachment(self, value):
         """Setter for attachment property."""
-        self.logger.warn("Setting values on attachment will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on attachment will NOT update the remote Canvas instance."
+        )
         self._attachment = value
 
     @property
@@ -265,7 +329,9 @@ class Report(BaseModel):
     @status.setter
     def status(self, value):
         """Setter for status property."""
-        self.logger.warn("Setting values on status will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on status will NOT update the remote Canvas instance."
+        )
         self._status = value
 
     @property
@@ -276,7 +342,9 @@ class Report(BaseModel):
     @created_at.setter
     def created_at(self, value):
         """Setter for created_at property."""
-        self.logger.warn("Setting values on created_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on created_at will NOT update the remote Canvas instance."
+        )
         self._created_at = value
 
     @property
@@ -287,7 +355,9 @@ class Report(BaseModel):
     @started_at.setter
     def started_at(self, value):
         """Setter for started_at property."""
-        self.logger.warn("Setting values on started_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on started_at will NOT update the remote Canvas instance."
+        )
         self._started_at = value
 
     @property
@@ -298,7 +368,9 @@ class Report(BaseModel):
     @ended_at.setter
     def ended_at(self, value):
         """Setter for ended_at property."""
-        self.logger.warn("Setting values on ended_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on ended_at will NOT update the remote Canvas instance."
+        )
         self._ended_at = value
 
     @property
@@ -309,7 +381,9 @@ class Report(BaseModel):
     @parameters.setter
     def parameters(self, value):
         """Setter for parameters property."""
-        self.logger.warn("Setting values on parameters will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on parameters will NOT update the remote Canvas instance."
+        )
         self._parameters = value
 
     @property
@@ -320,7 +394,9 @@ class Report(BaseModel):
     @progress.setter
     def progress(self, value):
         """Setter for progress property."""
-        self.logger.warn("Setting values on progress will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on progress will NOT update the remote Canvas instance."
+        )
         self._progress = value
 
     @property
@@ -331,7 +407,9 @@ class Report(BaseModel):
     @current_line.setter
     def current_line(self, value):
         """Setter for current_line property."""
-        self.logger.warn("Setting values on current_line will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on current_line will NOT update the remote Canvas instance."
+        )
         self._current_line = value
 
 
@@ -339,7 +417,27 @@ class Reportparameters(BaseModel):
     """Reportparameters Model.
     The parameters returned will vary for each report."""
 
-    def __init__(self, enrollment_term_id=None, include_deleted=None, course_id=None, order=None, users=None, accounts=None, terms=None, courses=None, sections=None, enrollments=None, groups=None, xlist=None, sis_terms_csv=None, sis_accounts_csv=None, include_enrollment_state=None, enrollment_state=None, start_at=None, end_at=None):
+    def __init__(
+        self,
+        enrollment_term_id=None,
+        include_deleted=None,
+        course_id=None,
+        order=None,
+        users=None,
+        accounts=None,
+        terms=None,
+        courses=None,
+        sections=None,
+        enrollments=None,
+        groups=None,
+        xlist=None,
+        sis_terms_csv=None,
+        sis_accounts_csv=None,
+        include_enrollment_state=None,
+        enrollment_state=None,
+        start_at=None,
+        end_at=None,
+    ):
         """Init method for Reportparameters class."""
         self._enrollment_term_id = enrollment_term_id
         self._include_deleted = include_deleted
@@ -360,7 +458,7 @@ class Reportparameters(BaseModel):
         self._start_at = start_at
         self._end_at = end_at
 
-        self.logger = logging.getLogger('py3canvas.Reportparameters')
+        self.logger = logging.getLogger("py3canvas.Reportparameters")
 
     @property
     def enrollment_term_id(self):
@@ -370,7 +468,9 @@ class Reportparameters(BaseModel):
     @enrollment_term_id.setter
     def enrollment_term_id(self, value):
         """Setter for enrollment_term_id property."""
-        self.logger.warn("Setting values on enrollment_term_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on enrollment_term_id will NOT update the remote Canvas instance."
+        )
         self._enrollment_term_id = value
 
     @property
@@ -381,7 +481,9 @@ class Reportparameters(BaseModel):
     @include_deleted.setter
     def include_deleted(self, value):
         """Setter for include_deleted property."""
-        self.logger.warn("Setting values on include_deleted will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on include_deleted will NOT update the remote Canvas instance."
+        )
         self._include_deleted = value
 
     @property
@@ -392,7 +494,9 @@ class Reportparameters(BaseModel):
     @course_id.setter
     def course_id(self, value):
         """Setter for course_id property."""
-        self.logger.warn("Setting values on course_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on course_id will NOT update the remote Canvas instance."
+        )
         self._course_id = value
 
     @property
@@ -403,7 +507,9 @@ class Reportparameters(BaseModel):
     @order.setter
     def order(self, value):
         """Setter for order property."""
-        self.logger.warn("Setting values on order will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on order will NOT update the remote Canvas instance."
+        )
         self._order = value
 
     @property
@@ -414,7 +520,9 @@ class Reportparameters(BaseModel):
     @users.setter
     def users(self, value):
         """Setter for users property."""
-        self.logger.warn("Setting values on users will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on users will NOT update the remote Canvas instance."
+        )
         self._users = value
 
     @property
@@ -425,7 +533,9 @@ class Reportparameters(BaseModel):
     @accounts.setter
     def accounts(self, value):
         """Setter for accounts property."""
-        self.logger.warn("Setting values on accounts will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on accounts will NOT update the remote Canvas instance."
+        )
         self._accounts = value
 
     @property
@@ -436,7 +546,9 @@ class Reportparameters(BaseModel):
     @terms.setter
     def terms(self, value):
         """Setter for terms property."""
-        self.logger.warn("Setting values on terms will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on terms will NOT update the remote Canvas instance."
+        )
         self._terms = value
 
     @property
@@ -447,7 +559,9 @@ class Reportparameters(BaseModel):
     @courses.setter
     def courses(self, value):
         """Setter for courses property."""
-        self.logger.warn("Setting values on courses will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on courses will NOT update the remote Canvas instance."
+        )
         self._courses = value
 
     @property
@@ -458,7 +572,9 @@ class Reportparameters(BaseModel):
     @sections.setter
     def sections(self, value):
         """Setter for sections property."""
-        self.logger.warn("Setting values on sections will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sections will NOT update the remote Canvas instance."
+        )
         self._sections = value
 
     @property
@@ -469,7 +585,9 @@ class Reportparameters(BaseModel):
     @enrollments.setter
     def enrollments(self, value):
         """Setter for enrollments property."""
-        self.logger.warn("Setting values on enrollments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on enrollments will NOT update the remote Canvas instance."
+        )
         self._enrollments = value
 
     @property
@@ -480,7 +598,9 @@ class Reportparameters(BaseModel):
     @groups.setter
     def groups(self, value):
         """Setter for groups property."""
-        self.logger.warn("Setting values on groups will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on groups will NOT update the remote Canvas instance."
+        )
         self._groups = value
 
     @property
@@ -491,7 +611,9 @@ class Reportparameters(BaseModel):
     @xlist.setter
     def xlist(self, value):
         """Setter for xlist property."""
-        self.logger.warn("Setting values on xlist will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on xlist will NOT update the remote Canvas instance."
+        )
         self._xlist = value
 
     @property
@@ -502,7 +624,9 @@ class Reportparameters(BaseModel):
     @sis_terms_csv.setter
     def sis_terms_csv(self, value):
         """Setter for sis_terms_csv property."""
-        self.logger.warn("Setting values on sis_terms_csv will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_terms_csv will NOT update the remote Canvas instance."
+        )
         self._sis_terms_csv = value
 
     @property
@@ -513,7 +637,9 @@ class Reportparameters(BaseModel):
     @sis_accounts_csv.setter
     def sis_accounts_csv(self, value):
         """Setter for sis_accounts_csv property."""
-        self.logger.warn("Setting values on sis_accounts_csv will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on sis_accounts_csv will NOT update the remote Canvas instance."
+        )
         self._sis_accounts_csv = value
 
     @property
@@ -524,7 +650,9 @@ class Reportparameters(BaseModel):
     @include_enrollment_state.setter
     def include_enrollment_state(self, value):
         """Setter for include_enrollment_state property."""
-        self.logger.warn("Setting values on include_enrollment_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on include_enrollment_state will NOT update the remote Canvas instance."
+        )
         self._include_enrollment_state = value
 
     @property
@@ -535,7 +663,9 @@ class Reportparameters(BaseModel):
     @enrollment_state.setter
     def enrollment_state(self, value):
         """Setter for enrollment_state property."""
-        self.logger.warn("Setting values on enrollment_state will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on enrollment_state will NOT update the remote Canvas instance."
+        )
         self._enrollment_state = value
 
     @property
@@ -546,7 +676,9 @@ class Reportparameters(BaseModel):
     @start_at.setter
     def start_at(self, value):
         """Setter for start_at property."""
-        self.logger.warn("Setting values on start_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on start_at will NOT update the remote Canvas instance."
+        )
         self._start_at = value
 
     @property
@@ -557,6 +689,7 @@ class Reportparameters(BaseModel):
     @end_at.setter
     def end_at(self, value):
         """Setter for end_at property."""
-        self.logger.warn("Setting values on end_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on end_at will NOT update the remote Canvas instance."
+        )
         self._end_at = value
-

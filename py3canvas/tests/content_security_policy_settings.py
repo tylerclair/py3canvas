@@ -5,14 +5,18 @@ This is a testing template for the generated ContentSecurityPolicySettingsAPI Cl
 import unittest
 import requests
 import secrets
-from py3canvas.apis.content_security_policy_settings import ContentSecurityPolicySettingsAPI
+from py3canvas.apis.content_security_policy_settings import (
+    ContentSecurityPolicySettingsAPI,
+)
 
 
 class TestContentSecurityPolicySettingsAPI(unittest.TestCase):
     """Tests for the ContentSecurityPolicySettingsAPI."""
 
     def setUp(self):
-        self.client = ContentSecurityPolicySettingsAPI(secrets.instance_address, secrets.access_token)
+        self.client = ContentSecurityPolicySettingsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_get_current_settings_for_account_or_course_courses(self):
         """Integration test for the ContentSecurityPolicySettingsAPI.get_current_settings_for_account_or_course_courses method."""
@@ -63,4 +67,3 @@ class TestContentSecurityPolicySettingsAPI(unittest.TestCase):
         domain = None  # Change me!!
 
         r = self.client.remove_domain_from_account(account_id, domain)
-

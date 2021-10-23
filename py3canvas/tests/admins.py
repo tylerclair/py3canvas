@@ -25,11 +25,12 @@ class TestAdminsAPI(unittest.TestCase):
         account_id = None  # Change me!!
         user_id = None  # Change me!!
 
-        r = self.client.remove_account_admin(account_id, user_id, role=None, role_id=None)
+        r = self.client.remove_account_admin(
+            account_id, user_id, role=None, role_id=None
+        )
 
     def test_list_account_admins(self):
         """Integration test for the AdminsAPI.list_account_admins method."""
         account_id = None  # Change me!!
 
         r = self.client.list_account_admins(account_id, user_id=None)
-

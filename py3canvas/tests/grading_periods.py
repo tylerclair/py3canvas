@@ -52,4 +52,3 @@ class TestGradingPeriodsAPI(unittest.TestCase):
         id = None  # Change me!!
 
         r = self.client.delete_grading_period_accounts(account_id, id)
-

@@ -27,7 +27,9 @@ class TestLiveAssessmentsAPI(unittest.TestCase):
         course_id = None  # Change me!!
         assessment_id = None  # Change me!!
 
-        r = self.client.list_live_assessment_results(assessment_id, course_id, user_id=None)
+        r = self.client.list_live_assessment_results(
+            assessment_id, course_id, user_id=None
+        )
 
     def test_create_or_find_live_assessment(self):
         """Integration test for the LiveAssessmentsAPI.create_or_find_live_assessment method."""
@@ -39,4 +41,3 @@ class TestLiveAssessmentsAPI(unittest.TestCase):
         course_id = None  # Change me!!
 
         r = self.client.list_live_assessments(course_id)
-

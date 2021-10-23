@@ -27,4 +27,3 @@ class TestPollSubmissionsAPI(unittest.TestCase):
         """Integration test for the PollSubmissionsAPI.create_single_poll_submission method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

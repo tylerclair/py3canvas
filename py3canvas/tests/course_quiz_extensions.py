@@ -13,10 +13,11 @@ class TestCourseQuizExtensionsAPI(unittest.TestCase):
     """Tests for the CourseQuizExtensionsAPI."""
 
     def setUp(self):
-        self.client = CourseQuizExtensionsAPI(secrets.instance_address, secrets.access_token)
+        self.client = CourseQuizExtensionsAPI(
+            secrets.instance_address, secrets.access_token
+        )
 
     def test_set_extensions_for_student_quiz_submissions(self):
         """Integration test for the CourseQuizExtensionsAPI.set_extensions_for_student_quiz_submissions method."""
         # This method utilises the POST request method and will make changes to the Canvas instance. This needs consideration.
         pass
-

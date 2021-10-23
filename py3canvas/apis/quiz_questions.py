@@ -16,7 +16,9 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         super(QuizQuestionsAPI, self).__init__(*args, **kwargs)
         self.logger = logging.getLogger("py3canvas.QuizQuestionsAPI")
 
-    def list_questions_in_quiz_or_submission(self, course_id, quiz_id, quiz_submission_attempt=None, quiz_submission_id=None):
+    def list_questions_in_quiz_or_submission(
+        self, course_id, quiz_id, quiz_submission_attempt=None, quiz_submission_id=None
+    ):
         """
         List questions in a quiz or a submission.
 
@@ -32,13 +34,11 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # OPTIONAL - quiz_submission_id
         """
@@ -52,7 +52,6 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if quiz_submission_id is not None:
             params["quiz_submission_id"] = quiz_submission_id
 
-
         # OPTIONAL - quiz_submission_attempt
         """
             The attempt of the submission you want the questions for.
@@ -60,9 +59,18 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if quiz_submission_attempt is not None:
             params["quiz_submission_attempt"] = quiz_submission_attempt
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/questions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions".format(**path), data=data, params=params, all_pages=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/questions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions".format(**path),
+            data=data,
+            params=params,
+            all_pages=True,
+        )
 
     def get_single_quiz_question(self, course_id, id, quiz_id):
         """
@@ -80,13 +88,11 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # REQUIRED - PATH - id
         """
@@ -94,11 +100,37 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id}".format(**path), data=data, params=params, single_item=True)
-
-    def create_single_quiz_question(self, course_id, quiz_id, question_answers=None, question_correct_comments=None, question_incorrect_comments=None, question_neutral_comments=None, question_points_possible=None, question_position=None, question_question_name=None, question_question_text=None, question_question_type=None, question_quiz_group_id=None, question_text_after_answers=None):
+    def create_single_quiz_question(
+        self,
+        course_id,
+        quiz_id,
+        question_answers=None,
+        question_correct_comments=None,
+        question_incorrect_comments=None,
+        question_neutral_comments=None,
+        question_points_possible=None,
+        question_position=None,
+        question_question_name=None,
+        question_question_text=None,
+        question_question_type=None,
+        question_quiz_group_id=None,
+        question_text_after_answers=None,
+    ):
         """
         Create a single quiz question.
 
@@ -114,13 +146,11 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # OPTIONAL - question[question_name]
         """
@@ -129,14 +159,12 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_question_name is not None:
             data["question[question_name]"] = question_question_name
 
-
         # OPTIONAL - question[question_text]
         """
             The text of the question.
         """
         if question_question_text is not None:
             data["question[question_text]"] = question_question_text
-
 
         # OPTIONAL - question[quiz_group_id]
         """
@@ -145,15 +173,29 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_quiz_group_id is not None:
             data["question[quiz_group_id]"] = question_quiz_group_id
 
-
         # OPTIONAL - question[question_type]
         """
             The type of question. Multiple optional fields depend upon the type of question to be used.
         """
         if question_question_type is not None:
-            self._validate_enum(question_question_type, ["calculated_question", "essay_question", "file_upload_question", "fill_in_multiple_blanks_question", "matching_question", "multiple_answers_question", "multiple_choice_question", "multiple_dropdowns_question", "numerical_question", "short_answer_question", "text_only_question", "true_false_question"])
+            self._validate_enum(
+                question_question_type,
+                [
+                    "calculated_question",
+                    "essay_question",
+                    "file_upload_question",
+                    "fill_in_multiple_blanks_question",
+                    "matching_question",
+                    "multiple_answers_question",
+                    "multiple_choice_question",
+                    "multiple_dropdowns_question",
+                    "numerical_question",
+                    "short_answer_question",
+                    "text_only_question",
+                    "true_false_question",
+                ],
+            )
             data["question[question_type]"] = question_question_type
-
 
         # OPTIONAL - question[position]
         """
@@ -162,14 +204,12 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_position is not None:
             data["question[position]"] = question_position
 
-
         # OPTIONAL - question[points_possible]
         """
             The maximum amount of points received for answering this question correctly.
         """
         if question_points_possible is not None:
             data["question[points_possible]"] = question_points_possible
-
 
         # OPTIONAL - question[correct_comments]
         """
@@ -178,14 +218,12 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_correct_comments is not None:
             data["question[correct_comments]"] = question_correct_comments
 
-
         # OPTIONAL - question[incorrect_comments]
         """
             The comment to display if the student answers incorrectly.
         """
         if question_incorrect_comments is not None:
             data["question[incorrect_comments]"] = question_incorrect_comments
-
 
         # OPTIONAL - question[neutral_comments]
         """
@@ -194,14 +232,12 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_neutral_comments is not None:
             data["question[neutral_comments]"] = question_neutral_comments
 
-
         # OPTIONAL - question[text_after_answers]
         """
             no description
         """
         if question_text_after_answers is not None:
             data["question[text_after_answers]"] = question_text_after_answers
-
 
         # OPTIONAL - question[answers]
         """
@@ -210,11 +246,36 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_answers is not None:
             data["question[answers]"] = question_answers
 
+        self.logger.debug(
+            "POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/questions with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "POST",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions".format(**path),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
-        self.logger.debug("POST /api/v1/courses/{course_id}/quizzes/{quiz_id}/questions with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("POST", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions".format(**path), data=data, params=params, single_item=True)
-
-    def update_existing_quiz_question(self, course_id, id, quiz_id, question_answers=None, question_correct_comments=None, question_incorrect_comments=None, question_neutral_comments=None, question_points_possible=None, question_position=None, question_question_name=None, question_question_text=None, question_question_type=None, question_quiz_group_id=None, question_text_after_answers=None):
+    def update_existing_quiz_question(
+        self,
+        course_id,
+        id,
+        quiz_id,
+        question_answers=None,
+        question_correct_comments=None,
+        question_incorrect_comments=None,
+        question_neutral_comments=None,
+        question_points_possible=None,
+        question_position=None,
+        question_question_name=None,
+        question_question_text=None,
+        question_question_type=None,
+        question_quiz_group_id=None,
+        question_text_after_answers=None,
+    ):
         """
         Update an existing quiz question.
 
@@ -230,20 +291,17 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             The associated quiz's unique identifier.
         """
         path["quiz_id"] = quiz_id
 
-
         # REQUIRED - PATH - id
         """
             The quiz question's unique identifier.
         """
         path["id"] = id
-
 
         # OPTIONAL - question[question_name]
         """
@@ -252,14 +310,12 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_question_name is not None:
             data["question[question_name]"] = question_question_name
 
-
         # OPTIONAL - question[question_text]
         """
             The text of the question.
         """
         if question_question_text is not None:
             data["question[question_text]"] = question_question_text
-
 
         # OPTIONAL - question[quiz_group_id]
         """
@@ -268,15 +324,29 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_quiz_group_id is not None:
             data["question[quiz_group_id]"] = question_quiz_group_id
 
-
         # OPTIONAL - question[question_type]
         """
             The type of question. Multiple optional fields depend upon the type of question to be used.
         """
         if question_question_type is not None:
-            self._validate_enum(question_question_type, ["calculated_question", "essay_question", "file_upload_question", "fill_in_multiple_blanks_question", "matching_question", "multiple_answers_question", "multiple_choice_question", "multiple_dropdowns_question", "numerical_question", "short_answer_question", "text_only_question", "true_false_question"])
+            self._validate_enum(
+                question_question_type,
+                [
+                    "calculated_question",
+                    "essay_question",
+                    "file_upload_question",
+                    "fill_in_multiple_blanks_question",
+                    "matching_question",
+                    "multiple_answers_question",
+                    "multiple_choice_question",
+                    "multiple_dropdowns_question",
+                    "numerical_question",
+                    "short_answer_question",
+                    "text_only_question",
+                    "true_false_question",
+                ],
+            )
             data["question[question_type]"] = question_question_type
-
 
         # OPTIONAL - question[position]
         """
@@ -285,14 +355,12 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_position is not None:
             data["question[position]"] = question_position
 
-
         # OPTIONAL - question[points_possible]
         """
             The maximum amount of points received for answering this question correctly.
         """
         if question_points_possible is not None:
             data["question[points_possible]"] = question_points_possible
-
 
         # OPTIONAL - question[correct_comments]
         """
@@ -301,14 +369,12 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_correct_comments is not None:
             data["question[correct_comments]"] = question_correct_comments
 
-
         # OPTIONAL - question[incorrect_comments]
         """
             The comment to display if the student answers incorrectly.
         """
         if question_incorrect_comments is not None:
             data["question[incorrect_comments]"] = question_incorrect_comments
-
 
         # OPTIONAL - question[neutral_comments]
         """
@@ -317,14 +383,12 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_neutral_comments is not None:
             data["question[neutral_comments]"] = question_neutral_comments
 
-
         # OPTIONAL - question[text_after_answers]
         """
             no description
         """
         if question_text_after_answers is not None:
             data["question[text_after_answers]"] = question_text_after_answers
-
 
         # OPTIONAL - question[answers]
         """
@@ -333,9 +397,20 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         if question_answers is not None:
             data["question[answers]"] = question_answers
 
-
-        self.logger.debug("PUT /api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("PUT", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id}".format(**path), data=data, params=params, single_item=True)
+        self.logger.debug(
+            "PUT /api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "PUT",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            single_item=True,
+        )
 
     def delete_quiz_question(self, course_id, id, quiz_id):
         """
@@ -353,13 +428,11 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             The associated quiz's unique identifier
         """
         path["quiz_id"] = quiz_id
-
 
         # REQUIRED - PATH - id
         """
@@ -367,15 +440,39 @@ class QuizQuestionsAPI(BaseCanvasAPI):
         """
         path["id"] = id
 
-
-        self.logger.debug("DELETE /api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id} with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("DELETE", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id}".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "DELETE /api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id} with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "DELETE",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/questions/{id}".format(
+                **path
+            ),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Quizquestion(BaseModel):
     """Quizquestion Model."""
 
-    def __init__(self, id, quiz_id, position=None, question_name=None, question_type=None, question_text=None, points_possible=None, correct_comments=None, incorrect_comments=None, neutral_comments=None, answers=None):
+    def __init__(
+        self,
+        id,
+        quiz_id,
+        position=None,
+        question_name=None,
+        question_type=None,
+        question_text=None,
+        points_possible=None,
+        correct_comments=None,
+        incorrect_comments=None,
+        neutral_comments=None,
+        answers=None,
+    ):
         """Init method for Quizquestion class."""
         self._id = id
         self._quiz_id = quiz_id
@@ -389,7 +486,7 @@ class Quizquestion(BaseModel):
         self._neutral_comments = neutral_comments
         self._answers = answers
 
-        self.logger = logging.getLogger('py3canvas.Quizquestion')
+        self.logger = logging.getLogger("py3canvas.Quizquestion")
 
     @property
     def id(self):
@@ -399,7 +496,9 @@ class Quizquestion(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -410,7 +509,9 @@ class Quizquestion(BaseModel):
     @quiz_id.setter
     def quiz_id(self, value):
         """Setter for quiz_id property."""
-        self.logger.warn("Setting values on quiz_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on quiz_id will NOT update the remote Canvas instance."
+        )
         self._quiz_id = value
 
     @property
@@ -421,7 +522,9 @@ class Quizquestion(BaseModel):
     @position.setter
     def position(self, value):
         """Setter for position property."""
-        self.logger.warn("Setting values on position will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on position will NOT update the remote Canvas instance."
+        )
         self._position = value
 
     @property
@@ -432,7 +535,9 @@ class Quizquestion(BaseModel):
     @question_name.setter
     def question_name(self, value):
         """Setter for question_name property."""
-        self.logger.warn("Setting values on question_name will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on question_name will NOT update the remote Canvas instance."
+        )
         self._question_name = value
 
     @property
@@ -443,7 +548,9 @@ class Quizquestion(BaseModel):
     @question_type.setter
     def question_type(self, value):
         """Setter for question_type property."""
-        self.logger.warn("Setting values on question_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on question_type will NOT update the remote Canvas instance."
+        )
         self._question_type = value
 
     @property
@@ -454,7 +561,9 @@ class Quizquestion(BaseModel):
     @question_text.setter
     def question_text(self, value):
         """Setter for question_text property."""
-        self.logger.warn("Setting values on question_text will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on question_text will NOT update the remote Canvas instance."
+        )
         self._question_text = value
 
     @property
@@ -465,7 +574,9 @@ class Quizquestion(BaseModel):
     @points_possible.setter
     def points_possible(self, value):
         """Setter for points_possible property."""
-        self.logger.warn("Setting values on points_possible will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on points_possible will NOT update the remote Canvas instance."
+        )
         self._points_possible = value
 
     @property
@@ -476,7 +587,9 @@ class Quizquestion(BaseModel):
     @correct_comments.setter
     def correct_comments(self, value):
         """Setter for correct_comments property."""
-        self.logger.warn("Setting values on correct_comments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on correct_comments will NOT update the remote Canvas instance."
+        )
         self._correct_comments = value
 
     @property
@@ -487,7 +600,9 @@ class Quizquestion(BaseModel):
     @incorrect_comments.setter
     def incorrect_comments(self, value):
         """Setter for incorrect_comments property."""
-        self.logger.warn("Setting values on incorrect_comments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on incorrect_comments will NOT update the remote Canvas instance."
+        )
         self._incorrect_comments = value
 
     @property
@@ -498,7 +613,9 @@ class Quizquestion(BaseModel):
     @neutral_comments.setter
     def neutral_comments(self, value):
         """Setter for neutral_comments property."""
-        self.logger.warn("Setting values on neutral_comments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on neutral_comments will NOT update the remote Canvas instance."
+        )
         self._neutral_comments = value
 
     @property
@@ -509,14 +626,34 @@ class Quizquestion(BaseModel):
     @answers.setter
     def answers(self, value):
         """Setter for answers property."""
-        self.logger.warn("Setting values on answers will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on answers will NOT update the remote Canvas instance."
+        )
         self._answers = value
 
 
 class Answer(BaseModel):
     """Answer Model."""
 
-    def __init__(self, answer_text, answer_weight, id=None, answer_comments=None, text_after_answers=None, answer_match_left=None, answer_match_right=None, matching_answer_incorrect_matches=None, numerical_answer_type=None, exact=None, margin=None, approximate=None, precision=None, start=None, end=None, blank_id=None):
+    def __init__(
+        self,
+        answer_text,
+        answer_weight,
+        id=None,
+        answer_comments=None,
+        text_after_answers=None,
+        answer_match_left=None,
+        answer_match_right=None,
+        matching_answer_incorrect_matches=None,
+        numerical_answer_type=None,
+        exact=None,
+        margin=None,
+        approximate=None,
+        precision=None,
+        start=None,
+        end=None,
+        blank_id=None,
+    ):
         """Init method for Answer class."""
         self._id = id
         self._answer_text = answer_text
@@ -535,7 +672,7 @@ class Answer(BaseModel):
         self._end = end
         self._blank_id = blank_id
 
-        self.logger = logging.getLogger('py3canvas.Answer')
+        self.logger = logging.getLogger("py3canvas.Answer")
 
     @property
     def id(self):
@@ -545,7 +682,9 @@ class Answer(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -556,7 +695,9 @@ class Answer(BaseModel):
     @answer_text.setter
     def answer_text(self, value):
         """Setter for answer_text property."""
-        self.logger.warn("Setting values on answer_text will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on answer_text will NOT update the remote Canvas instance."
+        )
         self._answer_text = value
 
     @property
@@ -567,7 +708,9 @@ class Answer(BaseModel):
     @answer_weight.setter
     def answer_weight(self, value):
         """Setter for answer_weight property."""
-        self.logger.warn("Setting values on answer_weight will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on answer_weight will NOT update the remote Canvas instance."
+        )
         self._answer_weight = value
 
     @property
@@ -578,7 +721,9 @@ class Answer(BaseModel):
     @answer_comments.setter
     def answer_comments(self, value):
         """Setter for answer_comments property."""
-        self.logger.warn("Setting values on answer_comments will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on answer_comments will NOT update the remote Canvas instance."
+        )
         self._answer_comments = value
 
     @property
@@ -589,7 +734,9 @@ class Answer(BaseModel):
     @text_after_answers.setter
     def text_after_answers(self, value):
         """Setter for text_after_answers property."""
-        self.logger.warn("Setting values on text_after_answers will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on text_after_answers will NOT update the remote Canvas instance."
+        )
         self._text_after_answers = value
 
     @property
@@ -600,7 +747,9 @@ class Answer(BaseModel):
     @answer_match_left.setter
     def answer_match_left(self, value):
         """Setter for answer_match_left property."""
-        self.logger.warn("Setting values on answer_match_left will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on answer_match_left will NOT update the remote Canvas instance."
+        )
         self._answer_match_left = value
 
     @property
@@ -611,19 +760,23 @@ class Answer(BaseModel):
     @answer_match_right.setter
     def answer_match_right(self, value):
         """Setter for answer_match_right property."""
-        self.logger.warn("Setting values on answer_match_right will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on answer_match_right will NOT update the remote Canvas instance."
+        )
         self._answer_match_right = value
 
     @property
     def matching_answer_incorrect_matches(self):
         """Used in matching questions. A list of distractors, delimited by new lines (
-) that will be seeded with all the answer_match_right values."""
+        ) that will be seeded with all the answer_match_right values."""
         return self._matching_answer_incorrect_matches
 
     @matching_answer_incorrect_matches.setter
     def matching_answer_incorrect_matches(self, value):
         """Setter for matching_answer_incorrect_matches property."""
-        self.logger.warn("Setting values on matching_answer_incorrect_matches will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on matching_answer_incorrect_matches will NOT update the remote Canvas instance."
+        )
         self._matching_answer_incorrect_matches = value
 
     @property
@@ -634,7 +787,9 @@ class Answer(BaseModel):
     @numerical_answer_type.setter
     def numerical_answer_type(self, value):
         """Setter for numerical_answer_type property."""
-        self.logger.warn("Setting values on numerical_answer_type will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on numerical_answer_type will NOT update the remote Canvas instance."
+        )
         self._numerical_answer_type = value
 
     @property
@@ -645,7 +800,9 @@ class Answer(BaseModel):
     @exact.setter
     def exact(self, value):
         """Setter for exact property."""
-        self.logger.warn("Setting values on exact will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on exact will NOT update the remote Canvas instance."
+        )
         self._exact = value
 
     @property
@@ -656,7 +813,9 @@ class Answer(BaseModel):
     @margin.setter
     def margin(self, value):
         """Setter for margin property."""
-        self.logger.warn("Setting values on margin will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on margin will NOT update the remote Canvas instance."
+        )
         self._margin = value
 
     @property
@@ -667,7 +826,9 @@ class Answer(BaseModel):
     @approximate.setter
     def approximate(self, value):
         """Setter for approximate property."""
-        self.logger.warn("Setting values on approximate will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on approximate will NOT update the remote Canvas instance."
+        )
         self._approximate = value
 
     @property
@@ -678,7 +839,9 @@ class Answer(BaseModel):
     @precision.setter
     def precision(self, value):
         """Setter for precision property."""
-        self.logger.warn("Setting values on precision will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on precision will NOT update the remote Canvas instance."
+        )
         self._precision = value
 
     @property
@@ -689,7 +852,9 @@ class Answer(BaseModel):
     @start.setter
     def start(self, value):
         """Setter for start property."""
-        self.logger.warn("Setting values on start will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on start will NOT update the remote Canvas instance."
+        )
         self._start = value
 
     @property
@@ -700,7 +865,9 @@ class Answer(BaseModel):
     @end.setter
     def end(self, value):
         """Setter for end property."""
-        self.logger.warn("Setting values on end will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on end will NOT update the remote Canvas instance."
+        )
         self._end = value
 
     @property
@@ -711,6 +878,7 @@ class Answer(BaseModel):
     @blank_id.setter
     def blank_id(self, value):
         """Setter for blank_id property."""
-        self.logger.warn("Setting values on blank_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on blank_id will NOT update the remote Canvas instance."
+        )
         self._blank_id = value
-

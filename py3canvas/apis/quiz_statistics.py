@@ -23,7 +23,7 @@ class QuizStatisticsAPI(BaseCanvasAPI):
         This endpoint provides statistics for all quiz versions, or for a specific
         quiz version, in which case the output is guaranteed to represent the
         _latest_ and most current version of the quiz.
-        
+
         <b>200 OK</b> response code is returned if the request was successful.
         """
         path = {}
@@ -36,13 +36,11 @@ class QuizStatisticsAPI(BaseCanvasAPI):
         """
         path["course_id"] = course_id
 
-
         # REQUIRED - PATH - quiz_id
         """
             ID
         """
         path["quiz_id"] = quiz_id
-
 
         # OPTIONAL - all_versions
         """
@@ -51,15 +49,36 @@ class QuizStatisticsAPI(BaseCanvasAPI):
         if all_versions is not None:
             params["all_versions"] = all_versions
 
-
-        self.logger.debug("GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/statistics with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/courses/{course_id}/quizzes/{quiz_id}/statistics".format(**path), data=data, params=params, no_data=True)
+        self.logger.debug(
+            "GET /api/v1/courses/{course_id}/quizzes/{quiz_id}/statistics with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/courses/{course_id}/quizzes/{quiz_id}/statistics".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
 
 
 class Quizstatistics(BaseModel):
     """Quizstatistics Model."""
 
-    def __init__(self, id, quiz_id, multiple_attempts_exist=None, includes_all_versions=None, generated_at=None, url=None, html_url=None, question_statistics=None, submission_statistics=None, links=None):
+    def __init__(
+        self,
+        id,
+        quiz_id,
+        multiple_attempts_exist=None,
+        includes_all_versions=None,
+        generated_at=None,
+        url=None,
+        html_url=None,
+        question_statistics=None,
+        submission_statistics=None,
+        links=None,
+    ):
         """Init method for Quizstatistics class."""
         self._id = id
         self._quiz_id = quiz_id
@@ -72,7 +91,7 @@ class Quizstatistics(BaseModel):
         self._submission_statistics = submission_statistics
         self._links = links
 
-        self.logger = logging.getLogger('py3canvas.Quizstatistics')
+        self.logger = logging.getLogger("py3canvas.Quizstatistics")
 
     @property
     def id(self):
@@ -82,19 +101,23 @@ class Quizstatistics(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
     def quiz_id(self):
-        """The ID of the Quiz the statistics report is for. 
-NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS."""
+        """The ID of the Quiz the statistics report is for.
+        NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS."""
         return self._quiz_id
 
     @quiz_id.setter
     def quiz_id(self, value):
         """Setter for quiz_id property."""
-        self.logger.warn("Setting values on quiz_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on quiz_id will NOT update the remote Canvas instance."
+        )
         self._quiz_id = value
 
     @property
@@ -105,7 +128,9 @@ NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS."""
     @multiple_attempts_exist.setter
     def multiple_attempts_exist(self, value):
         """Setter for multiple_attempts_exist property."""
-        self.logger.warn("Setting values on multiple_attempts_exist will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on multiple_attempts_exist will NOT update the remote Canvas instance."
+        )
         self._multiple_attempts_exist = value
 
     @property
@@ -116,7 +141,9 @@ NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS."""
     @includes_all_versions.setter
     def includes_all_versions(self, value):
         """Setter for includes_all_versions property."""
-        self.logger.warn("Setting values on includes_all_versions will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on includes_all_versions will NOT update the remote Canvas instance."
+        )
         self._includes_all_versions = value
 
     @property
@@ -127,7 +154,9 @@ NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS."""
     @generated_at.setter
     def generated_at(self, value):
         """Setter for generated_at property."""
-        self.logger.warn("Setting values on generated_at will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on generated_at will NOT update the remote Canvas instance."
+        )
         self._generated_at = value
 
     @property
@@ -138,7 +167,9 @@ NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS."""
     @url.setter
     def url(self, value):
         """Setter for url property."""
-        self.logger.warn("Setting values on url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on url will NOT update the remote Canvas instance."
+        )
         self._url = value
 
     @property
@@ -149,7 +180,9 @@ NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS."""
     @html_url.setter
     def html_url(self, value):
         """Setter for html_url property."""
-        self.logger.warn("Setting values on html_url will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on html_url will NOT update the remote Canvas instance."
+        )
         self._html_url = value
 
     @property
@@ -160,7 +193,9 @@ NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS."""
     @question_statistics.setter
     def question_statistics(self, value):
         """Setter for question_statistics property."""
-        self.logger.warn("Setting values on question_statistics will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on question_statistics will NOT update the remote Canvas instance."
+        )
         self._question_statistics = value
 
     @property
@@ -171,19 +206,23 @@ NOTE: AVAILABLE ONLY IN NON-JSON-API REQUESTS."""
     @submission_statistics.setter
     def submission_statistics(self, value):
         """Setter for submission_statistics property."""
-        self.logger.warn("Setting values on submission_statistics will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on submission_statistics will NOT update the remote Canvas instance."
+        )
         self._submission_statistics = value
 
     @property
     def links(self):
-        """JSON-API construct that contains links to media related to this quiz statistics object. 
-NOTE: AVAILABLE ONLY IN JSON-API REQUESTS."""
+        """JSON-API construct that contains links to media related to this quiz statistics object.
+        NOTE: AVAILABLE ONLY IN JSON-API REQUESTS."""
         return self._links
 
     @links.setter
     def links(self, value):
         """Setter for links property."""
-        self.logger.warn("Setting values on links will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on links will NOT update the remote Canvas instance."
+        )
         self._links = value
 
 
@@ -195,7 +234,7 @@ class Quizstatisticslinks(BaseModel):
         """Init method for Quizstatisticslinks class."""
         self._quiz = quiz
 
-        self.logger = logging.getLogger('py3canvas.Quizstatisticslinks')
+        self.logger = logging.getLogger("py3canvas.Quizstatisticslinks")
 
     @property
     def quiz(self):
@@ -205,7 +244,9 @@ class Quizstatisticslinks(BaseModel):
     @quiz.setter
     def quiz(self, value):
         """Setter for quiz property."""
-        self.logger.warn("Setting values on quiz will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on quiz will NOT update the remote Canvas instance."
+        )
         self._quiz = value
 
 
@@ -218,7 +259,7 @@ class Quizstatisticsquestionstatistics(BaseModel):
         self._responses = responses
         self._answers = answers
 
-        self.logger = logging.getLogger('py3canvas.Quizstatisticsquestionstatistics')
+        self.logger = logging.getLogger("py3canvas.Quizstatisticsquestionstatistics")
 
     @property
     def responses(self):
@@ -228,7 +269,9 @@ class Quizstatisticsquestionstatistics(BaseModel):
     @responses.setter
     def responses(self, value):
         """Setter for responses property."""
-        self.logger.warn("Setting values on responses will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on responses will NOT update the remote Canvas instance."
+        )
         self._responses = value
 
     @property
@@ -239,7 +282,9 @@ class Quizstatisticsquestionstatistics(BaseModel):
     @answers.setter
     def answers(self, value):
         """Setter for answers property."""
-        self.logger.warn("Setting values on answers will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on answers will NOT update the remote Canvas instance."
+        )
         self._answers = value
 
 
@@ -254,7 +299,7 @@ class Quizstatisticsanswerstatistics(BaseModel):
         self._weight = weight
         self._responses = responses
 
-        self.logger = logging.getLogger('py3canvas.Quizstatisticsanswerstatistics')
+        self.logger = logging.getLogger("py3canvas.Quizstatisticsanswerstatistics")
 
     @property
     def id(self):
@@ -264,7 +309,9 @@ class Quizstatisticsanswerstatistics(BaseModel):
     @id.setter
     def id(self, value):
         """Setter for id property."""
-        self.logger.warn("Setting values on id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on id will NOT update the remote Canvas instance."
+        )
         self._id = value
 
     @property
@@ -275,7 +322,9 @@ class Quizstatisticsanswerstatistics(BaseModel):
     @text.setter
     def text(self, value):
         """Setter for text property."""
-        self.logger.warn("Setting values on text will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on text will NOT update the remote Canvas instance."
+        )
         self._text = value
 
     @property
@@ -286,7 +335,9 @@ class Quizstatisticsanswerstatistics(BaseModel):
     @weight.setter
     def weight(self, value):
         """Setter for weight property."""
-        self.logger.warn("Setting values on weight will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on weight will NOT update the remote Canvas instance."
+        )
         self._weight = value
 
     @property
@@ -297,7 +348,9 @@ class Quizstatisticsanswerstatistics(BaseModel):
     @responses.setter
     def responses(self, value):
         """Setter for responses property."""
-        self.logger.warn("Setting values on responses will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on responses will NOT update the remote Canvas instance."
+        )
         self._responses = value
 
 
@@ -305,14 +358,16 @@ class Quizstatisticsanswerpointbiserial(BaseModel):
     """Quizstatisticsanswerpointbiserial Model.
     A point-biserial construct for a single pre-defined answer in a Multiple-Choice or True/False question."""
 
-    def __init__(self, answer_id=None, point_biserial=None, correct=None, distractor=None):
+    def __init__(
+        self, answer_id=None, point_biserial=None, correct=None, distractor=None
+    ):
         """Init method for Quizstatisticsanswerpointbiserial class."""
         self._answer_id = answer_id
         self._point_biserial = point_biserial
         self._correct = correct
         self._distractor = distractor
 
-        self.logger = logging.getLogger('py3canvas.Quizstatisticsanswerpointbiserial')
+        self.logger = logging.getLogger("py3canvas.Quizstatisticsanswerpointbiserial")
 
     @property
     def answer_id(self):
@@ -322,7 +377,9 @@ class Quizstatisticsanswerpointbiserial(BaseModel):
     @answer_id.setter
     def answer_id(self, value):
         """Setter for answer_id property."""
-        self.logger.warn("Setting values on answer_id will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on answer_id will NOT update the remote Canvas instance."
+        )
         self._answer_id = value
 
     @property
@@ -333,7 +390,9 @@ class Quizstatisticsanswerpointbiserial(BaseModel):
     @point_biserial.setter
     def point_biserial(self, value):
         """Setter for point_biserial property."""
-        self.logger.warn("Setting values on point_biserial will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on point_biserial will NOT update the remote Canvas instance."
+        )
         self._point_biserial = value
 
     @property
@@ -344,7 +403,9 @@ class Quizstatisticsanswerpointbiserial(BaseModel):
     @correct.setter
     def correct(self, value):
         """Setter for correct property."""
-        self.logger.warn("Setting values on correct will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on correct will NOT update the remote Canvas instance."
+        )
         self._correct = value
 
     @property
@@ -355,7 +416,9 @@ class Quizstatisticsanswerpointbiserial(BaseModel):
     @distractor.setter
     def distractor(self, value):
         """Setter for distractor property."""
-        self.logger.warn("Setting values on distractor will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on distractor will NOT update the remote Canvas instance."
+        )
         self._distractor = value
 
 
@@ -363,7 +426,18 @@ class Quizstatisticssubmissionstatistics(BaseModel):
     """Quizstatisticssubmissionstatistics Model.
     Generic statistics for all submissions for a quiz."""
 
-    def __init__(self, unique_count=None, score_average=None, score_high=None, score_low=None, score_stdev=None, scores=None, correct_count_average=None, incorrect_count_average=None, duration_average=None):
+    def __init__(
+        self,
+        unique_count=None,
+        score_average=None,
+        score_high=None,
+        score_low=None,
+        score_stdev=None,
+        scores=None,
+        correct_count_average=None,
+        incorrect_count_average=None,
+        duration_average=None,
+    ):
         """Init method for Quizstatisticssubmissionstatistics class."""
         self._unique_count = unique_count
         self._score_average = score_average
@@ -375,7 +449,7 @@ class Quizstatisticssubmissionstatistics(BaseModel):
         self._incorrect_count_average = incorrect_count_average
         self._duration_average = duration_average
 
-        self.logger = logging.getLogger('py3canvas.Quizstatisticssubmissionstatistics')
+        self.logger = logging.getLogger("py3canvas.Quizstatisticssubmissionstatistics")
 
     @property
     def unique_count(self):
@@ -385,7 +459,9 @@ class Quizstatisticssubmissionstatistics(BaseModel):
     @unique_count.setter
     def unique_count(self, value):
         """Setter for unique_count property."""
-        self.logger.warn("Setting values on unique_count will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on unique_count will NOT update the remote Canvas instance."
+        )
         self._unique_count = value
 
     @property
@@ -396,7 +472,9 @@ class Quizstatisticssubmissionstatistics(BaseModel):
     @score_average.setter
     def score_average(self, value):
         """Setter for score_average property."""
-        self.logger.warn("Setting values on score_average will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on score_average will NOT update the remote Canvas instance."
+        )
         self._score_average = value
 
     @property
@@ -407,7 +485,9 @@ class Quizstatisticssubmissionstatistics(BaseModel):
     @score_high.setter
     def score_high(self, value):
         """Setter for score_high property."""
-        self.logger.warn("Setting values on score_high will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on score_high will NOT update the remote Canvas instance."
+        )
         self._score_high = value
 
     @property
@@ -418,7 +498,9 @@ class Quizstatisticssubmissionstatistics(BaseModel):
     @score_low.setter
     def score_low(self, value):
         """Setter for score_low property."""
-        self.logger.warn("Setting values on score_low will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on score_low will NOT update the remote Canvas instance."
+        )
         self._score_low = value
 
     @property
@@ -429,7 +511,9 @@ class Quizstatisticssubmissionstatistics(BaseModel):
     @score_stdev.setter
     def score_stdev(self, value):
         """Setter for score_stdev property."""
-        self.logger.warn("Setting values on score_stdev will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on score_stdev will NOT update the remote Canvas instance."
+        )
         self._score_stdev = value
 
     @property
@@ -440,7 +524,9 @@ class Quizstatisticssubmissionstatistics(BaseModel):
     @scores.setter
     def scores(self, value):
         """Setter for scores property."""
-        self.logger.warn("Setting values on scores will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on scores will NOT update the remote Canvas instance."
+        )
         self._scores = value
 
     @property
@@ -451,7 +537,9 @@ class Quizstatisticssubmissionstatistics(BaseModel):
     @correct_count_average.setter
     def correct_count_average(self, value):
         """Setter for correct_count_average property."""
-        self.logger.warn("Setting values on correct_count_average will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on correct_count_average will NOT update the remote Canvas instance."
+        )
         self._correct_count_average = value
 
     @property
@@ -462,7 +550,9 @@ class Quizstatisticssubmissionstatistics(BaseModel):
     @incorrect_count_average.setter
     def incorrect_count_average(self, value):
         """Setter for incorrect_count_average property."""
-        self.logger.warn("Setting values on incorrect_count_average will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on incorrect_count_average will NOT update the remote Canvas instance."
+        )
         self._incorrect_count_average = value
 
     @property
@@ -473,6 +563,7 @@ class Quizstatisticssubmissionstatistics(BaseModel):
     @duration_average.setter
     def duration_average(self, value):
         """Setter for duration_average property."""
-        self.logger.warn("Setting values on duration_average will NOT update the remote Canvas instance.")
+        self.logger.warn(
+            "Setting values on duration_average will NOT update the remote Canvas instance."
+        )
         self._duration_average = value
-

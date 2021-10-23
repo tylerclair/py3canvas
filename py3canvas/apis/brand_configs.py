@@ -7,7 +7,6 @@ from datetime import date, datetime
 from .base import BaseCanvasAPI
 
 
-
 class BrandConfigsAPI(BaseCanvasAPI):
     """BrandConfigs API Version 1.0."""
 
@@ -29,6 +28,15 @@ class BrandConfigsAPI(BaseCanvasAPI):
         data = {}
         params = {}
 
-        self.logger.debug("GET /api/v1/brand_variables with query params: {params} and form data: {data}".format(params=params, data=data, **path))
-        return self.generic_request("GET", "/api/v1/brand_variables".format(**path), data=data, params=params, no_data=True)
-
+        self.logger.debug(
+            "GET /api/v1/brand_variables with query params: {params} and form data: {data}".format(
+                params=params, data=data, **path
+            )
+        )
+        return self.generic_request(
+            "GET",
+            "/api/v1/brand_variables".format(**path),
+            data=data,
+            params=params,
+            no_data=True,
+        )
